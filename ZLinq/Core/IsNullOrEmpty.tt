@@ -1,0 +1,35 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(SolutionDir)ZLinq.TTHelp\bin\$(Configuration)\ZLinq.TTHelp.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="ZLinq.TTHelp" #>
+<#@ output extension=".cs" #>
+
+using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using System.Linq;
+
+// ReSharper disable CheckNamespace
+namespace ZLinq
+{
+    public static partial class ZEnumerable
+    {        
+		<# foreach (var sourceType in TextTemplate.CollectionList) 
+		{ 
+		#>[Pure]
+        public static bool IsNullOrEmpty<T>(this <#= sourceType#> source)
+        {
+            return source == null || source.<#= TextTemplate.LengthOrCount(sourceType)#> == 0;
+        }
+
+		<#}
+		#>[Pure]
+        public static bool IsNullOrEmpty<T>(this IEnumerable<T> source)
+        {
+            return source == null || !source.Any();
+        }
+    }
+}

@@ -24,7 +24,8 @@ namespace ZLinq.TTHelp
 
         public static readonly string[] CollectionsIList = { "T[]", "List<T>", "IList<T>" };
         public static readonly string[] CollectionsIListInt = CollectionsIList.Select(x => x.Replace("T", "int")).ToArray();
-        public static readonly string[] EnumerablesList = CollectionsIList.Union(new[] { "ICollection<T>", "IEnumerable<T>" }).ToArray();
+        public static readonly string[] CollectionList = CollectionsIList.Union(new[] { "ICollection<T>"}).ToArray();
+        public static readonly string[] EnumerablesList = CollectionList.Union(new[] { "IEnumerable<T>" }).ToArray();
         public static readonly string[] EnumerablesListInt = EnumerablesList.Select(x => x.Replace("T", "int")).ToArray();
 
 

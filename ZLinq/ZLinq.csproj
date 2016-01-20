@@ -142,6 +142,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IsEqual.tt</DependentUpon>
     </Compile>
+    <Compile Include="Core\IsNullOrEmpty.cs">
+      <DependentUpon>IsNullOrEmpty.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Core\Select.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -160,6 +165,10 @@
     <Content Include="Core\IsEqual.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>IsEqual.cs</LastGenOutput>
+    </Content>
+    <Content Include="Core\IsNullOrEmpty.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IsNullOrEmpty.cs</LastGenOutput>
     </Content>
     <Content Include="Core\Select.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
