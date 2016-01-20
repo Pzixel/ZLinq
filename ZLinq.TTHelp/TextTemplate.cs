@@ -28,9 +28,9 @@ namespace ZLinq.TTHelp
         public static readonly string[] EnumerablesListInt = EnumerablesList.Select(x => x.Replace("T", "int")).ToArray();
 
 
-        public static string LengthOrCount(string x)
+        public static string LengthOrCount(string typeName)
         {
-            return x.IndexOf("[]", StringComparison.Ordinal) >= 0 ? "Length" : "Count";
+            return typeName.IndexOf("[]", StringComparison.Ordinal) >= 0 ? "Length" : "Count";
         }
 
         public static string ExplicitCastFromIntIfNeeded(string typeName)
@@ -52,7 +52,7 @@ namespace ZLinq.TTHelp
 
         public static string IsNotNull(string paramName)
         {
-            return string.Format("{0}.IsNotNull(\"{0}\");", paramName);
+            return $"{paramName}.IsNotNull(\"{paramName}\");";
         }
     }
 }

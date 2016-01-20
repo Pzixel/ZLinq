@@ -50,7 +50,54 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Core\FlattenTest.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FlattenTest.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core\IsEqual.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IsEqual.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core\SelectTest.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SelectTest.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core\SplitTest.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SplitTest.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\FlattenTest.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FlattenTest.cs</LastGenOutput>
+    </Content>
+    <Content Include="Core\IsEqual.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IsEqual.cs</LastGenOutput>
+    </Content>
+    <Content Include="Core\SelectTest.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SelectTest.cs</LastGenOutput>
+    </Content>
+    <Content Include="Core\SplitTest.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SplitTest.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ZLinq\ZLinq.csproj">
+      <Project>{66df194d-6d6e-492d-99d4-73fda0cff419}</Project>
+      <Name>ZLinq</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

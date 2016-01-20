@@ -1,0 +1,45 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(SolutionDir)ZLinq.TTHelp\bin\$(Configuration)\ZLinq.TTHelp.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="ZLinq.TTHelp" #>
+<#@ output extension=".cs" #>
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using ZLinq.Extension;
+
+// ReSharper disable LoopCanBeConvertedToQuery
+// ReSharper disable CheckNamespace
+namespace ZLinq
+{
+    public static partial class ZEnumerable
+    {
+		<# for(int i = 1; i < 10; i++) { 
+		#>[Pure]
+		public static IEnumerable<T> Flatten<T>(this T[<#= new string(',',i) #>] array)
+        {
+            foreach (T value in array)
+                yield return value;
+        }		
+
+		<# } #>
+
+		<# for(int i = 1; i < 10; i++) { 
+		#>[Pure]
+        public static T[] FlattenToArray<T>(this T[<#= new string(',',i) #>] array)
+        {
+            <#= TextTemplate.IsNotNull("array") #>
+            var result = new T[array.Length];
+            int i = 0;
+            foreach (T value in array)
+                result[i++] = value;
+            return result;
+        }	
+
+		<# } #>
+
+    }
+}
