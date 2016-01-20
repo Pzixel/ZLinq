@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZLinq", "ZLinq\ZLinq.csproj", "{66DF194D-6D6E-492D-99D4-73FDA0CFF419}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZLinq.TTHelp", "ZLinq.TTHelp\ZLinq.TTHelp.csproj", "{AC50A454-8C4C-47B0-845D-AD781D4E3688}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZLinq.Test", "ZLinq.Test\ZLinq.Test.csproj", "{0DCCA0EE-0985-4EDB-9178-4E6B2FDCF71C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{66DF194D-6D6E-492D-99D4-73FDA0CFF419}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66DF194D-6D6E-492D-99D4-73FDA0CFF419}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66DF194D-6D6E-492D-99D4-73FDA0CFF419}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC50A454-8C4C-47B0-845D-AD781D4E3688}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC50A454-8C4C-47B0-845D-AD781D4E3688}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC50A454-8C4C-47B0-845D-AD781D4E3688}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC50A454-8C4C-47B0-845D-AD781D4E3688}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DCCA0EE-0985-4EDB-9178-4E6B2FDCF71C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DCCA0EE-0985-4EDB-9178-4E6B2FDCF71C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DCCA0EE-0985-4EDB-9178-4E6B2FDCF71C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DCCA0EE-0985-4EDB-9178-4E6B2FDCF71C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
