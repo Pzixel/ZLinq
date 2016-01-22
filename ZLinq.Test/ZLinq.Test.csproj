@@ -55,10 +55,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FlattenTest.tt</DependentUpon>
     </Compile>
-    <Compile Include="Core\IsEqual.cs">
+    <Compile Include="Core\IsEqualTest.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>IsEqual.tt</DependentUpon>
+      <DependentUpon>IsEqualTest.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core\WhereInPlaceTest.cs" />
+    <Compile Include="Core\WhereTest.cs">
+      <DependentUpon>WhereTest.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Core\SelectTest.cs">
       <AutoGen>True</AutoGen>
@@ -77,9 +83,13 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>FlattenTest.cs</LastGenOutput>
     </Content>
-    <Content Include="Core\IsEqual.tt">
+    <Content Include="Core\IsEqualTest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>IsEqual.cs</LastGenOutput>
+      <LastGenOutput>IsEqualTest.cs</LastGenOutput>
+    </Content>
+    <Content Include="Core\WhereTest.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>WhereTest.cs</LastGenOutput>
     </Content>
     <Content Include="Core\SelectTest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

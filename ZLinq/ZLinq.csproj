@@ -147,13 +147,18 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Core\Where.cs">
+      <DependentUpon>Where.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Core\Select.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Select.tt</DependentUpon>
     </Compile>
     <Compile Include="Core\Split.cs" />
-    <Compile Include="Core\Where.cs" />
+    <Compile Include="Core\WhereInPlace.cs" />
     <Compile Include="Extension\Guard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -169,6 +174,10 @@
     <Content Include="Core\IsNullOrEmpty.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>IsNullOrEmpty.cs</LastGenOutput>
+    </Content>
+    <Content Include="Core\Where.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Where.cs</LastGenOutput>
     </Content>
     <Content Include="Core\Select.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -22,10 +22,12 @@ namespace ZLinq.TTHelp
 
         public static readonly string[] NullableNumberTypes = NumberTypes.Select(x => x + "?").ToArray();
 
-        public static readonly string[] CollectionsIList = { "T[]", "List<T>", "IList<T>" };
+        public static readonly string[] ListIList = {"List<T>", "IList<T>"};
+        public static readonly string[] CollectionsIList = new [] { "T[]" }.Concat(ListIList).ToArray();
         public static readonly string[] CollectionsIListInt = CollectionsIList.Select(x => x.Replace("T", "int")).ToArray();
-        public static readonly string[] CollectionList = CollectionsIList.Union(new[] { "ICollection<T>"}).ToArray();
-        public static readonly string[] EnumerablesList = CollectionList.Union(new[] { "IEnumerable<T>" }).ToArray();
+        public static readonly string[] CollectionList = CollectionsIList.Concat(new[] { "ICollection<T>"}).ToArray();
+        public static readonly string[] CollectionsListInt = CollectionList.Select(x => x.Replace("T", "int")).ToArray();
+        public static readonly string[] EnumerablesList = CollectionList.Concat(new[] { "IEnumerable<T>" }).ToArray();
         public static readonly string[] EnumerablesListInt = EnumerablesList.Select(x => x.Replace("T", "int")).ToArray();
 
 

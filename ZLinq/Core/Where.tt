@@ -1,0 +1,60 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(SolutionDir)ZLinq.TTHelp\bin\$(Configuration)\ZLinq.TTHelp.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="ZLinq.TTHelp" #>
+<#@ output extension=".cs" #>
+
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using ZLinq.Extension;
+
+// ReSharper disable CheckNamespace
+namespace ZLinq
+{
+    public static partial class ZEnumerable
+    {        
+		<# foreach (var sourceType in TextTemplate.CollectionList) 
+		{ #>		    
+		[Pure]
+	    public static T[] WhereToArray<T>(this <#= sourceType #> source, Predicate<T> predicate)
+		{
+            <#= TextTemplate.IsNotNull("source") #>
+			<#= TextTemplate.IsNotNull("predicate") #>
+            var result = new T[source.<#= TextTemplate.LengthOrCount(sourceType) #>];
+            int i = 0;
+            foreach (T value in source)
+            {
+                if (predicate(value))
+                {
+                    result[i++] = value;
+                }
+            }
+            Array.Resize(ref result, i);
+            return result;
+		}
+
+		[Pure]
+	    public static List<T> WhereToList<T>(this <#= sourceType #> source, Predicate<T> predicate)
+		{
+            <#= TextTemplate.IsNotNull("source") #>
+			<#= TextTemplate.IsNotNull("predicate") #>
+            var result = new List<T>(source.<#= TextTemplate.LengthOrCount(sourceType) #>);
+            foreach (T value in source)
+            {
+                if (predicate(value))
+                {
+                    result.Add(value);
+                }
+            }
+            result.TrimExcess();
+            return result;
+		}
+		<# } #>
+
+    }
+}

@@ -111,7 +111,6 @@ namespace ZLinq
         [Pure]
         public static IEnumerable<T[]> Split<T>(this IEnumerable<T> source, int size)
         {
-            source.IsNotNull("source");
             Guard.Requires<ArgumentException>(size > 0);
             IEnumerator<T> enumerator;
             try
@@ -123,25 +122,29 @@ namespace ZLinq
                 throw new ArgumentNullException("source", ex);
             }
 
-            while (enumerator.MoveNext())
+            try
             {
-                T[] split = new T[size];
-                split[0] = enumerator.Current;
-                int i;
-                for (i = 1; i < split.Length && enumerator.MoveNext(); i++)
+                while (enumerator.MoveNext())
                 {
-                    split[i] = enumerator.Current;
+                    T[] split = new T[size];
+                    split[0] = enumerator.Current;
+                    int i;
+                    for (i = 1; i < split.Length && enumerator.MoveNext(); i++)
+                    {
+                        split[i] = enumerator.Current;
+                    }
+                    if (i < size)
+                        Array.Resize(ref split, size);
+                    yield return split;
                 }
-                if (i < size)
-                    Array.Resize(ref split, size);
-                yield return split;
             }
-            enumerator.Dispose();
+            finally
+            {
+                enumerator.Dispose();
+            }
         }
 
         #endregion
-
-
 
         #region SplitToArray
 
