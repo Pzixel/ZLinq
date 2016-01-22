@@ -147,6 +147,8 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Core\Repeat.cs" />
+    <Compile Include="Core\Range.cs" />
     <Compile Include="Core\Where.cs">
       <DependentUpon>Where.tt</DependentUpon>
       <AutoGen>True</AutoGen>

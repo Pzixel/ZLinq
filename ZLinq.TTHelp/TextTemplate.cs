@@ -5,6 +5,17 @@ namespace ZLinq.TTHelp
 {
     public class TextTemplate
     {
+        public static readonly string[] LongableTypes =
+        {
+            "sbyte",
+            "byte",
+            "short",
+            "ushort",
+            "int",
+            "uint",
+            "long",
+        };
+
         public static readonly string[] NumberTypes =
         {
             "sbyte",

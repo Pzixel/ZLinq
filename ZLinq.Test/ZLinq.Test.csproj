@@ -60,6 +60,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IsEqualTest.tt</DependentUpon>
     </Compile>
+    <Compile Include="Core\RepeatTest.cs" />
+    <Compile Include="Core\RangeTest.cs" />
     <Compile Include="Core\WhereInPlaceTest.cs" />
     <Compile Include="Core\WhereTest.cs">
       <DependentUpon>WhereTest.tt</DependentUpon>
