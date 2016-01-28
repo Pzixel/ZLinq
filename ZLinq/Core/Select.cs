@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
 using ZLinq.Extension;
 
@@ -199,6 +200,7 @@ namespace ZLinq
         }
 
         [Pure]
+        [SuppressMessage("ReSharper", "LoopCanBeConvertedToQuery")]
         private static List<TResult> SelectToList<T, TResult>(this IEnumerable<T> source, Func<T, TResult> func, int count)
         {
             var list = new List<TResult>(count);
