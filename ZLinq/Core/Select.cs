@@ -180,7 +180,7 @@ namespace ZLinq
             //cannot check source here due to possible IEnumerable<T> multiple enumeration
             source.IsNotNull("source");
 			func.IsNotNull("func");
-            return SelectToList(source, func, 1000);
+            return SelectToList(source, func, 8);
 		}
 
 		/// <summary>
