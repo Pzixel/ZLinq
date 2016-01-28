@@ -149,6 +149,11 @@
     </Compile>
     <Compile Include="Core\Repeat.cs" />
     <Compile Include="Core\Range.cs" />
+    <Compile Include="Core\FirstOrDefault.cs">
+      <DependentUpon>FirstOrDefault.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Core\Where.cs">
       <DependentUpon>Where.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -191,6 +196,10 @@
     <Content Include="Core\IsNullOrEmpty.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>IsNullOrEmpty.cs</LastGenOutput>
+    </Content>
+    <Content Include="Core\FirstOrDefault.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FirstOrDefault.cs</LastGenOutput>
     </Content>
     <Content Include="Core\Where.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
