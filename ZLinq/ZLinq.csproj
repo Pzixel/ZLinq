@@ -162,6 +162,21 @@
     <Compile Include="Core\Split.cs" />
     <Compile Include="Core\WhereInPlace.cs" />
     <Compile Include="Extension\Guard.cs" />
+    <Compile Include="ZMath\Average.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Average.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ZMath\Max.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Max.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ZMath\Sum.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sum.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +199,18 @@
     <Content Include="Core\Select.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Select.cs</LastGenOutput>
+    </Content>
+    <Content Include="ZMath\Average.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Average.cs</LastGenOutput>
+    </Content>
+    <Content Include="ZMath\Max.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Max.cs</LastGenOutput>
+    </Content>
+    <Content Include="ZMath\Sum.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Sum.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

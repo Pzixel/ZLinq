@@ -78,6 +78,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SplitTest.tt</DependentUpon>
     </Compile>
+    <Compile Include="ZMath\AverageTest.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AverageTest.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ZMath\MaxTest.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaxTest.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ZMath\SumTest.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SumTest.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -100,6 +115,18 @@
     <Content Include="Core\SplitTest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SplitTest.cs</LastGenOutput>
+    </Content>
+    <Content Include="ZMath\AverageTest.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AverageTest.cs</LastGenOutput>
+    </Content>
+    <Content Include="ZMath\MaxTest.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MaxTest.cs</LastGenOutput>
+    </Content>
+    <Content Include="ZMath\SumTest.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SumTest.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,94 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(SolutionDir)ZLinq.TTHelp\bin\$(Configuration)\ZLinq.TTHelp.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="ZLinq.TTHelp" #>
+<#@ output extension=".cs" #>
+
+using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
+
+namespace ZLinq.Test.ZMath
+{
+    [TestClass]
+    public class Sum
+    {		    
+			
+	<#foreach (var type in TextTemplate.NumberTypes) { #>
+
+		#region <#= type #>	 		
+		<# foreach (string sourceType in TextTemplate.CollectionsIList) { #>	
+        [TestMethod]
+        public void TestSum<#= type #><#= TextTemplate.GetCollectionName(sourceType) #>()
+        {
+			const <#= type #> a = 10;
+			const int n = 10;
+            var source = Enumerable.Repeat(a, n).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
+
+			<#= type #> sumActual = source.Sum();
+            const <#= type #> sumExpected = (<#= type #>) a*n;
+
+            Assert.AreEqual(sumExpected, sumActual);
+        }
+
+		[TestMethod]
+        public void TestSum<#= type #><#= TextTemplate.GetCollectionName(sourceType) #>Map()
+        {
+            var source = Enumerable.Repeat(new { X = (<#= type #>) 10}, 10).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
+
+			<#= type #> sumActual = source.Sum(arg => arg.X);
+            const <#= type #> sumExpected = 100;
+
+            Assert.AreEqual(sumExpected, sumActual);
+        }
+
+				<# if (type != "double" && type != "float" && type != "decimal") { #>		
+		[TestMethod]
+        public void TestSum<#= type #><#= TextTemplate.GetCollectionName(sourceType) #>Overflow()
+        {
+            var source = (new[] { <#= type #>.MaxValue, <#= type #>.MaxValue }).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
+
+            try
+            {
+                <#= type #> sumActual = source.Sum();
+                Assert.Fail("Expected overflow but value is {0}", sumActual);
+            }
+            catch (OverflowException)
+            {
+
+            }
+
+			var source2 = new <#= type #>[] {1, 2}.<#= TextTemplate.ToArrayOrToList(sourceType) #>;
+			var sum = source2.Sum();
+			Assert.AreEqual((<#= type #>)3, sum);
+        }
+
+		[TestMethod]
+        public void TestSum<#= type #><#= TextTemplate.GetCollectionName(sourceType) #>MapOverflow()
+        {
+			var source = Enumerable.Repeat(new { X = <#= type #>.MaxValue}, 2).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
+            try
+            {
+                <#= type #> sumActual = source.Sum(arg => arg.X);
+                Assert.Fail("Expected overflow but value is {0}", sumActual);
+            }
+            catch (OverflowException)
+            {
+
+            }
+
+			var source2 = new <#= type #>[] {1, 2}.<#= TextTemplate.ToArrayOrToList(sourceType) #>;
+			var sum = source2.Sum(x => x);
+			Assert.AreEqual((<#= type #>)3, sum);
+        }
+		<# } #>
+		<# } #>
+		
+		#endregion
+	<# } #>	
+    }
+}

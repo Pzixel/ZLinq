@@ -16,20 +16,16 @@ namespace ZLinq.TTHelp
             "long",
         };
 
-        public static readonly string[] NumberTypes =
+
+        public static readonly string[] FloatTypes =
         {
-            "sbyte",
-            "byte",
-            "short",
-            "ushort",
-            "int",
-            "uint",
-            "long",
-            "ulong",
             "float",
             "double",
             "decimal"
         };
+
+
+        public static readonly string[] NumberTypes = LongableTypes.Concat(FloatTypes.Concat(new[] {"ulong"})).ToArray();
 
         public static readonly string[] NullableNumberTypes = NumberTypes.Select(x => x + "?").ToArray();
 
@@ -67,6 +63,11 @@ namespace ZLinq.TTHelp
         public static string IsNotNull(string paramName)
         {
             return $"{paramName}.IsNotNull(\"{paramName}\");";
+        }
+
+        public static string AssertFloatsRelative(string first, string second, string tolerance)
+        {
+            return $"Assert.IsTrue(Math.Abs(1 - {first}/(double){second}) < {tolerance}, $\"{first} = {{{first}}}\\t{second} = {{{second}}}\");";
         }
     }
 }

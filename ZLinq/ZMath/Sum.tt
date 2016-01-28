@@ -1,0 +1,134 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(SolutionDir)ZLinq.TTHelp\bin\$(Configuration)\ZLinq.TTHelp.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="ZLinq.TTHelp" #>
+<#@ output extension=".cs" #>
+
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using System.Threading;
+using System.Threading.Tasks;
+using ZLinq.Extension;
+
+// ReSharper disable CheckNamespace 
+namespace ZLinq
+{
+    public static partial class ZEnumerable
+    {		
+	<#foreach (var type in TextTemplate.NumberTypes) { #>
+
+		#region <#= type #>	 		
+		<# foreach (string sourceType in TextTemplate.CollectionsIList) 
+		{ #>	
+		/// <summary>
+        /// Perform checked summing of source collection
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static <#= type #> Sum(this <#= sourceType.Replace("T", type) #> source)
+        {
+			<#= TextTemplate.IsNotNull("source") #>
+            if (source.<#= TextTemplate.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, 0, source.<#= TextTemplate.LengthOrCount(sourceType) #>);
+            <#= type #> result = 0;
+			<# bool canInterlock = type == "int" || type == "long";
+			   if (!canInterlock) { #>object syncRoot = new object(); <# } #>	
+            Parallel.ForEach(Partitioner.Create(0, source.<#= TextTemplate.LengthOrCount(sourceType) #>),
+						range => {
+						var x = Sum(source, range.Item1, range.Item2);
+						<# if (canInterlock) { #>Interlocked.Add(ref result, x); <# }
+						else { #>lock (syncRoot)
+							result += x;						
+						<# } #>	  
+					});
+              
+            return result;
+        }
+
+        [Pure]
+        private static <#= type #> Sum(this <#= sourceType.Replace("T", type) #> source, int startIndex, int endIndex)
+        {
+            <#= type #> sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                {
+                    sum1 += source[i];
+                    sum2 += source[i + 1];
+                    sum3 += source[i + 2];
+                    sum4 += source[i + 3];
+                }
+
+                if (i == endIndex)
+                    return <#= TextTemplate.ExplicitCastFromIntIfNeeded(type) #>((sum1 + sum2) + (sum3 + sum4));
+                if (i == endIndex - 1)
+                    return <#= TextTemplate.ExplicitCastFromIntIfNeeded(type) #>((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                if (i == endIndex - 2)
+                    return <#= TextTemplate.ExplicitCastFromIntIfNeeded(type) #>((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
+                return <#= TextTemplate.ExplicitCastFromIntIfNeeded(type) #>((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+            }
+        }
+
+		/// <summary>
+        /// Perform checked summing of source collection mapping
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Sum of all elements</returns>
+		[Pure]
+        public static <#= type #> Sum<T>(this <#= sourceType #> source, Func<T, <#= type #>> mapFunc)
+        {
+            <#= TextTemplate.IsNotNull("source") #>
+            if (source.<#= TextTemplate.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, mapFunc, 0, source.<#= TextTemplate.LengthOrCount(sourceType) #>);
+            <#= type #> result = 0;
+            object syncRoot = new object();
+            Parallel.ForEach(Partitioner.Create(0, source.<#= TextTemplate.LengthOrCount(sourceType) #>),
+                () => (<#= type #>)0,
+                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
+                x =>
+                {
+                    lock (syncRoot)
+                        result += x;
+                });
+
+            return result;
+        }
+
+        [Pure]
+        private static <#= type #> Sum<T>(this <#= sourceType #> source, Func<T, <#= type #>> mapFunc, int startIndex, int endIndex)
+        {
+            <#= type #> sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                {
+                    sum1 += mapFunc(source[i]);
+                    sum2 += mapFunc(source[i + 1]);
+                    sum3 += mapFunc(source[i + 2]);
+                    sum4 += mapFunc(source[i + 3]);
+                }
+                if (i == endIndex)
+                    return  <#= TextTemplate.ExplicitCastFromIntIfNeeded(type) #> ((sum1 + sum2) + (sum3 + sum4));
+                if (i == endIndex - 1)
+                    return  <#= TextTemplate.ExplicitCastFromIntIfNeeded(type) #>((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                if (i == endIndex - 2)
+                    return  <#= TextTemplate.ExplicitCastFromIntIfNeeded(type) #>((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
+                return  <#= TextTemplate.ExplicitCastFromIntIfNeeded(type) #>((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+            }
+        }
+		<# } #>
+
+		#endregion
+	<# } #>	
+    }
+}
