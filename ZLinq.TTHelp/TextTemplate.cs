@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace ZLinq.TTHelp
@@ -30,19 +32,25 @@ namespace ZLinq.TTHelp
         public static readonly string[] NullableNumberTypes = NumberTypes.Select(x => x + "?").ToArray();
 
         public static readonly string[] ListIList = {"List<T>", "IList<T>"};
-        public static readonly string[] CollectionsIList = new [] { "T[]" }.Concat(ListIList).ToArray();
-        public static readonly string[] AllLists = CollectionsIList.Concat(new[] {"IList"}).ToArray();
-        public static readonly string[] CollectionsIListInt = CollectionsIList.Select(x => x.Replace("T", "int")).ToArray();
-        public static readonly string[] CollectionList = CollectionsIList.Concat(new[] { "ICollection<T>"}).ToArray();
-        public static readonly string[] CollectionsListInt = CollectionList.Select(x => x.Replace("T", "int")).ToArray();
-        public static readonly string[] EnumerablesList = CollectionList.Concat(new[] { "IEnumerable<T>" }).ToArray();
-        public static readonly string[] EnumerablesListInt = EnumerablesList.Select(x => x.Replace("T", "int")).ToArray();
-        public static readonly string[] AllCollections = AllLists.Concat(new[] {"ICollection<T>", "ICollection"}).ToArray();
+        public static readonly string[] StandardLists = new [] { "T[]" }.Concat(ListIList).ToArray();
+        public static readonly string[] StandardCollections = StandardLists.Concat(new[] { "ICollection<T>" }).ToArray();
+        public static readonly string[] StandardEnumerables = StandardCollections.Concat(new[] { "IEnumerable<T>" }).ToArray();
+        public static readonly string[] Foreachable = {"T[]", "List<T>", "IEnumerable<T>" };
 
+        public static string[] ToInt(IEnumerable<string> source)
+        {
+            return source.Select(x => x.Replace("T", "int")).ToArray();
+        }
+
+        public static string[] WithNonGen(string[] source)
+        {
+            var result = source.Where(x=>x.StartsWith("I", false, CultureInfo.CurrentCulture)).Select(GetCollectionName).ToArray();
+            return source.Concat(result).ToArray();
+        }
 
         public static string LengthOrCount(string typeName)
         {
-            return typeName.IndexOf("[]", StringComparison.Ordinal) >= 0 ? "Length" : "Count";
+            return typeName.IndexOf('[') >= 0 ? "Length" : "Count";
         }
 
         public static string ExplicitCastFromIntIfNeeded(string typeName)
@@ -54,6 +62,8 @@ namespace ZLinq.TTHelp
         {
             if (collection.IndexOf('[') >= 0)
                 return "Array";
+            if (collection.IndexOf('<') < 0)
+                return collection + "NonGen";
             return collection.Remove(collection.IndexOf('<'));
         }
 

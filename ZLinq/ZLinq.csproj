@@ -134,17 +134,17 @@
     <Compile Include="Comparers\CustomComparer.cs" />
     <Compile Include="Comparers\CustomComparerVisitor.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="Core\Single.cs">
+    <Compile Include="Core\Folding\Single.cs">
       <DependentUpon>Single.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Core\Last.cs">
+    <Compile Include="Core\Folding\Last.cs">
       <DependentUpon>Last.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Core\First.cs">
+    <Compile Include="Core\Folding\First.cs">
       <DependentUpon>First.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -197,15 +197,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Core\Single.tt">
+    <Content Include="Core\Folding\Single.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Single.cs</LastGenOutput>
     </Content>
-    <Content Include="Core\Last.tt">
+    <Content Include="Core\Folding\Last.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Last.cs</LastGenOutput>
     </Content>
-    <Content Include="Core\First.tt">
+    <Content Include="Core\Folding\First.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>First.cs</LastGenOutput>
     </Content>

@@ -8,7 +8,6 @@
 <#@ import namespace="ZLinq.TTHelp" #>
 <#@ output extension=".cs" #>
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
@@ -18,7 +17,7 @@ namespace ZLinq
 {
     public static partial class ZEnumerable
     {     		
-		<# foreach (var sourceType in TextTemplate.AllLists) 
+		<# foreach (var sourceType in TextTemplate.StandardLists) 
 		{ #>		
 		   	    
 		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -29,17 +28,7 @@ namespace ZLinq
                 throw new InvalidOperationException("Collection contains more than one element");
             }
 			return <#= TextTemplate.Cast(sourceType) #>source[0];
-        }	 	
-
-		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static TResult Single<T, TResult>(this <#= sourceType #> source, Func<T, TResult> func)
-        {			
-			if (source.<#= TextTemplate.LengthOrCount(sourceType) #> > 1)
-		    {
-                throw new InvalidOperationException("Collection contains more than one element");
-            }
-			return func(<#= TextTemplate.Cast(sourceType) #>source[0]);
-        }
+        }	 
 
 		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
 	    public static T SingleOrDefault<T>(this <#= sourceType #> source)
@@ -49,17 +38,51 @@ namespace ZLinq
                 throw new InvalidOperationException("Collection contains more than one element");
             }
 			return source.<#= TextTemplate.LengthOrCount(sourceType) #> == 0 ? default(T) : <#= TextTemplate.Cast(sourceType) #> source[0];
-        }		
-		   	    
-		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-	    public static TResult SingleOrDefault<T, TResult>(this <#= sourceType #> source, Func<T, TResult> func)
-        {			
-			if (source.<#= TextTemplate.LengthOrCount(sourceType) #> > 1)
+        }	
+	
+		<# } #>	
+		
+		<# foreach (var sourceType in TextTemplate.Foreachable) 
+		{ #>		
+
+		[Pure]
+		public static T Single<T>(this <#= sourceType #> source, Predicate<T> predicate)
+        {
+			T result = default(T);
+			bool found = false;
+		    foreach (T value in source)
 		    {
-                throw new InvalidOperationException("Collection contains more than one element");
-            }
-			return source.<#= TextTemplate.LengthOrCount(sourceType) #> == 0 ? default(TResult) : func(<#= TextTemplate.Cast(sourceType) #>source[0]);
+		        if (predicate(value))
+		        {
+					if (found)
+						throw new InvalidOperationException("Collection contains more than one element");
+					result = value;	
+					found = true;
+				}
+		    }
+			if (!found)
+				throw new InvalidOperationException("Collection has no elements");
+			return result;
         }
+
+		[Pure]
+		public static T SingleOrDefault<T>(this <#= sourceType #> source, Predicate<T> predicate)
+        {
+			T result = default(T);
+			bool found = false;
+		    foreach (T value in source)
+		    {
+		        if (predicate(value))
+		        {
+					if (found)
+						throw new InvalidOperationException("Collection contains more than one element");
+					result = value;	
+					found = true;
+				}
+		    }
+			return result;
+        }
+
 		<# } #>		
 
     }

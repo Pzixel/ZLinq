@@ -57,7 +57,7 @@ namespace ZLinq.Test.Core
 			}
         }	
 
-		<# foreach (var sourceTypeInt in TextTemplate.CollectionsIListInt) { #>
+		<# foreach (var sourceTypeInt in TextTemplate.ToInt(TextTemplate.StandardLists)) { #>
 
 		[TestMethod]
         public void TestSelectToArrayFrom<#= TextTemplate.GetCollectionName(sourceTypeInt) #>()

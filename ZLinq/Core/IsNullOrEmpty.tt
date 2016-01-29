@@ -18,10 +18,10 @@ namespace ZLinq
 {
     public static partial class ZEnumerable
     {        
-		<# foreach (var sourceType in TextTemplate.AllCollections) 
+		<# foreach (var sourceType in TextTemplate.WithNonGen(TextTemplate.StandardCollections))
 		{ 
 		#>[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsNullOrEmpty<#= TextTemplate.GetConstraint(sourceType) #>(this <#= sourceType#> source)
+        public static bool IsNullOrEmpty<#= TextTemplate.GetConstraint(sourceType) #>(this <#= sourceType #> source)
         {
             return source == null || source.<#= TextTemplate.LengthOrCount(sourceType)#> == 0;
         }
@@ -37,9 +37,9 @@ namespace ZLinq
 			using (var enumerator = source.GetEnumerator())
 			{
 			    if (enumerator.MoveNext())
-				    return true;
+				    return false;
 			}
-			return false;
+			return true;
         }
 
 		[Pure]
@@ -50,7 +50,7 @@ namespace ZLinq
                 return true;
             }
             var enumerator = source.GetEnumerator();
-            return enumerator.MoveNext();
+            return !enumerator.MoveNext();
         }
 
 		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]

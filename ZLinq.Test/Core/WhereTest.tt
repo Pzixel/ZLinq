@@ -17,7 +17,7 @@ namespace ZLinq.Test.Core
     [TestClass]
     public class Where
 	{		
-		<# foreach (var sourceTypeInt in TextTemplate.CollectionsListInt) 
+		<# foreach (var sourceTypeInt in TextTemplate.ToInt(TextTemplate.StandardCollections)) 
 		{ #>		    
 		[TestMethod]
 	    public void TestWhereToArray<#= TextTemplate.GetCollectionName(sourceTypeInt) #>()

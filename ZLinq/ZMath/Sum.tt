@@ -24,7 +24,7 @@ namespace ZLinq
 	<#foreach (var type in TextTemplate.NumberTypes) { #>
 
 		#region <#= type #>	 		
-		<# foreach (string sourceType in TextTemplate.CollectionsIList) 
+		<# foreach (string sourceType in TextTemplate.StandardLists) 
 		{ #>	
 		/// <summary>
         /// Perform checked summing of source collection

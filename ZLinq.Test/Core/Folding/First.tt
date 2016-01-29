@@ -1,0 +1,49 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(SolutionDir)ZLinq.TTHelp\bin\$(Configuration)\ZLinq.TTHelp.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="ZLinq.TTHelp" #>
+<#@ output extension=".cs" #>
+
+using System;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace ZLinq.Test.Core.Folding
+{
+    [TestClass]
+    public class First
+    {	
+		<# foreach (var sourceType in TextTemplate.StandardCollections) { #>		
+		[TestMethod]
+        public void First<#= TextTemplate.GetCollectionName(sourceType) #>()
+        {
+            var x = Enumerable.Range(1, 1024).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
+            var y = Enumerable.Range(1, 1024).Select(a => new Tuple<int, int>(a,a)).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
+            var z = Enumerable.Range(1, 1024).Select(a => new { A = a}).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
+
+            Assert.IsTrue(ZEnumerable.First(x) == Enumerable.First(x));
+			Assert.IsTrue(ZEnumerable.First(y) == Enumerable.First(y));
+			Assert.IsTrue(ZEnumerable.First(z) == Enumerable.First(z));
+        }
+
+		[TestMethod]
+        public void First<#= TextTemplate.GetCollectionName(sourceType) #>OrDefault()
+        {
+            var x = Enumerable.Range(1, 1024).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
+            var y = Enumerable.Range(1, 1024).Select(a => new Tuple<int, int>(a,a)).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
+            var z = new int[0];
+
+            Assert.IsTrue(ZEnumerable.FirstOrDefault(x, i => i%3 == 0) == Enumerable.FirstOrDefault(x, i => i%3 == 0));
+            Assert.IsTrue(ZEnumerable.FirstOrDefault(y, i => i.Item1%3 == 0) == Enumerable.FirstOrDefault(y, i => i.Item1%3 == 0));
+            Assert.IsTrue(ZEnumerable.FirstOrDefault(z, i => i%3 == 0) == Enumerable.FirstOrDefault(z, i => i%3 == 0));
+        }
+
+		<# } #>	
+
+
+    }
+}

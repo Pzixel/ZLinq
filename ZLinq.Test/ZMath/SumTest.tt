@@ -21,7 +21,7 @@ namespace ZLinq.Test.ZMath
 	<#foreach (var type in TextTemplate.NumberTypes) { #>
 
 		#region <#= type #>	 		
-		<# foreach (string sourceType in TextTemplate.CollectionsIList) { #>	
+		<# foreach (string sourceType in TextTemplate.StandardCollections) { #>	
         [TestMethod]
         public void TestSum<#= type #><#= TextTemplate.GetCollectionName(sourceType) #>()
         {

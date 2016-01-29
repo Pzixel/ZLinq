@@ -180,7 +180,7 @@ namespace ZLinq
             //cannot check source here due to possible IEnumerable<T> multiple enumeration
             source.IsNotNull("source");
 			func.IsNotNull("func");
-            return SelectToList(source, func, 8);
+            return SelectToList(source, func, Constants.ListDefaultCapacity);
 		}
 
 		/// <summary>
@@ -200,7 +200,7 @@ namespace ZLinq
         }
 
         [Pure]
-        [SuppressMessage("ReSharper", "LoopCanBeConvertedToQuery")]
+		[SuppressMessage("ReSharper", "LoopCanBeConvertedToQuery")]
         private static List<TResult> SelectToList<T, TResult>(this IEnumerable<T> source, Func<T, TResult> func, int count)
         {
             var list = new List<TResult>(count);

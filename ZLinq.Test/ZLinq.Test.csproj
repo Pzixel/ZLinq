@@ -56,6 +56,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FlattenTest.tt</DependentUpon>
     </Compile>
+    <Compile Include="Core\Folding\First.cs">
+      <DependentUpon>First.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Core\IsEqualTest.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -100,6 +105,10 @@
     <Content Include="Core\FlattenTest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>FlattenTest.cs</LastGenOutput>
+    </Content>
+    <Content Include="Core\Folding\First.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>First.cs</LastGenOutput>
     </Content>
     <Content Include="Core\IsEqualTest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

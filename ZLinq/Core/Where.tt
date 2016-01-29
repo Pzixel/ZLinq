@@ -18,7 +18,7 @@ namespace ZLinq
 {
     public static partial class ZEnumerable
     {        
-		<# foreach (var sourceType in TextTemplate.CollectionList) 
+		<# foreach (var sourceType in TextTemplate.StandardCollections) 
 		{ #>		    
 		[Pure]
 	    public static T[] WhereToArray<T>(this <#= sourceType #> source, Predicate<T> predicate)

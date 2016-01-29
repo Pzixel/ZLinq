@@ -19,6 +19,9 @@ namespace ZLinq.Test.Core
             Assert.IsTrue(x.IsEqual(y));
             Assert.IsTrue(y.IsEqual(x));
 
+			Assert.IsTrue(x.IsEqual(x));
+            Assert.IsTrue(y.IsEqual(y));
+
             Assert.IsFalse(x.IsEqual(a));
             Assert.IsFalse(x.IsEqual(b));
 
@@ -36,6 +39,9 @@ namespace ZLinq.Test.Core
 
             Assert.IsTrue(x.IsEqual(y));
             Assert.IsTrue(y.IsEqual(x));
+
+			Assert.IsTrue(x.IsEqual(x));
+            Assert.IsTrue(y.IsEqual(y));
 
             Assert.IsFalse(x.IsEqual(a));
             Assert.IsFalse(x.IsEqual(b));
@@ -55,6 +61,9 @@ namespace ZLinq.Test.Core
             Assert.IsTrue(x.IsEqual(y));
             Assert.IsTrue(y.IsEqual(x));
 
+			Assert.IsTrue(x.IsEqual(x));
+            Assert.IsTrue(y.IsEqual(y));
+
             Assert.IsFalse(x.IsEqual(a));
             Assert.IsFalse(x.IsEqual(b));
 
@@ -72,6 +81,9 @@ namespace ZLinq.Test.Core
 
             Assert.IsTrue(x.IsEqual(y));
             Assert.IsTrue(y.IsEqual(x));
+
+			Assert.IsTrue(x.IsEqual(x));
+            Assert.IsTrue(y.IsEqual(y));
 
             Assert.IsFalse(x.IsEqual(a));
             Assert.IsFalse(x.IsEqual(b));
@@ -95,6 +107,9 @@ namespace ZLinq.Test.Core
             Assert.IsTrue(x.IsEqualMemberwise(y));
             Assert.IsTrue(y.IsEqualMemberwise(x));
 
+			Assert.IsTrue(x.IsEqualMemberwise(x));
+            Assert.IsTrue(y.IsEqualMemberwise(y));
+
             Assert.IsFalse(x.IsEqualMemberwise(a));
             Assert.IsFalse(x.IsEqualMemberwise(b));
 
@@ -114,6 +129,9 @@ namespace ZLinq.Test.Core
 
             Assert.IsTrue(x.IsEqualMemberwise(y));
             Assert.IsTrue(y.IsEqualMemberwise(x));
+
+			Assert.IsTrue(x.IsEqualMemberwise(x));
+            Assert.IsTrue(y.IsEqualMemberwise(y));
 
             Assert.IsFalse(x.IsEqualMemberwise(a));
             Assert.IsFalse(x.IsEqualMemberwise(b));
@@ -135,6 +153,9 @@ namespace ZLinq.Test.Core
             Assert.IsTrue(x.IsEqualMemberwise(y));
             Assert.IsTrue(y.IsEqualMemberwise(x));
 
+			Assert.IsTrue(x.IsEqualMemberwise(x));
+            Assert.IsTrue(y.IsEqualMemberwise(y));
+
             Assert.IsFalse(x.IsEqualMemberwise(a));
             Assert.IsFalse(x.IsEqualMemberwise(b));
 
@@ -154,6 +175,9 @@ namespace ZLinq.Test.Core
 
             Assert.IsTrue(x.IsEqualMemberwise(y));
             Assert.IsTrue(y.IsEqualMemberwise(x));
+
+			Assert.IsTrue(x.IsEqualMemberwise(x));
+            Assert.IsTrue(y.IsEqualMemberwise(y));
 
             Assert.IsFalse(x.IsEqualMemberwise(a));
             Assert.IsFalse(x.IsEqualMemberwise(b));

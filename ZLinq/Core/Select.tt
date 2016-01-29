@@ -10,6 +10,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
 using ZLinq.Extension;
 
@@ -39,7 +40,7 @@ namespace ZLinq
             }
             return result;
         }			
-		<# foreach (var sourceType in TextTemplate.CollectionsIList) 
+		<# foreach (var sourceType in TextTemplate.StandardLists) 
 		{ #>		
 		
 		/// <summary>
@@ -101,7 +102,7 @@ namespace ZLinq
             //cannot check source here due to possible IEnumerable<T> multiple enumeration
             <#= TextTemplate.IsNotNull("source") #>
 			<#= TextTemplate.IsNotNull("func") #>
-            return SelectToList(source, func, 1000);
+            return SelectToList(source, func, Constants.ListDefaultCapacity);
 		}
 
 		/// <summary>
@@ -121,6 +122,7 @@ namespace ZLinq
         }
 
         [Pure]
+		[SuppressMessage("ReSharper", "LoopCanBeConvertedToQuery")]
         private static List<TResult> SelectToList<T, TResult>(this IEnumerable<T> source, Func<T, TResult> func, int count)
         {
             var list = new List<TResult>(count);

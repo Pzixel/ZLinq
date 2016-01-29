@@ -16,7 +16,7 @@ namespace ZLinq.Test.Core
     [TestClass]
     public class IsEqual
     {	
-		<# foreach (var sourceType in TextTemplate.CollectionsIList.Concat(new[] {"ICollection<T>"})) { #>		
+		<# foreach (var sourceType in TextTemplate.StandardCollections) { #>		
 		[TestMethod]
         public void IsEqual<#= TextTemplate.GetCollectionName(sourceType) #>()
         {
@@ -28,6 +28,9 @@ namespace ZLinq.Test.Core
             Assert.IsTrue(x.IsEqual(y));
             Assert.IsTrue(y.IsEqual(x));
 
+			Assert.IsTrue(x.IsEqual(x));
+            Assert.IsTrue(y.IsEqual(y));
+
             Assert.IsFalse(x.IsEqual(a));
             Assert.IsFalse(x.IsEqual(b));
 
@@ -36,7 +39,7 @@ namespace ZLinq.Test.Core
         }
 		<# } #>	
 
-		<# foreach (var sourceType in TextTemplate.CollectionsIList.Concat(new[] {"ICollection<T>"})) { #>		
+		<# foreach (var sourceType in TextTemplate.StandardCollections) { #>		
 		[TestMethod]
         public void IsEqualMemberwise<#= TextTemplate.GetCollectionName(sourceType) #>()
         {
@@ -49,6 +52,9 @@ namespace ZLinq.Test.Core
 
             Assert.IsTrue(x.IsEqualMemberwise(y));
             Assert.IsTrue(y.IsEqualMemberwise(x));
+
+			Assert.IsTrue(x.IsEqualMemberwise(x));
+            Assert.IsTrue(y.IsEqualMemberwise(y));
 
             Assert.IsFalse(x.IsEqualMemberwise(a));
             Assert.IsFalse(x.IsEqualMemberwise(b));

@@ -28,13 +28,13 @@ namespace ZLinq
         }
 
 		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsNullOrEmpty(this IList source)
+        public static bool IsNullOrEmpty<T>(this ICollection<T> source)
         {
             return source == null || source.Count == 0;
         }
 
 		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsNullOrEmpty<T>(this ICollection<T> source)
+        public static bool IsNullOrEmpty(this IList source)
         {
             return source == null || source.Count == 0;
         }
