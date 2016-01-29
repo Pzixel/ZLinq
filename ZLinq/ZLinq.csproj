@@ -131,6 +131,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Comparers\CustomComparer.cs" />
+    <Compile Include="Comparers\CustomComparerVisitor.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Core\Single.cs">
       <DependentUpon>Single.tt</DependentUpon>
