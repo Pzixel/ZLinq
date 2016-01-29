@@ -1,0 +1,50 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(SolutionDir)ZLinq.TTHelp\bin\$(Configuration)\ZLinq.TTHelp.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="ZLinq.TTHelp" #>
+<#@ output extension=".cs" #>
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using System.Runtime.CompilerServices;
+
+// ReSharper disable CheckNamespace
+namespace ZLinq
+{
+    public static partial class ZEnumerable
+    {     		
+		<# foreach (var sourceType in TextTemplate.AllLists) 
+		{ #>		
+		   	    
+		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+	   	public static T Last<T>(this <#= sourceType #> source)
+        {
+			return <#= TextTemplate.Cast(sourceType) #>source[source.<#= TextTemplate.LengthOrCount(sourceType) #> - 1];
+        }	 	
+
+		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static TResult Last<T, TResult>(this <#= sourceType #> source, Func<T, TResult> func)
+        {
+			return func(<#= TextTemplate.Cast(sourceType) #>source[source.<#= TextTemplate.LengthOrCount(sourceType) #> - 1]);
+        }
+
+		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+	    public static T LastOrDefault<T>(this <#= sourceType #> source)
+        {
+			return source.<#= TextTemplate.LengthOrCount(sourceType) #> == 0 ? default(T) : <#= TextTemplate.Cast(sourceType) #> source[source.<#= TextTemplate.LengthOrCount(sourceType) #> - 1];
+        }		
+		   	    
+		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+	    public static TResult LastOrDefault<T, TResult>(this <#= sourceType #> source, Func<T, TResult> func)
+        {
+			return source.<#= TextTemplate.LengthOrCount(sourceType) #> == 0 ? default(TResult) : func(<#= TextTemplate.Cast(sourceType) #>source[source.<#= TextTemplate.LengthOrCount(sourceType) #> - 1]);
+        }
+		<# } #>		
+
+    }
+}

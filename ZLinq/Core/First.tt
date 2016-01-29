@@ -11,6 +11,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using System.Runtime.CompilerServices;
 
 // ReSharper disable CheckNamespace
 namespace ZLinq
@@ -20,17 +21,29 @@ namespace ZLinq
 		<# foreach (var sourceType in TextTemplate.AllLists) 
 		{ #>		
 		   	    
-		[Pure]
-	    public static TResult FirstOrDefault<T, TResult>(this <#= sourceType #> source, Func<T, TResult> func)
+		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+	   	public static T First<T>(this <#= sourceType #> source)
         {
-			return source.<#= TextTemplate.LengthOrCount(sourceType) #> == 0 ? default(TResult) : func(<#= TextTemplate.Cast(sourceType) #>source[0]);
-        }	
+			return <#= TextTemplate.Cast(sourceType) #>source[0];
+        }	 	
 
-		[Pure]
+		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static TResult First<T, TResult>(this <#= sourceType #> source, Func<T, TResult> func)
+        {
+			return func(<#= TextTemplate.Cast(sourceType) #>source[0]);
+        }
+
+		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
 	    public static T FirstOrDefault<T>(this <#= sourceType #> source)
         {
 			return source.<#= TextTemplate.LengthOrCount(sourceType) #> == 0 ? default(T) : <#= TextTemplate.Cast(sourceType) #> source[0];
-        }	
+        }		
+		   	    
+		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+	    public static TResult FirstOrDefault<T, TResult>(this <#= sourceType #> source, Func<T, TResult> func)
+        {
+			return source.<#= TextTemplate.LengthOrCount(sourceType) #> == 0 ? default(TResult) : func(<#= TextTemplate.Cast(sourceType) #>source[0]);
+        }
 		<# } #>		
 
     }

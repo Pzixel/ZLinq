@@ -11,6 +11,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using System.Runtime.CompilerServices;
 
 // ReSharper disable CheckNamespace
 namespace ZLinq
@@ -19,8 +20,8 @@ namespace ZLinq
     {        
 		<# foreach (var sourceType in TextTemplate.AllCollections) 
 		{ 
-		#>[Pure]
-        public static bool IsNullOrEmpty<T>(this <#= sourceType#> source)
+		#>[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNullOrEmpty<#= TextTemplate.GetConstraint(sourceType) #>(this <#= sourceType#> source)
         {
             return source == null || source.<#= TextTemplate.LengthOrCount(sourceType)#> == 0;
         }
@@ -50,6 +51,12 @@ namespace ZLinq
             }
             var enumerator = source.GetEnumerator();
             return enumerator.MoveNext();
+        }
+
+		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNullOrEmpty(this string s)
+        {
+            return string.IsNullOrEmpty(s);
         }
     }
 }

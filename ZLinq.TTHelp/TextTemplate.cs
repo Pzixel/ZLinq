@@ -76,5 +76,10 @@ namespace ZLinq.TTHelp
         {
             return typeName.IndexOfAny(new[] {'<', '['}) >= 0 ? string.Empty : "(T)";
         }
+
+        public static string GetConstraint(string typeName)
+        {
+            return typeName.IndexOfAny(new[] {'<', '['}) >= 0 ? "<T>" : string.Empty;
+        }
     }
 }

@@ -132,6 +132,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="Core\Single.cs">
+      <DependentUpon>Single.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Core\Last.cs">
+      <DependentUpon>Last.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Core\First.cs">
+      <DependentUpon>First.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Core\Flatten.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -149,11 +164,6 @@
     </Compile>
     <Compile Include="Core\Repeat.cs" />
     <Compile Include="Core\Range.cs" />
-    <Compile Include="Core\FirstOrDefault.cs">
-      <DependentUpon>FirstOrDefault.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Core\Where.cs">
       <DependentUpon>Where.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -185,6 +195,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Core\Single.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Single.cs</LastGenOutput>
+    </Content>
+    <Content Include="Core\Last.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Last.cs</LastGenOutput>
+    </Content>
+    <Content Include="Core\First.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>First.cs</LastGenOutput>
+    </Content>
     <Content Include="Core\Flatten.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Flatten.cs</LastGenOutput>
@@ -196,10 +218,6 @@
     <Content Include="Core\IsNullOrEmpty.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>IsNullOrEmpty.cs</LastGenOutput>
-    </Content>
-    <Content Include="Core\FirstOrDefault.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>FirstOrDefault.cs</LastGenOutput>
     </Content>
     <Content Include="Core\Where.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
