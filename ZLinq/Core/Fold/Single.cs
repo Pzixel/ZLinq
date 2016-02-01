@@ -93,6 +93,7 @@ namespace ZLinq
             }
             using (var enumerator = source.GetEnumerator())
             {
+				enumerator.MoveNext();
                 return enumerator.Current;
             }
         }
@@ -112,6 +113,7 @@ namespace ZLinq
             }
             using (var enumerator = source.GetEnumerator())
             {
+				enumerator.MoveNext();
                 return enumerator.Current;
             }
         }
