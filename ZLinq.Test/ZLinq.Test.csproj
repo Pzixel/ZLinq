@@ -56,6 +56,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FlattenTest.tt</DependentUpon>
     </Compile>
+    <Compile Include="Core\Folding\Single.cs">
+      <DependentUpon>Single.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Core\Folding\Last.cs">
+      <DependentUpon>Last.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Core\Folding\First.cs">
       <DependentUpon>First.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -84,6 +94,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SplitTest.tt</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Caster.cs">
+      <DependentUpon>Caster.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="ZMath\AverageTest.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -106,6 +121,14 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>FlattenTest.cs</LastGenOutput>
     </Content>
+    <Content Include="Core\Folding\Single.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Single.cs</LastGenOutput>
+    </Content>
+    <Content Include="Core\Folding\Last.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Last.cs</LastGenOutput>
+    </Content>
     <Content Include="Core\Folding\First.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>First.cs</LastGenOutput>
@@ -125,6 +148,10 @@
     <Content Include="Core\SplitTest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SplitTest.cs</LastGenOutput>
+    </Content>
+    <Content Include="Helpers\Caster.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Caster.cs</LastGenOutput>
     </Content>
     <Content Include="ZMath\AverageTest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

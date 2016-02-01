@@ -1,0 +1,30 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(SolutionDir)ZLinq.TTHelp\bin\$(Configuration)\ZLinq.TTHelp.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="ZLinq.TTHelp" #>
+<#@ output extension=".cs" #>
+
+using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using System.Linq;
+
+
+namespace ZLinq.Test.Helpers
+{
+    public static class Caster
+    {        
+		<# foreach (var sourceType in TextTemplate.StandardInterfaces)
+		{ 
+		#>[Pure]
+        public static <#= sourceType #> To<#= TextTemplate.GetCollectionName(sourceType) #><T>(this IEnumerable<T> source)
+        {
+            return Enumerable.ToList(source);
+        }
+		<#}#>
+
+    }
+}

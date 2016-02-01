@@ -1,7 +1,7 @@
 ﻿
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ZLinq.Test.Helpers;
 
 namespace ZLinq.Test.Core
 {
@@ -12,10 +12,10 @@ namespace ZLinq.Test.Core
 		[TestMethod]
         public void IsEqualArray()
         {
-            var x = (int[]) Enumerable.Range(1, 1024).ToArray();
-            var y = (int[]) Enumerable.Range(1, 1024).ToArray();
-            var a = (int[]) Enumerable.Range(2, 1024).ToArray();
-            var b = (int[]) Enumerable.Range(1, 1000).ToArray();
+            var x = Enumerable.Range(1, 1024).ToArray();
+            var y = Enumerable.Range(1, 1024).ToArray();
+            var a = Enumerable.Range(2, 1024).ToArray();
+            var b = Enumerable.Range(1, 1000).ToArray();
 
             Assert.IsTrue(x.IsEqual(y));
             Assert.IsTrue(y.IsEqual(x));
@@ -33,10 +33,10 @@ namespace ZLinq.Test.Core
 		[TestMethod]
         public void IsEqualList()
         {
-            var x = (List<int>) Enumerable.Range(1, 1024).ToList();
-            var y = (List<int>) Enumerable.Range(1, 1024).ToList();
-            var a = (List<int>) Enumerable.Range(2, 1024).ToList();
-            var b = (List<int>) Enumerable.Range(1, 1000).ToList();
+            var x = Enumerable.Range(1, 1024).ToList();
+            var y = Enumerable.Range(1, 1024).ToList();
+            var a = Enumerable.Range(2, 1024).ToList();
+            var b = Enumerable.Range(1, 1000).ToList();
 
             Assert.IsTrue(x.IsEqual(y));
             Assert.IsTrue(y.IsEqual(x));
@@ -54,10 +54,10 @@ namespace ZLinq.Test.Core
 		[TestMethod]
         public void IsEqualIList()
         {
-            var x = (IList<int>) Enumerable.Range(1, 1024).ToList();
-            var y = (IList<int>) Enumerable.Range(1, 1024).ToList();
-            var a = (IList<int>) Enumerable.Range(2, 1024).ToList();
-            var b = (IList<int>) Enumerable.Range(1, 1000).ToList();
+            var x = Enumerable.Range(1, 1024).ToIList();
+            var y = Enumerable.Range(1, 1024).ToIList();
+            var a = Enumerable.Range(2, 1024).ToIList();
+            var b = Enumerable.Range(1, 1000).ToIList();
 
             Assert.IsTrue(x.IsEqual(y));
             Assert.IsTrue(y.IsEqual(x));
@@ -75,10 +75,10 @@ namespace ZLinq.Test.Core
 		[TestMethod]
         public void IsEqualICollection()
         {
-            var x = (ICollection<int>) Enumerable.Range(1, 1024).ToList();
-            var y = (ICollection<int>) Enumerable.Range(1, 1024).ToList();
-            var a = (ICollection<int>) Enumerable.Range(2, 1024).ToList();
-            var b = (ICollection<int>) Enumerable.Range(1, 1000).ToList();
+            var x = Enumerable.Range(1, 1024).ToICollection();
+            var y = Enumerable.Range(1, 1024).ToICollection();
+            var a = Enumerable.Range(2, 1024).ToICollection();
+            var b = Enumerable.Range(1, 1000).ToICollection();
 
             Assert.IsTrue(x.IsEqual(y));
             Assert.IsTrue(y.IsEqual(x));
@@ -98,12 +98,17 @@ namespace ZLinq.Test.Core
 		[TestMethod]
         public void IsEqualMemberwiseArray()
         {
-            var x = new object[1024].ToArray();
-            var y = new object[1024].ToArray();
+			var source1 = new object[1024];
+			var source2 = new object[source1.Length];
+
+			for (int i = 0; i < source1.Length; i++)
+				source1[i] = source2[i] = new object();
+
+            var x = source1.ToArray();
+            var y = source2.ToArray();
 			var a = Enumerable.Range(1, 1024).Select(t => (object) t).ToArray();
 			var b = Enumerable.Range(1, 1023).Select(t => (object) t).ToArray();
-			for (int i = 0; i < y.Length; i++)
-				y[i] = x[i] = new object();
+
 
             Assert.IsTrue(x.IsEqualMemberwise(y));
             Assert.IsTrue(y.IsEqualMemberwise(x));
@@ -121,12 +126,17 @@ namespace ZLinq.Test.Core
 		[TestMethod]
         public void IsEqualMemberwiseList()
         {
-            var x = new object[1024].ToList();
-            var y = new object[1024].ToList();
+			var source1 = new object[1024];
+			var source2 = new object[source1.Length];
+
+			for (int i = 0; i < source1.Length; i++)
+				source1[i] = source2[i] = new object();
+
+            var x = source1.ToList();
+            var y = source2.ToList();
 			var a = Enumerable.Range(1, 1024).Select(t => (object) t).ToList();
 			var b = Enumerable.Range(1, 1023).Select(t => (object) t).ToList();
-			for (int i = 0; i < y.Count; i++)
-				y[i] = x[i] = new object();
+
 
             Assert.IsTrue(x.IsEqualMemberwise(y));
             Assert.IsTrue(y.IsEqualMemberwise(x));
@@ -144,12 +154,17 @@ namespace ZLinq.Test.Core
 		[TestMethod]
         public void IsEqualMemberwiseIList()
         {
-            var x = new object[1024].ToList();
-            var y = new object[1024].ToList();
-			var a = Enumerable.Range(1, 1024).Select(t => (object) t).ToList();
-			var b = Enumerable.Range(1, 1023).Select(t => (object) t).ToList();
-			for (int i = 0; i < y.Count; i++)
-				y[i] = x[i] = new object();
+			var source1 = new object[1024];
+			var source2 = new object[source1.Length];
+
+			for (int i = 0; i < source1.Length; i++)
+				source1[i] = source2[i] = new object();
+
+            var x = source1.ToIList();
+            var y = source2.ToIList();
+			var a = Enumerable.Range(1, 1024).Select(t => (object) t).ToIList();
+			var b = Enumerable.Range(1, 1023).Select(t => (object) t).ToIList();
+
 
             Assert.IsTrue(x.IsEqualMemberwise(y));
             Assert.IsTrue(y.IsEqualMemberwise(x));
@@ -167,12 +182,17 @@ namespace ZLinq.Test.Core
 		[TestMethod]
         public void IsEqualMemberwiseICollection()
         {
-            var x = new object[1024].ToList();
-            var y = new object[1024].ToList();
-			var a = Enumerable.Range(1, 1024).Select(t => (object) t).ToList();
-			var b = Enumerable.Range(1, 1023).Select(t => (object) t).ToList();
-			for (int i = 0; i < y.Count; i++)
-				y[i] = x[i] = new object();
+			var source1 = new object[1024];
+			var source2 = new object[source1.Length];
+
+			for (int i = 0; i < source1.Length; i++)
+				source1[i] = source2[i] = new object();
+
+            var x = source1.ToICollection();
+            var y = source2.ToICollection();
+			var a = Enumerable.Range(1, 1024).Select(t => (object) t).ToICollection();
+			var b = Enumerable.Range(1, 1023).Select(t => (object) t).ToICollection();
+
 
             Assert.IsTrue(x.IsEqualMemberwise(y));
             Assert.IsTrue(y.IsEqualMemberwise(x));

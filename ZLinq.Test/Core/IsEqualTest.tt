@@ -8,23 +8,25 @@
 <#@ import namespace="ZLinq.TTHelp" #>
 <#@ output extension=".cs" #>
 
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ZLinq.Test.Helpers;
 
 namespace ZLinq.Test.Core
 {
     [TestClass]
     public class IsEqual
     {	
-		<# foreach (var sourceType in TextTemplate.StandardCollections) { #>		
+		<# foreach (var sourceType in TextTemplate.StandardCollections) { 
+		string name = TextTemplate.GetCollectionName(sourceType);
+		#>		
 		[TestMethod]
-        public void IsEqual<#= TextTemplate.GetCollectionName(sourceType) #>()
+        public void IsEqual<#= name #>()
         {
-            var x = (<#= TextTemplate.ToInt(sourceType) #>) Enumerable.Range(1, 1024).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
-            var y = (<#= TextTemplate.ToInt(sourceType) #>) Enumerable.Range(1, 1024).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
-            var a = (<#= TextTemplate.ToInt(sourceType) #>) Enumerable.Range(2, 1024).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
-            var b = (<#= TextTemplate.ToInt(sourceType) #>) Enumerable.Range(1, 1000).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
+            var x = Enumerable.Range(1, 1024).To<#= name #>();
+            var y = Enumerable.Range(1, 1024).To<#= name #>();
+            var a = Enumerable.Range(2, 1024).To<#= name #>();
+            var b = Enumerable.Range(1, 1000).To<#= name #>();
 
             Assert.IsTrue(x.IsEqual(y));
             Assert.IsTrue(y.IsEqual(x));
@@ -40,16 +42,23 @@ namespace ZLinq.Test.Core
         }
 		<# } #>	
 
-		<# foreach (var sourceType in TextTemplate.StandardCollections) { #>		
+		<# foreach (var sourceType in TextTemplate.StandardCollections) {
+		string name = TextTemplate.GetCollectionName(sourceType);
+		 #>		
 		[TestMethod]
         public void IsEqualMemberwise<#= TextTemplate.GetCollectionName(sourceType) #>()
         {
-            var x = new object[1024].<#= TextTemplate.ToArrayOrToList(sourceType) #>;
-            var y = new object[1024].<#= TextTemplate.ToArrayOrToList(sourceType) #>;
-			var a = Enumerable.Range(1, 1024).Select(t => (object) t).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
-			var b = Enumerable.Range(1, 1023).Select(t => (object) t).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
-			for (int i = 0; i < y.<#= TextTemplate.LengthOrCount(sourceType) #>; i++)
-				y[i] = x[i] = new object();
+			var source1 = new object[1024];
+			var source2 = new object[source1.Length];
+
+			for (int i = 0; i < source1.Length; i++)
+				source1[i] = source2[i] = new object();
+
+            var x = source1.To<#= name #>();
+            var y = source2.To<#= name #>();
+			var a = Enumerable.Range(1, 1024).Select(t => (object) t).To<#= name #>();
+			var b = Enumerable.Range(1, 1023).Select(t => (object) t).To<#= name #>();
+
 
             Assert.IsTrue(x.IsEqualMemberwise(y));
             Assert.IsTrue(y.IsEqualMemberwise(x));

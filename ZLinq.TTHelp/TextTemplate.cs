@@ -35,6 +35,7 @@ namespace ZLinq.TTHelp
         public static readonly string[] StandardLists = new [] { "T[]" }.Concat(ListIList).ToArray();
         public static readonly string[] StandardCollections = StandardLists.Concat(new[] { "ICollection<T>" }).ToArray();
         public static readonly string[] StandardEnumerables = StandardCollections.Concat(new[] { "IEnumerable<T>" }).ToArray();
+        public static readonly string[] StandardInterfaces = {"IList<T>", "ICollection<T>", "IEnumerable<T>"};
         public static readonly string[] Foreachable = {"T[]", "List<T>", "IEnumerable<T>" };
 
         public static string[] ToInt(IEnumerable<string> source)
@@ -44,7 +45,13 @@ namespace ZLinq.TTHelp
 
         public static string ToInt(string source)
         {
-            return source.Replace("T", "int");
+            const string replace = "int";
+            return To(source, replace);
+        }
+
+        public static string To(string source, string replace)
+        {
+            return source.Replace("T", replace);
         }
 
         public static string[] WithNonGen(string[] source)

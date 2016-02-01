@@ -7,23 +7,23 @@ using ZLinq.Test.Helpers;
 namespace ZLinq.Test.Core.Folding
 {
     [TestClass]
-    public class First
+    public class Last
     {	
 				
 		[TestMethod]
-        public void FirstArray()
+        public void LastArray()
         {
             var x = Enumerable.Range(1, 1024).ToArray();
             var y = Enumerable.Range(1, 1024).Select(a => new Tuple<int, int>(a,a)).ToArray();
             var z = Enumerable.Range(1, 1024).Select(a => new { A = a}).ToArray();
 
-            Assert.IsTrue(ZEnumerable.First(x) == Enumerable.First(x));
-			Assert.IsTrue(ZEnumerable.First(y) == Enumerable.First(y));
-			Assert.IsTrue(ZEnumerable.First(z) == Enumerable.First(z));
+            Assert.IsTrue(ZEnumerable.Last(x) == Enumerable.Last(x));
+			Assert.IsTrue(ZEnumerable.Last(y) == Enumerable.Last(y));
+			Assert.IsTrue(ZEnumerable.Last(z) == Enumerable.Last(z));
         }
 
 		[TestMethod]
-        public void FirstArrayOrDefault()
+        public void LastArrayOrDefault()
         {
             var x = Enumerable.Range(1, 1024).ToArray();
             var y = Enumerable.Range(1, 1024).Select(a => new Tuple<int, int>(a,a)).ToArray();
@@ -35,19 +35,19 @@ namespace ZLinq.Test.Core.Folding
         }
 
 		[TestMethod]
-        public void FirstArrayPredicate()
+        public void LastArrayPredicate()
         {
             var x = Enumerable.Range(1, 1024).ToArray();
             var y = Enumerable.Range(1, 1024).Select(a => new Tuple<int, int>(a,a)).ToArray();
             var z = Enumerable.Range(1, 1024).Select(a => new { A = a}).ToArray();
 
-            Assert.IsTrue(ZEnumerable.First(x, val => val%3 == 0) == Enumerable.First(x, val => val%3 == 0));
-			Assert.IsTrue(ZEnumerable.First(y, val => val.Item1%3 == 0) == Enumerable.First(y, val => val.Item1%3 == 0));
-			Assert.IsTrue(ZEnumerable.First(z, val => val.A%3 == 0) == Enumerable.First(z, val => val.A%3 == 0));
+            Assert.IsTrue(ZEnumerable.Last(x, val => val%3 == 0) == Enumerable.Last(x, val => val%3 == 0));
+			Assert.IsTrue(ZEnumerable.Last(y, val => val.Item1%3 == 0) == Enumerable.Last(y, val => val.Item1%3 == 0));
+			Assert.IsTrue(ZEnumerable.Last(z, val => val.A%3 == 0) == Enumerable.Last(z, val => val.A%3 == 0));
         }
 
 		[TestMethod]
-        public void FirstArrayOrDefaultPredicate()
+        public void LastArrayOrDefaultPredicate()
         {
             var x = Enumerable.Range(1, 1024).ToArray();
             var y = Enumerable.Range(1, 1024).Select(a => new Tuple<int, int>(a,a)).ToArray();
@@ -60,19 +60,19 @@ namespace ZLinq.Test.Core.Folding
 
 				
 		[TestMethod]
-        public void FirstList()
+        public void LastList()
         {
             var x = Enumerable.Range(1, 1024).ToList();
             var y = Enumerable.Range(1, 1024).Select(a => new Tuple<int, int>(a,a)).ToList();
             var z = Enumerable.Range(1, 1024).Select(a => new { A = a}).ToList();
 
-            Assert.IsTrue(ZEnumerable.First(x) == Enumerable.First(x));
-			Assert.IsTrue(ZEnumerable.First(y) == Enumerable.First(y));
-			Assert.IsTrue(ZEnumerable.First(z) == Enumerable.First(z));
+            Assert.IsTrue(ZEnumerable.Last(x) == Enumerable.Last(x));
+			Assert.IsTrue(ZEnumerable.Last(y) == Enumerable.Last(y));
+			Assert.IsTrue(ZEnumerable.Last(z) == Enumerable.Last(z));
         }
 
 		[TestMethod]
-        public void FirstListOrDefault()
+        public void LastListOrDefault()
         {
             var x = Enumerable.Range(1, 1024).ToList();
             var y = Enumerable.Range(1, 1024).Select(a => new Tuple<int, int>(a,a)).ToList();
@@ -84,19 +84,19 @@ namespace ZLinq.Test.Core.Folding
         }
 
 		[TestMethod]
-        public void FirstListPredicate()
+        public void LastListPredicate()
         {
             var x = Enumerable.Range(1, 1024).ToList();
             var y = Enumerable.Range(1, 1024).Select(a => new Tuple<int, int>(a,a)).ToList();
             var z = Enumerable.Range(1, 1024).Select(a => new { A = a}).ToList();
 
-            Assert.IsTrue(ZEnumerable.First(x, val => val%3 == 0) == Enumerable.First(x, val => val%3 == 0));
-			Assert.IsTrue(ZEnumerable.First(y, val => val.Item1%3 == 0) == Enumerable.First(y, val => val.Item1%3 == 0));
-			Assert.IsTrue(ZEnumerable.First(z, val => val.A%3 == 0) == Enumerable.First(z, val => val.A%3 == 0));
+            Assert.IsTrue(ZEnumerable.Last(x, val => val%3 == 0) == Enumerable.Last(x, val => val%3 == 0));
+			Assert.IsTrue(ZEnumerable.Last(y, val => val.Item1%3 == 0) == Enumerable.Last(y, val => val.Item1%3 == 0));
+			Assert.IsTrue(ZEnumerable.Last(z, val => val.A%3 == 0) == Enumerable.Last(z, val => val.A%3 == 0));
         }
 
 		[TestMethod]
-        public void FirstListOrDefaultPredicate()
+        public void LastListOrDefaultPredicate()
         {
             var x = Enumerable.Range(1, 1024).ToList();
             var y = Enumerable.Range(1, 1024).Select(a => new Tuple<int, int>(a,a)).ToList();
@@ -109,19 +109,19 @@ namespace ZLinq.Test.Core.Folding
 
 				
 		[TestMethod]
-        public void FirstIList()
+        public void LastIList()
         {
             var x = Enumerable.Range(1, 1024).ToIList();
             var y = Enumerable.Range(1, 1024).Select(a => new Tuple<int, int>(a,a)).ToIList();
             var z = Enumerable.Range(1, 1024).Select(a => new { A = a}).ToIList();
 
-            Assert.IsTrue(ZEnumerable.First(x) == Enumerable.First(x));
-			Assert.IsTrue(ZEnumerable.First(y) == Enumerable.First(y));
-			Assert.IsTrue(ZEnumerable.First(z) == Enumerable.First(z));
+            Assert.IsTrue(ZEnumerable.Last(x) == Enumerable.Last(x));
+			Assert.IsTrue(ZEnumerable.Last(y) == Enumerable.Last(y));
+			Assert.IsTrue(ZEnumerable.Last(z) == Enumerable.Last(z));
         }
 
 		[TestMethod]
-        public void FirstIListOrDefault()
+        public void LastIListOrDefault()
         {
             var x = Enumerable.Range(1, 1024).ToIList();
             var y = Enumerable.Range(1, 1024).Select(a => new Tuple<int, int>(a,a)).ToIList();
@@ -133,19 +133,19 @@ namespace ZLinq.Test.Core.Folding
         }
 
 		[TestMethod]
-        public void FirstIListPredicate()
+        public void LastIListPredicate()
         {
             var x = Enumerable.Range(1, 1024).ToIList();
             var y = Enumerable.Range(1, 1024).Select(a => new Tuple<int, int>(a,a)).ToIList();
             var z = Enumerable.Range(1, 1024).Select(a => new { A = a}).ToIList();
 
-            Assert.IsTrue(ZEnumerable.First(x, val => val%3 == 0) == Enumerable.First(x, val => val%3 == 0));
-			Assert.IsTrue(ZEnumerable.First(y, val => val.Item1%3 == 0) == Enumerable.First(y, val => val.Item1%3 == 0));
-			Assert.IsTrue(ZEnumerable.First(z, val => val.A%3 == 0) == Enumerable.First(z, val => val.A%3 == 0));
+            Assert.IsTrue(ZEnumerable.Last(x, val => val%3 == 0) == Enumerable.Last(x, val => val%3 == 0));
+			Assert.IsTrue(ZEnumerable.Last(y, val => val.Item1%3 == 0) == Enumerable.Last(y, val => val.Item1%3 == 0));
+			Assert.IsTrue(ZEnumerable.Last(z, val => val.A%3 == 0) == Enumerable.Last(z, val => val.A%3 == 0));
         }
 
 		[TestMethod]
-        public void FirstIListOrDefaultPredicate()
+        public void LastIListOrDefaultPredicate()
         {
             var x = Enumerable.Range(1, 1024).ToIList();
             var y = Enumerable.Range(1, 1024).Select(a => new Tuple<int, int>(a,a)).ToIList();
