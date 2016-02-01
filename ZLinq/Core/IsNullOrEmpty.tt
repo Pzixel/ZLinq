@@ -10,8 +10,8 @@
 
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
+using JetBrains.Annotations;
 
 // ReSharper disable CheckNamespace
 namespace ZLinq
@@ -20,15 +20,18 @@ namespace ZLinq
     {        
 		<# foreach (var sourceType in TextTemplate.WithNonGen(TextTemplate.StandardCollections))
 		{ 
-		#>[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsNullOrEmpty<#= TextTemplate.GetConstraint(sourceType) #>(this <#= sourceType #> source)
+		#>[System.Diagnostics.Contracts.Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [ContractAnnotation("source:null => true; source:notnull => false")]
+        public static bool IsNullOrEmpty<#= TextTemplate.GetConstraint(sourceType) #>([CanBeNull] this <#= sourceType #> source)
         {
             return source == null || source.<#= TextTemplate.LengthOrCount(sourceType)#> == 0;
         }
 
 		<#}
-		#>[Pure]
-        public static bool IsNullOrEmpty<T>(this IEnumerable<T> source)
+		#>
+		[System.Diagnostics.Contracts.Pure]
+        [ContractAnnotation("source:null => true; source:notnull => false")]
+        public static bool IsNullOrEmpty<T>([CanBeNull] this IEnumerable<T> source)
         {
             if (source == null)
 			{
@@ -42,8 +45,9 @@ namespace ZLinq
 			return true;
         }
 
-		[Pure]
-        public static bool IsNullOrEmpty(this IEnumerable source)
+		[System.Diagnostics.Contracts.Pure]
+        [ContractAnnotation("source:null => true; source:notnull => false")]
+        public static bool IsNullOrEmpty([CanBeNull] this IEnumerable source)
         {
             if (source == null)
             {
@@ -53,10 +57,11 @@ namespace ZLinq
             return !enumerator.MoveNext();
         }
 
-		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsNullOrEmpty(this string s)
+		[System.Diagnostics.Contracts.Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [ContractAnnotation("source:null => true; source:notnull => false")]
+        public static bool IsNullOrEmpty([CanBeNull] this string source)
         {
-            return string.IsNullOrEmpty(s);
+            return string.IsNullOrEmpty(source);
         }
     }
 }

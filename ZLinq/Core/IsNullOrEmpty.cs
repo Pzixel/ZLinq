@@ -1,52 +1,59 @@
 ﻿
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
+using JetBrains.Annotations;
 
 // ReSharper disable CheckNamespace
 namespace ZLinq
 {
     public static partial class ZEnumerable
     {        
-		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsNullOrEmpty<T>(this T[] source)
+		[System.Diagnostics.Contracts.Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [ContractAnnotation("source:null => true; source:notnull => false")]
+        public static bool IsNullOrEmpty<T>([CanBeNull] this T[] source)
         {
             return source == null || source.Length == 0;
         }
 
-		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsNullOrEmpty<T>(this List<T> source)
+		[System.Diagnostics.Contracts.Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [ContractAnnotation("source:null => true; source:notnull => false")]
+        public static bool IsNullOrEmpty<T>([CanBeNull] this List<T> source)
         {
             return source == null || source.Count == 0;
         }
 
-		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsNullOrEmpty<T>(this IList<T> source)
+		[System.Diagnostics.Contracts.Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [ContractAnnotation("source:null => true; source:notnull => false")]
+        public static bool IsNullOrEmpty<T>([CanBeNull] this IList<T> source)
         {
             return source == null || source.Count == 0;
         }
 
-		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsNullOrEmpty<T>(this ICollection<T> source)
+		[System.Diagnostics.Contracts.Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [ContractAnnotation("source:null => true; source:notnull => false")]
+        public static bool IsNullOrEmpty<T>([CanBeNull] this ICollection<T> source)
         {
             return source == null || source.Count == 0;
         }
 
-		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsNullOrEmpty(this IList source)
+		[System.Diagnostics.Contracts.Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [ContractAnnotation("source:null => true; source:notnull => false")]
+        public static bool IsNullOrEmpty([CanBeNull] this IList source)
         {
             return source == null || source.Count == 0;
         }
 
-		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsNullOrEmpty(this ICollection source)
+		[System.Diagnostics.Contracts.Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [ContractAnnotation("source:null => true; source:notnull => false")]
+        public static bool IsNullOrEmpty([CanBeNull] this ICollection source)
         {
             return source == null || source.Count == 0;
         }
 
-		[Pure]
-        public static bool IsNullOrEmpty<T>(this IEnumerable<T> source)
+				[System.Diagnostics.Contracts.Pure]
+        [ContractAnnotation("source:null => true; source:notnull => false")]
+        public static bool IsNullOrEmpty<T>([CanBeNull] this IEnumerable<T> source)
         {
             if (source == null)
 			{
@@ -60,8 +67,9 @@ namespace ZLinq
 			return true;
         }
 
-		[Pure]
-        public static bool IsNullOrEmpty(this IEnumerable source)
+		[System.Diagnostics.Contracts.Pure]
+        [ContractAnnotation("source:null => true; source:notnull => false")]
+        public static bool IsNullOrEmpty([CanBeNull] this IEnumerable source)
         {
             if (source == null)
             {
@@ -71,10 +79,11 @@ namespace ZLinq
             return !enumerator.MoveNext();
         }
 
-		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsNullOrEmpty(this string s)
+		[System.Diagnostics.Contracts.Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [ContractAnnotation("source:null => true; source:notnull => false")]
+        public static bool IsNullOrEmpty([CanBeNull] this string source)
         {
-            return string.IsNullOrEmpty(s);
+            return string.IsNullOrEmpty(source);
         }
     }
 }

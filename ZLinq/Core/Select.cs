@@ -8,6 +8,8 @@ using ZLinq.Extension;
 // ReSharper disable CheckNamespace
 namespace ZLinq
 {
+	[SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
+	[SuppressMessage("ReSharper", "LoopCanBeConvertedToQuery")]
     public static partial class ZEnumerable
     {        
 		/// <summary>
@@ -20,6 +22,7 @@ namespace ZLinq
         /// <returns>Array of mapped elements</returns>  	    
 		[System.Diagnostics.Contracts.Pure]
 		[Pure]
+		[NotNull]
 	    public static TResult[] SelectToArray<T, TResult>([NotNull] this ICollection<T> source, [NotNull] Func<T, TResult> func)
         {
 			source.IsNotNull("source");
@@ -44,6 +47,7 @@ namespace ZLinq
         /// <returns>Array of mapped elements</returns>  
 		[System.Diagnostics.Contracts.Pure]
 		[Pure]
+		[NotNull]
         public static TResult[] SelectToArray<T, TResult>([NotNull] this T[] source, [NotNull] Func<T, TResult> func)
         {
             source.IsNotNull("source");
@@ -89,6 +93,7 @@ namespace ZLinq
         /// <returns>Array of mapped elements</returns>  
 		[System.Diagnostics.Contracts.Pure]
 		[Pure]
+		[NotNull]
         public static TResult[] SelectToArray<T, TResult>([NotNull] this List<T> source, [NotNull] Func<T, TResult> func)
         {
             source.IsNotNull("source");
@@ -134,6 +139,7 @@ namespace ZLinq
         /// <returns>Array of mapped elements</returns>  
 		[System.Diagnostics.Contracts.Pure]
 		[Pure]
+		[NotNull]
         public static TResult[] SelectToArray<T, TResult>([NotNull] this IList<T> source, [NotNull] Func<T, TResult> func)
         {
             source.IsNotNull("source");
@@ -180,7 +186,7 @@ namespace ZLinq
         /// <returns>List of mapped elements</returns> 
         [System.Diagnostics.Contracts.Pure]
 		[Pure]
-		[SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
+		[NotNull]
         public static List<TResult> SelectToList<T, TResult>([NotNull] this IEnumerable<T> source, [NotNull] Func<T, TResult> func)
         {
             //cannot check source here due to possible IEnumerable<T> multiple enumeration
@@ -199,6 +205,7 @@ namespace ZLinq
         /// <returns>List of mapped elements</returns>
         [System.Diagnostics.Contracts.Pure]
 		[Pure]
+		[NotNull]
         public static List<TResult> SelectToList<T, TResult>([NotNull] this ICollection<T> source, [NotNull] Func<T, TResult> func)
         {
             source.IsNotNull("source");
@@ -208,7 +215,7 @@ namespace ZLinq
 
         [System.Diagnostics.Contracts.Pure]
 		[Pure]
-		[SuppressMessage("ReSharper", "LoopCanBeConvertedToQuery")]
+		[NotNull]
         private static List<TResult> SelectToList<T, TResult>([NotNull] this IEnumerable<T> source, [NotNull] Func<T, TResult> func, int count)
         {
             var list = new List<TResult>(count);

@@ -19,6 +19,7 @@ namespace ZLinq
     {
 		<# for(int i = 1; i < 10; i++) { 
 		#>[Pure]
+		[NotNull]
 		public static IEnumerable<T> Flatten<T>([NotNull] this T[<#= new string(',',i) #>] array)
         {
             foreach (T value in array)
@@ -29,6 +30,7 @@ namespace ZLinq
 
 		<# for(int i = 1; i < 10; i++) { 
 		#>[Pure]
+		[NotNull]
         public static T[] FlattenToArray<T>([NotNull] this T[<#= new string(',',i) #>] array)
         {
             <#= TextTemplate.IsNotNull("array") #>
