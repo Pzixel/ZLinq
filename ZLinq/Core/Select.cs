@@ -20,7 +20,7 @@ namespace ZLinq
         /// <returns>Array of mapped elements</returns>  	    
 		[System.Diagnostics.Contracts.Pure]
 		[Pure]
-	    public static TResult[] SelectToArray<T, TResult>([NotNull] this ICollection<T> source, Func<T, TResult> func)
+	    public static TResult[] SelectToArray<T, TResult>([NotNull] this ICollection<T> source, [NotNull] Func<T, TResult> func)
         {
 			source.IsNotNull("source");
 			func.IsNotNull("func");
@@ -44,7 +44,7 @@ namespace ZLinq
         /// <returns>Array of mapped elements</returns>  
 		[System.Diagnostics.Contracts.Pure]
 		[Pure]
-        public static TResult[] SelectToArray<T, TResult>([NotNull] this T[] source, Func<T, TResult> func)
+        public static TResult[] SelectToArray<T, TResult>([NotNull] this T[] source, [NotNull] Func<T, TResult> func)
         {
             source.IsNotNull("source");
 			func.IsNotNull("func");
@@ -89,7 +89,7 @@ namespace ZLinq
         /// <returns>Array of mapped elements</returns>  
 		[System.Diagnostics.Contracts.Pure]
 		[Pure]
-        public static TResult[] SelectToArray<T, TResult>([NotNull] this List<T> source, Func<T, TResult> func)
+        public static TResult[] SelectToArray<T, TResult>([NotNull] this List<T> source, [NotNull] Func<T, TResult> func)
         {
             source.IsNotNull("source");
 			func.IsNotNull("func");
@@ -134,7 +134,7 @@ namespace ZLinq
         /// <returns>Array of mapped elements</returns>  
 		[System.Diagnostics.Contracts.Pure]
 		[Pure]
-        public static TResult[] SelectToArray<T, TResult>([NotNull] this IList<T> source, Func<T, TResult> func)
+        public static TResult[] SelectToArray<T, TResult>([NotNull] this IList<T> source, [NotNull] Func<T, TResult> func)
         {
             source.IsNotNull("source");
 			func.IsNotNull("func");
@@ -180,7 +180,8 @@ namespace ZLinq
         /// <returns>List of mapped elements</returns> 
         [System.Diagnostics.Contracts.Pure]
 		[Pure]
-        public static List<TResult> SelectToList<T, TResult>([NotNull] this IEnumerable<T> source, Func<T, TResult> func)
+		[SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
+        public static List<TResult> SelectToList<T, TResult>([NotNull] this IEnumerable<T> source, [NotNull] Func<T, TResult> func)
         {
             //cannot check source here due to possible IEnumerable<T> multiple enumeration
             source.IsNotNull("source");
@@ -198,7 +199,7 @@ namespace ZLinq
         /// <returns>List of mapped elements</returns>
         [System.Diagnostics.Contracts.Pure]
 		[Pure]
-        public static List<TResult> SelectToList<T, TResult>([NotNull] this ICollection<T> source, Func<T, TResult> func)
+        public static List<TResult> SelectToList<T, TResult>([NotNull] this ICollection<T> source, [NotNull] Func<T, TResult> func)
         {
             source.IsNotNull("source");
 			func.IsNotNull("func");
@@ -208,7 +209,7 @@ namespace ZLinq
         [System.Diagnostics.Contracts.Pure]
 		[Pure]
 		[SuppressMessage("ReSharper", "LoopCanBeConvertedToQuery")]
-        private static List<TResult> SelectToList<T, TResult>([NotNull] this IEnumerable<T> source, Func<T, TResult> func, int count)
+        private static List<TResult> SelectToList<T, TResult>([NotNull] this IEnumerable<T> source, [NotNull] Func<T, TResult> func, int count)
         {
             var list = new List<TResult>(count);
             foreach (var value in source)

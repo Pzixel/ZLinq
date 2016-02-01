@@ -8,6 +8,7 @@
 <#@ import namespace="ZLinq.TTHelp" #>
 <#@ output extension=".cs" #>
 
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -20,10 +21,10 @@ namespace ZLinq.Test.Core
 		[TestMethod]
         public void IsEqual<#= TextTemplate.GetCollectionName(sourceType) #>()
         {
-            var x = Enumerable.Range(1, 1024).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
-            var y = Enumerable.Range(1, 1024).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
-            var a = Enumerable.Range(2, 1024).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
-            var b = Enumerable.Range(1, 1000).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
+            var x = (<#= TextTemplate.ToInt(sourceType) #>) Enumerable.Range(1, 1024).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
+            var y = (<#= TextTemplate.ToInt(sourceType) #>) Enumerable.Range(1, 1024).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
+            var a = (<#= TextTemplate.ToInt(sourceType) #>) Enumerable.Range(2, 1024).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
+            var b = (<#= TextTemplate.ToInt(sourceType) #>) Enumerable.Range(1, 1000).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
 
             Assert.IsTrue(x.IsEqual(y));
             Assert.IsTrue(y.IsEqual(x));

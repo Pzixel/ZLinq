@@ -115,7 +115,7 @@ namespace ZLinq
             IEnumerator<T> xEnum = x.GetEnumerator(), yEnum = y.GetEnumerator();
             while(xEnum.MoveNext() && yEnum.MoveNext())
             {
-                if (xEnum.Current.Equals(yEnum.Current))
+                if (!xEnum.Current.Equals(yEnum.Current))
                 {
                     result = false;
                     break;
@@ -232,7 +232,7 @@ namespace ZLinq
             IEnumerator<T> xEnum = x.GetEnumerator(), yEnum = y.GetEnumerator();
             while(xEnum.MoveNext() && yEnum.MoveNext())
             {
-                if (xEnum.Current.Equals(yEnum.Current))
+                if (!xEnum.Current.Equals(yEnum.Current))
                 {
                     result = false;
                     break;

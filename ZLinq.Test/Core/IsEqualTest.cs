@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -11,10 +12,10 @@ namespace ZLinq.Test.Core
 		[TestMethod]
         public void IsEqualArray()
         {
-            var x = Enumerable.Range(1, 1024).ToArray();
-            var y = Enumerable.Range(1, 1024).ToArray();
-            var a = Enumerable.Range(2, 1024).ToArray();
-            var b = Enumerable.Range(1, 1000).ToArray();
+            var x = (int[]) Enumerable.Range(1, 1024).ToArray();
+            var y = (int[]) Enumerable.Range(1, 1024).ToArray();
+            var a = (int[]) Enumerable.Range(2, 1024).ToArray();
+            var b = (int[]) Enumerable.Range(1, 1000).ToArray();
 
             Assert.IsTrue(x.IsEqual(y));
             Assert.IsTrue(y.IsEqual(x));
@@ -32,10 +33,10 @@ namespace ZLinq.Test.Core
 		[TestMethod]
         public void IsEqualList()
         {
-            var x = Enumerable.Range(1, 1024).ToList();
-            var y = Enumerable.Range(1, 1024).ToList();
-            var a = Enumerable.Range(2, 1024).ToList();
-            var b = Enumerable.Range(1, 1000).ToList();
+            var x = (List<int>) Enumerable.Range(1, 1024).ToList();
+            var y = (List<int>) Enumerable.Range(1, 1024).ToList();
+            var a = (List<int>) Enumerable.Range(2, 1024).ToList();
+            var b = (List<int>) Enumerable.Range(1, 1000).ToList();
 
             Assert.IsTrue(x.IsEqual(y));
             Assert.IsTrue(y.IsEqual(x));
@@ -53,10 +54,10 @@ namespace ZLinq.Test.Core
 		[TestMethod]
         public void IsEqualIList()
         {
-            var x = Enumerable.Range(1, 1024).ToList();
-            var y = Enumerable.Range(1, 1024).ToList();
-            var a = Enumerable.Range(2, 1024).ToList();
-            var b = Enumerable.Range(1, 1000).ToList();
+            var x = (IList<int>) Enumerable.Range(1, 1024).ToList();
+            var y = (IList<int>) Enumerable.Range(1, 1024).ToList();
+            var a = (IList<int>) Enumerable.Range(2, 1024).ToList();
+            var b = (IList<int>) Enumerable.Range(1, 1000).ToList();
 
             Assert.IsTrue(x.IsEqual(y));
             Assert.IsTrue(y.IsEqual(x));
@@ -74,10 +75,10 @@ namespace ZLinq.Test.Core
 		[TestMethod]
         public void IsEqualICollection()
         {
-            var x = Enumerable.Range(1, 1024).ToList();
-            var y = Enumerable.Range(1, 1024).ToList();
-            var a = Enumerable.Range(2, 1024).ToList();
-            var b = Enumerable.Range(1, 1000).ToList();
+            var x = (ICollection<int>) Enumerable.Range(1, 1024).ToList();
+            var y = (ICollection<int>) Enumerable.Range(1, 1024).ToList();
+            var a = (ICollection<int>) Enumerable.Range(2, 1024).ToList();
+            var b = (ICollection<int>) Enumerable.Range(1, 1000).ToList();
 
             Assert.IsTrue(x.IsEqual(y));
             Assert.IsTrue(y.IsEqual(x));

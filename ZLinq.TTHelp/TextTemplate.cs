@@ -39,7 +39,12 @@ namespace ZLinq.TTHelp
 
         public static string[] ToInt(IEnumerable<string> source)
         {
-            return source.Select(x => x.Replace("T", "int")).ToArray();
+            return source.Select(ToInt).ToArray();
+        }
+
+        public static string ToInt(string source)
+        {
+            return source.Replace("T", "int");
         }
 
         public static string[] WithNonGen(string[] source)
