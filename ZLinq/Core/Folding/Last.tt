@@ -9,8 +9,9 @@
 <#@ output extension=".cs" #>
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
+using JetBrains.Annotations;
+using ZLinq.Extension;
 
 // ReSharper disable CheckNamespace
 namespace ZLinq
@@ -21,20 +22,22 @@ namespace ZLinq
 		{ #>		
 		   	    
 		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-	   	public static T Last<T>(this <#= sourceType #> source)
+	   	public static T Last<T>([NotNull] this <#= sourceType #> source)
         {
 			return <#= TextTemplate.Cast(sourceType) #>source[source.<#= TextTemplate.LengthOrCount(sourceType) #> - 1];
         }	 	
 
 		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-	    public static T LastOrDefault<T>(this <#= sourceType #> source)
+	    public static T LastOrDefault<T>([NotNull] this <#= sourceType #> source)
         {
 			return source.<#= TextTemplate.LengthOrCount(sourceType) #> == 0 ? default(T) : <#= TextTemplate.Cast(sourceType) #> source[source.<#= TextTemplate.LengthOrCount(sourceType) #> - 1];
         }	
 
 		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static T Last<T>(this <#= sourceType #> source, Predicate<T> predicate)
+		public static T Last<T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
 		{
+			<#= TextTemplate.IsNotNull("source") #>
+			<#= TextTemplate.IsNotNull("predicate") #>
 			for (int i = source.<#= TextTemplate.LengthOrCount(sourceType) #> - 1; i >= 0; i--)
 			{
 				T obj = <#= TextTemplate.Cast(sourceType) #> source[i];
@@ -45,8 +48,10 @@ namespace ZLinq
 		}
 
 		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static T LastOrDefault<T>(this <#= sourceType #> source, Predicate<T> predicate)
+		public static T LastOrDefault<T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
 		{
+			<#= TextTemplate.IsNotNull("source") #>
+			<#= TextTemplate.IsNotNull("predicate") #>
 			for (int i = source.<#= TextTemplate.LengthOrCount(sourceType) #> - 1; i >= 0; i--)
 			{
 				T obj = <#= TextTemplate.Cast(sourceType) #> source[i];

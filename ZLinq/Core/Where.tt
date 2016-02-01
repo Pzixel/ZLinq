@@ -10,18 +10,21 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
+using System.Diagnostics.CodeAnalysis;
+using JetBrains.Annotations;
 using ZLinq.Extension;
 
 // ReSharper disable CheckNamespace
 namespace ZLinq
 {
+	[SuppressMessage("ReSharper", "LoopCanBeConvertedToQuery")]
     public static partial class ZEnumerable
     {        
 		<# foreach (var sourceType in TextTemplate.StandardCollections) 
 		{ #>		    
+		[System.Diagnostics.Contracts.Pure]
 		[Pure]
-	    public static T[] WhereToArray<T>(this <#= sourceType #> source, Predicate<T> predicate)
+	    public static T[] WhereToArray<T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
 		{
             <#= TextTemplate.IsNotNull("source") #>
 			<#= TextTemplate.IsNotNull("predicate") #>
@@ -38,8 +41,9 @@ namespace ZLinq
             return result;
 		}
 
+		[System.Diagnostics.Contracts.Pure]
 		[Pure]
-	    public static List<T> WhereToList<T>(this <#= sourceType #> source, Predicate<T> predicate)
+	    public static List<T> WhereToList<T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
 		{
             <#= TextTemplate.IsNotNull("source") #>
 			<#= TextTemplate.IsNotNull("predicate") #>

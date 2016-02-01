@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
+using JetBrains.Annotations;
+using ZLinq.Extension;
 
 // ReSharper disable CheckNamespace
 namespace ZLinq
 {
+	[SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
     public static partial class ZEnumerable
     {     		
 				
 		   	    
 		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-	   	public static T Single<T>(this T[] source)
+	   	public static T Single<T>([NotNull] this T[] source)
         {		    
 			if (source.Length > 1)
 		    {
@@ -21,7 +24,7 @@ namespace ZLinq
         }	 
 
 		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-	    public static T SingleOrDefault<T>(this T[] source)
+	    public static T SingleOrDefault<T>([NotNull] this T[] source)
         {			
 			if (source.Length > 1)
 		    {
@@ -33,7 +36,7 @@ namespace ZLinq
 				
 		   	    
 		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-	   	public static T Single<T>(this List<T> source)
+	   	public static T Single<T>([NotNull] this List<T> source)
         {		    
 			if (source.Count > 1)
 		    {
@@ -43,7 +46,7 @@ namespace ZLinq
         }	 
 
 		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-	    public static T SingleOrDefault<T>(this List<T> source)
+	    public static T SingleOrDefault<T>([NotNull] this List<T> source)
         {			
 			if (source.Count > 1)
 		    {
@@ -55,7 +58,7 @@ namespace ZLinq
 				
 		   	    
 		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-	   	public static T Single<T>(this IList<T> source)
+	   	public static T Single<T>([NotNull] this IList<T> source)
         {		    
 			if (source.Count > 1)
 		    {
@@ -65,7 +68,7 @@ namespace ZLinq
         }	 
 
 		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-	    public static T SingleOrDefault<T>(this IList<T> source)
+	    public static T SingleOrDefault<T>([NotNull] this IList<T> source)
         {			
 			if (source.Count > 1)
 		    {
@@ -79,8 +82,10 @@ namespace ZLinq
 				
 
 		[Pure]
-		public static T Single<T>(this T[] source, Predicate<T> predicate)
+		public static T Single<T>([NotNull] this T[] source, [NotNull] Predicate<T> predicate)
         {
+			source.IsNotNull("source");
+			predicate.IsNotNull("predicate");
 			T result = default(T);
 			bool found = false;
 		    foreach (T value in source)
@@ -99,8 +104,10 @@ namespace ZLinq
         }
 
 		[Pure]
-		public static T SingleOrDefault<T>(this T[] source, Predicate<T> predicate)
+		public static T SingleOrDefault<T>([NotNull] this T[] source, [NotNull] Predicate<T> predicate)
         {
+			source.IsNotNull("source");
+			predicate.IsNotNull("predicate");
 			T result = default(T);
 			bool found = false;
 		    foreach (T value in source)
@@ -119,8 +126,10 @@ namespace ZLinq
 				
 
 		[Pure]
-		public static T Single<T>(this List<T> source, Predicate<T> predicate)
+		public static T Single<T>([NotNull] this List<T> source, [NotNull] Predicate<T> predicate)
         {
+			source.IsNotNull("source");
+			predicate.IsNotNull("predicate");
 			T result = default(T);
 			bool found = false;
 		    foreach (T value in source)
@@ -139,8 +148,10 @@ namespace ZLinq
         }
 
 		[Pure]
-		public static T SingleOrDefault<T>(this List<T> source, Predicate<T> predicate)
+		public static T SingleOrDefault<T>([NotNull] this List<T> source, [NotNull] Predicate<T> predicate)
         {
+			source.IsNotNull("source");
+			predicate.IsNotNull("predicate");
 			T result = default(T);
 			bool found = false;
 		    foreach (T value in source)
@@ -159,8 +170,10 @@ namespace ZLinq
 				
 
 		[Pure]
-		public static T Single<T>(this IEnumerable<T> source, Predicate<T> predicate)
+		public static T Single<T>([NotNull] this IEnumerable<T> source, [NotNull] Predicate<T> predicate)
         {
+			source.IsNotNull("source");
+			predicate.IsNotNull("predicate");
 			T result = default(T);
 			bool found = false;
 		    foreach (T value in source)
@@ -179,8 +192,10 @@ namespace ZLinq
         }
 
 		[Pure]
-		public static T SingleOrDefault<T>(this IEnumerable<T> source, Predicate<T> predicate)
+		public static T SingleOrDefault<T>([NotNull] this IEnumerable<T> source, [NotNull] Predicate<T> predicate)
         {
+			source.IsNotNull("source");
+			predicate.IsNotNull("predicate");
 			T result = default(T);
 			bool found = false;
 		    foreach (T value in source)

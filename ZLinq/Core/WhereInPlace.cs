@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using ZLinq.Extension;
 
 // ReSharper disable CheckNamespace
@@ -7,7 +8,7 @@ namespace ZLinq
 {
     public static partial class ZEnumerable
     {
-        public static void WhereInPlace<T>(ref T[] source, Predicate<T> predicate)
+        public static void WhereInPlace<T>([NotNull] ref T[] source, [NotNull] Predicate<T> predicate)
         {
             source.IsNotNull("source");
             predicate.IsNotNull("predicate");
@@ -23,7 +24,7 @@ namespace ZLinq
             Array.Resize(ref source, i);
         }
 
-        public static void WhereInPlace<T>(this List<T> source, Predicate<T> predicate)
+        public static void WhereInPlace<T>([NotNull] this List<T> source, [NotNull] Predicate<T> predicate)
         {
             source.IsNotNull("source");
             predicate.IsNotNull("predicate");
@@ -42,7 +43,7 @@ namespace ZLinq
                 source.RemoveRange(i, source.Count - i);
         }
 
-        public static void WhereInPlace<T>(this IList<T> source, Predicate<T> predicate)
+        public static void WhereInPlace<T>([NotNull] this IList<T> source, [NotNull] Predicate<T> predicate)
         {
             source.IsNotNull("source");
             predicate.IsNotNull("predicate");

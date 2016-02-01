@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
+using JetBrains.Annotations;
+using ZLinq.Extension;
 
 // ReSharper disable CheckNamespace
 namespace ZLinq
@@ -11,20 +12,22 @@ namespace ZLinq
 				
 		   	    
 		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-	   	public static T Last<T>(this T[] source)
+	   	public static T Last<T>([NotNull] this T[] source)
         {
 			return source[source.Length - 1];
         }	 	
 
 		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-	    public static T LastOrDefault<T>(this T[] source)
+	    public static T LastOrDefault<T>([NotNull] this T[] source)
         {
 			return source.Length == 0 ? default(T) :  source[source.Length - 1];
         }	
 
 		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static T Last<T>(this T[] source, Predicate<T> predicate)
+		public static T Last<T>([NotNull] this T[] source, [NotNull] Predicate<T> predicate)
 		{
+			source.IsNotNull("source");
+			predicate.IsNotNull("predicate");
 			for (int i = source.Length - 1; i >= 0; i--)
 			{
 				T obj =  source[i];
@@ -35,8 +38,10 @@ namespace ZLinq
 		}
 
 		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static T LastOrDefault<T>(this T[] source, Predicate<T> predicate)
+		public static T LastOrDefault<T>([NotNull] this T[] source, [NotNull] Predicate<T> predicate)
 		{
+			source.IsNotNull("source");
+			predicate.IsNotNull("predicate");
 			for (int i = source.Length - 1; i >= 0; i--)
 			{
 				T obj =  source[i];
@@ -48,20 +53,22 @@ namespace ZLinq
 				
 		   	    
 		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-	   	public static T Last<T>(this List<T> source)
+	   	public static T Last<T>([NotNull] this List<T> source)
         {
 			return source[source.Count - 1];
         }	 	
 
 		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-	    public static T LastOrDefault<T>(this List<T> source)
+	    public static T LastOrDefault<T>([NotNull] this List<T> source)
         {
 			return source.Count == 0 ? default(T) :  source[source.Count - 1];
         }	
 
 		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static T Last<T>(this List<T> source, Predicate<T> predicate)
+		public static T Last<T>([NotNull] this List<T> source, [NotNull] Predicate<T> predicate)
 		{
+			source.IsNotNull("source");
+			predicate.IsNotNull("predicate");
 			for (int i = source.Count - 1; i >= 0; i--)
 			{
 				T obj =  source[i];
@@ -72,8 +79,10 @@ namespace ZLinq
 		}
 
 		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static T LastOrDefault<T>(this List<T> source, Predicate<T> predicate)
+		public static T LastOrDefault<T>([NotNull] this List<T> source, [NotNull] Predicate<T> predicate)
 		{
+			source.IsNotNull("source");
+			predicate.IsNotNull("predicate");
 			for (int i = source.Count - 1; i >= 0; i--)
 			{
 				T obj =  source[i];
@@ -85,20 +94,22 @@ namespace ZLinq
 				
 		   	    
 		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-	   	public static T Last<T>(this IList<T> source)
+	   	public static T Last<T>([NotNull] this IList<T> source)
         {
 			return source[source.Count - 1];
         }	 	
 
 		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-	    public static T LastOrDefault<T>(this IList<T> source)
+	    public static T LastOrDefault<T>([NotNull] this IList<T> source)
         {
 			return source.Count == 0 ? default(T) :  source[source.Count - 1];
         }	
 
 		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static T Last<T>(this IList<T> source, Predicate<T> predicate)
+		public static T Last<T>([NotNull] this IList<T> source, [NotNull] Predicate<T> predicate)
 		{
+			source.IsNotNull("source");
+			predicate.IsNotNull("predicate");
 			for (int i = source.Count - 1; i >= 0; i--)
 			{
 				T obj =  source[i];
@@ -109,8 +120,10 @@ namespace ZLinq
 		}
 
 		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static T LastOrDefault<T>(this IList<T> source, Predicate<T> predicate)
+		public static T LastOrDefault<T>([NotNull] this IList<T> source, [NotNull] Predicate<T> predicate)
 		{
+			source.IsNotNull("source");
+			predicate.IsNotNull("predicate");
 			for (int i = source.Count - 1; i >= 0; i--)
 			{
 				T obj =  source[i];

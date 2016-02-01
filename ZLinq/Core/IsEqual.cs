@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using ZLinq.Extension;
 
 // ReSharper disable CheckNamespace
 namespace ZLinq
@@ -21,10 +20,10 @@ namespace ZLinq
 		[Pure]
         public static bool IsEqual<T>(this T[] x, T[] y) where T : IEquatable<T> 
         {
-			x.IsNotNull("x");
-			y.IsNotNull("y");
-			if (ReferenceEquals(x, y))
-				return true;
+            if (ReferenceEquals(x, y))
+                return true;
+            if (x == null || y == null)
+                return false;
 			int length = x.Length;
             if (length != y.Length)
 				return false;
@@ -49,10 +48,10 @@ namespace ZLinq
 		[Pure]
         public static bool IsEqual<T>(this List<T> x, List<T> y) where T : IEquatable<T> 
         {
-			x.IsNotNull("x");
-			y.IsNotNull("y");
-			if (ReferenceEquals(x, y))
-				return true;
+            if (ReferenceEquals(x, y))
+                return true;
+            if (x == null || y == null)
+                return false;
 			int length = x.Count;
             if (length != y.Count)
 				return false;
@@ -77,10 +76,10 @@ namespace ZLinq
 		[Pure]
         public static bool IsEqual<T>(this IList<T> x, IList<T> y) where T : IEquatable<T> 
         {
-			x.IsNotNull("x");
-			y.IsNotNull("y");
-			if (ReferenceEquals(x, y))
-				return true;
+            if (ReferenceEquals(x, y))
+                return true;
+            if (x == null || y == null)
+                return false;
 			int length = x.Count;
             if (length != y.Count)
 				return false;
@@ -105,10 +104,10 @@ namespace ZLinq
 		[Pure]
         public static bool IsEqual<T>(this ICollection<T> x, ICollection<T> y) where T : IEquatable<T> 
         {
-            x.IsNotNull("x");
-			y.IsNotNull("y");
             if (ReferenceEquals(x, y))
                 return true;
+            if (x == null || y == null)
+                return false;
             int length = x.Count;
             if (length != y.Count)
                 return false;
@@ -138,10 +137,10 @@ namespace ZLinq
 		[Pure]
         public static bool IsEqualMemberwise<T>(this T[] x, T[] y)  
         {
-			x.IsNotNull("x");
-			y.IsNotNull("y");
-			if (ReferenceEquals(x, y))
-				return true;
+            if (ReferenceEquals(x, y))
+                return true;
+            if (x == null || y == null)
+                return false;
 			int length = x.Length;
             if (length != y.Length)
 				return false;
@@ -166,10 +165,10 @@ namespace ZLinq
 		[Pure]
         public static bool IsEqualMemberwise<T>(this List<T> x, List<T> y)  
         {
-			x.IsNotNull("x");
-			y.IsNotNull("y");
-			if (ReferenceEquals(x, y))
-				return true;
+            if (ReferenceEquals(x, y))
+                return true;
+            if (x == null || y == null)
+                return false;
 			int length = x.Count;
             if (length != y.Count)
 				return false;
@@ -194,10 +193,10 @@ namespace ZLinq
 		[Pure]
         public static bool IsEqualMemberwise<T>(this IList<T> x, IList<T> y)  
         {
-			x.IsNotNull("x");
-			y.IsNotNull("y");
-			if (ReferenceEquals(x, y))
-				return true;
+            if (ReferenceEquals(x, y))
+                return true;
+            if (x == null || y == null)
+                return false;
 			int length = x.Count;
             if (length != y.Count)
 				return false;
@@ -222,10 +221,10 @@ namespace ZLinq
 		[Pure]
         public static bool IsEqualMemberwise<T>(this ICollection<T> x, ICollection<T> y)  
         {
-            x.IsNotNull("x");
-			y.IsNotNull("y");
             if (ReferenceEquals(x, y))
                 return true;
+            if (x == null || y == null)
+                return false;
             int length = x.Count;
             if (length != y.Count)
                 return false;

@@ -9,25 +9,28 @@
 <#@ output extension=".cs" #>
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
+using JetBrains.Annotations;
+using ZLinq.Extension;
 
 // ReSharper disable CheckNamespace
 namespace ZLinq
 {
+	[SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
     public static partial class ZEnumerable
     {     		
 		<# foreach (var sourceType in TextTemplate.StandardLists) 
 		{ #>		
 		   	    
 		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-	   	public static T First<T>(this <#= sourceType #> source)
+	   	public static T First<T>([NotNull] this <#= sourceType #> source)
         {
 			return <#= TextTemplate.Cast(sourceType) #>source[0];
         }	 	
 
 		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-	    public static T FirstOrDefault<T>(this <#= sourceType #> source)
+	    public static T FirstOrDefault<T>([NotNull] this <#= sourceType #> source)
         {
 			return source.<#= TextTemplate.LengthOrCount(sourceType) #> == 0 ? default(T) : <#= TextTemplate.Cast(sourceType) #>source[0];
         }		
@@ -36,8 +39,10 @@ namespace ZLinq
 		{ #>		
 
 		[Pure]
-		public static T First<T>(this <#= sourceType #> source, Predicate<T> predicate)
+		public static T First<T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
         {
+			<#= TextTemplate.IsNotNull("source") #>
+			<#= TextTemplate.IsNotNull("predicate") #>
 		    foreach (T value in source)
 		    {
 		        if (predicate(value))
@@ -47,8 +52,10 @@ namespace ZLinq
         }
 		   	    
 		[Pure]
-	    public static T FirstOrDefault<T>(this <#= sourceType #> source, Predicate<T> predicate)
+	    public static T FirstOrDefault<T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
         {
+			<#= TextTemplate.IsNotNull("source") #>
+			<#= TextTemplate.IsNotNull("predicate") #>
 		    foreach (T value in source)
 		    {
 		        if (predicate(value))

@@ -91,5 +91,10 @@ namespace ZLinq.TTHelp
         {
             return typeName.IndexOfAny(new[] {'<', '['}) >= 0 ? "<T>" : string.Empty;
         }
+
+        public static string[] GetNullables(IEnumerable<string> types)
+        {
+            return types.Select(x => x + "?").ToArray();
+        }
     }
 }

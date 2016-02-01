@@ -2447,33 +2447,33 @@ namespace ZLinq.Test.ZMath
 	#region Nullables
 
 		
-		#region sbyte	 		
+		#region sbyte?	 		
 			
         [TestMethod]
-        public void TestMaxsbyteNullableArray()
+        public void TestMaxsbyteNullableNullableArray()
         {
             var source = Enumerable.Range(1, 100).Select(x => (sbyte?)x).ToArray();
 
-			sbyte maxActual = source.Max();
-            const sbyte maxExpected = 100;
+			sbyte? maxActual = source.Max();
+            sbyte? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMaxsbyteNullableArrayMap()
+        public void TestMaxsbyteNullableNullableArrayMap()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (sbyte?)arg }).ToArray();
 
-			sbyte maxActual = source.Max(arg => arg.X);
-            const sbyte maxExpected = 100;
+			sbyte? maxActual = source.Max(arg => arg.X);
+            sbyte? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 						
 		[TestMethod]
-        public void TestMaxsbyteNullableArrayNull()
+        public void TestMaxsbyteNullableNullableArrayNull()
         {		
 			sbyte?[] nullSource = null;
 
@@ -2489,11 +2489,11 @@ namespace ZLinq.Test.ZMath
 
 			sbyte?[] sourceOfNulls = new sbyte?[] {null}.ToArray();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((sbyte)0, max);
+			Assert.AreEqual(default(sbyte?), max);
         }
 
 		[TestMethod]
-        public void TestMaxsbyteNullableArrayMapNull()
+        public void TestMaxsbyteNullableNullableArrayMapNull()
         {
 			sbyte?[] nullSource = null;
 
@@ -2521,34 +2521,34 @@ namespace ZLinq.Test.ZMath
 			object[] sourceForNulls = { new Stack<int>() };
 			var sourceOfNulls = sourceForNulls.Select(x => (sbyte?) null).ToArray();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((sbyte)0, max);
+			Assert.AreEqual(default(sbyte?), max);
         }
 					
         [TestMethod]
-        public void TestMaxsbyteNullableList()
+        public void TestMaxsbyteNullableNullableList()
         {
             var source = Enumerable.Range(1, 100).Select(x => (sbyte?)x).ToList();
 
-			sbyte maxActual = source.Max();
-            const sbyte maxExpected = 100;
+			sbyte? maxActual = source.Max();
+            sbyte? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMaxsbyteNullableListMap()
+        public void TestMaxsbyteNullableNullableListMap()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (sbyte?)arg }).ToList();
 
-			sbyte maxActual = source.Max(arg => arg.X);
-            const sbyte maxExpected = 100;
+			sbyte? maxActual = source.Max(arg => arg.X);
+            sbyte? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 						
 		[TestMethod]
-        public void TestMaxsbyteNullableListNull()
+        public void TestMaxsbyteNullableNullableListNull()
         {		
 			List<sbyte?> nullSource = null;
 
@@ -2564,11 +2564,11 @@ namespace ZLinq.Test.ZMath
 
 			List<sbyte?> sourceOfNulls = new sbyte?[] {null}.ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((sbyte)0, max);
+			Assert.AreEqual(default(sbyte?), max);
         }
 
 		[TestMethod]
-        public void TestMaxsbyteNullableListMapNull()
+        public void TestMaxsbyteNullableNullableListMapNull()
         {
 			List<sbyte?> nullSource = null;
 
@@ -2596,34 +2596,34 @@ namespace ZLinq.Test.ZMath
 			object[] sourceForNulls = { new Stack<int>() };
 			var sourceOfNulls = sourceForNulls.Select(x => (sbyte?) null).ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((sbyte)0, max);
+			Assert.AreEqual(default(sbyte?), max);
         }
 					
         [TestMethod]
-        public void TestMaxsbyteNullableIList()
+        public void TestMaxsbyteNullableNullableIList()
         {
             var source = Enumerable.Range(1, 100).Select(x => (sbyte?)x).ToList();
 
-			sbyte maxActual = source.Max();
-            const sbyte maxExpected = 100;
+			sbyte? maxActual = source.Max();
+            sbyte? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMaxsbyteNullableIListMap()
+        public void TestMaxsbyteNullableNullableIListMap()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (sbyte?)arg }).ToList();
 
-			sbyte maxActual = source.Max(arg => arg.X);
-            const sbyte maxExpected = 100;
+			sbyte? maxActual = source.Max(arg => arg.X);
+            sbyte? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 						
 		[TestMethod]
-        public void TestMaxsbyteNullableIListNull()
+        public void TestMaxsbyteNullableNullableIListNull()
         {		
 			IList<sbyte?> nullSource = null;
 
@@ -2639,11 +2639,11 @@ namespace ZLinq.Test.ZMath
 
 			IList<sbyte?> sourceOfNulls = new sbyte?[] {null}.ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((sbyte)0, max);
+			Assert.AreEqual(default(sbyte?), max);
         }
 
 		[TestMethod]
-        public void TestMaxsbyteNullableIListMapNull()
+        public void TestMaxsbyteNullableNullableIListMapNull()
         {
 			IList<sbyte?> nullSource = null;
 
@@ -2671,34 +2671,34 @@ namespace ZLinq.Test.ZMath
 			object[] sourceForNulls = { new Stack<int>() };
 			var sourceOfNulls = sourceForNulls.Select(x => (sbyte?) null).ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((sbyte)0, max);
+			Assert.AreEqual(default(sbyte?), max);
         }
 					
         [TestMethod]
-        public void TestMaxsbyteNullableICollection()
+        public void TestMaxsbyteNullableNullableICollection()
         {
             var source = Enumerable.Range(1, 100).Select(x => (sbyte?)x).ToList();
 
-			sbyte maxActual = source.Max();
-            const sbyte maxExpected = 100;
+			sbyte? maxActual = source.Max();
+            sbyte? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMaxsbyteNullableICollectionMap()
+        public void TestMaxsbyteNullableNullableICollectionMap()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (sbyte?)arg }).ToList();
 
-			sbyte maxActual = source.Max(arg => arg.X);
-            const sbyte maxExpected = 100;
+			sbyte? maxActual = source.Max(arg => arg.X);
+            sbyte? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 						
 		[TestMethod]
-        public void TestMaxsbyteNullableICollectionNull()
+        public void TestMaxsbyteNullableNullableICollectionNull()
         {		
 			ICollection<sbyte?> nullSource = null;
 
@@ -2714,11 +2714,11 @@ namespace ZLinq.Test.ZMath
 
 			ICollection<sbyte?> sourceOfNulls = new sbyte?[] {null}.ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((sbyte)0, max);
+			Assert.AreEqual(default(sbyte?), max);
         }
 
 		[TestMethod]
-        public void TestMaxsbyteNullableICollectionMapNull()
+        public void TestMaxsbyteNullableNullableICollectionMapNull()
         {
 			ICollection<sbyte?> nullSource = null;
 
@@ -2746,38 +2746,38 @@ namespace ZLinq.Test.ZMath
 			object[] sourceForNulls = { new Stack<int>() };
 			var sourceOfNulls = sourceForNulls.Select(x => (sbyte?) null).ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((sbyte)0, max);
+			Assert.AreEqual(default(sbyte?), max);
         }
 						
 		#endregion
 	
-		#region byte	 		
+		#region byte?	 		
 			
         [TestMethod]
-        public void TestMaxbyteNullableArray()
+        public void TestMaxbyteNullableNullableArray()
         {
             var source = Enumerable.Range(1, 100).Select(x => (byte?)x).ToArray();
 
-			byte maxActual = source.Max();
-            const byte maxExpected = 100;
+			byte? maxActual = source.Max();
+            byte? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMaxbyteNullableArrayMap()
+        public void TestMaxbyteNullableNullableArrayMap()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (byte?)arg }).ToArray();
 
-			byte maxActual = source.Max(arg => arg.X);
-            const byte maxExpected = 100;
+			byte? maxActual = source.Max(arg => arg.X);
+            byte? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 						
 		[TestMethod]
-        public void TestMaxbyteNullableArrayNull()
+        public void TestMaxbyteNullableNullableArrayNull()
         {		
 			byte?[] nullSource = null;
 
@@ -2793,11 +2793,11 @@ namespace ZLinq.Test.ZMath
 
 			byte?[] sourceOfNulls = new byte?[] {null}.ToArray();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((byte)0, max);
+			Assert.AreEqual(default(byte?), max);
         }
 
 		[TestMethod]
-        public void TestMaxbyteNullableArrayMapNull()
+        public void TestMaxbyteNullableNullableArrayMapNull()
         {
 			byte?[] nullSource = null;
 
@@ -2825,34 +2825,34 @@ namespace ZLinq.Test.ZMath
 			object[] sourceForNulls = { new Stack<int>() };
 			var sourceOfNulls = sourceForNulls.Select(x => (byte?) null).ToArray();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((byte)0, max);
+			Assert.AreEqual(default(byte?), max);
         }
 					
         [TestMethod]
-        public void TestMaxbyteNullableList()
+        public void TestMaxbyteNullableNullableList()
         {
             var source = Enumerable.Range(1, 100).Select(x => (byte?)x).ToList();
 
-			byte maxActual = source.Max();
-            const byte maxExpected = 100;
+			byte? maxActual = source.Max();
+            byte? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMaxbyteNullableListMap()
+        public void TestMaxbyteNullableNullableListMap()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (byte?)arg }).ToList();
 
-			byte maxActual = source.Max(arg => arg.X);
-            const byte maxExpected = 100;
+			byte? maxActual = source.Max(arg => arg.X);
+            byte? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 						
 		[TestMethod]
-        public void TestMaxbyteNullableListNull()
+        public void TestMaxbyteNullableNullableListNull()
         {		
 			List<byte?> nullSource = null;
 
@@ -2868,11 +2868,11 @@ namespace ZLinq.Test.ZMath
 
 			List<byte?> sourceOfNulls = new byte?[] {null}.ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((byte)0, max);
+			Assert.AreEqual(default(byte?), max);
         }
 
 		[TestMethod]
-        public void TestMaxbyteNullableListMapNull()
+        public void TestMaxbyteNullableNullableListMapNull()
         {
 			List<byte?> nullSource = null;
 
@@ -2900,34 +2900,34 @@ namespace ZLinq.Test.ZMath
 			object[] sourceForNulls = { new Stack<int>() };
 			var sourceOfNulls = sourceForNulls.Select(x => (byte?) null).ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((byte)0, max);
+			Assert.AreEqual(default(byte?), max);
         }
 					
         [TestMethod]
-        public void TestMaxbyteNullableIList()
+        public void TestMaxbyteNullableNullableIList()
         {
             var source = Enumerable.Range(1, 100).Select(x => (byte?)x).ToList();
 
-			byte maxActual = source.Max();
-            const byte maxExpected = 100;
+			byte? maxActual = source.Max();
+            byte? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMaxbyteNullableIListMap()
+        public void TestMaxbyteNullableNullableIListMap()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (byte?)arg }).ToList();
 
-			byte maxActual = source.Max(arg => arg.X);
-            const byte maxExpected = 100;
+			byte? maxActual = source.Max(arg => arg.X);
+            byte? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 						
 		[TestMethod]
-        public void TestMaxbyteNullableIListNull()
+        public void TestMaxbyteNullableNullableIListNull()
         {		
 			IList<byte?> nullSource = null;
 
@@ -2943,11 +2943,11 @@ namespace ZLinq.Test.ZMath
 
 			IList<byte?> sourceOfNulls = new byte?[] {null}.ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((byte)0, max);
+			Assert.AreEqual(default(byte?), max);
         }
 
 		[TestMethod]
-        public void TestMaxbyteNullableIListMapNull()
+        public void TestMaxbyteNullableNullableIListMapNull()
         {
 			IList<byte?> nullSource = null;
 
@@ -2975,34 +2975,34 @@ namespace ZLinq.Test.ZMath
 			object[] sourceForNulls = { new Stack<int>() };
 			var sourceOfNulls = sourceForNulls.Select(x => (byte?) null).ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((byte)0, max);
+			Assert.AreEqual(default(byte?), max);
         }
 					
         [TestMethod]
-        public void TestMaxbyteNullableICollection()
+        public void TestMaxbyteNullableNullableICollection()
         {
             var source = Enumerable.Range(1, 100).Select(x => (byte?)x).ToList();
 
-			byte maxActual = source.Max();
-            const byte maxExpected = 100;
+			byte? maxActual = source.Max();
+            byte? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMaxbyteNullableICollectionMap()
+        public void TestMaxbyteNullableNullableICollectionMap()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (byte?)arg }).ToList();
 
-			byte maxActual = source.Max(arg => arg.X);
-            const byte maxExpected = 100;
+			byte? maxActual = source.Max(arg => arg.X);
+            byte? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 						
 		[TestMethod]
-        public void TestMaxbyteNullableICollectionNull()
+        public void TestMaxbyteNullableNullableICollectionNull()
         {		
 			ICollection<byte?> nullSource = null;
 
@@ -3018,11 +3018,11 @@ namespace ZLinq.Test.ZMath
 
 			ICollection<byte?> sourceOfNulls = new byte?[] {null}.ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((byte)0, max);
+			Assert.AreEqual(default(byte?), max);
         }
 
 		[TestMethod]
-        public void TestMaxbyteNullableICollectionMapNull()
+        public void TestMaxbyteNullableNullableICollectionMapNull()
         {
 			ICollection<byte?> nullSource = null;
 
@@ -3050,38 +3050,38 @@ namespace ZLinq.Test.ZMath
 			object[] sourceForNulls = { new Stack<int>() };
 			var sourceOfNulls = sourceForNulls.Select(x => (byte?) null).ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((byte)0, max);
+			Assert.AreEqual(default(byte?), max);
         }
 						
 		#endregion
 	
-		#region short	 		
+		#region short?	 		
 			
         [TestMethod]
-        public void TestMaxshortNullableArray()
+        public void TestMaxshortNullableNullableArray()
         {
             var source = Enumerable.Range(1, 100).Select(x => (short?)x).ToArray();
 
-			short maxActual = source.Max();
-            const short maxExpected = 100;
+			short? maxActual = source.Max();
+            short? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMaxshortNullableArrayMap()
+        public void TestMaxshortNullableNullableArrayMap()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (short?)arg }).ToArray();
 
-			short maxActual = source.Max(arg => arg.X);
-            const short maxExpected = 100;
+			short? maxActual = source.Max(arg => arg.X);
+            short? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 						
 		[TestMethod]
-        public void TestMaxshortNullableArrayNull()
+        public void TestMaxshortNullableNullableArrayNull()
         {		
 			short?[] nullSource = null;
 
@@ -3097,11 +3097,11 @@ namespace ZLinq.Test.ZMath
 
 			short?[] sourceOfNulls = new short?[] {null}.ToArray();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((short)0, max);
+			Assert.AreEqual(default(short?), max);
         }
 
 		[TestMethod]
-        public void TestMaxshortNullableArrayMapNull()
+        public void TestMaxshortNullableNullableArrayMapNull()
         {
 			short?[] nullSource = null;
 
@@ -3129,34 +3129,34 @@ namespace ZLinq.Test.ZMath
 			object[] sourceForNulls = { new Stack<int>() };
 			var sourceOfNulls = sourceForNulls.Select(x => (short?) null).ToArray();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((short)0, max);
+			Assert.AreEqual(default(short?), max);
         }
 					
         [TestMethod]
-        public void TestMaxshortNullableList()
+        public void TestMaxshortNullableNullableList()
         {
             var source = Enumerable.Range(1, 100).Select(x => (short?)x).ToList();
 
-			short maxActual = source.Max();
-            const short maxExpected = 100;
+			short? maxActual = source.Max();
+            short? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMaxshortNullableListMap()
+        public void TestMaxshortNullableNullableListMap()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (short?)arg }).ToList();
 
-			short maxActual = source.Max(arg => arg.X);
-            const short maxExpected = 100;
+			short? maxActual = source.Max(arg => arg.X);
+            short? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 						
 		[TestMethod]
-        public void TestMaxshortNullableListNull()
+        public void TestMaxshortNullableNullableListNull()
         {		
 			List<short?> nullSource = null;
 
@@ -3172,11 +3172,11 @@ namespace ZLinq.Test.ZMath
 
 			List<short?> sourceOfNulls = new short?[] {null}.ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((short)0, max);
+			Assert.AreEqual(default(short?), max);
         }
 
 		[TestMethod]
-        public void TestMaxshortNullableListMapNull()
+        public void TestMaxshortNullableNullableListMapNull()
         {
 			List<short?> nullSource = null;
 
@@ -3204,34 +3204,34 @@ namespace ZLinq.Test.ZMath
 			object[] sourceForNulls = { new Stack<int>() };
 			var sourceOfNulls = sourceForNulls.Select(x => (short?) null).ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((short)0, max);
+			Assert.AreEqual(default(short?), max);
         }
 					
         [TestMethod]
-        public void TestMaxshortNullableIList()
+        public void TestMaxshortNullableNullableIList()
         {
             var source = Enumerable.Range(1, 100).Select(x => (short?)x).ToList();
 
-			short maxActual = source.Max();
-            const short maxExpected = 100;
+			short? maxActual = source.Max();
+            short? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMaxshortNullableIListMap()
+        public void TestMaxshortNullableNullableIListMap()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (short?)arg }).ToList();
 
-			short maxActual = source.Max(arg => arg.X);
-            const short maxExpected = 100;
+			short? maxActual = source.Max(arg => arg.X);
+            short? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 						
 		[TestMethod]
-        public void TestMaxshortNullableIListNull()
+        public void TestMaxshortNullableNullableIListNull()
         {		
 			IList<short?> nullSource = null;
 
@@ -3247,11 +3247,11 @@ namespace ZLinq.Test.ZMath
 
 			IList<short?> sourceOfNulls = new short?[] {null}.ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((short)0, max);
+			Assert.AreEqual(default(short?), max);
         }
 
 		[TestMethod]
-        public void TestMaxshortNullableIListMapNull()
+        public void TestMaxshortNullableNullableIListMapNull()
         {
 			IList<short?> nullSource = null;
 
@@ -3279,34 +3279,34 @@ namespace ZLinq.Test.ZMath
 			object[] sourceForNulls = { new Stack<int>() };
 			var sourceOfNulls = sourceForNulls.Select(x => (short?) null).ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((short)0, max);
+			Assert.AreEqual(default(short?), max);
         }
 					
         [TestMethod]
-        public void TestMaxshortNullableICollection()
+        public void TestMaxshortNullableNullableICollection()
         {
             var source = Enumerable.Range(1, 100).Select(x => (short?)x).ToList();
 
-			short maxActual = source.Max();
-            const short maxExpected = 100;
+			short? maxActual = source.Max();
+            short? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMaxshortNullableICollectionMap()
+        public void TestMaxshortNullableNullableICollectionMap()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (short?)arg }).ToList();
 
-			short maxActual = source.Max(arg => arg.X);
-            const short maxExpected = 100;
+			short? maxActual = source.Max(arg => arg.X);
+            short? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 						
 		[TestMethod]
-        public void TestMaxshortNullableICollectionNull()
+        public void TestMaxshortNullableNullableICollectionNull()
         {		
 			ICollection<short?> nullSource = null;
 
@@ -3322,11 +3322,11 @@ namespace ZLinq.Test.ZMath
 
 			ICollection<short?> sourceOfNulls = new short?[] {null}.ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((short)0, max);
+			Assert.AreEqual(default(short?), max);
         }
 
 		[TestMethod]
-        public void TestMaxshortNullableICollectionMapNull()
+        public void TestMaxshortNullableNullableICollectionMapNull()
         {
 			ICollection<short?> nullSource = null;
 
@@ -3354,38 +3354,38 @@ namespace ZLinq.Test.ZMath
 			object[] sourceForNulls = { new Stack<int>() };
 			var sourceOfNulls = sourceForNulls.Select(x => (short?) null).ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((short)0, max);
+			Assert.AreEqual(default(short?), max);
         }
 						
 		#endregion
 	
-		#region ushort	 		
+		#region ushort?	 		
 			
         [TestMethod]
-        public void TestMaxushortNullableArray()
+        public void TestMaxushortNullableNullableArray()
         {
             var source = Enumerable.Range(1, 100).Select(x => (ushort?)x).ToArray();
 
-			ushort maxActual = source.Max();
-            const ushort maxExpected = 100;
+			ushort? maxActual = source.Max();
+            ushort? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMaxushortNullableArrayMap()
+        public void TestMaxushortNullableNullableArrayMap()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (ushort?)arg }).ToArray();
 
-			ushort maxActual = source.Max(arg => arg.X);
-            const ushort maxExpected = 100;
+			ushort? maxActual = source.Max(arg => arg.X);
+            ushort? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 						
 		[TestMethod]
-        public void TestMaxushortNullableArrayNull()
+        public void TestMaxushortNullableNullableArrayNull()
         {		
 			ushort?[] nullSource = null;
 
@@ -3401,11 +3401,11 @@ namespace ZLinq.Test.ZMath
 
 			ushort?[] sourceOfNulls = new ushort?[] {null}.ToArray();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((ushort)0, max);
+			Assert.AreEqual(default(ushort?), max);
         }
 
 		[TestMethod]
-        public void TestMaxushortNullableArrayMapNull()
+        public void TestMaxushortNullableNullableArrayMapNull()
         {
 			ushort?[] nullSource = null;
 
@@ -3433,34 +3433,34 @@ namespace ZLinq.Test.ZMath
 			object[] sourceForNulls = { new Stack<int>() };
 			var sourceOfNulls = sourceForNulls.Select(x => (ushort?) null).ToArray();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((ushort)0, max);
+			Assert.AreEqual(default(ushort?), max);
         }
 					
         [TestMethod]
-        public void TestMaxushortNullableList()
+        public void TestMaxushortNullableNullableList()
         {
             var source = Enumerable.Range(1, 100).Select(x => (ushort?)x).ToList();
 
-			ushort maxActual = source.Max();
-            const ushort maxExpected = 100;
+			ushort? maxActual = source.Max();
+            ushort? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMaxushortNullableListMap()
+        public void TestMaxushortNullableNullableListMap()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (ushort?)arg }).ToList();
 
-			ushort maxActual = source.Max(arg => arg.X);
-            const ushort maxExpected = 100;
+			ushort? maxActual = source.Max(arg => arg.X);
+            ushort? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 						
 		[TestMethod]
-        public void TestMaxushortNullableListNull()
+        public void TestMaxushortNullableNullableListNull()
         {		
 			List<ushort?> nullSource = null;
 
@@ -3476,11 +3476,11 @@ namespace ZLinq.Test.ZMath
 
 			List<ushort?> sourceOfNulls = new ushort?[] {null}.ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((ushort)0, max);
+			Assert.AreEqual(default(ushort?), max);
         }
 
 		[TestMethod]
-        public void TestMaxushortNullableListMapNull()
+        public void TestMaxushortNullableNullableListMapNull()
         {
 			List<ushort?> nullSource = null;
 
@@ -3508,34 +3508,34 @@ namespace ZLinq.Test.ZMath
 			object[] sourceForNulls = { new Stack<int>() };
 			var sourceOfNulls = sourceForNulls.Select(x => (ushort?) null).ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((ushort)0, max);
+			Assert.AreEqual(default(ushort?), max);
         }
 					
         [TestMethod]
-        public void TestMaxushortNullableIList()
+        public void TestMaxushortNullableNullableIList()
         {
             var source = Enumerable.Range(1, 100).Select(x => (ushort?)x).ToList();
 
-			ushort maxActual = source.Max();
-            const ushort maxExpected = 100;
+			ushort? maxActual = source.Max();
+            ushort? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMaxushortNullableIListMap()
+        public void TestMaxushortNullableNullableIListMap()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (ushort?)arg }).ToList();
 
-			ushort maxActual = source.Max(arg => arg.X);
-            const ushort maxExpected = 100;
+			ushort? maxActual = source.Max(arg => arg.X);
+            ushort? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 						
 		[TestMethod]
-        public void TestMaxushortNullableIListNull()
+        public void TestMaxushortNullableNullableIListNull()
         {		
 			IList<ushort?> nullSource = null;
 
@@ -3551,11 +3551,11 @@ namespace ZLinq.Test.ZMath
 
 			IList<ushort?> sourceOfNulls = new ushort?[] {null}.ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((ushort)0, max);
+			Assert.AreEqual(default(ushort?), max);
         }
 
 		[TestMethod]
-        public void TestMaxushortNullableIListMapNull()
+        public void TestMaxushortNullableNullableIListMapNull()
         {
 			IList<ushort?> nullSource = null;
 
@@ -3583,34 +3583,34 @@ namespace ZLinq.Test.ZMath
 			object[] sourceForNulls = { new Stack<int>() };
 			var sourceOfNulls = sourceForNulls.Select(x => (ushort?) null).ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((ushort)0, max);
+			Assert.AreEqual(default(ushort?), max);
         }
 					
         [TestMethod]
-        public void TestMaxushortNullableICollection()
+        public void TestMaxushortNullableNullableICollection()
         {
             var source = Enumerable.Range(1, 100).Select(x => (ushort?)x).ToList();
 
-			ushort maxActual = source.Max();
-            const ushort maxExpected = 100;
+			ushort? maxActual = source.Max();
+            ushort? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMaxushortNullableICollectionMap()
+        public void TestMaxushortNullableNullableICollectionMap()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (ushort?)arg }).ToList();
 
-			ushort maxActual = source.Max(arg => arg.X);
-            const ushort maxExpected = 100;
+			ushort? maxActual = source.Max(arg => arg.X);
+            ushort? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 						
 		[TestMethod]
-        public void TestMaxushortNullableICollectionNull()
+        public void TestMaxushortNullableNullableICollectionNull()
         {		
 			ICollection<ushort?> nullSource = null;
 
@@ -3626,11 +3626,11 @@ namespace ZLinq.Test.ZMath
 
 			ICollection<ushort?> sourceOfNulls = new ushort?[] {null}.ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((ushort)0, max);
+			Assert.AreEqual(default(ushort?), max);
         }
 
 		[TestMethod]
-        public void TestMaxushortNullableICollectionMapNull()
+        public void TestMaxushortNullableNullableICollectionMapNull()
         {
 			ICollection<ushort?> nullSource = null;
 
@@ -3658,38 +3658,38 @@ namespace ZLinq.Test.ZMath
 			object[] sourceForNulls = { new Stack<int>() };
 			var sourceOfNulls = sourceForNulls.Select(x => (ushort?) null).ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((ushort)0, max);
+			Assert.AreEqual(default(ushort?), max);
         }
 						
 		#endregion
 	
-		#region int	 		
+		#region int?	 		
 			
         [TestMethod]
-        public void TestMaxintNullableArray()
+        public void TestMaxintNullableNullableArray()
         {
             var source = Enumerable.Range(1, 100).Select(x => (int?)x).ToArray();
 
-			int maxActual = source.Max();
-            const int maxExpected = 100;
+			int? maxActual = source.Max();
+            int? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMaxintNullableArrayMap()
+        public void TestMaxintNullableNullableArrayMap()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (int?)arg }).ToArray();
 
-			int maxActual = source.Max(arg => arg.X);
-            const int maxExpected = 100;
+			int? maxActual = source.Max(arg => arg.X);
+            int? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 						
 		[TestMethod]
-        public void TestMaxintNullableArrayNull()
+        public void TestMaxintNullableNullableArrayNull()
         {		
 			int?[] nullSource = null;
 
@@ -3705,11 +3705,11 @@ namespace ZLinq.Test.ZMath
 
 			int?[] sourceOfNulls = new int?[] {null}.ToArray();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((int)0, max);
+			Assert.AreEqual(default(int?), max);
         }
 
 		[TestMethod]
-        public void TestMaxintNullableArrayMapNull()
+        public void TestMaxintNullableNullableArrayMapNull()
         {
 			int?[] nullSource = null;
 
@@ -3737,34 +3737,34 @@ namespace ZLinq.Test.ZMath
 			object[] sourceForNulls = { new Stack<int>() };
 			var sourceOfNulls = sourceForNulls.Select(x => (int?) null).ToArray();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((int)0, max);
+			Assert.AreEqual(default(int?), max);
         }
 					
         [TestMethod]
-        public void TestMaxintNullableList()
+        public void TestMaxintNullableNullableList()
         {
             var source = Enumerable.Range(1, 100).Select(x => (int?)x).ToList();
 
-			int maxActual = source.Max();
-            const int maxExpected = 100;
+			int? maxActual = source.Max();
+            int? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMaxintNullableListMap()
+        public void TestMaxintNullableNullableListMap()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (int?)arg }).ToList();
 
-			int maxActual = source.Max(arg => arg.X);
-            const int maxExpected = 100;
+			int? maxActual = source.Max(arg => arg.X);
+            int? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 						
 		[TestMethod]
-        public void TestMaxintNullableListNull()
+        public void TestMaxintNullableNullableListNull()
         {		
 			List<int?> nullSource = null;
 
@@ -3780,11 +3780,11 @@ namespace ZLinq.Test.ZMath
 
 			List<int?> sourceOfNulls = new int?[] {null}.ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((int)0, max);
+			Assert.AreEqual(default(int?), max);
         }
 
 		[TestMethod]
-        public void TestMaxintNullableListMapNull()
+        public void TestMaxintNullableNullableListMapNull()
         {
 			List<int?> nullSource = null;
 
@@ -3812,34 +3812,34 @@ namespace ZLinq.Test.ZMath
 			object[] sourceForNulls = { new Stack<int>() };
 			var sourceOfNulls = sourceForNulls.Select(x => (int?) null).ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((int)0, max);
+			Assert.AreEqual(default(int?), max);
         }
 					
         [TestMethod]
-        public void TestMaxintNullableIList()
+        public void TestMaxintNullableNullableIList()
         {
             var source = Enumerable.Range(1, 100).Select(x => (int?)x).ToList();
 
-			int maxActual = source.Max();
-            const int maxExpected = 100;
+			int? maxActual = source.Max();
+            int? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMaxintNullableIListMap()
+        public void TestMaxintNullableNullableIListMap()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (int?)arg }).ToList();
 
-			int maxActual = source.Max(arg => arg.X);
-            const int maxExpected = 100;
+			int? maxActual = source.Max(arg => arg.X);
+            int? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 						
 		[TestMethod]
-        public void TestMaxintNullableIListNull()
+        public void TestMaxintNullableNullableIListNull()
         {		
 			IList<int?> nullSource = null;
 
@@ -3855,11 +3855,11 @@ namespace ZLinq.Test.ZMath
 
 			IList<int?> sourceOfNulls = new int?[] {null}.ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((int)0, max);
+			Assert.AreEqual(default(int?), max);
         }
 
 		[TestMethod]
-        public void TestMaxintNullableIListMapNull()
+        public void TestMaxintNullableNullableIListMapNull()
         {
 			IList<int?> nullSource = null;
 
@@ -3887,34 +3887,34 @@ namespace ZLinq.Test.ZMath
 			object[] sourceForNulls = { new Stack<int>() };
 			var sourceOfNulls = sourceForNulls.Select(x => (int?) null).ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((int)0, max);
+			Assert.AreEqual(default(int?), max);
         }
 					
         [TestMethod]
-        public void TestMaxintNullableICollection()
+        public void TestMaxintNullableNullableICollection()
         {
             var source = Enumerable.Range(1, 100).Select(x => (int?)x).ToList();
 
-			int maxActual = source.Max();
-            const int maxExpected = 100;
+			int? maxActual = source.Max();
+            int? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMaxintNullableICollectionMap()
+        public void TestMaxintNullableNullableICollectionMap()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (int?)arg }).ToList();
 
-			int maxActual = source.Max(arg => arg.X);
-            const int maxExpected = 100;
+			int? maxActual = source.Max(arg => arg.X);
+            int? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 						
 		[TestMethod]
-        public void TestMaxintNullableICollectionNull()
+        public void TestMaxintNullableNullableICollectionNull()
         {		
 			ICollection<int?> nullSource = null;
 
@@ -3930,11 +3930,11 @@ namespace ZLinq.Test.ZMath
 
 			ICollection<int?> sourceOfNulls = new int?[] {null}.ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((int)0, max);
+			Assert.AreEqual(default(int?), max);
         }
 
 		[TestMethod]
-        public void TestMaxintNullableICollectionMapNull()
+        public void TestMaxintNullableNullableICollectionMapNull()
         {
 			ICollection<int?> nullSource = null;
 
@@ -3962,38 +3962,38 @@ namespace ZLinq.Test.ZMath
 			object[] sourceForNulls = { new Stack<int>() };
 			var sourceOfNulls = sourceForNulls.Select(x => (int?) null).ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((int)0, max);
+			Assert.AreEqual(default(int?), max);
         }
 						
 		#endregion
 	
-		#region uint	 		
+		#region uint?	 		
 			
         [TestMethod]
-        public void TestMaxuintNullableArray()
+        public void TestMaxuintNullableNullableArray()
         {
             var source = Enumerable.Range(1, 100).Select(x => (uint?)x).ToArray();
 
-			uint maxActual = source.Max();
-            const uint maxExpected = 100;
+			uint? maxActual = source.Max();
+            uint? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMaxuintNullableArrayMap()
+        public void TestMaxuintNullableNullableArrayMap()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (uint?)arg }).ToArray();
 
-			uint maxActual = source.Max(arg => arg.X);
-            const uint maxExpected = 100;
+			uint? maxActual = source.Max(arg => arg.X);
+            uint? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 						
 		[TestMethod]
-        public void TestMaxuintNullableArrayNull()
+        public void TestMaxuintNullableNullableArrayNull()
         {		
 			uint?[] nullSource = null;
 
@@ -4009,11 +4009,11 @@ namespace ZLinq.Test.ZMath
 
 			uint?[] sourceOfNulls = new uint?[] {null}.ToArray();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((uint)0, max);
+			Assert.AreEqual(default(uint?), max);
         }
 
 		[TestMethod]
-        public void TestMaxuintNullableArrayMapNull()
+        public void TestMaxuintNullableNullableArrayMapNull()
         {
 			uint?[] nullSource = null;
 
@@ -4041,34 +4041,34 @@ namespace ZLinq.Test.ZMath
 			object[] sourceForNulls = { new Stack<int>() };
 			var sourceOfNulls = sourceForNulls.Select(x => (uint?) null).ToArray();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((uint)0, max);
+			Assert.AreEqual(default(uint?), max);
         }
 					
         [TestMethod]
-        public void TestMaxuintNullableList()
+        public void TestMaxuintNullableNullableList()
         {
             var source = Enumerable.Range(1, 100).Select(x => (uint?)x).ToList();
 
-			uint maxActual = source.Max();
-            const uint maxExpected = 100;
+			uint? maxActual = source.Max();
+            uint? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMaxuintNullableListMap()
+        public void TestMaxuintNullableNullableListMap()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (uint?)arg }).ToList();
 
-			uint maxActual = source.Max(arg => arg.X);
-            const uint maxExpected = 100;
+			uint? maxActual = source.Max(arg => arg.X);
+            uint? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 						
 		[TestMethod]
-        public void TestMaxuintNullableListNull()
+        public void TestMaxuintNullableNullableListNull()
         {		
 			List<uint?> nullSource = null;
 
@@ -4084,11 +4084,11 @@ namespace ZLinq.Test.ZMath
 
 			List<uint?> sourceOfNulls = new uint?[] {null}.ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((uint)0, max);
+			Assert.AreEqual(default(uint?), max);
         }
 
 		[TestMethod]
-        public void TestMaxuintNullableListMapNull()
+        public void TestMaxuintNullableNullableListMapNull()
         {
 			List<uint?> nullSource = null;
 
@@ -4116,34 +4116,34 @@ namespace ZLinq.Test.ZMath
 			object[] sourceForNulls = { new Stack<int>() };
 			var sourceOfNulls = sourceForNulls.Select(x => (uint?) null).ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((uint)0, max);
+			Assert.AreEqual(default(uint?), max);
         }
 					
         [TestMethod]
-        public void TestMaxuintNullableIList()
+        public void TestMaxuintNullableNullableIList()
         {
             var source = Enumerable.Range(1, 100).Select(x => (uint?)x).ToList();
 
-			uint maxActual = source.Max();
-            const uint maxExpected = 100;
+			uint? maxActual = source.Max();
+            uint? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMaxuintNullableIListMap()
+        public void TestMaxuintNullableNullableIListMap()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (uint?)arg }).ToList();
 
-			uint maxActual = source.Max(arg => arg.X);
-            const uint maxExpected = 100;
+			uint? maxActual = source.Max(arg => arg.X);
+            uint? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 						
 		[TestMethod]
-        public void TestMaxuintNullableIListNull()
+        public void TestMaxuintNullableNullableIListNull()
         {		
 			IList<uint?> nullSource = null;
 
@@ -4159,11 +4159,11 @@ namespace ZLinq.Test.ZMath
 
 			IList<uint?> sourceOfNulls = new uint?[] {null}.ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((uint)0, max);
+			Assert.AreEqual(default(uint?), max);
         }
 
 		[TestMethod]
-        public void TestMaxuintNullableIListMapNull()
+        public void TestMaxuintNullableNullableIListMapNull()
         {
 			IList<uint?> nullSource = null;
 
@@ -4191,34 +4191,34 @@ namespace ZLinq.Test.ZMath
 			object[] sourceForNulls = { new Stack<int>() };
 			var sourceOfNulls = sourceForNulls.Select(x => (uint?) null).ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((uint)0, max);
+			Assert.AreEqual(default(uint?), max);
         }
 					
         [TestMethod]
-        public void TestMaxuintNullableICollection()
+        public void TestMaxuintNullableNullableICollection()
         {
             var source = Enumerable.Range(1, 100).Select(x => (uint?)x).ToList();
 
-			uint maxActual = source.Max();
-            const uint maxExpected = 100;
+			uint? maxActual = source.Max();
+            uint? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMaxuintNullableICollectionMap()
+        public void TestMaxuintNullableNullableICollectionMap()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (uint?)arg }).ToList();
 
-			uint maxActual = source.Max(arg => arg.X);
-            const uint maxExpected = 100;
+			uint? maxActual = source.Max(arg => arg.X);
+            uint? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 						
 		[TestMethod]
-        public void TestMaxuintNullableICollectionNull()
+        public void TestMaxuintNullableNullableICollectionNull()
         {		
 			ICollection<uint?> nullSource = null;
 
@@ -4234,11 +4234,11 @@ namespace ZLinq.Test.ZMath
 
 			ICollection<uint?> sourceOfNulls = new uint?[] {null}.ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((uint)0, max);
+			Assert.AreEqual(default(uint?), max);
         }
 
 		[TestMethod]
-        public void TestMaxuintNullableICollectionMapNull()
+        public void TestMaxuintNullableNullableICollectionMapNull()
         {
 			ICollection<uint?> nullSource = null;
 
@@ -4266,38 +4266,38 @@ namespace ZLinq.Test.ZMath
 			object[] sourceForNulls = { new Stack<int>() };
 			var sourceOfNulls = sourceForNulls.Select(x => (uint?) null).ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((uint)0, max);
+			Assert.AreEqual(default(uint?), max);
         }
 						
 		#endregion
 	
-		#region long	 		
+		#region long?	 		
 			
         [TestMethod]
-        public void TestMaxlongNullableArray()
+        public void TestMaxlongNullableNullableArray()
         {
             var source = Enumerable.Range(1, 100).Select(x => (long?)x).ToArray();
 
-			long maxActual = source.Max();
-            const long maxExpected = 100;
+			long? maxActual = source.Max();
+            long? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMaxlongNullableArrayMap()
+        public void TestMaxlongNullableNullableArrayMap()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (long?)arg }).ToArray();
 
-			long maxActual = source.Max(arg => arg.X);
-            const long maxExpected = 100;
+			long? maxActual = source.Max(arg => arg.X);
+            long? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 						
 		[TestMethod]
-        public void TestMaxlongNullableArrayNull()
+        public void TestMaxlongNullableNullableArrayNull()
         {		
 			long?[] nullSource = null;
 
@@ -4313,11 +4313,11 @@ namespace ZLinq.Test.ZMath
 
 			long?[] sourceOfNulls = new long?[] {null}.ToArray();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((long)0, max);
+			Assert.AreEqual(default(long?), max);
         }
 
 		[TestMethod]
-        public void TestMaxlongNullableArrayMapNull()
+        public void TestMaxlongNullableNullableArrayMapNull()
         {
 			long?[] nullSource = null;
 
@@ -4345,34 +4345,34 @@ namespace ZLinq.Test.ZMath
 			object[] sourceForNulls = { new Stack<int>() };
 			var sourceOfNulls = sourceForNulls.Select(x => (long?) null).ToArray();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((long)0, max);
+			Assert.AreEqual(default(long?), max);
         }
 					
         [TestMethod]
-        public void TestMaxlongNullableList()
+        public void TestMaxlongNullableNullableList()
         {
             var source = Enumerable.Range(1, 100).Select(x => (long?)x).ToList();
 
-			long maxActual = source.Max();
-            const long maxExpected = 100;
+			long? maxActual = source.Max();
+            long? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMaxlongNullableListMap()
+        public void TestMaxlongNullableNullableListMap()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (long?)arg }).ToList();
 
-			long maxActual = source.Max(arg => arg.X);
-            const long maxExpected = 100;
+			long? maxActual = source.Max(arg => arg.X);
+            long? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 						
 		[TestMethod]
-        public void TestMaxlongNullableListNull()
+        public void TestMaxlongNullableNullableListNull()
         {		
 			List<long?> nullSource = null;
 
@@ -4388,11 +4388,11 @@ namespace ZLinq.Test.ZMath
 
 			List<long?> sourceOfNulls = new long?[] {null}.ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((long)0, max);
+			Assert.AreEqual(default(long?), max);
         }
 
 		[TestMethod]
-        public void TestMaxlongNullableListMapNull()
+        public void TestMaxlongNullableNullableListMapNull()
         {
 			List<long?> nullSource = null;
 
@@ -4420,34 +4420,34 @@ namespace ZLinq.Test.ZMath
 			object[] sourceForNulls = { new Stack<int>() };
 			var sourceOfNulls = sourceForNulls.Select(x => (long?) null).ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((long)0, max);
+			Assert.AreEqual(default(long?), max);
         }
 					
         [TestMethod]
-        public void TestMaxlongNullableIList()
+        public void TestMaxlongNullableNullableIList()
         {
             var source = Enumerable.Range(1, 100).Select(x => (long?)x).ToList();
 
-			long maxActual = source.Max();
-            const long maxExpected = 100;
+			long? maxActual = source.Max();
+            long? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMaxlongNullableIListMap()
+        public void TestMaxlongNullableNullableIListMap()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (long?)arg }).ToList();
 
-			long maxActual = source.Max(arg => arg.X);
-            const long maxExpected = 100;
+			long? maxActual = source.Max(arg => arg.X);
+            long? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 						
 		[TestMethod]
-        public void TestMaxlongNullableIListNull()
+        public void TestMaxlongNullableNullableIListNull()
         {		
 			IList<long?> nullSource = null;
 
@@ -4463,11 +4463,11 @@ namespace ZLinq.Test.ZMath
 
 			IList<long?> sourceOfNulls = new long?[] {null}.ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((long)0, max);
+			Assert.AreEqual(default(long?), max);
         }
 
 		[TestMethod]
-        public void TestMaxlongNullableIListMapNull()
+        public void TestMaxlongNullableNullableIListMapNull()
         {
 			IList<long?> nullSource = null;
 
@@ -4495,34 +4495,34 @@ namespace ZLinq.Test.ZMath
 			object[] sourceForNulls = { new Stack<int>() };
 			var sourceOfNulls = sourceForNulls.Select(x => (long?) null).ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((long)0, max);
+			Assert.AreEqual(default(long?), max);
         }
 					
         [TestMethod]
-        public void TestMaxlongNullableICollection()
+        public void TestMaxlongNullableNullableICollection()
         {
             var source = Enumerable.Range(1, 100).Select(x => (long?)x).ToList();
 
-			long maxActual = source.Max();
-            const long maxExpected = 100;
+			long? maxActual = source.Max();
+            long? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMaxlongNullableICollectionMap()
+        public void TestMaxlongNullableNullableICollectionMap()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (long?)arg }).ToList();
 
-			long maxActual = source.Max(arg => arg.X);
-            const long maxExpected = 100;
+			long? maxActual = source.Max(arg => arg.X);
+            long? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 						
 		[TestMethod]
-        public void TestMaxlongNullableICollectionNull()
+        public void TestMaxlongNullableNullableICollectionNull()
         {		
 			ICollection<long?> nullSource = null;
 
@@ -4538,11 +4538,11 @@ namespace ZLinq.Test.ZMath
 
 			ICollection<long?> sourceOfNulls = new long?[] {null}.ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((long)0, max);
+			Assert.AreEqual(default(long?), max);
         }
 
 		[TestMethod]
-        public void TestMaxlongNullableICollectionMapNull()
+        public void TestMaxlongNullableNullableICollectionMapNull()
         {
 			ICollection<long?> nullSource = null;
 
@@ -4570,326 +4570,950 @@ namespace ZLinq.Test.ZMath
 			object[] sourceForNulls = { new Stack<int>() };
 			var sourceOfNulls = sourceForNulls.Select(x => (long?) null).ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((long)0, max);
+			Assert.AreEqual(default(long?), max);
         }
 						
 		#endregion
 	
-		#region float	 		
+		#region float?	 		
 			
         [TestMethod]
-        public void TestMaxfloatNullableArray()
+        public void TestMaxfloatNullableNullableArray()
         {
             var source = Enumerable.Range(1, 100).Select(x => (float?)x).ToArray();
 
-			float maxActual = source.Max();
-            const float maxExpected = 100;
+			float? maxActual = source.Max();
+            float? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMaxfloatNullableArrayMap()
+        public void TestMaxfloatNullableNullableArrayMap()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (float?)arg }).ToArray();
 
-			float maxActual = source.Max(arg => arg.X);
-            const float maxExpected = 100;
-
-            Assert.AreEqual(maxExpected, maxActual);
-        }
-
-							
-        [TestMethod]
-        public void TestMaxfloatNullableList()
-        {
-            var source = Enumerable.Range(1, 100).Select(x => (float?)x).ToList();
-
-			float maxActual = source.Max();
-            const float maxExpected = 100;
-
-            Assert.AreEqual(maxExpected, maxActual);
-        }
-
-		[TestMethod]
-        public void TestMaxfloatNullableListMap()
-        {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (float?)arg }).ToList();
-
-			float maxActual = source.Max(arg => arg.X);
-            const float maxExpected = 100;
-
-            Assert.AreEqual(maxExpected, maxActual);
-        }
-
-							
-        [TestMethod]
-        public void TestMaxfloatNullableIList()
-        {
-            var source = Enumerable.Range(1, 100).Select(x => (float?)x).ToList();
-
-			float maxActual = source.Max();
-            const float maxExpected = 100;
-
-            Assert.AreEqual(maxExpected, maxActual);
-        }
-
-		[TestMethod]
-        public void TestMaxfloatNullableIListMap()
-        {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (float?)arg }).ToList();
-
-			float maxActual = source.Max(arg => arg.X);
-            const float maxExpected = 100;
-
-            Assert.AreEqual(maxExpected, maxActual);
-        }
-
-							
-        [TestMethod]
-        public void TestMaxfloatNullableICollection()
-        {
-            var source = Enumerable.Range(1, 100).Select(x => (float?)x).ToList();
-
-			float maxActual = source.Max();
-            const float maxExpected = 100;
-
-            Assert.AreEqual(maxExpected, maxActual);
-        }
-
-		[TestMethod]
-        public void TestMaxfloatNullableICollectionMap()
-        {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (float?)arg }).ToList();
-
-			float maxActual = source.Max(arg => arg.X);
-            const float maxExpected = 100;
-
-            Assert.AreEqual(maxExpected, maxActual);
-        }
-
-								
-		#endregion
-	
-		#region double	 		
-			
-        [TestMethod]
-        public void TestMaxdoubleNullableArray()
-        {
-            var source = Enumerable.Range(1, 100).Select(x => (double?)x).ToArray();
-
-			double maxActual = source.Max();
-            const double maxExpected = 100;
-
-            Assert.AreEqual(maxExpected, maxActual);
-        }
-
-		[TestMethod]
-        public void TestMaxdoubleNullableArrayMap()
-        {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (double?)arg }).ToArray();
-
-			double maxActual = source.Max(arg => arg.X);
-            const double maxExpected = 100;
-
-            Assert.AreEqual(maxExpected, maxActual);
-        }
-
-							
-        [TestMethod]
-        public void TestMaxdoubleNullableList()
-        {
-            var source = Enumerable.Range(1, 100).Select(x => (double?)x).ToList();
-
-			double maxActual = source.Max();
-            const double maxExpected = 100;
-
-            Assert.AreEqual(maxExpected, maxActual);
-        }
-
-		[TestMethod]
-        public void TestMaxdoubleNullableListMap()
-        {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (double?)arg }).ToList();
-
-			double maxActual = source.Max(arg => arg.X);
-            const double maxExpected = 100;
-
-            Assert.AreEqual(maxExpected, maxActual);
-        }
-
-							
-        [TestMethod]
-        public void TestMaxdoubleNullableIList()
-        {
-            var source = Enumerable.Range(1, 100).Select(x => (double?)x).ToList();
-
-			double maxActual = source.Max();
-            const double maxExpected = 100;
-
-            Assert.AreEqual(maxExpected, maxActual);
-        }
-
-		[TestMethod]
-        public void TestMaxdoubleNullableIListMap()
-        {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (double?)arg }).ToList();
-
-			double maxActual = source.Max(arg => arg.X);
-            const double maxExpected = 100;
-
-            Assert.AreEqual(maxExpected, maxActual);
-        }
-
-							
-        [TestMethod]
-        public void TestMaxdoubleNullableICollection()
-        {
-            var source = Enumerable.Range(1, 100).Select(x => (double?)x).ToList();
-
-			double maxActual = source.Max();
-            const double maxExpected = 100;
-
-            Assert.AreEqual(maxExpected, maxActual);
-        }
-
-		[TestMethod]
-        public void TestMaxdoubleNullableICollectionMap()
-        {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (double?)arg }).ToList();
-
-			double maxActual = source.Max(arg => arg.X);
-            const double maxExpected = 100;
-
-            Assert.AreEqual(maxExpected, maxActual);
-        }
-
-								
-		#endregion
-	
-		#region decimal	 		
-			
-        [TestMethod]
-        public void TestMaxdecimalNullableArray()
-        {
-            var source = Enumerable.Range(1, 100).Select(x => (decimal?)x).ToArray();
-
-			decimal maxActual = source.Max();
-            const decimal maxExpected = 100;
-
-            Assert.AreEqual(maxExpected, maxActual);
-        }
-
-		[TestMethod]
-        public void TestMaxdecimalNullableArrayMap()
-        {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (decimal?)arg }).ToArray();
-
-			decimal maxActual = source.Max(arg => arg.X);
-            const decimal maxExpected = 100;
-
-            Assert.AreEqual(maxExpected, maxActual);
-        }
-
-							
-        [TestMethod]
-        public void TestMaxdecimalNullableList()
-        {
-            var source = Enumerable.Range(1, 100).Select(x => (decimal?)x).ToList();
-
-			decimal maxActual = source.Max();
-            const decimal maxExpected = 100;
-
-            Assert.AreEqual(maxExpected, maxActual);
-        }
-
-		[TestMethod]
-        public void TestMaxdecimalNullableListMap()
-        {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (decimal?)arg }).ToList();
-
-			decimal maxActual = source.Max(arg => arg.X);
-            const decimal maxExpected = 100;
-
-            Assert.AreEqual(maxExpected, maxActual);
-        }
-
-							
-        [TestMethod]
-        public void TestMaxdecimalNullableIList()
-        {
-            var source = Enumerable.Range(1, 100).Select(x => (decimal?)x).ToList();
-
-			decimal maxActual = source.Max();
-            const decimal maxExpected = 100;
-
-            Assert.AreEqual(maxExpected, maxActual);
-        }
-
-		[TestMethod]
-        public void TestMaxdecimalNullableIListMap()
-        {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (decimal?)arg }).ToList();
-
-			decimal maxActual = source.Max(arg => arg.X);
-            const decimal maxExpected = 100;
-
-            Assert.AreEqual(maxExpected, maxActual);
-        }
-
-							
-        [TestMethod]
-        public void TestMaxdecimalNullableICollection()
-        {
-            var source = Enumerable.Range(1, 100).Select(x => (decimal?)x).ToList();
-
-			decimal maxActual = source.Max();
-            const decimal maxExpected = 100;
-
-            Assert.AreEqual(maxExpected, maxActual);
-        }
-
-		[TestMethod]
-        public void TestMaxdecimalNullableICollectionMap()
-        {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (decimal?)arg }).ToList();
-
-			decimal maxActual = source.Max(arg => arg.X);
-            const decimal maxExpected = 100;
-
-            Assert.AreEqual(maxExpected, maxActual);
-        }
-
-								
-		#endregion
-	
-		#region ulong	 		
-			
-        [TestMethod]
-        public void TestMaxulongNullableArray()
-        {
-            var source = Enumerable.Range(1, 100).Select(x => (ulong?)x).ToArray();
-
-			ulong maxActual = source.Max();
-            const ulong maxExpected = 100;
-
-            Assert.AreEqual(maxExpected, maxActual);
-        }
-
-		[TestMethod]
-        public void TestMaxulongNullableArrayMap()
-        {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (ulong?)arg }).ToArray();
-
-			ulong maxActual = source.Max(arg => arg.X);
-            const ulong maxExpected = 100;
+			float? maxActual = source.Max(arg => arg.X);
+            float? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 						
 		[TestMethod]
-        public void TestMaxulongNullableArrayNull()
+        public void TestMaxfloatNullableNullableArrayNull()
+        {		
+			float?[] nullSource = null;
+
+            try
+			{
+				nullSource.Max();				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			float?[] sourceOfNulls = new float?[] {null}.ToArray();
+			var max = sourceOfNulls.Max();
+			Assert.AreEqual(default(float?), max);
+        }
+
+		[TestMethod]
+        public void TestMaxfloatNullableNullableArrayMapNull()
+        {
+			float?[] nullSource = null;
+
+            try
+			{
+				nullSource.Max();				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			var source = Enumerable.Range(1, 100).Select(arg => new KeyValuePair<float?,float?>((float?) arg, (float?) arg)).ToArray();
+			try
+			{
+				source.Max<KeyValuePair<float?,float?>, float?>(null);				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			object[] sourceForNulls = { new Stack<int>() };
+			var sourceOfNulls = sourceForNulls.Select(x => (float?) null).ToArray();
+			var max = sourceOfNulls.Max();
+			Assert.AreEqual(default(float?), max);
+        }
+					
+        [TestMethod]
+        public void TestMaxfloatNullableNullableList()
+        {
+            var source = Enumerable.Range(1, 100).Select(x => (float?)x).ToList();
+
+			float? maxActual = source.Max();
+            float? maxExpected = 100;
+
+            Assert.AreEqual(maxExpected, maxActual);
+        }
+
+		[TestMethod]
+        public void TestMaxfloatNullableNullableListMap()
+        {
+            var source = Enumerable.Range(1, 100).Select(arg => new { X = (float?)arg }).ToList();
+
+			float? maxActual = source.Max(arg => arg.X);
+            float? maxExpected = 100;
+
+            Assert.AreEqual(maxExpected, maxActual);
+        }
+
+						
+		[TestMethod]
+        public void TestMaxfloatNullableNullableListNull()
+        {		
+			List<float?> nullSource = null;
+
+            try
+			{
+				nullSource.Max();				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			List<float?> sourceOfNulls = new float?[] {null}.ToList();
+			var max = sourceOfNulls.Max();
+			Assert.AreEqual(default(float?), max);
+        }
+
+		[TestMethod]
+        public void TestMaxfloatNullableNullableListMapNull()
+        {
+			List<float?> nullSource = null;
+
+            try
+			{
+				nullSource.Max();				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			var source = Enumerable.Range(1, 100).Select(arg => new KeyValuePair<float?,float?>((float?) arg, (float?) arg)).ToList();
+			try
+			{
+				source.Max<KeyValuePair<float?,float?>, float?>(null);				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			object[] sourceForNulls = { new Stack<int>() };
+			var sourceOfNulls = sourceForNulls.Select(x => (float?) null).ToList();
+			var max = sourceOfNulls.Max();
+			Assert.AreEqual(default(float?), max);
+        }
+					
+        [TestMethod]
+        public void TestMaxfloatNullableNullableIList()
+        {
+            var source = Enumerable.Range(1, 100).Select(x => (float?)x).ToList();
+
+			float? maxActual = source.Max();
+            float? maxExpected = 100;
+
+            Assert.AreEqual(maxExpected, maxActual);
+        }
+
+		[TestMethod]
+        public void TestMaxfloatNullableNullableIListMap()
+        {
+            var source = Enumerable.Range(1, 100).Select(arg => new { X = (float?)arg }).ToList();
+
+			float? maxActual = source.Max(arg => arg.X);
+            float? maxExpected = 100;
+
+            Assert.AreEqual(maxExpected, maxActual);
+        }
+
+						
+		[TestMethod]
+        public void TestMaxfloatNullableNullableIListNull()
+        {		
+			IList<float?> nullSource = null;
+
+            try
+			{
+				nullSource.Max();				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			IList<float?> sourceOfNulls = new float?[] {null}.ToList();
+			var max = sourceOfNulls.Max();
+			Assert.AreEqual(default(float?), max);
+        }
+
+		[TestMethod]
+        public void TestMaxfloatNullableNullableIListMapNull()
+        {
+			IList<float?> nullSource = null;
+
+            try
+			{
+				nullSource.Max();				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			var source = Enumerable.Range(1, 100).Select(arg => new KeyValuePair<float?,float?>((float?) arg, (float?) arg)).ToList();
+			try
+			{
+				source.Max<KeyValuePair<float?,float?>, float?>(null);				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			object[] sourceForNulls = { new Stack<int>() };
+			var sourceOfNulls = sourceForNulls.Select(x => (float?) null).ToList();
+			var max = sourceOfNulls.Max();
+			Assert.AreEqual(default(float?), max);
+        }
+					
+        [TestMethod]
+        public void TestMaxfloatNullableNullableICollection()
+        {
+            var source = Enumerable.Range(1, 100).Select(x => (float?)x).ToList();
+
+			float? maxActual = source.Max();
+            float? maxExpected = 100;
+
+            Assert.AreEqual(maxExpected, maxActual);
+        }
+
+		[TestMethod]
+        public void TestMaxfloatNullableNullableICollectionMap()
+        {
+            var source = Enumerable.Range(1, 100).Select(arg => new { X = (float?)arg }).ToList();
+
+			float? maxActual = source.Max(arg => arg.X);
+            float? maxExpected = 100;
+
+            Assert.AreEqual(maxExpected, maxActual);
+        }
+
+						
+		[TestMethod]
+        public void TestMaxfloatNullableNullableICollectionNull()
+        {		
+			ICollection<float?> nullSource = null;
+
+            try
+			{
+				nullSource.Max();				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			ICollection<float?> sourceOfNulls = new float?[] {null}.ToList();
+			var max = sourceOfNulls.Max();
+			Assert.AreEqual(default(float?), max);
+        }
+
+		[TestMethod]
+        public void TestMaxfloatNullableNullableICollectionMapNull()
+        {
+			ICollection<float?> nullSource = null;
+
+            try
+			{
+				nullSource.Max();				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			var source = Enumerable.Range(1, 100).Select(arg => new KeyValuePair<float?,float?>((float?) arg, (float?) arg)).ToList();
+			try
+			{
+				source.Max<KeyValuePair<float?,float?>, float?>(null);				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			object[] sourceForNulls = { new Stack<int>() };
+			var sourceOfNulls = sourceForNulls.Select(x => (float?) null).ToList();
+			var max = sourceOfNulls.Max();
+			Assert.AreEqual(default(float?), max);
+        }
+						
+		#endregion
+	
+		#region double?	 		
+			
+        [TestMethod]
+        public void TestMaxdoubleNullableNullableArray()
+        {
+            var source = Enumerable.Range(1, 100).Select(x => (double?)x).ToArray();
+
+			double? maxActual = source.Max();
+            double? maxExpected = 100;
+
+            Assert.AreEqual(maxExpected, maxActual);
+        }
+
+		[TestMethod]
+        public void TestMaxdoubleNullableNullableArrayMap()
+        {
+            var source = Enumerable.Range(1, 100).Select(arg => new { X = (double?)arg }).ToArray();
+
+			double? maxActual = source.Max(arg => arg.X);
+            double? maxExpected = 100;
+
+            Assert.AreEqual(maxExpected, maxActual);
+        }
+
+						
+		[TestMethod]
+        public void TestMaxdoubleNullableNullableArrayNull()
+        {		
+			double?[] nullSource = null;
+
+            try
+			{
+				nullSource.Max();				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			double?[] sourceOfNulls = new double?[] {null}.ToArray();
+			var max = sourceOfNulls.Max();
+			Assert.AreEqual(default(double?), max);
+        }
+
+		[TestMethod]
+        public void TestMaxdoubleNullableNullableArrayMapNull()
+        {
+			double?[] nullSource = null;
+
+            try
+			{
+				nullSource.Max();				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			var source = Enumerable.Range(1, 100).Select(arg => new KeyValuePair<double?,double?>((double?) arg, (double?) arg)).ToArray();
+			try
+			{
+				source.Max<KeyValuePair<double?,double?>, double?>(null);				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			object[] sourceForNulls = { new Stack<int>() };
+			var sourceOfNulls = sourceForNulls.Select(x => (double?) null).ToArray();
+			var max = sourceOfNulls.Max();
+			Assert.AreEqual(default(double?), max);
+        }
+					
+        [TestMethod]
+        public void TestMaxdoubleNullableNullableList()
+        {
+            var source = Enumerable.Range(1, 100).Select(x => (double?)x).ToList();
+
+			double? maxActual = source.Max();
+            double? maxExpected = 100;
+
+            Assert.AreEqual(maxExpected, maxActual);
+        }
+
+		[TestMethod]
+        public void TestMaxdoubleNullableNullableListMap()
+        {
+            var source = Enumerable.Range(1, 100).Select(arg => new { X = (double?)arg }).ToList();
+
+			double? maxActual = source.Max(arg => arg.X);
+            double? maxExpected = 100;
+
+            Assert.AreEqual(maxExpected, maxActual);
+        }
+
+						
+		[TestMethod]
+        public void TestMaxdoubleNullableNullableListNull()
+        {		
+			List<double?> nullSource = null;
+
+            try
+			{
+				nullSource.Max();				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			List<double?> sourceOfNulls = new double?[] {null}.ToList();
+			var max = sourceOfNulls.Max();
+			Assert.AreEqual(default(double?), max);
+        }
+
+		[TestMethod]
+        public void TestMaxdoubleNullableNullableListMapNull()
+        {
+			List<double?> nullSource = null;
+
+            try
+			{
+				nullSource.Max();				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			var source = Enumerable.Range(1, 100).Select(arg => new KeyValuePair<double?,double?>((double?) arg, (double?) arg)).ToList();
+			try
+			{
+				source.Max<KeyValuePair<double?,double?>, double?>(null);				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			object[] sourceForNulls = { new Stack<int>() };
+			var sourceOfNulls = sourceForNulls.Select(x => (double?) null).ToList();
+			var max = sourceOfNulls.Max();
+			Assert.AreEqual(default(double?), max);
+        }
+					
+        [TestMethod]
+        public void TestMaxdoubleNullableNullableIList()
+        {
+            var source = Enumerable.Range(1, 100).Select(x => (double?)x).ToList();
+
+			double? maxActual = source.Max();
+            double? maxExpected = 100;
+
+            Assert.AreEqual(maxExpected, maxActual);
+        }
+
+		[TestMethod]
+        public void TestMaxdoubleNullableNullableIListMap()
+        {
+            var source = Enumerable.Range(1, 100).Select(arg => new { X = (double?)arg }).ToList();
+
+			double? maxActual = source.Max(arg => arg.X);
+            double? maxExpected = 100;
+
+            Assert.AreEqual(maxExpected, maxActual);
+        }
+
+						
+		[TestMethod]
+        public void TestMaxdoubleNullableNullableIListNull()
+        {		
+			IList<double?> nullSource = null;
+
+            try
+			{
+				nullSource.Max();				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			IList<double?> sourceOfNulls = new double?[] {null}.ToList();
+			var max = sourceOfNulls.Max();
+			Assert.AreEqual(default(double?), max);
+        }
+
+		[TestMethod]
+        public void TestMaxdoubleNullableNullableIListMapNull()
+        {
+			IList<double?> nullSource = null;
+
+            try
+			{
+				nullSource.Max();				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			var source = Enumerable.Range(1, 100).Select(arg => new KeyValuePair<double?,double?>((double?) arg, (double?) arg)).ToList();
+			try
+			{
+				source.Max<KeyValuePair<double?,double?>, double?>(null);				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			object[] sourceForNulls = { new Stack<int>() };
+			var sourceOfNulls = sourceForNulls.Select(x => (double?) null).ToList();
+			var max = sourceOfNulls.Max();
+			Assert.AreEqual(default(double?), max);
+        }
+					
+        [TestMethod]
+        public void TestMaxdoubleNullableNullableICollection()
+        {
+            var source = Enumerable.Range(1, 100).Select(x => (double?)x).ToList();
+
+			double? maxActual = source.Max();
+            double? maxExpected = 100;
+
+            Assert.AreEqual(maxExpected, maxActual);
+        }
+
+		[TestMethod]
+        public void TestMaxdoubleNullableNullableICollectionMap()
+        {
+            var source = Enumerable.Range(1, 100).Select(arg => new { X = (double?)arg }).ToList();
+
+			double? maxActual = source.Max(arg => arg.X);
+            double? maxExpected = 100;
+
+            Assert.AreEqual(maxExpected, maxActual);
+        }
+
+						
+		[TestMethod]
+        public void TestMaxdoubleNullableNullableICollectionNull()
+        {		
+			ICollection<double?> nullSource = null;
+
+            try
+			{
+				nullSource.Max();				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			ICollection<double?> sourceOfNulls = new double?[] {null}.ToList();
+			var max = sourceOfNulls.Max();
+			Assert.AreEqual(default(double?), max);
+        }
+
+		[TestMethod]
+        public void TestMaxdoubleNullableNullableICollectionMapNull()
+        {
+			ICollection<double?> nullSource = null;
+
+            try
+			{
+				nullSource.Max();				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			var source = Enumerable.Range(1, 100).Select(arg => new KeyValuePair<double?,double?>((double?) arg, (double?) arg)).ToList();
+			try
+			{
+				source.Max<KeyValuePair<double?,double?>, double?>(null);				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			object[] sourceForNulls = { new Stack<int>() };
+			var sourceOfNulls = sourceForNulls.Select(x => (double?) null).ToList();
+			var max = sourceOfNulls.Max();
+			Assert.AreEqual(default(double?), max);
+        }
+						
+		#endregion
+	
+		#region decimal?	 		
+			
+        [TestMethod]
+        public void TestMaxdecimalNullableNullableArray()
+        {
+            var source = Enumerable.Range(1, 100).Select(x => (decimal?)x).ToArray();
+
+			decimal? maxActual = source.Max();
+            decimal? maxExpected = 100;
+
+            Assert.AreEqual(maxExpected, maxActual);
+        }
+
+		[TestMethod]
+        public void TestMaxdecimalNullableNullableArrayMap()
+        {
+            var source = Enumerable.Range(1, 100).Select(arg => new { X = (decimal?)arg }).ToArray();
+
+			decimal? maxActual = source.Max(arg => arg.X);
+            decimal? maxExpected = 100;
+
+            Assert.AreEqual(maxExpected, maxActual);
+        }
+
+						
+		[TestMethod]
+        public void TestMaxdecimalNullableNullableArrayNull()
+        {		
+			decimal?[] nullSource = null;
+
+            try
+			{
+				nullSource.Max();				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			decimal?[] sourceOfNulls = new decimal?[] {null}.ToArray();
+			var max = sourceOfNulls.Max();
+			Assert.AreEqual(default(decimal?), max);
+        }
+
+		[TestMethod]
+        public void TestMaxdecimalNullableNullableArrayMapNull()
+        {
+			decimal?[] nullSource = null;
+
+            try
+			{
+				nullSource.Max();				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			var source = Enumerable.Range(1, 100).Select(arg => new KeyValuePair<decimal?,decimal?>((decimal?) arg, (decimal?) arg)).ToArray();
+			try
+			{
+				source.Max<KeyValuePair<decimal?,decimal?>, decimal?>(null);				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			object[] sourceForNulls = { new Stack<int>() };
+			var sourceOfNulls = sourceForNulls.Select(x => (decimal?) null).ToArray();
+			var max = sourceOfNulls.Max();
+			Assert.AreEqual(default(decimal?), max);
+        }
+					
+        [TestMethod]
+        public void TestMaxdecimalNullableNullableList()
+        {
+            var source = Enumerable.Range(1, 100).Select(x => (decimal?)x).ToList();
+
+			decimal? maxActual = source.Max();
+            decimal? maxExpected = 100;
+
+            Assert.AreEqual(maxExpected, maxActual);
+        }
+
+		[TestMethod]
+        public void TestMaxdecimalNullableNullableListMap()
+        {
+            var source = Enumerable.Range(1, 100).Select(arg => new { X = (decimal?)arg }).ToList();
+
+			decimal? maxActual = source.Max(arg => arg.X);
+            decimal? maxExpected = 100;
+
+            Assert.AreEqual(maxExpected, maxActual);
+        }
+
+						
+		[TestMethod]
+        public void TestMaxdecimalNullableNullableListNull()
+        {		
+			List<decimal?> nullSource = null;
+
+            try
+			{
+				nullSource.Max();				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			List<decimal?> sourceOfNulls = new decimal?[] {null}.ToList();
+			var max = sourceOfNulls.Max();
+			Assert.AreEqual(default(decimal?), max);
+        }
+
+		[TestMethod]
+        public void TestMaxdecimalNullableNullableListMapNull()
+        {
+			List<decimal?> nullSource = null;
+
+            try
+			{
+				nullSource.Max();				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			var source = Enumerable.Range(1, 100).Select(arg => new KeyValuePair<decimal?,decimal?>((decimal?) arg, (decimal?) arg)).ToList();
+			try
+			{
+				source.Max<KeyValuePair<decimal?,decimal?>, decimal?>(null);				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			object[] sourceForNulls = { new Stack<int>() };
+			var sourceOfNulls = sourceForNulls.Select(x => (decimal?) null).ToList();
+			var max = sourceOfNulls.Max();
+			Assert.AreEqual(default(decimal?), max);
+        }
+					
+        [TestMethod]
+        public void TestMaxdecimalNullableNullableIList()
+        {
+            var source = Enumerable.Range(1, 100).Select(x => (decimal?)x).ToList();
+
+			decimal? maxActual = source.Max();
+            decimal? maxExpected = 100;
+
+            Assert.AreEqual(maxExpected, maxActual);
+        }
+
+		[TestMethod]
+        public void TestMaxdecimalNullableNullableIListMap()
+        {
+            var source = Enumerable.Range(1, 100).Select(arg => new { X = (decimal?)arg }).ToList();
+
+			decimal? maxActual = source.Max(arg => arg.X);
+            decimal? maxExpected = 100;
+
+            Assert.AreEqual(maxExpected, maxActual);
+        }
+
+						
+		[TestMethod]
+        public void TestMaxdecimalNullableNullableIListNull()
+        {		
+			IList<decimal?> nullSource = null;
+
+            try
+			{
+				nullSource.Max();				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			IList<decimal?> sourceOfNulls = new decimal?[] {null}.ToList();
+			var max = sourceOfNulls.Max();
+			Assert.AreEqual(default(decimal?), max);
+        }
+
+		[TestMethod]
+        public void TestMaxdecimalNullableNullableIListMapNull()
+        {
+			IList<decimal?> nullSource = null;
+
+            try
+			{
+				nullSource.Max();				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			var source = Enumerable.Range(1, 100).Select(arg => new KeyValuePair<decimal?,decimal?>((decimal?) arg, (decimal?) arg)).ToList();
+			try
+			{
+				source.Max<KeyValuePair<decimal?,decimal?>, decimal?>(null);				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			object[] sourceForNulls = { new Stack<int>() };
+			var sourceOfNulls = sourceForNulls.Select(x => (decimal?) null).ToList();
+			var max = sourceOfNulls.Max();
+			Assert.AreEqual(default(decimal?), max);
+        }
+					
+        [TestMethod]
+        public void TestMaxdecimalNullableNullableICollection()
+        {
+            var source = Enumerable.Range(1, 100).Select(x => (decimal?)x).ToList();
+
+			decimal? maxActual = source.Max();
+            decimal? maxExpected = 100;
+
+            Assert.AreEqual(maxExpected, maxActual);
+        }
+
+		[TestMethod]
+        public void TestMaxdecimalNullableNullableICollectionMap()
+        {
+            var source = Enumerable.Range(1, 100).Select(arg => new { X = (decimal?)arg }).ToList();
+
+			decimal? maxActual = source.Max(arg => arg.X);
+            decimal? maxExpected = 100;
+
+            Assert.AreEqual(maxExpected, maxActual);
+        }
+
+						
+		[TestMethod]
+        public void TestMaxdecimalNullableNullableICollectionNull()
+        {		
+			ICollection<decimal?> nullSource = null;
+
+            try
+			{
+				nullSource.Max();				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			ICollection<decimal?> sourceOfNulls = new decimal?[] {null}.ToList();
+			var max = sourceOfNulls.Max();
+			Assert.AreEqual(default(decimal?), max);
+        }
+
+		[TestMethod]
+        public void TestMaxdecimalNullableNullableICollectionMapNull()
+        {
+			ICollection<decimal?> nullSource = null;
+
+            try
+			{
+				nullSource.Max();				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			var source = Enumerable.Range(1, 100).Select(arg => new KeyValuePair<decimal?,decimal?>((decimal?) arg, (decimal?) arg)).ToList();
+			try
+			{
+				source.Max<KeyValuePair<decimal?,decimal?>, decimal?>(null);				
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+				
+			}
+
+			object[] sourceForNulls = { new Stack<int>() };
+			var sourceOfNulls = sourceForNulls.Select(x => (decimal?) null).ToList();
+			var max = sourceOfNulls.Max();
+			Assert.AreEqual(default(decimal?), max);
+        }
+						
+		#endregion
+	
+		#region ulong?	 		
+			
+        [TestMethod]
+        public void TestMaxulongNullableNullableArray()
+        {
+            var source = Enumerable.Range(1, 100).Select(x => (ulong?)x).ToArray();
+
+			ulong? maxActual = source.Max();
+            ulong? maxExpected = 100;
+
+            Assert.AreEqual(maxExpected, maxActual);
+        }
+
+		[TestMethod]
+        public void TestMaxulongNullableNullableArrayMap()
+        {
+            var source = Enumerable.Range(1, 100).Select(arg => new { X = (ulong?)arg }).ToArray();
+
+			ulong? maxActual = source.Max(arg => arg.X);
+            ulong? maxExpected = 100;
+
+            Assert.AreEqual(maxExpected, maxActual);
+        }
+
+						
+		[TestMethod]
+        public void TestMaxulongNullableNullableArrayNull()
         {		
 			ulong?[] nullSource = null;
 
@@ -4905,11 +5529,11 @@ namespace ZLinq.Test.ZMath
 
 			ulong?[] sourceOfNulls = new ulong?[] {null}.ToArray();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((ulong)0, max);
+			Assert.AreEqual(default(ulong?), max);
         }
 
 		[TestMethod]
-        public void TestMaxulongNullableArrayMapNull()
+        public void TestMaxulongNullableNullableArrayMapNull()
         {
 			ulong?[] nullSource = null;
 
@@ -4937,34 +5561,34 @@ namespace ZLinq.Test.ZMath
 			object[] sourceForNulls = { new Stack<int>() };
 			var sourceOfNulls = sourceForNulls.Select(x => (ulong?) null).ToArray();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((ulong)0, max);
+			Assert.AreEqual(default(ulong?), max);
         }
 					
         [TestMethod]
-        public void TestMaxulongNullableList()
+        public void TestMaxulongNullableNullableList()
         {
             var source = Enumerable.Range(1, 100).Select(x => (ulong?)x).ToList();
 
-			ulong maxActual = source.Max();
-            const ulong maxExpected = 100;
+			ulong? maxActual = source.Max();
+            ulong? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMaxulongNullableListMap()
+        public void TestMaxulongNullableNullableListMap()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (ulong?)arg }).ToList();
 
-			ulong maxActual = source.Max(arg => arg.X);
-            const ulong maxExpected = 100;
+			ulong? maxActual = source.Max(arg => arg.X);
+            ulong? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 						
 		[TestMethod]
-        public void TestMaxulongNullableListNull()
+        public void TestMaxulongNullableNullableListNull()
         {		
 			List<ulong?> nullSource = null;
 
@@ -4980,11 +5604,11 @@ namespace ZLinq.Test.ZMath
 
 			List<ulong?> sourceOfNulls = new ulong?[] {null}.ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((ulong)0, max);
+			Assert.AreEqual(default(ulong?), max);
         }
 
 		[TestMethod]
-        public void TestMaxulongNullableListMapNull()
+        public void TestMaxulongNullableNullableListMapNull()
         {
 			List<ulong?> nullSource = null;
 
@@ -5012,34 +5636,34 @@ namespace ZLinq.Test.ZMath
 			object[] sourceForNulls = { new Stack<int>() };
 			var sourceOfNulls = sourceForNulls.Select(x => (ulong?) null).ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((ulong)0, max);
+			Assert.AreEqual(default(ulong?), max);
         }
 					
         [TestMethod]
-        public void TestMaxulongNullableIList()
+        public void TestMaxulongNullableNullableIList()
         {
             var source = Enumerable.Range(1, 100).Select(x => (ulong?)x).ToList();
 
-			ulong maxActual = source.Max();
-            const ulong maxExpected = 100;
+			ulong? maxActual = source.Max();
+            ulong? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMaxulongNullableIListMap()
+        public void TestMaxulongNullableNullableIListMap()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (ulong?)arg }).ToList();
 
-			ulong maxActual = source.Max(arg => arg.X);
-            const ulong maxExpected = 100;
+			ulong? maxActual = source.Max(arg => arg.X);
+            ulong? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 						
 		[TestMethod]
-        public void TestMaxulongNullableIListNull()
+        public void TestMaxulongNullableNullableIListNull()
         {		
 			IList<ulong?> nullSource = null;
 
@@ -5055,11 +5679,11 @@ namespace ZLinq.Test.ZMath
 
 			IList<ulong?> sourceOfNulls = new ulong?[] {null}.ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((ulong)0, max);
+			Assert.AreEqual(default(ulong?), max);
         }
 
 		[TestMethod]
-        public void TestMaxulongNullableIListMapNull()
+        public void TestMaxulongNullableNullableIListMapNull()
         {
 			IList<ulong?> nullSource = null;
 
@@ -5087,34 +5711,34 @@ namespace ZLinq.Test.ZMath
 			object[] sourceForNulls = { new Stack<int>() };
 			var sourceOfNulls = sourceForNulls.Select(x => (ulong?) null).ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((ulong)0, max);
+			Assert.AreEqual(default(ulong?), max);
         }
 					
         [TestMethod]
-        public void TestMaxulongNullableICollection()
+        public void TestMaxulongNullableNullableICollection()
         {
             var source = Enumerable.Range(1, 100).Select(x => (ulong?)x).ToList();
 
-			ulong maxActual = source.Max();
-            const ulong maxExpected = 100;
+			ulong? maxActual = source.Max();
+            ulong? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMaxulongNullableICollectionMap()
+        public void TestMaxulongNullableNullableICollectionMap()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (ulong?)arg }).ToList();
 
-			ulong maxActual = source.Max(arg => arg.X);
-            const ulong maxExpected = 100;
+			ulong? maxActual = source.Max(arg => arg.X);
+            ulong? maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 						
 		[TestMethod]
-        public void TestMaxulongNullableICollectionNull()
+        public void TestMaxulongNullableNullableICollectionNull()
         {		
 			ICollection<ulong?> nullSource = null;
 
@@ -5130,11 +5754,11 @@ namespace ZLinq.Test.ZMath
 
 			ICollection<ulong?> sourceOfNulls = new ulong?[] {null}.ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((ulong)0, max);
+			Assert.AreEqual(default(ulong?), max);
         }
 
 		[TestMethod]
-        public void TestMaxulongNullableICollectionMapNull()
+        public void TestMaxulongNullableNullableICollectionMapNull()
         {
 			ICollection<ulong?> nullSource = null;
 
@@ -5162,7 +5786,7 @@ namespace ZLinq.Test.ZMath
 			object[] sourceForNulls = { new Stack<int>() };
 			var sourceOfNulls = sourceForNulls.Select(x => (ulong?) null).ToList();
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((ulong)0, max);
+			Assert.AreEqual(default(ulong?), max);
         }
 						
 		#endregion

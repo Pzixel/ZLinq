@@ -1,17 +1,20 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
+using System.Diagnostics.CodeAnalysis;
+using JetBrains.Annotations;
 using ZLinq.Extension;
 
 // ReSharper disable CheckNamespace
 namespace ZLinq
 {
+	[SuppressMessage("ReSharper", "LoopCanBeConvertedToQuery")]
     public static partial class ZEnumerable
     {        
 				    
+		[System.Diagnostics.Contracts.Pure]
 		[Pure]
-	    public static T[] WhereToArray<T>(this T[] source, Predicate<T> predicate)
+	    public static T[] WhereToArray<T>([NotNull] this T[] source, [NotNull] Predicate<T> predicate)
 		{
             source.IsNotNull("source");
 			predicate.IsNotNull("predicate");
@@ -28,8 +31,9 @@ namespace ZLinq
             return result;
 		}
 
+		[System.Diagnostics.Contracts.Pure]
 		[Pure]
-	    public static List<T> WhereToList<T>(this T[] source, Predicate<T> predicate)
+	    public static List<T> WhereToList<T>([NotNull] this T[] source, [NotNull] Predicate<T> predicate)
 		{
             source.IsNotNull("source");
 			predicate.IsNotNull("predicate");
@@ -45,8 +49,9 @@ namespace ZLinq
             return result;
 		}
 				    
+		[System.Diagnostics.Contracts.Pure]
 		[Pure]
-	    public static T[] WhereToArray<T>(this List<T> source, Predicate<T> predicate)
+	    public static T[] WhereToArray<T>([NotNull] this List<T> source, [NotNull] Predicate<T> predicate)
 		{
             source.IsNotNull("source");
 			predicate.IsNotNull("predicate");
@@ -63,8 +68,9 @@ namespace ZLinq
             return result;
 		}
 
+		[System.Diagnostics.Contracts.Pure]
 		[Pure]
-	    public static List<T> WhereToList<T>(this List<T> source, Predicate<T> predicate)
+	    public static List<T> WhereToList<T>([NotNull] this List<T> source, [NotNull] Predicate<T> predicate)
 		{
             source.IsNotNull("source");
 			predicate.IsNotNull("predicate");
@@ -80,8 +86,9 @@ namespace ZLinq
             return result;
 		}
 				    
+		[System.Diagnostics.Contracts.Pure]
 		[Pure]
-	    public static T[] WhereToArray<T>(this IList<T> source, Predicate<T> predicate)
+	    public static T[] WhereToArray<T>([NotNull] this IList<T> source, [NotNull] Predicate<T> predicate)
 		{
             source.IsNotNull("source");
 			predicate.IsNotNull("predicate");
@@ -98,8 +105,9 @@ namespace ZLinq
             return result;
 		}
 
+		[System.Diagnostics.Contracts.Pure]
 		[Pure]
-	    public static List<T> WhereToList<T>(this IList<T> source, Predicate<T> predicate)
+	    public static List<T> WhereToList<T>([NotNull] this IList<T> source, [NotNull] Predicate<T> predicate)
 		{
             source.IsNotNull("source");
 			predicate.IsNotNull("predicate");
@@ -115,8 +123,9 @@ namespace ZLinq
             return result;
 		}
 				    
+		[System.Diagnostics.Contracts.Pure]
 		[Pure]
-	    public static T[] WhereToArray<T>(this ICollection<T> source, Predicate<T> predicate)
+	    public static T[] WhereToArray<T>([NotNull] this ICollection<T> source, [NotNull] Predicate<T> predicate)
 		{
             source.IsNotNull("source");
 			predicate.IsNotNull("predicate");
@@ -133,8 +142,9 @@ namespace ZLinq
             return result;
 		}
 
+		[System.Diagnostics.Contracts.Pure]
 		[Pure]
-	    public static List<T> WhereToList<T>(this ICollection<T> source, Predicate<T> predicate)
+	    public static List<T> WhereToList<T>([NotNull] this ICollection<T> source, [NotNull] Predicate<T> predicate)
 		{
             source.IsNotNull("source");
 			predicate.IsNotNull("predicate");

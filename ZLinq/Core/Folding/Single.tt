@@ -9,19 +9,22 @@
 <#@ output extension=".cs" #>
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
+using JetBrains.Annotations;
+using ZLinq.Extension;
 
 // ReSharper disable CheckNamespace
 namespace ZLinq
 {
+	[SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
     public static partial class ZEnumerable
     {     		
 		<# foreach (var sourceType in TextTemplate.StandardLists) 
 		{ #>		
 		   	    
 		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-	   	public static T Single<T>(this <#= sourceType #> source)
+	   	public static T Single<T>([NotNull] this <#= sourceType #> source)
         {		    
 			if (source.<#= TextTemplate.LengthOrCount(sourceType) #> > 1)
 		    {
@@ -31,7 +34,7 @@ namespace ZLinq
         }	 
 
 		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-	    public static T SingleOrDefault<T>(this <#= sourceType #> source)
+	    public static T SingleOrDefault<T>([NotNull] this <#= sourceType #> source)
         {			
 			if (source.<#= TextTemplate.LengthOrCount(sourceType) #> > 1)
 		    {
@@ -46,8 +49,10 @@ namespace ZLinq
 		{ #>		
 
 		[Pure]
-		public static T Single<T>(this <#= sourceType #> source, Predicate<T> predicate)
+		public static T Single<T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
         {
+			<#= TextTemplate.IsNotNull("source") #>
+			<#= TextTemplate.IsNotNull("predicate") #>
 			T result = default(T);
 			bool found = false;
 		    foreach (T value in source)
@@ -66,8 +71,10 @@ namespace ZLinq
         }
 
 		[Pure]
-		public static T SingleOrDefault<T>(this <#= sourceType #> source, Predicate<T> predicate)
+		public static T SingleOrDefault<T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
         {
+			<#= TextTemplate.IsNotNull("source") #>
+			<#= TextTemplate.IsNotNull("predicate") #>
 			T result = default(T);
 			bool found = false;
 		    foreach (T value in source)

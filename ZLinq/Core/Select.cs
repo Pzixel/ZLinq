@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Diagnostics.Contracts;
+using JetBrains.Annotations;
 using ZLinq.Extension;
 
 // ReSharper disable CheckNamespace
@@ -18,8 +18,9 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="func">Function that maps elements from source collection to resulting collection</param>
         /// <returns>Array of mapped elements</returns>  	    
+		[System.Diagnostics.Contracts.Pure]
 		[Pure]
-	    public static TResult[] SelectToArray<T, TResult>(this ICollection<T> source, Func<T, TResult> func)
+	    public static TResult[] SelectToArray<T, TResult>([NotNull] this ICollection<T> source, Func<T, TResult> func)
         {
 			source.IsNotNull("source");
 			func.IsNotNull("func");
@@ -41,8 +42,9 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="func">Function that maps elements from source collection to resulting collection</param>
         /// <returns>Array of mapped elements</returns>  
+		[System.Diagnostics.Contracts.Pure]
 		[Pure]
-        public static TResult[] SelectToArray<T, TResult>(this T[] source, Func<T, TResult> func)
+        public static TResult[] SelectToArray<T, TResult>([NotNull] this T[] source, Func<T, TResult> func)
         {
             source.IsNotNull("source");
 			func.IsNotNull("func");
@@ -85,8 +87,9 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="func">Function that maps elements from source collection to resulting collection</param>
         /// <returns>Array of mapped elements</returns>  
+		[System.Diagnostics.Contracts.Pure]
 		[Pure]
-        public static TResult[] SelectToArray<T, TResult>(this List<T> source, Func<T, TResult> func)
+        public static TResult[] SelectToArray<T, TResult>([NotNull] this List<T> source, Func<T, TResult> func)
         {
             source.IsNotNull("source");
 			func.IsNotNull("func");
@@ -129,8 +132,9 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="func">Function that maps elements from source collection to resulting collection</param>
         /// <returns>Array of mapped elements</returns>  
+		[System.Diagnostics.Contracts.Pure]
 		[Pure]
-        public static TResult[] SelectToArray<T, TResult>(this IList<T> source, Func<T, TResult> func)
+        public static TResult[] SelectToArray<T, TResult>([NotNull] this IList<T> source, Func<T, TResult> func)
         {
             source.IsNotNull("source");
 			func.IsNotNull("func");
@@ -174,8 +178,9 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="func">Function that maps elements from source collection to resulting collection</param>
         /// <returns>List of mapped elements</returns> 
-        [Pure]
-        public static List<TResult> SelectToList<T, TResult>(this IEnumerable<T> source, Func<T, TResult> func)
+        [System.Diagnostics.Contracts.Pure]
+		[Pure]
+        public static List<TResult> SelectToList<T, TResult>([NotNull] this IEnumerable<T> source, Func<T, TResult> func)
         {
             //cannot check source here due to possible IEnumerable<T> multiple enumeration
             source.IsNotNull("source");
@@ -191,17 +196,19 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="func">Function that maps elements from source collection to resulting collection</param>
         /// <returns>List of mapped elements</returns>
-        [Pure]
-        public static List<TResult> SelectToList<T, TResult>(this ICollection<T> source, Func<T, TResult> func)
+        [System.Diagnostics.Contracts.Pure]
+		[Pure]
+        public static List<TResult> SelectToList<T, TResult>([NotNull] this ICollection<T> source, Func<T, TResult> func)
         {
             source.IsNotNull("source");
 			func.IsNotNull("func");
             return SelectToList(source, func, source.Count);
         }
 
-        [Pure]
+        [System.Diagnostics.Contracts.Pure]
+		[Pure]
 		[SuppressMessage("ReSharper", "LoopCanBeConvertedToQuery")]
-        private static List<TResult> SelectToList<T, TResult>(this IEnumerable<T> source, Func<T, TResult> func, int count)
+        private static List<TResult> SelectToList<T, TResult>([NotNull] this IEnumerable<T> source, Func<T, TResult> func, int count)
         {
             var list = new List<TResult>(count);
             foreach (var value in source)

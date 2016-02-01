@@ -96,38 +96,38 @@ namespace ZLinq.Test.ZMath
 
 	#region Nullables
 
-		<#foreach (var type in TextTemplate.NumberTypes) { 
-			string nulType = type + "?";#>
+		<#foreach (var type in TextTemplate.GetNullables(TextTemplate.NumberTypes)) { 
+		string testName = type.Replace("?", "Nullable");#>
 
 		#region <#= type #>	 		
 		<# foreach (string sourceType in TextTemplate.StandardCollections) { #>	
         [TestMethod]
-        public void TestMax<#= type #>Nullable<#= TextTemplate.GetCollectionName(sourceType) #>()
+        public void TestMax<#= testName #>Nullable<#= TextTemplate.GetCollectionName(sourceType) #>()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (<#= nulType #>)x).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
+            var source = Enumerable.Range(1, 100).Select(x => (<#= type #>)x).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
 
 			<#= type #> maxActual = source.Max();
-            const <#= type #> maxExpected = 100;
+            <#= type #> maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 		[TestMethod]
-        public void TestMax<#= type #>Nullable<#= TextTemplate.GetCollectionName(sourceType) #>Map()
+        public void TestMax<#= testName #>Nullable<#= TextTemplate.GetCollectionName(sourceType) #>Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (<#= nulType #>)arg }).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
+            var source = Enumerable.Range(1, 100).Select(arg => new { X = (<#= type #>)arg }).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
 
 			<#= type #> maxActual = source.Max(arg => arg.X);
-            const <#= type #> maxExpected = 100;
+            <#= type #> maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
 				<# if (type != "double" && type != "float" && type != "decimal") { #>		
 		[TestMethod]
-        public void TestMax<#= type #>Nullable<#= TextTemplate.GetCollectionName(sourceType) #>Null()
+        public void TestMax<#= testName #>Nullable<#= TextTemplate.GetCollectionName(sourceType) #>Null()
         {		
-			<#= sourceType.Replace("T", nulType) #> nullSource = null;
+			<#= sourceType.Replace("T", type) #> nullSource = null;
 
             try
 			{
@@ -139,15 +139,15 @@ namespace ZLinq.Test.ZMath
 				
 			}
 
-			<#= sourceType.Replace("T", nulType) #> sourceOfNulls = new <#= nulType #>[] {null}.<#= TextTemplate.ToArrayOrToList(sourceType) #>;
+			<#= sourceType.Replace("T", type) #> sourceOfNulls = new <#= type #>[] {null}.<#= TextTemplate.ToArrayOrToList(sourceType) #>;
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((<#= type #>)0, max);
+			Assert.AreEqual(default(<#= type #>), max);
         }
 
 		[TestMethod]
-        public void TestMax<#= type #>Nullable<#= TextTemplate.GetCollectionName(sourceType) #>MapNull()
+        public void TestMax<#= testName #>Nullable<#= TextTemplate.GetCollectionName(sourceType) #>MapNull()
         {
-			<#= sourceType.Replace("T", nulType) #> nullSource = null;
+			<#= sourceType.Replace("T", type) #> nullSource = null;
 
             try
 			{
@@ -159,10 +159,10 @@ namespace ZLinq.Test.ZMath
 				
 			}
 
-			var source = Enumerable.Range(1, 100).Select(arg => new KeyValuePair<<#= nulType #>,<#= nulType #>>((<#= nulType #>) arg, (<#= nulType #>) arg)).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
+			var source = Enumerable.Range(1, 100).Select(arg => new KeyValuePair<<#= type #>,<#= type #>>((<#= type #>) arg, (<#= type #>) arg)).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
 			try
 			{
-				source.Max<KeyValuePair<<#= nulType #>,<#= nulType #>>, <#= nulType #>>(null);				
+				source.Max<KeyValuePair<<#= type #>,<#= type #>>, <#= type #>>(null);				
 				Assert.Fail();
 			}
 			catch (ArgumentNullException)
@@ -171,9 +171,9 @@ namespace ZLinq.Test.ZMath
 			}
 
 			object[] sourceForNulls = { new Stack<int>() };
-			var sourceOfNulls = sourceForNulls.Select(x => (<#= nulType #>) null).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
+			var sourceOfNulls = sourceForNulls.Select(x => (<#= type #>) null).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
 			var max = sourceOfNulls.Max();
-			Assert.AreEqual((<#= type #>)0, max);
+			Assert.AreEqual(default(<#= type #>), max);
         }
 		<# } #>
 		<# } #>

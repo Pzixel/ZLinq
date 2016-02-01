@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 using ZLinq.Extension;
 
 // ReSharper disable CheckNamespace
@@ -18,8 +18,9 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="size">Size of partitions</param>
         /// <returns>Enumeration of partitions</returns>
+        [System.Diagnostics.Contracts.Pure]
         [Pure]
-        public static IEnumerable<T[]> Split<T>(this T[] source, int size)
+        public static IEnumerable<T[]> Split<T>([NotNull] this T[] source, int size)
         {
             source.IsNotNull("source");
             Guard.Requires<ArgumentException>(size > 0);
@@ -38,8 +39,9 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="size">Size of partitions</param>
         /// <returns>Enumeration of partitions</returns>
+        [System.Diagnostics.Contracts.Pure]
         [Pure]
-        public static IEnumerable<T[]> Split<T>(this List<T> source, int size)
+        public static IEnumerable<T[]> Split<T>([NotNull] this List<T> source, int size)
         {
             source.IsNotNull("source");
             Guard.Requires<ArgumentException>(size > 0);
@@ -59,8 +61,9 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="size">Size of partitions</param>
         /// <returns>Enumeration of partitions</returns>
+        [System.Diagnostics.Contracts.Pure]
         [Pure]
-        public static IEnumerable<T[]> Split<T>(this IList<T> source, int size)
+        public static IEnumerable<T[]> Split<T>([NotNull] this IList<T> source, int size)
         {
             source.IsNotNull("source");
             Guard.Requires<ArgumentException>(size > 0);
@@ -80,8 +83,10 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="size">Size of partitions</param>
         /// <returns>Enumeration of partitions</returns>
+        /// <returns>Enumeration of partitions</returns>
+        [System.Diagnostics.Contracts.Pure]
         [Pure]
-        public static IEnumerable<T[]> Split<T>(this ICollection<T> source, int size)
+        public static IEnumerable<T[]> Split<T>([NotNull] this ICollection<T> source, int size)
         {
             source.IsNotNull("source");
             Guard.Requires<ArgumentException>(size > 0);
@@ -108,8 +113,9 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="size">Size of partitions</param>
         /// <returns>Enumeration of partitions</returns>
+        [System.Diagnostics.Contracts.Pure]
         [Pure]
-        public static IEnumerable<T[]> Split<T>(this IEnumerable<T> source, int size)
+        public static IEnumerable<T[]> Split<T>([NotNull] this IEnumerable<T> source, int size)
         {
             Guard.Requires<ArgumentException>(size > 0);
             IEnumerator<T> enumerator;
@@ -155,6 +161,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="size">Size of partitions</param>
         /// <returns>Array of partitions</returns>
+        [System.Diagnostics.Contracts.Pure]
         [Pure]
         public static T[][] SplitToArray<T>(this T[] source, int size)
         {
@@ -178,7 +185,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="size">Size of partitions</param>
         /// <returns>Array of partitions</returns>
-        [Pure]
+        [System.Diagnostics.Contracts.Pure]
         public static T[][] SplitToArray<T>(this List<T> source, int size)
         {
             source.IsNotNull("source");
@@ -202,7 +209,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="size">Size of partitions</param>
         /// <returns>Array of partitions</returns>
-        [Pure]
+        [System.Diagnostics.Contracts.Pure]
         public static T[][] SplitToArray<T>(this IList<T> source, int size)
         {
             source.IsNotNull("source");
@@ -226,7 +233,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="size">Size of partitions</param>
         /// <returns>Array of partitions</returns>
-        [Pure]
+        [System.Diagnostics.Contracts.Pure]
         public static T[][] SplitToArray<T>(this ICollection<T> source, int size)
         {
             return source.Split(size).ToArray();
@@ -239,7 +246,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="size">Size of partitions</param>
         /// <returns>Array of partitions</returns>
-        [Pure]
+        [System.Diagnostics.Contracts.Pure]
         public static IEnumerable<T[]> SplitToArray<T>(this IEnumerable<T> source, int size)
         {
             return source.Split(size).ToArray();

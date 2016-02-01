@@ -6,20 +6,20 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="ZLinq.TTHelp" #>
 <#@ output extension=".cs" #>
-using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
+using System.Diagnostics.CodeAnalysis;
+using JetBrains.Annotations;
 using ZLinq.Extension;
 
-// ReSharper disable LoopCanBeConvertedToQuery
 // ReSharper disable CheckNamespace
 namespace ZLinq
 {
+	[SuppressMessage("ReSharper", "LoopCanBeConvertedToQuery")]
     public static partial class ZEnumerable
     {
 		<# for(int i = 1; i < 10; i++) { 
 		#>[Pure]
-		public static IEnumerable<T> Flatten<T>(this T[<#= new string(',',i) #>] array)
+		public static IEnumerable<T> Flatten<T>([NotNull] this T[<#= new string(',',i) #>] array)
         {
             foreach (T value in array)
                 yield return value;
@@ -29,7 +29,7 @@ namespace ZLinq
 
 		<# for(int i = 1; i < 10; i++) { 
 		#>[Pure]
-        public static T[] FlattenToArray<T>(this T[<#= new string(',',i) #>] array)
+        public static T[] FlattenToArray<T>([NotNull] this T[<#= new string(',',i) #>] array)
         {
             <#= TextTemplate.IsNotNull("array") #>
             var result = new T[array.Length];
