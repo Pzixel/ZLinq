@@ -51,45 +51,50 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Comparers\CustomComparerTest.cs" />
-    <Compile Include="Core\FlattenTest.cs">
+    <Compile Include="Core\Common\FlattenTest.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FlattenTest.tt</DependentUpon>
     </Compile>
-    <Compile Include="Core\Folding\Single.cs">
-      <DependentUpon>Single.tt</DependentUpon>
+    <Compile Include="Core\Fold\IsNullOrEmptyTest.cs">
+      <DependentUpon>IsNullOrEmptyTest.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Core\Folding\Last.cs">
-      <DependentUpon>Last.tt</DependentUpon>
+    <Compile Include="Core\Fold\SingleTest.cs">
+      <DependentUpon>SingleTest.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Core\Folding\First.cs">
-      <DependentUpon>First.tt</DependentUpon>
+    <Compile Include="Core\Fold\LastTest.cs">
+      <DependentUpon>LastTest.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Core\IsEqualTest.cs">
+    <Compile Include="Core\Fold\FirstTest.cs">
+      <DependentUpon>FirstTest.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Core\Fold\IsEqualTest.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IsEqualTest.tt</DependentUpon>
     </Compile>
-    <Compile Include="Core\RepeatTest.cs" />
-    <Compile Include="Core\RangeTest.cs" />
-    <Compile Include="Core\WhereInPlaceTest.cs" />
-    <Compile Include="Core\WhereTest.cs">
+    <Compile Include="Core\Unfold\RepeatTest.cs" />
+    <Compile Include="Core\Unfold\RangeTest.cs" />
+    <Compile Include="Core\Common\WhereInPlaceTest.cs" />
+    <Compile Include="Core\Common\WhereTest.cs">
       <DependentUpon>WhereTest.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Core\SelectTest.cs">
+    <Compile Include="Core\Common\SelectTest.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SelectTest.tt</DependentUpon>
     </Compile>
-    <Compile Include="Core\SplitTest.cs">
+    <Compile Include="Core\Common\SplitTest.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SplitTest.tt</DependentUpon>
@@ -117,35 +122,39 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Core\FlattenTest.tt">
+    <Content Include="Core\Common\FlattenTest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>FlattenTest.cs</LastGenOutput>
     </Content>
-    <Content Include="Core\Folding\Single.tt">
+    <Content Include="Core\Fold\IsNullOrEmptyTest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Single.cs</LastGenOutput>
+      <LastGenOutput>IsNullOrEmptyTest.cs</LastGenOutput>
     </Content>
-    <Content Include="Core\Folding\Last.tt">
+    <Content Include="Core\Fold\SingleTest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Last.cs</LastGenOutput>
+      <LastGenOutput>SingleTest.cs</LastGenOutput>
     </Content>
-    <Content Include="Core\Folding\First.tt">
+    <Content Include="Core\Fold\LastTest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>First.cs</LastGenOutput>
+      <LastGenOutput>LastTest.cs</LastGenOutput>
     </Content>
-    <Content Include="Core\IsEqualTest.tt">
+    <Content Include="Core\Fold\FirstTest.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FirstTest.cs</LastGenOutput>
+    </Content>
+    <Content Include="Core\Fold\IsEqualTest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>IsEqualTest.cs</LastGenOutput>
     </Content>
-    <Content Include="Core\WhereTest.tt">
+    <Content Include="Core\Common\WhereTest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>WhereTest.cs</LastGenOutput>
     </Content>
-    <Content Include="Core\SelectTest.tt">
+    <Content Include="Core\Common\SelectTest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SelectTest.cs</LastGenOutput>
     </Content>
-    <Content Include="Core\SplitTest.tt">
+    <Content Include="Core\Common\SplitTest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SplitTest.cs</LastGenOutput>
     </Content>

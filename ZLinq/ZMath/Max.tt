@@ -21,10 +21,10 @@ namespace ZLinq
 {
     public static partial class ZEnumerable
     {
-		<#foreach (var type in TextTemplate.NumberTypes) { #>
+		<#foreach (var type in TT.NumberTypes) { #>
 
 		#region <#= type #>	 		
-		<# foreach (string sourceType in TextTemplate.StandardLists) 
+		<# foreach (string sourceType in TT.StandardLists) 
 		{ #>	
 		/// <summary>
         /// Search max value in collection
@@ -34,12 +34,12 @@ namespace ZLinq
 		[Pure]
         public static <#= type #> Max(this <#= sourceType.Replace("T", type) #> source)
         {
-            <#= TextTemplate.IsNotNull("source") #>
-            if (source.<#= TextTemplate.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
-                return Max(source, 0, source.<#= TextTemplate.LengthOrCount(sourceType) #>);
+            <#= TT.IsNotNull("source") #>
+            if (source.<#= TT.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
+                return Max(source, 0, source.<#= TT.LengthOrCount(sourceType) #>);
             <#= type #> result = 0;
             object syncRoot = new object();
-            Parallel.ForEach(Partitioner.Create(0, source.<#= TextTemplate.LengthOrCount(sourceType) #>),
+            Parallel.ForEach(Partitioner.Create(0, source.<#= TT.LengthOrCount(sourceType) #>),
                 () => (<#= type #>)0,
                 (range, state, max) => Max(source, range.Item1, range.Item2),
                 x =>
@@ -55,15 +55,15 @@ namespace ZLinq
 		[Pure]
         private static <#= type #> Max(this <#= sourceType.Replace("T", type) #> source, int startIndex, int endIndex)
         {
-			if (source.<#= TextTemplate.LengthOrCount(sourceType) #> <= 4)
+			if (source.<#= TT.LengthOrCount(sourceType) #> <= 4)
 		    {
-		        if (source.<#= TextTemplate.LengthOrCount(sourceType) #> == 0)
+		        if (source.<#= TT.LengthOrCount(sourceType) #> == 0)
 		            return 0;
-		        if (source.<#= TextTemplate.LengthOrCount(sourceType) #> == 1)
+		        if (source.<#= TT.LengthOrCount(sourceType) #> == 1)
 		            return source[0];
-		        if (source.<#= TextTemplate.LengthOrCount(sourceType) #> == 2)
+		        if (source.<#= TT.LengthOrCount(sourceType) #> == 2)
 		            return Math.Max(source[0], source[1]);
-                if (source.<#= TextTemplate.LengthOrCount(sourceType) #> == 3)
+                if (source.<#= TT.LengthOrCount(sourceType) #> == 3)
                     return Math.Max(source[0], Math.Max(source[1], source[2]));
                 return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));
             }
@@ -80,13 +80,13 @@ namespace ZLinq
                 if (max3 < source[i + 3])
                     max3 = source[i + 3];   
             }
-            if (i == source.<#= TextTemplate.LengthOrCount(sourceType) #>)
-                return <#= TextTemplate.ExplicitCastFromIntIfNeeded(type) #> Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
-            if (i == source.<#= TextTemplate.LengthOrCount(sourceType) #> - 1)
-                return <#= TextTemplate.ExplicitCastFromIntIfNeeded(type) #> Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
-            if (i == source.<#= TextTemplate.LengthOrCount(sourceType) #> - 2)
-                return <#= TextTemplate.ExplicitCastFromIntIfNeeded(type) #> Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
-            return <#= TextTemplate.ExplicitCastFromIntIfNeeded(type) #> Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
+            if (i == source.<#= TT.LengthOrCount(sourceType) #>)
+                return <#= TT.ExplicitCastFromIntIfNeeded(type) #> Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+            if (i == source.<#= TT.LengthOrCount(sourceType) #> - 1)
+                return <#= TT.ExplicitCastFromIntIfNeeded(type) #> Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
+            if (i == source.<#= TT.LengthOrCount(sourceType) #> - 2)
+                return <#= TT.ExplicitCastFromIntIfNeeded(type) #> Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
+            return <#= TT.ExplicitCastFromIntIfNeeded(type) #> Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
 
 		/// <summary>
@@ -98,12 +98,12 @@ namespace ZLinq
 		[Pure]
         public static <#= type #> Max<T>(this <#= sourceType #> source, Func<T, <#= type #>> mapFunc)
         {
-            <#= TextTemplate.IsNotNull("source") #>
-            if (source.<#= TextTemplate.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
-                return Max(source, mapFunc, 0, source.<#= TextTemplate.LengthOrCount(sourceType) #>);
+            <#= TT.IsNotNull("source") #>
+            if (source.<#= TT.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
+                return Max(source, mapFunc, 0, source.<#= TT.LengthOrCount(sourceType) #>);
             <#= type #> result = 0;
             object syncRoot = new object();
-            Parallel.ForEach(Partitioner.Create(0, source.<#= TextTemplate.LengthOrCount(sourceType) #>),
+            Parallel.ForEach(Partitioner.Create(0, source.<#= TT.LengthOrCount(sourceType) #>),
                 () => (<#= type #>)0,
                 (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
                 x =>
@@ -119,15 +119,15 @@ namespace ZLinq
 		[Pure]
         private static <#= type #> Max<T>(this <#= sourceType #> source, Func<T, <#= type #>> mapFunc, int startIndex, int endIndex)
         {
-			if (source.<#= TextTemplate.LengthOrCount(sourceType) #> <= 4)
+			if (source.<#= TT.LengthOrCount(sourceType) #> <= 4)
 		    {
-		        if (source.<#= TextTemplate.LengthOrCount(sourceType) #> == 0)
+		        if (source.<#= TT.LengthOrCount(sourceType) #> == 0)
 		            return 0;
-		        if (source.<#= TextTemplate.LengthOrCount(sourceType) #> == 1)
+		        if (source.<#= TT.LengthOrCount(sourceType) #> == 1)
 		            return mapFunc(source[0]);
-		        if (source.<#= TextTemplate.LengthOrCount(sourceType) #> == 2)
+		        if (source.<#= TT.LengthOrCount(sourceType) #> == 2)
 		            return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                if (source.<#= TextTemplate.LengthOrCount(sourceType) #> == 3)
+                if (source.<#= TT.LengthOrCount(sourceType) #> == 3)
                     return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
                 return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));
             }
@@ -150,13 +150,13 @@ namespace ZLinq
                 if (max3 < tmp3)
                     max3 = tmp3;
             }
-            if (i == source.<#= TextTemplate.LengthOrCount(sourceType) #>)
-                return <#= TextTemplate.ExplicitCastFromIntIfNeeded(type) #> Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
-            if (i == source.<#= TextTemplate.LengthOrCount(sourceType) #> - 1)
-                return <#= TextTemplate.ExplicitCastFromIntIfNeeded(type) #> Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
-            if (i == source.<#= TextTemplate.LengthOrCount(sourceType) #> - 2)
-                return <#= TextTemplate.ExplicitCastFromIntIfNeeded(type) #> Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
-            return <#= TextTemplate.ExplicitCastFromIntIfNeeded(type) #> Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
+            if (i == source.<#= TT.LengthOrCount(sourceType) #>)
+                return <#= TT.ExplicitCastFromIntIfNeeded(type) #> Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+            if (i == source.<#= TT.LengthOrCount(sourceType) #> - 1)
+                return <#= TT.ExplicitCastFromIntIfNeeded(type) #> Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
+            if (i == source.<#= TT.LengthOrCount(sourceType) #> - 2)
+                return <#= TT.ExplicitCastFromIntIfNeeded(type) #> Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
+            return <#= TT.ExplicitCastFromIntIfNeeded(type) #> Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         }
 		<# } #>
 
@@ -165,7 +165,7 @@ namespace ZLinq
 
 	#region Nullables
 
-		<#foreach (var type in TextTemplate.GetNullables(TextTemplate.NumberTypes)) { #>
+		<#foreach (var type in TT.GetNullables(TT.NumberTypes)) { #>
 		
 		[Pure]
 		private static <#= type #> Max(<#= type #> x, <#= type #> y)
@@ -180,7 +180,7 @@ namespace ZLinq
 		}
 
 		#region <#= type #>	 		
-		<# foreach (string sourceType in TextTemplate.StandardLists) 
+		<# foreach (string sourceType in TT.StandardLists) 
 		{			
 		#>
 		
@@ -192,12 +192,12 @@ namespace ZLinq
 		[Pure]
         public static <#= type #> Max(this <#= sourceType.Replace("T", type) #> source)
         {
-            <#= TextTemplate.IsNotNull("source") #>
-            if (source.<#= TextTemplate.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
-                return Max(source, 0, source.<#= TextTemplate.LengthOrCount(sourceType) #>);
+            <#= TT.IsNotNull("source") #>
+            if (source.<#= TT.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
+                return Max(source, 0, source.<#= TT.LengthOrCount(sourceType) #>);
             <#= type #> result = 0;
             object syncRoot = new object();
-            Parallel.ForEach(Partitioner.Create(0, source.<#= TextTemplate.LengthOrCount(sourceType) #>),
+            Parallel.ForEach(Partitioner.Create(0, source.<#= TT.LengthOrCount(sourceType) #>),
                 () => (<#= type #>)0,
                 (range, state, max) => Max(source, range.Item1, range.Item2),
                 x =>
@@ -213,15 +213,15 @@ namespace ZLinq
 		[Pure]
         private static <#= type #> Max(this <#= sourceType.Replace("T", type) #> source, int startIndex, int endIndex)
         {
-			if (source.<#= TextTemplate.LengthOrCount(sourceType) #> <= 4)
+			if (source.<#= TT.LengthOrCount(sourceType) #> <= 4)
 		    {
-		        if (source.<#= TextTemplate.LengthOrCount(sourceType) #> == 0)
+		        if (source.<#= TT.LengthOrCount(sourceType) #> == 0)
 		            return 0;
-		        if (source.<#= TextTemplate.LengthOrCount(sourceType) #> == 1)
+		        if (source.<#= TT.LengthOrCount(sourceType) #> == 1)
 		            return source[0];
-		        if (source.<#= TextTemplate.LengthOrCount(sourceType) #> == 2)
+		        if (source.<#= TT.LengthOrCount(sourceType) #> == 2)
 		            return Max(source[0], source[1]);
-                if (source.<#= TextTemplate.LengthOrCount(sourceType) #> == 3)
+                if (source.<#= TT.LengthOrCount(sourceType) #> == 3)
                     return Max(source[0], Max(source[1], source[2]));
                 return Max(Max(source[0], source[1]), Max(source[2], source[3]));
             }
@@ -236,13 +236,13 @@ namespace ZLinq
                 <# } #>
 
             }
-            if (i == source.<#= TextTemplate.LengthOrCount(sourceType) #>)
-                return <#= TextTemplate.ExplicitCastFromIntIfNeeded(type) #> Max(Max(max0, max1), Max(max2, max3));
-            if (i == source.<#= TextTemplate.LengthOrCount(sourceType) #> - 1)
-                return <#= TextTemplate.ExplicitCastFromIntIfNeeded(type) #> Max(Max(Max(max0, max1), Max(max2, max3)), source[i]);
-            if (i == source.<#= TextTemplate.LengthOrCount(sourceType) #> - 2)
-                return <#= TextTemplate.ExplicitCastFromIntIfNeeded(type) #> Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
-            return <#= TextTemplate.ExplicitCastFromIntIfNeeded(type) #> Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
+            if (i == source.<#= TT.LengthOrCount(sourceType) #>)
+                return <#= TT.ExplicitCastFromIntIfNeeded(type) #> Max(Max(max0, max1), Max(max2, max3));
+            if (i == source.<#= TT.LengthOrCount(sourceType) #> - 1)
+                return <#= TT.ExplicitCastFromIntIfNeeded(type) #> Max(Max(Max(max0, max1), Max(max2, max3)), source[i]);
+            if (i == source.<#= TT.LengthOrCount(sourceType) #> - 2)
+                return <#= TT.ExplicitCastFromIntIfNeeded(type) #> Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
+            return <#= TT.ExplicitCastFromIntIfNeeded(type) #> Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
 
 		/// <summary>
@@ -254,12 +254,12 @@ namespace ZLinq
 		[Pure]
         public static <#= type #> Max<T>(this <#= sourceType #> source, Func<T, <#= type #>> mapFunc)
         {
-            <#= TextTemplate.IsNotNull("source") #>
-            if (source.<#= TextTemplate.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
-                return Max(source, mapFunc, 0, source.<#= TextTemplate.LengthOrCount(sourceType) #>);
+            <#= TT.IsNotNull("source") #>
+            if (source.<#= TT.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
+                return Max(source, mapFunc, 0, source.<#= TT.LengthOrCount(sourceType) #>);
             <#= type #> result = 0;
             object syncRoot = new object();
-            Parallel.ForEach(Partitioner.Create(0, source.<#= TextTemplate.LengthOrCount(sourceType) #>),
+            Parallel.ForEach(Partitioner.Create(0, source.<#= TT.LengthOrCount(sourceType) #>),
                 () => (<#= type #>)0,
                 (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
                 x =>
@@ -275,15 +275,15 @@ namespace ZLinq
 		[Pure]
         private static <#= type #> Max<T>(this <#= sourceType #> source, Func<T, <#= type #>> mapFunc, int startIndex, int endIndex)
         {
-			if (source.<#= TextTemplate.LengthOrCount(sourceType) #> <= 4)
+			if (source.<#= TT.LengthOrCount(sourceType) #> <= 4)
 		    {
-		        if (source.<#= TextTemplate.LengthOrCount(sourceType) #> == 0)
+		        if (source.<#= TT.LengthOrCount(sourceType) #> == 0)
 		            return 0;
-		        if (source.<#= TextTemplate.LengthOrCount(sourceType) #> == 1)
+		        if (source.<#= TT.LengthOrCount(sourceType) #> == 1)
 		            return mapFunc(source[0]);
-		        if (source.<#= TextTemplate.LengthOrCount(sourceType) #> == 2)
+		        if (source.<#= TT.LengthOrCount(sourceType) #> == 2)
 		            return Max(mapFunc(source[0]), mapFunc(source[1]));
-                if (source.<#= TextTemplate.LengthOrCount(sourceType) #> == 3)
+                if (source.<#= TT.LengthOrCount(sourceType) #> == 3)
                     return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
                 return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));
             }
@@ -298,13 +298,13 @@ namespace ZLinq
                 <# } #>
 
             }
-            if (i == source.<#= TextTemplate.LengthOrCount(sourceType) #>)
-                return <#= TextTemplate.ExplicitCastFromIntIfNeeded(type) #> Max(Max(max0, max1), Max(max2, max3));
-            if (i == source.<#= TextTemplate.LengthOrCount(sourceType) #> - 1)
-                return <#= TextTemplate.ExplicitCastFromIntIfNeeded(type) #> Max(Max(Max(max0, max1), Max(max2, max3)), mapFunc(source[i]));
-            if (i == source.<#= TextTemplate.LengthOrCount(sourceType) #> - 2)
-                return <#= TextTemplate.ExplicitCastFromIntIfNeeded(type) #> Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), mapFunc(source[i + 1])));
-            return <#= TextTemplate.ExplicitCastFromIntIfNeeded(type) #> Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
+            if (i == source.<#= TT.LengthOrCount(sourceType) #>)
+                return <#= TT.ExplicitCastFromIntIfNeeded(type) #> Max(Max(max0, max1), Max(max2, max3));
+            if (i == source.<#= TT.LengthOrCount(sourceType) #> - 1)
+                return <#= TT.ExplicitCastFromIntIfNeeded(type) #> Max(Max(Max(max0, max1), Max(max2, max3)), mapFunc(source[i]));
+            if (i == source.<#= TT.LengthOrCount(sourceType) #> - 2)
+                return <#= TT.ExplicitCastFromIntIfNeeded(type) #> Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), mapFunc(source[i + 1])));
+            return <#= TT.ExplicitCastFromIntIfNeeded(type) #> Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
 		<# } #>
 

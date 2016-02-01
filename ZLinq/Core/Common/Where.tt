@@ -1,0 +1,64 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(SolutionDir)ZLinq.TTHelp\bin\$(Configuration)\ZLinq.TTHelp.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="ZLinq.TTHelp" #>
+<#@ output extension=".cs" #>
+
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using JetBrains.Annotations;
+using ZLinq.Extension;
+
+// ReSharper disable CheckNamespace
+namespace ZLinq
+{
+	[SuppressMessage("ReSharper", "LoopCanBeConvertedToQuery")]
+    public static partial class ZEnumerable
+    {        
+		<# foreach (var sourceType in TT.StandardCollections) 
+		{ #>		    
+		[System.Diagnostics.Contracts.Pure]
+		[Pure]
+	    public static T[] WhereToArray<T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
+		{
+            <#= TT.IsNotNull("source") #>
+			<#= TT.IsNotNull("predicate") #>
+            var result = new T[source.<#= TT.LengthOrCount(sourceType) #>];
+            int i = 0;
+            foreach (T value in source)
+            {
+                if (predicate(value))
+                {
+                    result[i++] = value;
+                }
+            }
+            Array.Resize(ref result, i);
+            return result;
+		}
+
+		[System.Diagnostics.Contracts.Pure]
+		[Pure]
+	    public static List<T> WhereToList<T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
+		{
+            <#= TT.IsNotNull("source") #>
+			<#= TT.IsNotNull("predicate") #>
+            var result = new List<T>(source.<#= TT.LengthOrCount(sourceType) #>);
+            foreach (T value in source)
+            {
+                if (predicate(value))
+                {
+                    result.Add(value);
+                }
+            }
+            result.TrimExcess();
+            return result;
+		}
+		<# } #>
+
+    }
+}

@@ -1,0 +1,84 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(SolutionDir)ZLinq.TTHelp\bin\$(Configuration)\ZLinq.TTHelp.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="ZLinq.TTHelp" #>
+<#@ output extension=".cs" #>
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ZLinq.Test.Helpers;
+
+namespace ZLinq.Test.Core.Fold
+{
+    [TestClass]
+    public class Last
+    {	
+		<# foreach (var sourceType in TT.StandardCollections) { 
+		string name = TT.GetCollectionName(sourceType);#>		
+		[TestMethod]
+        public void Last<#= name #>()
+        {
+            var x = Enumerable.Range(1, 1024).To<#= name #>();
+            var y = Enumerable.Range(1, 1024).Select(a => new Tuple<int, int>(a,a)).To<#= name #>();
+            var z = Enumerable.Range(1, 1024).Select(a => new { A = a}).To<#= name #>();
+		    var dict = new SortedDictionary<int, int>(x.ToDictionary(a => a, a => a));
+
+            Assert.IsTrue(ZEnumerable.Last(x) == Enumerable.Last(x));
+			Assert.IsTrue(ZEnumerable.Last(y) == Enumerable.Last(y));
+			Assert.IsTrue(ZEnumerable.Last(z) == Enumerable.Last(z));
+			Assert.IsTrue(ZEnumerable.Last(dict).Equals(Enumerable.Last(dict)));
+        }
+
+		[TestMethod]
+        public void Last<#= TT.GetCollectionName(sourceType) #>OrDefault()
+        {
+            var x = Enumerable.Range(1, 1024).To<#= name #>();
+            var y = Enumerable.Range(1, 1024).Select(a => new Tuple<int, int>(a,a)).To<#= name #>();
+            var z = new int[0].To<#= name #>();
+		    var dict = new SortedDictionary<int, int>(x.ToDictionary(a => a, a => a));
+
+            Assert.IsTrue(ZEnumerable.LastOrDefault(x) == Enumerable.LastOrDefault(x));
+			Assert.IsTrue(ZEnumerable.LastOrDefault(y) == Enumerable.LastOrDefault(y));
+			Assert.IsTrue(ZEnumerable.LastOrDefault(z) == Enumerable.LastOrDefault(z));
+			Assert.IsTrue(ZEnumerable.LastOrDefault(dict).Equals(Enumerable.LastOrDefault(dict)));
+        }
+
+		[TestMethod]
+        public void Last<#= name #>Predicate()
+        {
+            var x = Enumerable.Range(1, 1024).To<#= name #>();
+            var y = Enumerable.Range(1, 1024).Select(a => new Tuple<int, int>(a,a)).To<#= name #>();
+            var z = Enumerable.Range(1, 1024).Select(a => new { A = a}).To<#= name #>();
+			var dict = new SortedDictionary<int, int>(x.ToDictionary(a => a, a => a));
+
+            Assert.IsTrue(ZEnumerable.Last(x, val => val%3 == 0) == Enumerable.Last(x, val => val%3 == 0));
+			Assert.IsTrue(ZEnumerable.Last(y, val => val.Item1%3 == 0) == Enumerable.Last(y, val => val.Item1%3 == 0));
+			Assert.IsTrue(ZEnumerable.Last(z, val => val.A%3 == 0) == Enumerable.Last(z, val => val.A%3 == 0));
+			Assert.IsTrue(ZEnumerable.Last(dict, val => val.Key%3 == 0).Equals(Enumerable.Last(dict, val => val.Key%3 == 0)));
+        }
+
+		[TestMethod]
+        public void Last<#= TT.GetCollectionName(sourceType) #>OrDefaultPredicate()
+        {
+            var x = Enumerable.Range(1, 1024).To<#= name #>();
+            var y = Enumerable.Range(1, 1024).Select(a => new Tuple<int, int>(a,a)).To<#= name #>();
+            var z = new int[0].To<#= name #>();
+			var dict = new SortedDictionary<int, int>(x.ToDictionary(a => a, a => a));
+
+            Assert.IsTrue(ZEnumerable.LastOrDefault(x, val => val%3 == 0) == Enumerable.LastOrDefault(x, val => val%3 == 0));
+            Assert.IsTrue(ZEnumerable.LastOrDefault(y, val => val.Item1%3 == 0) == Enumerable.LastOrDefault(y, val => val.Item1%3 == 0));
+            Assert.IsTrue(ZEnumerable.LastOrDefault(z, val => val%3 == 0) == Enumerable.LastOrDefault(z, val => val%3 == 0));
+			Assert.IsTrue(ZEnumerable.LastOrDefault(dict, val => val.Key%3 == 0).Equals(Enumerable.LastOrDefault(dict, val => val.Key%3 == 0)));
+        }
+
+		<# } #>	
+
+
+    }
+}

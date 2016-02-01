@@ -138,50 +138,50 @@
     <Compile Include="Comparers\CustomComparer.cs" />
     <Compile Include="Comparers\CustomComparerVisitor.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="Core\Folding\Single.cs">
+    <Compile Include="Core\Fold\Single.cs">
       <DependentUpon>Single.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Core\Folding\Last.cs">
+    <Compile Include="Core\Fold\Last.cs">
       <DependentUpon>Last.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Core\Folding\First.cs">
+    <Compile Include="Core\Fold\First.cs">
       <DependentUpon>First.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Core\Flatten.cs">
+    <Compile Include="Core\Common\Flatten.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Flatten.tt</DependentUpon>
     </Compile>
-    <Compile Include="Core\IsEqual.cs">
+    <Compile Include="Core\Fold\IsEqual.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IsEqual.tt</DependentUpon>
     </Compile>
-    <Compile Include="Core\IsNullOrEmpty.cs">
+    <Compile Include="Core\Fold\IsNullOrEmpty.cs">
       <DependentUpon>IsNullOrEmpty.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Core\Repeat.cs" />
-    <Compile Include="Core\Range.cs" />
-    <Compile Include="Core\Where.cs">
+    <Compile Include="Core\Unfold\Repeat.cs" />
+    <Compile Include="Core\Unfold\Range.cs" />
+    <Compile Include="Core\Common\Where.cs">
       <DependentUpon>Where.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Core\Select.cs">
+    <Compile Include="Core\Common\Select.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Select.tt</DependentUpon>
     </Compile>
-    <Compile Include="Core\Split.cs" />
-    <Compile Include="Core\WhereInPlace.cs" />
+    <Compile Include="Core\Common\Split.cs" />
+    <Compile Include="Core\Common\WhereInPlace.cs" />
     <Compile Include="Extension\Guard.cs" />
     <Compile Include="ZMath\Average.cs">
       <AutoGen>True</AutoGen>
@@ -201,35 +201,35 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Core\Folding\Single.tt">
+    <Content Include="Core\Fold\Single.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Single.cs</LastGenOutput>
     </Content>
-    <Content Include="Core\Folding\Last.tt">
+    <Content Include="Core\Fold\Last.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Last.cs</LastGenOutput>
     </Content>
-    <Content Include="Core\Folding\First.tt">
+    <Content Include="Core\Fold\First.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>First.cs</LastGenOutput>
     </Content>
-    <Content Include="Core\Flatten.tt">
+    <Content Include="Core\Common\Flatten.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Flatten.cs</LastGenOutput>
     </Content>
-    <Content Include="Core\IsEqual.tt">
+    <Content Include="Core\Fold\IsEqual.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>IsEqual.cs</LastGenOutput>
     </Content>
-    <Content Include="Core\IsNullOrEmpty.tt">
+    <Content Include="Core\Fold\IsNullOrEmpty.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>IsNullOrEmpty.cs</LastGenOutput>
     </Content>
-    <Content Include="Core\Where.tt">
+    <Content Include="Core\Common\Where.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Where.cs</LastGenOutput>
     </Content>
-    <Content Include="Core\Select.tt">
+    <Content Include="Core\Common\Select.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Select.cs</LastGenOutput>
     </Content>

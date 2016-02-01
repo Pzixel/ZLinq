@@ -9037,7 +9037,6 @@ namespace ZLinq
 		[Pure]
         private static ulong? Max(this IList<ulong?> source, int startIndex, int endIndex)
         {
-           
 			if (source.Count <= 4)
 		    {
 		        if (source.Count == 0)

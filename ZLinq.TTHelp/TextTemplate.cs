@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace ZLinq.TTHelp
 {
-    public class TextTemplate
+    public class TT
     {
         public static readonly string[] LongableTypes =
         {
@@ -35,7 +35,8 @@ namespace ZLinq.TTHelp
         public static readonly string[] StandardLists = new [] { "T[]" }.Concat(ListIList).ToArray();
         public static readonly string[] StandardCollections = StandardLists.Concat(new[] { "ICollection<T>" }).ToArray();
         public static readonly string[] StandardEnumerables = StandardCollections.Concat(new[] { "IEnumerable<T>" }).ToArray();
-        public static readonly string[] StandardInterfaces = {"IList<T>", "ICollection<T>", "IEnumerable<T>"};
+        public static readonly string[] Unindexable = {"ICollection<T>", "IEnumerable<T>"};
+        public static readonly string[] StandardInterfaces = new[] {"IList<T>"}.Concat(Unindexable).ToArray();
         public static readonly string[] Foreachable = {"T[]", "List<T>", "IEnumerable<T>" };
 
         public static string[] ToInt(IEnumerable<string> source)

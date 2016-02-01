@@ -21,50 +21,50 @@ namespace ZLinq.Test.ZMath
     {		    
 		private const double Tolerance = 0.0000001;
 			
-	<#foreach (var type in TextTemplate.NumberTypes) { #>
+	<#foreach (var type in TT.NumberTypes) { #>
 
 		#region <#= type #>	 		
-		<# foreach (string sourceType in TextTemplate.StandardCollections) {
+		<# foreach (string sourceType in TT.StandardCollections) {
 			string expectedVal = type != "double" && type != "float" && type != "double" ? type + ".MaxValue/10*9" : "short.MaxValue";
 		 #>	
         [TestMethod]
-        public void TestAverage<#= type #><#= TextTemplate.GetCollectionName(sourceType) #>()
+        public void TestAverage<#= type #><#= TT.GetCollectionName(sourceType) #>()
         {			
             const <#= type #> expected = <#= expectedVal #>;
-            var source = Enumerable.Repeat(expected, 100).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
+            var source = Enumerable.Repeat(expected, 100).<#= TT.ToArrayOrToList(sourceType) #>;
 
 			double result = source.Average();
 
-            <#= TextTemplate.AssertFloatsRelative("result", "expected", "Tolerance") #>
+            <#= TT.AssertFloatsRelative("result", "expected", "Tolerance") #>
         }
 
 		[TestMethod]
-        public void TestAverage<#= type #><#= TextTemplate.GetCollectionName(sourceType) #>Map()
+        public void TestAverage<#= type #><#= TT.GetCollectionName(sourceType) #>Map()
         {
             const <#= type #> expected = <#= expectedVal #>;
-            var source = Enumerable.Repeat(new { X = expected}, 100).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
+            var source = Enumerable.Repeat(new { X = expected}, 100).<#= TT.ToArrayOrToList(sourceType) #>;
 
 			double result = source.Average(arg => arg.X);
-			<#= TextTemplate.AssertFloatsRelative("result", "expected", "Tolerance") #>
+			<#= TT.AssertFloatsRelative("result", "expected", "Tolerance") #>
         }
 
 				<# if (type != "double" && type != "float" && type != "double") { #>		
 		[TestMethod]
-        public void TestAverage<#= type #><#= TextTemplate.GetCollectionName(sourceType) #>NoOverflow()
+        public void TestAverage<#= type #><#= TT.GetCollectionName(sourceType) #>NoOverflow()
         {
 			const <#= type #> expected = <#= type #>.MaxValue;
-            var source = Enumerable.Repeat(expected, 2).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
+            var source = Enumerable.Repeat(expected, 2).<#= TT.ToArrayOrToList(sourceType) #>;
 			double result = source.Average();
-			<#= TextTemplate.AssertFloatsRelative("result", "expected", "Tolerance") #>
+			<#= TT.AssertFloatsRelative("result", "expected", "Tolerance") #>
         }
 		
 		[TestMethod]
-        public void TestAverage<#= type #><#= TextTemplate.GetCollectionName(sourceType) #>MapNoOverflow()
+        public void TestAverage<#= type #><#= TT.GetCollectionName(sourceType) #>MapNoOverflow()
         {	
 			const <#= type #> expected = <#= type #>.MaxValue;
-            var source =  Enumerable.Repeat(new { X = expected} , 2).<#= TextTemplate.ToArrayOrToList(sourceType) #>;
+            var source =  Enumerable.Repeat(new { X = expected} , 2).<#= TT.ToArrayOrToList(sourceType) #>;
 			double result = source.Average(arg => arg.X);
-			<#= TextTemplate.AssertFloatsRelative("result", "expected", "Tolerance") #>
+			<#= TT.AssertFloatsRelative("result", "expected", "Tolerance") #>
         }
 		<# } #>
 		<# } #>

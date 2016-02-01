@@ -19,10 +19,10 @@ namespace ZLinq
 {
     public static partial class ZEnumerable
     {		
-	<#foreach (var type in TextTemplate.NumberTypes) { #>
+	<#foreach (var type in TT.NumberTypes) { #>
 
 		#region <#= type #>	 		
-		<# foreach (string sourceType in TextTemplate.StandardLists) 
+		<# foreach (string sourceType in TT.StandardLists) 
 		{ #>	
 		/// <summary>
         /// Perform checked summing of source collection
@@ -32,15 +32,15 @@ namespace ZLinq
         [Pure]
         public static double Average(this <#= sourceType.Replace("T", type) #> source)
         {
-            <#= TextTemplate.IsNotNull("source") #>
+            <#= TT.IsNotNull("source") #>
 			try
 		    {
 				double sum = (double) source.Sum();
-				return (sum/source.<#= TextTemplate.LengthOrCount(sourceType) #>);
+				return (sum/source.<#= TT.LengthOrCount(sourceType) #>);
             }
 		    catch (OverflowException)
 		    {
-				double mult = (double) 1.0/source.<#= TextTemplate.LengthOrCount(sourceType) #>;
+				double mult = (double) 1.0/source.<#= TT.LengthOrCount(sourceType) #>;
 		        return source.Sum(x => (double) x*mult);
 		    }
         }
@@ -54,15 +54,15 @@ namespace ZLinq
 		[Pure]
         public static double Average<T>(this <#= sourceType #> source, Func<T, <#= type #>> mapFunc)
         {
-            <#= TextTemplate.IsNotNull("source") #>
+            <#= TT.IsNotNull("source") #>
 			try
 		    {
 				double sum = (double) source.Sum(mapFunc);
-				return (sum/source.<#= TextTemplate.LengthOrCount(sourceType) #>);
+				return (sum/source.<#= TT.LengthOrCount(sourceType) #>);
             }
 		    catch (OverflowException)
 		    {
-				double mult = (double) 1.0/source.<#= TextTemplate.LengthOrCount(sourceType) #>;
+				double mult = (double) 1.0/source.<#= TT.LengthOrCount(sourceType) #>;
 		        return source.Sum(arg => (double) mapFunc(arg)*mult);
 		    }
         }

@@ -8,19 +8,22 @@
 <#@ import namespace="ZLinq.TTHelp" #>
 <#@ output extension=".cs" #>
 
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
 using System.Linq;
 
 
 namespace ZLinq.Test.Helpers
 {
+    [SuppressMessage("ReSharper", "InvokeAsExtensionMethod")]
     public static class Caster
     {        
-		<# foreach (var sourceType in TextTemplate.StandardInterfaces)
+		<# foreach (var sourceType in TT.WithNonGen(TT.StandardInterfaces))
 		{ 
 		#>[Pure]
-        public static <#= sourceType #> To<#= TextTemplate.GetCollectionName(sourceType) #><T>(this IEnumerable<T> source)
+        public static <#= sourceType #> To<#= TT.GetCollectionName(sourceType) #><T>(this IEnumerable<T> source)
         {
             return Enumerable.ToList(source);
         }

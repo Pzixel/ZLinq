@@ -21,10 +21,10 @@ namespace ZLinq
 {
     public static partial class ZEnumerable
     {		
-	<#foreach (var type in TextTemplate.NumberTypes) { #>
+	<#foreach (var type in TT.NumberTypes) { #>
 
 		#region <#= type #>	 		
-		<# foreach (string sourceType in TextTemplate.StandardLists) 
+		<# foreach (string sourceType in TT.StandardLists) 
 		{ #>	
 		/// <summary>
         /// Perform checked summing of source collection
@@ -34,13 +34,13 @@ namespace ZLinq
         [Pure]
         public static <#= type #> Sum(this <#= sourceType.Replace("T", type) #> source)
         {
-			<#= TextTemplate.IsNotNull("source") #>
-            if (source.<#= TextTemplate.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, 0, source.<#= TextTemplate.LengthOrCount(sourceType) #>);
+			<#= TT.IsNotNull("source") #>
+            if (source.<#= TT.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, 0, source.<#= TT.LengthOrCount(sourceType) #>);
             <#= type #> result = 0;
 			<# bool canInterlock = type == "int" || type == "long";
 			   if (!canInterlock) { #>object syncRoot = new object(); <# } #>	
-            Parallel.ForEach(Partitioner.Create(0, source.<#= TextTemplate.LengthOrCount(sourceType) #>),
+            Parallel.ForEach(Partitioner.Create(0, source.<#= TT.LengthOrCount(sourceType) #>),
 						range => {
 						var x = Sum(source, range.Item1, range.Item2);
 						<# if (canInterlock) { #>Interlocked.Add(ref result, x); <# }
@@ -68,12 +68,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return <#= TextTemplate.ExplicitCastFromIntIfNeeded(type) #>((sum1 + sum2) + (sum3 + sum4));
+                    return <#= TT.ExplicitCastFromIntIfNeeded(type) #>((sum1 + sum2) + (sum3 + sum4));
                 if (i == endIndex - 1)
-                    return <#= TextTemplate.ExplicitCastFromIntIfNeeded(type) #>((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return <#= TT.ExplicitCastFromIntIfNeeded(type) #>((sum1 + sum2) + (sum3 + sum4) + source[i]);
                 if (i == endIndex - 2)
-                    return <#= TextTemplate.ExplicitCastFromIntIfNeeded(type) #>((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return <#= TextTemplate.ExplicitCastFromIntIfNeeded(type) #>((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return <#= TT.ExplicitCastFromIntIfNeeded(type) #>((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
+                return <#= TT.ExplicitCastFromIntIfNeeded(type) #>((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
             }
         }
 
@@ -86,12 +86,12 @@ namespace ZLinq
 		[Pure]
         public static <#= type #> Sum<T>(this <#= sourceType #> source, Func<T, <#= type #>> mapFunc)
         {
-            <#= TextTemplate.IsNotNull("source") #>
-            if (source.<#= TextTemplate.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, mapFunc, 0, source.<#= TextTemplate.LengthOrCount(sourceType) #>);
+            <#= TT.IsNotNull("source") #>
+            if (source.<#= TT.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, mapFunc, 0, source.<#= TT.LengthOrCount(sourceType) #>);
             <#= type #> result = 0;
             object syncRoot = new object();
-            Parallel.ForEach(Partitioner.Create(0, source.<#= TextTemplate.LengthOrCount(sourceType) #>),
+            Parallel.ForEach(Partitioner.Create(0, source.<#= TT.LengthOrCount(sourceType) #>),
                 () => (<#= type #>)0,
                 (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
                 x =>
@@ -118,12 +118,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return  <#= TextTemplate.ExplicitCastFromIntIfNeeded(type) #> ((sum1 + sum2) + (sum3 + sum4));
+                    return  <#= TT.ExplicitCastFromIntIfNeeded(type) #> ((sum1 + sum2) + (sum3 + sum4));
                 if (i == endIndex - 1)
-                    return  <#= TextTemplate.ExplicitCastFromIntIfNeeded(type) #>((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  <#= TT.ExplicitCastFromIntIfNeeded(type) #>((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  <#= TextTemplate.ExplicitCastFromIntIfNeeded(type) #>((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  <#= TextTemplate.ExplicitCastFromIntIfNeeded(type) #>((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  <#= TT.ExplicitCastFromIntIfNeeded(type) #>((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
+                return  <#= TT.ExplicitCastFromIntIfNeeded(type) #>((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
 		<# } #>

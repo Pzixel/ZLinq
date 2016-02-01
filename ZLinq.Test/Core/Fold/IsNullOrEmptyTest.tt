@@ -1,0 +1,53 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(SolutionDir)ZLinq.TTHelp\bin\$(Configuration)\ZLinq.TTHelp.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="ZLinq.TTHelp" #>
+<#@ output extension=".cs" #>
+
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ZLinq.Test.Helpers;
+
+namespace ZLinq.Test.Core.Fold
+{
+    [TestClass]
+    public class IsNullOrEmptyTest
+	{        
+		<# foreach (var sourceType in TT.WithNonGen(TT.StandardEnumerables))
+		{ 			
+			string name = TT.GetCollectionName(sourceType);
+		#>
+		
+		[TestMethod]
+        public void IsNullOrEmpty<#= name #>()
+        {
+            <#= TT.ToInt(sourceType) #> sourceA = new int[0].To<#= name #>();
+			<#= TT.ToInt(sourceType) #> sourceB = null;
+			<#= TT.ToInt(sourceType) #> sourceC = new[] {1,2,3}.To<#= name #>();
+
+			Assert.IsTrue(sourceA.IsNullOrEmpty());
+			Assert.IsTrue(sourceB.IsNullOrEmpty());
+			Assert.IsFalse(sourceC.IsNullOrEmpty());
+        }
+
+		<#}#>
+
+		[TestMethod]
+        public void IsNullOrEmptyString()
+        {
+            string sourceA = string.Empty;
+            string sourceB = null;
+            string sourceC = "Hello world!";
+
+            Assert.IsTrue(sourceA.IsNullOrEmpty());
+            Assert.IsTrue(sourceB.IsNullOrEmpty());
+            Assert.IsFalse(sourceC.IsNullOrEmpty());
+        }
+    }
+}

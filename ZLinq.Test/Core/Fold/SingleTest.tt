@@ -1,0 +1,75 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(SolutionDir)ZLinq.TTHelp\bin\$(Configuration)\ZLinq.TTHelp.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="ZLinq.TTHelp" #>
+<#@ output extension=".cs" #>
+
+using System;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ZLinq.Test.Helpers;
+
+namespace ZLinq.Test.Core.Fold
+{
+    [TestClass]
+    public class Single
+    {	
+		<# foreach (var sourceType in TT.StandardCollections) { 
+		string name = TT.GetCollectionName(sourceType);#>		
+		[TestMethod]
+        public void Single<#= name #>()
+        {
+            var x = Enumerable.Range(1, 1).To<#= name #>();
+            var y = Enumerable.Range(1, 1).Select(a => new Tuple<int, int>(a,a)).To<#= name #>();
+            var z = Enumerable.Range(1, 1).Select(a => new { A = a}).To<#= name #>();
+
+            Assert.IsTrue(ZEnumerable.Single(x) == Enumerable.Single(x));
+			Assert.IsTrue(ZEnumerable.Single(y) == Enumerable.Single(y));
+			Assert.IsTrue(ZEnumerable.Single(z) == Enumerable.Single(z));
+        }
+
+		[TestMethod]
+        public void Single<#= TT.GetCollectionName(sourceType) #>OrDefault()
+        {
+            var x = Enumerable.Range(1, 1).To<#= name #>();
+            var y = Enumerable.Range(1, 1).Select(a => new Tuple<int, int>(a,a)).To<#= name #>();
+            var z = new int[0].To<#= name #>();
+
+            Assert.IsTrue(ZEnumerable.SingleOrDefault(x) == Enumerable.SingleOrDefault(x));
+            Assert.IsTrue(ZEnumerable.SingleOrDefault(y) == Enumerable.SingleOrDefault(y));
+            Assert.IsTrue(ZEnumerable.SingleOrDefault(z) == Enumerable.SingleOrDefault(z));
+        }
+
+		[TestMethod]
+        public void Single<#= name #>Predicate()
+        {
+            var x = Enumerable.Range(1, 5).To<#= name #>();
+            var y = Enumerable.Range(1, 5).Select(a => new Tuple<int, int>(a,a)).To<#= name #>();
+            var z = Enumerable.Range(1, 5).Select(a => new { A = a}).To<#= name #>();
+
+            Assert.IsTrue(ZEnumerable.Single(x, val => val%3 == 0) == Enumerable.Single(x, val => val%3 == 0));
+			Assert.IsTrue(ZEnumerable.Single(y, val => val.Item1%3 == 0) == Enumerable.Single(y, val => val.Item1%3 == 0));
+			Assert.IsTrue(ZEnumerable.Single(z, val => val.A%3 == 0) == Enumerable.Single(z, val => val.A%3 == 0));
+        }
+
+		[TestMethod]
+        public void Single<#= TT.GetCollectionName(sourceType) #>OrDefaultPredicate()
+        {
+            var x = Enumerable.Range(1, 5).To<#= name #>();
+            var y = Enumerable.Range(1, 5).Select(a => new Tuple<int, int>(a,a)).To<#= name #>();
+            var z = new int[0].To<#= name #>();
+
+            Assert.IsTrue(ZEnumerable.SingleOrDefault(x, val => val%3 == 0) == Enumerable.SingleOrDefault(x, val => val%3 == 0));
+            Assert.IsTrue(ZEnumerable.SingleOrDefault(y, val => val.Item1%3 == 0) == Enumerable.SingleOrDefault(y, val => val.Item1%3 == 0));
+            Assert.IsTrue(ZEnumerable.SingleOrDefault(z, val => val%3 == 0) == Enumerable.SingleOrDefault(z, val => val%3 == 0));
+        }
+
+		<# } #>	
+
+
+    }
+}
