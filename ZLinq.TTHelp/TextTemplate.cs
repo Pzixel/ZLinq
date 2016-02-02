@@ -109,5 +109,15 @@ namespace ZLinq.TTHelp
         {
             return types.Select(x => x + "?").ToArray();
         }
+
+        public static string AreEqual(string a, string b)
+        {
+            return $@"Assert.IsTrue({a} == {b}, $""{a} ={{{a}}}\t{b} ={{{b}}}"");;";
+        }
+
+        public static string AreNotEqual(string a, string b)
+        {
+            return $@"Assert.IsFalse({a} == {b}, $""{a} ={{{a}}}\t{b} ={{{b}}}"");;";
+        }
     }
 }

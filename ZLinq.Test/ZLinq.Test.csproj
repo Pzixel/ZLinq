@@ -56,6 +56,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FlattenTest.tt</DependentUpon>
     </Compile>
+    <Compile Include="Core\Common\ShuffleTest.cs">
+      <DependentUpon>ShuffleTest.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Core\Fold\IsNullOrEmptyTest.cs">
       <DependentUpon>IsNullOrEmptyTest.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -125,6 +130,10 @@
     <Content Include="Core\Common\FlattenTest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>FlattenTest.cs</LastGenOutput>
+    </Content>
+    <Content Include="Core\Common\ShuffleTest.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ShuffleTest.cs</LastGenOutput>
     </Content>
     <Content Include="Core\Fold\IsNullOrEmptyTest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

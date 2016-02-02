@@ -138,6 +138,11 @@
     <Compile Include="Comparers\CustomComparer.cs" />
     <Compile Include="Comparers\CustomComparerVisitor.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Core\Common\Shuffle.cs">
+      <DependentUpon>Shuffle.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Core\Fold\Single.cs">
       <DependentUpon>Single.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -201,6 +206,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Core\Common\Shuffle.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Shuffle.cs</LastGenOutput>
+    </Content>
     <Content Include="Core\Fold\Single.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Single.cs</LastGenOutput>
@@ -251,6 +260,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Core\Extra\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
