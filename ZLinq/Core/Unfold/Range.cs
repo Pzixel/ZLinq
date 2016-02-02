@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Diagnostics.Contracts;
+using JetBrains.Annotations;
 
 // ReSharper disable CheckNamespace
 namespace ZLinq

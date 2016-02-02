@@ -20,7 +20,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="size">Size of partitions</param>
         /// <returns>Enumeration of partitions</returns>
-        [System.Diagnostics.Contracts.Pure]
+        [Pure]
         [NotNull]
         [ContractAnnotation("source:null => halt")]
         public static IEnumerable<T[]> Split<T>([NotNull] this T[] source, int size)
@@ -42,7 +42,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="size">Size of partitions</param>
         /// <returns>Enumeration of partitions</returns>
-        [System.Diagnostics.Contracts.Pure]
+        [Pure]
         [NotNull]
         [ContractAnnotation("source:null => halt")]
         public static IEnumerable<T[]> Split<T>([NotNull] this List<T> source, int size)
@@ -65,7 +65,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="size">Size of partitions</param>
         /// <returns>Enumeration of partitions</returns>
-        [System.Diagnostics.Contracts.Pure]
+        [Pure]
         [NotNull]
         [ContractAnnotation("source:null => halt")]
         public static IEnumerable<T[]> Split<T>([NotNull] this IList<T> source, int size)
@@ -89,7 +89,7 @@ namespace ZLinq
         /// <param name="size">Size of partitions</param>
         /// <returns>Enumeration of partitions</returns>
         /// <returns>Enumeration of partitions</returns>
-        [System.Diagnostics.Contracts.Pure]
+        [Pure]
         [NotNull]
         [ContractAnnotation("source:null => halt")]
         public static IEnumerable<T[]> Split<T>([NotNull] this ICollection<T> source, int size)
@@ -119,7 +119,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="size">Size of partitions</param>
         /// <returns>Enumeration of partitions</returns>
-        [System.Diagnostics.Contracts.Pure]
+        [Pure]
         [NotNull]
         [ContractAnnotation("source:null => halt")]
         public static IEnumerable<T[]> Split<T>([NotNull] this IEnumerable<T> source, int size)
@@ -168,7 +168,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="size">Size of partitions</param>
         /// <returns>Array of partitions</returns>
-        [System.Diagnostics.Contracts.Pure]
+        [Pure]
         [NotNull]
         [ContractAnnotation("source:null => halt")]
         public static T[][] SplitToArray<T>([NotNull] this T[] source, int size)
@@ -193,7 +193,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="size">Size of partitions</param>
         /// <returns>Array of partitions</returns>
-        [System.Diagnostics.Contracts.Pure]
+        [Pure]
         [NotNull]
         [ContractAnnotation("source:null => halt")]
         public static T[][] SplitToArray<T>([NotNull] this List<T> source, int size)
@@ -219,7 +219,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="size">Size of partitions</param>
         /// <returns>Array of partitions</returns>
-        [System.Diagnostics.Contracts.Pure]
+        [Pure]
         [NotNull]
         [ContractAnnotation("source:null => halt")]
         public static T[][] SplitToArray<T>([NotNull] this IList<T> source, int size)
@@ -245,7 +245,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="size">Size of partitions</param>
         /// <returns>Array of partitions</returns>
-        [System.Diagnostics.Contracts.Pure]
+        [Pure]
         [NotNull]
         [ContractAnnotation("source:null => halt")]
         public static T[][] SplitToArray<T>([NotNull] this ICollection<T> source, int size)
@@ -260,7 +260,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="size">Size of partitions</param>
         /// <returns>Array of partitions</returns>
-        [System.Diagnostics.Contracts.Pure]
+        [Pure]
         [NotNull]
         [ContractAnnotation("source:null => halt")]
         public static IEnumerable<T[]> SplitToArray<T>([NotNull] this IEnumerable<T> source, int size)

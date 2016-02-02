@@ -12,7 +12,6 @@ namespace ZLinq
     public static partial class ZEnumerable
     {        
                     
-        [System.Diagnostics.Contracts.Pure]
         [Pure]
         public static T[] WhereToArray<T>([NotNull] this T[] source, [NotNull] Predicate<T> predicate)
         {
@@ -31,7 +30,6 @@ namespace ZLinq
             return result;
         }
 
-        [System.Diagnostics.Contracts.Pure]
         [Pure]
         public static List<T> WhereToList<T>([NotNull] this T[] source, [NotNull] Predicate<T> predicate)
         {
@@ -49,7 +47,6 @@ namespace ZLinq
             return result;
         }
                     
-        [System.Diagnostics.Contracts.Pure]
         [Pure]
         public static T[] WhereToArray<T>([NotNull] this List<T> source, [NotNull] Predicate<T> predicate)
         {
@@ -68,7 +65,6 @@ namespace ZLinq
             return result;
         }
 
-        [System.Diagnostics.Contracts.Pure]
         [Pure]
         public static List<T> WhereToList<T>([NotNull] this List<T> source, [NotNull] Predicate<T> predicate)
         {
@@ -86,7 +82,6 @@ namespace ZLinq
             return result;
         }
                     
-        [System.Diagnostics.Contracts.Pure]
         [Pure]
         public static T[] WhereToArray<T>([NotNull] this IList<T> source, [NotNull] Predicate<T> predicate)
         {
@@ -105,7 +100,6 @@ namespace ZLinq
             return result;
         }
 
-        [System.Diagnostics.Contracts.Pure]
         [Pure]
         public static List<T> WhereToList<T>([NotNull] this IList<T> source, [NotNull] Predicate<T> predicate)
         {
@@ -123,7 +117,6 @@ namespace ZLinq
             return result;
         }
                     
-        [System.Diagnostics.Contracts.Pure]
         [Pure]
         public static T[] WhereToArray<T>([NotNull] this ICollection<T> source, [NotNull] Predicate<T> predicate)
         {
@@ -142,7 +135,6 @@ namespace ZLinq
             return result;
         }
 
-        [System.Diagnostics.Contracts.Pure]
         [Pure]
         public static List<T> WhereToList<T>([NotNull] this ICollection<T> source, [NotNull] Predicate<T> predicate)
         {

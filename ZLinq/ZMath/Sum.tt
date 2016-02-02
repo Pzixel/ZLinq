@@ -11,9 +11,9 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Threading;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 using ZLinq.Extension;
 
 // ReSharper disable CheckNamespace 
@@ -32,7 +32,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static <#= type #> Sum(this <#= sourceType.Replace("T", type) #> source)
+        public static <#= type #> Sum([NotNull] this <#= sourceType.Replace("T", type) #> source)
         {
             <#= TT.IsNotNull("source") #>
             if (source.<#= TT.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
@@ -53,7 +53,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static <#= type #> Sum(this <#= sourceType.Replace("T", type) #> source, int startIndex, int endIndex)
+        private static <#= type #> Sum([NotNull] this <#= sourceType.Replace("T", type) #> source, int startIndex, int endIndex)
         {
             <#= type #> sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -84,9 +84,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static <#= type #> Sum<T>(this <#= sourceType #> source, Func<T, <#= type #>> mapFunc)
+        public static <#= type #> Sum<T>([NotNull] this <#= sourceType #> source, [NotNull] Func<T, <#= type #>> mapFunc)
         {
             <#= TT.IsNotNull("source") #>
+            <#= TT.IsNotNull("mapFunc") #>
             if (source.<#= TT.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.<#= TT.LengthOrCount(sourceType) #>);
             <#= type #> result = 0;
@@ -104,7 +105,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static <#= type #> Sum<T>(this <#= sourceType #> source, Func<T, <#= type #>> mapFunc, int startIndex, int endIndex)
+        private static <#= type #> Sum<T>([NotNull] this <#= sourceType #> source, Func<T, <#= type #>> mapFunc, int startIndex, int endIndex)
         {
             <#= type #> sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked

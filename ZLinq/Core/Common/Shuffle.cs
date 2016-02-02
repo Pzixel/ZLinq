@@ -30,7 +30,7 @@ namespace ZLinq
             }
         }
 
-        [System.Diagnostics.Contracts.Pure]
+        [Pure]
         [NotNull]
         public static T[] GetShuffle<T>([NotNull] this T[] source, int? seed = null)
         {
@@ -62,7 +62,7 @@ namespace ZLinq
             }
         }
 
-        [System.Diagnostics.Contracts.Pure]
+        [Pure]
         [NotNull]
         public static T[] GetShuffle<T>([NotNull] this List<T> source, int? seed = null)
         {
@@ -94,7 +94,7 @@ namespace ZLinq
             }
         }
 
-        [System.Diagnostics.Contracts.Pure]
+        [Pure]
         [NotNull]
         public static T[] GetShuffle<T>([NotNull] this IList<T> source, int? seed = null)
         {

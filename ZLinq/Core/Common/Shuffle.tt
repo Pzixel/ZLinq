@@ -40,7 +40,7 @@ namespace ZLinq
             }
         }
 
-        [System.Diagnostics.Contracts.Pure]
+        [Pure]
         [NotNull]
         public static T[] GetShuffle<T>([NotNull] this <#= sourceType #> source, int? seed = null)
         {

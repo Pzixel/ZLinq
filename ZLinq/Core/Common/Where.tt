@@ -22,7 +22,6 @@ namespace ZLinq
     {        
         <# foreach (var sourceType in TT.StandardCollections) 
         { #>            
-        [System.Diagnostics.Contracts.Pure]
         [Pure]
         public static T[] WhereToArray<T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
         {
@@ -41,7 +40,6 @@ namespace ZLinq
             return result;
         }
 
-        [System.Diagnostics.Contracts.Pure]
         [Pure]
         public static List<T> WhereToList<T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
         {

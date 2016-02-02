@@ -20,7 +20,6 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="func">Function that maps elements from source collection to resulting collection</param>
         /// <returns>Array of mapped elements</returns>          
-        [System.Diagnostics.Contracts.Pure]
         [Pure]
         [NotNull]
         public static TResult[] SelectToArray<T, TResult>([NotNull] this ICollection<T> source, [NotNull] Func<T, TResult> func)
@@ -45,7 +44,6 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="func">Function that maps elements from source collection to resulting collection</param>
         /// <returns>Array of mapped elements</returns>  
-        [System.Diagnostics.Contracts.Pure]
         [Pure]
         [NotNull]
         public static TResult[] SelectToArray<T, TResult>([NotNull] this T[] source, [NotNull] Func<T, TResult> func)
@@ -91,7 +89,6 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="func">Function that maps elements from source collection to resulting collection</param>
         /// <returns>Array of mapped elements</returns>  
-        [System.Diagnostics.Contracts.Pure]
         [Pure]
         [NotNull]
         public static TResult[] SelectToArray<T, TResult>([NotNull] this List<T> source, [NotNull] Func<T, TResult> func)
@@ -137,7 +134,6 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="func">Function that maps elements from source collection to resulting collection</param>
         /// <returns>Array of mapped elements</returns>  
-        [System.Diagnostics.Contracts.Pure]
         [Pure]
         [NotNull]
         public static TResult[] SelectToArray<T, TResult>([NotNull] this IList<T> source, [NotNull] Func<T, TResult> func)
@@ -184,7 +180,6 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="func">Function that maps elements from source collection to resulting collection</param>
         /// <returns>List of mapped elements</returns> 
-        [System.Diagnostics.Contracts.Pure]
         [Pure]
         [NotNull]
         public static List<TResult> SelectToList<T, TResult>([NotNull] this IEnumerable<T> source, [NotNull] Func<T, TResult> func)
@@ -203,7 +198,6 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="func">Function that maps elements from source collection to resulting collection</param>
         /// <returns>List of mapped elements</returns>
-        [System.Diagnostics.Contracts.Pure]
         [Pure]
         [NotNull]
         public static List<TResult> SelectToList<T, TResult>([NotNull] this ICollection<T> source, [NotNull] Func<T, TResult> func)
@@ -213,7 +207,6 @@ namespace ZLinq
             return SelectToList(source, func, source.Count);
         }
 
-        [System.Diagnostics.Contracts.Pure]
         [Pure]
         [NotNull]
         private static List<TResult> SelectToList<T, TResult>([NotNull] this IEnumerable<T> source, [NotNull] Func<T, TResult> func, int count)

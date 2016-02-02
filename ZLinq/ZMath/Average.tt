@@ -10,7 +10,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
+using JetBrains.Annotations;
 using ZLinq.Extension;
 
 // ReSharper disable CheckNamespace
@@ -30,7 +30,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this <#= sourceType.Replace("T", type) #> source)
+        public static double Average([NotNull] this <#= sourceType.Replace("T", type) #> source)
         {
             <#= TT.IsNotNull("source") #>
             try
@@ -52,9 +52,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this <#= sourceType #> source, Func<T, <#= type #>> mapFunc)
+        public static double Average<T>([NotNull] this <#= sourceType #> source, [NotNull] Func<T, <#= type #>> mapFunc)
         {
             <#= TT.IsNotNull("source") #>
+            <#= TT.IsNotNull("mapFunc") #>
             try
             {
                 double sum = (double) source.Sum(mapFunc);

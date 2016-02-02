@@ -11,7 +11,6 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using ZLinq.Extension;
@@ -23,7 +22,7 @@ namespace ZLinq
     public static partial class ZEnumerable
     {
 
-#region Non-Nullables         
+    #region Non-Nullables         
         <#foreach (var type in TT.NumberTypes) { #>
 
         #region <#= type #>             
@@ -34,7 +33,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-        [System.Diagnostics.Contracts.Pure]
+        [Pure]
         public static <#= type #> Max([NotNull] this <#= sourceType.Replace("T", type) #> source)
         {
             <#= TT.IsNotNull("source") #>
@@ -55,7 +54,7 @@ namespace ZLinq
             return result;
         }
 
-        [System.Diagnostics.Contracts.Pure]
+        [Pure]
         private static <#= type #> Max([NotNull] this <#= sourceType.Replace("T", type) #> source, int startIndex, int endIndex)
         {
             if (source.<#= TT.LengthOrCount(sourceType) #> <= 4)
@@ -98,7 +97,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-        [System.Diagnostics.Contracts.Pure]
+        [Pure]
         public static <#= type #> Max<T>([NotNull] this <#= sourceType #> source, [NotNull] Func<T, <#= type #>> mapFunc)
         {
             <#= TT.IsNotNull("source") #>
@@ -120,7 +119,7 @@ namespace ZLinq
             return result;
         }
 
-        [System.Diagnostics.Contracts.Pure]
+        [Pure]
         private static <#= type #> Max<T>([NotNull] this <#= sourceType #> source, [NotNull] Func<T, <#= type #>> mapFunc, int startIndex, int endIndex)
         {
             if (source.<#= TT.LengthOrCount(sourceType) #> <= 4)
@@ -167,11 +166,12 @@ namespace ZLinq
         #endregion
     <# } #>    
     #endregion
+
     #region Nullables
 
         <#foreach (var type in TT.GetNullables(TT.NumberTypes)) { #>
         
-        [System.Diagnostics.Contracts.Pure]
+        [Pure]
         private static <#= type #> Max(<#= type #> x, <#= type #> y)
         {
             bool hasValX = x.HasValue;
@@ -193,7 +193,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-        [System.Diagnostics.Contracts.Pure]
+        [Pure]
         public static <#= type #> Max([NotNull] this <#= sourceType.Replace("T", type) #> source)
         {
             <#= TT.IsNotNull("source") #>
@@ -214,7 +214,7 @@ namespace ZLinq
             return result;
         }
 
-        [System.Diagnostics.Contracts.Pure]
+        [Pure]
         private static <#= type #> Max([NotNull] this <#= sourceType.Replace("T", type) #> source, int startIndex, int endIndex)
         {
             if (source.<#= TT.LengthOrCount(sourceType) #> <= 4)
@@ -255,7 +255,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-        [System.Diagnostics.Contracts.Pure]
+        [Pure]
         public static <#= type #> Max<T>([NotNull] this <#= sourceType #> source, [NotNull] Func<T, <#= type #>> mapFunc)
         {
             <#= TT.IsNotNull("source") #>
@@ -277,7 +277,7 @@ namespace ZLinq
             return result;
         }
 
-        [System.Diagnostics.Contracts.Pure]
+        [Pure]
         private static <#= type #> Max<T>([NotNull] this <#= sourceType #> source, [NotNull] Func<T, <#= type #>> mapFunc, int startIndex, int endIndex)
         {
             if (source.<#= TT.LengthOrCount(sourceType) #> <= 4)

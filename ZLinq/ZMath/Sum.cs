@@ -2,9 +2,9 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Threading;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 using ZLinq.Extension;
 
 // ReSharper disable CheckNamespace 
@@ -21,7 +21,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static sbyte Sum(this sbyte[] source)
+        public static sbyte Sum([NotNull] this sbyte[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -40,7 +40,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static sbyte Sum(this sbyte[] source, int startIndex, int endIndex)
+        private static sbyte Sum([NotNull] this sbyte[] source, int startIndex, int endIndex)
         {
             sbyte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -71,9 +71,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static sbyte Sum<T>(this T[] source, Func<T, sbyte> mapFunc)
+        public static sbyte Sum<T>([NotNull] this T[] source, [NotNull] Func<T, sbyte> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             sbyte result = 0;
@@ -91,7 +92,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static sbyte Sum<T>(this T[] source, Func<T, sbyte> mapFunc, int startIndex, int endIndex)
+        private static sbyte Sum<T>([NotNull] this T[] source, Func<T, sbyte> mapFunc, int startIndex, int endIndex)
         {
             sbyte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -120,7 +121,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static sbyte Sum(this List<sbyte> source)
+        public static sbyte Sum([NotNull] this List<sbyte> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -139,7 +140,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static sbyte Sum(this List<sbyte> source, int startIndex, int endIndex)
+        private static sbyte Sum([NotNull] this List<sbyte> source, int startIndex, int endIndex)
         {
             sbyte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -170,9 +171,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static sbyte Sum<T>(this List<T> source, Func<T, sbyte> mapFunc)
+        public static sbyte Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, sbyte> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             sbyte result = 0;
@@ -190,7 +192,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static sbyte Sum<T>(this List<T> source, Func<T, sbyte> mapFunc, int startIndex, int endIndex)
+        private static sbyte Sum<T>([NotNull] this List<T> source, Func<T, sbyte> mapFunc, int startIndex, int endIndex)
         {
             sbyte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -219,7 +221,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static sbyte Sum(this IList<sbyte> source)
+        public static sbyte Sum([NotNull] this IList<sbyte> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -238,7 +240,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static sbyte Sum(this IList<sbyte> source, int startIndex, int endIndex)
+        private static sbyte Sum([NotNull] this IList<sbyte> source, int startIndex, int endIndex)
         {
             sbyte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -269,9 +271,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static sbyte Sum<T>(this IList<T> source, Func<T, sbyte> mapFunc)
+        public static sbyte Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, sbyte> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             sbyte result = 0;
@@ -289,7 +292,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static sbyte Sum<T>(this IList<T> source, Func<T, sbyte> mapFunc, int startIndex, int endIndex)
+        private static sbyte Sum<T>([NotNull] this IList<T> source, Func<T, sbyte> mapFunc, int startIndex, int endIndex)
         {
             sbyte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -322,7 +325,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static byte Sum(this byte[] source)
+        public static byte Sum([NotNull] this byte[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -341,7 +344,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static byte Sum(this byte[] source, int startIndex, int endIndex)
+        private static byte Sum([NotNull] this byte[] source, int startIndex, int endIndex)
         {
             byte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -372,9 +375,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static byte Sum<T>(this T[] source, Func<T, byte> mapFunc)
+        public static byte Sum<T>([NotNull] this T[] source, [NotNull] Func<T, byte> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             byte result = 0;
@@ -392,7 +396,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static byte Sum<T>(this T[] source, Func<T, byte> mapFunc, int startIndex, int endIndex)
+        private static byte Sum<T>([NotNull] this T[] source, Func<T, byte> mapFunc, int startIndex, int endIndex)
         {
             byte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -421,7 +425,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static byte Sum(this List<byte> source)
+        public static byte Sum([NotNull] this List<byte> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -440,7 +444,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static byte Sum(this List<byte> source, int startIndex, int endIndex)
+        private static byte Sum([NotNull] this List<byte> source, int startIndex, int endIndex)
         {
             byte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -471,9 +475,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static byte Sum<T>(this List<T> source, Func<T, byte> mapFunc)
+        public static byte Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, byte> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             byte result = 0;
@@ -491,7 +496,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static byte Sum<T>(this List<T> source, Func<T, byte> mapFunc, int startIndex, int endIndex)
+        private static byte Sum<T>([NotNull] this List<T> source, Func<T, byte> mapFunc, int startIndex, int endIndex)
         {
             byte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -520,7 +525,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static byte Sum(this IList<byte> source)
+        public static byte Sum([NotNull] this IList<byte> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -539,7 +544,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static byte Sum(this IList<byte> source, int startIndex, int endIndex)
+        private static byte Sum([NotNull] this IList<byte> source, int startIndex, int endIndex)
         {
             byte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -570,9 +575,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static byte Sum<T>(this IList<T> source, Func<T, byte> mapFunc)
+        public static byte Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, byte> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             byte result = 0;
@@ -590,7 +596,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static byte Sum<T>(this IList<T> source, Func<T, byte> mapFunc, int startIndex, int endIndex)
+        private static byte Sum<T>([NotNull] this IList<T> source, Func<T, byte> mapFunc, int startIndex, int endIndex)
         {
             byte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -623,7 +629,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static short Sum(this short[] source)
+        public static short Sum([NotNull] this short[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -642,7 +648,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static short Sum(this short[] source, int startIndex, int endIndex)
+        private static short Sum([NotNull] this short[] source, int startIndex, int endIndex)
         {
             short sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -673,9 +679,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static short Sum<T>(this T[] source, Func<T, short> mapFunc)
+        public static short Sum<T>([NotNull] this T[] source, [NotNull] Func<T, short> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             short result = 0;
@@ -693,7 +700,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static short Sum<T>(this T[] source, Func<T, short> mapFunc, int startIndex, int endIndex)
+        private static short Sum<T>([NotNull] this T[] source, Func<T, short> mapFunc, int startIndex, int endIndex)
         {
             short sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -722,7 +729,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static short Sum(this List<short> source)
+        public static short Sum([NotNull] this List<short> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -741,7 +748,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static short Sum(this List<short> source, int startIndex, int endIndex)
+        private static short Sum([NotNull] this List<short> source, int startIndex, int endIndex)
         {
             short sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -772,9 +779,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static short Sum<T>(this List<T> source, Func<T, short> mapFunc)
+        public static short Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, short> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             short result = 0;
@@ -792,7 +800,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static short Sum<T>(this List<T> source, Func<T, short> mapFunc, int startIndex, int endIndex)
+        private static short Sum<T>([NotNull] this List<T> source, Func<T, short> mapFunc, int startIndex, int endIndex)
         {
             short sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -821,7 +829,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static short Sum(this IList<short> source)
+        public static short Sum([NotNull] this IList<short> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -840,7 +848,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static short Sum(this IList<short> source, int startIndex, int endIndex)
+        private static short Sum([NotNull] this IList<short> source, int startIndex, int endIndex)
         {
             short sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -871,9 +879,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static short Sum<T>(this IList<T> source, Func<T, short> mapFunc)
+        public static short Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, short> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             short result = 0;
@@ -891,7 +900,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static short Sum<T>(this IList<T> source, Func<T, short> mapFunc, int startIndex, int endIndex)
+        private static short Sum<T>([NotNull] this IList<T> source, Func<T, short> mapFunc, int startIndex, int endIndex)
         {
             short sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -924,7 +933,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static ushort Sum(this ushort[] source)
+        public static ushort Sum([NotNull] this ushort[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -943,7 +952,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static ushort Sum(this ushort[] source, int startIndex, int endIndex)
+        private static ushort Sum([NotNull] this ushort[] source, int startIndex, int endIndex)
         {
             ushort sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -974,9 +983,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static ushort Sum<T>(this T[] source, Func<T, ushort> mapFunc)
+        public static ushort Sum<T>([NotNull] this T[] source, [NotNull] Func<T, ushort> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             ushort result = 0;
@@ -994,7 +1004,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static ushort Sum<T>(this T[] source, Func<T, ushort> mapFunc, int startIndex, int endIndex)
+        private static ushort Sum<T>([NotNull] this T[] source, Func<T, ushort> mapFunc, int startIndex, int endIndex)
         {
             ushort sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -1023,7 +1033,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static ushort Sum(this List<ushort> source)
+        public static ushort Sum([NotNull] this List<ushort> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -1042,7 +1052,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static ushort Sum(this List<ushort> source, int startIndex, int endIndex)
+        private static ushort Sum([NotNull] this List<ushort> source, int startIndex, int endIndex)
         {
             ushort sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -1073,9 +1083,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static ushort Sum<T>(this List<T> source, Func<T, ushort> mapFunc)
+        public static ushort Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, ushort> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             ushort result = 0;
@@ -1093,7 +1104,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static ushort Sum<T>(this List<T> source, Func<T, ushort> mapFunc, int startIndex, int endIndex)
+        private static ushort Sum<T>([NotNull] this List<T> source, Func<T, ushort> mapFunc, int startIndex, int endIndex)
         {
             ushort sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -1122,7 +1133,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static ushort Sum(this IList<ushort> source)
+        public static ushort Sum([NotNull] this IList<ushort> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -1141,7 +1152,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static ushort Sum(this IList<ushort> source, int startIndex, int endIndex)
+        private static ushort Sum([NotNull] this IList<ushort> source, int startIndex, int endIndex)
         {
             ushort sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -1172,9 +1183,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static ushort Sum<T>(this IList<T> source, Func<T, ushort> mapFunc)
+        public static ushort Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, ushort> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             ushort result = 0;
@@ -1192,7 +1204,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static ushort Sum<T>(this IList<T> source, Func<T, ushort> mapFunc, int startIndex, int endIndex)
+        private static ushort Sum<T>([NotNull] this IList<T> source, Func<T, ushort> mapFunc, int startIndex, int endIndex)
         {
             ushort sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -1225,7 +1237,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static int Sum(this int[] source)
+        public static int Sum([NotNull] this int[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -1242,7 +1254,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static int Sum(this int[] source, int startIndex, int endIndex)
+        private static int Sum([NotNull] this int[] source, int startIndex, int endIndex)
         {
             int sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -1273,9 +1285,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static int Sum<T>(this T[] source, Func<T, int> mapFunc)
+        public static int Sum<T>([NotNull] this T[] source, [NotNull] Func<T, int> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             int result = 0;
@@ -1293,7 +1306,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static int Sum<T>(this T[] source, Func<T, int> mapFunc, int startIndex, int endIndex)
+        private static int Sum<T>([NotNull] this T[] source, Func<T, int> mapFunc, int startIndex, int endIndex)
         {
             int sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -1322,7 +1335,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static int Sum(this List<int> source)
+        public static int Sum([NotNull] this List<int> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -1339,7 +1352,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static int Sum(this List<int> source, int startIndex, int endIndex)
+        private static int Sum([NotNull] this List<int> source, int startIndex, int endIndex)
         {
             int sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -1370,9 +1383,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static int Sum<T>(this List<T> source, Func<T, int> mapFunc)
+        public static int Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, int> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             int result = 0;
@@ -1390,7 +1404,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static int Sum<T>(this List<T> source, Func<T, int> mapFunc, int startIndex, int endIndex)
+        private static int Sum<T>([NotNull] this List<T> source, Func<T, int> mapFunc, int startIndex, int endIndex)
         {
             int sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -1419,7 +1433,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static int Sum(this IList<int> source)
+        public static int Sum([NotNull] this IList<int> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -1436,7 +1450,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static int Sum(this IList<int> source, int startIndex, int endIndex)
+        private static int Sum([NotNull] this IList<int> source, int startIndex, int endIndex)
         {
             int sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -1467,9 +1481,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static int Sum<T>(this IList<T> source, Func<T, int> mapFunc)
+        public static int Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, int> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             int result = 0;
@@ -1487,7 +1502,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static int Sum<T>(this IList<T> source, Func<T, int> mapFunc, int startIndex, int endIndex)
+        private static int Sum<T>([NotNull] this IList<T> source, Func<T, int> mapFunc, int startIndex, int endIndex)
         {
             int sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -1520,7 +1535,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static uint Sum(this uint[] source)
+        public static uint Sum([NotNull] this uint[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -1539,7 +1554,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static uint Sum(this uint[] source, int startIndex, int endIndex)
+        private static uint Sum([NotNull] this uint[] source, int startIndex, int endIndex)
         {
             uint sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -1570,9 +1585,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static uint Sum<T>(this T[] source, Func<T, uint> mapFunc)
+        public static uint Sum<T>([NotNull] this T[] source, [NotNull] Func<T, uint> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             uint result = 0;
@@ -1590,7 +1606,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static uint Sum<T>(this T[] source, Func<T, uint> mapFunc, int startIndex, int endIndex)
+        private static uint Sum<T>([NotNull] this T[] source, Func<T, uint> mapFunc, int startIndex, int endIndex)
         {
             uint sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -1619,7 +1635,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static uint Sum(this List<uint> source)
+        public static uint Sum([NotNull] this List<uint> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -1638,7 +1654,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static uint Sum(this List<uint> source, int startIndex, int endIndex)
+        private static uint Sum([NotNull] this List<uint> source, int startIndex, int endIndex)
         {
             uint sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -1669,9 +1685,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static uint Sum<T>(this List<T> source, Func<T, uint> mapFunc)
+        public static uint Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, uint> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             uint result = 0;
@@ -1689,7 +1706,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static uint Sum<T>(this List<T> source, Func<T, uint> mapFunc, int startIndex, int endIndex)
+        private static uint Sum<T>([NotNull] this List<T> source, Func<T, uint> mapFunc, int startIndex, int endIndex)
         {
             uint sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -1718,7 +1735,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static uint Sum(this IList<uint> source)
+        public static uint Sum([NotNull] this IList<uint> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -1737,7 +1754,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static uint Sum(this IList<uint> source, int startIndex, int endIndex)
+        private static uint Sum([NotNull] this IList<uint> source, int startIndex, int endIndex)
         {
             uint sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -1768,9 +1785,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static uint Sum<T>(this IList<T> source, Func<T, uint> mapFunc)
+        public static uint Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, uint> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             uint result = 0;
@@ -1788,7 +1806,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static uint Sum<T>(this IList<T> source, Func<T, uint> mapFunc, int startIndex, int endIndex)
+        private static uint Sum<T>([NotNull] this IList<T> source, Func<T, uint> mapFunc, int startIndex, int endIndex)
         {
             uint sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -1821,7 +1839,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static long Sum(this long[] source)
+        public static long Sum([NotNull] this long[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -1838,7 +1856,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static long Sum(this long[] source, int startIndex, int endIndex)
+        private static long Sum([NotNull] this long[] source, int startIndex, int endIndex)
         {
             long sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -1869,9 +1887,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static long Sum<T>(this T[] source, Func<T, long> mapFunc)
+        public static long Sum<T>([NotNull] this T[] source, [NotNull] Func<T, long> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             long result = 0;
@@ -1889,7 +1908,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static long Sum<T>(this T[] source, Func<T, long> mapFunc, int startIndex, int endIndex)
+        private static long Sum<T>([NotNull] this T[] source, Func<T, long> mapFunc, int startIndex, int endIndex)
         {
             long sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -1918,7 +1937,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static long Sum(this List<long> source)
+        public static long Sum([NotNull] this List<long> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -1935,7 +1954,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static long Sum(this List<long> source, int startIndex, int endIndex)
+        private static long Sum([NotNull] this List<long> source, int startIndex, int endIndex)
         {
             long sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -1966,9 +1985,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static long Sum<T>(this List<T> source, Func<T, long> mapFunc)
+        public static long Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, long> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             long result = 0;
@@ -1986,7 +2006,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static long Sum<T>(this List<T> source, Func<T, long> mapFunc, int startIndex, int endIndex)
+        private static long Sum<T>([NotNull] this List<T> source, Func<T, long> mapFunc, int startIndex, int endIndex)
         {
             long sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -2015,7 +2035,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static long Sum(this IList<long> source)
+        public static long Sum([NotNull] this IList<long> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -2032,7 +2052,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static long Sum(this IList<long> source, int startIndex, int endIndex)
+        private static long Sum([NotNull] this IList<long> source, int startIndex, int endIndex)
         {
             long sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -2063,9 +2083,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static long Sum<T>(this IList<T> source, Func<T, long> mapFunc)
+        public static long Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, long> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             long result = 0;
@@ -2083,7 +2104,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static long Sum<T>(this IList<T> source, Func<T, long> mapFunc, int startIndex, int endIndex)
+        private static long Sum<T>([NotNull] this IList<T> source, Func<T, long> mapFunc, int startIndex, int endIndex)
         {
             long sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -2116,7 +2137,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static float Sum(this float[] source)
+        public static float Sum([NotNull] this float[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -2135,7 +2156,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static float Sum(this float[] source, int startIndex, int endIndex)
+        private static float Sum([NotNull] this float[] source, int startIndex, int endIndex)
         {
             float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -2166,9 +2187,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static float Sum<T>(this T[] source, Func<T, float> mapFunc)
+        public static float Sum<T>([NotNull] this T[] source, [NotNull] Func<T, float> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             float result = 0;
@@ -2186,7 +2208,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static float Sum<T>(this T[] source, Func<T, float> mapFunc, int startIndex, int endIndex)
+        private static float Sum<T>([NotNull] this T[] source, Func<T, float> mapFunc, int startIndex, int endIndex)
         {
             float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -2215,7 +2237,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static float Sum(this List<float> source)
+        public static float Sum([NotNull] this List<float> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -2234,7 +2256,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static float Sum(this List<float> source, int startIndex, int endIndex)
+        private static float Sum([NotNull] this List<float> source, int startIndex, int endIndex)
         {
             float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -2265,9 +2287,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static float Sum<T>(this List<T> source, Func<T, float> mapFunc)
+        public static float Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, float> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             float result = 0;
@@ -2285,7 +2308,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static float Sum<T>(this List<T> source, Func<T, float> mapFunc, int startIndex, int endIndex)
+        private static float Sum<T>([NotNull] this List<T> source, Func<T, float> mapFunc, int startIndex, int endIndex)
         {
             float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -2314,7 +2337,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static float Sum(this IList<float> source)
+        public static float Sum([NotNull] this IList<float> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -2333,7 +2356,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static float Sum(this IList<float> source, int startIndex, int endIndex)
+        private static float Sum([NotNull] this IList<float> source, int startIndex, int endIndex)
         {
             float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -2364,9 +2387,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static float Sum<T>(this IList<T> source, Func<T, float> mapFunc)
+        public static float Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, float> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             float result = 0;
@@ -2384,7 +2408,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static float Sum<T>(this IList<T> source, Func<T, float> mapFunc, int startIndex, int endIndex)
+        private static float Sum<T>([NotNull] this IList<T> source, Func<T, float> mapFunc, int startIndex, int endIndex)
         {
             float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -2417,7 +2441,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Sum(this double[] source)
+        public static double Sum([NotNull] this double[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -2436,7 +2460,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static double Sum(this double[] source, int startIndex, int endIndex)
+        private static double Sum([NotNull] this double[] source, int startIndex, int endIndex)
         {
             double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -2467,9 +2491,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Sum<T>(this T[] source, Func<T, double> mapFunc)
+        public static double Sum<T>([NotNull] this T[] source, [NotNull] Func<T, double> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             double result = 0;
@@ -2487,7 +2512,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static double Sum<T>(this T[] source, Func<T, double> mapFunc, int startIndex, int endIndex)
+        private static double Sum<T>([NotNull] this T[] source, Func<T, double> mapFunc, int startIndex, int endIndex)
         {
             double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -2516,7 +2541,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Sum(this List<double> source)
+        public static double Sum([NotNull] this List<double> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -2535,7 +2560,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static double Sum(this List<double> source, int startIndex, int endIndex)
+        private static double Sum([NotNull] this List<double> source, int startIndex, int endIndex)
         {
             double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -2566,9 +2591,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Sum<T>(this List<T> source, Func<T, double> mapFunc)
+        public static double Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, double> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             double result = 0;
@@ -2586,7 +2612,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static double Sum<T>(this List<T> source, Func<T, double> mapFunc, int startIndex, int endIndex)
+        private static double Sum<T>([NotNull] this List<T> source, Func<T, double> mapFunc, int startIndex, int endIndex)
         {
             double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -2615,7 +2641,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Sum(this IList<double> source)
+        public static double Sum([NotNull] this IList<double> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -2634,7 +2660,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static double Sum(this IList<double> source, int startIndex, int endIndex)
+        private static double Sum([NotNull] this IList<double> source, int startIndex, int endIndex)
         {
             double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -2665,9 +2691,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Sum<T>(this IList<T> source, Func<T, double> mapFunc)
+        public static double Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, double> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             double result = 0;
@@ -2685,7 +2712,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static double Sum<T>(this IList<T> source, Func<T, double> mapFunc, int startIndex, int endIndex)
+        private static double Sum<T>([NotNull] this IList<T> source, Func<T, double> mapFunc, int startIndex, int endIndex)
         {
             double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -2718,7 +2745,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static decimal Sum(this decimal[] source)
+        public static decimal Sum([NotNull] this decimal[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -2737,7 +2764,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static decimal Sum(this decimal[] source, int startIndex, int endIndex)
+        private static decimal Sum([NotNull] this decimal[] source, int startIndex, int endIndex)
         {
             decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -2768,9 +2795,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static decimal Sum<T>(this T[] source, Func<T, decimal> mapFunc)
+        public static decimal Sum<T>([NotNull] this T[] source, [NotNull] Func<T, decimal> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             decimal result = 0;
@@ -2788,7 +2816,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static decimal Sum<T>(this T[] source, Func<T, decimal> mapFunc, int startIndex, int endIndex)
+        private static decimal Sum<T>([NotNull] this T[] source, Func<T, decimal> mapFunc, int startIndex, int endIndex)
         {
             decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -2817,7 +2845,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static decimal Sum(this List<decimal> source)
+        public static decimal Sum([NotNull] this List<decimal> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -2836,7 +2864,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static decimal Sum(this List<decimal> source, int startIndex, int endIndex)
+        private static decimal Sum([NotNull] this List<decimal> source, int startIndex, int endIndex)
         {
             decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -2867,9 +2895,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static decimal Sum<T>(this List<T> source, Func<T, decimal> mapFunc)
+        public static decimal Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, decimal> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             decimal result = 0;
@@ -2887,7 +2916,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static decimal Sum<T>(this List<T> source, Func<T, decimal> mapFunc, int startIndex, int endIndex)
+        private static decimal Sum<T>([NotNull] this List<T> source, Func<T, decimal> mapFunc, int startIndex, int endIndex)
         {
             decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -2916,7 +2945,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static decimal Sum(this IList<decimal> source)
+        public static decimal Sum([NotNull] this IList<decimal> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -2935,7 +2964,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static decimal Sum(this IList<decimal> source, int startIndex, int endIndex)
+        private static decimal Sum([NotNull] this IList<decimal> source, int startIndex, int endIndex)
         {
             decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -2966,9 +2995,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static decimal Sum<T>(this IList<T> source, Func<T, decimal> mapFunc)
+        public static decimal Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, decimal> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             decimal result = 0;
@@ -2986,7 +3016,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static decimal Sum<T>(this IList<T> source, Func<T, decimal> mapFunc, int startIndex, int endIndex)
+        private static decimal Sum<T>([NotNull] this IList<T> source, Func<T, decimal> mapFunc, int startIndex, int endIndex)
         {
             decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -3019,7 +3049,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static ulong Sum(this ulong[] source)
+        public static ulong Sum([NotNull] this ulong[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -3038,7 +3068,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static ulong Sum(this ulong[] source, int startIndex, int endIndex)
+        private static ulong Sum([NotNull] this ulong[] source, int startIndex, int endIndex)
         {
             ulong sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -3069,9 +3099,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static ulong Sum<T>(this T[] source, Func<T, ulong> mapFunc)
+        public static ulong Sum<T>([NotNull] this T[] source, [NotNull] Func<T, ulong> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             ulong result = 0;
@@ -3089,7 +3120,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static ulong Sum<T>(this T[] source, Func<T, ulong> mapFunc, int startIndex, int endIndex)
+        private static ulong Sum<T>([NotNull] this T[] source, Func<T, ulong> mapFunc, int startIndex, int endIndex)
         {
             ulong sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -3118,7 +3149,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static ulong Sum(this List<ulong> source)
+        public static ulong Sum([NotNull] this List<ulong> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -3137,7 +3168,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static ulong Sum(this List<ulong> source, int startIndex, int endIndex)
+        private static ulong Sum([NotNull] this List<ulong> source, int startIndex, int endIndex)
         {
             ulong sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -3168,9 +3199,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static ulong Sum<T>(this List<T> source, Func<T, ulong> mapFunc)
+        public static ulong Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, ulong> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             ulong result = 0;
@@ -3188,7 +3220,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static ulong Sum<T>(this List<T> source, Func<T, ulong> mapFunc, int startIndex, int endIndex)
+        private static ulong Sum<T>([NotNull] this List<T> source, Func<T, ulong> mapFunc, int startIndex, int endIndex)
         {
             ulong sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -3217,7 +3249,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static ulong Sum(this IList<ulong> source)
+        public static ulong Sum([NotNull] this IList<ulong> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -3236,7 +3268,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static ulong Sum(this IList<ulong> source, int startIndex, int endIndex)
+        private static ulong Sum([NotNull] this IList<ulong> source, int startIndex, int endIndex)
         {
             ulong sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked
@@ -3267,9 +3299,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static ulong Sum<T>(this IList<T> source, Func<T, ulong> mapFunc)
+        public static ulong Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, ulong> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             ulong result = 0;
@@ -3287,7 +3320,7 @@ namespace ZLinq
         }
 
         [Pure]
-        private static ulong Sum<T>(this IList<T> source, Func<T, ulong> mapFunc, int startIndex, int endIndex)
+        private static ulong Sum<T>([NotNull] this IList<T> source, Func<T, ulong> mapFunc, int startIndex, int endIndex)
         {
             ulong sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
             checked

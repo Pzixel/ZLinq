@@ -1,7 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
+using JetBrains.Annotations;
 using ZLinq.Extension;
 
 // ReSharper disable CheckNamespace
@@ -19,7 +19,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this sbyte[] source)
+        public static double Average([NotNull] this sbyte[] source)
         {
             source.IsNotNull("source");
             try
@@ -41,9 +41,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this T[] source, Func<T, sbyte> mapFunc)
+        public static double Average<T>([NotNull] this T[] source, [NotNull] Func<T, sbyte> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -63,7 +64,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this List<sbyte> source)
+        public static double Average([NotNull] this List<sbyte> source)
         {
             source.IsNotNull("source");
             try
@@ -85,9 +86,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this List<T> source, Func<T, sbyte> mapFunc)
+        public static double Average<T>([NotNull] this List<T> source, [NotNull] Func<T, sbyte> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -107,7 +109,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this IList<sbyte> source)
+        public static double Average([NotNull] this IList<sbyte> source)
         {
             source.IsNotNull("source");
             try
@@ -129,9 +131,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this IList<T> source, Func<T, sbyte> mapFunc)
+        public static double Average<T>([NotNull] this IList<T> source, [NotNull] Func<T, sbyte> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -155,7 +158,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this byte[] source)
+        public static double Average([NotNull] this byte[] source)
         {
             source.IsNotNull("source");
             try
@@ -177,9 +180,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this T[] source, Func<T, byte> mapFunc)
+        public static double Average<T>([NotNull] this T[] source, [NotNull] Func<T, byte> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -199,7 +203,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this List<byte> source)
+        public static double Average([NotNull] this List<byte> source)
         {
             source.IsNotNull("source");
             try
@@ -221,9 +225,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this List<T> source, Func<T, byte> mapFunc)
+        public static double Average<T>([NotNull] this List<T> source, [NotNull] Func<T, byte> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -243,7 +248,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this IList<byte> source)
+        public static double Average([NotNull] this IList<byte> source)
         {
             source.IsNotNull("source");
             try
@@ -265,9 +270,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this IList<T> source, Func<T, byte> mapFunc)
+        public static double Average<T>([NotNull] this IList<T> source, [NotNull] Func<T, byte> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -291,7 +297,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this short[] source)
+        public static double Average([NotNull] this short[] source)
         {
             source.IsNotNull("source");
             try
@@ -313,9 +319,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this T[] source, Func<T, short> mapFunc)
+        public static double Average<T>([NotNull] this T[] source, [NotNull] Func<T, short> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -335,7 +342,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this List<short> source)
+        public static double Average([NotNull] this List<short> source)
         {
             source.IsNotNull("source");
             try
@@ -357,9 +364,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this List<T> source, Func<T, short> mapFunc)
+        public static double Average<T>([NotNull] this List<T> source, [NotNull] Func<T, short> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -379,7 +387,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this IList<short> source)
+        public static double Average([NotNull] this IList<short> source)
         {
             source.IsNotNull("source");
             try
@@ -401,9 +409,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this IList<T> source, Func<T, short> mapFunc)
+        public static double Average<T>([NotNull] this IList<T> source, [NotNull] Func<T, short> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -427,7 +436,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this ushort[] source)
+        public static double Average([NotNull] this ushort[] source)
         {
             source.IsNotNull("source");
             try
@@ -449,9 +458,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this T[] source, Func<T, ushort> mapFunc)
+        public static double Average<T>([NotNull] this T[] source, [NotNull] Func<T, ushort> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -471,7 +481,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this List<ushort> source)
+        public static double Average([NotNull] this List<ushort> source)
         {
             source.IsNotNull("source");
             try
@@ -493,9 +503,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this List<T> source, Func<T, ushort> mapFunc)
+        public static double Average<T>([NotNull] this List<T> source, [NotNull] Func<T, ushort> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -515,7 +526,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this IList<ushort> source)
+        public static double Average([NotNull] this IList<ushort> source)
         {
             source.IsNotNull("source");
             try
@@ -537,9 +548,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this IList<T> source, Func<T, ushort> mapFunc)
+        public static double Average<T>([NotNull] this IList<T> source, [NotNull] Func<T, ushort> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -563,7 +575,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this int[] source)
+        public static double Average([NotNull] this int[] source)
         {
             source.IsNotNull("source");
             try
@@ -585,9 +597,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this T[] source, Func<T, int> mapFunc)
+        public static double Average<T>([NotNull] this T[] source, [NotNull] Func<T, int> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -607,7 +620,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this List<int> source)
+        public static double Average([NotNull] this List<int> source)
         {
             source.IsNotNull("source");
             try
@@ -629,9 +642,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this List<T> source, Func<T, int> mapFunc)
+        public static double Average<T>([NotNull] this List<T> source, [NotNull] Func<T, int> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -651,7 +665,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this IList<int> source)
+        public static double Average([NotNull] this IList<int> source)
         {
             source.IsNotNull("source");
             try
@@ -673,9 +687,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this IList<T> source, Func<T, int> mapFunc)
+        public static double Average<T>([NotNull] this IList<T> source, [NotNull] Func<T, int> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -699,7 +714,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this uint[] source)
+        public static double Average([NotNull] this uint[] source)
         {
             source.IsNotNull("source");
             try
@@ -721,9 +736,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this T[] source, Func<T, uint> mapFunc)
+        public static double Average<T>([NotNull] this T[] source, [NotNull] Func<T, uint> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -743,7 +759,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this List<uint> source)
+        public static double Average([NotNull] this List<uint> source)
         {
             source.IsNotNull("source");
             try
@@ -765,9 +781,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this List<T> source, Func<T, uint> mapFunc)
+        public static double Average<T>([NotNull] this List<T> source, [NotNull] Func<T, uint> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -787,7 +804,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this IList<uint> source)
+        public static double Average([NotNull] this IList<uint> source)
         {
             source.IsNotNull("source");
             try
@@ -809,9 +826,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this IList<T> source, Func<T, uint> mapFunc)
+        public static double Average<T>([NotNull] this IList<T> source, [NotNull] Func<T, uint> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -835,7 +853,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this long[] source)
+        public static double Average([NotNull] this long[] source)
         {
             source.IsNotNull("source");
             try
@@ -857,9 +875,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this T[] source, Func<T, long> mapFunc)
+        public static double Average<T>([NotNull] this T[] source, [NotNull] Func<T, long> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -879,7 +898,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this List<long> source)
+        public static double Average([NotNull] this List<long> source)
         {
             source.IsNotNull("source");
             try
@@ -901,9 +920,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this List<T> source, Func<T, long> mapFunc)
+        public static double Average<T>([NotNull] this List<T> source, [NotNull] Func<T, long> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -923,7 +943,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this IList<long> source)
+        public static double Average([NotNull] this IList<long> source)
         {
             source.IsNotNull("source");
             try
@@ -945,9 +965,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this IList<T> source, Func<T, long> mapFunc)
+        public static double Average<T>([NotNull] this IList<T> source, [NotNull] Func<T, long> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -971,7 +992,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this float[] source)
+        public static double Average([NotNull] this float[] source)
         {
             source.IsNotNull("source");
             try
@@ -993,9 +1014,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this T[] source, Func<T, float> mapFunc)
+        public static double Average<T>([NotNull] this T[] source, [NotNull] Func<T, float> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -1015,7 +1037,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this List<float> source)
+        public static double Average([NotNull] this List<float> source)
         {
             source.IsNotNull("source");
             try
@@ -1037,9 +1059,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this List<T> source, Func<T, float> mapFunc)
+        public static double Average<T>([NotNull] this List<T> source, [NotNull] Func<T, float> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -1059,7 +1082,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this IList<float> source)
+        public static double Average([NotNull] this IList<float> source)
         {
             source.IsNotNull("source");
             try
@@ -1081,9 +1104,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this IList<T> source, Func<T, float> mapFunc)
+        public static double Average<T>([NotNull] this IList<T> source, [NotNull] Func<T, float> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -1107,7 +1131,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this double[] source)
+        public static double Average([NotNull] this double[] source)
         {
             source.IsNotNull("source");
             try
@@ -1129,9 +1153,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this T[] source, Func<T, double> mapFunc)
+        public static double Average<T>([NotNull] this T[] source, [NotNull] Func<T, double> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -1151,7 +1176,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this List<double> source)
+        public static double Average([NotNull] this List<double> source)
         {
             source.IsNotNull("source");
             try
@@ -1173,9 +1198,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this List<T> source, Func<T, double> mapFunc)
+        public static double Average<T>([NotNull] this List<T> source, [NotNull] Func<T, double> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -1195,7 +1221,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this IList<double> source)
+        public static double Average([NotNull] this IList<double> source)
         {
             source.IsNotNull("source");
             try
@@ -1217,9 +1243,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this IList<T> source, Func<T, double> mapFunc)
+        public static double Average<T>([NotNull] this IList<T> source, [NotNull] Func<T, double> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -1243,7 +1270,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this decimal[] source)
+        public static double Average([NotNull] this decimal[] source)
         {
             source.IsNotNull("source");
             try
@@ -1265,9 +1292,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this T[] source, Func<T, decimal> mapFunc)
+        public static double Average<T>([NotNull] this T[] source, [NotNull] Func<T, decimal> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -1287,7 +1315,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this List<decimal> source)
+        public static double Average([NotNull] this List<decimal> source)
         {
             source.IsNotNull("source");
             try
@@ -1309,9 +1337,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this List<T> source, Func<T, decimal> mapFunc)
+        public static double Average<T>([NotNull] this List<T> source, [NotNull] Func<T, decimal> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -1331,7 +1360,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this IList<decimal> source)
+        public static double Average([NotNull] this IList<decimal> source)
         {
             source.IsNotNull("source");
             try
@@ -1353,9 +1382,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this IList<T> source, Func<T, decimal> mapFunc)
+        public static double Average<T>([NotNull] this IList<T> source, [NotNull] Func<T, decimal> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -1379,7 +1409,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this ulong[] source)
+        public static double Average([NotNull] this ulong[] source)
         {
             source.IsNotNull("source");
             try
@@ -1401,9 +1431,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this T[] source, Func<T, ulong> mapFunc)
+        public static double Average<T>([NotNull] this T[] source, [NotNull] Func<T, ulong> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -1423,7 +1454,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this List<ulong> source)
+        public static double Average([NotNull] this List<ulong> source)
         {
             source.IsNotNull("source");
             try
@@ -1445,9 +1476,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this List<T> source, Func<T, ulong> mapFunc)
+        public static double Average<T>([NotNull] this List<T> source, [NotNull] Func<T, ulong> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -1467,7 +1499,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average(this IList<ulong> source)
+        public static double Average([NotNull] this IList<ulong> source)
         {
             source.IsNotNull("source");
             try
@@ -1489,9 +1521,10 @@ namespace ZLinq
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static double Average<T>(this IList<T> source, Func<T, ulong> mapFunc)
+        public static double Average<T>([NotNull] this IList<T> source, [NotNull] Func<T, ulong> mapFunc)
         {
             source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
             try
             {
                 double sum = (double) source.Sum(mapFunc);

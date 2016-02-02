@@ -51,7 +51,7 @@ namespace ZLinq
             return source == null || source.Count == 0;
         }
 
-                [System.Diagnostics.Contracts.Pure]
+                [Pure]
         [ContractAnnotation("source:null => true; source:notnull => false")]
         public static bool IsNullOrEmpty<T>([CanBeNull] this IEnumerable<T> source)
         {
@@ -67,7 +67,7 @@ namespace ZLinq
             return true;
         }
 
-        [System.Diagnostics.Contracts.Pure]
+        [Pure]
         [ContractAnnotation("source:null => true; source:notnull => false")]
         public static bool IsNullOrEmpty([CanBeNull] this IEnumerable source)
         {
