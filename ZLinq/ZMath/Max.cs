@@ -4,6 +4,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 using ZLinq.Extension;
 
 // ReSharper disable CheckNamespace
@@ -12,6 +13,8 @@ namespace ZLinq
 {
     public static partial class ZEnumerable
     {
+
+#region Non-Nullables	 	
 		
 		#region sbyte	 		
 			
@@ -20,8 +23,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static sbyte Max(this sbyte[] source)
+		[System.Diagnostics.Contracts.Pure]
+        public static sbyte Max([NotNull] this sbyte[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -41,8 +44,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static sbyte Max(this sbyte[] source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static sbyte Max([NotNull] this sbyte[] source, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -84,10 +87,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static sbyte Max<T>(this T[] source, Func<T, sbyte> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static sbyte Max<T>([NotNull] this T[] source, [NotNull] Func<T, sbyte> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
             sbyte result = 0;
@@ -105,8 +109,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static sbyte Max<T>(this T[] source, Func<T, sbyte> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static sbyte Max<T>([NotNull] this T[] source, [NotNull] Func<T, sbyte> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -153,8 +157,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static sbyte Max(this List<sbyte> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static sbyte Max([NotNull] this List<sbyte> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -174,8 +178,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static sbyte Max(this List<sbyte> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static sbyte Max([NotNull] this List<sbyte> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -217,10 +221,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static sbyte Max<T>(this List<T> source, Func<T, sbyte> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static sbyte Max<T>([NotNull] this List<T> source, [NotNull] Func<T, sbyte> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             sbyte result = 0;
@@ -238,8 +243,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static sbyte Max<T>(this List<T> source, Func<T, sbyte> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static sbyte Max<T>([NotNull] this List<T> source, [NotNull] Func<T, sbyte> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -286,8 +291,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static sbyte Max(this IList<sbyte> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static sbyte Max([NotNull] this IList<sbyte> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -307,8 +312,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static sbyte Max(this IList<sbyte> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static sbyte Max([NotNull] this IList<sbyte> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -350,10 +355,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static sbyte Max<T>(this IList<T> source, Func<T, sbyte> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static sbyte Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, sbyte> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             sbyte result = 0;
@@ -371,8 +377,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static sbyte Max<T>(this IList<T> source, Func<T, sbyte> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static sbyte Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, sbyte> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -423,8 +429,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static byte Max(this byte[] source)
+		[System.Diagnostics.Contracts.Pure]
+        public static byte Max([NotNull] this byte[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -444,8 +450,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static byte Max(this byte[] source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static byte Max([NotNull] this byte[] source, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -487,10 +493,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static byte Max<T>(this T[] source, Func<T, byte> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static byte Max<T>([NotNull] this T[] source, [NotNull] Func<T, byte> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
             byte result = 0;
@@ -508,8 +515,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static byte Max<T>(this T[] source, Func<T, byte> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static byte Max<T>([NotNull] this T[] source, [NotNull] Func<T, byte> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -556,8 +563,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static byte Max(this List<byte> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static byte Max([NotNull] this List<byte> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -577,8 +584,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static byte Max(this List<byte> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static byte Max([NotNull] this List<byte> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -620,10 +627,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static byte Max<T>(this List<T> source, Func<T, byte> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static byte Max<T>([NotNull] this List<T> source, [NotNull] Func<T, byte> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             byte result = 0;
@@ -641,8 +649,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static byte Max<T>(this List<T> source, Func<T, byte> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static byte Max<T>([NotNull] this List<T> source, [NotNull] Func<T, byte> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -689,8 +697,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static byte Max(this IList<byte> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static byte Max([NotNull] this IList<byte> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -710,8 +718,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static byte Max(this IList<byte> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static byte Max([NotNull] this IList<byte> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -753,10 +761,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static byte Max<T>(this IList<T> source, Func<T, byte> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static byte Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, byte> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             byte result = 0;
@@ -774,8 +783,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static byte Max<T>(this IList<T> source, Func<T, byte> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static byte Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, byte> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -826,8 +835,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static short Max(this short[] source)
+		[System.Diagnostics.Contracts.Pure]
+        public static short Max([NotNull] this short[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -847,8 +856,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static short Max(this short[] source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static short Max([NotNull] this short[] source, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -890,10 +899,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static short Max<T>(this T[] source, Func<T, short> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static short Max<T>([NotNull] this T[] source, [NotNull] Func<T, short> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
             short result = 0;
@@ -911,8 +921,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static short Max<T>(this T[] source, Func<T, short> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static short Max<T>([NotNull] this T[] source, [NotNull] Func<T, short> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -959,8 +969,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static short Max(this List<short> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static short Max([NotNull] this List<short> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -980,8 +990,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static short Max(this List<short> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static short Max([NotNull] this List<short> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -1023,10 +1033,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static short Max<T>(this List<T> source, Func<T, short> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static short Max<T>([NotNull] this List<T> source, [NotNull] Func<T, short> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             short result = 0;
@@ -1044,8 +1055,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static short Max<T>(this List<T> source, Func<T, short> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static short Max<T>([NotNull] this List<T> source, [NotNull] Func<T, short> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -1092,8 +1103,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static short Max(this IList<short> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static short Max([NotNull] this IList<short> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -1113,8 +1124,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static short Max(this IList<short> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static short Max([NotNull] this IList<short> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -1156,10 +1167,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static short Max<T>(this IList<T> source, Func<T, short> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static short Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, short> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             short result = 0;
@@ -1177,8 +1189,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static short Max<T>(this IList<T> source, Func<T, short> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static short Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, short> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -1229,8 +1241,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static ushort Max(this ushort[] source)
+		[System.Diagnostics.Contracts.Pure]
+        public static ushort Max([NotNull] this ushort[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -1250,8 +1262,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static ushort Max(this ushort[] source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static ushort Max([NotNull] this ushort[] source, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -1293,10 +1305,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static ushort Max<T>(this T[] source, Func<T, ushort> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static ushort Max<T>([NotNull] this T[] source, [NotNull] Func<T, ushort> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
             ushort result = 0;
@@ -1314,8 +1327,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static ushort Max<T>(this T[] source, Func<T, ushort> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static ushort Max<T>([NotNull] this T[] source, [NotNull] Func<T, ushort> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -1362,8 +1375,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static ushort Max(this List<ushort> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static ushort Max([NotNull] this List<ushort> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -1383,8 +1396,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static ushort Max(this List<ushort> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static ushort Max([NotNull] this List<ushort> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -1426,10 +1439,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static ushort Max<T>(this List<T> source, Func<T, ushort> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static ushort Max<T>([NotNull] this List<T> source, [NotNull] Func<T, ushort> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             ushort result = 0;
@@ -1447,8 +1461,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static ushort Max<T>(this List<T> source, Func<T, ushort> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static ushort Max<T>([NotNull] this List<T> source, [NotNull] Func<T, ushort> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -1495,8 +1509,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static ushort Max(this IList<ushort> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static ushort Max([NotNull] this IList<ushort> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -1516,8 +1530,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static ushort Max(this IList<ushort> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static ushort Max([NotNull] this IList<ushort> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -1559,10 +1573,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static ushort Max<T>(this IList<T> source, Func<T, ushort> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static ushort Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, ushort> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             ushort result = 0;
@@ -1580,8 +1595,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static ushort Max<T>(this IList<T> source, Func<T, ushort> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static ushort Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, ushort> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -1632,8 +1647,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static int Max(this int[] source)
+		[System.Diagnostics.Contracts.Pure]
+        public static int Max([NotNull] this int[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -1653,8 +1668,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static int Max(this int[] source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static int Max([NotNull] this int[] source, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -1696,10 +1711,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static int Max<T>(this T[] source, Func<T, int> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static int Max<T>([NotNull] this T[] source, [NotNull] Func<T, int> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
             int result = 0;
@@ -1717,8 +1733,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static int Max<T>(this T[] source, Func<T, int> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static int Max<T>([NotNull] this T[] source, [NotNull] Func<T, int> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -1765,8 +1781,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static int Max(this List<int> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static int Max([NotNull] this List<int> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -1786,8 +1802,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static int Max(this List<int> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static int Max([NotNull] this List<int> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -1829,10 +1845,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static int Max<T>(this List<T> source, Func<T, int> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static int Max<T>([NotNull] this List<T> source, [NotNull] Func<T, int> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             int result = 0;
@@ -1850,8 +1867,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static int Max<T>(this List<T> source, Func<T, int> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static int Max<T>([NotNull] this List<T> source, [NotNull] Func<T, int> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -1898,8 +1915,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static int Max(this IList<int> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static int Max([NotNull] this IList<int> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -1919,8 +1936,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static int Max(this IList<int> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static int Max([NotNull] this IList<int> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -1962,10 +1979,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static int Max<T>(this IList<T> source, Func<T, int> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static int Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, int> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             int result = 0;
@@ -1983,8 +2001,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static int Max<T>(this IList<T> source, Func<T, int> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static int Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, int> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -2035,8 +2053,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static uint Max(this uint[] source)
+		[System.Diagnostics.Contracts.Pure]
+        public static uint Max([NotNull] this uint[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -2056,8 +2074,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static uint Max(this uint[] source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static uint Max([NotNull] this uint[] source, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -2099,10 +2117,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static uint Max<T>(this T[] source, Func<T, uint> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static uint Max<T>([NotNull] this T[] source, [NotNull] Func<T, uint> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
             uint result = 0;
@@ -2120,8 +2139,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static uint Max<T>(this T[] source, Func<T, uint> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static uint Max<T>([NotNull] this T[] source, [NotNull] Func<T, uint> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -2168,8 +2187,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static uint Max(this List<uint> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static uint Max([NotNull] this List<uint> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -2189,8 +2208,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static uint Max(this List<uint> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static uint Max([NotNull] this List<uint> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -2232,10 +2251,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static uint Max<T>(this List<T> source, Func<T, uint> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static uint Max<T>([NotNull] this List<T> source, [NotNull] Func<T, uint> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             uint result = 0;
@@ -2253,8 +2273,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static uint Max<T>(this List<T> source, Func<T, uint> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static uint Max<T>([NotNull] this List<T> source, [NotNull] Func<T, uint> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -2301,8 +2321,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static uint Max(this IList<uint> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static uint Max([NotNull] this IList<uint> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -2322,8 +2342,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static uint Max(this IList<uint> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static uint Max([NotNull] this IList<uint> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -2365,10 +2385,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static uint Max<T>(this IList<T> source, Func<T, uint> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static uint Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, uint> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             uint result = 0;
@@ -2386,8 +2407,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static uint Max<T>(this IList<T> source, Func<T, uint> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static uint Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, uint> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -2438,8 +2459,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static long Max(this long[] source)
+		[System.Diagnostics.Contracts.Pure]
+        public static long Max([NotNull] this long[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -2459,8 +2480,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static long Max(this long[] source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static long Max([NotNull] this long[] source, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -2502,10 +2523,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static long Max<T>(this T[] source, Func<T, long> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static long Max<T>([NotNull] this T[] source, [NotNull] Func<T, long> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
             long result = 0;
@@ -2523,8 +2545,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static long Max<T>(this T[] source, Func<T, long> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static long Max<T>([NotNull] this T[] source, [NotNull] Func<T, long> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -2571,8 +2593,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static long Max(this List<long> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static long Max([NotNull] this List<long> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -2592,8 +2614,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static long Max(this List<long> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static long Max([NotNull] this List<long> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -2635,10 +2657,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static long Max<T>(this List<T> source, Func<T, long> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static long Max<T>([NotNull] this List<T> source, [NotNull] Func<T, long> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             long result = 0;
@@ -2656,8 +2679,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static long Max<T>(this List<T> source, Func<T, long> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static long Max<T>([NotNull] this List<T> source, [NotNull] Func<T, long> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -2704,8 +2727,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static long Max(this IList<long> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static long Max([NotNull] this IList<long> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -2725,8 +2748,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static long Max(this IList<long> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static long Max([NotNull] this IList<long> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -2768,10 +2791,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static long Max<T>(this IList<T> source, Func<T, long> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static long Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, long> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             long result = 0;
@@ -2789,8 +2813,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static long Max<T>(this IList<T> source, Func<T, long> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static long Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, long> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -2841,8 +2865,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static float Max(this float[] source)
+		[System.Diagnostics.Contracts.Pure]
+        public static float Max([NotNull] this float[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -2862,8 +2886,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static float Max(this float[] source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static float Max([NotNull] this float[] source, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -2905,10 +2929,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static float Max<T>(this T[] source, Func<T, float> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static float Max<T>([NotNull] this T[] source, [NotNull] Func<T, float> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
             float result = 0;
@@ -2926,8 +2951,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static float Max<T>(this T[] source, Func<T, float> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static float Max<T>([NotNull] this T[] source, [NotNull] Func<T, float> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -2974,8 +2999,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static float Max(this List<float> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static float Max([NotNull] this List<float> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -2995,8 +3020,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static float Max(this List<float> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static float Max([NotNull] this List<float> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -3038,10 +3063,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static float Max<T>(this List<T> source, Func<T, float> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static float Max<T>([NotNull] this List<T> source, [NotNull] Func<T, float> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             float result = 0;
@@ -3059,8 +3085,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static float Max<T>(this List<T> source, Func<T, float> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static float Max<T>([NotNull] this List<T> source, [NotNull] Func<T, float> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -3107,8 +3133,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static float Max(this IList<float> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static float Max([NotNull] this IList<float> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -3128,8 +3154,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static float Max(this IList<float> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static float Max([NotNull] this IList<float> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -3171,10 +3197,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static float Max<T>(this IList<T> source, Func<T, float> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static float Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, float> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             float result = 0;
@@ -3192,8 +3219,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static float Max<T>(this IList<T> source, Func<T, float> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static float Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, float> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -3244,8 +3271,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static double Max(this double[] source)
+		[System.Diagnostics.Contracts.Pure]
+        public static double Max([NotNull] this double[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -3265,8 +3292,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static double Max(this double[] source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static double Max([NotNull] this double[] source, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -3308,10 +3335,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static double Max<T>(this T[] source, Func<T, double> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static double Max<T>([NotNull] this T[] source, [NotNull] Func<T, double> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
             double result = 0;
@@ -3329,8 +3357,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static double Max<T>(this T[] source, Func<T, double> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static double Max<T>([NotNull] this T[] source, [NotNull] Func<T, double> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -3377,8 +3405,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static double Max(this List<double> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static double Max([NotNull] this List<double> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -3398,8 +3426,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static double Max(this List<double> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static double Max([NotNull] this List<double> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -3441,10 +3469,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static double Max<T>(this List<T> source, Func<T, double> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static double Max<T>([NotNull] this List<T> source, [NotNull] Func<T, double> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             double result = 0;
@@ -3462,8 +3491,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static double Max<T>(this List<T> source, Func<T, double> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static double Max<T>([NotNull] this List<T> source, [NotNull] Func<T, double> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -3510,8 +3539,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static double Max(this IList<double> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static double Max([NotNull] this IList<double> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -3531,8 +3560,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static double Max(this IList<double> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static double Max([NotNull] this IList<double> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -3574,10 +3603,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static double Max<T>(this IList<T> source, Func<T, double> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static double Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, double> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             double result = 0;
@@ -3595,8 +3625,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static double Max<T>(this IList<T> source, Func<T, double> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static double Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, double> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -3647,8 +3677,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static decimal Max(this decimal[] source)
+		[System.Diagnostics.Contracts.Pure]
+        public static decimal Max([NotNull] this decimal[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -3668,8 +3698,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static decimal Max(this decimal[] source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static decimal Max([NotNull] this decimal[] source, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -3711,10 +3741,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static decimal Max<T>(this T[] source, Func<T, decimal> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static decimal Max<T>([NotNull] this T[] source, [NotNull] Func<T, decimal> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
             decimal result = 0;
@@ -3732,8 +3763,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static decimal Max<T>(this T[] source, Func<T, decimal> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static decimal Max<T>([NotNull] this T[] source, [NotNull] Func<T, decimal> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -3780,8 +3811,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static decimal Max(this List<decimal> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static decimal Max([NotNull] this List<decimal> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -3801,8 +3832,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static decimal Max(this List<decimal> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static decimal Max([NotNull] this List<decimal> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -3844,10 +3875,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static decimal Max<T>(this List<T> source, Func<T, decimal> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static decimal Max<T>([NotNull] this List<T> source, [NotNull] Func<T, decimal> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             decimal result = 0;
@@ -3865,8 +3897,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static decimal Max<T>(this List<T> source, Func<T, decimal> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static decimal Max<T>([NotNull] this List<T> source, [NotNull] Func<T, decimal> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -3913,8 +3945,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static decimal Max(this IList<decimal> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static decimal Max([NotNull] this IList<decimal> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -3934,8 +3966,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static decimal Max(this IList<decimal> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static decimal Max([NotNull] this IList<decimal> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -3977,10 +4009,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static decimal Max<T>(this IList<T> source, Func<T, decimal> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static decimal Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, decimal> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             decimal result = 0;
@@ -3998,8 +4031,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static decimal Max<T>(this IList<T> source, Func<T, decimal> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static decimal Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, decimal> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -4050,8 +4083,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static ulong Max(this ulong[] source)
+		[System.Diagnostics.Contracts.Pure]
+        public static ulong Max([NotNull] this ulong[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -4071,8 +4104,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static ulong Max(this ulong[] source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static ulong Max([NotNull] this ulong[] source, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -4114,10 +4147,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static ulong Max<T>(this T[] source, Func<T, ulong> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static ulong Max<T>([NotNull] this T[] source, [NotNull] Func<T, ulong> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
             ulong result = 0;
@@ -4135,8 +4169,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static ulong Max<T>(this T[] source, Func<T, ulong> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static ulong Max<T>([NotNull] this T[] source, [NotNull] Func<T, ulong> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -4183,8 +4217,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static ulong Max(this List<ulong> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static ulong Max([NotNull] this List<ulong> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -4204,8 +4238,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static ulong Max(this List<ulong> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static ulong Max([NotNull] this List<ulong> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -4247,10 +4281,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static ulong Max<T>(this List<T> source, Func<T, ulong> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static ulong Max<T>([NotNull] this List<T> source, [NotNull] Func<T, ulong> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             ulong result = 0;
@@ -4268,8 +4303,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static ulong Max<T>(this List<T> source, Func<T, ulong> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static ulong Max<T>([NotNull] this List<T> source, [NotNull] Func<T, ulong> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -4316,8 +4351,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static ulong Max(this IList<ulong> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static ulong Max([NotNull] this IList<ulong> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -4337,8 +4372,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static ulong Max(this IList<ulong> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static ulong Max([NotNull] this IList<ulong> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -4380,10 +4415,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static ulong Max<T>(this IList<T> source, Func<T, ulong> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static ulong Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, ulong> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             ulong result = 0;
@@ -4401,8 +4437,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static ulong Max<T>(this IList<T> source, Func<T, ulong> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static ulong Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, ulong> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -4446,11 +4482,11 @@ namespace ZLinq
 		
 		#endregion
 		
-
+	#endregion
 	#region Nullables
 
 				
-		[Pure]
+		[System.Diagnostics.Contracts.Pure]
 		private static sbyte? Max(sbyte? x, sbyte? y)
 		{
 			bool hasValX = x.HasValue;
@@ -4469,8 +4505,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static sbyte? Max(this sbyte?[] source)
+		[System.Diagnostics.Contracts.Pure]
+        public static sbyte? Max([NotNull] this sbyte?[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -4490,8 +4526,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static sbyte? Max(this sbyte?[] source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static sbyte? Max([NotNull] this sbyte?[] source, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -4538,10 +4574,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static sbyte? Max<T>(this T[] source, Func<T, sbyte?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static sbyte? Max<T>([NotNull] this T[] source, [NotNull] Func<T, sbyte?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
             sbyte? result = 0;
@@ -4559,8 +4596,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static sbyte? Max<T>(this T[] source, Func<T, sbyte?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static sbyte? Max<T>([NotNull] this T[] source, [NotNull] Func<T, sbyte?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -4606,8 +4643,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static sbyte? Max(this List<sbyte?> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static sbyte? Max([NotNull] this List<sbyte?> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -4627,8 +4664,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static sbyte? Max(this List<sbyte?> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static sbyte? Max([NotNull] this List<sbyte?> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -4675,10 +4712,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static sbyte? Max<T>(this List<T> source, Func<T, sbyte?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static sbyte? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, sbyte?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             sbyte? result = 0;
@@ -4696,8 +4734,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static sbyte? Max<T>(this List<T> source, Func<T, sbyte?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static sbyte? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, sbyte?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -4743,8 +4781,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static sbyte? Max(this IList<sbyte?> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static sbyte? Max([NotNull] this IList<sbyte?> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -4764,8 +4802,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static sbyte? Max(this IList<sbyte?> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static sbyte? Max([NotNull] this IList<sbyte?> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -4812,10 +4850,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static sbyte? Max<T>(this IList<T> source, Func<T, sbyte?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static sbyte? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, sbyte?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             sbyte? result = 0;
@@ -4833,8 +4872,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static sbyte? Max<T>(this IList<T> source, Func<T, sbyte?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static sbyte? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, sbyte?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -4877,7 +4916,7 @@ namespace ZLinq
 		
 		#endregion
 			
-		[Pure]
+		[System.Diagnostics.Contracts.Pure]
 		private static byte? Max(byte? x, byte? y)
 		{
 			bool hasValX = x.HasValue;
@@ -4896,8 +4935,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static byte? Max(this byte?[] source)
+		[System.Diagnostics.Contracts.Pure]
+        public static byte? Max([NotNull] this byte?[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -4917,8 +4956,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static byte? Max(this byte?[] source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static byte? Max([NotNull] this byte?[] source, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -4965,10 +5004,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static byte? Max<T>(this T[] source, Func<T, byte?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static byte? Max<T>([NotNull] this T[] source, [NotNull] Func<T, byte?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
             byte? result = 0;
@@ -4986,8 +5026,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static byte? Max<T>(this T[] source, Func<T, byte?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static byte? Max<T>([NotNull] this T[] source, [NotNull] Func<T, byte?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -5033,8 +5073,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static byte? Max(this List<byte?> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static byte? Max([NotNull] this List<byte?> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -5054,8 +5094,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static byte? Max(this List<byte?> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static byte? Max([NotNull] this List<byte?> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -5102,10 +5142,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static byte? Max<T>(this List<T> source, Func<T, byte?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static byte? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, byte?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             byte? result = 0;
@@ -5123,8 +5164,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static byte? Max<T>(this List<T> source, Func<T, byte?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static byte? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, byte?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -5170,8 +5211,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static byte? Max(this IList<byte?> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static byte? Max([NotNull] this IList<byte?> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -5191,8 +5232,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static byte? Max(this IList<byte?> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static byte? Max([NotNull] this IList<byte?> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -5239,10 +5280,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static byte? Max<T>(this IList<T> source, Func<T, byte?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static byte? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, byte?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             byte? result = 0;
@@ -5260,8 +5302,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static byte? Max<T>(this IList<T> source, Func<T, byte?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static byte? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, byte?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -5304,7 +5346,7 @@ namespace ZLinq
 		
 		#endregion
 			
-		[Pure]
+		[System.Diagnostics.Contracts.Pure]
 		private static short? Max(short? x, short? y)
 		{
 			bool hasValX = x.HasValue;
@@ -5323,8 +5365,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static short? Max(this short?[] source)
+		[System.Diagnostics.Contracts.Pure]
+        public static short? Max([NotNull] this short?[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -5344,8 +5386,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static short? Max(this short?[] source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static short? Max([NotNull] this short?[] source, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -5392,10 +5434,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static short? Max<T>(this T[] source, Func<T, short?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static short? Max<T>([NotNull] this T[] source, [NotNull] Func<T, short?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
             short? result = 0;
@@ -5413,8 +5456,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static short? Max<T>(this T[] source, Func<T, short?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static short? Max<T>([NotNull] this T[] source, [NotNull] Func<T, short?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -5460,8 +5503,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static short? Max(this List<short?> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static short? Max([NotNull] this List<short?> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -5481,8 +5524,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static short? Max(this List<short?> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static short? Max([NotNull] this List<short?> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -5529,10 +5572,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static short? Max<T>(this List<T> source, Func<T, short?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static short? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, short?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             short? result = 0;
@@ -5550,8 +5594,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static short? Max<T>(this List<T> source, Func<T, short?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static short? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, short?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -5597,8 +5641,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static short? Max(this IList<short?> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static short? Max([NotNull] this IList<short?> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -5618,8 +5662,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static short? Max(this IList<short?> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static short? Max([NotNull] this IList<short?> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -5666,10 +5710,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static short? Max<T>(this IList<T> source, Func<T, short?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static short? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, short?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             short? result = 0;
@@ -5687,8 +5732,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static short? Max<T>(this IList<T> source, Func<T, short?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static short? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, short?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -5731,7 +5776,7 @@ namespace ZLinq
 		
 		#endregion
 			
-		[Pure]
+		[System.Diagnostics.Contracts.Pure]
 		private static ushort? Max(ushort? x, ushort? y)
 		{
 			bool hasValX = x.HasValue;
@@ -5750,8 +5795,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static ushort? Max(this ushort?[] source)
+		[System.Diagnostics.Contracts.Pure]
+        public static ushort? Max([NotNull] this ushort?[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -5771,8 +5816,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static ushort? Max(this ushort?[] source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static ushort? Max([NotNull] this ushort?[] source, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -5819,10 +5864,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static ushort? Max<T>(this T[] source, Func<T, ushort?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static ushort? Max<T>([NotNull] this T[] source, [NotNull] Func<T, ushort?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
             ushort? result = 0;
@@ -5840,8 +5886,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static ushort? Max<T>(this T[] source, Func<T, ushort?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static ushort? Max<T>([NotNull] this T[] source, [NotNull] Func<T, ushort?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -5887,8 +5933,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static ushort? Max(this List<ushort?> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static ushort? Max([NotNull] this List<ushort?> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -5908,8 +5954,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static ushort? Max(this List<ushort?> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static ushort? Max([NotNull] this List<ushort?> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -5956,10 +6002,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static ushort? Max<T>(this List<T> source, Func<T, ushort?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static ushort? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, ushort?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             ushort? result = 0;
@@ -5977,8 +6024,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static ushort? Max<T>(this List<T> source, Func<T, ushort?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static ushort? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, ushort?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -6024,8 +6071,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static ushort? Max(this IList<ushort?> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static ushort? Max([NotNull] this IList<ushort?> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -6045,8 +6092,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static ushort? Max(this IList<ushort?> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static ushort? Max([NotNull] this IList<ushort?> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -6093,10 +6140,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static ushort? Max<T>(this IList<T> source, Func<T, ushort?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static ushort? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, ushort?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             ushort? result = 0;
@@ -6114,8 +6162,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static ushort? Max<T>(this IList<T> source, Func<T, ushort?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static ushort? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, ushort?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -6158,7 +6206,7 @@ namespace ZLinq
 		
 		#endregion
 			
-		[Pure]
+		[System.Diagnostics.Contracts.Pure]
 		private static int? Max(int? x, int? y)
 		{
 			bool hasValX = x.HasValue;
@@ -6177,8 +6225,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static int? Max(this int?[] source)
+		[System.Diagnostics.Contracts.Pure]
+        public static int? Max([NotNull] this int?[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -6198,8 +6246,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static int? Max(this int?[] source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static int? Max([NotNull] this int?[] source, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -6246,10 +6294,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static int? Max<T>(this T[] source, Func<T, int?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static int? Max<T>([NotNull] this T[] source, [NotNull] Func<T, int?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
             int? result = 0;
@@ -6267,8 +6316,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static int? Max<T>(this T[] source, Func<T, int?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static int? Max<T>([NotNull] this T[] source, [NotNull] Func<T, int?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -6314,8 +6363,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static int? Max(this List<int?> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static int? Max([NotNull] this List<int?> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -6335,8 +6384,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static int? Max(this List<int?> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static int? Max([NotNull] this List<int?> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -6383,10 +6432,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static int? Max<T>(this List<T> source, Func<T, int?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static int? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, int?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             int? result = 0;
@@ -6404,8 +6454,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static int? Max<T>(this List<T> source, Func<T, int?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static int? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, int?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -6451,8 +6501,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static int? Max(this IList<int?> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static int? Max([NotNull] this IList<int?> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -6472,8 +6522,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static int? Max(this IList<int?> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static int? Max([NotNull] this IList<int?> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -6520,10 +6570,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static int? Max<T>(this IList<T> source, Func<T, int?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static int? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, int?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             int? result = 0;
@@ -6541,8 +6592,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static int? Max<T>(this IList<T> source, Func<T, int?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static int? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, int?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -6585,7 +6636,7 @@ namespace ZLinq
 		
 		#endregion
 			
-		[Pure]
+		[System.Diagnostics.Contracts.Pure]
 		private static uint? Max(uint? x, uint? y)
 		{
 			bool hasValX = x.HasValue;
@@ -6604,8 +6655,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static uint? Max(this uint?[] source)
+		[System.Diagnostics.Contracts.Pure]
+        public static uint? Max([NotNull] this uint?[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -6625,8 +6676,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static uint? Max(this uint?[] source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static uint? Max([NotNull] this uint?[] source, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -6673,10 +6724,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static uint? Max<T>(this T[] source, Func<T, uint?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static uint? Max<T>([NotNull] this T[] source, [NotNull] Func<T, uint?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
             uint? result = 0;
@@ -6694,8 +6746,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static uint? Max<T>(this T[] source, Func<T, uint?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static uint? Max<T>([NotNull] this T[] source, [NotNull] Func<T, uint?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -6741,8 +6793,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static uint? Max(this List<uint?> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static uint? Max([NotNull] this List<uint?> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -6762,8 +6814,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static uint? Max(this List<uint?> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static uint? Max([NotNull] this List<uint?> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -6810,10 +6862,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static uint? Max<T>(this List<T> source, Func<T, uint?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static uint? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, uint?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             uint? result = 0;
@@ -6831,8 +6884,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static uint? Max<T>(this List<T> source, Func<T, uint?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static uint? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, uint?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -6878,8 +6931,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static uint? Max(this IList<uint?> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static uint? Max([NotNull] this IList<uint?> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -6899,8 +6952,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static uint? Max(this IList<uint?> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static uint? Max([NotNull] this IList<uint?> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -6947,10 +7000,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static uint? Max<T>(this IList<T> source, Func<T, uint?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static uint? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, uint?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             uint? result = 0;
@@ -6968,8 +7022,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static uint? Max<T>(this IList<T> source, Func<T, uint?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static uint? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, uint?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -7012,7 +7066,7 @@ namespace ZLinq
 		
 		#endregion
 			
-		[Pure]
+		[System.Diagnostics.Contracts.Pure]
 		private static long? Max(long? x, long? y)
 		{
 			bool hasValX = x.HasValue;
@@ -7031,8 +7085,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static long? Max(this long?[] source)
+		[System.Diagnostics.Contracts.Pure]
+        public static long? Max([NotNull] this long?[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -7052,8 +7106,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static long? Max(this long?[] source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static long? Max([NotNull] this long?[] source, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -7100,10 +7154,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static long? Max<T>(this T[] source, Func<T, long?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static long? Max<T>([NotNull] this T[] source, [NotNull] Func<T, long?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
             long? result = 0;
@@ -7121,8 +7176,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static long? Max<T>(this T[] source, Func<T, long?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static long? Max<T>([NotNull] this T[] source, [NotNull] Func<T, long?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -7168,8 +7223,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static long? Max(this List<long?> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static long? Max([NotNull] this List<long?> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -7189,8 +7244,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static long? Max(this List<long?> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static long? Max([NotNull] this List<long?> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -7237,10 +7292,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static long? Max<T>(this List<T> source, Func<T, long?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static long? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, long?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             long? result = 0;
@@ -7258,8 +7314,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static long? Max<T>(this List<T> source, Func<T, long?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static long? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, long?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -7305,8 +7361,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static long? Max(this IList<long?> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static long? Max([NotNull] this IList<long?> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -7326,8 +7382,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static long? Max(this IList<long?> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static long? Max([NotNull] this IList<long?> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -7374,10 +7430,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static long? Max<T>(this IList<T> source, Func<T, long?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static long? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, long?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             long? result = 0;
@@ -7395,8 +7452,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static long? Max<T>(this IList<T> source, Func<T, long?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static long? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, long?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -7439,7 +7496,7 @@ namespace ZLinq
 		
 		#endregion
 			
-		[Pure]
+		[System.Diagnostics.Contracts.Pure]
 		private static float? Max(float? x, float? y)
 		{
 			bool hasValX = x.HasValue;
@@ -7458,8 +7515,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static float? Max(this float?[] source)
+		[System.Diagnostics.Contracts.Pure]
+        public static float? Max([NotNull] this float?[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -7479,8 +7536,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static float? Max(this float?[] source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static float? Max([NotNull] this float?[] source, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -7527,10 +7584,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static float? Max<T>(this T[] source, Func<T, float?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static float? Max<T>([NotNull] this T[] source, [NotNull] Func<T, float?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
             float? result = 0;
@@ -7548,8 +7606,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static float? Max<T>(this T[] source, Func<T, float?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static float? Max<T>([NotNull] this T[] source, [NotNull] Func<T, float?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -7595,8 +7653,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static float? Max(this List<float?> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static float? Max([NotNull] this List<float?> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -7616,8 +7674,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static float? Max(this List<float?> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static float? Max([NotNull] this List<float?> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -7664,10 +7722,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static float? Max<T>(this List<T> source, Func<T, float?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static float? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, float?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             float? result = 0;
@@ -7685,8 +7744,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static float? Max<T>(this List<T> source, Func<T, float?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static float? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, float?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -7732,8 +7791,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static float? Max(this IList<float?> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static float? Max([NotNull] this IList<float?> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -7753,8 +7812,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static float? Max(this IList<float?> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static float? Max([NotNull] this IList<float?> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -7801,10 +7860,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static float? Max<T>(this IList<T> source, Func<T, float?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static float? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, float?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             float? result = 0;
@@ -7822,8 +7882,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static float? Max<T>(this IList<T> source, Func<T, float?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static float? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, float?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -7866,7 +7926,7 @@ namespace ZLinq
 		
 		#endregion
 			
-		[Pure]
+		[System.Diagnostics.Contracts.Pure]
 		private static double? Max(double? x, double? y)
 		{
 			bool hasValX = x.HasValue;
@@ -7885,8 +7945,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static double? Max(this double?[] source)
+		[System.Diagnostics.Contracts.Pure]
+        public static double? Max([NotNull] this double?[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -7906,8 +7966,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static double? Max(this double?[] source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static double? Max([NotNull] this double?[] source, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -7954,10 +8014,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static double? Max<T>(this T[] source, Func<T, double?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static double? Max<T>([NotNull] this T[] source, [NotNull] Func<T, double?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
             double? result = 0;
@@ -7975,8 +8036,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static double? Max<T>(this T[] source, Func<T, double?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static double? Max<T>([NotNull] this T[] source, [NotNull] Func<T, double?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -8022,8 +8083,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static double? Max(this List<double?> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static double? Max([NotNull] this List<double?> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -8043,8 +8104,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static double? Max(this List<double?> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static double? Max([NotNull] this List<double?> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -8091,10 +8152,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static double? Max<T>(this List<T> source, Func<T, double?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static double? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, double?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             double? result = 0;
@@ -8112,8 +8174,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static double? Max<T>(this List<T> source, Func<T, double?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static double? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, double?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -8159,8 +8221,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static double? Max(this IList<double?> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static double? Max([NotNull] this IList<double?> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -8180,8 +8242,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static double? Max(this IList<double?> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static double? Max([NotNull] this IList<double?> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -8228,10 +8290,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static double? Max<T>(this IList<T> source, Func<T, double?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static double? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, double?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             double? result = 0;
@@ -8249,8 +8312,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static double? Max<T>(this IList<T> source, Func<T, double?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static double? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, double?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -8293,7 +8356,7 @@ namespace ZLinq
 		
 		#endregion
 			
-		[Pure]
+		[System.Diagnostics.Contracts.Pure]
 		private static decimal? Max(decimal? x, decimal? y)
 		{
 			bool hasValX = x.HasValue;
@@ -8312,8 +8375,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static decimal? Max(this decimal?[] source)
+		[System.Diagnostics.Contracts.Pure]
+        public static decimal? Max([NotNull] this decimal?[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -8333,8 +8396,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static decimal? Max(this decimal?[] source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static decimal? Max([NotNull] this decimal?[] source, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -8381,10 +8444,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static decimal? Max<T>(this T[] source, Func<T, decimal?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static decimal? Max<T>([NotNull] this T[] source, [NotNull] Func<T, decimal?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
             decimal? result = 0;
@@ -8402,8 +8466,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static decimal? Max<T>(this T[] source, Func<T, decimal?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static decimal? Max<T>([NotNull] this T[] source, [NotNull] Func<T, decimal?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -8449,8 +8513,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static decimal? Max(this List<decimal?> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static decimal? Max([NotNull] this List<decimal?> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -8470,8 +8534,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static decimal? Max(this List<decimal?> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static decimal? Max([NotNull] this List<decimal?> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -8518,10 +8582,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static decimal? Max<T>(this List<T> source, Func<T, decimal?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static decimal? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, decimal?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             decimal? result = 0;
@@ -8539,8 +8604,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static decimal? Max<T>(this List<T> source, Func<T, decimal?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static decimal? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, decimal?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -8586,8 +8651,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static decimal? Max(this IList<decimal?> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static decimal? Max([NotNull] this IList<decimal?> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -8607,8 +8672,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static decimal? Max(this IList<decimal?> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static decimal? Max([NotNull] this IList<decimal?> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -8655,10 +8720,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static decimal? Max<T>(this IList<T> source, Func<T, decimal?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static decimal? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, decimal?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             decimal? result = 0;
@@ -8676,8 +8742,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static decimal? Max<T>(this IList<T> source, Func<T, decimal?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static decimal? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, decimal?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -8720,7 +8786,7 @@ namespace ZLinq
 		
 		#endregion
 			
-		[Pure]
+		[System.Diagnostics.Contracts.Pure]
 		private static ulong? Max(ulong? x, ulong? y)
 		{
 			bool hasValX = x.HasValue;
@@ -8739,8 +8805,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static ulong? Max(this ulong?[] source)
+		[System.Diagnostics.Contracts.Pure]
+        public static ulong? Max([NotNull] this ulong?[] source)
         {
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -8760,8 +8826,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static ulong? Max(this ulong?[] source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static ulong? Max([NotNull] this ulong?[] source, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -8808,10 +8874,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static ulong? Max<T>(this T[] source, Func<T, ulong?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static ulong? Max<T>([NotNull] this T[] source, [NotNull] Func<T, ulong?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
             ulong? result = 0;
@@ -8829,8 +8896,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static ulong? Max<T>(this T[] source, Func<T, ulong?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static ulong? Max<T>([NotNull] this T[] source, [NotNull] Func<T, ulong?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Length <= 4)
 		    {
@@ -8876,8 +8943,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static ulong? Max(this List<ulong?> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static ulong? Max([NotNull] this List<ulong?> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -8897,8 +8964,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static ulong? Max(this List<ulong?> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static ulong? Max([NotNull] this List<ulong?> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -8945,10 +9012,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static ulong? Max<T>(this List<T> source, Func<T, ulong?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static ulong? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, ulong?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             ulong? result = 0;
@@ -8966,8 +9034,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static ulong? Max<T>(this List<T> source, Func<T, ulong?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static ulong? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, ulong?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -9013,8 +9081,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static ulong? Max(this IList<ulong?> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static ulong? Max([NotNull] this IList<ulong?> source)
         {
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -9034,8 +9102,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static ulong? Max(this IList<ulong?> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static ulong? Max([NotNull] this IList<ulong?> source, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {
@@ -9082,10 +9150,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static ulong? Max<T>(this IList<T> source, Func<T, ulong?> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static ulong? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, ulong?> mapFunc)
         {
             source.IsNotNull("source");
+			mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
             ulong? result = 0;
@@ -9103,8 +9172,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static ulong? Max<T>(this IList<T> source, Func<T, ulong?> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static ulong? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, ulong?> mapFunc, int startIndex, int endIndex)
         {
 			if (source.Count <= 4)
 		    {

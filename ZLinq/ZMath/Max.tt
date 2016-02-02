@@ -13,6 +13,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 using ZLinq.Extension;
 
 // ReSharper disable CheckNamespace
@@ -21,6 +22,8 @@ namespace ZLinq
 {
     public static partial class ZEnumerable
     {
+
+#region Non-Nullables	 	
 		<#foreach (var type in TT.NumberTypes) { #>
 
 		#region <#= type #>	 		
@@ -31,8 +34,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static <#= type #> Max(this <#= sourceType.Replace("T", type) #> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static <#= type #> Max([NotNull] this <#= sourceType.Replace("T", type) #> source)
         {
             <#= TT.IsNotNull("source") #>
             if (source.<#= TT.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
@@ -52,8 +55,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static <#= type #> Max(this <#= sourceType.Replace("T", type) #> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static <#= type #> Max([NotNull] this <#= sourceType.Replace("T", type) #> source, int startIndex, int endIndex)
         {
 			if (source.<#= TT.LengthOrCount(sourceType) #> <= 4)
 		    {
@@ -95,10 +98,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static <#= type #> Max<T>(this <#= sourceType #> source, Func<T, <#= type #>> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static <#= type #> Max<T>([NotNull] this <#= sourceType #> source, [NotNull] Func<T, <#= type #>> mapFunc)
         {
             <#= TT.IsNotNull("source") #>
+			<#= TT.IsNotNull("mapFunc") #>
             if (source.<#= TT.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.<#= TT.LengthOrCount(sourceType) #>);
             <#= type #> result = 0;
@@ -116,8 +120,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static <#= type #> Max<T>(this <#= sourceType #> source, Func<T, <#= type #>> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static <#= type #> Max<T>([NotNull] this <#= sourceType #> source, [NotNull] Func<T, <#= type #>> mapFunc, int startIndex, int endIndex)
         {
 			if (source.<#= TT.LengthOrCount(sourceType) #> <= 4)
 		    {
@@ -162,12 +166,12 @@ namespace ZLinq
 
 		#endregion
 	<# } #>	
-
+	#endregion
 	#region Nullables
 
 		<#foreach (var type in TT.GetNullables(TT.NumberTypes)) { #>
 		
-		[Pure]
+		[System.Diagnostics.Contracts.Pure]
 		private static <#= type #> Max(<#= type #> x, <#= type #> y)
 		{
 			bool hasValX = x.HasValue;
@@ -189,8 +193,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Maximum value of collection</returns>
-		[Pure]
-        public static <#= type #> Max(this <#= sourceType.Replace("T", type) #> source)
+		[System.Diagnostics.Contracts.Pure]
+        public static <#= type #> Max([NotNull] this <#= sourceType.Replace("T", type) #> source)
         {
             <#= TT.IsNotNull("source") #>
             if (source.<#= TT.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
@@ -210,8 +214,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static <#= type #> Max(this <#= sourceType.Replace("T", type) #> source, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static <#= type #> Max([NotNull] this <#= sourceType.Replace("T", type) #> source, int startIndex, int endIndex)
         {
 			if (source.<#= TT.LengthOrCount(sourceType) #> <= 4)
 		    {
@@ -251,10 +255,11 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Maximum value of mapping</returns>
-		[Pure]
-        public static <#= type #> Max<T>(this <#= sourceType #> source, Func<T, <#= type #>> mapFunc)
+		[System.Diagnostics.Contracts.Pure]
+        public static <#= type #> Max<T>([NotNull] this <#= sourceType #> source, [NotNull] Func<T, <#= type #>> mapFunc)
         {
             <#= TT.IsNotNull("source") #>
+			<#= TT.IsNotNull("mapFunc") #>
             if (source.<#= TT.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.<#= TT.LengthOrCount(sourceType) #>);
             <#= type #> result = 0;
@@ -272,8 +277,8 @@ namespace ZLinq
             return result;
         }
 
-		[Pure]
-        private static <#= type #> Max<T>(this <#= sourceType #> source, Func<T, <#= type #>> mapFunc, int startIndex, int endIndex)
+		[System.Diagnostics.Contracts.Pure]
+        private static <#= type #> Max<T>([NotNull] this <#= sourceType #> source, [NotNull] Func<T, <#= type #>> mapFunc, int startIndex, int endIndex)
         {
 			if (source.<#= TT.LengthOrCount(sourceType) #> <= 4)
 		    {
