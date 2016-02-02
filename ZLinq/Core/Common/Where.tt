@@ -17,17 +17,17 @@ using ZLinq.Extension;
 // ReSharper disable CheckNamespace
 namespace ZLinq
 {
-	[SuppressMessage("ReSharper", "LoopCanBeConvertedToQuery")]
+    [SuppressMessage("ReSharper", "LoopCanBeConvertedToQuery")]
     public static partial class ZEnumerable
     {        
-		<# foreach (var sourceType in TT.StandardCollections) 
-		{ #>		    
-		[System.Diagnostics.Contracts.Pure]
-		[Pure]
-	    public static T[] WhereToArray<T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
-		{
+        <# foreach (var sourceType in TT.StandardCollections) 
+        { #>            
+        [System.Diagnostics.Contracts.Pure]
+        [Pure]
+        public static T[] WhereToArray<T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
+        {
             <#= TT.IsNotNull("source") #>
-			<#= TT.IsNotNull("predicate") #>
+            <#= TT.IsNotNull("predicate") #>
             var result = new T[source.<#= TT.LengthOrCount(sourceType) #>];
             int i = 0;
             foreach (T value in source)
@@ -39,14 +39,14 @@ namespace ZLinq
             }
             Array.Resize(ref result, i);
             return result;
-		}
+        }
 
-		[System.Diagnostics.Contracts.Pure]
-		[Pure]
-	    public static List<T> WhereToList<T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
-		{
+        [System.Diagnostics.Contracts.Pure]
+        [Pure]
+        public static List<T> WhereToList<T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
+        {
             <#= TT.IsNotNull("source") #>
-			<#= TT.IsNotNull("predicate") #>
+            <#= TT.IsNotNull("predicate") #>
             var result = new List<T>(source.<#= TT.LengthOrCount(sourceType) #>);
             foreach (T value in source)
             {
@@ -57,8 +57,8 @@ namespace ZLinq
             }
             result.TrimExcess();
             return result;
-		}
-		<# } #>
+        }
+        <# } #>
 
     }
 }

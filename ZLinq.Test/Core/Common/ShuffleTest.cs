@@ -8,9 +8,9 @@ namespace ZLinq.Test.Core.Common
 {
     [TestClass]
     public class Shuffle
-    {		  
-		
-		[TestMethod]
+    {          
+        
+        [TestMethod]
         public void TestSelectToArrayFromArray()
         {
             var source = (int[]) Enumerable.Range(1, 100).ToArray();
@@ -19,8 +19,8 @@ namespace ZLinq.Test.Core.Common
 
             Assert.IsFalse(source.SequenceEqual(shuffled));
         }
-		
-		[TestMethod]
+        
+        [TestMethod]
         public void TestSelectToArrayFromList()
         {
             var source = (List<int>) Enumerable.Range(1, 100).ToList();
@@ -29,8 +29,8 @@ namespace ZLinq.Test.Core.Common
 
             Assert.IsFalse(source.SequenceEqual(shuffled));
         }
-		
-		[TestMethod]
+        
+        [TestMethod]
         public void TestSelectToArrayFromIList()
         {
             var source = (IList<int>) Enumerable.Range(1, 100).ToList();
@@ -39,6 +39,6 @@ namespace ZLinq.Test.Core.Common
 
             Assert.IsFalse(source.SequenceEqual(shuffled));
         }
-		
+        
     }
 }

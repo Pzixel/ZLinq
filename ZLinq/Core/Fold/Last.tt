@@ -17,52 +17,52 @@ using ZLinq.Extension;
 namespace ZLinq
 {
     public static partial class ZEnumerable
-    {     		
-		<# foreach (var sourceType in TT.StandardLists) 
-		{ #>		
-		   	    
-		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-	   	public static T Last<T>([NotNull] this <#= sourceType #> source)
+    {             
+        <# foreach (var sourceType in TT.StandardLists) 
+        { #>        
+                   
+        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+           public static T Last<T>([NotNull] this <#= sourceType #> source)
         {
-			return <#= TT.Cast(sourceType) #>source[source.<#= TT.LengthOrCount(sourceType) #> - 1];
-        }	 	
+            return <#= TT.Cast(sourceType) #>source[source.<#= TT.LengthOrCount(sourceType) #> - 1];
+        }         
 
-		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-	    public static T LastOrDefault<T>([NotNull] this <#= sourceType #> source)
+        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static T LastOrDefault<T>([NotNull] this <#= sourceType #> source)
         {
-			return source.<#= TT.LengthOrCount(sourceType) #> == 0 ? default(T) : <#= TT.Cast(sourceType) #> source[source.<#= TT.LengthOrCount(sourceType) #> - 1];
-        }	
+            return source.<#= TT.LengthOrCount(sourceType) #> == 0 ? default(T) : <#= TT.Cast(sourceType) #> source[source.<#= TT.LengthOrCount(sourceType) #> - 1];
+        }    
 
-		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static T Last<T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
-		{
-			<#= TT.IsNotNull("source") #>
-			<#= TT.IsNotNull("predicate") #>
-			for (int i = source.<#= TT.LengthOrCount(sourceType) #> - 1; i >= 0; i--)
-			{
-				T obj = <#= TT.Cast(sourceType) #> source[i];
-				if (predicate(obj))
-					return obj;
-			}
-			throw new InvalidOperationException();
-		}
+        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static T Last<T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
+        {
+            <#= TT.IsNotNull("source") #>
+            <#= TT.IsNotNull("predicate") #>
+            for (int i = source.<#= TT.LengthOrCount(sourceType) #> - 1; i >= 0; i--)
+            {
+                T obj = <#= TT.Cast(sourceType) #> source[i];
+                if (predicate(obj))
+                    return obj;
+            }
+            throw new InvalidOperationException();
+        }
 
-		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static T LastOrDefault<T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
-		{
-			<#= TT.IsNotNull("source") #>
-			<#= TT.IsNotNull("predicate") #>
-			for (int i = source.<#= TT.LengthOrCount(sourceType) #> - 1; i >= 0; i--)
-			{
-				T obj = <#= TT.Cast(sourceType) #> source[i];
-				if (predicate(obj))
-					return obj;
-			}
-			return default(T);
-		}
-		<# } #>		
+        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static T LastOrDefault<T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
+        {
+            <#= TT.IsNotNull("source") #>
+            <#= TT.IsNotNull("predicate") #>
+            for (int i = source.<#= TT.LengthOrCount(sourceType) #> - 1; i >= 0; i--)
+            {
+                T obj = <#= TT.Cast(sourceType) #> source[i];
+                if (predicate(obj))
+                    return obj;
+            }
+            return default(T);
+        }
+        <# } #>        
 
-		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T Last<T>([NotNull] this ICollection<T> source)
         {
             if (source == null)

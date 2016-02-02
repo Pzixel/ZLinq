@@ -18,34 +18,34 @@ namespace ZLinq
 {
     public static partial class ZEnumerable
     {        
-		<# foreach (var sourceType in TT.WithNonGen(TT.StandardCollections))
-		{ 
-		#>[System.Diagnostics.Contracts.Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+        <# foreach (var sourceType in TT.WithNonGen(TT.StandardCollections))
+        { 
+        #>[System.Diagnostics.Contracts.Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         [ContractAnnotation("source:null => true; source:notnull => false")]
         public static bool IsNullOrEmpty<#= TT.GetConstraint(sourceType) #>([CanBeNull] this <#= sourceType #> source)
         {
             return source == null || source.<#= TT.LengthOrCount(sourceType)#> == 0;
         }
 
-		<#}
-		#>
-		[System.Diagnostics.Contracts.Pure]
+        <#}
+        #>
+        [System.Diagnostics.Contracts.Pure]
         [ContractAnnotation("source:null => true; source:notnull => false")]
         public static bool IsNullOrEmpty<T>([CanBeNull] this IEnumerable<T> source)
         {
             if (source == null)
-			{
-			   return true;
-			}
-			using (var enumerator = source.GetEnumerator())
-			{
-			    if (enumerator.MoveNext())
-				    return false;
-			}
-			return true;
+            {
+               return true;
+            }
+            using (var enumerator = source.GetEnumerator())
+            {
+                if (enumerator.MoveNext())
+                    return false;
+            }
+            return true;
         }
 
-		[System.Diagnostics.Contracts.Pure]
+        [System.Diagnostics.Contracts.Pure]
         [ContractAnnotation("source:null => true; source:notnull => false")]
         public static bool IsNullOrEmpty([CanBeNull] this IEnumerable source)
         {
@@ -57,7 +57,7 @@ namespace ZLinq
             return !enumerator.MoveNext();
         }
 
-		[System.Diagnostics.Contracts.Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [System.Diagnostics.Contracts.Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         [ContractAnnotation("source:null => true; source:notnull => false")]
         public static bool IsNullOrEmpty([CanBeNull] this string source)
         {

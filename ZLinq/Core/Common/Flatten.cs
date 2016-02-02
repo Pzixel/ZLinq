@@ -6,84 +6,84 @@ using ZLinq.Extension;
 // ReSharper disable CheckNamespace
 namespace ZLinq
 {
-	[SuppressMessage("ReSharper", "LoopCanBeConvertedToQuery")]
+    [SuppressMessage("ReSharper", "LoopCanBeConvertedToQuery")]
     public static partial class ZEnumerable
     {
-		[Pure]
-		[NotNull]
-		public static IEnumerable<T> Flatten<T>([NotNull] this T[,] array)
+        [Pure]
+        [NotNull]
+        public static IEnumerable<T> Flatten<T>([NotNull] this T[,] array)
         {
             foreach (T value in array)
                 yield return value;
-        }		
+        }        
 
-		[Pure]
-		[NotNull]
-		public static IEnumerable<T> Flatten<T>([NotNull] this T[,,] array)
+        [Pure]
+        [NotNull]
+        public static IEnumerable<T> Flatten<T>([NotNull] this T[,,] array)
         {
             foreach (T value in array)
                 yield return value;
-        }		
+        }        
 
-		[Pure]
-		[NotNull]
-		public static IEnumerable<T> Flatten<T>([NotNull] this T[,,,] array)
+        [Pure]
+        [NotNull]
+        public static IEnumerable<T> Flatten<T>([NotNull] this T[,,,] array)
         {
             foreach (T value in array)
                 yield return value;
-        }		
+        }        
 
-		[Pure]
-		[NotNull]
-		public static IEnumerable<T> Flatten<T>([NotNull] this T[,,,,] array)
+        [Pure]
+        [NotNull]
+        public static IEnumerable<T> Flatten<T>([NotNull] this T[,,,,] array)
         {
             foreach (T value in array)
                 yield return value;
-        }		
+        }        
 
-		[Pure]
-		[NotNull]
-		public static IEnumerable<T> Flatten<T>([NotNull] this T[,,,,,] array)
+        [Pure]
+        [NotNull]
+        public static IEnumerable<T> Flatten<T>([NotNull] this T[,,,,,] array)
         {
             foreach (T value in array)
                 yield return value;
-        }		
+        }        
 
-		[Pure]
-		[NotNull]
-		public static IEnumerable<T> Flatten<T>([NotNull] this T[,,,,,,] array)
+        [Pure]
+        [NotNull]
+        public static IEnumerable<T> Flatten<T>([NotNull] this T[,,,,,,] array)
         {
             foreach (T value in array)
                 yield return value;
-        }		
+        }        
 
-		[Pure]
-		[NotNull]
-		public static IEnumerable<T> Flatten<T>([NotNull] this T[,,,,,,,] array)
+        [Pure]
+        [NotNull]
+        public static IEnumerable<T> Flatten<T>([NotNull] this T[,,,,,,,] array)
         {
             foreach (T value in array)
                 yield return value;
-        }		
+        }        
 
-		[Pure]
-		[NotNull]
-		public static IEnumerable<T> Flatten<T>([NotNull] this T[,,,,,,,,] array)
+        [Pure]
+        [NotNull]
+        public static IEnumerable<T> Flatten<T>([NotNull] this T[,,,,,,,,] array)
         {
             foreach (T value in array)
                 yield return value;
-        }		
+        }        
 
-		[Pure]
-		[NotNull]
-		public static IEnumerable<T> Flatten<T>([NotNull] this T[,,,,,,,,,] array)
+        [Pure]
+        [NotNull]
+        public static IEnumerable<T> Flatten<T>([NotNull] this T[,,,,,,,,,] array)
         {
             foreach (T value in array)
                 yield return value;
-        }		
+        }        
 
-		
-		[Pure]
-		[NotNull]
+        
+        [Pure]
+        [NotNull]
         public static T[] FlattenToArray<T>([NotNull] this T[,] array)
         {
             array.IsNotNull("array");
@@ -92,10 +92,10 @@ namespace ZLinq
             foreach (T value in array)
                 result[i++] = value;
             return result;
-        }	
+        }    
 
-		[Pure]
-		[NotNull]
+        [Pure]
+        [NotNull]
         public static T[] FlattenToArray<T>([NotNull] this T[,,] array)
         {
             array.IsNotNull("array");
@@ -104,10 +104,10 @@ namespace ZLinq
             foreach (T value in array)
                 result[i++] = value;
             return result;
-        }	
+        }    
 
-		[Pure]
-		[NotNull]
+        [Pure]
+        [NotNull]
         public static T[] FlattenToArray<T>([NotNull] this T[,,,] array)
         {
             array.IsNotNull("array");
@@ -116,10 +116,10 @@ namespace ZLinq
             foreach (T value in array)
                 result[i++] = value;
             return result;
-        }	
+        }    
 
-		[Pure]
-		[NotNull]
+        [Pure]
+        [NotNull]
         public static T[] FlattenToArray<T>([NotNull] this T[,,,,] array)
         {
             array.IsNotNull("array");
@@ -128,10 +128,10 @@ namespace ZLinq
             foreach (T value in array)
                 result[i++] = value;
             return result;
-        }	
+        }    
 
-		[Pure]
-		[NotNull]
+        [Pure]
+        [NotNull]
         public static T[] FlattenToArray<T>([NotNull] this T[,,,,,] array)
         {
             array.IsNotNull("array");
@@ -140,10 +140,10 @@ namespace ZLinq
             foreach (T value in array)
                 result[i++] = value;
             return result;
-        }	
+        }    
 
-		[Pure]
-		[NotNull]
+        [Pure]
+        [NotNull]
         public static T[] FlattenToArray<T>([NotNull] this T[,,,,,,] array)
         {
             array.IsNotNull("array");
@@ -152,10 +152,10 @@ namespace ZLinq
             foreach (T value in array)
                 result[i++] = value;
             return result;
-        }	
+        }    
 
-		[Pure]
-		[NotNull]
+        [Pure]
+        [NotNull]
         public static T[] FlattenToArray<T>([NotNull] this T[,,,,,,,] array)
         {
             array.IsNotNull("array");
@@ -164,10 +164,10 @@ namespace ZLinq
             foreach (T value in array)
                 result[i++] = value;
             return result;
-        }	
+        }    
 
-		[Pure]
-		[NotNull]
+        [Pure]
+        [NotNull]
         public static T[] FlattenToArray<T>([NotNull] this T[,,,,,,,,] array)
         {
             array.IsNotNull("array");
@@ -176,10 +176,10 @@ namespace ZLinq
             foreach (T value in array)
                 result[i++] = value;
             return result;
-        }	
+        }    
 
-		[Pure]
-		[NotNull]
+        [Pure]
+        [NotNull]
         public static T[] FlattenToArray<T>([NotNull] this T[,,,,,,,,,] array)
         {
             array.IsNotNull("array");
@@ -188,8 +188,8 @@ namespace ZLinq
             foreach (T value in array)
                 result[i++] = value;
             return result;
-        }	
+        }    
 
-		
+        
     }
 }

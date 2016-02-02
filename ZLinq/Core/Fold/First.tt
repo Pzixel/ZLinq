@@ -17,42 +17,42 @@ using ZLinq.Extension;
 // ReSharper disable CheckNamespace
 namespace ZLinq
 {
-	[SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
+    [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
     public static partial class ZEnumerable
-    {     		
-		<# foreach (var sourceType in TT.StandardLists) 
-		{ #>		
-		   	    
-		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-	   	public static T First<T>([NotNull] this <#= sourceType #> source)
+    {             
+        <# foreach (var sourceType in TT.StandardLists) 
+        { #>        
+                   
+        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+           public static T First<T>([NotNull] this <#= sourceType #> source)
         {
-			return <#= TT.Cast(sourceType) #>source[0];
-        }	 	
+            return <#= TT.Cast(sourceType) #>source[0];
+        }         
 
-		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-	    public static T FirstOrDefault<T>([NotNull] this <#= sourceType #> source)
+        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static T FirstOrDefault<T>([NotNull] this <#= sourceType #> source)
         {
-			return source.<#= TT.LengthOrCount(sourceType) #> == 0 ? default(T) : <#= TT.Cast(sourceType) #>source[0];
-        }		
-		<# } #>		
+            return source.<#= TT.LengthOrCount(sourceType) #> == 0 ? default(T) : <#= TT.Cast(sourceType) #>source[0];
+        }        
+        <# } #>        
 
-		[Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-	   	public static T First<T>([NotNull] this ICollection<T> source)
+        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+           public static T First<T>([NotNull] this ICollection<T> source)
         {
             if (source == null)
                 throw new ArgumentNullException();
-			if (source.Count == 0)
+            if (source.Count == 0)
                 throw new InvalidOperationException();
             var list = source as IList<T>;
             if (list != null)
             {
                 return list.First();
             }
-		    using (var enumerator = source.GetEnumerator())
-		    {
-				enumerator.MoveNext();
-		        return enumerator.Current;
-		    }
+            using (var enumerator = source.GetEnumerator())
+            {
+                enumerator.MoveNext();
+                return enumerator.Current;
+            }
         }
 
         [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -69,39 +69,39 @@ namespace ZLinq
             }
             using (var enumerator = source.GetEnumerator())
             {
-				enumerator.MoveNext();
+                enumerator.MoveNext();
                 return enumerator.Current;
             }
         }
 
-		<# foreach (var sourceType in TT.StandardCollections) 
-		{ #>		
+        <# foreach (var sourceType in TT.StandardCollections) 
+        { #>        
 
-		[Pure]
-		public static T First<T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
+        [Pure]
+        public static T First<T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
         {
-			<#= TT.IsNotNull("source") #>
-			<#= TT.IsNotNull("predicate") #>
-		    foreach (T value in source)
-		    {
-		        if (predicate(value))
-		            return value;
-		    }
-		    throw new InvalidOperationException();
+            <#= TT.IsNotNull("source") #>
+            <#= TT.IsNotNull("predicate") #>
+            foreach (T value in source)
+            {
+                if (predicate(value))
+                    return value;
+            }
+            throw new InvalidOperationException();
         }
-		   	    
-		[Pure]
-	    public static T FirstOrDefault<T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
+                   
+        [Pure]
+        public static T FirstOrDefault<T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
         {
-			<#= TT.IsNotNull("source") #>
-			<#= TT.IsNotNull("predicate") #>
-		    foreach (T value in source)
-		    {
-		        if (predicate(value))
-		            return value;
-		    }
-		    return default(T);
+            <#= TT.IsNotNull("source") #>
+            <#= TT.IsNotNull("predicate") #>
+            foreach (T value in source)
+            {
+                if (predicate(value))
+                    return value;
+            }
+            return default(T);
         }
-		<# } #>		
+        <# } #>        
     }
 }

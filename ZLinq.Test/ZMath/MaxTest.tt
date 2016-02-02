@@ -17,144 +17,144 @@ namespace ZLinq.Test.ZMath
 {
     [TestClass]
     public class Max
-    {		    
-			
-	<#foreach (var type in TT.NumberTypes) { #>
+    {            
+            
+    <#foreach (var type in TT.NumberTypes) { #>
 
-		#region <#= type #>	 		
-		<# foreach (string sourceType in TT.StandardLists) { #>	
+        #region <#= type #>             
+        <# foreach (string sourceType in TT.StandardLists) { #>    
         [TestMethod]
         public void TestMax<#= type #><#= TT.GetCollectionName(sourceType) #>()
         {
             var source = Enumerable.Range(1, 100).Select(x => (<#= type #>)x).<#= TT.ToArrayOrToList(sourceType) #>;
 
-			<#= type #> maxActual = ZEnumerable.Max(source);
+            <#= type #> maxActual = ZEnumerable.Max(source);
             const <#= type #> maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
-		[TestMethod]
+        [TestMethod]
         public void TestMax<#= type #><#= TT.GetCollectionName(sourceType) #>Map()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (<#= type #>)arg }).<#= TT.ToArrayOrToList(sourceType) #>;
 
-			<#= type #> maxActual = ZEnumerable.Max(source, arg => arg.X);
+            <#= type #> maxActual = ZEnumerable.Max(source, arg => arg.X);
             const <#= type #> maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
-	
-		[TestMethod]
+    
+        [TestMethod]
         public void TestMax<#= type #><#= TT.GetCollectionName(sourceType) #>Null()
-        {		
-			<#= sourceType.Replace("T", type) #> nullSource = null;
+        {        
+            <#= sourceType.Replace("T", type) #> nullSource = null;
 
             try
-			{
-				ZEnumerable.Max(nullSource);				
-				Assert.Fail();
-			}
-			catch (ArgumentNullException)
-			{
-				
-			}
+            {
+                ZEnumerable.Max(nullSource);                
+                Assert.Fail();
+            }
+            catch (ArgumentNullException)
+            {
+                
+            }
         }
 
-		[TestMethod]
+        [TestMethod]
         public void TestMax<#= type #><#= TT.GetCollectionName(sourceType) #>MapNull()
         {
-			var source = Enumerable.Range(1, 100).Select(arg => new KeyValuePair<<#= type #>,<#= type #>>((<#= type #>) arg, (<#= type #>) arg)).<#= TT.ToArrayOrToList(sourceType) #>;
-			Func<KeyValuePair<<#= type #>, <#= type #>>, <#= type #>> map = null;
-			try
-			{
-				ZEnumerable.Max(source, map);				
-				Assert.Fail();
-			}
-			catch (ArgumentNullException)
-			{
-				
-			}
+            var source = Enumerable.Range(1, 100).Select(arg => new KeyValuePair<<#= type #>,<#= type #>>((<#= type #>) arg, (<#= type #>) arg)).<#= TT.ToArrayOrToList(sourceType) #>;
+            Func<KeyValuePair<<#= type #>, <#= type #>>, <#= type #>> map = null;
+            try
+            {
+                ZEnumerable.Max(source, map);                
+                Assert.Fail();
+            }
+            catch (ArgumentNullException)
+            {
+                
+            }
         }
-		<# } #>
-		
-		#endregion
-	<# } #>	
+        <# } #>
+        
+        #endregion
+    <# } #>    
 
-	#region Nullables
+    #region Nullables
 
-		<#foreach (var type in TT.GetNullables(TT.NumberTypes)) { 
-		string testName = type.Replace("?", "Nullable");#>
+        <#foreach (var type in TT.GetNullables(TT.NumberTypes)) { 
+        string testName = type.Replace("?", "Nullable");#>
 
-		#region <#= type #>	 		
-		<# foreach (string sourceType in TT.StandardLists) { #>	
+        #region <#= type #>             
+        <# foreach (string sourceType in TT.StandardLists) { #>    
         [TestMethod]
         public void TestMax<#= testName #>Nullable<#= TT.GetCollectionName(sourceType) #>()
         {
             var source = Enumerable.Range(1, 100).Select(x => (<#= type #>)x).<#= TT.ToArrayOrToList(sourceType) #>;
 
-			<#= type #> maxActual = ZEnumerable.Max(source);
+            <#= type #> maxActual = ZEnumerable.Max(source);
             <#= type #> maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
 
-		[TestMethod]
+        [TestMethod]
         public void TestMax<#= testName #>Nullable<#= TT.GetCollectionName(sourceType) #>Map()
         {
             var source = Enumerable.Range(1, 100).Select(arg => new { X = (<#= type #>)arg }).<#= TT.ToArrayOrToList(sourceType) #>;
 
-			<#= type #> maxActual = ZEnumerable.Max(source, arg => arg.X);
+            <#= type #> maxActual = ZEnumerable.Max(source, arg => arg.X);
             <#= type #> maxExpected = 100;
 
             Assert.AreEqual(maxExpected, maxActual);
         }
-	
-		[TestMethod]
+    
+        [TestMethod]
         public void TestMax<#= testName #>Nullable<#= TT.GetCollectionName(sourceType) #>Null()
-        {		
-			<#= sourceType.Replace("T", type) #> nullSource = null;
+        {        
+            <#= sourceType.Replace("T", type) #> nullSource = null;
 
             try
-			{
-				ZEnumerable.Max(nullSource);				
-				Assert.Fail();
-			}
-			catch (ArgumentNullException)
-			{
-				
-			}
+            {
+                ZEnumerable.Max(nullSource);                
+                Assert.Fail();
+            }
+            catch (ArgumentNullException)
+            {
+                
+            }
 
-			<#= sourceType.Replace("T", type) #> sourceOfNulls = new <#= type #>[] {null}.<#= TT.ToArrayOrToList(sourceType) #>;
-			var max = ZEnumerable.Max(sourceOfNulls);
-			Assert.AreEqual(default(<#= type #>), max);
+            <#= sourceType.Replace("T", type) #> sourceOfNulls = new <#= type #>[] {null}.<#= TT.ToArrayOrToList(sourceType) #>;
+            var max = ZEnumerable.Max(sourceOfNulls);
+            Assert.AreEqual(default(<#= type #>), max);
         }
 
-		[TestMethod]
+        [TestMethod]
         public void TestMax<#= testName #>Nullable<#= TT.GetCollectionName(sourceType) #>MapNull()
         {
-			var source = Enumerable.Range(1, 100).Select(arg => new KeyValuePair<<#= type #>,<#= type #>>((<#= type #>) arg, (<#= type #>) arg)).<#= TT.ToArrayOrToList(sourceType) #>;
-			Func<KeyValuePair<<#= type #>, <#= type #>>, <#= type #>> map = null;
-			try
-			{
-				ZEnumerable.Max(source, map);				
-				Assert.Fail();
-			}
-			catch (ArgumentNullException)
-			{
-				
-			}
+            var source = Enumerable.Range(1, 100).Select(arg => new KeyValuePair<<#= type #>,<#= type #>>((<#= type #>) arg, (<#= type #>) arg)).<#= TT.ToArrayOrToList(sourceType) #>;
+            Func<KeyValuePair<<#= type #>, <#= type #>>, <#= type #>> map = null;
+            try
+            {
+                ZEnumerable.Max(source, map);                
+                Assert.Fail();
+            }
+            catch (ArgumentNullException)
+            {
+                
+            }
 
-			object[] sourceForNulls = { new Stack<int>() };
-			var sourceOfNulls = sourceForNulls.Select(x => (<#= type #>) null).<#= TT.ToArrayOrToList(sourceType) #>;
-			var max = ZEnumerable.Max(sourceOfNulls);
-			Assert.AreEqual(default(<#= type #>), max);
+            object[] sourceForNulls = { new Stack<int>() };
+            var sourceOfNulls = sourceForNulls.Select(x => (<#= type #>) null).<#= TT.ToArrayOrToList(sourceType) #>;
+            var max = ZEnumerable.Max(sourceOfNulls);
+            Assert.AreEqual(default(<#= type #>), max);
         }
-		<# } #>
-		
-		#endregion
-	<# } #>	
+        <# } #>
+        
+        #endregion
+    <# } #>    
 
-	#endregion
+    #endregion
     }
 }

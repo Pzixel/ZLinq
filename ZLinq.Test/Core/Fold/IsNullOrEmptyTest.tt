@@ -18,27 +18,27 @@ namespace ZLinq.Test.Core.Fold
 {
     [TestClass]
     public class IsNullOrEmptyTest
-	{        
-		<# foreach (var sourceType in TT.WithNonGen(TT.StandardEnumerables))
-		{ 			
-			string name = TT.GetCollectionName(sourceType);
-		#>
-		
-		[TestMethod]
+    {        
+        <# foreach (var sourceType in TT.WithNonGen(TT.StandardEnumerables))
+        {             
+            string name = TT.GetCollectionName(sourceType);
+        #>
+        
+        [TestMethod]
         public void IsNullOrEmpty<#= name #>()
         {
             <#= TT.ToInt(sourceType) #> sourceA = new int[0].To<#= name #>();
-			<#= TT.ToInt(sourceType) #> sourceB = null;
-			<#= TT.ToInt(sourceType) #> sourceC = new[] {1,2,3}.To<#= name #>();
+            <#= TT.ToInt(sourceType) #> sourceB = null;
+            <#= TT.ToInt(sourceType) #> sourceC = new[] {1,2,3}.To<#= name #>();
 
-			Assert.IsTrue(sourceA.IsNullOrEmpty());
-			Assert.IsTrue(sourceB.IsNullOrEmpty());
-			Assert.IsFalse(sourceC.IsNullOrEmpty());
+            Assert.IsTrue(sourceA.IsNullOrEmpty());
+            Assert.IsTrue(sourceB.IsNullOrEmpty());
+            Assert.IsFalse(sourceC.IsNullOrEmpty());
         }
 
-		<#}#>
+        <#}#>
 
-		[TestMethod]
+        [TestMethod]
         public void IsNullOrEmptyString()
         {
             string sourceA = string.Empty;

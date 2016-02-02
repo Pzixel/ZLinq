@@ -16,11 +16,11 @@ namespace ZLinq.Test.Core.Fold
 {
     [TestClass]
     public class IsEqual
-    {	
-		<# foreach (var sourceType in TT.StandardCollections) { 
-		string name = TT.GetCollectionName(sourceType);
-		#>		
-		[TestMethod]
+    {    
+        <# foreach (var sourceType in TT.StandardCollections) { 
+        string name = TT.GetCollectionName(sourceType);
+        #>        
+        [TestMethod]
         public void IsEqual<#= name #>()
         {
             var x = Enumerable.Range(1, 1024).To<#= name #>();
@@ -31,7 +31,7 @@ namespace ZLinq.Test.Core.Fold
             Assert.IsTrue(x.IsEqual(y));
             Assert.IsTrue(y.IsEqual(x));
 
-			Assert.IsTrue(x.IsEqual(x));
+            Assert.IsTrue(x.IsEqual(x));
             Assert.IsTrue(y.IsEqual(y));
 
             Assert.IsFalse(x.IsEqual(a));
@@ -40,30 +40,30 @@ namespace ZLinq.Test.Core.Fold
             Assert.IsFalse(y.IsEqual(a));
             Assert.IsFalse(y.IsEqual(b));
         }
-		<# } #>	
+        <# } #>    
 
-		<# foreach (var sourceType in TT.StandardCollections) {
-		string name = TT.GetCollectionName(sourceType);
-		 #>		
-		[TestMethod]
+        <# foreach (var sourceType in TT.StandardCollections) {
+        string name = TT.GetCollectionName(sourceType);
+         #>        
+        [TestMethod]
         public void IsEqualMemberwise<#= TT.GetCollectionName(sourceType) #>()
         {
-			var source1 = new object[1024];
-			var source2 = new object[source1.Length];
+            var source1 = new object[1024];
+            var source2 = new object[source1.Length];
 
-			for (int i = 0; i < source1.Length; i++)
-				source1[i] = source2[i] = new object();
+            for (int i = 0; i < source1.Length; i++)
+                source1[i] = source2[i] = new object();
 
             var x = source1.To<#= name #>();
             var y = source2.To<#= name #>();
-			var a = Enumerable.Range(1, 1024).Select(t => (object) t).To<#= name #>();
-			var b = Enumerable.Range(1, 1023).Select(t => (object) t).To<#= name #>();
+            var a = Enumerable.Range(1, 1024).Select(t => (object) t).To<#= name #>();
+            var b = Enumerable.Range(1, 1023).Select(t => (object) t).To<#= name #>();
 
 
             Assert.IsTrue(x.IsEqualMemberwise(y));
             Assert.IsTrue(y.IsEqualMemberwise(x));
 
-			Assert.IsTrue(x.IsEqualMemberwise(x));
+            Assert.IsTrue(x.IsEqualMemberwise(x));
             Assert.IsTrue(y.IsEqualMemberwise(y));
 
             Assert.IsFalse(x.IsEqualMemberwise(a));
@@ -72,7 +72,7 @@ namespace ZLinq.Test.Core.Fold
             Assert.IsFalse(y.IsEqualMemberwise(a));
             Assert.IsFalse(y.IsEqualMemberwise(b));
         }
-		<# } #>	
+        <# } #>    
 
     }
 }

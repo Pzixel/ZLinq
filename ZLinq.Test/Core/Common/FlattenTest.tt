@@ -12,22 +12,22 @@ namespace ZLinq.Test.Core.Common
 {
     [TestClass]
     public class Flatten
-    {   	
-		<# for(int i = 2; i <= 10; i++) { 	#> 
+    {       
+        <# for(int i = 2; i <= 10; i++) {     #> 
 
         [TestMethod]
         public void TestFlatten<#= i #>Dim()
         {
             var array = new int[<#= string.Join(",", Enumerable.Range(0, i).Select(x=>x%3 + 1)) #>];
-			<# char[] letters = Enumerable.Range(0, i).Select(x =>(char)('a' + x)).ToArray();
-			for(int j = 0; j < letters.Length; j++) { 	
-			
-			#>for (int <#= letters[j] #> = 0; <#= letters[j] #> < array.GetLength(<#= j #>); <#= letters[j] #>++) 
-			<# } #>
+            <# char[] letters = Enumerable.Range(0, i).Select(x =>(char)('a' + x)).ToArray();
+            for(int j = 0; j < letters.Length; j++) {     
+            
+            #>for (int <#= letters[j] #> = 0; <#= letters[j] #> < array.GetLength(<#= j #>); <#= letters[j] #>++) 
+            <# } #>
 
-				unchecked
+                unchecked
                 {
-					array[<#= string.Join(",", letters) #>] = <#= string.Join("+", letters) #>;
+                    array[<#= string.Join(",", letters) #>] = <#= string.Join("+", letters) #>;
                 }
 
             var arr1 = array.Flatten().ToArray();
@@ -36,23 +36,23 @@ namespace ZLinq.Test.Core.Common
             Assert.AreEqual(arr1.Length, arr2.Length);
             Assert.IsTrue(arr1.SequenceEqual(arr2));
         }
-		<# } #>
+        <# } #>
 
-		<# for(int i = 2; i <= 10; i++) { 	#> 
+        <# for(int i = 2; i <= 10; i++) {     #> 
 
         [TestMethod]
         public void TestFlattenToArray<#= i #>Dim()
         {
             var array = new int[<#= string.Join(",", Enumerable.Range(0, i).Select(x=>x%3 + 1)) #>];
-			<# char[] letters = Enumerable.Range(0, i).Select(x =>(char)('a' + x)).ToArray();
-			for(int j = 0; j < letters.Length; j++) { 	
-			
-			#>for (int <#= letters[j] #> = 0; <#= letters[j] #> < array.GetLength(<#= j #>); <#= letters[j] #>++) 
-			<# } #>
+            <# char[] letters = Enumerable.Range(0, i).Select(x =>(char)('a' + x)).ToArray();
+            for(int j = 0; j < letters.Length; j++) {     
+            
+            #>for (int <#= letters[j] #> = 0; <#= letters[j] #> < array.GetLength(<#= j #>); <#= letters[j] #>++) 
+            <# } #>
 
-				unchecked
+                unchecked
                 {
-					array[<#= string.Join(",", letters) #>] = <#= string.Join("+", letters) #>;
+                    array[<#= string.Join(",", letters) #>] = <#= string.Join("+", letters) #>;
                 }
 
             var arr1 = array.FlattenToArray();
@@ -61,7 +61,7 @@ namespace ZLinq.Test.Core.Common
             Assert.AreEqual(arr1.Length, arr2.Length);
             Assert.IsTrue(arr1.SequenceEqual(arr2));
         }
-		<# } #>	        
+        <# } #>            
 
     }
 }

@@ -17,40 +17,40 @@ using ZLinq.Extension;
 namespace ZLinq
 {
     public static partial class ZEnumerable
-    {        			
-		<# foreach (var sourceType in TT.StandardLists) 
-		{ #>		
+    {                    
+        <# foreach (var sourceType in TT.StandardLists) 
+        { #>        
 
-		/// <summary>
+        /// <summary>
         /// Fisher-Yates algorithm
-        /// </summary>	
+        /// </summary>    
         public static void Shuffle<T>([NotNull] this <#= sourceType #> source, int? seed = null)
         {
             <#= TT.IsNotNull("source") #>
 
-			if (source.<#=TT.LengthOrCount(sourceType)#> == 0)
-				return;
-			int value = seed ?? Environment.TickCount ^ source[0].GetHashCode();
-			Random rand = new Random(value);
-			for (int i = source.<#=TT.LengthOrCount(sourceType)#> - 1; i > 0; i--) {
-				int j = rand.Next(0, i + 1);
-				T tmp = source[i];
-				source[i] = source[j];
-				source[j] = tmp;
-			}
+            if (source.<#=TT.LengthOrCount(sourceType)#> == 0)
+                return;
+            int value = seed ?? Environment.TickCount ^ source[0].GetHashCode();
+            Random rand = new Random(value);
+            for (int i = source.<#=TT.LengthOrCount(sourceType)#> - 1; i > 0; i--) {
+                int j = rand.Next(0, i + 1);
+                T tmp = source[i];
+                source[i] = source[j];
+                source[j] = tmp;
+            }
         }
 
-		[System.Diagnostics.Contracts.Pure]
-		[NotNull]
-		public static T[] GetShuffle<T>([NotNull] this <#= sourceType #> source, int? seed = null)
+        [System.Diagnostics.Contracts.Pure]
+        [NotNull]
+        public static T[] GetShuffle<T>([NotNull] this <#= sourceType #> source, int? seed = null)
         {
             <#= TT.IsNotNull("source") #>
 
-			T[] result = new T[source.<#=TT.LengthOrCount(sourceType)#>];
-			source.CopyTo(result, 0);
-			result.Shuffle(seed);
-			return result;
+            T[] result = new T[source.<#=TT.LengthOrCount(sourceType)#>];
+            source.CopyTo(result, 0);
+            result.Shuffle(seed);
+            return result;
         }
-		<# } #>		
+        <# } #>        
     }
 }

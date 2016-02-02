@@ -18,66 +18,66 @@ namespace ZLinq.Test.Core.Fold
 {
     [TestClass]
     public class Last
-    {	
-		<# foreach (var sourceType in TT.StandardCollections) { 
-		string name = TT.GetCollectionName(sourceType);#>		
-		[TestMethod]
+    {    
+        <# foreach (var sourceType in TT.StandardCollections) { 
+        string name = TT.GetCollectionName(sourceType);#>        
+        [TestMethod]
         public void Last<#= name #>()
         {
             var x = Enumerable.Range(1, 1024).To<#= name #>();
             var y = Enumerable.Range(1, 1024).Select(a => new Tuple<int, int>(a,a)).To<#= name #>();
             var z = Enumerable.Range(1, 1024).Select(a => new { A = a}).To<#= name #>();
-		    var dict = new SortedDictionary<int, int>(x.ToDictionary(a => a, a => a));
+            var dict = new SortedDictionary<int, int>(x.ToDictionary(a => a, a => a));
 
             Assert.AreEqual(ZEnumerable.Last(x), Enumerable.Last(x));
-			Assert.AreEqual(ZEnumerable.Last(y), Enumerable.Last(y));
-			Assert.AreEqual(ZEnumerable.Last(z), Enumerable.Last(z));
-			Assert.AreEqual(ZEnumerable.Last(dict), Enumerable.Last(dict));
+            Assert.AreEqual(ZEnumerable.Last(y), Enumerable.Last(y));
+            Assert.AreEqual(ZEnumerable.Last(z), Enumerable.Last(z));
+            Assert.AreEqual(ZEnumerable.Last(dict), Enumerable.Last(dict));
         }
 
-		[TestMethod]
+        [TestMethod]
         public void Last<#= TT.GetCollectionName(sourceType) #>OrDefault()
         {
             var x = Enumerable.Range(1, 1024).To<#= name #>();
             var y = Enumerable.Range(1, 1024).Select(a => new Tuple<int, int>(a,a)).To<#= name #>();
             var z = new int[0].To<#= name #>();
-		    var dict = new SortedDictionary<int, int>(x.ToDictionary(a => a, a => a));
+            var dict = new SortedDictionary<int, int>(x.ToDictionary(a => a, a => a));
 
             Assert.AreEqual(ZEnumerable.LastOrDefault(x), Enumerable.LastOrDefault(x));
-			Assert.AreEqual(ZEnumerable.LastOrDefault(y), Enumerable.LastOrDefault(y));
-			Assert.AreEqual(ZEnumerable.LastOrDefault(z), Enumerable.LastOrDefault(z));
-			Assert.AreEqual(ZEnumerable.LastOrDefault(dict), Enumerable.LastOrDefault(dict));
+            Assert.AreEqual(ZEnumerable.LastOrDefault(y), Enumerable.LastOrDefault(y));
+            Assert.AreEqual(ZEnumerable.LastOrDefault(z), Enumerable.LastOrDefault(z));
+            Assert.AreEqual(ZEnumerable.LastOrDefault(dict), Enumerable.LastOrDefault(dict));
         }
 
-		[TestMethod]
+        [TestMethod]
         public void Last<#= name #>Predicate()
         {
             var x = Enumerable.Range(1, 1024).To<#= name #>();
             var y = Enumerable.Range(1, 1024).Select(a => new Tuple<int, int>(a,a)).To<#= name #>();
             var z = Enumerable.Range(1, 1024).Select(a => new { A = a}).To<#= name #>();
-			var dict = new SortedDictionary<int, int>(x.ToDictionary(a => a, a => a));
+            var dict = new SortedDictionary<int, int>(x.ToDictionary(a => a, a => a));
 
             Assert.AreEqual(ZEnumerable.Last(x, val => val%3 == 0), Enumerable.Last(x, val => val%3 == 0));
             Assert.AreEqual(ZEnumerable.Last(y, val => val.Item1%3 == 0), Enumerable.Last(y, val => val.Item1%3 == 0));
             Assert.AreEqual(ZEnumerable.Last(z, val => val.A%3 == 0), Enumerable.Last(z, val => val.A%3 == 0));
-			Assert.AreEqual(ZEnumerable.Last(dict, val => val.Key%3 == 0), Enumerable.Last(dict, val => val.Key%3 == 0));
+            Assert.AreEqual(ZEnumerable.Last(dict, val => val.Key%3 == 0), Enumerable.Last(dict, val => val.Key%3 == 0));
         }
 
-		[TestMethod]
+        [TestMethod]
         public void Last<#= TT.GetCollectionName(sourceType) #>OrDefaultPredicate()
         {
             var x = Enumerable.Range(1, 1024).To<#= name #>();
             var y = Enumerable.Range(1, 1024).Select(a => new Tuple<int, int>(a,a)).To<#= name #>();
             var z = new int[0].To<#= name #>();
-			var dict = new SortedDictionary<int, int>(x.ToDictionary(a => a, a => a));
+            var dict = new SortedDictionary<int, int>(x.ToDictionary(a => a, a => a));
 
             Assert.AreEqual(ZEnumerable.LastOrDefault(x, val => val%3 == 0), Enumerable.LastOrDefault(x, val => val%3 == 0));
             Assert.AreEqual(ZEnumerable.LastOrDefault(y, val => val.Item1%3 == 0), Enumerable.LastOrDefault(y, val => val.Item1%3 == 0));
             Assert.AreEqual(ZEnumerable.LastOrDefault(z, val => val%3 == 0), Enumerable.LastOrDefault(z, val => val%3 == 0));
-			Assert.AreEqual(ZEnumerable.LastOrDefault(dict, val => val.Key%3 == 0), Enumerable.LastOrDefault(dict, val => val.Key%3 == 0));
+            Assert.AreEqual(ZEnumerable.LastOrDefault(dict, val => val.Key%3 == 0), Enumerable.LastOrDefault(dict, val => val.Key%3 == 0));
         }
 
-		<# } #>	
+        <# } #>    
 
 
     }

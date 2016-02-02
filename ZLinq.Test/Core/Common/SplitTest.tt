@@ -19,10 +19,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ZLinq.Test.Core.Common
 {    
-	[TestClass]
+    [TestClass]
     public class Split
     {
-		<# foreach(string suffix in new[] {string.Empty, "ToArray"}) { #> 
+        <# foreach(string suffix in new[] {string.Empty, "ToArray"}) { #> 
 
         [TestMethod]
         public void TestSplit<#= suffix #>()
@@ -37,8 +37,8 @@ namespace ZLinq.Test.Core.Common
             Assert.AreEqual(source[3], split[1][1]);
             Assert.AreEqual(source[4], split[2][0]);
         }
-		
-		<# foreach (var sourceType in sourceTypeCollections) { #>
+        
+        <# foreach (var sourceType in sourceTypeCollections) { #>
 
         [TestMethod]
         public void TestSplit<#= sourceType.Remove(sourceType.IndexOf("<int>")) #><#= suffix #>()
@@ -46,7 +46,7 @@ namespace ZLinq.Test.Core.Common
             var source = (<#= sourceType #>) new List<int> { 1, 2, 3, 4, 5 };
             var split = source.Split<#= suffix #>(2).ToArray();
 
-			var sourceArr = source.ToArray();
+            var sourceArr = source.ToArray();
             Assert.AreEqual(3, split.Length, "Array length mismatch");
             Assert.AreEqual(sourceArr[0], split[0][0]);
             Assert.AreEqual(sourceArr[1], split[0][1]);
@@ -55,34 +55,34 @@ namespace ZLinq.Test.Core.Common
             Assert.AreEqual(sourceArr[4], split[2][0]);
         }
 
-		[TestMethod]
+        [TestMethod]
         public void TestSplit<#= sourceType.Remove(sourceType.IndexOf("<int>")) #><#= suffix #>InvalidArguments()
         {
             <#= sourceType #> nullSource = null;
 
             try
-			{
-				nullSource.Split<#= suffix #>(2).ToArray();			
-				Assert.Fail();
-			}
-			catch (ArgumentNullException)
-			{
-				
-			}
+            {
+                nullSource.Split<#= suffix #>(2).ToArray();            
+                Assert.Fail();
+            }
+            catch (ArgumentNullException)
+            {
+                
+            }
 
-			var source = (<#= sourceType #>) new List<int> { 1, 2, 3, 4, 5 };
-			try
-			{
-				source.Split<#= suffix #>(0).ToArray();				
-				Assert.Fail();
-			}
-			catch (ArgumentException)
-			{
-				
-			}
-        }	
-		<# } 
-		}#>
+            var source = (<#= sourceType #>) new List<int> { 1, 2, 3, 4, 5 };
+            try
+            {
+                source.Split<#= suffix #>(0).ToArray();                
+                Assert.Fail();
+            }
+            catch (ArgumentException)
+            {
+                
+            }
+        }    
+        <# } 
+        }#>
 
     }
 }

@@ -17,52 +17,52 @@ namespace ZLinq
 {
     public static partial class ZEnumerable
     {   
-		<# var conditions = new []
-		{
-			new {Constraint = "where T : IEquatable<T>", Description = "", NameSuffix = ""},
-			new {Constraint = "", Description = ". Use Object.Equals for equality comparasion", NameSuffix = "Memberwise"}
-		}; 
-		
-		foreach(var overload in conditions)
-		{
-			foreach (var sourceType in TT.StandardLists) { #>		
-		
+        <# var conditions = new []
+        {
+            new {Constraint = "where T : IEquatable<T>", Description = "", NameSuffix = ""},
+            new {Constraint = "", Description = ". Use Object.Equals for equality comparasion", NameSuffix = "Memberwise"}
+        }; 
+        
+        foreach(var overload in conditions)
+        {
+            foreach (var sourceType in TT.StandardLists) { #>        
+        
         /// <summary>
-        ///	Check if collections are equal<#= overload.Description #> 
+        ///    Check if collections are equal<#= overload.Description #> 
         /// </summary>
         /// <typeparam name="T">IEquatable collection</typeparam>
         /// <param name="x">first collection</param>
         /// <param name="y">second collection</param>
         /// <returns>true if collections are equal</returns> 
-		[Pure]
+        [Pure]
         public static bool IsEqual<#= overload.NameSuffix #><T>(this <#= sourceType #> x, <#= sourceType #> y) <#= overload.Constraint #> 
         {
             if (ReferenceEquals(x, y))
                 return true;
             if (x == null || y == null)
                 return false;
-			int length = x.<#= TT.LengthOrCount(sourceType) #>;
+            int length = x.<#= TT.LengthOrCount(sourceType) #>;
             if (length != y.<#= TT.LengthOrCount(sourceType) #>)
-				return false;
-			int i;
+                return false;
+            int i;
             for (i = 0; i < length; i++) 
             {
                 if (!x[i].Equals(y[i]))
-					return false;
+                    return false;
             }
-			return true;
+            return true;
         }
 
-			<# } #>		
+            <# } #>        
 
         /// <summary>
-        ///	Check if collections are equal<#= overload.Description #> 
+        ///    Check if collections are equal<#= overload.Description #> 
         /// </summary>
         /// <typeparam name="T">IEquatable collection</typeparam>
         /// <param name="x">first collection</param>
         /// <param name="y">second collection</param>
         /// <returns>true if collections are equal</returns> 
-		[Pure]
+        [Pure]
         public static bool IsEqual<#= overload.NameSuffix #><T>(this ICollection<T> x, ICollection<T> y) <#= overload.Constraint #> 
         {
             if (ReferenceEquals(x, y))
@@ -86,6 +86,6 @@ namespace ZLinq
             yEnum.Dispose();
             return result;
         }
-		<# } #>	
+        <# } #>    
     }
 }

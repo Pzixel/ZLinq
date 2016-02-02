@@ -20,13 +20,13 @@ using ZLinq.Extension;
 namespace ZLinq
 {
     public static partial class ZEnumerable
-    {		
-	<#foreach (var type in TT.NumberTypes) { #>
+    {        
+    <#foreach (var type in TT.NumberTypes) { #>
 
-		#region <#= type #>	 		
-		<# foreach (string sourceType in TT.StandardLists) 
-		{ #>	
-		/// <summary>
+        #region <#= type #>             
+        <# foreach (string sourceType in TT.StandardLists) 
+        { #>    
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -34,20 +34,20 @@ namespace ZLinq
         [Pure]
         public static <#= type #> Sum(this <#= sourceType.Replace("T", type) #> source)
         {
-			<#= TT.IsNotNull("source") #>
+            <#= TT.IsNotNull("source") #>
             if (source.<#= TT.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.<#= TT.LengthOrCount(sourceType) #>);
             <#= type #> result = 0;
-			<# bool canInterlock = type == "int" || type == "long";
-			   if (!canInterlock) { #>object syncRoot = new object(); <# } #>	
+            <# bool canInterlock = type == "int" || type == "long";
+               if (!canInterlock) { #>object syncRoot = new object(); <# } #>    
             Parallel.ForEach(Partitioner.Create(0, source.<#= TT.LengthOrCount(sourceType) #>),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						<# if (canInterlock) { #>Interlocked.Add(ref result, x); <# }
-						else { #>lock (syncRoot)
-							result += x;						
-						<# } #>	  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        <# if (canInterlock) { #>Interlocked.Add(ref result, x); <# }
+                        else { #>lock (syncRoot)
+                            result += x;                        
+                        <# } #>      
+                    });
               
             return result;
         }
@@ -77,13 +77,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static <#= type #> Sum<T>(this <#= sourceType #> source, Func<T, <#= type #>> mapFunc)
         {
             <#= TT.IsNotNull("source") #>
@@ -126,9 +126,9 @@ namespace ZLinq
                 return  <#= TT.ExplicitCastFromIntIfNeeded(type) #>((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-		<# } #>
+        <# } #>
 
-		#endregion
-	<# } #>	
+        #endregion
+    <# } #>    
     }
 }

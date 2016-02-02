@@ -16,12 +16,12 @@ namespace ZLinq.Test.Core.Common
 {
     [TestClass]
     public class Where
-	{		
-		<# foreach (var sourceTypeInt in TT.ToInt(TT.StandardCollections)) 
-		{ #>		    
-		[TestMethod]
-	    public void TestWhereToArray<#= TT.GetCollectionName(sourceTypeInt) #>()
-		{
+    {        
+        <# foreach (var sourceTypeInt in TT.ToInt(TT.StandardCollections)) 
+        { #>            
+        [TestMethod]
+        public void TestWhereToArray<#= TT.GetCollectionName(sourceTypeInt) #>()
+        {
             var source = (<#= sourceTypeInt #>) Enumerable.Range(1, 100).<#= TT.ToArrayOrToList(sourceTypeInt) #>;
 
             var xArr = source.WhereToArray(x => x%3 == 0);
@@ -29,19 +29,19 @@ namespace ZLinq.Test.Core.Common
 
             Assert.IsTrue(xArr.Length == linqArr.Length);
             Assert.IsTrue(xArr.SequenceEqual(linqArr));
-		}
+        }
 
-		[TestMethod]
-	    public void TestWhereToList<#= TT.GetCollectionName(sourceTypeInt) #>()
-		{
-		    var source = (<#= sourceTypeInt #>) Enumerable.Range(1, 100).<#= TT.ToArrayOrToList(sourceTypeInt) #>;
+        [TestMethod]
+        public void TestWhereToList<#= TT.GetCollectionName(sourceTypeInt) #>()
+        {
+            var source = (<#= sourceTypeInt #>) Enumerable.Range(1, 100).<#= TT.ToArrayOrToList(sourceTypeInt) #>;
 
             var xArr = source.WhereToList(x => x%3 == 0);
             var linqArr = source.Where(x => x%3 == 0).ToList();
 
             Assert.IsTrue(xArr.Count == linqArr.Count);
             Assert.IsTrue(xArr.SequenceEqual(linqArr));
-		}
-		<# } #>
+        }
+        <# } #>
     }
 }

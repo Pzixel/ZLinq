@@ -11,11 +11,11 @@ using ZLinq.Extension;
 namespace ZLinq
 {
     public static partial class ZEnumerable
-    {		
-	
-		#region sbyte	 		
-			
-		/// <summary>
+    {        
+    
+        #region sbyte             
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -23,18 +23,18 @@ namespace ZLinq
         [Pure]
         public static sbyte Sum(this sbyte[] source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             sbyte result = 0;
-			object syncRoot = new object(); 	
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						lock (syncRoot)
-							result += x;						
-							  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        lock (syncRoot)
+                            result += x;                        
+                              
+                    });
               
             return result;
         }
@@ -64,13 +64,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static sbyte Sum<T>(this T[] source, Func<T, sbyte> mapFunc)
         {
             source.IsNotNull("source");
@@ -113,8 +113,8 @@ namespace ZLinq
                 return  (sbyte)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-			
-		/// <summary>
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -122,18 +122,18 @@ namespace ZLinq
         [Pure]
         public static sbyte Sum(this List<sbyte> source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             sbyte result = 0;
-			object syncRoot = new object(); 	
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						lock (syncRoot)
-							result += x;						
-							  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        lock (syncRoot)
+                            result += x;                        
+                              
+                    });
               
             return result;
         }
@@ -163,13 +163,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static sbyte Sum<T>(this List<T> source, Func<T, sbyte> mapFunc)
         {
             source.IsNotNull("source");
@@ -212,8 +212,8 @@ namespace ZLinq
                 return  (sbyte)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-			
-		/// <summary>
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -221,18 +221,18 @@ namespace ZLinq
         [Pure]
         public static sbyte Sum(this IList<sbyte> source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             sbyte result = 0;
-			object syncRoot = new object(); 	
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						lock (syncRoot)
-							result += x;						
-							  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        lock (syncRoot)
+                            result += x;                        
+                              
+                    });
               
             return result;
         }
@@ -262,13 +262,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static sbyte Sum<T>(this IList<T> source, Func<T, sbyte> mapFunc)
         {
             source.IsNotNull("source");
@@ -311,12 +311,12 @@ namespace ZLinq
                 return  (sbyte)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-		
-		#endregion
-	
-		#region byte	 		
-			
-		/// <summary>
+        
+        #endregion
+    
+        #region byte             
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -324,18 +324,18 @@ namespace ZLinq
         [Pure]
         public static byte Sum(this byte[] source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             byte result = 0;
-			object syncRoot = new object(); 	
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						lock (syncRoot)
-							result += x;						
-							  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        lock (syncRoot)
+                            result += x;                        
+                              
+                    });
               
             return result;
         }
@@ -365,13 +365,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static byte Sum<T>(this T[] source, Func<T, byte> mapFunc)
         {
             source.IsNotNull("source");
@@ -414,8 +414,8 @@ namespace ZLinq
                 return  (byte)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-			
-		/// <summary>
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -423,18 +423,18 @@ namespace ZLinq
         [Pure]
         public static byte Sum(this List<byte> source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             byte result = 0;
-			object syncRoot = new object(); 	
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						lock (syncRoot)
-							result += x;						
-							  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        lock (syncRoot)
+                            result += x;                        
+                              
+                    });
               
             return result;
         }
@@ -464,13 +464,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static byte Sum<T>(this List<T> source, Func<T, byte> mapFunc)
         {
             source.IsNotNull("source");
@@ -513,8 +513,8 @@ namespace ZLinq
                 return  (byte)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-			
-		/// <summary>
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -522,18 +522,18 @@ namespace ZLinq
         [Pure]
         public static byte Sum(this IList<byte> source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             byte result = 0;
-			object syncRoot = new object(); 	
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						lock (syncRoot)
-							result += x;						
-							  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        lock (syncRoot)
+                            result += x;                        
+                              
+                    });
               
             return result;
         }
@@ -563,13 +563,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static byte Sum<T>(this IList<T> source, Func<T, byte> mapFunc)
         {
             source.IsNotNull("source");
@@ -612,12 +612,12 @@ namespace ZLinq
                 return  (byte)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-		
-		#endregion
-	
-		#region short	 		
-			
-		/// <summary>
+        
+        #endregion
+    
+        #region short             
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -625,18 +625,18 @@ namespace ZLinq
         [Pure]
         public static short Sum(this short[] source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             short result = 0;
-			object syncRoot = new object(); 	
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						lock (syncRoot)
-							result += x;						
-							  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        lock (syncRoot)
+                            result += x;                        
+                              
+                    });
               
             return result;
         }
@@ -666,13 +666,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static short Sum<T>(this T[] source, Func<T, short> mapFunc)
         {
             source.IsNotNull("source");
@@ -715,8 +715,8 @@ namespace ZLinq
                 return  (short)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-			
-		/// <summary>
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -724,18 +724,18 @@ namespace ZLinq
         [Pure]
         public static short Sum(this List<short> source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             short result = 0;
-			object syncRoot = new object(); 	
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						lock (syncRoot)
-							result += x;						
-							  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        lock (syncRoot)
+                            result += x;                        
+                              
+                    });
               
             return result;
         }
@@ -765,13 +765,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static short Sum<T>(this List<T> source, Func<T, short> mapFunc)
         {
             source.IsNotNull("source");
@@ -814,8 +814,8 @@ namespace ZLinq
                 return  (short)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-			
-		/// <summary>
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -823,18 +823,18 @@ namespace ZLinq
         [Pure]
         public static short Sum(this IList<short> source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             short result = 0;
-			object syncRoot = new object(); 	
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						lock (syncRoot)
-							result += x;						
-							  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        lock (syncRoot)
+                            result += x;                        
+                              
+                    });
               
             return result;
         }
@@ -864,13 +864,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static short Sum<T>(this IList<T> source, Func<T, short> mapFunc)
         {
             source.IsNotNull("source");
@@ -913,12 +913,12 @@ namespace ZLinq
                 return  (short)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-		
-		#endregion
-	
-		#region ushort	 		
-			
-		/// <summary>
+        
+        #endregion
+    
+        #region ushort             
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -926,18 +926,18 @@ namespace ZLinq
         [Pure]
         public static ushort Sum(this ushort[] source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             ushort result = 0;
-			object syncRoot = new object(); 	
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						lock (syncRoot)
-							result += x;						
-							  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        lock (syncRoot)
+                            result += x;                        
+                              
+                    });
               
             return result;
         }
@@ -967,13 +967,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static ushort Sum<T>(this T[] source, Func<T, ushort> mapFunc)
         {
             source.IsNotNull("source");
@@ -1016,8 +1016,8 @@ namespace ZLinq
                 return  (ushort)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-			
-		/// <summary>
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -1025,18 +1025,18 @@ namespace ZLinq
         [Pure]
         public static ushort Sum(this List<ushort> source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             ushort result = 0;
-			object syncRoot = new object(); 	
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						lock (syncRoot)
-							result += x;						
-							  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        lock (syncRoot)
+                            result += x;                        
+                              
+                    });
               
             return result;
         }
@@ -1066,13 +1066,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static ushort Sum<T>(this List<T> source, Func<T, ushort> mapFunc)
         {
             source.IsNotNull("source");
@@ -1115,8 +1115,8 @@ namespace ZLinq
                 return  (ushort)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-			
-		/// <summary>
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -1124,18 +1124,18 @@ namespace ZLinq
         [Pure]
         public static ushort Sum(this IList<ushort> source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             ushort result = 0;
-			object syncRoot = new object(); 	
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						lock (syncRoot)
-							result += x;						
-							  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        lock (syncRoot)
+                            result += x;                        
+                              
+                    });
               
             return result;
         }
@@ -1165,13 +1165,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static ushort Sum<T>(this IList<T> source, Func<T, ushort> mapFunc)
         {
             source.IsNotNull("source");
@@ -1214,12 +1214,12 @@ namespace ZLinq
                 return  (ushort)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-		
-		#endregion
-	
-		#region int	 		
-			
-		/// <summary>
+        
+        #endregion
+    
+        #region int             
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -1227,16 +1227,16 @@ namespace ZLinq
         [Pure]
         public static int Sum(this int[] source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             int result = 0;
-				
+                
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						Interlocked.Add(ref result, x); 	  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        Interlocked.Add(ref result, x);       
+                    });
               
             return result;
         }
@@ -1266,13 +1266,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static int Sum<T>(this T[] source, Func<T, int> mapFunc)
         {
             source.IsNotNull("source");
@@ -1315,8 +1315,8 @@ namespace ZLinq
                 return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-			
-		/// <summary>
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -1324,16 +1324,16 @@ namespace ZLinq
         [Pure]
         public static int Sum(this List<int> source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             int result = 0;
-				
+                
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						Interlocked.Add(ref result, x); 	  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        Interlocked.Add(ref result, x);       
+                    });
               
             return result;
         }
@@ -1363,13 +1363,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static int Sum<T>(this List<T> source, Func<T, int> mapFunc)
         {
             source.IsNotNull("source");
@@ -1412,8 +1412,8 @@ namespace ZLinq
                 return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-			
-		/// <summary>
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -1421,16 +1421,16 @@ namespace ZLinq
         [Pure]
         public static int Sum(this IList<int> source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             int result = 0;
-				
+                
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						Interlocked.Add(ref result, x); 	  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        Interlocked.Add(ref result, x);       
+                    });
               
             return result;
         }
@@ -1460,13 +1460,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static int Sum<T>(this IList<T> source, Func<T, int> mapFunc)
         {
             source.IsNotNull("source");
@@ -1509,12 +1509,12 @@ namespace ZLinq
                 return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-		
-		#endregion
-	
-		#region uint	 		
-			
-		/// <summary>
+        
+        #endregion
+    
+        #region uint             
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -1522,18 +1522,18 @@ namespace ZLinq
         [Pure]
         public static uint Sum(this uint[] source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             uint result = 0;
-			object syncRoot = new object(); 	
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						lock (syncRoot)
-							result += x;						
-							  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        lock (syncRoot)
+                            result += x;                        
+                              
+                    });
               
             return result;
         }
@@ -1563,13 +1563,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static uint Sum<T>(this T[] source, Func<T, uint> mapFunc)
         {
             source.IsNotNull("source");
@@ -1612,8 +1612,8 @@ namespace ZLinq
                 return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-			
-		/// <summary>
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -1621,18 +1621,18 @@ namespace ZLinq
         [Pure]
         public static uint Sum(this List<uint> source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             uint result = 0;
-			object syncRoot = new object(); 	
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						lock (syncRoot)
-							result += x;						
-							  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        lock (syncRoot)
+                            result += x;                        
+                              
+                    });
               
             return result;
         }
@@ -1662,13 +1662,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static uint Sum<T>(this List<T> source, Func<T, uint> mapFunc)
         {
             source.IsNotNull("source");
@@ -1711,8 +1711,8 @@ namespace ZLinq
                 return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-			
-		/// <summary>
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -1720,18 +1720,18 @@ namespace ZLinq
         [Pure]
         public static uint Sum(this IList<uint> source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             uint result = 0;
-			object syncRoot = new object(); 	
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						lock (syncRoot)
-							result += x;						
-							  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        lock (syncRoot)
+                            result += x;                        
+                              
+                    });
               
             return result;
         }
@@ -1761,13 +1761,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static uint Sum<T>(this IList<T> source, Func<T, uint> mapFunc)
         {
             source.IsNotNull("source");
@@ -1810,12 +1810,12 @@ namespace ZLinq
                 return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-		
-		#endregion
-	
-		#region long	 		
-			
-		/// <summary>
+        
+        #endregion
+    
+        #region long             
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -1823,16 +1823,16 @@ namespace ZLinq
         [Pure]
         public static long Sum(this long[] source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             long result = 0;
-				
+                
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						Interlocked.Add(ref result, x); 	  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        Interlocked.Add(ref result, x);       
+                    });
               
             return result;
         }
@@ -1862,13 +1862,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static long Sum<T>(this T[] source, Func<T, long> mapFunc)
         {
             source.IsNotNull("source");
@@ -1911,8 +1911,8 @@ namespace ZLinq
                 return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-			
-		/// <summary>
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -1920,16 +1920,16 @@ namespace ZLinq
         [Pure]
         public static long Sum(this List<long> source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             long result = 0;
-				
+                
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						Interlocked.Add(ref result, x); 	  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        Interlocked.Add(ref result, x);       
+                    });
               
             return result;
         }
@@ -1959,13 +1959,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static long Sum<T>(this List<T> source, Func<T, long> mapFunc)
         {
             source.IsNotNull("source");
@@ -2008,8 +2008,8 @@ namespace ZLinq
                 return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-			
-		/// <summary>
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -2017,16 +2017,16 @@ namespace ZLinq
         [Pure]
         public static long Sum(this IList<long> source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             long result = 0;
-				
+                
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						Interlocked.Add(ref result, x); 	  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        Interlocked.Add(ref result, x);       
+                    });
               
             return result;
         }
@@ -2056,13 +2056,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static long Sum<T>(this IList<T> source, Func<T, long> mapFunc)
         {
             source.IsNotNull("source");
@@ -2105,12 +2105,12 @@ namespace ZLinq
                 return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-		
-		#endregion
-	
-		#region float	 		
-			
-		/// <summary>
+        
+        #endregion
+    
+        #region float             
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -2118,18 +2118,18 @@ namespace ZLinq
         [Pure]
         public static float Sum(this float[] source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             float result = 0;
-			object syncRoot = new object(); 	
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						lock (syncRoot)
-							result += x;						
-							  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        lock (syncRoot)
+                            result += x;                        
+                              
+                    });
               
             return result;
         }
@@ -2159,13 +2159,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static float Sum<T>(this T[] source, Func<T, float> mapFunc)
         {
             source.IsNotNull("source");
@@ -2208,8 +2208,8 @@ namespace ZLinq
                 return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-			
-		/// <summary>
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -2217,18 +2217,18 @@ namespace ZLinq
         [Pure]
         public static float Sum(this List<float> source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             float result = 0;
-			object syncRoot = new object(); 	
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						lock (syncRoot)
-							result += x;						
-							  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        lock (syncRoot)
+                            result += x;                        
+                              
+                    });
               
             return result;
         }
@@ -2258,13 +2258,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static float Sum<T>(this List<T> source, Func<T, float> mapFunc)
         {
             source.IsNotNull("source");
@@ -2307,8 +2307,8 @@ namespace ZLinq
                 return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-			
-		/// <summary>
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -2316,18 +2316,18 @@ namespace ZLinq
         [Pure]
         public static float Sum(this IList<float> source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             float result = 0;
-			object syncRoot = new object(); 	
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						lock (syncRoot)
-							result += x;						
-							  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        lock (syncRoot)
+                            result += x;                        
+                              
+                    });
               
             return result;
         }
@@ -2357,13 +2357,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static float Sum<T>(this IList<T> source, Func<T, float> mapFunc)
         {
             source.IsNotNull("source");
@@ -2406,12 +2406,12 @@ namespace ZLinq
                 return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-		
-		#endregion
-	
-		#region double	 		
-			
-		/// <summary>
+        
+        #endregion
+    
+        #region double             
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -2419,18 +2419,18 @@ namespace ZLinq
         [Pure]
         public static double Sum(this double[] source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             double result = 0;
-			object syncRoot = new object(); 	
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						lock (syncRoot)
-							result += x;						
-							  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        lock (syncRoot)
+                            result += x;                        
+                              
+                    });
               
             return result;
         }
@@ -2460,13 +2460,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static double Sum<T>(this T[] source, Func<T, double> mapFunc)
         {
             source.IsNotNull("source");
@@ -2509,8 +2509,8 @@ namespace ZLinq
                 return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-			
-		/// <summary>
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -2518,18 +2518,18 @@ namespace ZLinq
         [Pure]
         public static double Sum(this List<double> source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             double result = 0;
-			object syncRoot = new object(); 	
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						lock (syncRoot)
-							result += x;						
-							  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        lock (syncRoot)
+                            result += x;                        
+                              
+                    });
               
             return result;
         }
@@ -2559,13 +2559,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static double Sum<T>(this List<T> source, Func<T, double> mapFunc)
         {
             source.IsNotNull("source");
@@ -2608,8 +2608,8 @@ namespace ZLinq
                 return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-			
-		/// <summary>
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -2617,18 +2617,18 @@ namespace ZLinq
         [Pure]
         public static double Sum(this IList<double> source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             double result = 0;
-			object syncRoot = new object(); 	
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						lock (syncRoot)
-							result += x;						
-							  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        lock (syncRoot)
+                            result += x;                        
+                              
+                    });
               
             return result;
         }
@@ -2658,13 +2658,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static double Sum<T>(this IList<T> source, Func<T, double> mapFunc)
         {
             source.IsNotNull("source");
@@ -2707,12 +2707,12 @@ namespace ZLinq
                 return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-		
-		#endregion
-	
-		#region decimal	 		
-			
-		/// <summary>
+        
+        #endregion
+    
+        #region decimal             
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -2720,18 +2720,18 @@ namespace ZLinq
         [Pure]
         public static decimal Sum(this decimal[] source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             decimal result = 0;
-			object syncRoot = new object(); 	
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						lock (syncRoot)
-							result += x;						
-							  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        lock (syncRoot)
+                            result += x;                        
+                              
+                    });
               
             return result;
         }
@@ -2761,13 +2761,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static decimal Sum<T>(this T[] source, Func<T, decimal> mapFunc)
         {
             source.IsNotNull("source");
@@ -2810,8 +2810,8 @@ namespace ZLinq
                 return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-			
-		/// <summary>
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -2819,18 +2819,18 @@ namespace ZLinq
         [Pure]
         public static decimal Sum(this List<decimal> source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             decimal result = 0;
-			object syncRoot = new object(); 	
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						lock (syncRoot)
-							result += x;						
-							  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        lock (syncRoot)
+                            result += x;                        
+                              
+                    });
               
             return result;
         }
@@ -2860,13 +2860,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static decimal Sum<T>(this List<T> source, Func<T, decimal> mapFunc)
         {
             source.IsNotNull("source");
@@ -2909,8 +2909,8 @@ namespace ZLinq
                 return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-			
-		/// <summary>
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -2918,18 +2918,18 @@ namespace ZLinq
         [Pure]
         public static decimal Sum(this IList<decimal> source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             decimal result = 0;
-			object syncRoot = new object(); 	
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						lock (syncRoot)
-							result += x;						
-							  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        lock (syncRoot)
+                            result += x;                        
+                              
+                    });
               
             return result;
         }
@@ -2959,13 +2959,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static decimal Sum<T>(this IList<T> source, Func<T, decimal> mapFunc)
         {
             source.IsNotNull("source");
@@ -3008,12 +3008,12 @@ namespace ZLinq
                 return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-		
-		#endregion
-	
-		#region ulong	 		
-			
-		/// <summary>
+        
+        #endregion
+    
+        #region ulong             
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -3021,18 +3021,18 @@ namespace ZLinq
         [Pure]
         public static ulong Sum(this ulong[] source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             ulong result = 0;
-			object syncRoot = new object(); 	
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						lock (syncRoot)
-							result += x;						
-							  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        lock (syncRoot)
+                            result += x;                        
+                              
+                    });
               
             return result;
         }
@@ -3062,13 +3062,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static ulong Sum<T>(this T[] source, Func<T, ulong> mapFunc)
         {
             source.IsNotNull("source");
@@ -3111,8 +3111,8 @@ namespace ZLinq
                 return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-			
-		/// <summary>
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -3120,18 +3120,18 @@ namespace ZLinq
         [Pure]
         public static ulong Sum(this List<ulong> source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             ulong result = 0;
-			object syncRoot = new object(); 	
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						lock (syncRoot)
-							result += x;						
-							  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        lock (syncRoot)
+                            result += x;                        
+                              
+                    });
               
             return result;
         }
@@ -3161,13 +3161,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static ulong Sum<T>(this List<T> source, Func<T, ulong> mapFunc)
         {
             source.IsNotNull("source");
@@ -3210,8 +3210,8 @@ namespace ZLinq
                 return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-			
-		/// <summary>
+            
+        /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
@@ -3219,18 +3219,18 @@ namespace ZLinq
         [Pure]
         public static ulong Sum(this IList<ulong> source)
         {
-			source.IsNotNull("source");
+            source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             ulong result = 0;
-			object syncRoot = new object(); 	
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-						range => {
-						var x = Sum(source, range.Item1, range.Item2);
-						lock (syncRoot)
-							result += x;						
-							  
-					});
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        lock (syncRoot)
+                            result += x;                        
+                              
+                    });
               
             return result;
         }
@@ -3260,13 +3260,13 @@ namespace ZLinq
             }
         }
 
-		/// <summary>
+        /// <summary>
         /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
         /// <returns>Sum of all elements</returns>
-		[Pure]
+        [Pure]
         public static ulong Sum<T>(this IList<T> source, Func<T, ulong> mapFunc)
         {
             source.IsNotNull("source");
@@ -3309,8 +3309,8 @@ namespace ZLinq
                 return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
             }
         }
-		
-		#endregion
-		
+        
+        #endregion
+        
     }
 }

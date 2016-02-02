@@ -17,10 +17,10 @@ namespace ZLinq.Test.Core.Common
 {
     [TestClass]
     public class Shuffle
-    {		  
-		<# foreach (var sourceTypeInt in TT.ToInt(TT.StandardLists)) { #>
+    {          
+        <# foreach (var sourceTypeInt in TT.ToInt(TT.StandardLists)) { #>
 
-		[TestMethod]
+        [TestMethod]
         public void TestSelectToArrayFrom<#= TT.GetCollectionName(sourceTypeInt) #>()
         {
             var source = (<#= sourceTypeInt #>) Enumerable.Range(1, 100).<#= TT.ToArrayOrToList(sourceTypeInt) #>;
@@ -29,7 +29,7 @@ namespace ZLinq.Test.Core.Common
 
             Assert.IsFalse(source.SequenceEqual(shuffled));
         }
-		<#}#>
+        <#}#>
 
     }
 }

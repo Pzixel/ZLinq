@@ -11,36 +11,36 @@ namespace ZLinq.Test.Helpers
     [SuppressMessage("ReSharper", "InvokeAsExtensionMethod")]
     public static class Caster
     {        
-		[Pure]
+        [Pure]
         public static IList<T> ToIList<T>(this IEnumerable<T> source)
         {
             return Enumerable.ToList(source);
         }
-		[Pure]
+        [Pure]
         public static ICollection<T> ToICollection<T>(this IEnumerable<T> source)
         {
             return Enumerable.ToList(source);
         }
-		[Pure]
+        [Pure]
         public static IEnumerable<T> ToIEnumerable<T>(this IEnumerable<T> source)
         {
             return Enumerable.ToList(source);
         }
-		[Pure]
+        [Pure]
         public static IList ToIListNonGen<T>(this IEnumerable<T> source)
         {
             return Enumerable.ToList(source);
         }
-		[Pure]
+        [Pure]
         public static ICollection ToICollectionNonGen<T>(this IEnumerable<T> source)
         {
             return Enumerable.ToList(source);
         }
-		[Pure]
+        [Pure]
         public static IEnumerable ToIEnumerableNonGen<T>(this IEnumerable<T> source)
         {
             return Enumerable.ToList(source);
         }
-		
+        
     }
 }

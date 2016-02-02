@@ -20,14 +20,14 @@ namespace ZLinq.Test.Helpers
     [SuppressMessage("ReSharper", "InvokeAsExtensionMethod")]
     public static class Caster
     {        
-		<# foreach (var sourceType in TT.WithNonGen(TT.StandardInterfaces))
-		{ 
-		#>[Pure]
+        <# foreach (var sourceType in TT.WithNonGen(TT.StandardInterfaces))
+        { 
+        #>[Pure]
         public static <#= sourceType #> To<#= TT.GetCollectionName(sourceType) #><T>(this IEnumerable<T> source)
         {
             return Enumerable.ToList(source);
         }
-		<#}#>
+        <#}#>
 
     }
 }
