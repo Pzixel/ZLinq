@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 
 namespace ZLinq.TTHelp
 {
@@ -40,10 +41,7 @@ namespace ZLinq.TTHelp
         public static readonly string[] StandardInterfaces = new[] {"IList<T>"}.Concat(Unindexable).ToArray();
         public static readonly string[] Foreachable = {"T[]", "List<T>", "IEnumerable<T>" };
 
-        public static string[] ToInt(IEnumerable<string> source)
-        {
-            return source.Select(ToInt).ToArray();
-        }
+        public static string[] ToInt(IEnumerable<string> source) => source.Select(ToInt).ToArray();
 
         public static string ToInt(string source)
         {
@@ -51,10 +49,7 @@ namespace ZLinq.TTHelp
             return To(source, replace);
         }
 
-        public static string To(string source, string replace)
-        {
-            return source.Replace("T", replace);
-        }
+        public static string To(string source, string replace) => source.Replace("T", replace);
 
         public static string[] WithNonGen(string[] source)
         {
@@ -62,15 +57,9 @@ namespace ZLinq.TTHelp
             return source.Concat(result).ToArray();
         }
 
-        public static string LengthOrCount(string typeName)
-        {
-            return typeName.IndexOf('[') >= 0 ? "Length" : "Count";
-        }
+        public static string LengthOrCount(string typeName) => typeName.IndexOf('[') >= 0 ? "Length" : "Count";
 
-        public static string ExplicitCastFromIntIfNeeded(string typeName)
-        {
-            return Array.IndexOf(NumberTypes, typeName) < 4 ? "(" + typeName + ")" : "";
-        }
+        public static string ExplicitCastFromIntIfNeeded(string typeName) => Array.IndexOf(NumberTypes, typeName) < 4 ? "(" + typeName + ")" : "";
 
         public static string GetCollectionName(string collection)
         {
@@ -81,44 +70,43 @@ namespace ZLinq.TTHelp
             return collection.Remove(collection.IndexOf('<'));
         }
 
-        public static string ToArrayOrToList(string collection)
-        {
-            return GetCollectionName(collection) == "Array" ? "ToArray()" : "ToList()";
-        }
+        public static string ToArrayOrToList(string collection) => GetCollectionName(collection) == "Array" ? "ToArray()" : "ToList()";
 
-        public static string IsNotNull(string paramName)
-        {
-            return $"{paramName}.IsNotNull(\"{paramName}\");";
-        }
+        public static string IsNotNull(string paramName) => $"{paramName}.IsNotNull(\"{paramName}\");";
 
         public static string AssertFloatsRelative(string first, string second, string tolerance)
         {
             return $"Assert.IsTrue(Math.Abs(1 - {first}/(double){second}) < {tolerance}, $\"{first} = {{{first}}}\\t{second} = {{{second}}}\");";
         }
 
-        public static string Cast(string typeName)
+        public static string Cast(string typeName) => typeName.IndexOfAny(new[] {'<', '['}) >= 0 ? string.Empty : "(T)";
+
+        public static string GetConstraint(string typeName) => typeName.IndexOfAny(new[] {'<', '['}) >= 0 ? "<T>" : string.Empty;
+
+        public static string[] GetNullables(IEnumerable<string> types) => types.Select(x => x + "?").ToArray();
+
+        public static string AreEqual(string a, string b) => $@"Assert.IsTrue({a} == {b}, $""{a} ={{{a}}}\t{b} ={{{b}}}"");;";
+
+        public static string AreNotEqual(string a, string b) => $@"Assert.IsFalse({a} == {b}, $""{a} ={{{a}}}\t{b} ={{{b}}}"");;";
+
+        public static bool CannotBeRepresented(string type, int value)
         {
-            return typeName.IndexOfAny(new[] {'<', '['}) >= 0 ? string.Empty : "(T)";
+            if (type.StartsWith("byte"))
+                return value > byte.MaxValue;
+            if (type.StartsWith("sbyte"))
+                return value > sbyte.MaxValue;
+            return false;
         }
 
-        public static string GetConstraint(string typeName)
-        {
-            return typeName.IndexOfAny(new[] {'<', '['}) >= 0 ? "<T>" : string.Empty;
-        }
 
-        public static string[] GetNullables(IEnumerable<string> types)
-        {
-            return types.Select(x => x + "?").ToArray();
-        }
+        public static bool CanBeRepresented(string type, int value) => !CannotBeRepresented(type, value);
 
-        public static string AreEqual(string a, string b)
+        public static string GetNullableName(string type)
         {
-            return $@"Assert.IsTrue({a} == {b}, $""{a} ={{{a}}}\t{b} ={{{b}}}"");;";
-        }
-
-        public static string AreNotEqual(string a, string b)
-        {
-            return $@"Assert.IsFalse({a} == {b}, $""{a} ={{{a}}}\t{b} ={{{b}}}"");;";
+            int index = type.IndexOf('?');
+            if (index < 0)
+                return type;
+            return type.Remove(index) + "Nullable";
         }
     }
 }
