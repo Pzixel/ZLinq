@@ -45,7 +45,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -96,7 +97,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);
@@ -143,7 +145,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -194,7 +197,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);
@@ -241,7 +245,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -292,7 +297,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);
@@ -343,7 +349,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -394,7 +401,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);
@@ -441,7 +449,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -492,7 +501,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);
@@ -539,7 +549,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -590,7 +601,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);
@@ -641,7 +653,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -692,7 +705,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);
@@ -739,7 +753,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -790,7 +805,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);
@@ -837,7 +853,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -888,7 +905,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);
@@ -939,7 +957,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -990,7 +1009,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);
@@ -1037,7 +1057,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -1088,7 +1109,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);
@@ -1135,7 +1157,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -1186,7 +1209,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);
@@ -1235,7 +1259,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -1286,7 +1311,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);
@@ -1331,7 +1357,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -1382,7 +1409,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);
@@ -1427,7 +1455,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -1478,7 +1507,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);
@@ -1529,7 +1559,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -1580,7 +1611,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);
@@ -1627,7 +1659,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -1678,7 +1711,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);
@@ -1725,7 +1759,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -1776,7 +1811,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);
@@ -1825,7 +1861,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -1876,7 +1913,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);
@@ -1921,7 +1959,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -1972,7 +2011,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);
@@ -2017,7 +2057,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -2068,7 +2109,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);
@@ -2119,7 +2161,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -2170,7 +2213,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);
@@ -2217,7 +2261,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -2268,7 +2313,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);
@@ -2315,7 +2361,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -2366,7 +2413,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);
@@ -2417,7 +2465,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -2468,7 +2517,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);
@@ -2515,7 +2565,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -2566,7 +2617,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);
@@ -2613,7 +2665,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -2664,7 +2717,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);
@@ -2715,7 +2769,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -2766,7 +2821,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);
@@ -2813,7 +2869,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -2864,7 +2921,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);
@@ -2911,7 +2969,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -2962,7 +3021,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);
@@ -3013,7 +3073,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -3064,7 +3125,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);
@@ -3111,7 +3173,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -3162,7 +3225,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);
@@ -3209,7 +3273,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += source[i];
                     sum2 += source[i + 1];
@@ -3260,7 +3325,8 @@ namespace ZLinq
             checked
             {
                 int i;
-                for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
                     sum1 += mapFunc(source[i]);
                     sum2 += mapFunc(source[i + 1]);

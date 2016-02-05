@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using ZLinq.Extension;
@@ -67,7 +66,8 @@ namespace ZLinq
             }
             sbyte max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -133,7 +133,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 sbyte tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -199,7 +200,8 @@ namespace ZLinq
             }
             sbyte max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -265,7 +267,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 sbyte tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -331,7 +334,8 @@ namespace ZLinq
             }
             sbyte max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -397,7 +401,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 sbyte tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -474,7 +479,8 @@ namespace ZLinq
             }
             byte max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -540,7 +546,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 byte tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -606,7 +613,8 @@ namespace ZLinq
             }
             byte max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -672,7 +680,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 byte tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -738,7 +747,8 @@ namespace ZLinq
             }
             byte max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -804,7 +814,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 byte tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -881,7 +892,8 @@ namespace ZLinq
             }
             short max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -947,7 +959,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 short tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -1013,7 +1026,8 @@ namespace ZLinq
             }
             short max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -1079,7 +1093,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 short tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -1145,7 +1160,8 @@ namespace ZLinq
             }
             short max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -1211,7 +1227,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 short tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -1288,7 +1305,8 @@ namespace ZLinq
             }
             ushort max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -1354,7 +1372,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ushort tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -1420,7 +1439,8 @@ namespace ZLinq
             }
             ushort max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -1486,7 +1506,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ushort tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -1552,7 +1573,8 @@ namespace ZLinq
             }
             ushort max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -1618,7 +1640,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ushort tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -1695,7 +1718,8 @@ namespace ZLinq
             }
             int max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -1761,7 +1785,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 int tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -1827,7 +1852,8 @@ namespace ZLinq
             }
             int max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -1893,7 +1919,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 int tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -1959,7 +1986,8 @@ namespace ZLinq
             }
             int max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -2025,7 +2053,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 int tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -2102,7 +2131,8 @@ namespace ZLinq
             }
             uint max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -2168,7 +2198,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 uint tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -2234,7 +2265,8 @@ namespace ZLinq
             }
             uint max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -2300,7 +2332,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 uint tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -2366,7 +2399,8 @@ namespace ZLinq
             }
             uint max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -2432,7 +2466,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 uint tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -2509,7 +2544,8 @@ namespace ZLinq
             }
             long max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -2575,7 +2611,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 long tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -2641,7 +2678,8 @@ namespace ZLinq
             }
             long max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -2707,7 +2745,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 long tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -2773,7 +2812,8 @@ namespace ZLinq
             }
             long max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -2839,7 +2879,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 long tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -2916,7 +2957,8 @@ namespace ZLinq
             }
             float max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -2982,7 +3024,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 float tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -3048,7 +3091,8 @@ namespace ZLinq
             }
             float max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -3114,7 +3158,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 float tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -3180,7 +3225,8 @@ namespace ZLinq
             }
             float max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -3246,7 +3292,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 float tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -3323,7 +3370,8 @@ namespace ZLinq
             }
             double max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -3389,7 +3437,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 double tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -3455,7 +3504,8 @@ namespace ZLinq
             }
             double max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -3521,7 +3571,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 double tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -3587,7 +3638,8 @@ namespace ZLinq
             }
             double max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -3653,7 +3705,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 double tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -3730,7 +3783,8 @@ namespace ZLinq
             }
             decimal max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -3796,7 +3850,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 decimal tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -3862,7 +3917,8 @@ namespace ZLinq
             }
             decimal max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -3928,7 +3984,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 decimal tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -3994,7 +4051,8 @@ namespace ZLinq
             }
             decimal max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -4060,7 +4118,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 decimal tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -4137,7 +4196,8 @@ namespace ZLinq
             }
             ulong max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -4203,7 +4263,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ulong tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -4269,7 +4330,8 @@ namespace ZLinq
             }
             ulong max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -4335,7 +4397,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ulong tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -4401,7 +4464,8 @@ namespace ZLinq
             }
             ulong max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -4467,7 +4531,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ulong tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -4554,7 +4619,8 @@ namespace ZLinq
             }
             sbyte? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 sbyte? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -4623,7 +4689,8 @@ namespace ZLinq
             }
             sbyte? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 sbyte? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)
@@ -4690,7 +4757,8 @@ namespace ZLinq
             }
             sbyte? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 sbyte? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -4759,7 +4827,8 @@ namespace ZLinq
             }
             sbyte? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 sbyte? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)
@@ -4826,7 +4895,8 @@ namespace ZLinq
             }
             sbyte? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 sbyte? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -4895,7 +4965,8 @@ namespace ZLinq
             }
             sbyte? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 sbyte? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)
@@ -4978,7 +5049,8 @@ namespace ZLinq
             }
             byte? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 byte? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -5047,7 +5119,8 @@ namespace ZLinq
             }
             byte? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 byte? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)
@@ -5114,7 +5187,8 @@ namespace ZLinq
             }
             byte? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 byte? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -5183,7 +5257,8 @@ namespace ZLinq
             }
             byte? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 byte? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)
@@ -5250,7 +5325,8 @@ namespace ZLinq
             }
             byte? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 byte? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -5319,7 +5395,8 @@ namespace ZLinq
             }
             byte? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 byte? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)
@@ -5402,7 +5479,8 @@ namespace ZLinq
             }
             short? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 short? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -5471,7 +5549,8 @@ namespace ZLinq
             }
             short? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 short? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)
@@ -5538,7 +5617,8 @@ namespace ZLinq
             }
             short? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 short? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -5607,7 +5687,8 @@ namespace ZLinq
             }
             short? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 short? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)
@@ -5674,7 +5755,8 @@ namespace ZLinq
             }
             short? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 short? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -5743,7 +5825,8 @@ namespace ZLinq
             }
             short? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 short? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)
@@ -5826,7 +5909,8 @@ namespace ZLinq
             }
             ushort? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ushort? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -5895,7 +5979,8 @@ namespace ZLinq
             }
             ushort? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ushort? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)
@@ -5962,7 +6047,8 @@ namespace ZLinq
             }
             ushort? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ushort? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -6031,7 +6117,8 @@ namespace ZLinq
             }
             ushort? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ushort? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)
@@ -6098,7 +6185,8 @@ namespace ZLinq
             }
             ushort? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ushort? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -6167,7 +6255,8 @@ namespace ZLinq
             }
             ushort? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ushort? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)
@@ -6250,7 +6339,8 @@ namespace ZLinq
             }
             int? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 int? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -6319,7 +6409,8 @@ namespace ZLinq
             }
             int? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 int? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)
@@ -6386,7 +6477,8 @@ namespace ZLinq
             }
             int? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 int? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -6455,7 +6547,8 @@ namespace ZLinq
             }
             int? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 int? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)
@@ -6522,7 +6615,8 @@ namespace ZLinq
             }
             int? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 int? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -6591,7 +6685,8 @@ namespace ZLinq
             }
             int? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 int? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)
@@ -6674,7 +6769,8 @@ namespace ZLinq
             }
             uint? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 uint? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -6743,7 +6839,8 @@ namespace ZLinq
             }
             uint? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 uint? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)
@@ -6810,7 +6907,8 @@ namespace ZLinq
             }
             uint? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 uint? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -6879,7 +6977,8 @@ namespace ZLinq
             }
             uint? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 uint? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)
@@ -6946,7 +7045,8 @@ namespace ZLinq
             }
             uint? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 uint? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -7015,7 +7115,8 @@ namespace ZLinq
             }
             uint? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 uint? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)
@@ -7098,7 +7199,8 @@ namespace ZLinq
             }
             long? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 long? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -7167,7 +7269,8 @@ namespace ZLinq
             }
             long? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 long? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)
@@ -7234,7 +7337,8 @@ namespace ZLinq
             }
             long? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 long? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -7303,7 +7407,8 @@ namespace ZLinq
             }
             long? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 long? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)
@@ -7370,7 +7475,8 @@ namespace ZLinq
             }
             long? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 long? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -7439,7 +7545,8 @@ namespace ZLinq
             }
             long? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 long? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)
@@ -7522,7 +7629,8 @@ namespace ZLinq
             }
             float? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 float? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -7591,7 +7699,8 @@ namespace ZLinq
             }
             float? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 float? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)
@@ -7658,7 +7767,8 @@ namespace ZLinq
             }
             float? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 float? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -7727,7 +7837,8 @@ namespace ZLinq
             }
             float? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 float? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)
@@ -7794,7 +7905,8 @@ namespace ZLinq
             }
             float? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 float? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -7863,7 +7975,8 @@ namespace ZLinq
             }
             float? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 float? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)
@@ -7946,7 +8059,8 @@ namespace ZLinq
             }
             double? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 double? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -8015,7 +8129,8 @@ namespace ZLinq
             }
             double? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 double? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)
@@ -8082,7 +8197,8 @@ namespace ZLinq
             }
             double? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 double? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -8151,7 +8267,8 @@ namespace ZLinq
             }
             double? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 double? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)
@@ -8218,7 +8335,8 @@ namespace ZLinq
             }
             double? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 double? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -8287,7 +8405,8 @@ namespace ZLinq
             }
             double? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 double? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)
@@ -8370,7 +8489,8 @@ namespace ZLinq
             }
             decimal? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 decimal? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -8439,7 +8559,8 @@ namespace ZLinq
             }
             decimal? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 decimal? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)
@@ -8506,7 +8627,8 @@ namespace ZLinq
             }
             decimal? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 decimal? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -8575,7 +8697,8 @@ namespace ZLinq
             }
             decimal? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 decimal? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)
@@ -8642,7 +8765,8 @@ namespace ZLinq
             }
             decimal? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 decimal? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -8711,7 +8835,8 @@ namespace ZLinq
             }
             decimal? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 decimal? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)
@@ -8794,7 +8919,8 @@ namespace ZLinq
             }
             ulong? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ulong? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -8863,7 +8989,8 @@ namespace ZLinq
             }
             ulong? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ulong? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)
@@ -8930,7 +9057,8 @@ namespace ZLinq
             }
             ulong? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ulong? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -8999,7 +9127,8 @@ namespace ZLinq
             }
             ulong? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ulong? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)
@@ -9066,7 +9195,8 @@ namespace ZLinq
             }
             ulong? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ulong? arg0 = source[i + 0];
                 if (arg0.HasValue && max0 < arg0)
@@ -9135,7 +9265,8 @@ namespace ZLinq
             }
             ulong? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ulong? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && max0 < arg0)

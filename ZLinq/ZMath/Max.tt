@@ -11,7 +11,6 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using ZLinq.Extension;
@@ -78,7 +77,8 @@ namespace ZLinq
             }
             <#= type #> max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 if (max0 < source[i])
                     max0 = source[i];
@@ -144,7 +144,8 @@ namespace ZLinq
                 max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
 
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 <#= type #> tmp0 = mapFunc(source[i]);
                 if (max0 < tmp0)
@@ -236,7 +237,8 @@ namespace ZLinq
             }
             <#= type #> max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 <# for(int j = 0; j < 4; j++) { 
                 #><#= type #> arg<#= j #> = source[i + <#= j #>];
@@ -298,7 +300,8 @@ namespace ZLinq
             }
             <#= type #> max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
-            for (i = startIndex; i < endIndex - Constants.Step + 1; i += Constants.Step)
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 <# for(int j = 0; j < 4; j++) { 
                 #><#= type #> arg<#= j #> = mapFunc(source[i + <#= j #>]);
