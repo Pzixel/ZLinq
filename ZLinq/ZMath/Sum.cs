@@ -34,8 +34,7 @@ namespace ZLinq
                         lock (syncRoot)
                             result += x;                        
                               
-                    });
-              
+                    });              
             return result;
         }
 
@@ -55,12 +54,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sbyte)((sum1 + sum2) + (sum3 + sum4));
+                    return (sbyte)(sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sbyte)((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (sbyte)(sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (sbyte)((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return (sbyte)((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (sbyte)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (sbyte)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -80,10 +79,9 @@ namespace ZLinq
             sbyte result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (sbyte)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -106,12 +104,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return  (sbyte) ((sum1 + sum2) + (sum3 + sum4));
+                    return  (sbyte) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (sbyte)((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (sbyte)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  (sbyte)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -134,8 +132,7 @@ namespace ZLinq
                         lock (syncRoot)
                             result += x;                        
                               
-                    });
-              
+                    });              
             return result;
         }
 
@@ -155,12 +152,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sbyte)((sum1 + sum2) + (sum3 + sum4));
+                    return (sbyte)(sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sbyte)((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (sbyte)(sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (sbyte)((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return (sbyte)((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (sbyte)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (sbyte)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -180,10 +177,9 @@ namespace ZLinq
             sbyte result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (sbyte)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -206,12 +202,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return  (sbyte) ((sum1 + sum2) + (sum3 + sum4));
+                    return  (sbyte) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (sbyte)((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (sbyte)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  (sbyte)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -234,8 +230,7 @@ namespace ZLinq
                         lock (syncRoot)
                             result += x;                        
                               
-                    });
-              
+                    });              
             return result;
         }
 
@@ -255,12 +250,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sbyte)((sum1 + sum2) + (sum3 + sum4));
+                    return (sbyte)(sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sbyte)((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (sbyte)(sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (sbyte)((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return (sbyte)((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (sbyte)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (sbyte)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -280,10 +275,9 @@ namespace ZLinq
             sbyte result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (sbyte)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -306,12 +300,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return  (sbyte) ((sum1 + sum2) + (sum3 + sum4));
+                    return  (sbyte) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (sbyte)((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (sbyte)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  (sbyte)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
         
@@ -338,8 +332,7 @@ namespace ZLinq
                         lock (syncRoot)
                             result += x;                        
                               
-                    });
-              
+                    });              
             return result;
         }
 
@@ -359,12 +352,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (byte)((sum1 + sum2) + (sum3 + sum4));
+                    return (byte)(sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (byte)((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (byte)(sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (byte)((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return (byte)((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (byte)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (byte)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -384,10 +377,9 @@ namespace ZLinq
             byte result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (byte)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -410,12 +402,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return  (byte) ((sum1 + sum2) + (sum3 + sum4));
+                    return  (byte) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (byte)((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (byte)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  (byte)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -438,8 +430,7 @@ namespace ZLinq
                         lock (syncRoot)
                             result += x;                        
                               
-                    });
-              
+                    });              
             return result;
         }
 
@@ -459,12 +450,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (byte)((sum1 + sum2) + (sum3 + sum4));
+                    return (byte)(sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (byte)((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (byte)(sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (byte)((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return (byte)((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (byte)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (byte)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -484,10 +475,9 @@ namespace ZLinq
             byte result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (byte)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -510,12 +500,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return  (byte) ((sum1 + sum2) + (sum3 + sum4));
+                    return  (byte) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (byte)((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (byte)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  (byte)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -538,8 +528,7 @@ namespace ZLinq
                         lock (syncRoot)
                             result += x;                        
                               
-                    });
-              
+                    });              
             return result;
         }
 
@@ -559,12 +548,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (byte)((sum1 + sum2) + (sum3 + sum4));
+                    return (byte)(sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (byte)((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (byte)(sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (byte)((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return (byte)((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (byte)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (byte)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -584,10 +573,9 @@ namespace ZLinq
             byte result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (byte)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -610,12 +598,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return  (byte) ((sum1 + sum2) + (sum3 + sum4));
+                    return  (byte) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (byte)((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (byte)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  (byte)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
         
@@ -642,8 +630,7 @@ namespace ZLinq
                         lock (syncRoot)
                             result += x;                        
                               
-                    });
-              
+                    });              
             return result;
         }
 
@@ -663,12 +650,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (short)((sum1 + sum2) + (sum3 + sum4));
+                    return (short)(sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (short)((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (short)(sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (short)((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return (short)((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (short)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (short)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -688,10 +675,9 @@ namespace ZLinq
             short result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (short)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -714,12 +700,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return  (short) ((sum1 + sum2) + (sum3 + sum4));
+                    return  (short) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (short)((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (short)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  (short)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -742,8 +728,7 @@ namespace ZLinq
                         lock (syncRoot)
                             result += x;                        
                               
-                    });
-              
+                    });              
             return result;
         }
 
@@ -763,12 +748,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (short)((sum1 + sum2) + (sum3 + sum4));
+                    return (short)(sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (short)((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (short)(sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (short)((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return (short)((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (short)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (short)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -788,10 +773,9 @@ namespace ZLinq
             short result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (short)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -814,12 +798,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return  (short) ((sum1 + sum2) + (sum3 + sum4));
+                    return  (short) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (short)((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (short)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  (short)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -842,8 +826,7 @@ namespace ZLinq
                         lock (syncRoot)
                             result += x;                        
                               
-                    });
-              
+                    });              
             return result;
         }
 
@@ -863,12 +846,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (short)((sum1 + sum2) + (sum3 + sum4));
+                    return (short)(sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (short)((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (short)(sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (short)((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return (short)((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (short)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (short)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -888,10 +871,9 @@ namespace ZLinq
             short result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (short)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -914,12 +896,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return  (short) ((sum1 + sum2) + (sum3 + sum4));
+                    return  (short) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (short)((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (short)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  (short)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
         
@@ -946,8 +928,7 @@ namespace ZLinq
                         lock (syncRoot)
                             result += x;                        
                               
-                    });
-              
+                    });              
             return result;
         }
 
@@ -967,12 +948,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (ushort)((sum1 + sum2) + (sum3 + sum4));
+                    return (ushort)(sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (ushort)((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (ushort)(sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (ushort)((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return (ushort)((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (ushort)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (ushort)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -992,10 +973,9 @@ namespace ZLinq
             ushort result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (ushort)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -1018,12 +998,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return  (ushort) ((sum1 + sum2) + (sum3 + sum4));
+                    return  (ushort) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (ushort)((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (ushort)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  (ushort)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -1046,8 +1026,7 @@ namespace ZLinq
                         lock (syncRoot)
                             result += x;                        
                               
-                    });
-              
+                    });              
             return result;
         }
 
@@ -1067,12 +1046,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (ushort)((sum1 + sum2) + (sum3 + sum4));
+                    return (ushort)(sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (ushort)((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (ushort)(sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (ushort)((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return (ushort)((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (ushort)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (ushort)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -1092,10 +1071,9 @@ namespace ZLinq
             ushort result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (ushort)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -1118,12 +1096,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return  (ushort) ((sum1 + sum2) + (sum3 + sum4));
+                    return  (ushort) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (ushort)((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (ushort)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  (ushort)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -1146,8 +1124,7 @@ namespace ZLinq
                         lock (syncRoot)
                             result += x;                        
                               
-                    });
-              
+                    });              
             return result;
         }
 
@@ -1167,12 +1144,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (ushort)((sum1 + sum2) + (sum3 + sum4));
+                    return (ushort)(sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (ushort)((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (ushort)(sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (ushort)((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return (ushort)((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (ushort)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (ushort)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -1192,10 +1169,9 @@ namespace ZLinq
             ushort result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (ushort)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -1218,12 +1194,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return  (ushort) ((sum1 + sum2) + (sum3 + sum4));
+                    return  (ushort) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (ushort)((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (ushort)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  (ushort)((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
         
@@ -1248,8 +1224,7 @@ namespace ZLinq
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
                         Interlocked.Add(ref result, x);       
-                    });
-              
+                    });              
             return result;
         }
 
@@ -1269,12 +1244,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return ((sum1 + sum2) + (sum3 + sum4));
+                    return (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return ((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -1294,10 +1269,9 @@ namespace ZLinq
             int result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (int)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -1320,12 +1294,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   ((sum1 + sum2) + (sum3 + sum4));
+                    return   (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -1346,8 +1320,7 @@ namespace ZLinq
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
                         Interlocked.Add(ref result, x);       
-                    });
-              
+                    });              
             return result;
         }
 
@@ -1367,12 +1340,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return ((sum1 + sum2) + (sum3 + sum4));
+                    return (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return ((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -1392,10 +1365,9 @@ namespace ZLinq
             int result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (int)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -1418,12 +1390,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   ((sum1 + sum2) + (sum3 + sum4));
+                    return   (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -1444,8 +1416,7 @@ namespace ZLinq
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
                         Interlocked.Add(ref result, x);       
-                    });
-              
+                    });              
             return result;
         }
 
@@ -1465,12 +1436,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return ((sum1 + sum2) + (sum3 + sum4));
+                    return (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return ((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -1490,10 +1461,9 @@ namespace ZLinq
             int result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (int)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -1516,12 +1486,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   ((sum1 + sum2) + (sum3 + sum4));
+                    return   (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
         
@@ -1548,8 +1518,7 @@ namespace ZLinq
                         lock (syncRoot)
                             result += x;                        
                               
-                    });
-              
+                    });              
             return result;
         }
 
@@ -1569,12 +1538,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return ((sum1 + sum2) + (sum3 + sum4));
+                    return (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return ((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -1594,10 +1563,9 @@ namespace ZLinq
             uint result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (uint)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -1620,12 +1588,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   ((sum1 + sum2) + (sum3 + sum4));
+                    return   (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -1648,8 +1616,7 @@ namespace ZLinq
                         lock (syncRoot)
                             result += x;                        
                               
-                    });
-              
+                    });              
             return result;
         }
 
@@ -1669,12 +1636,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return ((sum1 + sum2) + (sum3 + sum4));
+                    return (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return ((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -1694,10 +1661,9 @@ namespace ZLinq
             uint result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (uint)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -1720,12 +1686,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   ((sum1 + sum2) + (sum3 + sum4));
+                    return   (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -1748,8 +1714,7 @@ namespace ZLinq
                         lock (syncRoot)
                             result += x;                        
                               
-                    });
-              
+                    });              
             return result;
         }
 
@@ -1769,12 +1734,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return ((sum1 + sum2) + (sum3 + sum4));
+                    return (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return ((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -1794,10 +1759,9 @@ namespace ZLinq
             uint result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (uint)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -1820,12 +1784,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   ((sum1 + sum2) + (sum3 + sum4));
+                    return   (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
         
@@ -1850,8 +1814,7 @@ namespace ZLinq
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
                         Interlocked.Add(ref result, x);       
-                    });
-              
+                    });              
             return result;
         }
 
@@ -1871,12 +1834,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return ((sum1 + sum2) + (sum3 + sum4));
+                    return (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return ((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -1896,10 +1859,9 @@ namespace ZLinq
             long result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (long)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -1922,12 +1884,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   ((sum1 + sum2) + (sum3 + sum4));
+                    return   (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -1948,8 +1910,7 @@ namespace ZLinq
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
                         Interlocked.Add(ref result, x);       
-                    });
-              
+                    });              
             return result;
         }
 
@@ -1969,12 +1930,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return ((sum1 + sum2) + (sum3 + sum4));
+                    return (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return ((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -1994,10 +1955,9 @@ namespace ZLinq
             long result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (long)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -2020,12 +1980,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   ((sum1 + sum2) + (sum3 + sum4));
+                    return   (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -2046,8 +2006,7 @@ namespace ZLinq
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
                         Interlocked.Add(ref result, x);       
-                    });
-              
+                    });              
             return result;
         }
 
@@ -2067,12 +2026,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return ((sum1 + sum2) + (sum3 + sum4));
+                    return (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return ((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -2092,10 +2051,9 @@ namespace ZLinq
             long result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (long)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -2118,12 +2076,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   ((sum1 + sum2) + (sum3 + sum4));
+                    return   (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
         
@@ -2150,8 +2108,7 @@ namespace ZLinq
                         lock (syncRoot)
                             result += x;                        
                               
-                    });
-              
+                    });              
             return result;
         }
 
@@ -2171,12 +2128,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return ((sum1 + sum2) + (sum3 + sum4));
+                    return (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return ((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -2196,10 +2153,9 @@ namespace ZLinq
             float result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (float)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -2222,12 +2178,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   ((sum1 + sum2) + (sum3 + sum4));
+                    return   (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -2250,8 +2206,7 @@ namespace ZLinq
                         lock (syncRoot)
                             result += x;                        
                               
-                    });
-              
+                    });              
             return result;
         }
 
@@ -2271,12 +2226,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return ((sum1 + sum2) + (sum3 + sum4));
+                    return (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return ((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -2296,10 +2251,9 @@ namespace ZLinq
             float result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (float)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -2322,12 +2276,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   ((sum1 + sum2) + (sum3 + sum4));
+                    return   (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -2350,8 +2304,7 @@ namespace ZLinq
                         lock (syncRoot)
                             result += x;                        
                               
-                    });
-              
+                    });              
             return result;
         }
 
@@ -2371,12 +2324,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return ((sum1 + sum2) + (sum3 + sum4));
+                    return (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return ((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -2396,10 +2349,9 @@ namespace ZLinq
             float result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (float)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -2422,12 +2374,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   ((sum1 + sum2) + (sum3 + sum4));
+                    return   (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
         
@@ -2454,8 +2406,7 @@ namespace ZLinq
                         lock (syncRoot)
                             result += x;                        
                               
-                    });
-              
+                    });              
             return result;
         }
 
@@ -2475,12 +2426,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return ((sum1 + sum2) + (sum3 + sum4));
+                    return (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return ((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -2500,10 +2451,9 @@ namespace ZLinq
             double result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (double)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -2526,12 +2476,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   ((sum1 + sum2) + (sum3 + sum4));
+                    return   (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -2554,8 +2504,7 @@ namespace ZLinq
                         lock (syncRoot)
                             result += x;                        
                               
-                    });
-              
+                    });              
             return result;
         }
 
@@ -2575,12 +2524,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return ((sum1 + sum2) + (sum3 + sum4));
+                    return (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return ((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -2600,10 +2549,9 @@ namespace ZLinq
             double result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (double)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -2626,12 +2574,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   ((sum1 + sum2) + (sum3 + sum4));
+                    return   (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -2654,8 +2602,7 @@ namespace ZLinq
                         lock (syncRoot)
                             result += x;                        
                               
-                    });
-              
+                    });              
             return result;
         }
 
@@ -2675,12 +2622,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return ((sum1 + sum2) + (sum3 + sum4));
+                    return (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return ((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -2700,10 +2647,9 @@ namespace ZLinq
             double result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (double)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -2726,12 +2672,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   ((sum1 + sum2) + (sum3 + sum4));
+                    return   (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
         
@@ -2758,8 +2704,7 @@ namespace ZLinq
                         lock (syncRoot)
                             result += x;                        
                               
-                    });
-              
+                    });              
             return result;
         }
 
@@ -2779,12 +2724,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return ((sum1 + sum2) + (sum3 + sum4));
+                    return (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return ((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -2804,10 +2749,9 @@ namespace ZLinq
             decimal result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (decimal)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -2830,12 +2774,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   ((sum1 + sum2) + (sum3 + sum4));
+                    return   (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -2858,8 +2802,7 @@ namespace ZLinq
                         lock (syncRoot)
                             result += x;                        
                               
-                    });
-              
+                    });              
             return result;
         }
 
@@ -2879,12 +2822,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return ((sum1 + sum2) + (sum3 + sum4));
+                    return (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return ((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -2904,10 +2847,9 @@ namespace ZLinq
             decimal result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (decimal)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -2930,12 +2872,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   ((sum1 + sum2) + (sum3 + sum4));
+                    return   (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -2958,8 +2900,7 @@ namespace ZLinq
                         lock (syncRoot)
                             result += x;                        
                               
-                    });
-              
+                    });              
             return result;
         }
 
@@ -2979,12 +2920,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return ((sum1 + sum2) + (sum3 + sum4));
+                    return (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return ((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -3004,10 +2945,9 @@ namespace ZLinq
             decimal result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (decimal)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -3030,12 +2970,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   ((sum1 + sum2) + (sum3 + sum4));
+                    return   (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
         
@@ -3062,8 +3002,7 @@ namespace ZLinq
                         lock (syncRoot)
                             result += x;                        
                               
-                    });
-              
+                    });              
             return result;
         }
 
@@ -3083,12 +3022,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return ((sum1 + sum2) + (sum3 + sum4));
+                    return (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return ((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -3108,10 +3047,9 @@ namespace ZLinq
             ulong result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (ulong)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -3134,12 +3072,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   ((sum1 + sum2) + (sum3 + sum4));
+                    return   (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -3162,8 +3100,7 @@ namespace ZLinq
                         lock (syncRoot)
                             result += x;                        
                               
-                    });
-              
+                    });              
             return result;
         }
 
@@ -3183,12 +3120,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return ((sum1 + sum2) + (sum3 + sum4));
+                    return (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return ((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -3208,10 +3145,9 @@ namespace ZLinq
             ulong result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (ulong)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -3234,12 +3170,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   ((sum1 + sum2) + (sum3 + sum4));
+                    return   (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -3262,8 +3198,7 @@ namespace ZLinq
                         lock (syncRoot)
                             result += x;                        
                               
-                    });
-              
+                    });              
             return result;
         }
 
@@ -3283,12 +3218,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return ((sum1 + sum2) + (sum3 + sum4));
+                    return (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return ((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return ((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -3308,10 +3243,9 @@ namespace ZLinq
             ulong result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (ulong)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -3334,12 +3268,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   ((sum1 + sum2) + (sum3 + sum4));
+                    return   (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  ((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
         

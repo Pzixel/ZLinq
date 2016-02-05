@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using ZLinq.Extension;
@@ -24,6 +25,13 @@ namespace ZLinq
 
     #region Non-Nullables         
         <#foreach (var type in TT.NumberTypes) { #>
+
+//        [Pure]
+//        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+//        private static T Max<T>(T x, T y, [NotNull] Func<T, <#= type #>> mapFunc)
+//        {
+//            return mapFunc(x) > mapFunc(y) ? x : y;      
+//        }
 
         #region <#= type #>             
         <# foreach (string sourceType in TT.StandardLists) 
@@ -39,13 +47,12 @@ namespace ZLinq
             <#= TT.IsNotNull("source") #>
             if (source.<#= TT.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.<#= TT.LengthOrCount(sourceType) #>);
-            <#= type #> result = 0;
+            <#= type #> result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.<#= TT.LengthOrCount(sourceType) #>),
-                () => (<#= type #>)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -104,13 +111,12 @@ namespace ZLinq
             <#= TT.IsNotNull("mapFunc") #>
             if (source.<#= TT.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.<#= TT.LengthOrCount(sourceType) #>);
-            <#= type #> result = 0;
+            <#= type #> result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.<#= TT.LengthOrCount(sourceType) #>),
-                () => (<#= type #>)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -199,13 +205,12 @@ namespace ZLinq
             <#= TT.IsNotNull("source") #>
             if (source.<#= TT.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.<#= TT.LengthOrCount(sourceType) #>);
-            <#= type #> result = 0;
+            <#= type #> result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.<#= TT.LengthOrCount(sourceType) #>),
-                () => (<#= type #>)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -262,13 +267,12 @@ namespace ZLinq
             <#= TT.IsNotNull("mapFunc") #>
             if (source.<#= TT.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.<#= TT.LengthOrCount(sourceType) #>);
-            <#= type #> result = 0;
+            <#= type #> result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.<#= TT.LengthOrCount(sourceType) #>),
-                () => (<#= type #>)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;

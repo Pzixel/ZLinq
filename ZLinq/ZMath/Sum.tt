@@ -47,8 +47,7 @@ namespace ZLinq
                         else { #>lock (syncRoot)
                             result += x;                        
                         <# } #>      
-                    });
-              
+                    });              
             return result;
         }
 
@@ -68,12 +67,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return <#= TT.ExplicitCastFromIntIfNeeded(type) #>((sum1 + sum2) + (sum3 + sum4));
+                    return <#= TT.ExplicitCastFromIntIfNeeded(type) #>(sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return <#= TT.ExplicitCastFromIntIfNeeded(type) #>((sum1 + sum2) + (sum3 + sum4) + source[i]);
+                    return <#= TT.ExplicitCastFromIntIfNeeded(type) #>(sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return <#= TT.ExplicitCastFromIntIfNeeded(type) #>((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1]));
-                return <#= TT.ExplicitCastFromIntIfNeeded(type) #>((sum1 + sum2) + (sum3 + sum4) + (source[i] + source[i + 1] + source[i + 2]));
+                    return <#= TT.ExplicitCastFromIntIfNeeded(type) #>(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return <#= TT.ExplicitCastFromIntIfNeeded(type) #>(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -93,10 +92,9 @@ namespace ZLinq
             <#= type #> result = 0;
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.<#= TT.LengthOrCount(sourceType) #>),
-                () => (<#= type #>)0,
-                (range, state, sum) => Sum(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Sum(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         result += x;
                 });
@@ -119,12 +117,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return  <#= TT.ExplicitCastFromIntIfNeeded(type) #> ((sum1 + sum2) + (sum3 + sum4));
+                    return  <#= TT.ExplicitCastFromIntIfNeeded(type) #> (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  <#= TT.ExplicitCastFromIntIfNeeded(type) #>((sum1 + sum2) + (sum3 + sum4) + mapFunc(source[i]));
+                    return  <#= TT.ExplicitCastFromIntIfNeeded(type) #>(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  <#= TT.ExplicitCastFromIntIfNeeded(type) #>((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1])));
-                return  <#= TT.ExplicitCastFromIntIfNeeded(type) #>((sum1 + sum2) + (sum3 + sum4) + (mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2])));
+                    return  <#= TT.ExplicitCastFromIntIfNeeded(type) #>(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  <#= TT.ExplicitCastFromIntIfNeeded(type) #>(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
         <# } #>

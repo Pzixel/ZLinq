@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+using ZLinq.Test.Helpers;
 
 namespace ZLinq.Test.ZMath
 {
@@ -22,11 +23,12 @@ namespace ZLinq.Test.ZMath
     <#foreach (var type in TT.NumberTypes) { #>
 
         #region <#= type #>             
-        <# foreach (string sourceType in TT.StandardLists) { #>    
+        <# foreach (string sourceType in TT.StandardLists) { 
+        string name = TT.GetCollectionName(sourceType);#>    
         [TestMethod]
-        public void TestMax<#= type #><#= TT.GetCollectionName(sourceType) #>()
+        public void TestMax<#= type #><#= name #>()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (<#= type #>)x).<#= TT.ToArrayOrToList(sourceType) #>;
+            var source = Enumerable.Range(1, 100).Select(x => (<#= type #>)x).To<#= name #>();
 
             <#= type #> maxActual = ZEnumerable.Max(source);
             const <#= type #> maxExpected = 100;
@@ -35,9 +37,9 @@ namespace ZLinq.Test.ZMath
         }
 
         [TestMethod]
-        public void TestMax<#= type #><#= TT.GetCollectionName(sourceType) #>Map()
+        public void TestMax<#= type #><#= name #>Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (<#= type #>)arg }).<#= TT.ToArrayOrToList(sourceType) #>;
+            var source = Enumerable.Range(1, 100).Select(arg => new { X = (<#= type #>)arg }).To<#= name #>();
 
             <#= type #> maxActual = ZEnumerable.Max(source, arg => arg.X);
             const <#= type #> maxExpected = 100;
@@ -46,7 +48,7 @@ namespace ZLinq.Test.ZMath
         }
     
         [TestMethod]
-        public void TestMax<#= type #><#= TT.GetCollectionName(sourceType) #>Null()
+        public void TestMax<#= type #><#= name #>Null()
         {        
             <#= sourceType.Replace("T", type) #> nullSource = null;
 
@@ -62,9 +64,9 @@ namespace ZLinq.Test.ZMath
         }
 
         [TestMethod]
-        public void TestMax<#= type #><#= TT.GetCollectionName(sourceType) #>MapNull()
+        public void TestMax<#= type #><#= name #>MapNull()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new KeyValuePair<<#= type #>,<#= type #>>((<#= type #>) arg, (<#= type #>) arg)).<#= TT.ToArrayOrToList(sourceType) #>;
+            var source = Enumerable.Range(1, 100).Select(arg => new KeyValuePair<<#= type #>,<#= type #>>((<#= type #>) arg, (<#= type #>) arg)).To<#= name #>();
             Func<KeyValuePair<<#= type #>, <#= type #>>, <#= type #>> map = null;
             try
             {
@@ -87,11 +89,12 @@ namespace ZLinq.Test.ZMath
         string testName = type.Replace("?", "Nullable");#>
 
         #region <#= type #>             
-        <# foreach (string sourceType in TT.StandardLists) { #>    
+        <# foreach (string sourceType in TT.StandardLists) { 
+        string name = TT.GetCollectionName(sourceType);#>  
         [TestMethod]
-        public void TestMax<#= testName #>Nullable<#= TT.GetCollectionName(sourceType) #>()
+        public void TestMax<#= testName #>Nullable<#= name #>()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (<#= type #>)x).<#= TT.ToArrayOrToList(sourceType) #>;
+            var source = Enumerable.Range(1, 100).Select(x => (<#= type #>)x).To<#= name #>();
 
             <#= type #> maxActual = ZEnumerable.Max(source);
             <#= type #> maxExpected = 100;
@@ -100,9 +103,9 @@ namespace ZLinq.Test.ZMath
         }
 
         [TestMethod]
-        public void TestMax<#= testName #>Nullable<#= TT.GetCollectionName(sourceType) #>Map()
+        public void TestMax<#= testName #>Nullable<#= name #>Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (<#= type #>)arg }).<#= TT.ToArrayOrToList(sourceType) #>;
+            var source = Enumerable.Range(1, 100).Select(arg => new { X = (<#= type #>)arg }).To<#= name #>();
 
             <#= type #> maxActual = ZEnumerable.Max(source, arg => arg.X);
             <#= type #> maxExpected = 100;
@@ -111,7 +114,7 @@ namespace ZLinq.Test.ZMath
         }
     
         [TestMethod]
-        public void TestMax<#= testName #>Nullable<#= TT.GetCollectionName(sourceType) #>Null()
+        public void TestMax<#= testName #>Nullable<#= name #>Null()
         {        
             <#= sourceType.Replace("T", type) #> nullSource = null;
 
@@ -125,15 +128,15 @@ namespace ZLinq.Test.ZMath
                 
             }
 
-            <#= sourceType.Replace("T", type) #> sourceOfNulls = new <#= type #>[] {null}.<#= TT.ToArrayOrToList(sourceType) #>;
+            <#= sourceType.Replace("T", type) #> sourceOfNulls = new <#= type #>[] {null}.To<#= name #>();
             var max = ZEnumerable.Max(sourceOfNulls);
             Assert.AreEqual(default(<#= type #>), max);
         }
 
         [TestMethod]
-        public void TestMax<#= testName #>Nullable<#= TT.GetCollectionName(sourceType) #>MapNull()
+        public void TestMax<#= testName #>Nullable<#= name #>MapNull()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new KeyValuePair<<#= type #>,<#= type #>>((<#= type #>) arg, (<#= type #>) arg)).<#= TT.ToArrayOrToList(sourceType) #>;
+            var source = Enumerable.Range(1, 100).Select(arg => new KeyValuePair<<#= type #>,<#= type #>>((<#= type #>) arg, (<#= type #>) arg)).To<#= name #>();
             Func<KeyValuePair<<#= type #>, <#= type #>>, <#= type #>> map = null;
             try
             {
@@ -146,7 +149,7 @@ namespace ZLinq.Test.ZMath
             }
 
             object[] sourceForNulls = { new Stack<int>() };
-            var sourceOfNulls = sourceForNulls.Select(x => (<#= type #>) null).<#= TT.ToArrayOrToList(sourceType) #>;
+            var sourceOfNulls = sourceForNulls.Select(x => (<#= type #>) null).To<#= name #>();
             var max = ZEnumerable.Max(sourceOfNulls);
             Assert.AreEqual(default(<#= type #>), max);
         }

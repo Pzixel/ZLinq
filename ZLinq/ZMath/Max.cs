@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using ZLinq.Extension;
@@ -15,6 +16,13 @@ namespace ZLinq
 
     #region Non-Nullables         
         
+//        [Pure]
+//        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+//        private static T Max<T>(T x, T y, [NotNull] Func<T, sbyte> mapFunc)
+//        {
+//            return mapFunc(x) > mapFunc(y) ? x : y;      
+//        }
+
         #region sbyte             
             
         /// <summary>
@@ -28,13 +36,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Length);
-            sbyte result = 0;
+            sbyte result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (sbyte)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -93,13 +100,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
-            sbyte result = 0;
+            sbyte result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (sbyte)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -162,13 +168,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            sbyte result = 0;
+            sbyte result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (sbyte)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -227,13 +232,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            sbyte result = 0;
+            sbyte result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (sbyte)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -296,13 +300,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            sbyte result = 0;
+            sbyte result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (sbyte)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -361,13 +364,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            sbyte result = 0;
+            sbyte result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (sbyte)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -421,6 +423,13 @@ namespace ZLinq
         
         #endregion
     
+//        [Pure]
+//        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+//        private static T Max<T>(T x, T y, [NotNull] Func<T, byte> mapFunc)
+//        {
+//            return mapFunc(x) > mapFunc(y) ? x : y;      
+//        }
+
         #region byte             
             
         /// <summary>
@@ -434,13 +443,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Length);
-            byte result = 0;
+            byte result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (byte)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -499,13 +507,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
-            byte result = 0;
+            byte result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (byte)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -568,13 +575,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            byte result = 0;
+            byte result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (byte)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -633,13 +639,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            byte result = 0;
+            byte result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (byte)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -702,13 +707,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            byte result = 0;
+            byte result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (byte)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -767,13 +771,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            byte result = 0;
+            byte result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (byte)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -827,6 +830,13 @@ namespace ZLinq
         
         #endregion
     
+//        [Pure]
+//        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+//        private static T Max<T>(T x, T y, [NotNull] Func<T, short> mapFunc)
+//        {
+//            return mapFunc(x) > mapFunc(y) ? x : y;      
+//        }
+
         #region short             
             
         /// <summary>
@@ -840,13 +850,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Length);
-            short result = 0;
+            short result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (short)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -905,13 +914,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
-            short result = 0;
+            short result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (short)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -974,13 +982,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            short result = 0;
+            short result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (short)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -1039,13 +1046,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            short result = 0;
+            short result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (short)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -1108,13 +1114,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            short result = 0;
+            short result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (short)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -1173,13 +1178,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            short result = 0;
+            short result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (short)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -1233,6 +1237,13 @@ namespace ZLinq
         
         #endregion
     
+//        [Pure]
+//        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+//        private static T Max<T>(T x, T y, [NotNull] Func<T, ushort> mapFunc)
+//        {
+//            return mapFunc(x) > mapFunc(y) ? x : y;      
+//        }
+
         #region ushort             
             
         /// <summary>
@@ -1246,13 +1257,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Length);
-            ushort result = 0;
+            ushort result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (ushort)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -1311,13 +1321,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
-            ushort result = 0;
+            ushort result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (ushort)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -1380,13 +1389,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            ushort result = 0;
+            ushort result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (ushort)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -1445,13 +1453,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            ushort result = 0;
+            ushort result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (ushort)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -1514,13 +1521,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            ushort result = 0;
+            ushort result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (ushort)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -1579,13 +1585,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            ushort result = 0;
+            ushort result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (ushort)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -1639,6 +1644,13 @@ namespace ZLinq
         
         #endregion
     
+//        [Pure]
+//        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+//        private static T Max<T>(T x, T y, [NotNull] Func<T, int> mapFunc)
+//        {
+//            return mapFunc(x) > mapFunc(y) ? x : y;      
+//        }
+
         #region int             
             
         /// <summary>
@@ -1652,13 +1664,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Length);
-            int result = 0;
+            int result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (int)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -1717,13 +1728,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
-            int result = 0;
+            int result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (int)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -1786,13 +1796,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            int result = 0;
+            int result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (int)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -1851,13 +1860,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            int result = 0;
+            int result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (int)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -1920,13 +1928,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            int result = 0;
+            int result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (int)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -1985,13 +1992,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            int result = 0;
+            int result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (int)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -2045,6 +2051,13 @@ namespace ZLinq
         
         #endregion
     
+//        [Pure]
+//        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+//        private static T Max<T>(T x, T y, [NotNull] Func<T, uint> mapFunc)
+//        {
+//            return mapFunc(x) > mapFunc(y) ? x : y;      
+//        }
+
         #region uint             
             
         /// <summary>
@@ -2058,13 +2071,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Length);
-            uint result = 0;
+            uint result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (uint)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -2123,13 +2135,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
-            uint result = 0;
+            uint result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (uint)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -2192,13 +2203,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            uint result = 0;
+            uint result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (uint)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -2257,13 +2267,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            uint result = 0;
+            uint result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (uint)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -2326,13 +2335,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            uint result = 0;
+            uint result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (uint)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -2391,13 +2399,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            uint result = 0;
+            uint result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (uint)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -2451,6 +2458,13 @@ namespace ZLinq
         
         #endregion
     
+//        [Pure]
+//        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+//        private static T Max<T>(T x, T y, [NotNull] Func<T, long> mapFunc)
+//        {
+//            return mapFunc(x) > mapFunc(y) ? x : y;      
+//        }
+
         #region long             
             
         /// <summary>
@@ -2464,13 +2478,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Length);
-            long result = 0;
+            long result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (long)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -2529,13 +2542,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
-            long result = 0;
+            long result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (long)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -2598,13 +2610,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            long result = 0;
+            long result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (long)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -2663,13 +2674,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            long result = 0;
+            long result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (long)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -2732,13 +2742,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            long result = 0;
+            long result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (long)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -2797,13 +2806,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            long result = 0;
+            long result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (long)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -2857,6 +2865,13 @@ namespace ZLinq
         
         #endregion
     
+//        [Pure]
+//        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+//        private static T Max<T>(T x, T y, [NotNull] Func<T, float> mapFunc)
+//        {
+//            return mapFunc(x) > mapFunc(y) ? x : y;      
+//        }
+
         #region float             
             
         /// <summary>
@@ -2870,13 +2885,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Length);
-            float result = 0;
+            float result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (float)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -2935,13 +2949,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
-            float result = 0;
+            float result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (float)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -3004,13 +3017,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            float result = 0;
+            float result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (float)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -3069,13 +3081,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            float result = 0;
+            float result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (float)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -3138,13 +3149,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            float result = 0;
+            float result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (float)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -3203,13 +3213,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            float result = 0;
+            float result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (float)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -3263,6 +3272,13 @@ namespace ZLinq
         
         #endregion
     
+//        [Pure]
+//        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+//        private static T Max<T>(T x, T y, [NotNull] Func<T, double> mapFunc)
+//        {
+//            return mapFunc(x) > mapFunc(y) ? x : y;      
+//        }
+
         #region double             
             
         /// <summary>
@@ -3276,13 +3292,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Length);
-            double result = 0;
+            double result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (double)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -3341,13 +3356,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
-            double result = 0;
+            double result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (double)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -3410,13 +3424,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            double result = 0;
+            double result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (double)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -3475,13 +3488,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            double result = 0;
+            double result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (double)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -3544,13 +3556,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            double result = 0;
+            double result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (double)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -3609,13 +3620,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            double result = 0;
+            double result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (double)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -3669,6 +3679,13 @@ namespace ZLinq
         
         #endregion
     
+//        [Pure]
+//        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+//        private static T Max<T>(T x, T y, [NotNull] Func<T, decimal> mapFunc)
+//        {
+//            return mapFunc(x) > mapFunc(y) ? x : y;      
+//        }
+
         #region decimal             
             
         /// <summary>
@@ -3682,13 +3699,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Length);
-            decimal result = 0;
+            decimal result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (decimal)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -3747,13 +3763,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
-            decimal result = 0;
+            decimal result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (decimal)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -3816,13 +3831,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            decimal result = 0;
+            decimal result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (decimal)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -3881,13 +3895,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            decimal result = 0;
+            decimal result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (decimal)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -3950,13 +3963,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            decimal result = 0;
+            decimal result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (decimal)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -4015,13 +4027,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            decimal result = 0;
+            decimal result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (decimal)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -4075,6 +4086,13 @@ namespace ZLinq
         
         #endregion
     
+//        [Pure]
+//        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+//        private static T Max<T>(T x, T y, [NotNull] Func<T, ulong> mapFunc)
+//        {
+//            return mapFunc(x) > mapFunc(y) ? x : y;      
+//        }
+
         #region ulong             
             
         /// <summary>
@@ -4088,13 +4106,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Length);
-            ulong result = 0;
+            ulong result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (ulong)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -4153,13 +4170,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
-            ulong result = 0;
+            ulong result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (ulong)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -4222,13 +4238,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            ulong result = 0;
+            ulong result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (ulong)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -4287,13 +4302,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            ulong result = 0;
+            ulong result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (ulong)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -4356,13 +4370,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            ulong result = 0;
+            ulong result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (ulong)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -4421,13 +4434,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            ulong result = 0;
+            ulong result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (ulong)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -4511,13 +4523,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Length);
-            sbyte? result = 0;
+            sbyte? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (sbyte?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -4581,13 +4592,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
-            sbyte? result = 0;
+            sbyte? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (sbyte?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -4649,13 +4659,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            sbyte? result = 0;
+            sbyte? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (sbyte?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -4719,13 +4728,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            sbyte? result = 0;
+            sbyte? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (sbyte?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -4787,13 +4795,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            sbyte? result = 0;
+            sbyte? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (sbyte?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -4857,13 +4864,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            sbyte? result = 0;
+            sbyte? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (sbyte?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -4941,13 +4947,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Length);
-            byte? result = 0;
+            byte? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (byte?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -5011,13 +5016,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
-            byte? result = 0;
+            byte? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (byte?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -5079,13 +5083,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            byte? result = 0;
+            byte? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (byte?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -5149,13 +5152,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            byte? result = 0;
+            byte? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (byte?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -5217,13 +5219,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            byte? result = 0;
+            byte? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (byte?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -5287,13 +5288,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            byte? result = 0;
+            byte? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (byte?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -5371,13 +5371,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Length);
-            short? result = 0;
+            short? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (short?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -5441,13 +5440,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
-            short? result = 0;
+            short? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (short?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -5509,13 +5507,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            short? result = 0;
+            short? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (short?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -5579,13 +5576,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            short? result = 0;
+            short? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (short?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -5647,13 +5643,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            short? result = 0;
+            short? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (short?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -5717,13 +5712,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            short? result = 0;
+            short? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (short?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -5801,13 +5795,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Length);
-            ushort? result = 0;
+            ushort? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (ushort?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -5871,13 +5864,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
-            ushort? result = 0;
+            ushort? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (ushort?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -5939,13 +5931,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            ushort? result = 0;
+            ushort? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (ushort?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -6009,13 +6000,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            ushort? result = 0;
+            ushort? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (ushort?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -6077,13 +6067,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            ushort? result = 0;
+            ushort? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (ushort?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -6147,13 +6136,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            ushort? result = 0;
+            ushort? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (ushort?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -6231,13 +6219,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Length);
-            int? result = 0;
+            int? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (int?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -6301,13 +6288,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
-            int? result = 0;
+            int? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (int?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -6369,13 +6355,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            int? result = 0;
+            int? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (int?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -6439,13 +6424,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            int? result = 0;
+            int? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (int?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -6507,13 +6491,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            int? result = 0;
+            int? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (int?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -6577,13 +6560,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            int? result = 0;
+            int? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (int?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -6661,13 +6643,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Length);
-            uint? result = 0;
+            uint? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (uint?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -6731,13 +6712,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
-            uint? result = 0;
+            uint? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (uint?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -6799,13 +6779,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            uint? result = 0;
+            uint? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (uint?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -6869,13 +6848,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            uint? result = 0;
+            uint? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (uint?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -6937,13 +6915,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            uint? result = 0;
+            uint? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (uint?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -7007,13 +6984,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            uint? result = 0;
+            uint? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (uint?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -7091,13 +7067,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Length);
-            long? result = 0;
+            long? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (long?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -7161,13 +7136,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
-            long? result = 0;
+            long? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (long?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -7229,13 +7203,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            long? result = 0;
+            long? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (long?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -7299,13 +7272,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            long? result = 0;
+            long? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (long?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -7367,13 +7339,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            long? result = 0;
+            long? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (long?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -7437,13 +7408,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            long? result = 0;
+            long? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (long?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -7521,13 +7491,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Length);
-            float? result = 0;
+            float? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (float?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -7591,13 +7560,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
-            float? result = 0;
+            float? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (float?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -7659,13 +7627,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            float? result = 0;
+            float? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (float?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -7729,13 +7696,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            float? result = 0;
+            float? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (float?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -7797,13 +7763,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            float? result = 0;
+            float? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (float?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -7867,13 +7832,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            float? result = 0;
+            float? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (float?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -7951,13 +7915,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Length);
-            double? result = 0;
+            double? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (double?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -8021,13 +7984,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
-            double? result = 0;
+            double? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (double?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -8089,13 +8051,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            double? result = 0;
+            double? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (double?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -8159,13 +8120,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            double? result = 0;
+            double? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (double?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -8227,13 +8187,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            double? result = 0;
+            double? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (double?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -8297,13 +8256,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            double? result = 0;
+            double? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (double?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -8381,13 +8339,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Length);
-            decimal? result = 0;
+            decimal? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (decimal?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -8451,13 +8408,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
-            decimal? result = 0;
+            decimal? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (decimal?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -8519,13 +8475,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            decimal? result = 0;
+            decimal? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (decimal?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -8589,13 +8544,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            decimal? result = 0;
+            decimal? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (decimal?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -8657,13 +8611,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            decimal? result = 0;
+            decimal? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (decimal?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -8727,13 +8680,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            decimal? result = 0;
+            decimal? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (decimal?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -8811,13 +8763,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Length);
-            ulong? result = 0;
+            ulong? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (ulong?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -8881,13 +8832,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Length);
-            ulong? result = 0;
+            ulong? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
-                () => (ulong?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -8949,13 +8899,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            ulong? result = 0;
+            ulong? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (ulong?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -9019,13 +8968,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            ulong? result = 0;
+            ulong? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (ulong?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -9087,13 +9035,12 @@ namespace ZLinq
             source.IsNotNull("source");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, 0, source.Count);
-            ulong? result = 0;
+            ulong? result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (ulong?)0,
-                (range, state, max) => Max(source, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
@@ -9157,13 +9104,12 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Max(source, mapFunc, 0, source.Count);
-            ulong? result = 0;
+            ulong? result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
-                () => (ulong?)0,
-                (range, state, max) => Max(source, mapFunc, range.Item1, range.Item2),
-                x =>
+                range => 
                 {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
                     lock (syncRoot)
                         if (result < x)
                             result = x;
