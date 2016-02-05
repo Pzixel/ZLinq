@@ -18,18 +18,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxsbyteArray100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (sbyte)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (sbyte) r.Next(sbyte.MaxValue), 100).ToArray();
             sbyte maxActual = ZEnumerable.Max(source);
-            sbyte maxExpected = 100;            
+            sbyte maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxsbyteArray100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (sbyte)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (sbyte) r.Next(sbyte.MaxValue) } , 100).ToArray();
             sbyte maxActual = ZEnumerable.Max(source, arg => arg.X);
-            sbyte maxExpected = 100;            
+            sbyte maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -70,18 +70,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxsbyteList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (sbyte)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (sbyte) r.Next(sbyte.MaxValue), 100).ToList();
             sbyte maxActual = ZEnumerable.Max(source);
-            sbyte maxExpected = 100;            
+            sbyte maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxsbyteList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (sbyte)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (sbyte) r.Next(sbyte.MaxValue) } , 100).ToList();
             sbyte maxActual = ZEnumerable.Max(source, arg => arg.X);
-            sbyte maxExpected = 100;            
+            sbyte maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -122,18 +122,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxsbyteIList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (sbyte)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (sbyte) r.Next(sbyte.MaxValue), 100).ToIList();
             sbyte maxActual = ZEnumerable.Max(source);
-            sbyte maxExpected = 100;            
+            sbyte maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxsbyteIList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (sbyte)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (sbyte) r.Next(sbyte.MaxValue) } , 100).ToIList();
             sbyte maxActual = ZEnumerable.Max(source, arg => arg.X);
-            sbyte maxExpected = 100;            
+            sbyte maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -177,18 +177,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxbyteArray100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (byte)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (byte) r.Next(byte.MaxValue), 100).ToArray();
             byte maxActual = ZEnumerable.Max(source);
-            byte maxExpected = 100;            
+            byte maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxbyteArray100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (byte)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (byte) r.Next(byte.MaxValue) } , 100).ToArray();
             byte maxActual = ZEnumerable.Max(source, arg => arg.X);
-            byte maxExpected = 100;            
+            byte maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -229,18 +229,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxbyteList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (byte)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (byte) r.Next(byte.MaxValue), 100).ToList();
             byte maxActual = ZEnumerable.Max(source);
-            byte maxExpected = 100;            
+            byte maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxbyteList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (byte)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (byte) r.Next(byte.MaxValue) } , 100).ToList();
             byte maxActual = ZEnumerable.Max(source, arg => arg.X);
-            byte maxExpected = 100;            
+            byte maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -281,18 +281,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxbyteIList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (byte)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (byte) r.Next(byte.MaxValue), 100).ToIList();
             byte maxActual = ZEnumerable.Max(source);
-            byte maxExpected = 100;            
+            byte maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxbyteIList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (byte)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (byte) r.Next(byte.MaxValue) } , 100).ToIList();
             byte maxActual = ZEnumerable.Max(source, arg => arg.X);
-            byte maxExpected = 100;            
+            byte maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -336,18 +336,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxshortArray100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (short)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (short) r.Next(short.MaxValue), 100).ToArray();
             short maxActual = ZEnumerable.Max(source);
-            short maxExpected = 100;            
+            short maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxshortArray100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (short)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (short) r.Next(short.MaxValue) } , 100).ToArray();
             short maxActual = ZEnumerable.Max(source, arg => arg.X);
-            short maxExpected = 100;            
+            short maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -388,18 +388,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxshortList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (short)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (short) r.Next(short.MaxValue), 100).ToList();
             short maxActual = ZEnumerable.Max(source);
-            short maxExpected = 100;            
+            short maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxshortList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (short)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (short) r.Next(short.MaxValue) } , 100).ToList();
             short maxActual = ZEnumerable.Max(source, arg => arg.X);
-            short maxExpected = 100;            
+            short maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -440,18 +440,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxshortIList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (short)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (short) r.Next(short.MaxValue), 100).ToIList();
             short maxActual = ZEnumerable.Max(source);
-            short maxExpected = 100;            
+            short maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxshortIList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (short)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (short) r.Next(short.MaxValue) } , 100).ToIList();
             short maxActual = ZEnumerable.Max(source, arg => arg.X);
-            short maxExpected = 100;            
+            short maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -495,18 +495,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxushortArray100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (ushort)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (ushort) r.Next(ushort.MaxValue), 100).ToArray();
             ushort maxActual = ZEnumerable.Max(source);
-            ushort maxExpected = 100;            
+            ushort maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxushortArray100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (ushort)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ushort) r.Next(ushort.MaxValue) } , 100).ToArray();
             ushort maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ushort maxExpected = 100;            
+            ushort maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -547,18 +547,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxushortList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (ushort)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (ushort) r.Next(ushort.MaxValue), 100).ToList();
             ushort maxActual = ZEnumerable.Max(source);
-            ushort maxExpected = 100;            
+            ushort maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxushortList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (ushort)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ushort) r.Next(ushort.MaxValue) } , 100).ToList();
             ushort maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ushort maxExpected = 100;            
+            ushort maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -599,18 +599,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxushortIList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (ushort)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (ushort) r.Next(ushort.MaxValue), 100).ToIList();
             ushort maxActual = ZEnumerable.Max(source);
-            ushort maxExpected = 100;            
+            ushort maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxushortIList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (ushort)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ushort) r.Next(ushort.MaxValue) } , 100).ToIList();
             ushort maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ushort maxExpected = 100;            
+            ushort maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -654,18 +654,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxintArray100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (int)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (int) r.Next(int.MaxValue), 100).ToArray();
             int maxActual = ZEnumerable.Max(source);
-            int maxExpected = 100;            
+            int maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxintArray100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (int)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (int) r.Next(int.MaxValue) } , 100).ToArray();
             int maxActual = ZEnumerable.Max(source, arg => arg.X);
-            int maxExpected = 100;            
+            int maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -706,18 +706,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxintList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (int)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (int) r.Next(int.MaxValue), 100).ToList();
             int maxActual = ZEnumerable.Max(source);
-            int maxExpected = 100;            
+            int maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxintList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (int)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (int) r.Next(int.MaxValue) } , 100).ToList();
             int maxActual = ZEnumerable.Max(source, arg => arg.X);
-            int maxExpected = 100;            
+            int maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -758,18 +758,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxintIList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (int)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (int) r.Next(int.MaxValue), 100).ToIList();
             int maxActual = ZEnumerable.Max(source);
-            int maxExpected = 100;            
+            int maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxintIList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (int)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (int) r.Next(int.MaxValue) } , 100).ToIList();
             int maxActual = ZEnumerable.Max(source, arg => arg.X);
-            int maxExpected = 100;            
+            int maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -813,18 +813,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxuintArray100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (uint)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (uint) r.Next(int.MaxValue), 100).ToArray();
             uint maxActual = ZEnumerable.Max(source);
-            uint maxExpected = 100;            
+            uint maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxuintArray100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (uint)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (uint) r.Next(int.MaxValue) } , 100).ToArray();
             uint maxActual = ZEnumerable.Max(source, arg => arg.X);
-            uint maxExpected = 100;            
+            uint maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -865,18 +865,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxuintList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (uint)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (uint) r.Next(int.MaxValue), 100).ToList();
             uint maxActual = ZEnumerable.Max(source);
-            uint maxExpected = 100;            
+            uint maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxuintList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (uint)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (uint) r.Next(int.MaxValue) } , 100).ToList();
             uint maxActual = ZEnumerable.Max(source, arg => arg.X);
-            uint maxExpected = 100;            
+            uint maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -917,18 +917,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxuintIList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (uint)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (uint) r.Next(int.MaxValue), 100).ToIList();
             uint maxActual = ZEnumerable.Max(source);
-            uint maxExpected = 100;            
+            uint maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxuintIList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (uint)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (uint) r.Next(int.MaxValue) } , 100).ToIList();
             uint maxActual = ZEnumerable.Max(source, arg => arg.X);
-            uint maxExpected = 100;            
+            uint maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -972,18 +972,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxlongArray100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (long)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (long) r.Next(int.MaxValue), 100).ToArray();
             long maxActual = ZEnumerable.Max(source);
-            long maxExpected = 100;            
+            long maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxlongArray100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (long)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (long) r.Next(int.MaxValue) } , 100).ToArray();
             long maxActual = ZEnumerable.Max(source, arg => arg.X);
-            long maxExpected = 100;            
+            long maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -1024,18 +1024,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxlongList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (long)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (long) r.Next(int.MaxValue), 100).ToList();
             long maxActual = ZEnumerable.Max(source);
-            long maxExpected = 100;            
+            long maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxlongList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (long)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (long) r.Next(int.MaxValue) } , 100).ToList();
             long maxActual = ZEnumerable.Max(source, arg => arg.X);
-            long maxExpected = 100;            
+            long maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -1076,18 +1076,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxlongIList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (long)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (long) r.Next(int.MaxValue), 100).ToIList();
             long maxActual = ZEnumerable.Max(source);
-            long maxExpected = 100;            
+            long maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxlongIList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (long)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (long) r.Next(int.MaxValue) } , 100).ToIList();
             long maxActual = ZEnumerable.Max(source, arg => arg.X);
-            long maxExpected = 100;            
+            long maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -1131,18 +1131,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxfloatArray100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (float)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (float) r.Next(int.MaxValue), 100).ToArray();
             float maxActual = ZEnumerable.Max(source);
-            float maxExpected = 100;            
+            float maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxfloatArray100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (float)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (float) r.Next(int.MaxValue) } , 100).ToArray();
             float maxActual = ZEnumerable.Max(source, arg => arg.X);
-            float maxExpected = 100;            
+            float maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -1183,18 +1183,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxfloatList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (float)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (float) r.Next(int.MaxValue), 100).ToList();
             float maxActual = ZEnumerable.Max(source);
-            float maxExpected = 100;            
+            float maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxfloatList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (float)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (float) r.Next(int.MaxValue) } , 100).ToList();
             float maxActual = ZEnumerable.Max(source, arg => arg.X);
-            float maxExpected = 100;            
+            float maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -1235,18 +1235,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxfloatIList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (float)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (float) r.Next(int.MaxValue), 100).ToIList();
             float maxActual = ZEnumerable.Max(source);
-            float maxExpected = 100;            
+            float maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxfloatIList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (float)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (float) r.Next(int.MaxValue) } , 100).ToIList();
             float maxActual = ZEnumerable.Max(source, arg => arg.X);
-            float maxExpected = 100;            
+            float maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -1290,18 +1290,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdoubleArray100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (double)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (double) r.Next(int.MaxValue), 100).ToArray();
             double maxActual = ZEnumerable.Max(source);
-            double maxExpected = 100;            
+            double maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdoubleArray100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (double)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (double) r.Next(int.MaxValue) } , 100).ToArray();
             double maxActual = ZEnumerable.Max(source, arg => arg.X);
-            double maxExpected = 100;            
+            double maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -1342,18 +1342,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdoubleList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (double)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (double) r.Next(int.MaxValue), 100).ToList();
             double maxActual = ZEnumerable.Max(source);
-            double maxExpected = 100;            
+            double maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdoubleList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (double)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (double) r.Next(int.MaxValue) } , 100).ToList();
             double maxActual = ZEnumerable.Max(source, arg => arg.X);
-            double maxExpected = 100;            
+            double maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -1394,18 +1394,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdoubleIList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (double)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (double) r.Next(int.MaxValue), 100).ToIList();
             double maxActual = ZEnumerable.Max(source);
-            double maxExpected = 100;            
+            double maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdoubleIList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (double)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (double) r.Next(int.MaxValue) } , 100).ToIList();
             double maxActual = ZEnumerable.Max(source, arg => arg.X);
-            double maxExpected = 100;            
+            double maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -1449,18 +1449,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdecimalArray100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (decimal)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (decimal) r.Next(int.MaxValue), 100).ToArray();
             decimal maxActual = ZEnumerable.Max(source);
-            decimal maxExpected = 100;            
+            decimal maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdecimalArray100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (decimal)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (decimal) r.Next(int.MaxValue) } , 100).ToArray();
             decimal maxActual = ZEnumerable.Max(source, arg => arg.X);
-            decimal maxExpected = 100;            
+            decimal maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -1501,18 +1501,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdecimalList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (decimal)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (decimal) r.Next(int.MaxValue), 100).ToList();
             decimal maxActual = ZEnumerable.Max(source);
-            decimal maxExpected = 100;            
+            decimal maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdecimalList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (decimal)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (decimal) r.Next(int.MaxValue) } , 100).ToList();
             decimal maxActual = ZEnumerable.Max(source, arg => arg.X);
-            decimal maxExpected = 100;            
+            decimal maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -1553,18 +1553,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdecimalIList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (decimal)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (decimal) r.Next(int.MaxValue), 100).ToIList();
             decimal maxActual = ZEnumerable.Max(source);
-            decimal maxExpected = 100;            
+            decimal maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdecimalIList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (decimal)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (decimal) r.Next(int.MaxValue) } , 100).ToIList();
             decimal maxActual = ZEnumerable.Max(source, arg => arg.X);
-            decimal maxExpected = 100;            
+            decimal maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -1608,18 +1608,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxulongArray100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (ulong)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (ulong) r.Next(int.MaxValue), 100).ToArray();
             ulong maxActual = ZEnumerable.Max(source);
-            ulong maxExpected = 100;            
+            ulong maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxulongArray100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (ulong)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ulong) r.Next(int.MaxValue) } , 100).ToArray();
             ulong maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ulong maxExpected = 100;            
+            ulong maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -1660,18 +1660,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxulongList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (ulong)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (ulong) r.Next(int.MaxValue), 100).ToList();
             ulong maxActual = ZEnumerable.Max(source);
-            ulong maxExpected = 100;            
+            ulong maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxulongList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (ulong)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ulong) r.Next(int.MaxValue) } , 100).ToList();
             ulong maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ulong maxExpected = 100;            
+            ulong maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -1712,18 +1712,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxulongIList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (ulong)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (ulong) r.Next(int.MaxValue), 100).ToIList();
             ulong maxActual = ZEnumerable.Max(source);
-            ulong maxExpected = 100;            
+            ulong maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxulongIList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (ulong)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ulong) r.Next(int.MaxValue) } , 100).ToIList();
             ulong maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ulong maxExpected = 100;            
+            ulong maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -1767,18 +1767,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxsbyteNullableArray100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (sbyte?)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (sbyte?) r.Next(sbyte.MaxValue), 100).ToArray();
             sbyte? maxActual = ZEnumerable.Max(source);
-            sbyte? maxExpected = 100;            
+            sbyte? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxsbyteNullableArray100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (sbyte?)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (sbyte?) r.Next(sbyte.MaxValue) } , 100).ToArray();
             sbyte? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            sbyte? maxExpected = 100;            
+            sbyte? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -1819,18 +1819,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxsbyteNullableList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (sbyte?)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (sbyte?) r.Next(sbyte.MaxValue), 100).ToList();
             sbyte? maxActual = ZEnumerable.Max(source);
-            sbyte? maxExpected = 100;            
+            sbyte? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxsbyteNullableList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (sbyte?)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (sbyte?) r.Next(sbyte.MaxValue) } , 100).ToList();
             sbyte? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            sbyte? maxExpected = 100;            
+            sbyte? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -1871,18 +1871,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxsbyteNullableIList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (sbyte?)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (sbyte?) r.Next(sbyte.MaxValue), 100).ToIList();
             sbyte? maxActual = ZEnumerable.Max(source);
-            sbyte? maxExpected = 100;            
+            sbyte? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxsbyteNullableIList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (sbyte?)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (sbyte?) r.Next(sbyte.MaxValue) } , 100).ToIList();
             sbyte? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            sbyte? maxExpected = 100;            
+            sbyte? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -1926,18 +1926,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxbyteNullableArray100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (byte?)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (byte?) r.Next(byte.MaxValue), 100).ToArray();
             byte? maxActual = ZEnumerable.Max(source);
-            byte? maxExpected = 100;            
+            byte? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxbyteNullableArray100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (byte?)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (byte?) r.Next(byte.MaxValue) } , 100).ToArray();
             byte? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            byte? maxExpected = 100;            
+            byte? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -1978,18 +1978,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxbyteNullableList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (byte?)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (byte?) r.Next(byte.MaxValue), 100).ToList();
             byte? maxActual = ZEnumerable.Max(source);
-            byte? maxExpected = 100;            
+            byte? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxbyteNullableList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (byte?)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (byte?) r.Next(byte.MaxValue) } , 100).ToList();
             byte? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            byte? maxExpected = 100;            
+            byte? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -2030,18 +2030,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxbyteNullableIList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (byte?)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (byte?) r.Next(byte.MaxValue), 100).ToIList();
             byte? maxActual = ZEnumerable.Max(source);
-            byte? maxExpected = 100;            
+            byte? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxbyteNullableIList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (byte?)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (byte?) r.Next(byte.MaxValue) } , 100).ToIList();
             byte? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            byte? maxExpected = 100;            
+            byte? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -2085,18 +2085,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxshortNullableArray100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (short?)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (short?) r.Next(short.MaxValue), 100).ToArray();
             short? maxActual = ZEnumerable.Max(source);
-            short? maxExpected = 100;            
+            short? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxshortNullableArray100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (short?)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (short?) r.Next(short.MaxValue) } , 100).ToArray();
             short? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            short? maxExpected = 100;            
+            short? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -2137,18 +2137,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxshortNullableList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (short?)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (short?) r.Next(short.MaxValue), 100).ToList();
             short? maxActual = ZEnumerable.Max(source);
-            short? maxExpected = 100;            
+            short? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxshortNullableList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (short?)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (short?) r.Next(short.MaxValue) } , 100).ToList();
             short? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            short? maxExpected = 100;            
+            short? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -2189,18 +2189,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxshortNullableIList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (short?)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (short?) r.Next(short.MaxValue), 100).ToIList();
             short? maxActual = ZEnumerable.Max(source);
-            short? maxExpected = 100;            
+            short? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxshortNullableIList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (short?)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (short?) r.Next(short.MaxValue) } , 100).ToIList();
             short? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            short? maxExpected = 100;            
+            short? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -2244,18 +2244,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxushortNullableArray100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (ushort?)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (ushort?) r.Next(ushort.MaxValue), 100).ToArray();
             ushort? maxActual = ZEnumerable.Max(source);
-            ushort? maxExpected = 100;            
+            ushort? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxushortNullableArray100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (ushort?)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ushort?) r.Next(ushort.MaxValue) } , 100).ToArray();
             ushort? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ushort? maxExpected = 100;            
+            ushort? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -2296,18 +2296,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxushortNullableList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (ushort?)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (ushort?) r.Next(ushort.MaxValue), 100).ToList();
             ushort? maxActual = ZEnumerable.Max(source);
-            ushort? maxExpected = 100;            
+            ushort? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxushortNullableList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (ushort?)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ushort?) r.Next(ushort.MaxValue) } , 100).ToList();
             ushort? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ushort? maxExpected = 100;            
+            ushort? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -2348,18 +2348,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxushortNullableIList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (ushort?)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (ushort?) r.Next(ushort.MaxValue), 100).ToIList();
             ushort? maxActual = ZEnumerable.Max(source);
-            ushort? maxExpected = 100;            
+            ushort? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxushortNullableIList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (ushort?)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ushort?) r.Next(ushort.MaxValue) } , 100).ToIList();
             ushort? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ushort? maxExpected = 100;            
+            ushort? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -2403,18 +2403,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxintNullableArray100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (int?)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (int?) r.Next(int.MaxValue), 100).ToArray();
             int? maxActual = ZEnumerable.Max(source);
-            int? maxExpected = 100;            
+            int? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxintNullableArray100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (int?)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (int?) r.Next(int.MaxValue) } , 100).ToArray();
             int? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            int? maxExpected = 100;            
+            int? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -2455,18 +2455,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxintNullableList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (int?)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (int?) r.Next(int.MaxValue), 100).ToList();
             int? maxActual = ZEnumerable.Max(source);
-            int? maxExpected = 100;            
+            int? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxintNullableList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (int?)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (int?) r.Next(int.MaxValue) } , 100).ToList();
             int? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            int? maxExpected = 100;            
+            int? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -2507,18 +2507,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxintNullableIList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (int?)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (int?) r.Next(int.MaxValue), 100).ToIList();
             int? maxActual = ZEnumerable.Max(source);
-            int? maxExpected = 100;            
+            int? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxintNullableIList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (int?)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (int?) r.Next(int.MaxValue) } , 100).ToIList();
             int? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            int? maxExpected = 100;            
+            int? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -2562,18 +2562,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxuintNullableArray100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (uint?)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (uint?) r.Next(int.MaxValue), 100).ToArray();
             uint? maxActual = ZEnumerable.Max(source);
-            uint? maxExpected = 100;            
+            uint? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxuintNullableArray100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (uint?)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (uint?) r.Next(int.MaxValue) } , 100).ToArray();
             uint? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            uint? maxExpected = 100;            
+            uint? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -2614,18 +2614,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxuintNullableList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (uint?)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (uint?) r.Next(int.MaxValue), 100).ToList();
             uint? maxActual = ZEnumerable.Max(source);
-            uint? maxExpected = 100;            
+            uint? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxuintNullableList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (uint?)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (uint?) r.Next(int.MaxValue) } , 100).ToList();
             uint? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            uint? maxExpected = 100;            
+            uint? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -2666,18 +2666,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxuintNullableIList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (uint?)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (uint?) r.Next(int.MaxValue), 100).ToIList();
             uint? maxActual = ZEnumerable.Max(source);
-            uint? maxExpected = 100;            
+            uint? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxuintNullableIList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (uint?)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (uint?) r.Next(int.MaxValue) } , 100).ToIList();
             uint? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            uint? maxExpected = 100;            
+            uint? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -2721,18 +2721,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxlongNullableArray100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (long?)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (long?) r.Next(int.MaxValue), 100).ToArray();
             long? maxActual = ZEnumerable.Max(source);
-            long? maxExpected = 100;            
+            long? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxlongNullableArray100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (long?)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (long?) r.Next(int.MaxValue) } , 100).ToArray();
             long? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            long? maxExpected = 100;            
+            long? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -2773,18 +2773,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxlongNullableList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (long?)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (long?) r.Next(int.MaxValue), 100).ToList();
             long? maxActual = ZEnumerable.Max(source);
-            long? maxExpected = 100;            
+            long? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxlongNullableList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (long?)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (long?) r.Next(int.MaxValue) } , 100).ToList();
             long? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            long? maxExpected = 100;            
+            long? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -2825,18 +2825,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxlongNullableIList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (long?)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (long?) r.Next(int.MaxValue), 100).ToIList();
             long? maxActual = ZEnumerable.Max(source);
-            long? maxExpected = 100;            
+            long? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxlongNullableIList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (long?)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (long?) r.Next(int.MaxValue) } , 100).ToIList();
             long? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            long? maxExpected = 100;            
+            long? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -2880,18 +2880,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxfloatNullableArray100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (float?)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (float?) r.Next(int.MaxValue), 100).ToArray();
             float? maxActual = ZEnumerable.Max(source);
-            float? maxExpected = 100;            
+            float? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxfloatNullableArray100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (float?)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (float?) r.Next(int.MaxValue) } , 100).ToArray();
             float? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            float? maxExpected = 100;            
+            float? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -2932,18 +2932,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxfloatNullableList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (float?)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (float?) r.Next(int.MaxValue), 100).ToList();
             float? maxActual = ZEnumerable.Max(source);
-            float? maxExpected = 100;            
+            float? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxfloatNullableList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (float?)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (float?) r.Next(int.MaxValue) } , 100).ToList();
             float? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            float? maxExpected = 100;            
+            float? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -2984,18 +2984,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxfloatNullableIList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (float?)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (float?) r.Next(int.MaxValue), 100).ToIList();
             float? maxActual = ZEnumerable.Max(source);
-            float? maxExpected = 100;            
+            float? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxfloatNullableIList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (float?)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (float?) r.Next(int.MaxValue) } , 100).ToIList();
             float? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            float? maxExpected = 100;            
+            float? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -3039,18 +3039,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdoubleNullableArray100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (double?)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (double?) r.Next(int.MaxValue), 100).ToArray();
             double? maxActual = ZEnumerable.Max(source);
-            double? maxExpected = 100;            
+            double? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdoubleNullableArray100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (double?)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (double?) r.Next(int.MaxValue) } , 100).ToArray();
             double? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            double? maxExpected = 100;            
+            double? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -3091,18 +3091,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdoubleNullableList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (double?)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (double?) r.Next(int.MaxValue), 100).ToList();
             double? maxActual = ZEnumerable.Max(source);
-            double? maxExpected = 100;            
+            double? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdoubleNullableList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (double?)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (double?) r.Next(int.MaxValue) } , 100).ToList();
             double? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            double? maxExpected = 100;            
+            double? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -3143,18 +3143,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdoubleNullableIList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (double?)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (double?) r.Next(int.MaxValue), 100).ToIList();
             double? maxActual = ZEnumerable.Max(source);
-            double? maxExpected = 100;            
+            double? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdoubleNullableIList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (double?)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (double?) r.Next(int.MaxValue) } , 100).ToIList();
             double? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            double? maxExpected = 100;            
+            double? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -3198,18 +3198,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdecimalNullableArray100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (decimal?)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (decimal?) r.Next(int.MaxValue), 100).ToArray();
             decimal? maxActual = ZEnumerable.Max(source);
-            decimal? maxExpected = 100;            
+            decimal? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdecimalNullableArray100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (decimal?)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (decimal?) r.Next(int.MaxValue) } , 100).ToArray();
             decimal? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            decimal? maxExpected = 100;            
+            decimal? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -3250,18 +3250,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdecimalNullableList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (decimal?)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (decimal?) r.Next(int.MaxValue), 100).ToList();
             decimal? maxActual = ZEnumerable.Max(source);
-            decimal? maxExpected = 100;            
+            decimal? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdecimalNullableList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (decimal?)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (decimal?) r.Next(int.MaxValue) } , 100).ToList();
             decimal? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            decimal? maxExpected = 100;            
+            decimal? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -3302,18 +3302,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdecimalNullableIList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (decimal?)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (decimal?) r.Next(int.MaxValue), 100).ToIList();
             decimal? maxActual = ZEnumerable.Max(source);
-            decimal? maxExpected = 100;            
+            decimal? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdecimalNullableIList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (decimal?)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (decimal?) r.Next(int.MaxValue) } , 100).ToIList();
             decimal? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            decimal? maxExpected = 100;            
+            decimal? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -3357,18 +3357,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxulongNullableArray100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (ulong?)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (ulong?) r.Next(int.MaxValue), 100).ToArray();
             ulong? maxActual = ZEnumerable.Max(source);
-            ulong? maxExpected = 100;            
+            ulong? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxulongNullableArray100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (ulong?)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ulong?) r.Next(int.MaxValue) } , 100).ToArray();
             ulong? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ulong? maxExpected = 100;            
+            ulong? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -3409,18 +3409,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxulongNullableList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (ulong?)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (ulong?) r.Next(int.MaxValue), 100).ToList();
             ulong? maxActual = ZEnumerable.Max(source);
-            ulong? maxExpected = 100;            
+            ulong? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxulongNullableList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (ulong?)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ulong?) r.Next(int.MaxValue) } , 100).ToList();
             ulong? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ulong? maxExpected = 100;            
+            ulong? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -3461,18 +3461,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxulongNullableIList100()
         {
-            var source = Enumerable.Range(1, 100).Select(x => (ulong?)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (ulong?) r.Next(int.MaxValue), 100).ToIList();
             ulong? maxActual = ZEnumerable.Max(source);
-            ulong? maxExpected = 100;            
+            ulong? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxulongNullableIList100Map()
         {
-            var source = Enumerable.Range(1, 100).Select(arg => new { X = (ulong?)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ulong?) r.Next(int.MaxValue) } , 100).ToIList();
             ulong? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ulong? maxExpected = 100;            
+            ulong? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -3725,18 +3725,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxshortArray2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (short)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (short) r.Next(short.MaxValue), 2049).ToArray();
             short maxActual = ZEnumerable.Max(source);
-            short maxExpected = 2049;            
+            short maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxshortArray2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (short)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (short) r.Next(short.MaxValue) } , 2049).ToArray();
             short maxActual = ZEnumerable.Max(source, arg => arg.X);
-            short maxExpected = 2049;            
+            short maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -3777,18 +3777,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxshortList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (short)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (short) r.Next(short.MaxValue), 2049).ToList();
             short maxActual = ZEnumerable.Max(source);
-            short maxExpected = 2049;            
+            short maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxshortList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (short)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (short) r.Next(short.MaxValue) } , 2049).ToList();
             short maxActual = ZEnumerable.Max(source, arg => arg.X);
-            short maxExpected = 2049;            
+            short maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -3829,18 +3829,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxshortIList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (short)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (short) r.Next(short.MaxValue), 2049).ToIList();
             short maxActual = ZEnumerable.Max(source);
-            short maxExpected = 2049;            
+            short maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxshortIList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (short)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (short) r.Next(short.MaxValue) } , 2049).ToIList();
             short maxActual = ZEnumerable.Max(source, arg => arg.X);
-            short maxExpected = 2049;            
+            short maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -3884,18 +3884,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxushortArray2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (ushort)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (ushort) r.Next(ushort.MaxValue), 2049).ToArray();
             ushort maxActual = ZEnumerable.Max(source);
-            ushort maxExpected = 2049;            
+            ushort maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxushortArray2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (ushort)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ushort) r.Next(ushort.MaxValue) } , 2049).ToArray();
             ushort maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ushort maxExpected = 2049;            
+            ushort maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -3936,18 +3936,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxushortList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (ushort)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (ushort) r.Next(ushort.MaxValue), 2049).ToList();
             ushort maxActual = ZEnumerable.Max(source);
-            ushort maxExpected = 2049;            
+            ushort maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxushortList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (ushort)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ushort) r.Next(ushort.MaxValue) } , 2049).ToList();
             ushort maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ushort maxExpected = 2049;            
+            ushort maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -3988,18 +3988,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxushortIList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (ushort)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (ushort) r.Next(ushort.MaxValue), 2049).ToIList();
             ushort maxActual = ZEnumerable.Max(source);
-            ushort maxExpected = 2049;            
+            ushort maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxushortIList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (ushort)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ushort) r.Next(ushort.MaxValue) } , 2049).ToIList();
             ushort maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ushort maxExpected = 2049;            
+            ushort maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -4043,18 +4043,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxintArray2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (int)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (int) r.Next(int.MaxValue), 2049).ToArray();
             int maxActual = ZEnumerable.Max(source);
-            int maxExpected = 2049;            
+            int maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxintArray2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (int)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (int) r.Next(int.MaxValue) } , 2049).ToArray();
             int maxActual = ZEnumerable.Max(source, arg => arg.X);
-            int maxExpected = 2049;            
+            int maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -4095,18 +4095,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxintList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (int)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (int) r.Next(int.MaxValue), 2049).ToList();
             int maxActual = ZEnumerable.Max(source);
-            int maxExpected = 2049;            
+            int maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxintList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (int)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (int) r.Next(int.MaxValue) } , 2049).ToList();
             int maxActual = ZEnumerable.Max(source, arg => arg.X);
-            int maxExpected = 2049;            
+            int maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -4147,18 +4147,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxintIList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (int)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (int) r.Next(int.MaxValue), 2049).ToIList();
             int maxActual = ZEnumerable.Max(source);
-            int maxExpected = 2049;            
+            int maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxintIList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (int)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (int) r.Next(int.MaxValue) } , 2049).ToIList();
             int maxActual = ZEnumerable.Max(source, arg => arg.X);
-            int maxExpected = 2049;            
+            int maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -4202,18 +4202,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxuintArray2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (uint)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (uint) r.Next(int.MaxValue), 2049).ToArray();
             uint maxActual = ZEnumerable.Max(source);
-            uint maxExpected = 2049;            
+            uint maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxuintArray2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (uint)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (uint) r.Next(int.MaxValue) } , 2049).ToArray();
             uint maxActual = ZEnumerable.Max(source, arg => arg.X);
-            uint maxExpected = 2049;            
+            uint maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -4254,18 +4254,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxuintList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (uint)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (uint) r.Next(int.MaxValue), 2049).ToList();
             uint maxActual = ZEnumerable.Max(source);
-            uint maxExpected = 2049;            
+            uint maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxuintList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (uint)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (uint) r.Next(int.MaxValue) } , 2049).ToList();
             uint maxActual = ZEnumerable.Max(source, arg => arg.X);
-            uint maxExpected = 2049;            
+            uint maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -4306,18 +4306,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxuintIList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (uint)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (uint) r.Next(int.MaxValue), 2049).ToIList();
             uint maxActual = ZEnumerable.Max(source);
-            uint maxExpected = 2049;            
+            uint maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxuintIList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (uint)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (uint) r.Next(int.MaxValue) } , 2049).ToIList();
             uint maxActual = ZEnumerable.Max(source, arg => arg.X);
-            uint maxExpected = 2049;            
+            uint maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -4361,18 +4361,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxlongArray2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (long)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (long) r.Next(int.MaxValue), 2049).ToArray();
             long maxActual = ZEnumerable.Max(source);
-            long maxExpected = 2049;            
+            long maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxlongArray2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (long)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (long) r.Next(int.MaxValue) } , 2049).ToArray();
             long maxActual = ZEnumerable.Max(source, arg => arg.X);
-            long maxExpected = 2049;            
+            long maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -4413,18 +4413,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxlongList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (long)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (long) r.Next(int.MaxValue), 2049).ToList();
             long maxActual = ZEnumerable.Max(source);
-            long maxExpected = 2049;            
+            long maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxlongList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (long)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (long) r.Next(int.MaxValue) } , 2049).ToList();
             long maxActual = ZEnumerable.Max(source, arg => arg.X);
-            long maxExpected = 2049;            
+            long maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -4465,18 +4465,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxlongIList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (long)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (long) r.Next(int.MaxValue), 2049).ToIList();
             long maxActual = ZEnumerable.Max(source);
-            long maxExpected = 2049;            
+            long maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxlongIList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (long)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (long) r.Next(int.MaxValue) } , 2049).ToIList();
             long maxActual = ZEnumerable.Max(source, arg => arg.X);
-            long maxExpected = 2049;            
+            long maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -4520,18 +4520,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxfloatArray2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (float)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (float) r.Next(int.MaxValue), 2049).ToArray();
             float maxActual = ZEnumerable.Max(source);
-            float maxExpected = 2049;            
+            float maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxfloatArray2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (float)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (float) r.Next(int.MaxValue) } , 2049).ToArray();
             float maxActual = ZEnumerable.Max(source, arg => arg.X);
-            float maxExpected = 2049;            
+            float maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -4572,18 +4572,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxfloatList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (float)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (float) r.Next(int.MaxValue), 2049).ToList();
             float maxActual = ZEnumerable.Max(source);
-            float maxExpected = 2049;            
+            float maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxfloatList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (float)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (float) r.Next(int.MaxValue) } , 2049).ToList();
             float maxActual = ZEnumerable.Max(source, arg => arg.X);
-            float maxExpected = 2049;            
+            float maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -4624,18 +4624,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxfloatIList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (float)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (float) r.Next(int.MaxValue), 2049).ToIList();
             float maxActual = ZEnumerable.Max(source);
-            float maxExpected = 2049;            
+            float maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxfloatIList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (float)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (float) r.Next(int.MaxValue) } , 2049).ToIList();
             float maxActual = ZEnumerable.Max(source, arg => arg.X);
-            float maxExpected = 2049;            
+            float maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -4679,18 +4679,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdoubleArray2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (double)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (double) r.Next(int.MaxValue), 2049).ToArray();
             double maxActual = ZEnumerable.Max(source);
-            double maxExpected = 2049;            
+            double maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdoubleArray2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (double)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (double) r.Next(int.MaxValue) } , 2049).ToArray();
             double maxActual = ZEnumerable.Max(source, arg => arg.X);
-            double maxExpected = 2049;            
+            double maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -4731,18 +4731,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdoubleList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (double)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (double) r.Next(int.MaxValue), 2049).ToList();
             double maxActual = ZEnumerable.Max(source);
-            double maxExpected = 2049;            
+            double maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdoubleList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (double)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (double) r.Next(int.MaxValue) } , 2049).ToList();
             double maxActual = ZEnumerable.Max(source, arg => arg.X);
-            double maxExpected = 2049;            
+            double maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -4783,18 +4783,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdoubleIList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (double)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (double) r.Next(int.MaxValue), 2049).ToIList();
             double maxActual = ZEnumerable.Max(source);
-            double maxExpected = 2049;            
+            double maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdoubleIList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (double)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (double) r.Next(int.MaxValue) } , 2049).ToIList();
             double maxActual = ZEnumerable.Max(source, arg => arg.X);
-            double maxExpected = 2049;            
+            double maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -4838,18 +4838,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdecimalArray2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (decimal)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (decimal) r.Next(int.MaxValue), 2049).ToArray();
             decimal maxActual = ZEnumerable.Max(source);
-            decimal maxExpected = 2049;            
+            decimal maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdecimalArray2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (decimal)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (decimal) r.Next(int.MaxValue) } , 2049).ToArray();
             decimal maxActual = ZEnumerable.Max(source, arg => arg.X);
-            decimal maxExpected = 2049;            
+            decimal maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -4890,18 +4890,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdecimalList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (decimal)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (decimal) r.Next(int.MaxValue), 2049).ToList();
             decimal maxActual = ZEnumerable.Max(source);
-            decimal maxExpected = 2049;            
+            decimal maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdecimalList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (decimal)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (decimal) r.Next(int.MaxValue) } , 2049).ToList();
             decimal maxActual = ZEnumerable.Max(source, arg => arg.X);
-            decimal maxExpected = 2049;            
+            decimal maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -4942,18 +4942,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdecimalIList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (decimal)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (decimal) r.Next(int.MaxValue), 2049).ToIList();
             decimal maxActual = ZEnumerable.Max(source);
-            decimal maxExpected = 2049;            
+            decimal maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdecimalIList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (decimal)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (decimal) r.Next(int.MaxValue) } , 2049).ToIList();
             decimal maxActual = ZEnumerable.Max(source, arg => arg.X);
-            decimal maxExpected = 2049;            
+            decimal maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -4997,18 +4997,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxulongArray2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (ulong)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (ulong) r.Next(int.MaxValue), 2049).ToArray();
             ulong maxActual = ZEnumerable.Max(source);
-            ulong maxExpected = 2049;            
+            ulong maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxulongArray2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (ulong)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ulong) r.Next(int.MaxValue) } , 2049).ToArray();
             ulong maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ulong maxExpected = 2049;            
+            ulong maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -5049,18 +5049,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxulongList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (ulong)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (ulong) r.Next(int.MaxValue), 2049).ToList();
             ulong maxActual = ZEnumerable.Max(source);
-            ulong maxExpected = 2049;            
+            ulong maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxulongList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (ulong)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ulong) r.Next(int.MaxValue) } , 2049).ToList();
             ulong maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ulong maxExpected = 2049;            
+            ulong maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -5101,18 +5101,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxulongIList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (ulong)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (ulong) r.Next(int.MaxValue), 2049).ToIList();
             ulong maxActual = ZEnumerable.Max(source);
-            ulong maxExpected = 2049;            
+            ulong maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxulongIList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (ulong)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ulong) r.Next(int.MaxValue) } , 2049).ToIList();
             ulong maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ulong maxExpected = 2049;            
+            ulong maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -5360,18 +5360,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxshortNullableArray2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (short?)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (short?) r.Next(short.MaxValue), 2049).ToArray();
             short? maxActual = ZEnumerable.Max(source);
-            short? maxExpected = 2049;            
+            short? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxshortNullableArray2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (short?)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (short?) r.Next(short.MaxValue) } , 2049).ToArray();
             short? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            short? maxExpected = 2049;            
+            short? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -5412,18 +5412,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxshortNullableList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (short?)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (short?) r.Next(short.MaxValue), 2049).ToList();
             short? maxActual = ZEnumerable.Max(source);
-            short? maxExpected = 2049;            
+            short? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxshortNullableList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (short?)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (short?) r.Next(short.MaxValue) } , 2049).ToList();
             short? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            short? maxExpected = 2049;            
+            short? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -5464,18 +5464,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxshortNullableIList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (short?)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (short?) r.Next(short.MaxValue), 2049).ToIList();
             short? maxActual = ZEnumerable.Max(source);
-            short? maxExpected = 2049;            
+            short? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxshortNullableIList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (short?)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (short?) r.Next(short.MaxValue) } , 2049).ToIList();
             short? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            short? maxExpected = 2049;            
+            short? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -5519,18 +5519,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxushortNullableArray2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (ushort?)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (ushort?) r.Next(ushort.MaxValue), 2049).ToArray();
             ushort? maxActual = ZEnumerable.Max(source);
-            ushort? maxExpected = 2049;            
+            ushort? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxushortNullableArray2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (ushort?)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ushort?) r.Next(ushort.MaxValue) } , 2049).ToArray();
             ushort? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ushort? maxExpected = 2049;            
+            ushort? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -5571,18 +5571,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxushortNullableList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (ushort?)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (ushort?) r.Next(ushort.MaxValue), 2049).ToList();
             ushort? maxActual = ZEnumerable.Max(source);
-            ushort? maxExpected = 2049;            
+            ushort? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxushortNullableList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (ushort?)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ushort?) r.Next(ushort.MaxValue) } , 2049).ToList();
             ushort? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ushort? maxExpected = 2049;            
+            ushort? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -5623,18 +5623,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxushortNullableIList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (ushort?)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (ushort?) r.Next(ushort.MaxValue), 2049).ToIList();
             ushort? maxActual = ZEnumerable.Max(source);
-            ushort? maxExpected = 2049;            
+            ushort? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxushortNullableIList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (ushort?)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ushort?) r.Next(ushort.MaxValue) } , 2049).ToIList();
             ushort? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ushort? maxExpected = 2049;            
+            ushort? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -5678,18 +5678,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxintNullableArray2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (int?)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (int?) r.Next(int.MaxValue), 2049).ToArray();
             int? maxActual = ZEnumerable.Max(source);
-            int? maxExpected = 2049;            
+            int? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxintNullableArray2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (int?)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (int?) r.Next(int.MaxValue) } , 2049).ToArray();
             int? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            int? maxExpected = 2049;            
+            int? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -5730,18 +5730,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxintNullableList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (int?)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (int?) r.Next(int.MaxValue), 2049).ToList();
             int? maxActual = ZEnumerable.Max(source);
-            int? maxExpected = 2049;            
+            int? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxintNullableList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (int?)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (int?) r.Next(int.MaxValue) } , 2049).ToList();
             int? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            int? maxExpected = 2049;            
+            int? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -5782,18 +5782,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxintNullableIList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (int?)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (int?) r.Next(int.MaxValue), 2049).ToIList();
             int? maxActual = ZEnumerable.Max(source);
-            int? maxExpected = 2049;            
+            int? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxintNullableIList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (int?)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (int?) r.Next(int.MaxValue) } , 2049).ToIList();
             int? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            int? maxExpected = 2049;            
+            int? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -5837,18 +5837,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxuintNullableArray2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (uint?)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (uint?) r.Next(int.MaxValue), 2049).ToArray();
             uint? maxActual = ZEnumerable.Max(source);
-            uint? maxExpected = 2049;            
+            uint? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxuintNullableArray2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (uint?)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (uint?) r.Next(int.MaxValue) } , 2049).ToArray();
             uint? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            uint? maxExpected = 2049;            
+            uint? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -5889,18 +5889,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxuintNullableList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (uint?)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (uint?) r.Next(int.MaxValue), 2049).ToList();
             uint? maxActual = ZEnumerable.Max(source);
-            uint? maxExpected = 2049;            
+            uint? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxuintNullableList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (uint?)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (uint?) r.Next(int.MaxValue) } , 2049).ToList();
             uint? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            uint? maxExpected = 2049;            
+            uint? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -5941,18 +5941,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxuintNullableIList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (uint?)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (uint?) r.Next(int.MaxValue), 2049).ToIList();
             uint? maxActual = ZEnumerable.Max(source);
-            uint? maxExpected = 2049;            
+            uint? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxuintNullableIList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (uint?)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (uint?) r.Next(int.MaxValue) } , 2049).ToIList();
             uint? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            uint? maxExpected = 2049;            
+            uint? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -5996,18 +5996,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxlongNullableArray2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (long?)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (long?) r.Next(int.MaxValue), 2049).ToArray();
             long? maxActual = ZEnumerable.Max(source);
-            long? maxExpected = 2049;            
+            long? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxlongNullableArray2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (long?)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (long?) r.Next(int.MaxValue) } , 2049).ToArray();
             long? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            long? maxExpected = 2049;            
+            long? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -6048,18 +6048,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxlongNullableList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (long?)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (long?) r.Next(int.MaxValue), 2049).ToList();
             long? maxActual = ZEnumerable.Max(source);
-            long? maxExpected = 2049;            
+            long? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxlongNullableList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (long?)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (long?) r.Next(int.MaxValue) } , 2049).ToList();
             long? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            long? maxExpected = 2049;            
+            long? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -6100,18 +6100,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxlongNullableIList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (long?)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (long?) r.Next(int.MaxValue), 2049).ToIList();
             long? maxActual = ZEnumerable.Max(source);
-            long? maxExpected = 2049;            
+            long? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxlongNullableIList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (long?)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (long?) r.Next(int.MaxValue) } , 2049).ToIList();
             long? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            long? maxExpected = 2049;            
+            long? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -6155,18 +6155,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxfloatNullableArray2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (float?)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (float?) r.Next(int.MaxValue), 2049).ToArray();
             float? maxActual = ZEnumerable.Max(source);
-            float? maxExpected = 2049;            
+            float? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxfloatNullableArray2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (float?)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (float?) r.Next(int.MaxValue) } , 2049).ToArray();
             float? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            float? maxExpected = 2049;            
+            float? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -6207,18 +6207,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxfloatNullableList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (float?)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (float?) r.Next(int.MaxValue), 2049).ToList();
             float? maxActual = ZEnumerable.Max(source);
-            float? maxExpected = 2049;            
+            float? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxfloatNullableList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (float?)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (float?) r.Next(int.MaxValue) } , 2049).ToList();
             float? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            float? maxExpected = 2049;            
+            float? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -6259,18 +6259,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxfloatNullableIList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (float?)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (float?) r.Next(int.MaxValue), 2049).ToIList();
             float? maxActual = ZEnumerable.Max(source);
-            float? maxExpected = 2049;            
+            float? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxfloatNullableIList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (float?)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (float?) r.Next(int.MaxValue) } , 2049).ToIList();
             float? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            float? maxExpected = 2049;            
+            float? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -6314,18 +6314,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdoubleNullableArray2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (double?)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (double?) r.Next(int.MaxValue), 2049).ToArray();
             double? maxActual = ZEnumerable.Max(source);
-            double? maxExpected = 2049;            
+            double? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdoubleNullableArray2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (double?)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (double?) r.Next(int.MaxValue) } , 2049).ToArray();
             double? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            double? maxExpected = 2049;            
+            double? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -6366,18 +6366,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdoubleNullableList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (double?)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (double?) r.Next(int.MaxValue), 2049).ToList();
             double? maxActual = ZEnumerable.Max(source);
-            double? maxExpected = 2049;            
+            double? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdoubleNullableList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (double?)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (double?) r.Next(int.MaxValue) } , 2049).ToList();
             double? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            double? maxExpected = 2049;            
+            double? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -6418,18 +6418,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdoubleNullableIList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (double?)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (double?) r.Next(int.MaxValue), 2049).ToIList();
             double? maxActual = ZEnumerable.Max(source);
-            double? maxExpected = 2049;            
+            double? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdoubleNullableIList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (double?)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (double?) r.Next(int.MaxValue) } , 2049).ToIList();
             double? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            double? maxExpected = 2049;            
+            double? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -6473,18 +6473,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdecimalNullableArray2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (decimal?)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (decimal?) r.Next(int.MaxValue), 2049).ToArray();
             decimal? maxActual = ZEnumerable.Max(source);
-            decimal? maxExpected = 2049;            
+            decimal? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdecimalNullableArray2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (decimal?)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (decimal?) r.Next(int.MaxValue) } , 2049).ToArray();
             decimal? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            decimal? maxExpected = 2049;            
+            decimal? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -6525,18 +6525,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdecimalNullableList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (decimal?)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (decimal?) r.Next(int.MaxValue), 2049).ToList();
             decimal? maxActual = ZEnumerable.Max(source);
-            decimal? maxExpected = 2049;            
+            decimal? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdecimalNullableList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (decimal?)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (decimal?) r.Next(int.MaxValue) } , 2049).ToList();
             decimal? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            decimal? maxExpected = 2049;            
+            decimal? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -6577,18 +6577,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdecimalNullableIList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (decimal?)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (decimal?) r.Next(int.MaxValue), 2049).ToIList();
             decimal? maxActual = ZEnumerable.Max(source);
-            decimal? maxExpected = 2049;            
+            decimal? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdecimalNullableIList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (decimal?)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (decimal?) r.Next(int.MaxValue) } , 2049).ToIList();
             decimal? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            decimal? maxExpected = 2049;            
+            decimal? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -6632,18 +6632,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxulongNullableArray2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (ulong?)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (ulong?) r.Next(int.MaxValue), 2049).ToArray();
             ulong? maxActual = ZEnumerable.Max(source);
-            ulong? maxExpected = 2049;            
+            ulong? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxulongNullableArray2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (ulong?)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ulong?) r.Next(int.MaxValue) } , 2049).ToArray();
             ulong? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ulong? maxExpected = 2049;            
+            ulong? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -6684,18 +6684,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxulongNullableList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (ulong?)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (ulong?) r.Next(int.MaxValue), 2049).ToList();
             ulong? maxActual = ZEnumerable.Max(source);
-            ulong? maxExpected = 2049;            
+            ulong? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxulongNullableList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (ulong?)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ulong?) r.Next(int.MaxValue) } , 2049).ToList();
             ulong? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ulong? maxExpected = 2049;            
+            ulong? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -6736,18 +6736,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxulongNullableIList2049()
         {
-            var source = Enumerable.Range(1, 2049).Select(x => (ulong?)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (ulong?) r.Next(int.MaxValue), 2049).ToIList();
             ulong? maxActual = ZEnumerable.Max(source);
-            ulong? maxExpected = 2049;            
+            ulong? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxulongNullableIList2049Map()
         {
-            var source = Enumerable.Range(1, 2049).Select(arg => new { X = (ulong?)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ulong?) r.Next(int.MaxValue) } , 2049).ToIList();
             ulong? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ulong? maxExpected = 2049;            
+            ulong? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -7000,18 +7000,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxshortArray2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (short)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (short) r.Next(short.MaxValue), 2051).ToArray();
             short maxActual = ZEnumerable.Max(source);
-            short maxExpected = 2051;            
+            short maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxshortArray2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (short)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (short) r.Next(short.MaxValue) } , 2051).ToArray();
             short maxActual = ZEnumerable.Max(source, arg => arg.X);
-            short maxExpected = 2051;            
+            short maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -7052,18 +7052,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxshortList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (short)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (short) r.Next(short.MaxValue), 2051).ToList();
             short maxActual = ZEnumerable.Max(source);
-            short maxExpected = 2051;            
+            short maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxshortList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (short)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (short) r.Next(short.MaxValue) } , 2051).ToList();
             short maxActual = ZEnumerable.Max(source, arg => arg.X);
-            short maxExpected = 2051;            
+            short maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -7104,18 +7104,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxshortIList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (short)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (short) r.Next(short.MaxValue), 2051).ToIList();
             short maxActual = ZEnumerable.Max(source);
-            short maxExpected = 2051;            
+            short maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxshortIList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (short)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (short) r.Next(short.MaxValue) } , 2051).ToIList();
             short maxActual = ZEnumerable.Max(source, arg => arg.X);
-            short maxExpected = 2051;            
+            short maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -7159,18 +7159,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxushortArray2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (ushort)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (ushort) r.Next(ushort.MaxValue), 2051).ToArray();
             ushort maxActual = ZEnumerable.Max(source);
-            ushort maxExpected = 2051;            
+            ushort maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxushortArray2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (ushort)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ushort) r.Next(ushort.MaxValue) } , 2051).ToArray();
             ushort maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ushort maxExpected = 2051;            
+            ushort maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -7211,18 +7211,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxushortList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (ushort)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (ushort) r.Next(ushort.MaxValue), 2051).ToList();
             ushort maxActual = ZEnumerable.Max(source);
-            ushort maxExpected = 2051;            
+            ushort maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxushortList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (ushort)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ushort) r.Next(ushort.MaxValue) } , 2051).ToList();
             ushort maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ushort maxExpected = 2051;            
+            ushort maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -7263,18 +7263,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxushortIList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (ushort)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (ushort) r.Next(ushort.MaxValue), 2051).ToIList();
             ushort maxActual = ZEnumerable.Max(source);
-            ushort maxExpected = 2051;            
+            ushort maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxushortIList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (ushort)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ushort) r.Next(ushort.MaxValue) } , 2051).ToIList();
             ushort maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ushort maxExpected = 2051;            
+            ushort maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -7318,18 +7318,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxintArray2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (int)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (int) r.Next(int.MaxValue), 2051).ToArray();
             int maxActual = ZEnumerable.Max(source);
-            int maxExpected = 2051;            
+            int maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxintArray2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (int)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (int) r.Next(int.MaxValue) } , 2051).ToArray();
             int maxActual = ZEnumerable.Max(source, arg => arg.X);
-            int maxExpected = 2051;            
+            int maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -7370,18 +7370,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxintList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (int)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (int) r.Next(int.MaxValue), 2051).ToList();
             int maxActual = ZEnumerable.Max(source);
-            int maxExpected = 2051;            
+            int maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxintList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (int)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (int) r.Next(int.MaxValue) } , 2051).ToList();
             int maxActual = ZEnumerable.Max(source, arg => arg.X);
-            int maxExpected = 2051;            
+            int maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -7422,18 +7422,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxintIList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (int)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (int) r.Next(int.MaxValue), 2051).ToIList();
             int maxActual = ZEnumerable.Max(source);
-            int maxExpected = 2051;            
+            int maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxintIList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (int)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (int) r.Next(int.MaxValue) } , 2051).ToIList();
             int maxActual = ZEnumerable.Max(source, arg => arg.X);
-            int maxExpected = 2051;            
+            int maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -7477,18 +7477,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxuintArray2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (uint)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (uint) r.Next(int.MaxValue), 2051).ToArray();
             uint maxActual = ZEnumerable.Max(source);
-            uint maxExpected = 2051;            
+            uint maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxuintArray2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (uint)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (uint) r.Next(int.MaxValue) } , 2051).ToArray();
             uint maxActual = ZEnumerable.Max(source, arg => arg.X);
-            uint maxExpected = 2051;            
+            uint maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -7529,18 +7529,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxuintList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (uint)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (uint) r.Next(int.MaxValue), 2051).ToList();
             uint maxActual = ZEnumerable.Max(source);
-            uint maxExpected = 2051;            
+            uint maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxuintList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (uint)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (uint) r.Next(int.MaxValue) } , 2051).ToList();
             uint maxActual = ZEnumerable.Max(source, arg => arg.X);
-            uint maxExpected = 2051;            
+            uint maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -7581,18 +7581,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxuintIList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (uint)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (uint) r.Next(int.MaxValue), 2051).ToIList();
             uint maxActual = ZEnumerable.Max(source);
-            uint maxExpected = 2051;            
+            uint maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxuintIList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (uint)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (uint) r.Next(int.MaxValue) } , 2051).ToIList();
             uint maxActual = ZEnumerable.Max(source, arg => arg.X);
-            uint maxExpected = 2051;            
+            uint maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -7636,18 +7636,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxlongArray2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (long)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (long) r.Next(int.MaxValue), 2051).ToArray();
             long maxActual = ZEnumerable.Max(source);
-            long maxExpected = 2051;            
+            long maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxlongArray2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (long)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (long) r.Next(int.MaxValue) } , 2051).ToArray();
             long maxActual = ZEnumerable.Max(source, arg => arg.X);
-            long maxExpected = 2051;            
+            long maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -7688,18 +7688,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxlongList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (long)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (long) r.Next(int.MaxValue), 2051).ToList();
             long maxActual = ZEnumerable.Max(source);
-            long maxExpected = 2051;            
+            long maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxlongList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (long)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (long) r.Next(int.MaxValue) } , 2051).ToList();
             long maxActual = ZEnumerable.Max(source, arg => arg.X);
-            long maxExpected = 2051;            
+            long maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -7740,18 +7740,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxlongIList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (long)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (long) r.Next(int.MaxValue), 2051).ToIList();
             long maxActual = ZEnumerable.Max(source);
-            long maxExpected = 2051;            
+            long maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxlongIList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (long)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (long) r.Next(int.MaxValue) } , 2051).ToIList();
             long maxActual = ZEnumerable.Max(source, arg => arg.X);
-            long maxExpected = 2051;            
+            long maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -7795,18 +7795,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxfloatArray2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (float)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (float) r.Next(int.MaxValue), 2051).ToArray();
             float maxActual = ZEnumerable.Max(source);
-            float maxExpected = 2051;            
+            float maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxfloatArray2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (float)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (float) r.Next(int.MaxValue) } , 2051).ToArray();
             float maxActual = ZEnumerable.Max(source, arg => arg.X);
-            float maxExpected = 2051;            
+            float maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -7847,18 +7847,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxfloatList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (float)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (float) r.Next(int.MaxValue), 2051).ToList();
             float maxActual = ZEnumerable.Max(source);
-            float maxExpected = 2051;            
+            float maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxfloatList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (float)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (float) r.Next(int.MaxValue) } , 2051).ToList();
             float maxActual = ZEnumerable.Max(source, arg => arg.X);
-            float maxExpected = 2051;            
+            float maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -7899,18 +7899,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxfloatIList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (float)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (float) r.Next(int.MaxValue), 2051).ToIList();
             float maxActual = ZEnumerable.Max(source);
-            float maxExpected = 2051;            
+            float maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxfloatIList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (float)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (float) r.Next(int.MaxValue) } , 2051).ToIList();
             float maxActual = ZEnumerable.Max(source, arg => arg.X);
-            float maxExpected = 2051;            
+            float maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -7954,18 +7954,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdoubleArray2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (double)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (double) r.Next(int.MaxValue), 2051).ToArray();
             double maxActual = ZEnumerable.Max(source);
-            double maxExpected = 2051;            
+            double maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdoubleArray2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (double)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (double) r.Next(int.MaxValue) } , 2051).ToArray();
             double maxActual = ZEnumerable.Max(source, arg => arg.X);
-            double maxExpected = 2051;            
+            double maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -8006,18 +8006,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdoubleList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (double)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (double) r.Next(int.MaxValue), 2051).ToList();
             double maxActual = ZEnumerable.Max(source);
-            double maxExpected = 2051;            
+            double maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdoubleList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (double)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (double) r.Next(int.MaxValue) } , 2051).ToList();
             double maxActual = ZEnumerable.Max(source, arg => arg.X);
-            double maxExpected = 2051;            
+            double maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -8058,18 +8058,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdoubleIList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (double)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (double) r.Next(int.MaxValue), 2051).ToIList();
             double maxActual = ZEnumerable.Max(source);
-            double maxExpected = 2051;            
+            double maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdoubleIList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (double)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (double) r.Next(int.MaxValue) } , 2051).ToIList();
             double maxActual = ZEnumerable.Max(source, arg => arg.X);
-            double maxExpected = 2051;            
+            double maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -8113,18 +8113,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdecimalArray2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (decimal)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (decimal) r.Next(int.MaxValue), 2051).ToArray();
             decimal maxActual = ZEnumerable.Max(source);
-            decimal maxExpected = 2051;            
+            decimal maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdecimalArray2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (decimal)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (decimal) r.Next(int.MaxValue) } , 2051).ToArray();
             decimal maxActual = ZEnumerable.Max(source, arg => arg.X);
-            decimal maxExpected = 2051;            
+            decimal maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -8165,18 +8165,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdecimalList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (decimal)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (decimal) r.Next(int.MaxValue), 2051).ToList();
             decimal maxActual = ZEnumerable.Max(source);
-            decimal maxExpected = 2051;            
+            decimal maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdecimalList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (decimal)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (decimal) r.Next(int.MaxValue) } , 2051).ToList();
             decimal maxActual = ZEnumerable.Max(source, arg => arg.X);
-            decimal maxExpected = 2051;            
+            decimal maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -8217,18 +8217,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdecimalIList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (decimal)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (decimal) r.Next(int.MaxValue), 2051).ToIList();
             decimal maxActual = ZEnumerable.Max(source);
-            decimal maxExpected = 2051;            
+            decimal maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdecimalIList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (decimal)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (decimal) r.Next(int.MaxValue) } , 2051).ToIList();
             decimal maxActual = ZEnumerable.Max(source, arg => arg.X);
-            decimal maxExpected = 2051;            
+            decimal maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -8272,18 +8272,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxulongArray2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (ulong)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (ulong) r.Next(int.MaxValue), 2051).ToArray();
             ulong maxActual = ZEnumerable.Max(source);
-            ulong maxExpected = 2051;            
+            ulong maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxulongArray2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (ulong)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ulong) r.Next(int.MaxValue) } , 2051).ToArray();
             ulong maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ulong maxExpected = 2051;            
+            ulong maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -8324,18 +8324,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxulongList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (ulong)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (ulong) r.Next(int.MaxValue), 2051).ToList();
             ulong maxActual = ZEnumerable.Max(source);
-            ulong maxExpected = 2051;            
+            ulong maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxulongList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (ulong)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ulong) r.Next(int.MaxValue) } , 2051).ToList();
             ulong maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ulong maxExpected = 2051;            
+            ulong maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -8376,18 +8376,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxulongIList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (ulong)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (ulong) r.Next(int.MaxValue), 2051).ToIList();
             ulong maxActual = ZEnumerable.Max(source);
-            ulong maxExpected = 2051;            
+            ulong maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxulongIList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (ulong)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ulong) r.Next(int.MaxValue) } , 2051).ToIList();
             ulong maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ulong maxExpected = 2051;            
+            ulong maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -8635,18 +8635,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxshortNullableArray2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (short?)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (short?) r.Next(short.MaxValue), 2051).ToArray();
             short? maxActual = ZEnumerable.Max(source);
-            short? maxExpected = 2051;            
+            short? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxshortNullableArray2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (short?)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (short?) r.Next(short.MaxValue) } , 2051).ToArray();
             short? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            short? maxExpected = 2051;            
+            short? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -8687,18 +8687,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxshortNullableList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (short?)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (short?) r.Next(short.MaxValue), 2051).ToList();
             short? maxActual = ZEnumerable.Max(source);
-            short? maxExpected = 2051;            
+            short? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxshortNullableList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (short?)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (short?) r.Next(short.MaxValue) } , 2051).ToList();
             short? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            short? maxExpected = 2051;            
+            short? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -8739,18 +8739,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxshortNullableIList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (short?)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (short?) r.Next(short.MaxValue), 2051).ToIList();
             short? maxActual = ZEnumerable.Max(source);
-            short? maxExpected = 2051;            
+            short? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxshortNullableIList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (short?)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (short?) r.Next(short.MaxValue) } , 2051).ToIList();
             short? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            short? maxExpected = 2051;            
+            short? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -8794,18 +8794,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxushortNullableArray2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (ushort?)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (ushort?) r.Next(ushort.MaxValue), 2051).ToArray();
             ushort? maxActual = ZEnumerable.Max(source);
-            ushort? maxExpected = 2051;            
+            ushort? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxushortNullableArray2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (ushort?)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ushort?) r.Next(ushort.MaxValue) } , 2051).ToArray();
             ushort? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ushort? maxExpected = 2051;            
+            ushort? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -8846,18 +8846,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxushortNullableList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (ushort?)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (ushort?) r.Next(ushort.MaxValue), 2051).ToList();
             ushort? maxActual = ZEnumerable.Max(source);
-            ushort? maxExpected = 2051;            
+            ushort? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxushortNullableList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (ushort?)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ushort?) r.Next(ushort.MaxValue) } , 2051).ToList();
             ushort? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ushort? maxExpected = 2051;            
+            ushort? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -8898,18 +8898,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxushortNullableIList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (ushort?)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (ushort?) r.Next(ushort.MaxValue), 2051).ToIList();
             ushort? maxActual = ZEnumerable.Max(source);
-            ushort? maxExpected = 2051;            
+            ushort? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxushortNullableIList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (ushort?)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ushort?) r.Next(ushort.MaxValue) } , 2051).ToIList();
             ushort? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ushort? maxExpected = 2051;            
+            ushort? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -8953,18 +8953,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxintNullableArray2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (int?)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (int?) r.Next(int.MaxValue), 2051).ToArray();
             int? maxActual = ZEnumerable.Max(source);
-            int? maxExpected = 2051;            
+            int? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxintNullableArray2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (int?)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (int?) r.Next(int.MaxValue) } , 2051).ToArray();
             int? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            int? maxExpected = 2051;            
+            int? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -9005,18 +9005,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxintNullableList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (int?)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (int?) r.Next(int.MaxValue), 2051).ToList();
             int? maxActual = ZEnumerable.Max(source);
-            int? maxExpected = 2051;            
+            int? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxintNullableList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (int?)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (int?) r.Next(int.MaxValue) } , 2051).ToList();
             int? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            int? maxExpected = 2051;            
+            int? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -9057,18 +9057,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxintNullableIList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (int?)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (int?) r.Next(int.MaxValue), 2051).ToIList();
             int? maxActual = ZEnumerable.Max(source);
-            int? maxExpected = 2051;            
+            int? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxintNullableIList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (int?)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (int?) r.Next(int.MaxValue) } , 2051).ToIList();
             int? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            int? maxExpected = 2051;            
+            int? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -9112,18 +9112,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxuintNullableArray2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (uint?)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (uint?) r.Next(int.MaxValue), 2051).ToArray();
             uint? maxActual = ZEnumerable.Max(source);
-            uint? maxExpected = 2051;            
+            uint? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxuintNullableArray2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (uint?)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (uint?) r.Next(int.MaxValue) } , 2051).ToArray();
             uint? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            uint? maxExpected = 2051;            
+            uint? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -9164,18 +9164,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxuintNullableList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (uint?)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (uint?) r.Next(int.MaxValue), 2051).ToList();
             uint? maxActual = ZEnumerable.Max(source);
-            uint? maxExpected = 2051;            
+            uint? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxuintNullableList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (uint?)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (uint?) r.Next(int.MaxValue) } , 2051).ToList();
             uint? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            uint? maxExpected = 2051;            
+            uint? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -9216,18 +9216,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxuintNullableIList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (uint?)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (uint?) r.Next(int.MaxValue), 2051).ToIList();
             uint? maxActual = ZEnumerable.Max(source);
-            uint? maxExpected = 2051;            
+            uint? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxuintNullableIList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (uint?)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (uint?) r.Next(int.MaxValue) } , 2051).ToIList();
             uint? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            uint? maxExpected = 2051;            
+            uint? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -9271,18 +9271,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxlongNullableArray2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (long?)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (long?) r.Next(int.MaxValue), 2051).ToArray();
             long? maxActual = ZEnumerable.Max(source);
-            long? maxExpected = 2051;            
+            long? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxlongNullableArray2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (long?)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (long?) r.Next(int.MaxValue) } , 2051).ToArray();
             long? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            long? maxExpected = 2051;            
+            long? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -9323,18 +9323,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxlongNullableList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (long?)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (long?) r.Next(int.MaxValue), 2051).ToList();
             long? maxActual = ZEnumerable.Max(source);
-            long? maxExpected = 2051;            
+            long? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxlongNullableList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (long?)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (long?) r.Next(int.MaxValue) } , 2051).ToList();
             long? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            long? maxExpected = 2051;            
+            long? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -9375,18 +9375,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxlongNullableIList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (long?)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (long?) r.Next(int.MaxValue), 2051).ToIList();
             long? maxActual = ZEnumerable.Max(source);
-            long? maxExpected = 2051;            
+            long? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxlongNullableIList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (long?)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (long?) r.Next(int.MaxValue) } , 2051).ToIList();
             long? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            long? maxExpected = 2051;            
+            long? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -9430,18 +9430,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxfloatNullableArray2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (float?)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (float?) r.Next(int.MaxValue), 2051).ToArray();
             float? maxActual = ZEnumerable.Max(source);
-            float? maxExpected = 2051;            
+            float? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxfloatNullableArray2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (float?)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (float?) r.Next(int.MaxValue) } , 2051).ToArray();
             float? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            float? maxExpected = 2051;            
+            float? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -9482,18 +9482,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxfloatNullableList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (float?)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (float?) r.Next(int.MaxValue), 2051).ToList();
             float? maxActual = ZEnumerable.Max(source);
-            float? maxExpected = 2051;            
+            float? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxfloatNullableList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (float?)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (float?) r.Next(int.MaxValue) } , 2051).ToList();
             float? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            float? maxExpected = 2051;            
+            float? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -9534,18 +9534,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxfloatNullableIList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (float?)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (float?) r.Next(int.MaxValue), 2051).ToIList();
             float? maxActual = ZEnumerable.Max(source);
-            float? maxExpected = 2051;            
+            float? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxfloatNullableIList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (float?)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (float?) r.Next(int.MaxValue) } , 2051).ToIList();
             float? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            float? maxExpected = 2051;            
+            float? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -9589,18 +9589,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdoubleNullableArray2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (double?)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (double?) r.Next(int.MaxValue), 2051).ToArray();
             double? maxActual = ZEnumerable.Max(source);
-            double? maxExpected = 2051;            
+            double? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdoubleNullableArray2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (double?)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (double?) r.Next(int.MaxValue) } , 2051).ToArray();
             double? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            double? maxExpected = 2051;            
+            double? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -9641,18 +9641,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdoubleNullableList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (double?)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (double?) r.Next(int.MaxValue), 2051).ToList();
             double? maxActual = ZEnumerable.Max(source);
-            double? maxExpected = 2051;            
+            double? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdoubleNullableList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (double?)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (double?) r.Next(int.MaxValue) } , 2051).ToList();
             double? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            double? maxExpected = 2051;            
+            double? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -9693,18 +9693,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdoubleNullableIList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (double?)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (double?) r.Next(int.MaxValue), 2051).ToIList();
             double? maxActual = ZEnumerable.Max(source);
-            double? maxExpected = 2051;            
+            double? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdoubleNullableIList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (double?)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (double?) r.Next(int.MaxValue) } , 2051).ToIList();
             double? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            double? maxExpected = 2051;            
+            double? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -9748,18 +9748,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdecimalNullableArray2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (decimal?)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (decimal?) r.Next(int.MaxValue), 2051).ToArray();
             decimal? maxActual = ZEnumerable.Max(source);
-            decimal? maxExpected = 2051;            
+            decimal? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdecimalNullableArray2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (decimal?)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (decimal?) r.Next(int.MaxValue) } , 2051).ToArray();
             decimal? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            decimal? maxExpected = 2051;            
+            decimal? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -9800,18 +9800,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdecimalNullableList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (decimal?)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (decimal?) r.Next(int.MaxValue), 2051).ToList();
             decimal? maxActual = ZEnumerable.Max(source);
-            decimal? maxExpected = 2051;            
+            decimal? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdecimalNullableList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (decimal?)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (decimal?) r.Next(int.MaxValue) } , 2051).ToList();
             decimal? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            decimal? maxExpected = 2051;            
+            decimal? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -9852,18 +9852,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxdecimalNullableIList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (decimal?)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (decimal?) r.Next(int.MaxValue), 2051).ToIList();
             decimal? maxActual = ZEnumerable.Max(source);
-            decimal? maxExpected = 2051;            
+            decimal? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxdecimalNullableIList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (decimal?)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (decimal?) r.Next(int.MaxValue) } , 2051).ToIList();
             decimal? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            decimal? maxExpected = 2051;            
+            decimal? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -9907,18 +9907,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxulongNullableArray2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (ulong?)x).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => (ulong?) r.Next(int.MaxValue), 2051).ToArray();
             ulong? maxActual = ZEnumerable.Max(source);
-            ulong? maxExpected = 2051;            
+            ulong? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxulongNullableArray2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (ulong?)arg }).ToArray();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ulong?) r.Next(int.MaxValue) } , 2051).ToArray();
             ulong? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ulong? maxExpected = 2051;            
+            ulong? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -9959,18 +9959,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxulongNullableList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (ulong?)x).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => (ulong?) r.Next(int.MaxValue), 2051).ToList();
             ulong? maxActual = ZEnumerable.Max(source);
-            ulong? maxExpected = 2051;            
+            ulong? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxulongNullableList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (ulong?)arg }).ToList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ulong?) r.Next(int.MaxValue) } , 2051).ToList();
             ulong? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ulong? maxExpected = 2051;            
+            ulong? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
@@ -10011,18 +10011,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMaxulongNullableIList2051()
         {
-            var source = Enumerable.Range(1, 2051).Select(x => (ulong?)x).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => (ulong?) r.Next(int.MaxValue), 2051).ToIList();
             ulong? maxActual = ZEnumerable.Max(source);
-            ulong? maxExpected = 2051;            
+            ulong? maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMaxulongNullableIList2051Map()
         {
-            var source = Enumerable.Range(1, 2051).Select(arg => new { X = (ulong?)arg }).ToIList();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (ulong?) r.Next(int.MaxValue) } , 2051).ToIList();
             ulong? maxActual = ZEnumerable.Max(source, arg => arg.X);
-            ulong? maxExpected = 2051;            
+            ulong? maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 

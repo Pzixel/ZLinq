@@ -2,22 +2,26 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Reflection;
 
 namespace ZLinq.TTHelp
 {
     public class TT
     {
-        public static readonly string[] LongableTypes =
+        public static readonly string[] IntableTypes =
         {
             "sbyte",
             "byte",
             "short",
             "ushort",
             "int",
-            "uint",
-            "long",
         };
+
+        public static readonly string[] LongableTypes = IntableTypes.Concat(new[]
+                                                                            {
+
+                                                                                "uint",
+                                                                                "long",
+                                                                            }).ToArray();
 
 
         public static readonly string[] FloatTypes =
@@ -107,6 +111,14 @@ namespace ZLinq.TTHelp
             if (index < 0)
                 return type;
             return type.Remove(index) + "Nullable";
+        }
+
+        public static string GetMaxValue(string type)
+        {
+            string trimmedType = type.TrimEnd('?');
+            if (Array.IndexOf(IntableTypes, trimmedType) >= 0)
+                return trimmedType + ".MaxValue";
+            return "int.MaxValue";
         }
     }
 }

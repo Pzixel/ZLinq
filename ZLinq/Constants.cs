@@ -4,6 +4,6 @@
     {
         public const int Step = 4;
         public const int ListDefaultCapacity = 8;
-        public const int SingleThreadExecutionThreshold = int.MaxValue;
+        public const int SingleThreadExecutionThreshold = 1024;
     }
 }

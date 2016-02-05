@@ -32,18 +32,18 @@ namespace ZLinq.Test.ZMath
         [TestMethod]
         public void TestMax<#= typeName #><#= name #><#= i #>()
         {
-            var source = Enumerable.Range(1, <#= i #>).Select(x => (<#= type #>)x).To<#= name #>();
+            var source = ZEnumerable.Repeat(new Random(), r => (<#= type #>) r.Next(<#= TT.GetMaxValue(type) #>), <#= i #>).To<#= name #>();
             <#= type #> maxActual = ZEnumerable.Max(source);
-            <#= type #> maxExpected = <#= i #>;            
+            <#= type #> maxExpected = Enumerable.Max(source);          
             Assert.AreEqual(maxExpected, maxActual);
         }
            
         [TestMethod]
         public void TestMax<#= typeName #><#= name #><#= i #>Map()
         {
-            var source = Enumerable.Range(1, <#= i #>).Select(arg => new { X = (<#= type #>)arg }).To<#= name #>();
+            var source = ZEnumerable.Repeat(new Random(), r => new { X =  (<#= type #>) r.Next(<#= TT.GetMaxValue(type) #>) } , <#= i #>).To<#= name #>();
             <#= type #> maxActual = ZEnumerable.Max(source, arg => arg.X);
-            <#= type #> maxExpected = <#= i #>;            
+            <#= type #> maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
 
