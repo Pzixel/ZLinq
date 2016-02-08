@@ -1,0 +1,78 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(SolutionDir)ZLinq.TTHelp\bin\$(Configuration)\ZLinq.TTHelp.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="ZLinq.TTHelp" #>
+<#@ output extension=".cs" #>
+using System;
+using System.Collections.Generic;
+using JetBrains.Annotations;
+
+// ReSharper disable CheckNamespace
+namespace ZLinq
+{
+    public static partial class ZEnumerable
+    {
+        <# foreach(var sourceType in TT.CollectionClasses) { #>
+
+        [Pure]
+        public static <#= sourceType #> Repeat<#= TT.GetSuffix(sourceType) #><T>(T value, int count)
+        {
+            if (count < 0)
+                throw new ArgumentOutOfRangeException();
+            var result = <#= TT.New(sourceType, "count") #>;
+            for (int i = 0; i < result.<#= TT.LengthOrCount(sourceType) #>; i++)
+                <#= TT.Set(sourceType, "result", "value") #>
+            return result;
+        }
+
+        [Pure]
+        public static <#= sourceType #> Repeat<#= TT.GetSuffix(sourceType) #><T, TSource>(TSource generator, Func<TSource, T> func, int count)
+        {
+            if (count < 0)
+                throw new ArgumentOutOfRangeException();
+            var result = <#= TT.New(sourceType, "count") #>;
+            for (int i = 0; i < result.<#= TT.LengthOrCount(sourceType) #>; i++)
+                <#= TT.Set(sourceType, "result", "func(generator)") #>
+            return result;
+        }
+
+        [Pure]
+        public static <#= sourceType #> Repeat<#= TT.GetSuffix(sourceType) #><T>(Func<T> func, int count)
+        {
+            if (count < 0)
+                throw new ArgumentOutOfRangeException();
+            var result = <#= TT.New(sourceType, "count") #>;
+            for (int i = 0; i < result.<#= TT.LengthOrCount(sourceType) #>; i++)
+                <#= TT.Set(sourceType, "result", "func()") #>
+            return result;
+        }
+
+        <# } #>
+
+        [Pure]
+        public static IEnumerable<T> RepeatSeq<T, TSource>(TSource generator, Func<TSource, T> func, int count)
+        {
+            if (count < 0)
+                throw new ArgumentOutOfRangeException();
+            for (int i = 0; i < count; i++)
+            {
+                yield return func(generator);
+            }
+        }
+
+        [Pure]
+        public static IEnumerable<T> RepeatSeq<T>(Func<T> func, int count)
+        {
+            if (count < 0)
+                throw new ArgumentOutOfRangeException();
+            for (int i = 0; i < count; i++)
+            {
+                yield return func();
+            }
+        }
+    }
+}
