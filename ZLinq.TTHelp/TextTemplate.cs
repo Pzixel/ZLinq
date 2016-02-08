@@ -177,14 +177,24 @@ namespace ZLinq.TTHelp
 
         private static string ExpandNotNull(string type)
         {
-            if (type.StartsWith("float") || type.StartsWith("decimal") || type.StartsWith("double"))
-                return "double";
-            return "long";
+            return IsFloat(type) ? "double" : "long";
+        }
+
+        public static bool IsFloat(string type)
+        {
+            return type.StartsWith("float") || type.StartsWith("decimal") || type.StartsWith("double");
         }
 
         public static string[] WithNullables(string[] source)
         {
             return source.Concat(GetNullables(source)).ToArray();
+        }
+
+        public static string UnwrapNullable(string type, string source)
+        {
+            if (!type.EndsWith("?"))
+                return source;
+            return $"({source} ?? 0)";
         }
     }
 }
