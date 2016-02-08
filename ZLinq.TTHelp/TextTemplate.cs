@@ -16,21 +16,14 @@ namespace ZLinq.TTHelp
             "int",
         };
 
-        public static readonly string[] LongableTypes = IntableTypes.Concat(new[]
-                                                                            {
-
-                                                                                "uint",
-                                                                                "long",
-                                                                            }).ToArray();
-
-
         public static readonly string[] FloatTypes =
         {
             "float",
             "double",
             "decimal"
         };
-
+        
+        public static readonly string[] LongableTypes = IntableTypes.Concat(new[] { "uint", "long" }).ToArray();
 
         public static readonly string[] NumberTypes = LongableTypes.Concat(FloatTypes.Concat(new[] {"ulong"})).ToArray();
         public static readonly string[] NumberTypesInt = {"int"};
@@ -172,6 +165,26 @@ namespace ZLinq.TTHelp
             string setBlock = Set(type, result, value);
             string rn = Environment.NewLine;
             return $"var {result} = {newBlock}{rn}{tabs}{foreachBlock}{rn}{tabs}{"    "}{setBlock}";
+        }
+
+        public static string Expand(string type)
+        {
+            string expandNotNull = ExpandNotNull(type);
+            if (type.EndsWith("?"))
+                expandNotNull += "?";
+            return "(" + expandNotNull + ")";
+        }
+
+        private static string ExpandNotNull(string type)
+        {
+            if (type.StartsWith("float") || type.StartsWith("decimal") || type.StartsWith("double"))
+                return "double";
+            return "long";
+        }
+
+        public static string[] WithNullables(string[] source)
+        {
+            return source.Concat(GetNullables(source)).ToArray();
         }
     }
 }

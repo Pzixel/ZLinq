@@ -22,8 +22,9 @@ namespace ZLinq.Test.ZMath
     <# foreach(int i in new[] {100, 2049, 2051 }) { #>
 
                 
-    <#foreach (var type in TT.NumberTypes.Concat(TT.GetNullables(TT.NumberTypes))) { 
+    <#foreach (var type in TT.WithNullables(TT.NumberTypes)) { 
         string typeName = TT.GetNullableName(type); #>
+
         #region <#= type #>             
         <# foreach (string sourceType in TT.StandardLists) { 
         string name = TT.GetCollectionName(sourceType);#>    

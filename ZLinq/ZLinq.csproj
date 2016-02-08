@@ -191,7 +191,6 @@
     <Compile Include="Core\Common\Split.cs" />
     <Compile Include="Core\Common\WhereInPlace.cs" />
     <Compile Include="Extension\Guard.cs" />
-    <Compile Include="Extension\RandomExtensions.cs" />
     <Compile Include="ZMath\Average.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

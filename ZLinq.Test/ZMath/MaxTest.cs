@@ -12,7 +12,8 @@ namespace ZLinq.Test.ZMath
     {            
     
                 
-            #region sbyte             
+    
+        #region sbyte             
             
         
         [TestMethod]
@@ -171,7 +172,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region byte             
+    
+        #region byte             
             
         
         [TestMethod]
@@ -330,7 +332,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region short             
+    
+        #region short             
             
         
         [TestMethod]
@@ -489,7 +492,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region ushort             
+    
+        #region ushort             
             
         
         [TestMethod]
@@ -648,7 +652,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region int             
+    
+        #region int             
             
         
         [TestMethod]
@@ -807,7 +812,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region uint             
+    
+        #region uint             
             
         
         [TestMethod]
@@ -966,7 +972,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region long             
+    
+        #region long             
             
         
         [TestMethod]
@@ -1125,7 +1132,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region float             
+    
+        #region float             
             
         
         [TestMethod]
@@ -1284,7 +1292,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region double             
+    
+        #region double             
             
         
         [TestMethod]
@@ -1443,7 +1452,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region decimal             
+    
+        #region decimal             
             
         
         [TestMethod]
@@ -1602,7 +1612,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region ulong             
+    
+        #region ulong             
             
         
         [TestMethod]
@@ -1761,7 +1772,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region sbyte?             
+    
+        #region sbyte?             
             
         
         [TestMethod]
@@ -1920,7 +1932,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region byte?             
+    
+        #region byte?             
             
         
         [TestMethod]
@@ -2079,7 +2092,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region short?             
+    
+        #region short?             
             
         
         [TestMethod]
@@ -2238,7 +2252,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region ushort?             
+    
+        #region ushort?             
             
         
         [TestMethod]
@@ -2397,7 +2412,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region int?             
+    
+        #region int?             
             
         
         [TestMethod]
@@ -2556,7 +2572,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region uint?             
+    
+        #region uint?             
             
         
         [TestMethod]
@@ -2715,7 +2732,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region long?             
+    
+        #region long?             
             
         
         [TestMethod]
@@ -2874,7 +2892,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region float?             
+    
+        #region float?             
             
         
         [TestMethod]
@@ -3033,7 +3052,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region double?             
+    
+        #region double?             
             
         
         [TestMethod]
@@ -3192,7 +3212,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region decimal?             
+    
+        #region decimal?             
             
         
         [TestMethod]
@@ -3351,7 +3372,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region ulong?             
+    
+        #region ulong?             
             
         
         [TestMethod]
@@ -3515,7 +3537,8 @@ namespace ZLinq.Test.ZMath
 
     
                 
-            #region sbyte             
+    
+        #region sbyte             
             
             
         [TestMethod]
@@ -3617,7 +3640,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region byte             
+    
+        #region byte             
             
             
         [TestMethod]
@@ -3719,7 +3743,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region short             
+    
+        #region short             
             
         
         [TestMethod]
@@ -3878,7 +3903,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region ushort             
+    
+        #region ushort             
             
         
         [TestMethod]
@@ -4037,7 +4063,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region int             
+    
+        #region int             
             
         
         [TestMethod]
@@ -4196,7 +4223,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region uint             
+    
+        #region uint             
             
         
         [TestMethod]
@@ -4355,7 +4383,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region long             
+    
+        #region long             
             
         
         [TestMethod]
@@ -4514,7 +4543,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region float             
+    
+        #region float             
             
         
         [TestMethod]
@@ -4673,7 +4703,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region double             
+    
+        #region double             
             
         
         [TestMethod]
@@ -4832,7 +4863,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region decimal             
+    
+        #region decimal             
             
         
         [TestMethod]
@@ -4991,7 +5023,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region ulong             
+    
+        #region ulong             
             
         
         [TestMethod]
@@ -5150,7 +5183,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region sbyte?             
+    
+        #region sbyte?             
             
             
         [TestMethod]
@@ -5252,7 +5286,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region byte?             
+    
+        #region byte?             
             
             
         [TestMethod]
@@ -5354,7 +5389,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region short?             
+    
+        #region short?             
             
         
         [TestMethod]
@@ -5513,7 +5549,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region ushort?             
+    
+        #region ushort?             
             
         
         [TestMethod]
@@ -5672,7 +5709,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region int?             
+    
+        #region int?             
             
         
         [TestMethod]
@@ -5831,7 +5869,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region uint?             
+    
+        #region uint?             
             
         
         [TestMethod]
@@ -5990,7 +6029,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region long?             
+    
+        #region long?             
             
         
         [TestMethod]
@@ -6149,7 +6189,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region float?             
+    
+        #region float?             
             
         
         [TestMethod]
@@ -6308,7 +6349,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region double?             
+    
+        #region double?             
             
         
         [TestMethod]
@@ -6467,7 +6509,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region decimal?             
+    
+        #region decimal?             
             
         
         [TestMethod]
@@ -6626,7 +6669,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region ulong?             
+    
+        #region ulong?             
             
         
         [TestMethod]
@@ -6790,7 +6834,8 @@ namespace ZLinq.Test.ZMath
 
     
                 
-            #region sbyte             
+    
+        #region sbyte             
             
             
         [TestMethod]
@@ -6892,7 +6937,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region byte             
+    
+        #region byte             
             
             
         [TestMethod]
@@ -6994,7 +7040,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region short             
+    
+        #region short             
             
         
         [TestMethod]
@@ -7153,7 +7200,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region ushort             
+    
+        #region ushort             
             
         
         [TestMethod]
@@ -7312,7 +7360,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region int             
+    
+        #region int             
             
         
         [TestMethod]
@@ -7471,7 +7520,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region uint             
+    
+        #region uint             
             
         
         [TestMethod]
@@ -7630,7 +7680,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region long             
+    
+        #region long             
             
         
         [TestMethod]
@@ -7789,7 +7840,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region float             
+    
+        #region float             
             
         
         [TestMethod]
@@ -7948,7 +8000,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region double             
+    
+        #region double             
             
         
         [TestMethod]
@@ -8107,7 +8160,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region decimal             
+    
+        #region decimal             
             
         
         [TestMethod]
@@ -8266,7 +8320,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region ulong             
+    
+        #region ulong             
             
         
         [TestMethod]
@@ -8425,7 +8480,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region sbyte?             
+    
+        #region sbyte?             
             
             
         [TestMethod]
@@ -8527,7 +8583,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region byte?             
+    
+        #region byte?             
             
             
         [TestMethod]
@@ -8629,7 +8686,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region short?             
+    
+        #region short?             
             
         
         [TestMethod]
@@ -8788,7 +8846,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region ushort?             
+    
+        #region ushort?             
             
         
         [TestMethod]
@@ -8947,7 +9006,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region int?             
+    
+        #region int?             
             
         
         [TestMethod]
@@ -9106,7 +9166,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region uint?             
+    
+        #region uint?             
             
         
         [TestMethod]
@@ -9265,7 +9326,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region long?             
+    
+        #region long?             
             
         
         [TestMethod]
@@ -9424,7 +9486,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region float?             
+    
+        #region float?             
             
         
         [TestMethod]
@@ -9583,7 +9646,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region double?             
+    
+        #region double?             
             
         
         [TestMethod]
@@ -9742,7 +9806,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region decimal?             
+    
+        #region decimal?             
             
         
         [TestMethod]
@@ -9901,7 +9966,8 @@ namespace ZLinq.Test.ZMath
         }
                 
         #endregion
-            #region ulong?             
+    
+        #region ulong?             
             
         
         [TestMethod]
