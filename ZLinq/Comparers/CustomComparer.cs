@@ -128,20 +128,25 @@ namespace ZLinq.Comparers
 
         public static explicit operator Expression<Comparison<T>>(CustomComparer<T> obj)
         {
-            return Expression.Lambda<Comparison<T>>(obj.Value, Parameters);
+            return ToExpression(obj.Value);
         }
 
-        public Comparison<T> CreateDelegate()
+        private static Expression<Comparison<T>> ToExpression(BlockExpression blockExpression)
+        {
+            return Expression.Lambda<Comparison<T>>(blockExpression, Parameters);
+        }
+
+        public Comparison<T> ToDelegate()
         {
             ConstantExpression zero = Expression.Constant(0, typeof (int));
-            Value = Expression.Block(Value, Expression.Label(RetLabelTarget, zero));
-            var result = ((Expression<Comparison<T>>) this);
+            var labeled = Expression.Block(Value, Expression.Label(RetLabelTarget, zero));
+            var result = ToExpression(labeled);
             return result.Compile();
         }
 
-        public IComparer<T> CreateComparer()
+        public IComparer<T> ToComparer()
         {
-            return Comparer<T>.Create(CreateDelegate());
+            return Comparer<T>.Create(ToDelegate());
         }
     }
 }
