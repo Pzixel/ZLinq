@@ -1,0 +1,48 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(SolutionDir)ZLinq.TTHelp\bin\$(Configuration)\ZLinq.TTHelp.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="ZLinq.TTHelp" #>
+<#@ output extension=".cs" #>
+
+using System;
+using System.Collections.Generic;
+using JetBrains.Annotations;
+
+// ReSharper disable CheckNamespace
+namespace ZLinq
+{
+    public static partial class ZEnumerable
+    {
+        <# foreach (string sourceType in TT.Foreachable)  {  #>    
+
+        [Pure]
+        public static <#= TT.ToInt(sourceType) #> Repeat<#= TT.GetSuffix(sourceType) #>(this Random random, int count)
+        {
+            return Repeat<#= TT.GetSuffix(sourceType) #>(random, r => r.Next(), count);
+        }
+
+        [Pure]
+        public static <#= TT.ToInt(sourceType) #> Repeat<#= TT.GetSuffix(sourceType) #>(this Random random, int count, int max)
+        {
+            return Repeat<#= TT.GetSuffix(sourceType) #>(random, r => r.Next(max), count);
+        }
+
+        [Pure]
+        public static <#= TT.ToInt(sourceType) #> Repeat<#= TT.GetSuffix(sourceType) #>(this Random random, int count, int min, int max)
+        {
+            return Repeat<#= TT.GetSuffix(sourceType) #>(random, r => r.Next(min, max), count);
+        }
+
+        [Pure]
+        public static <#= TT.To(sourceType, "double") #> RepeatDouble<#= TT.GetSuffix(sourceType) #>(this Random random, int count)
+        {
+            return Repeat<#= TT.GetSuffix(sourceType) #>(random, r => r.NextDouble(), count);
+        }
+
+        <# } #>    
+    }
+}

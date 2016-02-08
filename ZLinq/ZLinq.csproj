@@ -167,7 +167,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Core\Unfold\Repeat.cs" />
+    <Compile Include="Core\Unfold\Repeat.cs">
+      <DependentUpon>Repeat.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Core\Unfold\RepeatRandom.cs">
+      <DependentUpon>RepeatRandom.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Core\Unfold\Range.cs" />
     <Compile Include="Core\Common\Where.cs">
       <DependentUpon>Where.tt</DependentUpon>
@@ -236,6 +245,14 @@
     <Content Include="Core\Common\Select.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Select.cs</LastGenOutput>
+    </Content>
+    <Content Include="Core\Unfold\Repeat.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Repeat.cs</LastGenOutput>
+    </Content>
+    <Content Include="Core\Unfold\RepeatRandom.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>RepeatRandom.cs</LastGenOutput>
     </Content>
     <Content Include="ZMath\Average.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -1,0 +1,68 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(SolutionDir)ZLinq.TTHelp\bin\$(Configuration)\ZLinq.TTHelp.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="ZLinq.TTHelp" #>
+<#@ output extension=".cs" #>
+using System;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace ZLinq.Test.Core.Unfold
+{
+    [TestClass]
+    public class RepeatTest
+    {
+        private const int Seed = 1;
+
+        [TestMethod]
+        public void TestRepeat()
+        {
+            var source = Enumerable.Repeat(1, 100).ToArray();
+            var zsource = ZEnumerable.Repeat(1, 100);
+
+            Assert.IsTrue(source.Length == zsource.Length);
+            Assert.IsTrue(source.SequenceEqual(zsource));
+        }
+
+        <# foreach(var type in TT.Foreachable) { #>        
+        
+        [TestMethod]
+        public void TestRangeGenerator<#= TT.GetSuffix(type) #>()
+        {
+            int[] source = new int[100];
+            var r = new Random(Seed);
+            for (int i = 0; i < source.Length; i++)
+            {
+                source[i] = r.Next();
+            }
+
+            var zsource = ZEnumerable.Repeat<#= TT.GetSuffix(type) #>(new Random(Seed), random => random.Next(), source.Length);
+
+            Assert.IsTrue(source.Length == zsource.<#= TT.LengthOrCount(type) #>);
+            Assert.IsTrue(source.SequenceEqual(zsource));
+        }
+
+        [TestMethod]
+        public void TestRangeGeneratorClosure<#= TT.GetSuffix(type) #>()
+        {
+            int[] source = new int[100];
+            var r = new Random(Seed);
+            for (int i = 0; i < source.Length; i++)
+            {
+                source[i] = r.Next();
+            }
+
+            var generator = new Random(Seed);
+            var zsource = ZEnumerable.Repeat<#= TT.GetSuffix(type) #>(() => generator.Next(), source.Length);
+
+            Assert.IsTrue(source.Length == zsource.<#= TT.LengthOrCount(type) #>);
+            Assert.IsTrue(source.SequenceEqual(zsource));
+        }
+        
+        <# } #>
+    }
+}

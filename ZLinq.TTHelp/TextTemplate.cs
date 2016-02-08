@@ -43,7 +43,8 @@ namespace ZLinq.TTHelp
         public static readonly string[] StandardEnumerables = StandardCollections.Concat(new[] { "IEnumerable<T>" }).ToArray();
         public static readonly string[] Unindexable = {"ICollection<T>", "IEnumerable<T>"};
         public static readonly string[] StandardInterfaces = new[] {"IList<T>"}.Concat(Unindexable).ToArray();
-        public static readonly string[] Foreachable = {"T[]", "List<T>", "IEnumerable<T>" };
+        public static readonly string[] CollectionClasses = { "T[]", "List<T>" };
+        public static readonly string[] Foreachable = CollectionClasses.Concat(new[] {"IEnumerable<T>"}).ToArray();
 
         public static string[] ToInt(IEnumerable<string> source) => source.Select(ToInt).ToArray();
 
@@ -67,11 +68,16 @@ namespace ZLinq.TTHelp
 
         public static string GetCollectionName(string collection)
         {
-            if (collection.IndexOf('[') >= 0)
+            if (IsArray(collection))
                 return "Array";
             if (collection.IndexOf('<') < 0)
                 return collection + "NonGen";
             return collection.Remove(collection.IndexOf('<'));
+        }
+
+        private static bool IsArray(string collection)
+        {
+            return collection.IndexOf('[') >= 0;
         }
 
         public static string ToArrayOrToList(string collection) => GetCollectionName(collection) == "Array" ? "ToArray()" : "ToList()";
@@ -119,6 +125,37 @@ namespace ZLinq.TTHelp
             if (Array.IndexOf(IntableTypes, trimmedType) >= 0)
                 return trimmedType + ".MaxValue";
             return "int.MaxValue";
+        }
+
+        public static string GetSuffix(string type)
+        {
+            switch (type)
+            {
+                case "IEnumerable<T>":
+                    return "Seq";
+                case "List<T>":
+                    return "List";
+                case "IList<T>":
+                    return "IList";
+                default:
+                    return string.Empty;
+            }
+        }
+
+        public static string New(string type, string lengthOrCount)
+        {
+            if (IsArray(type))
+            {
+                return $"new T[{lengthOrCount}]";
+            }
+            return $"new List<T>({lengthOrCount});";
+        }
+
+        public static string Set(string type, string result, string value)
+        {
+            if (IsArray(type))
+                return $"{result}[i] = {value};";
+            return $"{result}.Add({value});";
         }
     }
 }
