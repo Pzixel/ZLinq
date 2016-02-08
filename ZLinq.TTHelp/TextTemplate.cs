@@ -146,9 +146,16 @@ namespace ZLinq.TTHelp
         {
             if (IsArray(type))
             {
-                return $"new T[{lengthOrCount}]";
+                return $"new T[{lengthOrCount}];";
             }
             return $"new List<T>({lengthOrCount});";
+        }
+        
+        public static string InitForeach(string type, string result, string lengthOrCount)
+        {
+            if (IsArray(type))
+                return $"for (int i = 0; i < {result}.Length; i++)";
+            return $"for (int i = 0; i < {lengthOrCount}; i++)";
         }
 
         public static string Set(string type, string result, string value)
@@ -156,6 +163,15 @@ namespace ZLinq.TTHelp
             if (IsArray(type))
                 return $"{result}[i] = {value};";
             return $"{result}.Add({value});";
+        }
+
+        public static string NewInitLoop(string type, string result, string lengthOrCount, string value, string tabs)
+        {
+            string newBlock = New(type, lengthOrCount);
+            string foreachBlock = InitForeach(type, result, lengthOrCount);
+            string setBlock = Set(type, result, value);
+            string rn = Environment.NewLine;
+            return $"var {result} = {newBlock}{rn}{tabs}{foreachBlock}{rn}{tabs}{"    "}{setBlock}";
         }
     }
 }

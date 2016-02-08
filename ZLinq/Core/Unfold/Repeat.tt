@@ -23,9 +23,7 @@ namespace ZLinq
         {
             if (count < 0)
                 throw new ArgumentOutOfRangeException();
-            var result = <#= TT.New(sourceType, "count") #>;
-            for (int i = 0; i < result.<#= TT.LengthOrCount(sourceType) #>; i++)
-                <#= TT.Set(sourceType, "result", "value") #>
+            <#= TT.NewInitLoop(sourceType, "result", "count", "value", "            ") #>
             return result;
         }
 
@@ -34,9 +32,7 @@ namespace ZLinq
         {
             if (count < 0)
                 throw new ArgumentOutOfRangeException();
-            var result = <#= TT.New(sourceType, "count") #>;
-            for (int i = 0; i < result.<#= TT.LengthOrCount(sourceType) #>; i++)
-                <#= TT.Set(sourceType, "result", "func(generator)") #>
+            <#= TT.NewInitLoop(sourceType, "result", "count", "func(generator)", "            ") #>
             return result;
         }
 
@@ -45,9 +41,7 @@ namespace ZLinq
         {
             if (count < 0)
                 throw new ArgumentOutOfRangeException();
-            var result = <#= TT.New(sourceType, "count") #>;
-            for (int i = 0; i < result.<#= TT.LengthOrCount(sourceType) #>; i++)
-                <#= TT.Set(sourceType, "result", "func()") #>
+            <#= TT.NewInitLoop(sourceType, "result", "count", "func()", "            ") #>
             return result;
         }
 

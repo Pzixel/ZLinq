@@ -18,15 +18,18 @@ namespace ZLinq.Test.Core.Unfold
     {
         private const int Seed = 1;
 
+        <# foreach(var type in TT.CollectionClasses) { #>    
+
         [TestMethod]
-        public void TestRepeat()
+        public void TestRepeat<#= TT.GetSuffix(type) #>()
         {
             var source = Enumerable.Repeat(1, 100).ToArray();
-            var zsource = ZEnumerable.Repeat(1, 100);
+            var zsource = ZEnumerable.Repeat<#= TT.GetSuffix(type) #>(1, 100).ToArray();
 
             Assert.IsTrue(source.Length == zsource.Length);
             Assert.IsTrue(source.SequenceEqual(zsource));
         }
+        <# } #>
 
         <# foreach(var type in TT.Foreachable) { #>        
         
@@ -40,9 +43,9 @@ namespace ZLinq.Test.Core.Unfold
                 source[i] = r.Next();
             }
 
-            var zsource = ZEnumerable.Repeat<#= TT.GetSuffix(type) #>(new Random(Seed), random => random.Next(), source.Length);
+            var zsource = ZEnumerable.Repeat<#= TT.GetSuffix(type) #>(new Random(Seed), random => random.Next(), source.Length).ToArray();
 
-            Assert.IsTrue(source.Length == zsource.<#= TT.LengthOrCount(type) #>);
+            Assert.IsTrue(source.Length == zsource.Length);
             Assert.IsTrue(source.SequenceEqual(zsource));
         }
 
@@ -57,12 +60,12 @@ namespace ZLinq.Test.Core.Unfold
             }
 
             var generator = new Random(Seed);
-            var zsource = ZEnumerable.Repeat<#= TT.GetSuffix(type) #>(() => generator.Next(), source.Length);
+            var zsource = ZEnumerable.Repeat<#= TT.GetSuffix(type) #>(() => generator.Next(), source.Length).ToArray();
 
-            Assert.IsTrue(source.Length == zsource.<#= TT.LengthOrCount(type) #>);
+            Assert.IsTrue(source.Length == zsource.Length);
             Assert.IsTrue(source.SequenceEqual(zsource));
-        }
-        
+        }        
         <# } #>
+
     }
 }

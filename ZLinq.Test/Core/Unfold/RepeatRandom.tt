@@ -1,0 +1,91 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(SolutionDir)ZLinq.TTHelp\bin\$(Configuration)\ZLinq.TTHelp.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="ZLinq.TTHelp" #>
+<#@ output extension=".cs" #>
+using System;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace ZLinq.Test.Core.Unfold
+{
+    [TestClass]
+    public class RepeatRandomTest
+    {
+        private const int Seed = 1;
+        <# foreach (string type in TT.Foreachable)  {  #> 
+
+        [TestMethod]
+        public void TestRangeGenerator<#= TT.GetSuffix(type) #>()
+        {
+            int[] source = new int[100];
+            var r = new Random(Seed);
+            for (int i = 0; i < source.Length; i++)
+            {
+                source[i] = r.Next();
+            }
+
+            var zsource = new Random(Seed).Repeat<#= TT.GetSuffix(type) #>(source.Length).ToArray();
+
+            Assert.IsTrue(source.Length == zsource.Length);
+            Assert.IsTrue(source.SequenceEqual(zsource));
+        }
+
+        [TestMethod]
+        public void TestRangeGeneratorMax<#= TT.GetSuffix(type) #>()
+        {
+            const int max = 100;
+            int[] source = new int[100];
+            var r = new Random(Seed);
+            for (int i = 0; i < source.Length; i++)
+            {
+                source[i] = r.Next(max);
+            }
+
+            var zsource = new Random(Seed).Repeat<#= TT.GetSuffix(type) #>(source.Length, max).ToArray();
+
+            Assert.IsTrue(source.Length == zsource.Length);
+            Assert.IsTrue(source.SequenceEqual(zsource));
+        }
+
+        [TestMethod]
+        public void TestRangeGeneratorMinMax<#= TT.GetSuffix(type) #>()
+        {
+            const int min = 10;
+            const int max = 100;
+            int[] source = new int[100];
+            var r = new Random(Seed);
+            for (int i = 0; i < source.Length; i++)
+            {
+                source[i] = r.Next(min, max);
+            }
+
+            var zsource = new Random(Seed).Repeat<#= TT.GetSuffix(type) #>(source.Length, min, max).ToArray();
+
+            Assert.IsTrue(source.Length == zsource.Length);
+            Assert.IsTrue(source.SequenceEqual(zsource));
+        }
+
+        [TestMethod]
+        public void TestRangeGeneratorDouble<#= TT.GetSuffix(type) #>()
+        {
+            double[] source = new double[100];
+            var r = new Random(Seed);
+            for (int i = 0; i < source.Length; i++)
+            {
+                source[i] = r.NextDouble();
+            }
+
+            var zsource = new Random(Seed).RepeatDouble<#= TT.GetSuffix(type) #>(source.Length).ToArray();
+
+            Assert.IsTrue(source.Length == zsource.Length);
+            Assert.IsTrue(source.SequenceEqual(zsource));
+        }
+        <# } #>
+
+    }
+}

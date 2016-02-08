@@ -47,8 +47,8 @@ namespace ZLinq
         {
             if (count < 0)
                 throw new ArgumentOutOfRangeException();
-            var result = new List<T>(count);;
-            for (int i = 0; i < result.Count; i++)
+            var result = new List<T>(count);
+            for (int i = 0; i < count; i++)
                 result.Add(value);
             return result;
         }
@@ -58,8 +58,8 @@ namespace ZLinq
         {
             if (count < 0)
                 throw new ArgumentOutOfRangeException();
-            var result = new List<T>(count);;
-            for (int i = 0; i < result.Count; i++)
+            var result = new List<T>(count);
+            for (int i = 0; i < count; i++)
                 result.Add(func(generator));
             return result;
         }
@@ -69,8 +69,8 @@ namespace ZLinq
         {
             if (count < 0)
                 throw new ArgumentOutOfRangeException();
-            var result = new List<T>(count);;
-            for (int i = 0; i < result.Count; i++)
+            var result = new List<T>(count);
+            for (int i = 0; i < count; i++)
                 result.Add(func());
             return result;
         }

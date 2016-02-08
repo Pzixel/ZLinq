@@ -9,16 +9,29 @@ namespace ZLinq.Test.Core.Unfold
     {
         private const int Seed = 1;
 
+            
+
         [TestMethod]
         public void TestRepeat()
         {
             var source = Enumerable.Repeat(1, 100).ToArray();
-            var zsource = ZEnumerable.Repeat(1, 100);
+            var zsource = ZEnumerable.Repeat(1, 100).ToArray();
 
             Assert.IsTrue(source.Length == zsource.Length);
             Assert.IsTrue(source.SequenceEqual(zsource));
         }
+            
 
+        [TestMethod]
+        public void TestRepeatList()
+        {
+            var source = Enumerable.Repeat(1, 100).ToArray();
+            var zsource = ZEnumerable.RepeatList(1, 100).ToArray();
+
+            Assert.IsTrue(source.Length == zsource.Length);
+            Assert.IsTrue(source.SequenceEqual(zsource));
+        }
+        
                 
         
         [TestMethod]
@@ -31,7 +44,7 @@ namespace ZLinq.Test.Core.Unfold
                 source[i] = r.Next();
             }
 
-            var zsource = ZEnumerable.Repeat(new Random(Seed), random => random.Next(), source.Length);
+            var zsource = ZEnumerable.Repeat(new Random(Seed), random => random.Next(), source.Length).ToArray();
 
             Assert.IsTrue(source.Length == zsource.Length);
             Assert.IsTrue(source.SequenceEqual(zsource));
@@ -48,12 +61,11 @@ namespace ZLinq.Test.Core.Unfold
             }
 
             var generator = new Random(Seed);
-            var zsource = ZEnumerable.Repeat(() => generator.Next(), source.Length);
+            var zsource = ZEnumerable.Repeat(() => generator.Next(), source.Length).ToArray();
 
             Assert.IsTrue(source.Length == zsource.Length);
             Assert.IsTrue(source.SequenceEqual(zsource));
-        }
-        
+        }        
                 
         
         [TestMethod]
@@ -66,9 +78,9 @@ namespace ZLinq.Test.Core.Unfold
                 source[i] = r.Next();
             }
 
-            var zsource = ZEnumerable.RepeatList(new Random(Seed), random => random.Next(), source.Length);
+            var zsource = ZEnumerable.RepeatList(new Random(Seed), random => random.Next(), source.Length).ToArray();
 
-            Assert.IsTrue(source.Length == zsource.Count);
+            Assert.IsTrue(source.Length == zsource.Length);
             Assert.IsTrue(source.SequenceEqual(zsource));
         }
 
@@ -83,12 +95,11 @@ namespace ZLinq.Test.Core.Unfold
             }
 
             var generator = new Random(Seed);
-            var zsource = ZEnumerable.RepeatList(() => generator.Next(), source.Length);
+            var zsource = ZEnumerable.RepeatList(() => generator.Next(), source.Length).ToArray();
 
-            Assert.IsTrue(source.Length == zsource.Count);
+            Assert.IsTrue(source.Length == zsource.Length);
             Assert.IsTrue(source.SequenceEqual(zsource));
-        }
-        
+        }        
                 
         
         [TestMethod]
@@ -101,9 +112,9 @@ namespace ZLinq.Test.Core.Unfold
                 source[i] = r.Next();
             }
 
-            var zsource = ZEnumerable.RepeatSeq(new Random(Seed), random => random.Next(), source.Length);
+            var zsource = ZEnumerable.RepeatSeq(new Random(Seed), random => random.Next(), source.Length).ToArray();
 
-            Assert.IsTrue(source.Length == zsource.Count);
+            Assert.IsTrue(source.Length == zsource.Length);
             Assert.IsTrue(source.SequenceEqual(zsource));
         }
 
@@ -118,11 +129,11 @@ namespace ZLinq.Test.Core.Unfold
             }
 
             var generator = new Random(Seed);
-            var zsource = ZEnumerable.RepeatSeq(() => generator.Next(), source.Length);
+            var zsource = ZEnumerable.RepeatSeq(() => generator.Next(), source.Length).ToArray();
 
-            Assert.IsTrue(source.Length == zsource.Count);
+            Assert.IsTrue(source.Length == zsource.Length);
             Assert.IsTrue(source.SequenceEqual(zsource));
-        }
+        }        
         
-            }
+    }
 }
