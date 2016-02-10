@@ -79,7 +79,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Core\Common\WhereInPlaceTest - Copy.cs" />
     <Compile Include="Core\Fold\IsNullOrEmptyTest.cs">
       <DependentUpon>IsNullOrEmptyTest.tt</DependentUpon>
       <AutoGen>True</AutoGen>
