@@ -4,11 +4,12 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using JetBrains.Annotations;
 
 namespace ZLinq.Comparers
 {
     [SuppressMessage("ReSharper", "StaticMemberInGenericType")]
-    public sealed class CustomComparer<T>
+    public sealed class ZComparer<T> : ICloneable
     {
         private static readonly Dictionary<string, BlockExpression> MemberMemoizeDictionary = new Dictionary<string, BlockExpression>();
         private static readonly LabelTarget RetLabelTarget = Expression.Label(typeof (int));
@@ -18,20 +19,20 @@ namespace ZLinq.Comparers
             Expression.Parameter(typeof (T), "x"),
             Expression.Parameter(typeof (T), "y")
         };
-
-        private CustomComparer()
+        
+        private ZComparer()
         {
 
         }
 
-        public CustomComparer(CustomComparer<T> comparer)
+        private ZComparer(BlockExpression value)
         {
-            Value = comparer.Value;
+            Value = value;
         }  
 
         private BlockExpression Value { get; set; }
 
-        private static BlockExpression CreateBody<TProperty>(CustomComparer<T> comparer, Expression<Func<T, TProperty>> member, bool negate)
+        private static BlockExpression CreateBody<TProperty>(Expression<Func<T, TProperty>> member, bool negate)
             where TProperty : IComparable<TProperty>
         {
             MemberExpression memberExpression = member.Body as MemberExpression;
@@ -40,11 +41,11 @@ namespace ZLinq.Comparers
                 negate = true;
                 memberExpression = (MemberExpression) ((UnaryExpression) member.Body).Operand;
             }
-            BlockExpression result = comparer.GetCompareTo<TProperty>(negate, memberExpression);
+            BlockExpression result = GetCompareTo<TProperty>(negate, memberExpression);
             return result;
         }
 
-        private BlockExpression GetCompareTo<TProperty>(bool negate, MemberExpression memberExpression) where TProperty : IComparable<TProperty>
+        private static BlockExpression GetCompareTo<TProperty>(bool negate, MemberExpression memberExpression) where TProperty : IComparable<TProperty>
         {
             string name = memberExpression.Member.Name;
             if (negate)
@@ -59,7 +60,7 @@ namespace ZLinq.Comparers
             return result;
         }
 
-        private BlockExpression CreateCompareTo<TProperty>(MemberExpression memberExpression, bool negate) where TProperty : IComparable<TProperty>
+        private static BlockExpression CreateCompareTo<TProperty>(MemberExpression memberExpression, bool negate) where TProperty : IComparable<TProperty>
         {
             var compareTo = GetCompareToExpression<TProperty>(memberExpression);
             var compareToVariable = compareTo.Key;
@@ -98,44 +99,37 @@ namespace ZLinq.Comparers
             }
             throw new Exception("Never throws");
         }
-
-        public static CustomComparer<T> New<TProperty>(Expression<Func<T, TProperty>> member) where TProperty : IComparable<TProperty>
+        
+        [Pure]
+        public static ZComparer<T> New<TProperty>([NotNull] Expression<Func<T, TProperty>> member, bool negate = false) where TProperty : IComparable<TProperty>
         {
-            var comparator = new CustomComparer<T>();
-            var body = CreateBody(comparator, member, false);
+            var comparator = new ZComparer<T>();
+            var body = CreateBody(member, negate);
             comparator.Value = body;
             return comparator;
         }
 
-        public CustomComparer<T> Add<TProperty>(Expression<Func<T, TProperty>> member) where TProperty : IComparable<TProperty>
+        [Pure]
+        public static ZComparer<T> NewNeg<TProperty>([NotNull] Expression<Func<T, TProperty>> member) where TProperty : IComparable<TProperty>
         {
-            var additionalComparasion = CreateBody(this, member, false);
-            var visitor = new CustomComparerVisitor(additionalComparasion);
-            Value = (BlockExpression) visitor.Visit(Value);
-            return this;
+            return New(member, true);
         }
 
-        public static CustomComparer<T> NewNeg<TProperty>(Expression<Func<T, TProperty>> member) where TProperty : IComparable<TProperty>
+        [Pure]
+        public ZComparer<T> Add<TProperty>([NotNull] Expression<Func<T, TProperty>> member, bool negate = false) where TProperty : IComparable<TProperty>
         {
-            var comparator = new CustomComparer<T>();
-            var body = CreateBody(comparator, member, true);
-            comparator.Value = body;
-            return comparator;
+            var additionalComparasion = CreateBody(member, negate);
+            var visitor = new ZComparerVisitor(additionalComparasion);
+            BlockExpression blockExpression = (BlockExpression)visitor.Visit(Value);
+            return new ZComparer<T>(blockExpression);
         }
 
-        public CustomComparer<T> AddNeg<TProperty>(Expression<Func<T, TProperty>> member) where TProperty : IComparable<TProperty>
+        [Pure]
+        public ZComparer<T> AddNeg<TProperty>([NotNull] Expression<Func<T, TProperty>> member) where TProperty : IComparable<TProperty>
         {
-            var additionalComparasion = CreateBody(this, member, true);
-            var visitor = new CustomComparerVisitor(additionalComparasion);
-            Value = (BlockExpression) visitor.Visit(Value);
-            return this;
+            return Add(member, true);
         }
-
-        public static explicit operator Expression<Comparison<T>>(CustomComparer<T> obj)
-        {
-            return ToExpression(obj.Value);
-        }
-
+        
         private static Expression<Comparison<T>> ToExpression(BlockExpression blockExpression)
         {
             return Expression.Lambda<Comparison<T>>(blockExpression, Parameters);
@@ -149,9 +143,14 @@ namespace ZLinq.Comparers
             return result.Compile();
         }
 
-        public IComparer<T> ToDefault()
+        public IComparer<T> ToComparer()
         {
             return Comparer<T>.Create(ToDelegate());
+        }
+
+        public object Clone()
+        {
+            return new ZComparer<T>(Value);
         }
     }
 }

@@ -30,9 +30,9 @@ namespace ZLinq.Test.Comparers
             var objB = new Test { A = 1, B = 20, C = "H", D = 0 };
             var objC = new Test { A = 1, B = 0, C = "H", D = 20 };
 
-            var customComparer = CustomComparer<Test>.New(t => t.A).Add(t => t.C);
+            var customComparer = ZComparer<Test>.New(t => t.A).Add(t => t.C);
             var comparison = customComparer.ToDelegate();
-            var comparer = customComparer.ToDefault();
+            var comparer = customComparer.ToComparer();
 
             Assert.AreEqual(0, comparison(objA, objB));
             Assert.AreEqual(0, comparison(objB, objA));
@@ -52,9 +52,9 @@ namespace ZLinq.Test.Comparers
             var objB = new Test { A = 1, B = 19, C = "H", D = 10 };
             var objC = new Test { A = 1, B = 19, C = "H", D = 10 };
 
-            var customComparer = CustomComparer<Test>.New(t => t.A).Add(t => t.B).Add(t => t.C).Add(t => t.D);
+            var customComparer = ZComparer<Test>.New(t => t.A).Add(t => t.B).Add(t => t.C).Add(t => t.D);
             var comparison = customComparer.ToDelegate();
-            var comparer = customComparer.ToDefault();
+            var comparer = customComparer.ToComparer();
 
             Assert.AreEqual(0, comparison(objA, objB));
             Assert.AreEqual(0, comparison(objB, objA));
@@ -76,9 +76,9 @@ namespace ZLinq.Test.Comparers
             var objB = new Test { A = 1, B = 20, C = "H", D = 10 };
             var objC = new Test { A = 1, B = 30, C = "H", D = 10 };
 
-            var customComparer = CustomComparer<Test>.New(t => t.A).Add(t => t.B).Add(t => t.C).Add(t => t.D);
+            var customComparer = ZComparer<Test>.New(t => t.A).Add(t => t.B).Add(t => t.C).Add(t => t.D);
             var comparison = customComparer.ToDelegate();
-            var comparer = customComparer.ToDefault();
+            var comparer = customComparer.ToComparer();
 
 
             Assert.IsTrue(comparison(objA, objB) < 0);
@@ -97,14 +97,14 @@ namespace ZLinq.Test.Comparers
         {
             Tuple<string, int> a = new Tuple<string, int>("1", 2), b = new Tuple<string, int>("2", 4);
             Tuple<string, int> x = new Tuple<string, int>("2", 2), y = new Tuple<string, int>("2", 4);
-            var customComparer = CustomComparer<Tuple<string, int>>.New(t => t.Item1).Add(t => t.Item2);
-            var customComparerNeg = CustomComparer<Tuple<string, int>>.NewNeg(t => t.Item1).Add(t => -t.Item2);
+            var customComparer = ZComparer<Tuple<string, int>>.New(t => t.Item1).Add(t => t.Item2);
+            var customComparerNeg = ZComparer<Tuple<string, int>>.NewNeg(t => t.Item1).Add(t => -t.Item2);
 
             var comparison = customComparer.ToDelegate();
             var comparasionNeg = customComparerNeg.ToDelegate();
 
-            var comparer = customComparer.ToDefault();
-            var comparerNeg = customComparerNeg.ToDefault();
+            var comparer = customComparer.ToComparer();
+            var comparerNeg = customComparerNeg.ToComparer();
 
             Assert.AreEqual(-1, comparison(a, b));
             Assert.AreEqual(1, comparison(b, a));
@@ -121,10 +121,10 @@ namespace ZLinq.Test.Comparers
         public void TestComparerBuilding()
         {
             Tuple<string, int> x = new Tuple<string, int>("2", 2), y = new Tuple<string, int>("2", 4);
-            var customComparer = CustomComparer<Tuple<string, int>>.New(t => t.Item1);
+            var customComparer = ZComparer<Tuple<string, int>>.New(t => t.Item1);
 
             var comparison = customComparer.ToDelegate();
-            var comparer = customComparer.ToDefault();
+            var comparer = customComparer.ToComparer();
 
             Assert.AreEqual(0, comparison(x, y));
             Assert.AreEqual(0, comparison(y, x));
@@ -133,12 +133,54 @@ namespace ZLinq.Test.Comparers
 
             customComparer.Add(t => t.Item2);
             comparison = customComparer.ToDelegate();
-            comparer = customComparer.ToDefault();
+            comparer = customComparer.ToComparer();
 
             Assert.AreEqual(-1, comparison(x, y));
             Assert.AreEqual(1, comparison(y, x));
             Assert.AreEqual(-1, comparer.Compare(x, y));
             Assert.AreEqual(1, comparer.Compare(y, x));
+        }
+
+        [TestMethod]
+        public void TestComparerNewNeg()
+        {
+            var objA = new Test { A = 1, B = 19, C = "H", D = 10 };
+            var objB = new Test { A = 1, B = 19, C = "H", D = 10 };
+
+            var customComparer = ZComparer<Test>.New(t => t.A);
+            var customComparerNeg = ZComparer<Test>.NewNeg(t => t.A);
+            var comparison = customComparer.ToDelegate();
+            var comparer = customComparer.ToComparer();
+
+            var comparisonNeg = customComparerNeg.ToDelegate();
+            var comparerNeg = customComparerNeg.ToComparer();
+
+            Assert.AreEqual(comparisonNeg(objA, objB), -comparison(objA, objB));
+            Assert.AreEqual(comparisonNeg(objA, objB), -comparison(objB, objA));
+
+            Assert.AreEqual(comparerNeg.Compare(objA, objB), -comparer.Compare(objA, objB));
+            Assert.AreEqual(comparerNeg.Compare(objA, objB), -comparer.Compare(objB, objA));
+        }
+
+        [TestMethod]
+        public void TestComparerAddNeg()
+        {
+            var objA = new Test { A = 1, B = 19, C = "H", D = 10 };
+            var objB = new Test { A = 1, B = 19, C = "H", D = 10 };
+
+            var customComparer = ZComparer<Test>.New(t => t.A).Add(t => t.B).Add(t => t.C).Add(t => t.D);
+            var customComparerNeg = ZComparer<Test>.NewNeg(t => t.A).AddNeg(t => t.B).AddNeg(t => t.C).AddNeg(t => t.D);
+            var comparison = customComparer.ToDelegate();
+            var comparer = customComparer.ToComparer();
+
+            var comparisonNeg = customComparerNeg.ToDelegate();
+            var comparerNeg = customComparerNeg.ToComparer();
+
+            Assert.AreEqual(comparisonNeg(objA, objB), -comparison(objA, objB));
+            Assert.AreEqual(comparisonNeg(objA, objB), -comparison(objB, objA));
+
+            Assert.AreEqual(comparerNeg.Compare(objA, objB), -comparer.Compare(objA, objB));
+            Assert.AreEqual(comparerNeg.Compare(objA, objB), -comparer.Compare(objB, objA));
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ZLinq.Test.Core.Common
+namespace ZLinq.Test.Core.NonPure
 {
     [TestClass]
     public class WhereInPlaceTest

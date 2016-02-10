@@ -104,6 +104,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IsEqualTest.tt</DependentUpon>
     </Compile>
+    <Compile Include="Core\NonPure\OrderByInPlaceTest.cs">
+      <DependentUpon>OrderByInPlaceTest.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Core\Unfold\RepeatRandom.cs">
       <DependentUpon>RepeatRandom.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -115,7 +120,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Core\Unfold\RangeTest.cs" />
-    <Compile Include="Core\Common\WhereInPlaceTest.cs" />
+    <Compile Include="Core\NonPure\WhereInPlaceTest.cs" />
     <Compile Include="Core\Common\WhereTest.cs">
       <DependentUpon>WhereTest.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -193,6 +198,10 @@
     <Content Include="Core\Common\SplitTest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SplitTest.cs</LastGenOutput>
+    </Content>
+    <Content Include="Core\NonPure\OrderByInPlaceTest.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>OrderByInPlaceTest.cs</LastGenOutput>
     </Content>
     <Content Include="Core\Unfold\RepeatRandom.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

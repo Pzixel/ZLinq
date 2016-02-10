@@ -149,8 +149,11 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Comparers\CustomComparer.cs" />
-    <Compile Include="Comparers\CustomComparerVisitor.cs" />
+    <Compile Include="Class\IZOrderedEnumerable.cs" />
+    <Compile Include="Class\ZOrderedList.cs" />
+    <Compile Include="Class\ZOrderedArray.cs" />
+    <Compile Include="Comparers\ZComparer.cs" />
+    <Compile Include="Comparers\ZComparerVisitor.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Core\Common\Shuffle.cs">
       <DependentUpon>Shuffle.tt</DependentUpon>
@@ -187,6 +190,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Core\NonPure\OrderByInPlace.cs">
+      <DependentUpon>OrderByInPlace.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Core\Unfold\Repeat.cs">
       <DependentUpon>Repeat.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -209,7 +217,7 @@
       <DependentUpon>Select.tt</DependentUpon>
     </Compile>
     <Compile Include="Core\Common\Split.cs" />
-    <Compile Include="Core\Common\WhereInPlace.cs" />
+    <Compile Include="Core\NonPure\WhereInPlace.cs" />
     <Compile Include="Extension\Guard.cs" />
     <Compile Include="ZMath\Average.cs">
       <AutoGen>True</AutoGen>
@@ -264,6 +272,10 @@
     <Content Include="Core\Common\Select.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Select.cs</LastGenOutput>
+    </Content>
+    <Content Include="Core\NonPure\OrderByInPlace.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>OrderByInPlace.cs</LastGenOutput>
     </Content>
     <Content Include="Core\Unfold\Repeat.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -6,7 +6,7 @@ namespace ZLinq.Console
     {
         static void Main(string[] args)
         {
-            //var summary = BenchmarkRunner.Run<OrderByBench>();
+            var summary = BenchmarkRunner.Run<OrderByBench>();
         }
     }
 }
