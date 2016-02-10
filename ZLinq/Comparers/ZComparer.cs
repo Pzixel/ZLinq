@@ -9,7 +9,7 @@ using JetBrains.Annotations;
 namespace ZLinq.Comparers
 {
     [SuppressMessage("ReSharper", "StaticMemberInGenericType")]
-    public sealed class ZComparer<T> : ICloneable
+    public sealed class ZComparer<T>
     {
         private static readonly Dictionary<string, BlockExpression> MemberMemoizeDictionary = new Dictionary<string, BlockExpression>();
         private static readonly LabelTarget RetLabelTarget = Expression.Label(typeof (int));
@@ -19,8 +19,8 @@ namespace ZLinq.Comparers
             Expression.Parameter(typeof (T), "x"),
             Expression.Parameter(typeof (T), "y")
         };
-        
-        private ZComparer()
+
+        internal ZComparer()
         {
 
         }
@@ -146,11 +146,6 @@ namespace ZLinq.Comparers
         public IComparer<T> ToComparer()
         {
             return Comparer<T>.Create(ToDelegate());
-        }
-
-        public object Clone()
-        {
-            return new ZComparer<T>(Value);
         }
     }
 }
