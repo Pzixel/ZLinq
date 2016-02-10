@@ -152,6 +152,7 @@
     <Compile Include="Class\IZOrderedEnumerable.cs" />
     <Compile Include="Class\ZOrderedList.cs" />
     <Compile Include="Class\ZOrderedArray.cs" />
+    <Compile Include="Comparers\ZComparerNonGen.cs" />
     <Compile Include="Comparers\ZComparer.cs" />
     <Compile Include="Comparers\ZComparerVisitor.cs" />
     <Compile Include="Constants.cs" />

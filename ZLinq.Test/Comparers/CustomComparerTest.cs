@@ -183,5 +183,26 @@ namespace ZLinq.Test.Comparers
             Assert.AreEqual(comparerNeg.Compare(objA, objB), -comparer.Compare(objA, objB));
             Assert.AreEqual(comparerNeg.Compare(objA, objB), -comparer.Compare(objB, objA));
         }
+
+        [TestMethod]
+        public void TestAnonymous()
+        {
+            var objA = new { A = 1, B = 19, C = "H", D = 10 };
+            var objB = new { A = 1, B = 19, C = "H", D = 10 };
+
+            var zComparer = ZComparer.ForObject(objA, t => t.A).Add(t => t.B).Add(t => t.C).Add(t => t.D);
+            var zComparerNeg = ZComparer.ForObjectNeg(objA, t => t.A).AddNeg(t => t.B).AddNeg(t => t.C).AddNeg(t => t.D);
+            var comparison = zComparer.ToDelegate();
+            var comparer = zComparer.ToComparer();
+
+            var comparisonNeg = zComparerNeg.ToDelegate();
+            var comparerNeg = zComparerNeg.ToComparer();
+
+            Assert.AreEqual(comparisonNeg(objA, objB), -comparison(objA, objB));
+            Assert.AreEqual(comparisonNeg(objA, objB), -comparison(objB, objA));
+
+            Assert.AreEqual(comparerNeg.Compare(objA, objB), -comparer.Compare(objA, objB));
+            Assert.AreEqual(comparerNeg.Compare(objA, objB), -comparer.Compare(objB, objA));
+        }
     }
 }
