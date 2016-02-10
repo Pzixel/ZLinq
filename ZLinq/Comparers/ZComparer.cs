@@ -20,7 +20,7 @@ namespace ZLinq.Comparers
             Expression.Parameter(typeof (T), "y")
         };
 
-        internal ZComparer()
+        private ZComparer()
         {
 
         }
