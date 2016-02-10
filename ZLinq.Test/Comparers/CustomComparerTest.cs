@@ -32,7 +32,7 @@ namespace ZLinq.Test.Comparers
 
             var customComparer = CustomComparer<Test>.New(t => t.A).Add(t => t.C);
             var comparison = customComparer.ToDelegate();
-            var comparer = customComparer.ToComparer();
+            var comparer = customComparer.ToDefault();
 
             Assert.AreEqual(0, comparison(objA, objB));
             Assert.AreEqual(0, comparison(objB, objA));
@@ -54,7 +54,7 @@ namespace ZLinq.Test.Comparers
 
             var customComparer = CustomComparer<Test>.New(t => t.A).Add(t => t.B).Add(t => t.C).Add(t => t.D);
             var comparison = customComparer.ToDelegate();
-            var comparer = customComparer.ToComparer();
+            var comparer = customComparer.ToDefault();
 
             Assert.AreEqual(0, comparison(objA, objB));
             Assert.AreEqual(0, comparison(objB, objA));
@@ -78,7 +78,7 @@ namespace ZLinq.Test.Comparers
 
             var customComparer = CustomComparer<Test>.New(t => t.A).Add(t => t.B).Add(t => t.C).Add(t => t.D);
             var comparison = customComparer.ToDelegate();
-            var comparer = customComparer.ToComparer();
+            var comparer = customComparer.ToDefault();
 
 
             Assert.IsTrue(comparison(objA, objB) < 0);
@@ -103,8 +103,8 @@ namespace ZLinq.Test.Comparers
             var comparison = customComparer.ToDelegate();
             var comparasionNeg = customComparerNeg.ToDelegate();
 
-            var comparer = customComparer.ToComparer();
-            var comparerNeg = customComparerNeg.ToComparer();
+            var comparer = customComparer.ToDefault();
+            var comparerNeg = customComparerNeg.ToDefault();
 
             Assert.AreEqual(-1, comparison(a, b));
             Assert.AreEqual(1, comparison(b, a));
@@ -124,7 +124,7 @@ namespace ZLinq.Test.Comparers
             var customComparer = CustomComparer<Tuple<string, int>>.New(t => t.Item1);
 
             var comparison = customComparer.ToDelegate();
-            var comparer = customComparer.ToComparer();
+            var comparer = customComparer.ToDefault();
 
             Assert.AreEqual(0, comparison(x, y));
             Assert.AreEqual(0, comparison(y, x));
@@ -133,7 +133,7 @@ namespace ZLinq.Test.Comparers
 
             customComparer.Add(t => t.Item2);
             comparison = customComparer.ToDelegate();
-            comparer = customComparer.ToComparer();
+            comparer = customComparer.ToDefault();
 
             Assert.AreEqual(-1, comparison(x, y));
             Assert.AreEqual(1, comparison(y, x));

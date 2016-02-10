@@ -24,10 +24,15 @@ namespace ZLinq.Comparers
 
         }
 
+        public CustomComparer(CustomComparer<T> comparer)
+        {
+            Value = comparer.Value;
+        }  
+
         private BlockExpression Value { get; set; }
 
         private static BlockExpression CreateBody<TProperty>(CustomComparer<T> comparer, Expression<Func<T, TProperty>> member, bool negate)
-            where TProperty : IComparable<TProperty>, IComparable
+            where TProperty : IComparable<TProperty>
         {
             MemberExpression memberExpression = member.Body as MemberExpression;
             if (memberExpression == null)
@@ -39,7 +44,7 @@ namespace ZLinq.Comparers
             return result;
         }
 
-        private BlockExpression GetCompareTo<TProperty>(bool negate, MemberExpression memberExpression) where TProperty : IComparable<TProperty>, IComparable
+        private BlockExpression GetCompareTo<TProperty>(bool negate, MemberExpression memberExpression) where TProperty : IComparable<TProperty>
         {
             string name = memberExpression.Member.Name;
             if (negate)
@@ -54,7 +59,7 @@ namespace ZLinq.Comparers
             return result;
         }
 
-        private BlockExpression CreateCompareTo<TProperty>(MemberExpression memberExpression, bool negate) where TProperty : IComparable<TProperty>, IComparable
+        private BlockExpression CreateCompareTo<TProperty>(MemberExpression memberExpression, bool negate) where TProperty : IComparable<TProperty>
         {
             var compareTo = GetCompareToExpression<TProperty>(memberExpression);
             var compareToVariable = compareTo.Key;
@@ -68,7 +73,7 @@ namespace ZLinq.Comparers
 
 
         private static KeyValuePair<ParameterExpression, MethodCallExpression> GetCompareToExpression<TProperty>(MemberExpression memberExpression)
-            where TProperty : IComparable<TProperty>, IComparable
+            where TProperty : IComparable<TProperty>
         {
             var member = memberExpression.Member;
             var prop0 = Expression.PropertyOrField(Parameters[0], member.Name);
@@ -94,7 +99,7 @@ namespace ZLinq.Comparers
             throw new Exception("Never throws");
         }
 
-        public static CustomComparer<T> New<TProperty>(Expression<Func<T, TProperty>> member) where TProperty : IComparable<TProperty>, IComparable
+        public static CustomComparer<T> New<TProperty>(Expression<Func<T, TProperty>> member) where TProperty : IComparable<TProperty>
         {
             var comparator = new CustomComparer<T>();
             var body = CreateBody(comparator, member, false);
@@ -102,7 +107,7 @@ namespace ZLinq.Comparers
             return comparator;
         }
 
-        public CustomComparer<T> Add<TProperty>(Expression<Func<T, TProperty>> member) where TProperty : IComparable<TProperty>, IComparable
+        public CustomComparer<T> Add<TProperty>(Expression<Func<T, TProperty>> member) where TProperty : IComparable<TProperty>
         {
             var additionalComparasion = CreateBody(this, member, false);
             var visitor = new CustomComparerVisitor(additionalComparasion);
@@ -110,7 +115,7 @@ namespace ZLinq.Comparers
             return this;
         }
 
-        public static CustomComparer<T> NewNeg<TProperty>(Expression<Func<T, TProperty>> member) where TProperty : IComparable<TProperty>, IComparable
+        public static CustomComparer<T> NewNeg<TProperty>(Expression<Func<T, TProperty>> member) where TProperty : IComparable<TProperty>
         {
             var comparator = new CustomComparer<T>();
             var body = CreateBody(comparator, member, true);
@@ -118,7 +123,7 @@ namespace ZLinq.Comparers
             return comparator;
         }
 
-        public CustomComparer<T> AddNeg<TProperty>(Expression<Func<T, TProperty>> member) where TProperty : IComparable<TProperty>, IComparable
+        public CustomComparer<T> AddNeg<TProperty>(Expression<Func<T, TProperty>> member) where TProperty : IComparable<TProperty>
         {
             var additionalComparasion = CreateBody(this, member, true);
             var visitor = new CustomComparerVisitor(additionalComparasion);
@@ -144,7 +149,7 @@ namespace ZLinq.Comparers
             return result.Compile();
         }
 
-        public IComparer<T> ToComparer()
+        public IComparer<T> ToDefault()
         {
             return Comparer<T>.Create(ToDelegate());
         }
