@@ -53,15 +53,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -136,15 +136,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -218,15 +218,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -301,15 +301,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -383,15 +383,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -466,15 +466,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -553,15 +553,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -636,15 +636,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -718,15 +718,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -801,15 +801,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -883,15 +883,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -966,15 +966,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -1053,15 +1053,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -1136,15 +1136,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -1218,15 +1218,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -1301,15 +1301,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -1383,15 +1383,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -1466,15 +1466,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -1553,15 +1553,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -1636,15 +1636,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -1718,15 +1718,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -1801,15 +1801,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -1883,15 +1883,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -1966,15 +1966,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -2053,15 +2053,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -2136,15 +2136,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -2218,15 +2218,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -2301,15 +2301,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -2383,15 +2383,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -2466,15 +2466,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -2553,15 +2553,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -2636,15 +2636,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -2718,15 +2718,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -2801,15 +2801,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -2883,15 +2883,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -2966,15 +2966,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -3053,15 +3053,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -3136,15 +3136,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -3218,15 +3218,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -3301,15 +3301,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -3383,15 +3383,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -3466,15 +3466,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -3553,15 +3553,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -3636,15 +3636,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -3718,15 +3718,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -3801,15 +3801,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -3883,15 +3883,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -3966,15 +3966,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -4053,15 +4053,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -4136,15 +4136,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -4218,15 +4218,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -4301,15 +4301,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -4383,15 +4383,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -4466,15 +4466,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -4553,15 +4553,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -4636,15 +4636,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -4718,15 +4718,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -4801,15 +4801,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -4883,15 +4883,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -4966,15 +4966,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -5053,15 +5053,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -5136,15 +5136,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -5218,15 +5218,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -5301,15 +5301,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -5383,15 +5383,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Math.Max(source[0], source[1]);
+                    return Math.Max(source[0], source[1]);  
                 case 3:
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));  
                 case 4:
                     return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
                 }
@@ -5466,15 +5466,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -5564,15 +5564,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -5647,15 +5647,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -5729,15 +5729,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -5812,15 +5812,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -5894,15 +5894,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -5977,15 +5977,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -6075,15 +6075,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -6158,15 +6158,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -6240,15 +6240,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -6323,15 +6323,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -6405,15 +6405,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -6488,15 +6488,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -6586,15 +6586,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -6669,15 +6669,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -6751,15 +6751,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -6834,15 +6834,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -6916,15 +6916,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -6999,15 +6999,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -7097,15 +7097,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -7180,15 +7180,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -7262,15 +7262,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -7345,15 +7345,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -7427,15 +7427,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -7510,15 +7510,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -7608,15 +7608,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -7691,15 +7691,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -7773,15 +7773,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -7856,15 +7856,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -7938,15 +7938,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -8021,15 +8021,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -8119,15 +8119,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -8202,15 +8202,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -8284,15 +8284,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -8367,15 +8367,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -8449,15 +8449,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -8532,15 +8532,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -8630,15 +8630,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -8713,15 +8713,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -8795,15 +8795,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -8878,15 +8878,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -8960,15 +8960,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -9043,15 +9043,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -9141,15 +9141,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -9224,15 +9224,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -9306,15 +9306,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -9389,15 +9389,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -9471,15 +9471,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -9554,15 +9554,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -9652,15 +9652,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -9735,15 +9735,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -9817,15 +9817,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -9900,15 +9900,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -9982,15 +9982,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -10065,15 +10065,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -10163,15 +10163,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -10246,15 +10246,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -10328,15 +10328,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -10411,15 +10411,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -10493,15 +10493,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -10576,15 +10576,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -10674,15 +10674,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -10757,15 +10757,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -10839,15 +10839,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -10922,15 +10922,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }
@@ -11004,15 +11004,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return source[0];
+                    return source[0];  
                 case 2:
-                    return Max(source[0], source[1]);
+                    return Max(source[0], source[1]);  
                 case 3:
-                    return Max(source[0], Max(source[1], source[2]));
+                    return Max(source[0], Max(source[1], source[2]));  
                 case 4:
                     return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
                 }
@@ -11087,15 +11087,15 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
+                {     
                 case 0:
-                    return 0;
+                    return 0;  
                 case 1:
-                    return mapFunc(source[0]);
+                    return mapFunc(source[0]);  
                 case 2:
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));  
                 case 3:
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));  
                 case 4:
                     return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
                 }

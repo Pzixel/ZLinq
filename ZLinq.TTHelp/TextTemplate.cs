@@ -203,5 +203,6 @@ namespace ZLinq.TTHelp
 
         public static string Envelope(string shell, string value) => shell == string.Empty ? value : $"{shell}({value})";
         public static IEnumerable<int> Unroll = Enumerable.Range(0, Constants.Step);
+        public static IEnumerable<int> UnrollInclusive = Enumerable.Range(0, Constants.Step + 1);
     }
 }

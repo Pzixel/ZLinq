@@ -90,17 +90,11 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {
-                case 0:
-                    return 0;
-                case 1:
-                    return <#= TT.Envelope(mapFunc, "source[0]") #>;
-                case 2:
-                    return <#= max #>(<#= TT.Envelope(mapFunc, "source[0]") #>, <#= TT.Envelope(mapFunc, "source[1]") #>);
-                case 3:
-                    return <#= max #>(<#= TT.Envelope(mapFunc, "source[0]") #>, <#= max #>(<#= TT.Envelope(mapFunc, "source[1]") #>, <#= TT.Envelope(mapFunc, "source[2]") #>));
-                case 4:
-                    return <#= max #>(<#= max #>(<#= TT.Envelope(mapFunc, "source[0]") #>, <#= TT.Envelope(mapFunc, "source[1]") #>), <#= max #>(<#= TT.Envelope(mapFunc, "source[2]") #>, <#= TT.Envelope(mapFunc, "source[3]") #>));    
+                {   <#  
+                    var recursion = new Recursion(max, i => TT.Envelope(mapFunc, string.Format("source[{0}]", i)));
+                    foreach(int j in TT.UnrollInclusive) { #>  
+                case <#= j #>:
+                    return <#= recursion.Apply(j) #>;<# } #>    
                 }
             }
             <# foreach(int j in TT.Unroll) { 
