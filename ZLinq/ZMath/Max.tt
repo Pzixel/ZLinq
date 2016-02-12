@@ -22,162 +22,14 @@ namespace ZLinq
     public static partial class ZEnumerable
     {
 
-    #region Non-Nullables         
-        <#foreach (var type in TT.NumberTypes) { #>
-
-//        [Pure]
-//        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-//        private static T Max<T>(T x, T y, [NotNull] Func<T, <#= type #>> mapFunc)
-//        {
-//            return mapFunc(x) > mapFunc(y) ? x : y;      
-//        }
-
-        #region <#= type #>             
-        <# foreach (string sourceType in TT.StandardLists) 
-        { #>    
-        /// <summary>
-        /// Search max value in collection
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
-        [Pure]
-        public static <#= type #> Max([NotNull] this <#= sourceType.Replace("T", type) #> source)
-        {
-            <#= TT.IsNotNull("source") #>
-            if (source.<#= TT.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
-                return Max(source, 0, source.<#= TT.LengthOrCount(sourceType) #>);
-            <#= type #> result = source.FirstOrDefault();
-            object syncRoot = new object();
-            Parallel.ForEach(Partitioner.Create(0, source.<#= TT.LengthOrCount(sourceType) #>),
-                range => 
-                {
-                    var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
-                });
-
-            return result;
-        }
-
-        [Pure]
-        private static <#= type #> Max([NotNull] this <#= sourceType.Replace("T", type) #> source, int startIndex, int endIndex)
-        {
-            if (source.<#= TT.LengthOrCount(sourceType) #> <= 4)
-            {
-                if (source.<#= TT.LengthOrCount(sourceType) #> == 0)
-                    return 0;
-                if (source.<#= TT.LengthOrCount(sourceType) #> == 1)
-                    return source[0];
-                if (source.<#= TT.LengthOrCount(sourceType) #> == 2)
-                    return Math.Max(source[0], source[1]);
-                if (source.<#= TT.LengthOrCount(sourceType) #> == 3)
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
-                return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));
-            }
-            <#= type #> max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
-            int i;
-            int loopEnd = endIndex - Constants.Step + 1;
-            for (i = startIndex; i < loopEnd; i += Constants.Step)
-            {
-                if (max0 < source[i])
-                    max0 = source[i];
-                if (max1 < source[i + 1])
-                    max1 = source[i + 1];
-                if (max2 < source[i + 2])
-                    max2 = source[i + 2];
-                if (max3 < source[i + 3])
-                    max3 = source[i + 3];   
-            }
-            if (i == source.<#= TT.LengthOrCount(sourceType) #>)
-                return <#= TT.ExplicitCastFromIntIfNeeded(type) #> Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
-            if (i == source.<#= TT.LengthOrCount(sourceType) #> - 1)
-                return <#= TT.ExplicitCastFromIntIfNeeded(type) #> Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
-            if (i == source.<#= TT.LengthOrCount(sourceType) #> - 2)
-                return <#= TT.ExplicitCastFromIntIfNeeded(type) #> Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
-            return <#= TT.ExplicitCastFromIntIfNeeded(type) #> Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
-        } 
-
-        /// <summary>
-        /// Search max value in mapped collection
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
-        /// <returns>Maximum value of mapping</returns>
-        [Pure]
-        public static <#= type #> Max<T>([NotNull] this <#= sourceType #> source, [NotNull] Func<T, <#= type #>> mapFunc)
-        {
-            <#= TT.IsNotNull("source") #>
-            <#= TT.IsNotNull("mapFunc") #>
-            if (source.<#= TT.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
-                return Max(source, mapFunc, 0, source.<#= TT.LengthOrCount(sourceType) #>);
-            <#= type #> result = mapFunc(source.First());
-            object syncRoot = new object();
-            Parallel.ForEach(Partitioner.Create(0, source.<#= TT.LengthOrCount(sourceType) #>),
-                range => 
-                {
-                    var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
-                });
-
-            return result;
-        }
-
-        [Pure]
-        private static <#= type #> Max<T>([NotNull] this <#= sourceType #> source, [NotNull] Func<T, <#= type #>> mapFunc, int startIndex, int endIndex)
-        {
-            if (source.<#= TT.LengthOrCount(sourceType) #> <= 4)
-            {
-                if (source.<#= TT.LengthOrCount(sourceType) #> == 0)
-                    return 0;
-                if (source.<#= TT.LengthOrCount(sourceType) #> == 1)
-                    return mapFunc(source[0]);
-                if (source.<#= TT.LengthOrCount(sourceType) #> == 2)
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                if (source.<#= TT.LengthOrCount(sourceType) #> == 3)
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));
-            }
-            <#= type #> max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), 
-                max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
-
-            int i;
-            int loopEnd = endIndex - Constants.Step + 1;
-            for (i = startIndex; i < loopEnd; i += Constants.Step)
-            {
-                <#= type #> tmp0 = mapFunc(source[i]);
-                if (max0 < tmp0)
-                    max0 = tmp0;
-                <#= type #> tmp1 = mapFunc(source[i + 1]);
-                if (max1 < tmp1)
-                    max1 = tmp1;
-                <#= type #> tmp2 = mapFunc(source[i + 2]);
-                if (max2 < tmp2)
-                    max2 = tmp2;
-                <#= type #> tmp3 = mapFunc(source[i + 3]);
-                if (max3 < tmp3)
-                    max3 = tmp3;
-            }
-            if (i == source.<#= TT.LengthOrCount(sourceType) #>)
-                return <#= TT.ExplicitCastFromIntIfNeeded(type) #> Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
-            if (i == source.<#= TT.LengthOrCount(sourceType) #> - 1)
-                return <#= TT.ExplicitCastFromIntIfNeeded(type) #> Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
-            if (i == source.<#= TT.LengthOrCount(sourceType) #> - 2)
-                return <#= TT.ExplicitCastFromIntIfNeeded(type) #> Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
-            return <#= TT.ExplicitCastFromIntIfNeeded(type) #> Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
-        }
-        <# } #>
-
-        #endregion
-    <# } #>    
-    #endregion
-
-    #region Nullables
-
-        <#foreach (var type in TT.GetNullables(TT.NumberTypes)) { #>
+<#foreach (var type in TT.WithNullables(TT.NumberTypes)) {
+    bool isNullable = TT.IsNullable(type);
+    string max = isNullable ? "Max" : "Math.Max";
+    Func<string, string> hasValueCheck = isNullable ? new Func<string, string>(s => s + ".HasValue &&") : new Func<string, string>(s => "");
+    string valuePrefix = isNullable ? ".Value" : "";
+ #>
         
+        <# if (isNullable) { #>
         [Pure]
         private static <#= type #> Max(<#= type #> x, <#= type #> y)
         {
@@ -189,6 +41,7 @@ namespace ZLinq
                 return x.Value;
             return y.GetValueOrDefault();            
         }
+        <# } #>
 
         #region <#= type #>             
         <# foreach (string sourceType in TT.StandardLists) 
@@ -205,7 +58,23 @@ namespace ZLinq
         {
             <#= TT.IsNotNull("source") #>
             if (source.<#= TT.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
-                return Max(source, 0, source.<#= TT.LengthOrCount(sourceType) #>);
+            {
+                switch (source.<#= TT.LengthOrCount(sourceType) #>)
+                {
+                    case 0:
+                        return 0;
+                    case 1:
+                        return source[0];
+                    case 2:
+                        return <#= max #>(source[0], source[1]);
+                    case 3:
+                        return <#= max #>(source[0], <#= max #>(source[1], source[2]));
+                    case 4:
+                        return <#= max #>(<#= max #>(source[0], source[1]), <#= max #>(source[2], source[3]));   
+                    default:
+                        return Max(source, 0, source.<#= TT.LengthOrCount(sourceType) #>);
+                }            
+            }
             <#= type #> result = source.FirstOrDefault();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.<#= TT.LengthOrCount(sourceType) #>),
@@ -223,18 +92,6 @@ namespace ZLinq
         [Pure]
         private static <#= type #> Max([NotNull] this <#= sourceType.Replace("T", type) #> source, int startIndex, int endIndex)
         {
-            if (source.<#= TT.LengthOrCount(sourceType) #> <= 4)
-            {
-                if (source.<#= TT.LengthOrCount(sourceType) #> == 0)
-                    return 0;
-                if (source.<#= TT.LengthOrCount(sourceType) #> == 1)
-                    return source[0];
-                if (source.<#= TT.LengthOrCount(sourceType) #> == 2)
-                    return Max(source[0], source[1]);
-                if (source.<#= TT.LengthOrCount(sourceType) #> == 3)
-                    return Max(source[0], Max(source[1], source[2]));
-                return Max(Max(source[0], source[1]), Max(source[2], source[3]));
-            }
             <#= type #> max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
@@ -242,18 +99,18 @@ namespace ZLinq
             {
                 <# for(int j = 0; j < 4; j++) { 
                 #><#= type #> arg<#= j #> = source[i + <#= j #>];
-                if (arg<#= j #>.HasValue && max<#= j #> < arg<#= j #>)
-                    max<#= j #> = arg<#= j #>.Value;
+                if (<#= hasValueCheck("arg" + j) #> max<#= j #> < arg<#= j #>)
+                    max<#= j #> = arg<#= j #><#= valuePrefix #>;
                 <# } #>
 
             }
             if (i == source.<#= TT.LengthOrCount(sourceType) #>)
-                return <#= TT.ExplicitCastFromIntIfNeeded(type) #> Max(Max(max0, max1), Max(max2, max3));
+                return <#= TT.ExplicitCastFromIntIfNeeded(type) #> <#= max #>(<#= max #>(max0, max1), <#= max #>(max2, max3));
             if (i == source.<#= TT.LengthOrCount(sourceType) #> - 1)
-                return <#= TT.ExplicitCastFromIntIfNeeded(type) #> Max(Max(Max(max0, max1), Max(max2, max3)), source[i]);
+                return <#= TT.ExplicitCastFromIntIfNeeded(type) #> <#= max #>(<#= max #>(<#= max #>(max0, max1), <#= max #>(max2, max3)), source[i]);
             if (i == source.<#= TT.LengthOrCount(sourceType) #> - 2)
-                return <#= TT.ExplicitCastFromIntIfNeeded(type) #> Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
-            return <#= TT.ExplicitCastFromIntIfNeeded(type) #> Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
+                return <#= TT.ExplicitCastFromIntIfNeeded(type) #> <#= max #>(<#= max #>(<#= max #>(max0, max1), <#= max #>(max2, max3)), <#= max #>(source[i], source[i + 1]));
+            return <#= TT.ExplicitCastFromIntIfNeeded(type) #> <#= max #>(<#= max #>(<#= max #>(max0, max1), <#= max #>(max2, max3)), <#= max #>(source[i], <#= max #>(source[i + 1], source[i + 2])));
         } 
 
         /// <summary>
@@ -268,7 +125,23 @@ namespace ZLinq
             <#= TT.IsNotNull("source") #>
             <#= TT.IsNotNull("mapFunc") #>
             if (source.<#= TT.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
-                return Max(source, mapFunc, 0, source.<#= TT.LengthOrCount(sourceType) #>);
+            {
+                switch (source.<#= TT.LengthOrCount(sourceType) #>)
+                {
+                    case 0:
+                        return 0;
+                    case 1:
+                        return mapFunc(source[0]);
+                    case 2:
+                        return <#= max #>(mapFunc(source[0]), mapFunc(source[1]));
+                    case 3:
+                        return <#= max #>(mapFunc(source[0]), <#= max #>(mapFunc(source[1]), mapFunc(source[2])));
+                    case 4:
+                        return <#= max #>(<#= max #>(mapFunc(source[0]), mapFunc(source[1])), <#= max #>(mapFunc(source[2]), mapFunc(source[3])));   
+                    default:
+                        return Max(source, mapFunc, 0, source.<#= TT.LengthOrCount(sourceType) #>);
+                }            
+            }                
             <#= type #> result = mapFunc(source.First());
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.<#= TT.LengthOrCount(sourceType) #>),
@@ -286,18 +159,6 @@ namespace ZLinq
         [Pure]
         private static <#= type #> Max<T>([NotNull] this <#= sourceType #> source, [NotNull] Func<T, <#= type #>> mapFunc, int startIndex, int endIndex)
         {
-            if (source.<#= TT.LengthOrCount(sourceType) #> <= 4)
-            {
-                if (source.<#= TT.LengthOrCount(sourceType) #> == 0)
-                    return 0;
-                if (source.<#= TT.LengthOrCount(sourceType) #> == 1)
-                    return mapFunc(source[0]);
-                if (source.<#= TT.LengthOrCount(sourceType) #> == 2)
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
-                if (source.<#= TT.LengthOrCount(sourceType) #> == 3)
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));
-            }
             <#= type #> max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
@@ -305,24 +166,22 @@ namespace ZLinq
             {
                 <# for(int j = 0; j < 4; j++) { 
                 #><#= type #> arg<#= j #> = mapFunc(source[i + <#= j #>]);
-                if (arg<#= j #>.HasValue && max<#= j #> < arg<#= j #>)
-                    max<#= j #> = arg<#= j #>.Value;
+                if (<#= hasValueCheck("arg" + j) #> max<#= j #> < arg<#= j #>)
+                    max<#= j #> = arg<#= j #><#= valuePrefix #>;
                 <# } #>
 
             }
             if (i == source.<#= TT.LengthOrCount(sourceType) #>)
-                return <#= TT.ExplicitCastFromIntIfNeeded(type) #> Max(Max(max0, max1), Max(max2, max3));
+                return <#= TT.ExplicitCastFromIntIfNeeded(type) #> <#= max #>(<#= max #>(max0, max1), <#= max #>(max2, max3));
             if (i == source.<#= TT.LengthOrCount(sourceType) #> - 1)
-                return <#= TT.ExplicitCastFromIntIfNeeded(type) #> Max(Max(Max(max0, max1), Max(max2, max3)), mapFunc(source[i]));
+                return <#= TT.ExplicitCastFromIntIfNeeded(type) #> <#= max #>(<#= max #>(<#= max #>(max0, max1), <#= max #>(max2, max3)), mapFunc(source[i]));
             if (i == source.<#= TT.LengthOrCount(sourceType) #> - 2)
-                return <#= TT.ExplicitCastFromIntIfNeeded(type) #> Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), mapFunc(source[i + 1])));
-            return <#= TT.ExplicitCastFromIntIfNeeded(type) #> Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
+                return <#= TT.ExplicitCastFromIntIfNeeded(type) #> <#= max #>(<#= max #>(<#= max #>(max0, max1), <#= max #>(max2, max3)), <#= max #>(mapFunc(source[i]), mapFunc(source[i + 1])));
+            return <#= TT.ExplicitCastFromIntIfNeeded(type) #> <#= max #>(<#= max #>(<#= max #>(max0, max1), <#= max #>(max2, max3)), <#= max #>(mapFunc(source[i]), <#= max #>(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
         <# } #>
-
-        #endregion
-    <# } #>    
-
+        
     #endregion
+<# } #>    
     }
 }

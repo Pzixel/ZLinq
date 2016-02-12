@@ -197,5 +197,7 @@ namespace ZLinq.TTHelp
                 return source;
             return $"({source} ?? 0)";
         }
+
+        public static bool IsNullable(string type) => type[type.Length - 1] == '?';
     }
 }
