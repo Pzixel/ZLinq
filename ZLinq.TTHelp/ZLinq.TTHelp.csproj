@@ -61,6 +61,12 @@
     <Compile Include="TextTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ZLinq.Common\ZLinq.Common.csproj">
+      <Project>{72C72778-B75F-4740-9C4C-25414A5162D4}</Project>
+      <Name>ZLinq.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using ZLinq.Common;
 
 namespace ZLinq.TTHelp
 {
@@ -199,5 +200,8 @@ namespace ZLinq.TTHelp
         }
 
         public static bool IsNullable(string type) => type[type.Length - 1] == '?';
+
+        public static string Envelope(string shell, string value) => shell == string.Empty ? value : $"{shell}({value})";
+        public static IEnumerable<int> Unroll = Enumerable.Range(0, Constants.Step);
     }
 }

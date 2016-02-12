@@ -11,40 +11,28 @@ using ZLinq.Common;
 namespace ZLinq
 {
     public static partial class ZEnumerable
-    {
-
+    {               
+    
         
         
         #region sbyte             
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static sbyte Max([NotNull] this sbyte[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Length);
-                }            
-            }
-            sbyte result = source.FirstOrDefault();
+                return Max(source, 0, source.Length);         
+            }                
+            sbyte result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                 range => 
@@ -61,7 +49,29 @@ namespace ZLinq
         [Pure]
         private static sbyte Max([NotNull] this sbyte[] source, int startIndex, int endIndex)
         {
-            sbyte max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            sbyte max0 = source[startIndex + 0];
+            sbyte max1 = source[startIndex + 1];
+            sbyte max2 = source[startIndex + 2];
+            sbyte max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -88,12 +98,13 @@ namespace ZLinq
                 return (sbyte) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
             return (sbyte) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static sbyte Max<T>([NotNull] this T[] source, [NotNull] Func<T, sbyte> mapFunc)
@@ -102,21 +113,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Length);
-                }            
+                return Max(source, mapFunc, 0, source.Length);         
             }                
             sbyte result = mapFunc(source.First());
             object syncRoot = new object();
@@ -135,7 +132,29 @@ namespace ZLinq
         [Pure]
         private static sbyte Max<T>([NotNull] this T[] source, [NotNull] Func<T, sbyte> mapFunc, int startIndex, int endIndex)
         {
-            sbyte max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            sbyte max0 = mapFunc(source[startIndex + 0]);
+            sbyte max1 = mapFunc(source[startIndex + 1]);
+            sbyte max2 = mapFunc(source[startIndex + 2]);
+            sbyte max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -162,35 +181,23 @@ namespace ZLinq
                 return (sbyte) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
             return (sbyte) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static sbyte Max([NotNull] this List<sbyte> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            sbyte result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            sbyte result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -207,7 +214,29 @@ namespace ZLinq
         [Pure]
         private static sbyte Max([NotNull] this List<sbyte> source, int startIndex, int endIndex)
         {
-            sbyte max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            sbyte max0 = source[startIndex + 0];
+            sbyte max1 = source[startIndex + 1];
+            sbyte max2 = source[startIndex + 2];
+            sbyte max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -234,12 +263,13 @@ namespace ZLinq
                 return (sbyte) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
             return (sbyte) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static sbyte Max<T>([NotNull] this List<T> source, [NotNull] Func<T, sbyte> mapFunc)
@@ -248,21 +278,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             sbyte result = mapFunc(source.First());
             object syncRoot = new object();
@@ -281,7 +297,29 @@ namespace ZLinq
         [Pure]
         private static sbyte Max<T>([NotNull] this List<T> source, [NotNull] Func<T, sbyte> mapFunc, int startIndex, int endIndex)
         {
-            sbyte max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            sbyte max0 = mapFunc(source[startIndex + 0]);
+            sbyte max1 = mapFunc(source[startIndex + 1]);
+            sbyte max2 = mapFunc(source[startIndex + 2]);
+            sbyte max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -308,35 +346,23 @@ namespace ZLinq
                 return (sbyte) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
             return (sbyte) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static sbyte Max([NotNull] this IList<sbyte> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            sbyte result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            sbyte result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -353,7 +379,29 @@ namespace ZLinq
         [Pure]
         private static sbyte Max([NotNull] this IList<sbyte> source, int startIndex, int endIndex)
         {
-            sbyte max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            sbyte max0 = source[startIndex + 0];
+            sbyte max1 = source[startIndex + 1];
+            sbyte max2 = source[startIndex + 2];
+            sbyte max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -380,12 +428,13 @@ namespace ZLinq
                 return (sbyte) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
             return (sbyte) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static sbyte Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, sbyte> mapFunc)
@@ -394,21 +443,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             sbyte result = mapFunc(source.First());
             object syncRoot = new object();
@@ -427,7 +462,29 @@ namespace ZLinq
         [Pure]
         private static sbyte Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, sbyte> mapFunc, int startIndex, int endIndex)
         {
-            sbyte max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            sbyte max0 = mapFunc(source[startIndex + 0]);
+            sbyte max1 = mapFunc(source[startIndex + 1]);
+            sbyte max2 = mapFunc(source[startIndex + 2]);
+            sbyte max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -459,35 +516,23 @@ namespace ZLinq
         
         
         #region byte             
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static byte Max([NotNull] this byte[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Length);
-                }            
-            }
-            byte result = source.FirstOrDefault();
+                return Max(source, 0, source.Length);         
+            }                
+            byte result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                 range => 
@@ -504,7 +549,29 @@ namespace ZLinq
         [Pure]
         private static byte Max([NotNull] this byte[] source, int startIndex, int endIndex)
         {
-            byte max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            byte max0 = source[startIndex + 0];
+            byte max1 = source[startIndex + 1];
+            byte max2 = source[startIndex + 2];
+            byte max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -531,12 +598,13 @@ namespace ZLinq
                 return (byte) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
             return (byte) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static byte Max<T>([NotNull] this T[] source, [NotNull] Func<T, byte> mapFunc)
@@ -545,21 +613,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Length);
-                }            
+                return Max(source, mapFunc, 0, source.Length);         
             }                
             byte result = mapFunc(source.First());
             object syncRoot = new object();
@@ -578,7 +632,29 @@ namespace ZLinq
         [Pure]
         private static byte Max<T>([NotNull] this T[] source, [NotNull] Func<T, byte> mapFunc, int startIndex, int endIndex)
         {
-            byte max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            byte max0 = mapFunc(source[startIndex + 0]);
+            byte max1 = mapFunc(source[startIndex + 1]);
+            byte max2 = mapFunc(source[startIndex + 2]);
+            byte max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -605,35 +681,23 @@ namespace ZLinq
                 return (byte) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
             return (byte) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static byte Max([NotNull] this List<byte> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            byte result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            byte result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -650,7 +714,29 @@ namespace ZLinq
         [Pure]
         private static byte Max([NotNull] this List<byte> source, int startIndex, int endIndex)
         {
-            byte max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            byte max0 = source[startIndex + 0];
+            byte max1 = source[startIndex + 1];
+            byte max2 = source[startIndex + 2];
+            byte max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -677,12 +763,13 @@ namespace ZLinq
                 return (byte) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
             return (byte) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static byte Max<T>([NotNull] this List<T> source, [NotNull] Func<T, byte> mapFunc)
@@ -691,21 +778,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             byte result = mapFunc(source.First());
             object syncRoot = new object();
@@ -724,7 +797,29 @@ namespace ZLinq
         [Pure]
         private static byte Max<T>([NotNull] this List<T> source, [NotNull] Func<T, byte> mapFunc, int startIndex, int endIndex)
         {
-            byte max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            byte max0 = mapFunc(source[startIndex + 0]);
+            byte max1 = mapFunc(source[startIndex + 1]);
+            byte max2 = mapFunc(source[startIndex + 2]);
+            byte max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -751,35 +846,23 @@ namespace ZLinq
                 return (byte) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
             return (byte) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static byte Max([NotNull] this IList<byte> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            byte result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            byte result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -796,7 +879,29 @@ namespace ZLinq
         [Pure]
         private static byte Max([NotNull] this IList<byte> source, int startIndex, int endIndex)
         {
-            byte max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            byte max0 = source[startIndex + 0];
+            byte max1 = source[startIndex + 1];
+            byte max2 = source[startIndex + 2];
+            byte max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -823,12 +928,13 @@ namespace ZLinq
                 return (byte) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
             return (byte) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static byte Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, byte> mapFunc)
@@ -837,21 +943,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             byte result = mapFunc(source.First());
             object syncRoot = new object();
@@ -870,7 +962,29 @@ namespace ZLinq
         [Pure]
         private static byte Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, byte> mapFunc, int startIndex, int endIndex)
         {
-            byte max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            byte max0 = mapFunc(source[startIndex + 0]);
+            byte max1 = mapFunc(source[startIndex + 1]);
+            byte max2 = mapFunc(source[startIndex + 2]);
+            byte max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -902,35 +1016,23 @@ namespace ZLinq
         
         
         #region short             
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static short Max([NotNull] this short[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Length);
-                }            
-            }
-            short result = source.FirstOrDefault();
+                return Max(source, 0, source.Length);         
+            }                
+            short result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                 range => 
@@ -947,7 +1049,29 @@ namespace ZLinq
         [Pure]
         private static short Max([NotNull] this short[] source, int startIndex, int endIndex)
         {
-            short max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            short max0 = source[startIndex + 0];
+            short max1 = source[startIndex + 1];
+            short max2 = source[startIndex + 2];
+            short max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -974,12 +1098,13 @@ namespace ZLinq
                 return (short) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
             return (short) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static short Max<T>([NotNull] this T[] source, [NotNull] Func<T, short> mapFunc)
@@ -988,21 +1113,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Length);
-                }            
+                return Max(source, mapFunc, 0, source.Length);         
             }                
             short result = mapFunc(source.First());
             object syncRoot = new object();
@@ -1021,7 +1132,29 @@ namespace ZLinq
         [Pure]
         private static short Max<T>([NotNull] this T[] source, [NotNull] Func<T, short> mapFunc, int startIndex, int endIndex)
         {
-            short max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            short max0 = mapFunc(source[startIndex + 0]);
+            short max1 = mapFunc(source[startIndex + 1]);
+            short max2 = mapFunc(source[startIndex + 2]);
+            short max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -1048,35 +1181,23 @@ namespace ZLinq
                 return (short) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
             return (short) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static short Max([NotNull] this List<short> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            short result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            short result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -1093,7 +1214,29 @@ namespace ZLinq
         [Pure]
         private static short Max([NotNull] this List<short> source, int startIndex, int endIndex)
         {
-            short max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            short max0 = source[startIndex + 0];
+            short max1 = source[startIndex + 1];
+            short max2 = source[startIndex + 2];
+            short max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -1120,12 +1263,13 @@ namespace ZLinq
                 return (short) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
             return (short) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static short Max<T>([NotNull] this List<T> source, [NotNull] Func<T, short> mapFunc)
@@ -1134,21 +1278,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             short result = mapFunc(source.First());
             object syncRoot = new object();
@@ -1167,7 +1297,29 @@ namespace ZLinq
         [Pure]
         private static short Max<T>([NotNull] this List<T> source, [NotNull] Func<T, short> mapFunc, int startIndex, int endIndex)
         {
-            short max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            short max0 = mapFunc(source[startIndex + 0]);
+            short max1 = mapFunc(source[startIndex + 1]);
+            short max2 = mapFunc(source[startIndex + 2]);
+            short max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -1194,35 +1346,23 @@ namespace ZLinq
                 return (short) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
             return (short) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static short Max([NotNull] this IList<short> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            short result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            short result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -1239,7 +1379,29 @@ namespace ZLinq
         [Pure]
         private static short Max([NotNull] this IList<short> source, int startIndex, int endIndex)
         {
-            short max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            short max0 = source[startIndex + 0];
+            short max1 = source[startIndex + 1];
+            short max2 = source[startIndex + 2];
+            short max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -1266,12 +1428,13 @@ namespace ZLinq
                 return (short) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
             return (short) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static short Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, short> mapFunc)
@@ -1280,21 +1443,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             short result = mapFunc(source.First());
             object syncRoot = new object();
@@ -1313,7 +1462,29 @@ namespace ZLinq
         [Pure]
         private static short Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, short> mapFunc, int startIndex, int endIndex)
         {
-            short max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            short max0 = mapFunc(source[startIndex + 0]);
+            short max1 = mapFunc(source[startIndex + 1]);
+            short max2 = mapFunc(source[startIndex + 2]);
+            short max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -1345,35 +1516,23 @@ namespace ZLinq
         
         
         #region ushort             
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static ushort Max([NotNull] this ushort[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Length);
-                }            
-            }
-            ushort result = source.FirstOrDefault();
+                return Max(source, 0, source.Length);         
+            }                
+            ushort result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                 range => 
@@ -1390,7 +1549,29 @@ namespace ZLinq
         [Pure]
         private static ushort Max([NotNull] this ushort[] source, int startIndex, int endIndex)
         {
-            ushort max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            ushort max0 = source[startIndex + 0];
+            ushort max1 = source[startIndex + 1];
+            ushort max2 = source[startIndex + 2];
+            ushort max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -1417,12 +1598,13 @@ namespace ZLinq
                 return (ushort) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
             return (ushort) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static ushort Max<T>([NotNull] this T[] source, [NotNull] Func<T, ushort> mapFunc)
@@ -1431,21 +1613,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Length);
-                }            
+                return Max(source, mapFunc, 0, source.Length);         
             }                
             ushort result = mapFunc(source.First());
             object syncRoot = new object();
@@ -1464,7 +1632,29 @@ namespace ZLinq
         [Pure]
         private static ushort Max<T>([NotNull] this T[] source, [NotNull] Func<T, ushort> mapFunc, int startIndex, int endIndex)
         {
-            ushort max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            ushort max0 = mapFunc(source[startIndex + 0]);
+            ushort max1 = mapFunc(source[startIndex + 1]);
+            ushort max2 = mapFunc(source[startIndex + 2]);
+            ushort max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -1491,35 +1681,23 @@ namespace ZLinq
                 return (ushort) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
             return (ushort) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static ushort Max([NotNull] this List<ushort> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            ushort result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            ushort result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -1536,7 +1714,29 @@ namespace ZLinq
         [Pure]
         private static ushort Max([NotNull] this List<ushort> source, int startIndex, int endIndex)
         {
-            ushort max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            ushort max0 = source[startIndex + 0];
+            ushort max1 = source[startIndex + 1];
+            ushort max2 = source[startIndex + 2];
+            ushort max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -1563,12 +1763,13 @@ namespace ZLinq
                 return (ushort) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
             return (ushort) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static ushort Max<T>([NotNull] this List<T> source, [NotNull] Func<T, ushort> mapFunc)
@@ -1577,21 +1778,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             ushort result = mapFunc(source.First());
             object syncRoot = new object();
@@ -1610,7 +1797,29 @@ namespace ZLinq
         [Pure]
         private static ushort Max<T>([NotNull] this List<T> source, [NotNull] Func<T, ushort> mapFunc, int startIndex, int endIndex)
         {
-            ushort max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            ushort max0 = mapFunc(source[startIndex + 0]);
+            ushort max1 = mapFunc(source[startIndex + 1]);
+            ushort max2 = mapFunc(source[startIndex + 2]);
+            ushort max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -1637,35 +1846,23 @@ namespace ZLinq
                 return (ushort) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
             return (ushort) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static ushort Max([NotNull] this IList<ushort> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            ushort result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            ushort result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -1682,7 +1879,29 @@ namespace ZLinq
         [Pure]
         private static ushort Max([NotNull] this IList<ushort> source, int startIndex, int endIndex)
         {
-            ushort max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            ushort max0 = source[startIndex + 0];
+            ushort max1 = source[startIndex + 1];
+            ushort max2 = source[startIndex + 2];
+            ushort max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -1709,12 +1928,13 @@ namespace ZLinq
                 return (ushort) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
             return (ushort) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static ushort Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, ushort> mapFunc)
@@ -1723,21 +1943,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             ushort result = mapFunc(source.First());
             object syncRoot = new object();
@@ -1756,7 +1962,29 @@ namespace ZLinq
         [Pure]
         private static ushort Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, ushort> mapFunc, int startIndex, int endIndex)
         {
-            ushort max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            ushort max0 = mapFunc(source[startIndex + 0]);
+            ushort max1 = mapFunc(source[startIndex + 1]);
+            ushort max2 = mapFunc(source[startIndex + 2]);
+            ushort max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -1788,35 +2016,23 @@ namespace ZLinq
         
         
         #region int             
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static int Max([NotNull] this int[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Length);
-                }            
-            }
-            int result = source.FirstOrDefault();
+                return Max(source, 0, source.Length);         
+            }                
+            int result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                 range => 
@@ -1833,7 +2049,29 @@ namespace ZLinq
         [Pure]
         private static int Max([NotNull] this int[] source, int startIndex, int endIndex)
         {
-            int max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            int max0 = source[startIndex + 0];
+            int max1 = source[startIndex + 1];
+            int max2 = source[startIndex + 2];
+            int max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -1853,19 +2091,20 @@ namespace ZLinq
                 
             }
             if (i == source.Length)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (int) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Length - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
+                return (int) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
             if (i == source.Length - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
+                return (int) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
+            return (int) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static int Max<T>([NotNull] this T[] source, [NotNull] Func<T, int> mapFunc)
@@ -1874,21 +2113,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Length);
-                }            
+                return Max(source, mapFunc, 0, source.Length);         
             }                
             int result = mapFunc(source.First());
             object syncRoot = new object();
@@ -1907,7 +2132,29 @@ namespace ZLinq
         [Pure]
         private static int Max<T>([NotNull] this T[] source, [NotNull] Func<T, int> mapFunc, int startIndex, int endIndex)
         {
-            int max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            int max0 = mapFunc(source[startIndex + 0]);
+            int max1 = mapFunc(source[startIndex + 1]);
+            int max2 = mapFunc(source[startIndex + 2]);
+            int max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -1927,42 +2174,30 @@ namespace ZLinq
                 
             }
             if (i == source.Length)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (int) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Length - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
+                return (int) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
             if (i == source.Length - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
+                return (int) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
+            return (int) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static int Max([NotNull] this List<int> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            int result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            int result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -1979,7 +2214,29 @@ namespace ZLinq
         [Pure]
         private static int Max([NotNull] this List<int> source, int startIndex, int endIndex)
         {
-            int max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            int max0 = source[startIndex + 0];
+            int max1 = source[startIndex + 1];
+            int max2 = source[startIndex + 2];
+            int max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -1999,19 +2256,20 @@ namespace ZLinq
                 
             }
             if (i == source.Count)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (int) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Count - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
+                return (int) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
             if (i == source.Count - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
+                return (int) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
+            return (int) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static int Max<T>([NotNull] this List<T> source, [NotNull] Func<T, int> mapFunc)
@@ -2020,21 +2278,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             int result = mapFunc(source.First());
             object syncRoot = new object();
@@ -2053,7 +2297,29 @@ namespace ZLinq
         [Pure]
         private static int Max<T>([NotNull] this List<T> source, [NotNull] Func<T, int> mapFunc, int startIndex, int endIndex)
         {
-            int max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            int max0 = mapFunc(source[startIndex + 0]);
+            int max1 = mapFunc(source[startIndex + 1]);
+            int max2 = mapFunc(source[startIndex + 2]);
+            int max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -2073,42 +2339,30 @@ namespace ZLinq
                 
             }
             if (i == source.Count)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (int) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Count - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
+                return (int) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
             if (i == source.Count - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
+                return (int) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
+            return (int) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static int Max([NotNull] this IList<int> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            int result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            int result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -2125,7 +2379,29 @@ namespace ZLinq
         [Pure]
         private static int Max([NotNull] this IList<int> source, int startIndex, int endIndex)
         {
-            int max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            int max0 = source[startIndex + 0];
+            int max1 = source[startIndex + 1];
+            int max2 = source[startIndex + 2];
+            int max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -2145,19 +2421,20 @@ namespace ZLinq
                 
             }
             if (i == source.Count)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (int) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Count - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
+                return (int) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
             if (i == source.Count - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
+                return (int) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
+            return (int) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static int Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, int> mapFunc)
@@ -2166,21 +2443,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             int result = mapFunc(source.First());
             object syncRoot = new object();
@@ -2199,7 +2462,29 @@ namespace ZLinq
         [Pure]
         private static int Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, int> mapFunc, int startIndex, int endIndex)
         {
-            int max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            int max0 = mapFunc(source[startIndex + 0]);
+            int max1 = mapFunc(source[startIndex + 1]);
+            int max2 = mapFunc(source[startIndex + 2]);
+            int max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -2219,47 +2504,35 @@ namespace ZLinq
                 
             }
             if (i == source.Count)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (int) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Count - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
+                return (int) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
             if (i == source.Count - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
+                return (int) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
+            return (int) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
                 
     #endregion
         
         
         #region uint             
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static uint Max([NotNull] this uint[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Length);
-                }            
-            }
-            uint result = source.FirstOrDefault();
+                return Max(source, 0, source.Length);         
+            }                
+            uint result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                 range => 
@@ -2276,7 +2549,29 @@ namespace ZLinq
         [Pure]
         private static uint Max([NotNull] this uint[] source, int startIndex, int endIndex)
         {
-            uint max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            uint max0 = source[startIndex + 0];
+            uint max1 = source[startIndex + 1];
+            uint max2 = source[startIndex + 2];
+            uint max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -2296,19 +2591,20 @@ namespace ZLinq
                 
             }
             if (i == source.Length)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (uint) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Length - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
+                return (uint) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
             if (i == source.Length - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
+                return (uint) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
+            return (uint) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static uint Max<T>([NotNull] this T[] source, [NotNull] Func<T, uint> mapFunc)
@@ -2317,21 +2613,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Length);
-                }            
+                return Max(source, mapFunc, 0, source.Length);         
             }                
             uint result = mapFunc(source.First());
             object syncRoot = new object();
@@ -2350,7 +2632,29 @@ namespace ZLinq
         [Pure]
         private static uint Max<T>([NotNull] this T[] source, [NotNull] Func<T, uint> mapFunc, int startIndex, int endIndex)
         {
-            uint max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            uint max0 = mapFunc(source[startIndex + 0]);
+            uint max1 = mapFunc(source[startIndex + 1]);
+            uint max2 = mapFunc(source[startIndex + 2]);
+            uint max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -2370,42 +2674,30 @@ namespace ZLinq
                 
             }
             if (i == source.Length)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (uint) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Length - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
+                return (uint) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
             if (i == source.Length - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
+                return (uint) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
+            return (uint) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static uint Max([NotNull] this List<uint> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            uint result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            uint result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -2422,7 +2714,29 @@ namespace ZLinq
         [Pure]
         private static uint Max([NotNull] this List<uint> source, int startIndex, int endIndex)
         {
-            uint max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            uint max0 = source[startIndex + 0];
+            uint max1 = source[startIndex + 1];
+            uint max2 = source[startIndex + 2];
+            uint max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -2442,19 +2756,20 @@ namespace ZLinq
                 
             }
             if (i == source.Count)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (uint) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Count - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
+                return (uint) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
             if (i == source.Count - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
+                return (uint) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
+            return (uint) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static uint Max<T>([NotNull] this List<T> source, [NotNull] Func<T, uint> mapFunc)
@@ -2463,21 +2778,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             uint result = mapFunc(source.First());
             object syncRoot = new object();
@@ -2496,7 +2797,29 @@ namespace ZLinq
         [Pure]
         private static uint Max<T>([NotNull] this List<T> source, [NotNull] Func<T, uint> mapFunc, int startIndex, int endIndex)
         {
-            uint max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            uint max0 = mapFunc(source[startIndex + 0]);
+            uint max1 = mapFunc(source[startIndex + 1]);
+            uint max2 = mapFunc(source[startIndex + 2]);
+            uint max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -2516,42 +2839,30 @@ namespace ZLinq
                 
             }
             if (i == source.Count)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (uint) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Count - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
+                return (uint) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
             if (i == source.Count - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
+                return (uint) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
+            return (uint) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static uint Max([NotNull] this IList<uint> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            uint result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            uint result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -2568,7 +2879,29 @@ namespace ZLinq
         [Pure]
         private static uint Max([NotNull] this IList<uint> source, int startIndex, int endIndex)
         {
-            uint max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            uint max0 = source[startIndex + 0];
+            uint max1 = source[startIndex + 1];
+            uint max2 = source[startIndex + 2];
+            uint max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -2588,19 +2921,20 @@ namespace ZLinq
                 
             }
             if (i == source.Count)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (uint) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Count - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
+                return (uint) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
             if (i == source.Count - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
+                return (uint) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
+            return (uint) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static uint Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, uint> mapFunc)
@@ -2609,21 +2943,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             uint result = mapFunc(source.First());
             object syncRoot = new object();
@@ -2642,7 +2962,29 @@ namespace ZLinq
         [Pure]
         private static uint Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, uint> mapFunc, int startIndex, int endIndex)
         {
-            uint max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            uint max0 = mapFunc(source[startIndex + 0]);
+            uint max1 = mapFunc(source[startIndex + 1]);
+            uint max2 = mapFunc(source[startIndex + 2]);
+            uint max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -2662,47 +3004,35 @@ namespace ZLinq
                 
             }
             if (i == source.Count)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (uint) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Count - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
+                return (uint) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
             if (i == source.Count - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
+                return (uint) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
+            return (uint) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
                 
     #endregion
         
         
         #region long             
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static long Max([NotNull] this long[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Length);
-                }            
-            }
-            long result = source.FirstOrDefault();
+                return Max(source, 0, source.Length);         
+            }                
+            long result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                 range => 
@@ -2719,7 +3049,29 @@ namespace ZLinq
         [Pure]
         private static long Max([NotNull] this long[] source, int startIndex, int endIndex)
         {
-            long max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            long max0 = source[startIndex + 0];
+            long max1 = source[startIndex + 1];
+            long max2 = source[startIndex + 2];
+            long max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -2739,19 +3091,20 @@ namespace ZLinq
                 
             }
             if (i == source.Length)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (long) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Length - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
+                return (long) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
             if (i == source.Length - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
+                return (long) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
+            return (long) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static long Max<T>([NotNull] this T[] source, [NotNull] Func<T, long> mapFunc)
@@ -2760,21 +3113,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Length);
-                }            
+                return Max(source, mapFunc, 0, source.Length);         
             }                
             long result = mapFunc(source.First());
             object syncRoot = new object();
@@ -2793,7 +3132,29 @@ namespace ZLinq
         [Pure]
         private static long Max<T>([NotNull] this T[] source, [NotNull] Func<T, long> mapFunc, int startIndex, int endIndex)
         {
-            long max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            long max0 = mapFunc(source[startIndex + 0]);
+            long max1 = mapFunc(source[startIndex + 1]);
+            long max2 = mapFunc(source[startIndex + 2]);
+            long max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -2813,42 +3174,30 @@ namespace ZLinq
                 
             }
             if (i == source.Length)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (long) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Length - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
+                return (long) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
             if (i == source.Length - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
+                return (long) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
+            return (long) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static long Max([NotNull] this List<long> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            long result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            long result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -2865,7 +3214,29 @@ namespace ZLinq
         [Pure]
         private static long Max([NotNull] this List<long> source, int startIndex, int endIndex)
         {
-            long max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            long max0 = source[startIndex + 0];
+            long max1 = source[startIndex + 1];
+            long max2 = source[startIndex + 2];
+            long max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -2885,19 +3256,20 @@ namespace ZLinq
                 
             }
             if (i == source.Count)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (long) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Count - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
+                return (long) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
             if (i == source.Count - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
+                return (long) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
+            return (long) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static long Max<T>([NotNull] this List<T> source, [NotNull] Func<T, long> mapFunc)
@@ -2906,21 +3278,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             long result = mapFunc(source.First());
             object syncRoot = new object();
@@ -2939,7 +3297,29 @@ namespace ZLinq
         [Pure]
         private static long Max<T>([NotNull] this List<T> source, [NotNull] Func<T, long> mapFunc, int startIndex, int endIndex)
         {
-            long max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            long max0 = mapFunc(source[startIndex + 0]);
+            long max1 = mapFunc(source[startIndex + 1]);
+            long max2 = mapFunc(source[startIndex + 2]);
+            long max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -2959,42 +3339,30 @@ namespace ZLinq
                 
             }
             if (i == source.Count)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (long) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Count - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
+                return (long) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
             if (i == source.Count - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
+                return (long) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
+            return (long) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static long Max([NotNull] this IList<long> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            long result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            long result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -3011,7 +3379,29 @@ namespace ZLinq
         [Pure]
         private static long Max([NotNull] this IList<long> source, int startIndex, int endIndex)
         {
-            long max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            long max0 = source[startIndex + 0];
+            long max1 = source[startIndex + 1];
+            long max2 = source[startIndex + 2];
+            long max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -3031,19 +3421,20 @@ namespace ZLinq
                 
             }
             if (i == source.Count)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (long) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Count - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
+                return (long) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
             if (i == source.Count - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
+                return (long) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
+            return (long) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static long Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, long> mapFunc)
@@ -3052,21 +3443,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             long result = mapFunc(source.First());
             object syncRoot = new object();
@@ -3085,7 +3462,29 @@ namespace ZLinq
         [Pure]
         private static long Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, long> mapFunc, int startIndex, int endIndex)
         {
-            long max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            long max0 = mapFunc(source[startIndex + 0]);
+            long max1 = mapFunc(source[startIndex + 1]);
+            long max2 = mapFunc(source[startIndex + 2]);
+            long max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -3105,47 +3504,35 @@ namespace ZLinq
                 
             }
             if (i == source.Count)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (long) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Count - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
+                return (long) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
             if (i == source.Count - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
+                return (long) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
+            return (long) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
                 
     #endregion
         
         
         #region ulong             
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static ulong Max([NotNull] this ulong[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Length);
-                }            
-            }
-            ulong result = source.FirstOrDefault();
+                return Max(source, 0, source.Length);         
+            }                
+            ulong result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                 range => 
@@ -3162,7 +3549,29 @@ namespace ZLinq
         [Pure]
         private static ulong Max([NotNull] this ulong[] source, int startIndex, int endIndex)
         {
-            ulong max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            ulong max0 = source[startIndex + 0];
+            ulong max1 = source[startIndex + 1];
+            ulong max2 = source[startIndex + 2];
+            ulong max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -3182,19 +3591,20 @@ namespace ZLinq
                 
             }
             if (i == source.Length)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (ulong) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Length - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
+                return (ulong) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
             if (i == source.Length - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
+                return (ulong) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
+            return (ulong) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static ulong Max<T>([NotNull] this T[] source, [NotNull] Func<T, ulong> mapFunc)
@@ -3203,21 +3613,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Length);
-                }            
+                return Max(source, mapFunc, 0, source.Length);         
             }                
             ulong result = mapFunc(source.First());
             object syncRoot = new object();
@@ -3236,7 +3632,29 @@ namespace ZLinq
         [Pure]
         private static ulong Max<T>([NotNull] this T[] source, [NotNull] Func<T, ulong> mapFunc, int startIndex, int endIndex)
         {
-            ulong max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            ulong max0 = mapFunc(source[startIndex + 0]);
+            ulong max1 = mapFunc(source[startIndex + 1]);
+            ulong max2 = mapFunc(source[startIndex + 2]);
+            ulong max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -3256,42 +3674,30 @@ namespace ZLinq
                 
             }
             if (i == source.Length)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (ulong) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Length - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
+                return (ulong) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
             if (i == source.Length - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
+                return (ulong) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
+            return (ulong) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static ulong Max([NotNull] this List<ulong> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            ulong result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            ulong result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -3308,7 +3714,29 @@ namespace ZLinq
         [Pure]
         private static ulong Max([NotNull] this List<ulong> source, int startIndex, int endIndex)
         {
-            ulong max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            ulong max0 = source[startIndex + 0];
+            ulong max1 = source[startIndex + 1];
+            ulong max2 = source[startIndex + 2];
+            ulong max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -3328,19 +3756,20 @@ namespace ZLinq
                 
             }
             if (i == source.Count)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (ulong) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Count - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
+                return (ulong) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
             if (i == source.Count - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
+                return (ulong) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
+            return (ulong) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static ulong Max<T>([NotNull] this List<T> source, [NotNull] Func<T, ulong> mapFunc)
@@ -3349,21 +3778,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             ulong result = mapFunc(source.First());
             object syncRoot = new object();
@@ -3382,7 +3797,29 @@ namespace ZLinq
         [Pure]
         private static ulong Max<T>([NotNull] this List<T> source, [NotNull] Func<T, ulong> mapFunc, int startIndex, int endIndex)
         {
-            ulong max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            ulong max0 = mapFunc(source[startIndex + 0]);
+            ulong max1 = mapFunc(source[startIndex + 1]);
+            ulong max2 = mapFunc(source[startIndex + 2]);
+            ulong max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -3402,42 +3839,30 @@ namespace ZLinq
                 
             }
             if (i == source.Count)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (ulong) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Count - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
+                return (ulong) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
             if (i == source.Count - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
+                return (ulong) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
+            return (ulong) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static ulong Max([NotNull] this IList<ulong> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            ulong result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            ulong result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -3454,7 +3879,29 @@ namespace ZLinq
         [Pure]
         private static ulong Max([NotNull] this IList<ulong> source, int startIndex, int endIndex)
         {
-            ulong max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            ulong max0 = source[startIndex + 0];
+            ulong max1 = source[startIndex + 1];
+            ulong max2 = source[startIndex + 2];
+            ulong max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -3474,19 +3921,20 @@ namespace ZLinq
                 
             }
             if (i == source.Count)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (ulong) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Count - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
+                return (ulong) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
             if (i == source.Count - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
+                return (ulong) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
+            return (ulong) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static ulong Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, ulong> mapFunc)
@@ -3495,21 +3943,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             ulong result = mapFunc(source.First());
             object syncRoot = new object();
@@ -3528,7 +3962,29 @@ namespace ZLinq
         [Pure]
         private static ulong Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, ulong> mapFunc, int startIndex, int endIndex)
         {
-            ulong max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            ulong max0 = mapFunc(source[startIndex + 0]);
+            ulong max1 = mapFunc(source[startIndex + 1]);
+            ulong max2 = mapFunc(source[startIndex + 2]);
+            ulong max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -3548,47 +4004,35 @@ namespace ZLinq
                 
             }
             if (i == source.Count)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (ulong) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Count - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
+                return (ulong) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
             if (i == source.Count - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
+                return (ulong) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
+            return (ulong) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
                 
     #endregion
         
         
         #region float             
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static float Max([NotNull] this float[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Length);
-                }            
-            }
-            float result = source.FirstOrDefault();
+                return Max(source, 0, source.Length);         
+            }                
+            float result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                 range => 
@@ -3605,7 +4049,29 @@ namespace ZLinq
         [Pure]
         private static float Max([NotNull] this float[] source, int startIndex, int endIndex)
         {
-            float max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            float max0 = source[startIndex + 0];
+            float max1 = source[startIndex + 1];
+            float max2 = source[startIndex + 2];
+            float max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -3625,19 +4091,20 @@ namespace ZLinq
                 
             }
             if (i == source.Length)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (float) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Length - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
+                return (float) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
             if (i == source.Length - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
+                return (float) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
+            return (float) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static float Max<T>([NotNull] this T[] source, [NotNull] Func<T, float> mapFunc)
@@ -3646,21 +4113,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Length);
-                }            
+                return Max(source, mapFunc, 0, source.Length);         
             }                
             float result = mapFunc(source.First());
             object syncRoot = new object();
@@ -3679,7 +4132,29 @@ namespace ZLinq
         [Pure]
         private static float Max<T>([NotNull] this T[] source, [NotNull] Func<T, float> mapFunc, int startIndex, int endIndex)
         {
-            float max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            float max0 = mapFunc(source[startIndex + 0]);
+            float max1 = mapFunc(source[startIndex + 1]);
+            float max2 = mapFunc(source[startIndex + 2]);
+            float max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -3699,42 +4174,30 @@ namespace ZLinq
                 
             }
             if (i == source.Length)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (float) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Length - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
+                return (float) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
             if (i == source.Length - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
+                return (float) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
+            return (float) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static float Max([NotNull] this List<float> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            float result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            float result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -3751,7 +4214,29 @@ namespace ZLinq
         [Pure]
         private static float Max([NotNull] this List<float> source, int startIndex, int endIndex)
         {
-            float max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            float max0 = source[startIndex + 0];
+            float max1 = source[startIndex + 1];
+            float max2 = source[startIndex + 2];
+            float max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -3771,19 +4256,20 @@ namespace ZLinq
                 
             }
             if (i == source.Count)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (float) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Count - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
+                return (float) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
             if (i == source.Count - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
+                return (float) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
+            return (float) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static float Max<T>([NotNull] this List<T> source, [NotNull] Func<T, float> mapFunc)
@@ -3792,21 +4278,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             float result = mapFunc(source.First());
             object syncRoot = new object();
@@ -3825,7 +4297,29 @@ namespace ZLinq
         [Pure]
         private static float Max<T>([NotNull] this List<T> source, [NotNull] Func<T, float> mapFunc, int startIndex, int endIndex)
         {
-            float max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            float max0 = mapFunc(source[startIndex + 0]);
+            float max1 = mapFunc(source[startIndex + 1]);
+            float max2 = mapFunc(source[startIndex + 2]);
+            float max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -3845,42 +4339,30 @@ namespace ZLinq
                 
             }
             if (i == source.Count)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (float) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Count - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
+                return (float) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
             if (i == source.Count - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
+                return (float) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
+            return (float) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static float Max([NotNull] this IList<float> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            float result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            float result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -3897,7 +4379,29 @@ namespace ZLinq
         [Pure]
         private static float Max([NotNull] this IList<float> source, int startIndex, int endIndex)
         {
-            float max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            float max0 = source[startIndex + 0];
+            float max1 = source[startIndex + 1];
+            float max2 = source[startIndex + 2];
+            float max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -3917,19 +4421,20 @@ namespace ZLinq
                 
             }
             if (i == source.Count)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (float) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Count - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
+                return (float) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
             if (i == source.Count - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
+                return (float) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
+            return (float) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static float Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, float> mapFunc)
@@ -3938,21 +4443,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             float result = mapFunc(source.First());
             object syncRoot = new object();
@@ -3971,7 +4462,29 @@ namespace ZLinq
         [Pure]
         private static float Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, float> mapFunc, int startIndex, int endIndex)
         {
-            float max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            float max0 = mapFunc(source[startIndex + 0]);
+            float max1 = mapFunc(source[startIndex + 1]);
+            float max2 = mapFunc(source[startIndex + 2]);
+            float max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -3991,47 +4504,35 @@ namespace ZLinq
                 
             }
             if (i == source.Count)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (float) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Count - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
+                return (float) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
             if (i == source.Count - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
+                return (float) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
+            return (float) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
                 
     #endregion
         
         
         #region double             
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static double Max([NotNull] this double[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Length);
-                }            
-            }
-            double result = source.FirstOrDefault();
+                return Max(source, 0, source.Length);         
+            }                
+            double result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                 range => 
@@ -4048,7 +4549,29 @@ namespace ZLinq
         [Pure]
         private static double Max([NotNull] this double[] source, int startIndex, int endIndex)
         {
-            double max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            double max0 = source[startIndex + 0];
+            double max1 = source[startIndex + 1];
+            double max2 = source[startIndex + 2];
+            double max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -4068,19 +4591,20 @@ namespace ZLinq
                 
             }
             if (i == source.Length)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (double) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Length - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
+                return (double) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
             if (i == source.Length - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
+                return (double) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
+            return (double) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static double Max<T>([NotNull] this T[] source, [NotNull] Func<T, double> mapFunc)
@@ -4089,21 +4613,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Length);
-                }            
+                return Max(source, mapFunc, 0, source.Length);         
             }                
             double result = mapFunc(source.First());
             object syncRoot = new object();
@@ -4122,7 +4632,29 @@ namespace ZLinq
         [Pure]
         private static double Max<T>([NotNull] this T[] source, [NotNull] Func<T, double> mapFunc, int startIndex, int endIndex)
         {
-            double max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            double max0 = mapFunc(source[startIndex + 0]);
+            double max1 = mapFunc(source[startIndex + 1]);
+            double max2 = mapFunc(source[startIndex + 2]);
+            double max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -4142,42 +4674,30 @@ namespace ZLinq
                 
             }
             if (i == source.Length)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (double) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Length - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
+                return (double) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
             if (i == source.Length - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
+                return (double) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
+            return (double) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static double Max([NotNull] this List<double> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            double result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            double result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -4194,7 +4714,29 @@ namespace ZLinq
         [Pure]
         private static double Max([NotNull] this List<double> source, int startIndex, int endIndex)
         {
-            double max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            double max0 = source[startIndex + 0];
+            double max1 = source[startIndex + 1];
+            double max2 = source[startIndex + 2];
+            double max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -4214,19 +4756,20 @@ namespace ZLinq
                 
             }
             if (i == source.Count)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (double) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Count - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
+                return (double) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
             if (i == source.Count - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
+                return (double) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
+            return (double) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static double Max<T>([NotNull] this List<T> source, [NotNull] Func<T, double> mapFunc)
@@ -4235,21 +4778,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             double result = mapFunc(source.First());
             object syncRoot = new object();
@@ -4268,7 +4797,29 @@ namespace ZLinq
         [Pure]
         private static double Max<T>([NotNull] this List<T> source, [NotNull] Func<T, double> mapFunc, int startIndex, int endIndex)
         {
-            double max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            double max0 = mapFunc(source[startIndex + 0]);
+            double max1 = mapFunc(source[startIndex + 1]);
+            double max2 = mapFunc(source[startIndex + 2]);
+            double max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -4288,42 +4839,30 @@ namespace ZLinq
                 
             }
             if (i == source.Count)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (double) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Count - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
+                return (double) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
             if (i == source.Count - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
+                return (double) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
+            return (double) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static double Max([NotNull] this IList<double> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            double result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            double result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -4340,7 +4879,29 @@ namespace ZLinq
         [Pure]
         private static double Max([NotNull] this IList<double> source, int startIndex, int endIndex)
         {
-            double max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            double max0 = source[startIndex + 0];
+            double max1 = source[startIndex + 1];
+            double max2 = source[startIndex + 2];
+            double max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -4360,19 +4921,20 @@ namespace ZLinq
                 
             }
             if (i == source.Count)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (double) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Count - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
+                return (double) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
             if (i == source.Count - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
+                return (double) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
+            return (double) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static double Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, double> mapFunc)
@@ -4381,21 +4943,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             double result = mapFunc(source.First());
             object syncRoot = new object();
@@ -4414,7 +4962,29 @@ namespace ZLinq
         [Pure]
         private static double Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, double> mapFunc, int startIndex, int endIndex)
         {
-            double max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            double max0 = mapFunc(source[startIndex + 0]);
+            double max1 = mapFunc(source[startIndex + 1]);
+            double max2 = mapFunc(source[startIndex + 2]);
+            double max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -4434,47 +5004,35 @@ namespace ZLinq
                 
             }
             if (i == source.Count)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (double) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Count - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
+                return (double) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
             if (i == source.Count - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
+                return (double) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
+            return (double) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
                 
     #endregion
         
         
         #region decimal             
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static decimal Max([NotNull] this decimal[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Length);
-                }            
-            }
-            decimal result = source.FirstOrDefault();
+                return Max(source, 0, source.Length);         
+            }                
+            decimal result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                 range => 
@@ -4491,7 +5049,29 @@ namespace ZLinq
         [Pure]
         private static decimal Max([NotNull] this decimal[] source, int startIndex, int endIndex)
         {
-            decimal max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            decimal max0 = source[startIndex + 0];
+            decimal max1 = source[startIndex + 1];
+            decimal max2 = source[startIndex + 2];
+            decimal max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -4511,19 +5091,20 @@ namespace ZLinq
                 
             }
             if (i == source.Length)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (decimal) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Length - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
+                return (decimal) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
             if (i == source.Length - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
+                return (decimal) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
+            return (decimal) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static decimal Max<T>([NotNull] this T[] source, [NotNull] Func<T, decimal> mapFunc)
@@ -4532,21 +5113,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Length);
-                }            
+                return Max(source, mapFunc, 0, source.Length);         
             }                
             decimal result = mapFunc(source.First());
             object syncRoot = new object();
@@ -4565,7 +5132,29 @@ namespace ZLinq
         [Pure]
         private static decimal Max<T>([NotNull] this T[] source, [NotNull] Func<T, decimal> mapFunc, int startIndex, int endIndex)
         {
-            decimal max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            decimal max0 = mapFunc(source[startIndex + 0]);
+            decimal max1 = mapFunc(source[startIndex + 1]);
+            decimal max2 = mapFunc(source[startIndex + 2]);
+            decimal max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -4585,42 +5174,30 @@ namespace ZLinq
                 
             }
             if (i == source.Length)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (decimal) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Length - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
+                return (decimal) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
             if (i == source.Length - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
+                return (decimal) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
+            return (decimal) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static decimal Max([NotNull] this List<decimal> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            decimal result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            decimal result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -4637,7 +5214,29 @@ namespace ZLinq
         [Pure]
         private static decimal Max([NotNull] this List<decimal> source, int startIndex, int endIndex)
         {
-            decimal max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            decimal max0 = source[startIndex + 0];
+            decimal max1 = source[startIndex + 1];
+            decimal max2 = source[startIndex + 2];
+            decimal max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -4657,19 +5256,20 @@ namespace ZLinq
                 
             }
             if (i == source.Count)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (decimal) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Count - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
+                return (decimal) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
             if (i == source.Count - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
+                return (decimal) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
+            return (decimal) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static decimal Max<T>([NotNull] this List<T> source, [NotNull] Func<T, decimal> mapFunc)
@@ -4678,21 +5278,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             decimal result = mapFunc(source.First());
             object syncRoot = new object();
@@ -4711,7 +5297,29 @@ namespace ZLinq
         [Pure]
         private static decimal Max<T>([NotNull] this List<T> source, [NotNull] Func<T, decimal> mapFunc, int startIndex, int endIndex)
         {
-            decimal max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            decimal max0 = mapFunc(source[startIndex + 0]);
+            decimal max1 = mapFunc(source[startIndex + 1]);
+            decimal max2 = mapFunc(source[startIndex + 2]);
+            decimal max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -4731,42 +5339,30 @@ namespace ZLinq
                 
             }
             if (i == source.Count)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (decimal) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Count - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
+                return (decimal) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
             if (i == source.Count - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
+                return (decimal) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
+            return (decimal) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static decimal Max([NotNull] this IList<decimal> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Math.Max(source[0], source[1]);
-                    case 3:
-                        return Math.Max(source[0], Math.Max(source[1], source[2]));
-                    case 4:
-                        return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            decimal result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            decimal result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -4783,7 +5379,29 @@ namespace ZLinq
         [Pure]
         private static decimal Max([NotNull] this IList<decimal> source, int startIndex, int endIndex)
         {
-            decimal max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Math.Max(source[0], source[1]);
+                case 3:
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                case 4:
+                    return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));    
+                }
+            }
+            decimal max0 = source[startIndex + 0];
+            decimal max1 = source[startIndex + 1];
+            decimal max2 = source[startIndex + 2];
+            decimal max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -4803,19 +5421,20 @@ namespace ZLinq
                 
             }
             if (i == source.Count)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (decimal) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Count - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
+                return (decimal) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
             if (i == source.Count - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
+                return (decimal) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
+            return (decimal) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static decimal Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, decimal> mapFunc)
@@ -4824,21 +5443,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             decimal result = mapFunc(source.First());
             object syncRoot = new object();
@@ -4857,7 +5462,29 @@ namespace ZLinq
         [Pure]
         private static decimal Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, decimal> mapFunc, int startIndex, int endIndex)
         {
-            decimal max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            decimal max0 = mapFunc(source[startIndex + 0]);
+            decimal max1 = mapFunc(source[startIndex + 1]);
+            decimal max2 = mapFunc(source[startIndex + 2]);
+            decimal max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -4877,12 +5504,12 @@ namespace ZLinq
                 
             }
             if (i == source.Count)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+                return (decimal) Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
             if (i == source.Count - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
+                return (decimal) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
             if (i == source.Count - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
+                return (decimal) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
+            return (decimal) Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
                 
     #endregion
@@ -4900,35 +5527,23 @@ namespace ZLinq
         }
         
         #region sbyte?             
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static sbyte? Max([NotNull] this sbyte?[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Length);
-                }            
-            }
-            sbyte? result = source.FirstOrDefault();
+                return Max(source, 0, source.Length);         
+            }                
+            sbyte? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                 range => 
@@ -4945,7 +5560,29 @@ namespace ZLinq
         [Pure]
         private static sbyte? Max([NotNull] this sbyte?[] source, int startIndex, int endIndex)
         {
-            sbyte? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            sbyte? max0 = source[startIndex + 0];
+            sbyte? max1 = source[startIndex + 1];
+            sbyte? max2 = source[startIndex + 2];
+            sbyte? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -4972,12 +5609,13 @@ namespace ZLinq
                 return (sbyte?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (sbyte?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static sbyte? Max<T>([NotNull] this T[] source, [NotNull] Func<T, sbyte?> mapFunc)
@@ -4986,21 +5624,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Length);
-                }            
+                return Max(source, mapFunc, 0, source.Length);         
             }                
             sbyte? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -5019,7 +5643,29 @@ namespace ZLinq
         [Pure]
         private static sbyte? Max<T>([NotNull] this T[] source, [NotNull] Func<T, sbyte?> mapFunc, int startIndex, int endIndex)
         {
-            sbyte? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            sbyte? max0 = mapFunc(source[startIndex + 0]);
+            sbyte? max1 = mapFunc(source[startIndex + 1]);
+            sbyte? max2 = mapFunc(source[startIndex + 2]);
+            sbyte? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -5046,35 +5692,23 @@ namespace ZLinq
                 return (sbyte?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), mapFunc(source[i + 1])));
             return (sbyte?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static sbyte? Max([NotNull] this List<sbyte?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            sbyte? result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            sbyte? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -5091,7 +5725,29 @@ namespace ZLinq
         [Pure]
         private static sbyte? Max([NotNull] this List<sbyte?> source, int startIndex, int endIndex)
         {
-            sbyte? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            sbyte? max0 = source[startIndex + 0];
+            sbyte? max1 = source[startIndex + 1];
+            sbyte? max2 = source[startIndex + 2];
+            sbyte? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -5118,12 +5774,13 @@ namespace ZLinq
                 return (sbyte?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (sbyte?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static sbyte? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, sbyte?> mapFunc)
@@ -5132,21 +5789,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             sbyte? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -5165,7 +5808,29 @@ namespace ZLinq
         [Pure]
         private static sbyte? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, sbyte?> mapFunc, int startIndex, int endIndex)
         {
-            sbyte? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            sbyte? max0 = mapFunc(source[startIndex + 0]);
+            sbyte? max1 = mapFunc(source[startIndex + 1]);
+            sbyte? max2 = mapFunc(source[startIndex + 2]);
+            sbyte? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -5192,35 +5857,23 @@ namespace ZLinq
                 return (sbyte?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), mapFunc(source[i + 1])));
             return (sbyte?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static sbyte? Max([NotNull] this IList<sbyte?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            sbyte? result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            sbyte? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -5237,7 +5890,29 @@ namespace ZLinq
         [Pure]
         private static sbyte? Max([NotNull] this IList<sbyte?> source, int startIndex, int endIndex)
         {
-            sbyte? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            sbyte? max0 = source[startIndex + 0];
+            sbyte? max1 = source[startIndex + 1];
+            sbyte? max2 = source[startIndex + 2];
+            sbyte? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -5264,12 +5939,13 @@ namespace ZLinq
                 return (sbyte?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (sbyte?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static sbyte? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, sbyte?> mapFunc)
@@ -5278,21 +5954,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             sbyte? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -5311,7 +5973,29 @@ namespace ZLinq
         [Pure]
         private static sbyte? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, sbyte?> mapFunc, int startIndex, int endIndex)
         {
-            sbyte? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            sbyte? max0 = mapFunc(source[startIndex + 0]);
+            sbyte? max1 = mapFunc(source[startIndex + 1]);
+            sbyte? max2 = mapFunc(source[startIndex + 2]);
+            sbyte? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -5354,35 +6038,23 @@ namespace ZLinq
         }
         
         #region byte?             
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static byte? Max([NotNull] this byte?[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Length);
-                }            
-            }
-            byte? result = source.FirstOrDefault();
+                return Max(source, 0, source.Length);         
+            }                
+            byte? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                 range => 
@@ -5399,7 +6071,29 @@ namespace ZLinq
         [Pure]
         private static byte? Max([NotNull] this byte?[] source, int startIndex, int endIndex)
         {
-            byte? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            byte? max0 = source[startIndex + 0];
+            byte? max1 = source[startIndex + 1];
+            byte? max2 = source[startIndex + 2];
+            byte? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -5426,12 +6120,13 @@ namespace ZLinq
                 return (byte?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (byte?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static byte? Max<T>([NotNull] this T[] source, [NotNull] Func<T, byte?> mapFunc)
@@ -5440,21 +6135,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Length);
-                }            
+                return Max(source, mapFunc, 0, source.Length);         
             }                
             byte? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -5473,7 +6154,29 @@ namespace ZLinq
         [Pure]
         private static byte? Max<T>([NotNull] this T[] source, [NotNull] Func<T, byte?> mapFunc, int startIndex, int endIndex)
         {
-            byte? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            byte? max0 = mapFunc(source[startIndex + 0]);
+            byte? max1 = mapFunc(source[startIndex + 1]);
+            byte? max2 = mapFunc(source[startIndex + 2]);
+            byte? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -5500,35 +6203,23 @@ namespace ZLinq
                 return (byte?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), mapFunc(source[i + 1])));
             return (byte?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static byte? Max([NotNull] this List<byte?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            byte? result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            byte? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -5545,7 +6236,29 @@ namespace ZLinq
         [Pure]
         private static byte? Max([NotNull] this List<byte?> source, int startIndex, int endIndex)
         {
-            byte? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            byte? max0 = source[startIndex + 0];
+            byte? max1 = source[startIndex + 1];
+            byte? max2 = source[startIndex + 2];
+            byte? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -5572,12 +6285,13 @@ namespace ZLinq
                 return (byte?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (byte?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static byte? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, byte?> mapFunc)
@@ -5586,21 +6300,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             byte? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -5619,7 +6319,29 @@ namespace ZLinq
         [Pure]
         private static byte? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, byte?> mapFunc, int startIndex, int endIndex)
         {
-            byte? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            byte? max0 = mapFunc(source[startIndex + 0]);
+            byte? max1 = mapFunc(source[startIndex + 1]);
+            byte? max2 = mapFunc(source[startIndex + 2]);
+            byte? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -5646,35 +6368,23 @@ namespace ZLinq
                 return (byte?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), mapFunc(source[i + 1])));
             return (byte?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static byte? Max([NotNull] this IList<byte?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            byte? result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            byte? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -5691,7 +6401,29 @@ namespace ZLinq
         [Pure]
         private static byte? Max([NotNull] this IList<byte?> source, int startIndex, int endIndex)
         {
-            byte? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            byte? max0 = source[startIndex + 0];
+            byte? max1 = source[startIndex + 1];
+            byte? max2 = source[startIndex + 2];
+            byte? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -5718,12 +6450,13 @@ namespace ZLinq
                 return (byte?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (byte?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static byte? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, byte?> mapFunc)
@@ -5732,21 +6465,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             byte? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -5765,7 +6484,29 @@ namespace ZLinq
         [Pure]
         private static byte? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, byte?> mapFunc, int startIndex, int endIndex)
         {
-            byte? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            byte? max0 = mapFunc(source[startIndex + 0]);
+            byte? max1 = mapFunc(source[startIndex + 1]);
+            byte? max2 = mapFunc(source[startIndex + 2]);
+            byte? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -5808,35 +6549,23 @@ namespace ZLinq
         }
         
         #region short?             
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static short? Max([NotNull] this short?[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Length);
-                }            
-            }
-            short? result = source.FirstOrDefault();
+                return Max(source, 0, source.Length);         
+            }                
+            short? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                 range => 
@@ -5853,7 +6582,29 @@ namespace ZLinq
         [Pure]
         private static short? Max([NotNull] this short?[] source, int startIndex, int endIndex)
         {
-            short? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            short? max0 = source[startIndex + 0];
+            short? max1 = source[startIndex + 1];
+            short? max2 = source[startIndex + 2];
+            short? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -5880,12 +6631,13 @@ namespace ZLinq
                 return (short?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (short?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static short? Max<T>([NotNull] this T[] source, [NotNull] Func<T, short?> mapFunc)
@@ -5894,21 +6646,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Length);
-                }            
+                return Max(source, mapFunc, 0, source.Length);         
             }                
             short? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -5927,7 +6665,29 @@ namespace ZLinq
         [Pure]
         private static short? Max<T>([NotNull] this T[] source, [NotNull] Func<T, short?> mapFunc, int startIndex, int endIndex)
         {
-            short? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            short? max0 = mapFunc(source[startIndex + 0]);
+            short? max1 = mapFunc(source[startIndex + 1]);
+            short? max2 = mapFunc(source[startIndex + 2]);
+            short? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -5954,35 +6714,23 @@ namespace ZLinq
                 return (short?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), mapFunc(source[i + 1])));
             return (short?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static short? Max([NotNull] this List<short?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            short? result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            short? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -5999,7 +6747,29 @@ namespace ZLinq
         [Pure]
         private static short? Max([NotNull] this List<short?> source, int startIndex, int endIndex)
         {
-            short? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            short? max0 = source[startIndex + 0];
+            short? max1 = source[startIndex + 1];
+            short? max2 = source[startIndex + 2];
+            short? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -6026,12 +6796,13 @@ namespace ZLinq
                 return (short?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (short?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static short? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, short?> mapFunc)
@@ -6040,21 +6811,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             short? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -6073,7 +6830,29 @@ namespace ZLinq
         [Pure]
         private static short? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, short?> mapFunc, int startIndex, int endIndex)
         {
-            short? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            short? max0 = mapFunc(source[startIndex + 0]);
+            short? max1 = mapFunc(source[startIndex + 1]);
+            short? max2 = mapFunc(source[startIndex + 2]);
+            short? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -6100,35 +6879,23 @@ namespace ZLinq
                 return (short?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), mapFunc(source[i + 1])));
             return (short?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static short? Max([NotNull] this IList<short?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            short? result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            short? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -6145,7 +6912,29 @@ namespace ZLinq
         [Pure]
         private static short? Max([NotNull] this IList<short?> source, int startIndex, int endIndex)
         {
-            short? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            short? max0 = source[startIndex + 0];
+            short? max1 = source[startIndex + 1];
+            short? max2 = source[startIndex + 2];
+            short? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -6172,12 +6961,13 @@ namespace ZLinq
                 return (short?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (short?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static short? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, short?> mapFunc)
@@ -6186,21 +6976,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             short? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -6219,7 +6995,29 @@ namespace ZLinq
         [Pure]
         private static short? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, short?> mapFunc, int startIndex, int endIndex)
         {
-            short? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            short? max0 = mapFunc(source[startIndex + 0]);
+            short? max1 = mapFunc(source[startIndex + 1]);
+            short? max2 = mapFunc(source[startIndex + 2]);
+            short? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -6262,35 +7060,23 @@ namespace ZLinq
         }
         
         #region ushort?             
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static ushort? Max([NotNull] this ushort?[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Length);
-                }            
-            }
-            ushort? result = source.FirstOrDefault();
+                return Max(source, 0, source.Length);         
+            }                
+            ushort? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                 range => 
@@ -6307,7 +7093,29 @@ namespace ZLinq
         [Pure]
         private static ushort? Max([NotNull] this ushort?[] source, int startIndex, int endIndex)
         {
-            ushort? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            ushort? max0 = source[startIndex + 0];
+            ushort? max1 = source[startIndex + 1];
+            ushort? max2 = source[startIndex + 2];
+            ushort? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -6334,12 +7142,13 @@ namespace ZLinq
                 return (ushort?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (ushort?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static ushort? Max<T>([NotNull] this T[] source, [NotNull] Func<T, ushort?> mapFunc)
@@ -6348,21 +7157,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Length);
-                }            
+                return Max(source, mapFunc, 0, source.Length);         
             }                
             ushort? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -6381,7 +7176,29 @@ namespace ZLinq
         [Pure]
         private static ushort? Max<T>([NotNull] this T[] source, [NotNull] Func<T, ushort?> mapFunc, int startIndex, int endIndex)
         {
-            ushort? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            ushort? max0 = mapFunc(source[startIndex + 0]);
+            ushort? max1 = mapFunc(source[startIndex + 1]);
+            ushort? max2 = mapFunc(source[startIndex + 2]);
+            ushort? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -6408,35 +7225,23 @@ namespace ZLinq
                 return (ushort?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), mapFunc(source[i + 1])));
             return (ushort?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static ushort? Max([NotNull] this List<ushort?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            ushort? result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            ushort? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -6453,7 +7258,29 @@ namespace ZLinq
         [Pure]
         private static ushort? Max([NotNull] this List<ushort?> source, int startIndex, int endIndex)
         {
-            ushort? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            ushort? max0 = source[startIndex + 0];
+            ushort? max1 = source[startIndex + 1];
+            ushort? max2 = source[startIndex + 2];
+            ushort? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -6480,12 +7307,13 @@ namespace ZLinq
                 return (ushort?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (ushort?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static ushort? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, ushort?> mapFunc)
@@ -6494,21 +7322,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             ushort? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -6527,7 +7341,29 @@ namespace ZLinq
         [Pure]
         private static ushort? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, ushort?> mapFunc, int startIndex, int endIndex)
         {
-            ushort? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            ushort? max0 = mapFunc(source[startIndex + 0]);
+            ushort? max1 = mapFunc(source[startIndex + 1]);
+            ushort? max2 = mapFunc(source[startIndex + 2]);
+            ushort? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -6554,35 +7390,23 @@ namespace ZLinq
                 return (ushort?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), mapFunc(source[i + 1])));
             return (ushort?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static ushort? Max([NotNull] this IList<ushort?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            ushort? result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            ushort? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -6599,7 +7423,29 @@ namespace ZLinq
         [Pure]
         private static ushort? Max([NotNull] this IList<ushort?> source, int startIndex, int endIndex)
         {
-            ushort? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            ushort? max0 = source[startIndex + 0];
+            ushort? max1 = source[startIndex + 1];
+            ushort? max2 = source[startIndex + 2];
+            ushort? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -6626,12 +7472,13 @@ namespace ZLinq
                 return (ushort?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (ushort?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static ushort? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, ushort?> mapFunc)
@@ -6640,21 +7487,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             ushort? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -6673,7 +7506,29 @@ namespace ZLinq
         [Pure]
         private static ushort? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, ushort?> mapFunc, int startIndex, int endIndex)
         {
-            ushort? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            ushort? max0 = mapFunc(source[startIndex + 0]);
+            ushort? max1 = mapFunc(source[startIndex + 1]);
+            ushort? max2 = mapFunc(source[startIndex + 2]);
+            ushort? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -6716,35 +7571,23 @@ namespace ZLinq
         }
         
         #region int?             
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static int? Max([NotNull] this int?[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Length);
-                }            
-            }
-            int? result = source.FirstOrDefault();
+                return Max(source, 0, source.Length);         
+            }                
+            int? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                 range => 
@@ -6761,7 +7604,29 @@ namespace ZLinq
         [Pure]
         private static int? Max([NotNull] this int?[] source, int startIndex, int endIndex)
         {
-            int? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            int? max0 = source[startIndex + 0];
+            int? max1 = source[startIndex + 1];
+            int? max2 = source[startIndex + 2];
+            int? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -6788,12 +7653,13 @@ namespace ZLinq
                 return (int?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (int?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static int? Max<T>([NotNull] this T[] source, [NotNull] Func<T, int?> mapFunc)
@@ -6802,21 +7668,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Length);
-                }            
+                return Max(source, mapFunc, 0, source.Length);         
             }                
             int? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -6835,7 +7687,29 @@ namespace ZLinq
         [Pure]
         private static int? Max<T>([NotNull] this T[] source, [NotNull] Func<T, int?> mapFunc, int startIndex, int endIndex)
         {
-            int? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            int? max0 = mapFunc(source[startIndex + 0]);
+            int? max1 = mapFunc(source[startIndex + 1]);
+            int? max2 = mapFunc(source[startIndex + 2]);
+            int? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -6862,35 +7736,23 @@ namespace ZLinq
                 return (int?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), mapFunc(source[i + 1])));
             return (int?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static int? Max([NotNull] this List<int?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            int? result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            int? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -6907,7 +7769,29 @@ namespace ZLinq
         [Pure]
         private static int? Max([NotNull] this List<int?> source, int startIndex, int endIndex)
         {
-            int? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            int? max0 = source[startIndex + 0];
+            int? max1 = source[startIndex + 1];
+            int? max2 = source[startIndex + 2];
+            int? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -6934,12 +7818,13 @@ namespace ZLinq
                 return (int?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (int?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static int? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, int?> mapFunc)
@@ -6948,21 +7833,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             int? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -6981,7 +7852,29 @@ namespace ZLinq
         [Pure]
         private static int? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, int?> mapFunc, int startIndex, int endIndex)
         {
-            int? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            int? max0 = mapFunc(source[startIndex + 0]);
+            int? max1 = mapFunc(source[startIndex + 1]);
+            int? max2 = mapFunc(source[startIndex + 2]);
+            int? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -7008,35 +7901,23 @@ namespace ZLinq
                 return (int?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), mapFunc(source[i + 1])));
             return (int?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static int? Max([NotNull] this IList<int?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            int? result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            int? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -7053,7 +7934,29 @@ namespace ZLinq
         [Pure]
         private static int? Max([NotNull] this IList<int?> source, int startIndex, int endIndex)
         {
-            int? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            int? max0 = source[startIndex + 0];
+            int? max1 = source[startIndex + 1];
+            int? max2 = source[startIndex + 2];
+            int? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -7080,12 +7983,13 @@ namespace ZLinq
                 return (int?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (int?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static int? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, int?> mapFunc)
@@ -7094,21 +7998,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             int? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -7127,7 +8017,29 @@ namespace ZLinq
         [Pure]
         private static int? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, int?> mapFunc, int startIndex, int endIndex)
         {
-            int? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            int? max0 = mapFunc(source[startIndex + 0]);
+            int? max1 = mapFunc(source[startIndex + 1]);
+            int? max2 = mapFunc(source[startIndex + 2]);
+            int? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -7170,35 +8082,23 @@ namespace ZLinq
         }
         
         #region uint?             
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static uint? Max([NotNull] this uint?[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Length);
-                }            
-            }
-            uint? result = source.FirstOrDefault();
+                return Max(source, 0, source.Length);         
+            }                
+            uint? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                 range => 
@@ -7215,7 +8115,29 @@ namespace ZLinq
         [Pure]
         private static uint? Max([NotNull] this uint?[] source, int startIndex, int endIndex)
         {
-            uint? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            uint? max0 = source[startIndex + 0];
+            uint? max1 = source[startIndex + 1];
+            uint? max2 = source[startIndex + 2];
+            uint? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -7242,12 +8164,13 @@ namespace ZLinq
                 return (uint?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (uint?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static uint? Max<T>([NotNull] this T[] source, [NotNull] Func<T, uint?> mapFunc)
@@ -7256,21 +8179,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Length);
-                }            
+                return Max(source, mapFunc, 0, source.Length);         
             }                
             uint? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -7289,7 +8198,29 @@ namespace ZLinq
         [Pure]
         private static uint? Max<T>([NotNull] this T[] source, [NotNull] Func<T, uint?> mapFunc, int startIndex, int endIndex)
         {
-            uint? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            uint? max0 = mapFunc(source[startIndex + 0]);
+            uint? max1 = mapFunc(source[startIndex + 1]);
+            uint? max2 = mapFunc(source[startIndex + 2]);
+            uint? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -7316,35 +8247,23 @@ namespace ZLinq
                 return (uint?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), mapFunc(source[i + 1])));
             return (uint?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static uint? Max([NotNull] this List<uint?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            uint? result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            uint? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -7361,7 +8280,29 @@ namespace ZLinq
         [Pure]
         private static uint? Max([NotNull] this List<uint?> source, int startIndex, int endIndex)
         {
-            uint? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            uint? max0 = source[startIndex + 0];
+            uint? max1 = source[startIndex + 1];
+            uint? max2 = source[startIndex + 2];
+            uint? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -7388,12 +8329,13 @@ namespace ZLinq
                 return (uint?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (uint?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static uint? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, uint?> mapFunc)
@@ -7402,21 +8344,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             uint? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -7435,7 +8363,29 @@ namespace ZLinq
         [Pure]
         private static uint? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, uint?> mapFunc, int startIndex, int endIndex)
         {
-            uint? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            uint? max0 = mapFunc(source[startIndex + 0]);
+            uint? max1 = mapFunc(source[startIndex + 1]);
+            uint? max2 = mapFunc(source[startIndex + 2]);
+            uint? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -7462,35 +8412,23 @@ namespace ZLinq
                 return (uint?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), mapFunc(source[i + 1])));
             return (uint?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static uint? Max([NotNull] this IList<uint?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            uint? result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            uint? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -7507,7 +8445,29 @@ namespace ZLinq
         [Pure]
         private static uint? Max([NotNull] this IList<uint?> source, int startIndex, int endIndex)
         {
-            uint? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            uint? max0 = source[startIndex + 0];
+            uint? max1 = source[startIndex + 1];
+            uint? max2 = source[startIndex + 2];
+            uint? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -7534,12 +8494,13 @@ namespace ZLinq
                 return (uint?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (uint?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static uint? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, uint?> mapFunc)
@@ -7548,21 +8509,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             uint? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -7581,7 +8528,29 @@ namespace ZLinq
         [Pure]
         private static uint? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, uint?> mapFunc, int startIndex, int endIndex)
         {
-            uint? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            uint? max0 = mapFunc(source[startIndex + 0]);
+            uint? max1 = mapFunc(source[startIndex + 1]);
+            uint? max2 = mapFunc(source[startIndex + 2]);
+            uint? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -7624,35 +8593,23 @@ namespace ZLinq
         }
         
         #region long?             
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static long? Max([NotNull] this long?[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Length);
-                }            
-            }
-            long? result = source.FirstOrDefault();
+                return Max(source, 0, source.Length);         
+            }                
+            long? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                 range => 
@@ -7669,7 +8626,29 @@ namespace ZLinq
         [Pure]
         private static long? Max([NotNull] this long?[] source, int startIndex, int endIndex)
         {
-            long? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            long? max0 = source[startIndex + 0];
+            long? max1 = source[startIndex + 1];
+            long? max2 = source[startIndex + 2];
+            long? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -7696,12 +8675,13 @@ namespace ZLinq
                 return (long?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (long?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static long? Max<T>([NotNull] this T[] source, [NotNull] Func<T, long?> mapFunc)
@@ -7710,21 +8690,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Length);
-                }            
+                return Max(source, mapFunc, 0, source.Length);         
             }                
             long? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -7743,7 +8709,29 @@ namespace ZLinq
         [Pure]
         private static long? Max<T>([NotNull] this T[] source, [NotNull] Func<T, long?> mapFunc, int startIndex, int endIndex)
         {
-            long? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            long? max0 = mapFunc(source[startIndex + 0]);
+            long? max1 = mapFunc(source[startIndex + 1]);
+            long? max2 = mapFunc(source[startIndex + 2]);
+            long? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -7770,35 +8758,23 @@ namespace ZLinq
                 return (long?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), mapFunc(source[i + 1])));
             return (long?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static long? Max([NotNull] this List<long?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            long? result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            long? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -7815,7 +8791,29 @@ namespace ZLinq
         [Pure]
         private static long? Max([NotNull] this List<long?> source, int startIndex, int endIndex)
         {
-            long? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            long? max0 = source[startIndex + 0];
+            long? max1 = source[startIndex + 1];
+            long? max2 = source[startIndex + 2];
+            long? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -7842,12 +8840,13 @@ namespace ZLinq
                 return (long?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (long?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static long? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, long?> mapFunc)
@@ -7856,21 +8855,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             long? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -7889,7 +8874,29 @@ namespace ZLinq
         [Pure]
         private static long? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, long?> mapFunc, int startIndex, int endIndex)
         {
-            long? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            long? max0 = mapFunc(source[startIndex + 0]);
+            long? max1 = mapFunc(source[startIndex + 1]);
+            long? max2 = mapFunc(source[startIndex + 2]);
+            long? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -7916,35 +8923,23 @@ namespace ZLinq
                 return (long?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), mapFunc(source[i + 1])));
             return (long?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static long? Max([NotNull] this IList<long?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            long? result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            long? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -7961,7 +8956,29 @@ namespace ZLinq
         [Pure]
         private static long? Max([NotNull] this IList<long?> source, int startIndex, int endIndex)
         {
-            long? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            long? max0 = source[startIndex + 0];
+            long? max1 = source[startIndex + 1];
+            long? max2 = source[startIndex + 2];
+            long? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -7988,12 +9005,13 @@ namespace ZLinq
                 return (long?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (long?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static long? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, long?> mapFunc)
@@ -8002,21 +9020,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             long? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -8035,7 +9039,29 @@ namespace ZLinq
         [Pure]
         private static long? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, long?> mapFunc, int startIndex, int endIndex)
         {
-            long? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            long? max0 = mapFunc(source[startIndex + 0]);
+            long? max1 = mapFunc(source[startIndex + 1]);
+            long? max2 = mapFunc(source[startIndex + 2]);
+            long? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -8078,35 +9104,23 @@ namespace ZLinq
         }
         
         #region ulong?             
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static ulong? Max([NotNull] this ulong?[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Length);
-                }            
-            }
-            ulong? result = source.FirstOrDefault();
+                return Max(source, 0, source.Length);         
+            }                
+            ulong? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                 range => 
@@ -8123,7 +9137,29 @@ namespace ZLinq
         [Pure]
         private static ulong? Max([NotNull] this ulong?[] source, int startIndex, int endIndex)
         {
-            ulong? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            ulong? max0 = source[startIndex + 0];
+            ulong? max1 = source[startIndex + 1];
+            ulong? max2 = source[startIndex + 2];
+            ulong? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -8150,12 +9186,13 @@ namespace ZLinq
                 return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static ulong? Max<T>([NotNull] this T[] source, [NotNull] Func<T, ulong?> mapFunc)
@@ -8164,21 +9201,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Length);
-                }            
+                return Max(source, mapFunc, 0, source.Length);         
             }                
             ulong? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -8197,7 +9220,29 @@ namespace ZLinq
         [Pure]
         private static ulong? Max<T>([NotNull] this T[] source, [NotNull] Func<T, ulong?> mapFunc, int startIndex, int endIndex)
         {
-            ulong? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            ulong? max0 = mapFunc(source[startIndex + 0]);
+            ulong? max1 = mapFunc(source[startIndex + 1]);
+            ulong? max2 = mapFunc(source[startIndex + 2]);
+            ulong? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -8224,35 +9269,23 @@ namespace ZLinq
                 return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), mapFunc(source[i + 1])));
             return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static ulong? Max([NotNull] this List<ulong?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            ulong? result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            ulong? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -8269,7 +9302,29 @@ namespace ZLinq
         [Pure]
         private static ulong? Max([NotNull] this List<ulong?> source, int startIndex, int endIndex)
         {
-            ulong? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            ulong? max0 = source[startIndex + 0];
+            ulong? max1 = source[startIndex + 1];
+            ulong? max2 = source[startIndex + 2];
+            ulong? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -8296,12 +9351,13 @@ namespace ZLinq
                 return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static ulong? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, ulong?> mapFunc)
@@ -8310,21 +9366,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             ulong? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -8343,7 +9385,29 @@ namespace ZLinq
         [Pure]
         private static ulong? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, ulong?> mapFunc, int startIndex, int endIndex)
         {
-            ulong? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            ulong? max0 = mapFunc(source[startIndex + 0]);
+            ulong? max1 = mapFunc(source[startIndex + 1]);
+            ulong? max2 = mapFunc(source[startIndex + 2]);
+            ulong? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -8370,35 +9434,23 @@ namespace ZLinq
                 return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), mapFunc(source[i + 1])));
             return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static ulong? Max([NotNull] this IList<ulong?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            ulong? result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            ulong? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -8415,7 +9467,29 @@ namespace ZLinq
         [Pure]
         private static ulong? Max([NotNull] this IList<ulong?> source, int startIndex, int endIndex)
         {
-            ulong? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            ulong? max0 = source[startIndex + 0];
+            ulong? max1 = source[startIndex + 1];
+            ulong? max2 = source[startIndex + 2];
+            ulong? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -8442,12 +9516,13 @@ namespace ZLinq
                 return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static ulong? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, ulong?> mapFunc)
@@ -8456,21 +9531,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             ulong? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -8489,7 +9550,29 @@ namespace ZLinq
         [Pure]
         private static ulong? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, ulong?> mapFunc, int startIndex, int endIndex)
         {
-            ulong? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            ulong? max0 = mapFunc(source[startIndex + 0]);
+            ulong? max1 = mapFunc(source[startIndex + 1]);
+            ulong? max2 = mapFunc(source[startIndex + 2]);
+            ulong? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -8532,35 +9615,23 @@ namespace ZLinq
         }
         
         #region float?             
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static float? Max([NotNull] this float?[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Length);
-                }            
-            }
-            float? result = source.FirstOrDefault();
+                return Max(source, 0, source.Length);         
+            }                
+            float? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                 range => 
@@ -8577,7 +9648,29 @@ namespace ZLinq
         [Pure]
         private static float? Max([NotNull] this float?[] source, int startIndex, int endIndex)
         {
-            float? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            float? max0 = source[startIndex + 0];
+            float? max1 = source[startIndex + 1];
+            float? max2 = source[startIndex + 2];
+            float? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -8604,12 +9697,13 @@ namespace ZLinq
                 return (float?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (float?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static float? Max<T>([NotNull] this T[] source, [NotNull] Func<T, float?> mapFunc)
@@ -8618,21 +9712,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Length);
-                }            
+                return Max(source, mapFunc, 0, source.Length);         
             }                
             float? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -8651,7 +9731,29 @@ namespace ZLinq
         [Pure]
         private static float? Max<T>([NotNull] this T[] source, [NotNull] Func<T, float?> mapFunc, int startIndex, int endIndex)
         {
-            float? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            float? max0 = mapFunc(source[startIndex + 0]);
+            float? max1 = mapFunc(source[startIndex + 1]);
+            float? max2 = mapFunc(source[startIndex + 2]);
+            float? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -8678,35 +9780,23 @@ namespace ZLinq
                 return (float?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), mapFunc(source[i + 1])));
             return (float?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static float? Max([NotNull] this List<float?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            float? result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            float? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -8723,7 +9813,29 @@ namespace ZLinq
         [Pure]
         private static float? Max([NotNull] this List<float?> source, int startIndex, int endIndex)
         {
-            float? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            float? max0 = source[startIndex + 0];
+            float? max1 = source[startIndex + 1];
+            float? max2 = source[startIndex + 2];
+            float? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -8750,12 +9862,13 @@ namespace ZLinq
                 return (float?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (float?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static float? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, float?> mapFunc)
@@ -8764,21 +9877,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             float? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -8797,7 +9896,29 @@ namespace ZLinq
         [Pure]
         private static float? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, float?> mapFunc, int startIndex, int endIndex)
         {
-            float? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            float? max0 = mapFunc(source[startIndex + 0]);
+            float? max1 = mapFunc(source[startIndex + 1]);
+            float? max2 = mapFunc(source[startIndex + 2]);
+            float? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -8824,35 +9945,23 @@ namespace ZLinq
                 return (float?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), mapFunc(source[i + 1])));
             return (float?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static float? Max([NotNull] this IList<float?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            float? result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            float? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -8869,7 +9978,29 @@ namespace ZLinq
         [Pure]
         private static float? Max([NotNull] this IList<float?> source, int startIndex, int endIndex)
         {
-            float? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            float? max0 = source[startIndex + 0];
+            float? max1 = source[startIndex + 1];
+            float? max2 = source[startIndex + 2];
+            float? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -8896,12 +10027,13 @@ namespace ZLinq
                 return (float?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (float?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static float? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, float?> mapFunc)
@@ -8910,21 +10042,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             float? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -8943,7 +10061,29 @@ namespace ZLinq
         [Pure]
         private static float? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, float?> mapFunc, int startIndex, int endIndex)
         {
-            float? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            float? max0 = mapFunc(source[startIndex + 0]);
+            float? max1 = mapFunc(source[startIndex + 1]);
+            float? max2 = mapFunc(source[startIndex + 2]);
+            float? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -8986,35 +10126,23 @@ namespace ZLinq
         }
         
         #region double?             
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static double? Max([NotNull] this double?[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Length);
-                }            
-            }
-            double? result = source.FirstOrDefault();
+                return Max(source, 0, source.Length);         
+            }                
+            double? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                 range => 
@@ -9031,7 +10159,29 @@ namespace ZLinq
         [Pure]
         private static double? Max([NotNull] this double?[] source, int startIndex, int endIndex)
         {
-            double? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            double? max0 = source[startIndex + 0];
+            double? max1 = source[startIndex + 1];
+            double? max2 = source[startIndex + 2];
+            double? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -9058,12 +10208,13 @@ namespace ZLinq
                 return (double?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (double?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static double? Max<T>([NotNull] this T[] source, [NotNull] Func<T, double?> mapFunc)
@@ -9072,21 +10223,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Length);
-                }            
+                return Max(source, mapFunc, 0, source.Length);         
             }                
             double? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -9105,7 +10242,29 @@ namespace ZLinq
         [Pure]
         private static double? Max<T>([NotNull] this T[] source, [NotNull] Func<T, double?> mapFunc, int startIndex, int endIndex)
         {
-            double? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            double? max0 = mapFunc(source[startIndex + 0]);
+            double? max1 = mapFunc(source[startIndex + 1]);
+            double? max2 = mapFunc(source[startIndex + 2]);
+            double? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -9132,35 +10291,23 @@ namespace ZLinq
                 return (double?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), mapFunc(source[i + 1])));
             return (double?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static double? Max([NotNull] this List<double?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            double? result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            double? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -9177,7 +10324,29 @@ namespace ZLinq
         [Pure]
         private static double? Max([NotNull] this List<double?> source, int startIndex, int endIndex)
         {
-            double? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            double? max0 = source[startIndex + 0];
+            double? max1 = source[startIndex + 1];
+            double? max2 = source[startIndex + 2];
+            double? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -9204,12 +10373,13 @@ namespace ZLinq
                 return (double?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (double?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static double? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, double?> mapFunc)
@@ -9218,21 +10388,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             double? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -9251,7 +10407,29 @@ namespace ZLinq
         [Pure]
         private static double? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, double?> mapFunc, int startIndex, int endIndex)
         {
-            double? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            double? max0 = mapFunc(source[startIndex + 0]);
+            double? max1 = mapFunc(source[startIndex + 1]);
+            double? max2 = mapFunc(source[startIndex + 2]);
+            double? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -9278,35 +10456,23 @@ namespace ZLinq
                 return (double?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), mapFunc(source[i + 1])));
             return (double?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static double? Max([NotNull] this IList<double?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            double? result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            double? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -9323,7 +10489,29 @@ namespace ZLinq
         [Pure]
         private static double? Max([NotNull] this IList<double?> source, int startIndex, int endIndex)
         {
-            double? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            double? max0 = source[startIndex + 0];
+            double? max1 = source[startIndex + 1];
+            double? max2 = source[startIndex + 2];
+            double? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -9350,12 +10538,13 @@ namespace ZLinq
                 return (double?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (double?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static double? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, double?> mapFunc)
@@ -9364,21 +10553,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             double? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -9397,7 +10572,29 @@ namespace ZLinq
         [Pure]
         private static double? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, double?> mapFunc, int startIndex, int endIndex)
         {
-            double? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            double? max0 = mapFunc(source[startIndex + 0]);
+            double? max1 = mapFunc(source[startIndex + 1]);
+            double? max2 = mapFunc(source[startIndex + 2]);
+            double? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -9440,35 +10637,23 @@ namespace ZLinq
         }
         
         #region decimal?             
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static decimal? Max([NotNull] this decimal?[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Length);
-                }            
-            }
-            decimal? result = source.FirstOrDefault();
+                return Max(source, 0, source.Length);         
+            }                
+            decimal? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                 range => 
@@ -9485,7 +10670,29 @@ namespace ZLinq
         [Pure]
         private static decimal? Max([NotNull] this decimal?[] source, int startIndex, int endIndex)
         {
-            decimal? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            decimal? max0 = source[startIndex + 0];
+            decimal? max1 = source[startIndex + 1];
+            decimal? max2 = source[startIndex + 2];
+            decimal? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -9512,12 +10719,13 @@ namespace ZLinq
                 return (decimal?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (decimal?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static decimal? Max<T>([NotNull] this T[] source, [NotNull] Func<T, decimal?> mapFunc)
@@ -9526,21 +10734,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Length)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Length);
-                }            
+                return Max(source, mapFunc, 0, source.Length);         
             }                
             decimal? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -9559,7 +10753,29 @@ namespace ZLinq
         [Pure]
         private static decimal? Max<T>([NotNull] this T[] source, [NotNull] Func<T, decimal?> mapFunc, int startIndex, int endIndex)
         {
-            decimal? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            decimal? max0 = mapFunc(source[startIndex + 0]);
+            decimal? max1 = mapFunc(source[startIndex + 1]);
+            decimal? max2 = mapFunc(source[startIndex + 2]);
+            decimal? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -9586,35 +10802,23 @@ namespace ZLinq
                 return (decimal?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), mapFunc(source[i + 1])));
             return (decimal?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static decimal? Max([NotNull] this List<decimal?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            decimal? result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            decimal? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -9631,7 +10835,29 @@ namespace ZLinq
         [Pure]
         private static decimal? Max([NotNull] this List<decimal?> source, int startIndex, int endIndex)
         {
-            decimal? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            decimal? max0 = source[startIndex + 0];
+            decimal? max1 = source[startIndex + 1];
+            decimal? max2 = source[startIndex + 2];
+            decimal? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -9658,12 +10884,13 @@ namespace ZLinq
                 return (decimal?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (decimal?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static decimal? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, decimal?> mapFunc)
@@ -9672,21 +10899,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             decimal? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -9705,7 +10918,29 @@ namespace ZLinq
         [Pure]
         private static decimal? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, decimal?> mapFunc, int startIndex, int endIndex)
         {
-            decimal? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            decimal? max0 = mapFunc(source[startIndex + 0]);
+            decimal? max1 = mapFunc(source[startIndex + 1]);
+            decimal? max2 = mapFunc(source[startIndex + 2]);
+            decimal? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -9732,35 +10967,23 @@ namespace ZLinq
                 return (decimal?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), mapFunc(source[i + 1])));
             return (decimal?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
-                
+              
+
         /// <summary>
-        /// Search max value in collection or zero if all items are null
+        /// Search max value in mapped collection or zero if all items are null
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
+        /// <param name="source">Source collection</param>        
+        /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static decimal? Max([NotNull] this IList<decimal?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return source[0];
-                    case 2:
-                        return Max(source[0], source[1]);
-                    case 3:
-                        return Max(source[0], Max(source[1], source[2]));
-                    case 4:
-                        return Max(Max(source[0], source[1]), Max(source[2], source[3]));   
-                    default:
-                        return Max(source, 0, source.Count);
-                }            
-            }
-            decimal? result = source.FirstOrDefault();
+                return Max(source, 0, source.Count);         
+            }                
+            decimal? result = source.First();
             object syncRoot = new object();
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                 range => 
@@ -9777,7 +11000,29 @@ namespace ZLinq
         [Pure]
         private static decimal? Max([NotNull] this IList<decimal?> source, int startIndex, int endIndex)
         {
-            decimal? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return source[0];
+                case 2:
+                    return Max(source[0], source[1]);
+                case 3:
+                    return Max(source[0], Max(source[1], source[2]));
+                case 4:
+                    return Max(Max(source[0], source[1]), Max(source[2], source[3]));    
+                }
+            }
+            decimal? max0 = source[startIndex + 0];
+            decimal? max1 = source[startIndex + 1];
+            decimal? max2 = source[startIndex + 2];
+            decimal? max3 = source[startIndex + 3];
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
@@ -9804,12 +11049,13 @@ namespace ZLinq
                 return (decimal?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
             return (decimal?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
         } 
+              
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
         [Pure]
         public static decimal? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, decimal?> mapFunc)
@@ -9818,21 +11064,7 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
-                switch (source.Count)
-                {
-                    case 0:
-                        return 0;
-                    case 1:
-                        return mapFunc(source[0]);
-                    case 2:
-                        return Max(mapFunc(source[0]), mapFunc(source[1]));
-                    case 3:
-                        return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                    case 4:
-                        return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));   
-                    default:
-                        return Max(source, mapFunc, 0, source.Count);
-                }            
+                return Max(source, mapFunc, 0, source.Count);         
             }                
             decimal? result = mapFunc(source.First());
             object syncRoot = new object();
@@ -9851,7 +11083,29 @@ namespace ZLinq
         [Pure]
         private static decimal? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, decimal?> mapFunc, int startIndex, int endIndex)
         {
-            decimal? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int diff = endIndex - startIndex;
+            if (diff <= Constants.Step)
+            {
+                switch (diff)
+                {
+                case 0:
+                    return 0;
+                case 1:
+                    return mapFunc(source[0]);
+                case 2:
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                case 3:
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                case 4:
+                    return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));    
+                }
+            }
+            decimal? max0 = mapFunc(source[startIndex + 0]);
+            decimal? max1 = mapFunc(source[startIndex + 1]);
+            decimal? max2 = mapFunc(source[startIndex + 2]);
+            decimal? max3 = mapFunc(source[startIndex + 3]);
+              
+          
             int i;
             int loopEnd = endIndex - Constants.Step + 1;
             for (i = startIndex; i < loopEnd; i += Constants.Step)
