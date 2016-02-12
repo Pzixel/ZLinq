@@ -13,7 +13,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
-using ZLinq.Extension;
+using ZLinq.Common;
 
 // ReSharper disable CheckNamespace
 // ReSharper disable RedundantCast

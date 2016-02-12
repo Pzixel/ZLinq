@@ -1,6 +1,6 @@
-﻿namespace ZLinq
+﻿namespace ZLinq.Common
 {
-    internal static class Constants
+    public static class Constants
     {
         public const int Step = 4;
         public const int ListDefaultCapacity = 8;

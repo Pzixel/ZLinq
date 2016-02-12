@@ -55,6 +55,27 @@ namespace ZLinq.Test.ZMath
             double result = ZEnumerable.Average(source, arg => (<#= type #>) arg.X);
             <#= TT.AssertFloatsRelative("result", "expected", "Tolerance") #>
         }
+
+        [TestMethod]
+        public void TestAverage<#= typeName #><#= TT.GetCollectionName(sourceType) #><#= i #>Min()
+        {            
+            const <#= trimmedType #> expected = <#= 1 #>;
+            var source = Enumerable.Repeat((<#= type #>) expected, <#= i #>).To<#= name #>();
+
+            double result = ZEnumerable.Average(source);
+
+            <#= TT.AssertFloatsRelative("result", "expected", "Tolerance") #>
+        }
+
+        [TestMethod]
+        public void TestAverage<#= typeName #><#= TT.GetCollectionName(sourceType) #><#= i #>MapMin()
+        {
+            const <#= trimmedType #> expected = <#= 1 #>;
+            var source = Enumerable.Repeat(new { X = expected}, <#= i #>).To<#= name #>();
+
+            double result = ZEnumerable.Average(source, arg => (<#= type #>) arg.X);
+            <#= TT.AssertFloatsRelative("result", "expected", "Tolerance") #>
+        }
           
         <# } #>
 

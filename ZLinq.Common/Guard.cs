@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace ZLinq.Extension
+namespace ZLinq.Common
 {
-    internal static class Guard
+    public static class Guard
     {
         public static void IsNotNull<T>(this T obj, string argName = null) where T : class
         {

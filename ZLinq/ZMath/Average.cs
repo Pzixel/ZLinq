@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using JetBrains.Annotations;
-using ZLinq.Extension;
+using ZLinq.Common;
 
 // ReSharper disable CheckNamespace
 // ReSharper disable RedundantCast
@@ -24,20 +24,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Length;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Length;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Length;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
         }
 
@@ -54,20 +54,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Length;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
         }
 
@@ -83,20 +83,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
         }
 
@@ -113,20 +113,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
         }
 
@@ -142,20 +142,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
         }
 
@@ -172,20 +172,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
         }
 
@@ -205,20 +205,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Length;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Length;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Length;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
         }
 
@@ -235,20 +235,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Length;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
         }
 
@@ -264,20 +264,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
         }
 
@@ -294,20 +294,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
         }
 
@@ -323,20 +323,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
         }
 
@@ -353,20 +353,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
         }
 
@@ -386,20 +386,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Length;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Length;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Length;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
         }
 
@@ -416,20 +416,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Length;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
         }
 
@@ -445,20 +445,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
         }
 
@@ -475,20 +475,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
         }
 
@@ -504,20 +504,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
         }
 
@@ -534,20 +534,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
         }
 
@@ -567,20 +567,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Length;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Length;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Length;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
         }
 
@@ -597,20 +597,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Length;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
         }
 
@@ -626,20 +626,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
         }
 
@@ -656,20 +656,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
         }
 
@@ -685,20 +685,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
         }
 
@@ -715,20 +715,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
         }
 
@@ -748,20 +748,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Length;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Length;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Length;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
         }
 
@@ -778,20 +778,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Length;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
         }
 
@@ -807,20 +807,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
         }
 
@@ -837,20 +837,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
         }
 
@@ -866,20 +866,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
         }
 
@@ -896,20 +896,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
         }
 
@@ -929,20 +929,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Length;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Length;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Length;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
         }
 
@@ -959,20 +959,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Length;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
         }
 
@@ -988,20 +988,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
         }
 
@@ -1018,20 +1018,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
         }
 
@@ -1047,20 +1047,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
         }
 
@@ -1077,20 +1077,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
         }
 
@@ -1110,20 +1110,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Length;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Length;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Length;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
         }
 
@@ -1140,20 +1140,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Length;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
         }
 
@@ -1169,20 +1169,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
         }
 
@@ -1199,20 +1199,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
         }
 
@@ -1228,20 +1228,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
         }
 
@@ -1258,563 +1258,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
-            }
-        }
-
-        
-        #endregion
-    
-        #region float             
-            
-        /// <summary>
-        /// Calculates average of collection 
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average([NotNull] this float[] source)
-        {
-            source.IsNotNull("source");
-            try
-            {
-                double sum = (double) source.Sum();
-                return sum/source.Length;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Length;
-                return source.Sum(x => (double) x*mult);
-            }
-            catch (AggregateException ex)
-            {                
-                if (!(ex.InnerException is OverflowException))
-                    throw;                
-                double mult = 1.0/source.Length;
-                return source.Sum(x => (double) x*mult);
-            }
-        }
-
-        /// <summary>
-        /// Calculates average of collection mapping 
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average<T>([NotNull] this T[] source, [NotNull] Func<T, float> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            try
-            {
-                double sum = (double) source.Sum(mapFunc);
-                return sum/source.Length;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
-            }
-            catch (AggregateException ex)
-            {
-                if (!(ex.InnerException is OverflowException))
-                    throw;
-                double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
-            }
-        }
-
-            
-        /// <summary>
-        /// Calculates average of collection 
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average([NotNull] this List<float> source)
-        {
-            source.IsNotNull("source");
-            try
-            {
-                double sum = (double) source.Sum();
-                return sum/source.Count;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
-            }
-            catch (AggregateException ex)
-            {                
-                if (!(ex.InnerException is OverflowException))
-                    throw;                
-                double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
-            }
-        }
-
-        /// <summary>
-        /// Calculates average of collection mapping 
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average<T>([NotNull] this List<T> source, [NotNull] Func<T, float> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            try
-            {
-                double sum = (double) source.Sum(mapFunc);
-                return sum/source.Count;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
-            }
-            catch (AggregateException ex)
-            {
-                if (!(ex.InnerException is OverflowException))
-                    throw;
-                double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
-            }
-        }
-
-            
-        /// <summary>
-        /// Calculates average of collection 
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average([NotNull] this IList<float> source)
-        {
-            source.IsNotNull("source");
-            try
-            {
-                double sum = (double) source.Sum();
-                return sum/source.Count;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
-            }
-            catch (AggregateException ex)
-            {                
-                if (!(ex.InnerException is OverflowException))
-                    throw;                
-                double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
-            }
-        }
-
-        /// <summary>
-        /// Calculates average of collection mapping 
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average<T>([NotNull] this IList<T> source, [NotNull] Func<T, float> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            try
-            {
-                double sum = (double) source.Sum(mapFunc);
-                return sum/source.Count;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
-            }
-            catch (AggregateException ex)
-            {
-                if (!(ex.InnerException is OverflowException))
-                    throw;
-                double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
-            }
-        }
-
-        
-        #endregion
-    
-        #region double             
-            
-        /// <summary>
-        /// Calculates average of collection 
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average([NotNull] this double[] source)
-        {
-            source.IsNotNull("source");
-            try
-            {
-                double sum = (double) source.Sum();
-                return sum/source.Length;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Length;
-                return source.Sum(x => (double) x*mult);
-            }
-            catch (AggregateException ex)
-            {                
-                if (!(ex.InnerException is OverflowException))
-                    throw;                
-                double mult = 1.0/source.Length;
-                return source.Sum(x => (double) x*mult);
-            }
-        }
-
-        /// <summary>
-        /// Calculates average of collection mapping 
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average<T>([NotNull] this T[] source, [NotNull] Func<T, double> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            try
-            {
-                double sum = (double) source.Sum(mapFunc);
-                return sum/source.Length;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
-            }
-            catch (AggregateException ex)
-            {
-                if (!(ex.InnerException is OverflowException))
-                    throw;
-                double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
-            }
-        }
-
-            
-        /// <summary>
-        /// Calculates average of collection 
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average([NotNull] this List<double> source)
-        {
-            source.IsNotNull("source");
-            try
-            {
-                double sum = (double) source.Sum();
-                return sum/source.Count;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
-            }
-            catch (AggregateException ex)
-            {                
-                if (!(ex.InnerException is OverflowException))
-                    throw;                
-                double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
-            }
-        }
-
-        /// <summary>
-        /// Calculates average of collection mapping 
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average<T>([NotNull] this List<T> source, [NotNull] Func<T, double> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            try
-            {
-                double sum = (double) source.Sum(mapFunc);
-                return sum/source.Count;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
-            }
-            catch (AggregateException ex)
-            {
-                if (!(ex.InnerException is OverflowException))
-                    throw;
-                double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
-            }
-        }
-
-            
-        /// <summary>
-        /// Calculates average of collection 
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average([NotNull] this IList<double> source)
-        {
-            source.IsNotNull("source");
-            try
-            {
-                double sum = (double) source.Sum();
-                return sum/source.Count;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
-            }
-            catch (AggregateException ex)
-            {                
-                if (!(ex.InnerException is OverflowException))
-                    throw;                
-                double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
-            }
-        }
-
-        /// <summary>
-        /// Calculates average of collection mapping 
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average<T>([NotNull] this IList<T> source, [NotNull] Func<T, double> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            try
-            {
-                double sum = (double) source.Sum(mapFunc);
-                return sum/source.Count;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
-            }
-            catch (AggregateException ex)
-            {
-                if (!(ex.InnerException is OverflowException))
-                    throw;
-                double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
-            }
-        }
-
-        
-        #endregion
-    
-        #region decimal             
-            
-        /// <summary>
-        /// Calculates average of collection 
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average([NotNull] this decimal[] source)
-        {
-            source.IsNotNull("source");
-            try
-            {
-                double sum = (double) source.Sum();
-                return sum/source.Length;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Length;
-                return source.Sum(x => (double) x*mult);
-            }
-            catch (AggregateException ex)
-            {                
-                if (!(ex.InnerException is OverflowException))
-                    throw;                
-                double mult = 1.0/source.Length;
-                return source.Sum(x => (double) x*mult);
-            }
-        }
-
-        /// <summary>
-        /// Calculates average of collection mapping 
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average<T>([NotNull] this T[] source, [NotNull] Func<T, decimal> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            try
-            {
-                double sum = (double) source.Sum(mapFunc);
-                return sum/source.Length;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
-            }
-            catch (AggregateException ex)
-            {
-                if (!(ex.InnerException is OverflowException))
-                    throw;
-                double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
-            }
-        }
-
-            
-        /// <summary>
-        /// Calculates average of collection 
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average([NotNull] this List<decimal> source)
-        {
-            source.IsNotNull("source");
-            try
-            {
-                double sum = (double) source.Sum();
-                return sum/source.Count;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
-            }
-            catch (AggregateException ex)
-            {                
-                if (!(ex.InnerException is OverflowException))
-                    throw;                
-                double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
-            }
-        }
-
-        /// <summary>
-        /// Calculates average of collection mapping 
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average<T>([NotNull] this List<T> source, [NotNull] Func<T, decimal> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            try
-            {
-                double sum = (double) source.Sum(mapFunc);
-                return sum/source.Count;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
-            }
-            catch (AggregateException ex)
-            {
-                if (!(ex.InnerException is OverflowException))
-                    throw;
-                double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
-            }
-        }
-
-            
-        /// <summary>
-        /// Calculates average of collection 
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average([NotNull] this IList<decimal> source)
-        {
-            source.IsNotNull("source");
-            try
-            {
-                double sum = (double) source.Sum();
-                return sum/source.Count;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
-            }
-            catch (AggregateException ex)
-            {                
-                if (!(ex.InnerException is OverflowException))
-                    throw;                
-                double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
-            }
-        }
-
-        /// <summary>
-        /// Calculates average of collection mapping 
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average<T>([NotNull] this IList<T> source, [NotNull] Func<T, decimal> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            try
-            {
-                double sum = (double) source.Sum(mapFunc);
-                return sum/source.Count;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
-            }
-            catch (AggregateException ex)
-            {
-                if (!(ex.InnerException is OverflowException))
-                    throw;
-                double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
         }
 
@@ -1834,20 +1291,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Length;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Length;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Length;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
         }
 
@@ -1864,20 +1321,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Length;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
         }
 
@@ -1893,20 +1350,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
         }
 
@@ -1923,20 +1380,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
         }
 
@@ -1952,20 +1409,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) x*mult);
+                return source.Sum(x => x*mult);
             }
         }
 
@@ -1982,20 +1439,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) mapFunc(arg)*mult);
+                return source.Sum(arg => mapFunc(arg)*mult);
             }
         }
 
@@ -2015,20 +1472,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Length;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Length;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Length;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
         }
 
@@ -2045,20 +1502,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Length;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
         }
 
@@ -2074,20 +1531,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
         }
 
@@ -2104,20 +1561,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
         }
 
@@ -2133,20 +1590,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
         }
 
@@ -2163,20 +1620,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
         }
 
@@ -2196,20 +1653,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Length;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Length;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Length;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
         }
 
@@ -2226,20 +1683,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Length;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
         }
 
@@ -2255,20 +1712,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
         }
 
@@ -2285,20 +1742,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
         }
 
@@ -2314,20 +1771,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
         }
 
@@ -2344,20 +1801,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
         }
 
@@ -2377,20 +1834,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Length;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Length;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Length;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
         }
 
@@ -2407,20 +1864,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Length;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
         }
 
@@ -2436,20 +1893,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
         }
 
@@ -2466,20 +1923,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
         }
 
@@ -2495,20 +1952,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
         }
 
@@ -2525,20 +1982,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
         }
 
@@ -2558,20 +2015,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Length;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Length;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Length;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
         }
 
@@ -2588,20 +2045,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Length;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
         }
 
@@ -2617,20 +2074,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
         }
 
@@ -2647,20 +2104,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
         }
 
@@ -2676,20 +2133,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
         }
 
@@ -2706,20 +2163,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
         }
 
@@ -2739,20 +2196,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Length;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Length;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Length;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
         }
 
@@ -2769,20 +2226,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Length;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
         }
 
@@ -2798,20 +2255,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
         }
 
@@ -2828,20 +2285,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
         }
 
@@ -2857,20 +2314,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
         }
 
@@ -2887,20 +2344,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
         }
 
@@ -2920,20 +2377,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Length;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Length;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Length;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
         }
 
@@ -2950,20 +2407,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Length;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
         }
 
@@ -2979,20 +2436,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
         }
 
@@ -3009,20 +2466,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
         }
 
@@ -3038,20 +2495,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
         }
 
@@ -3068,20 +2525,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
         }
 
@@ -3101,20 +2558,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Length;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Length;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Length;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
         }
 
@@ -3131,20 +2588,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Length;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
         }
 
@@ -3160,20 +2617,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
         }
 
@@ -3190,20 +2647,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
         }
 
@@ -3219,20 +2676,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
         }
 
@@ -3249,563 +2706,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
-            }
-        }
-
-        
-        #endregion
-    
-        #region float?             
-            
-        /// <summary>
-        /// Calculates average of collection . Nulls are treated as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average([NotNull] this float?[] source)
-        {
-            source.IsNotNull("source");
-            try
-            {
-                double sum = (double) source.Sum();
-                return sum/source.Length;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Length;
-                return source.Sum(x => (double) (x ?? 0)*mult);
-            }
-            catch (AggregateException ex)
-            {                
-                if (!(ex.InnerException is OverflowException))
-                    throw;                
-                double mult = 1.0/source.Length;
-                return source.Sum(x => (double) (x ?? 0)*mult);
-            }
-        }
-
-        /// <summary>
-        /// Calculates average of collection mapping . Nulls are treated as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average<T>([NotNull] this T[] source, [NotNull] Func<T, float?> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            try
-            {
-                double sum = (double) source.Sum(mapFunc);
-                return sum/source.Length;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
-            }
-            catch (AggregateException ex)
-            {
-                if (!(ex.InnerException is OverflowException))
-                    throw;
-                double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
-            }
-        }
-
-            
-        /// <summary>
-        /// Calculates average of collection . Nulls are treated as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average([NotNull] this List<float?> source)
-        {
-            source.IsNotNull("source");
-            try
-            {
-                double sum = (double) source.Sum();
-                return sum/source.Count;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
-            }
-            catch (AggregateException ex)
-            {                
-                if (!(ex.InnerException is OverflowException))
-                    throw;                
-                double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
-            }
-        }
-
-        /// <summary>
-        /// Calculates average of collection mapping . Nulls are treated as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average<T>([NotNull] this List<T> source, [NotNull] Func<T, float?> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            try
-            {
-                double sum = (double) source.Sum(mapFunc);
-                return sum/source.Count;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
-            }
-            catch (AggregateException ex)
-            {
-                if (!(ex.InnerException is OverflowException))
-                    throw;
-                double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
-            }
-        }
-
-            
-        /// <summary>
-        /// Calculates average of collection . Nulls are treated as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average([NotNull] this IList<float?> source)
-        {
-            source.IsNotNull("source");
-            try
-            {
-                double sum = (double) source.Sum();
-                return sum/source.Count;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
-            }
-            catch (AggregateException ex)
-            {                
-                if (!(ex.InnerException is OverflowException))
-                    throw;                
-                double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
-            }
-        }
-
-        /// <summary>
-        /// Calculates average of collection mapping . Nulls are treated as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average<T>([NotNull] this IList<T> source, [NotNull] Func<T, float?> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            try
-            {
-                double sum = (double) source.Sum(mapFunc);
-                return sum/source.Count;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
-            }
-            catch (AggregateException ex)
-            {
-                if (!(ex.InnerException is OverflowException))
-                    throw;
-                double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
-            }
-        }
-
-        
-        #endregion
-    
-        #region double?             
-            
-        /// <summary>
-        /// Calculates average of collection . Nulls are treated as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average([NotNull] this double?[] source)
-        {
-            source.IsNotNull("source");
-            try
-            {
-                double sum = (double) source.Sum();
-                return sum/source.Length;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Length;
-                return source.Sum(x => (double) (x ?? 0)*mult);
-            }
-            catch (AggregateException ex)
-            {                
-                if (!(ex.InnerException is OverflowException))
-                    throw;                
-                double mult = 1.0/source.Length;
-                return source.Sum(x => (double) (x ?? 0)*mult);
-            }
-        }
-
-        /// <summary>
-        /// Calculates average of collection mapping . Nulls are treated as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average<T>([NotNull] this T[] source, [NotNull] Func<T, double?> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            try
-            {
-                double sum = (double) source.Sum(mapFunc);
-                return sum/source.Length;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
-            }
-            catch (AggregateException ex)
-            {
-                if (!(ex.InnerException is OverflowException))
-                    throw;
-                double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
-            }
-        }
-
-            
-        /// <summary>
-        /// Calculates average of collection . Nulls are treated as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average([NotNull] this List<double?> source)
-        {
-            source.IsNotNull("source");
-            try
-            {
-                double sum = (double) source.Sum();
-                return sum/source.Count;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
-            }
-            catch (AggregateException ex)
-            {                
-                if (!(ex.InnerException is OverflowException))
-                    throw;                
-                double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
-            }
-        }
-
-        /// <summary>
-        /// Calculates average of collection mapping . Nulls are treated as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average<T>([NotNull] this List<T> source, [NotNull] Func<T, double?> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            try
-            {
-                double sum = (double) source.Sum(mapFunc);
-                return sum/source.Count;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
-            }
-            catch (AggregateException ex)
-            {
-                if (!(ex.InnerException is OverflowException))
-                    throw;
-                double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
-            }
-        }
-
-            
-        /// <summary>
-        /// Calculates average of collection . Nulls are treated as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average([NotNull] this IList<double?> source)
-        {
-            source.IsNotNull("source");
-            try
-            {
-                double sum = (double) source.Sum();
-                return sum/source.Count;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
-            }
-            catch (AggregateException ex)
-            {                
-                if (!(ex.InnerException is OverflowException))
-                    throw;                
-                double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
-            }
-        }
-
-        /// <summary>
-        /// Calculates average of collection mapping . Nulls are treated as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average<T>([NotNull] this IList<T> source, [NotNull] Func<T, double?> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            try
-            {
-                double sum = (double) source.Sum(mapFunc);
-                return sum/source.Count;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
-            }
-            catch (AggregateException ex)
-            {
-                if (!(ex.InnerException is OverflowException))
-                    throw;
-                double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
-            }
-        }
-
-        
-        #endregion
-    
-        #region decimal?             
-            
-        /// <summary>
-        /// Calculates average of collection . Nulls are treated as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average([NotNull] this decimal?[] source)
-        {
-            source.IsNotNull("source");
-            try
-            {
-                double sum = (double) source.Sum();
-                return sum/source.Length;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Length;
-                return source.Sum(x => (double) (x ?? 0)*mult);
-            }
-            catch (AggregateException ex)
-            {                
-                if (!(ex.InnerException is OverflowException))
-                    throw;                
-                double mult = 1.0/source.Length;
-                return source.Sum(x => (double) (x ?? 0)*mult);
-            }
-        }
-
-        /// <summary>
-        /// Calculates average of collection mapping . Nulls are treated as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average<T>([NotNull] this T[] source, [NotNull] Func<T, decimal?> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            try
-            {
-                double sum = (double) source.Sum(mapFunc);
-                return sum/source.Length;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
-            }
-            catch (AggregateException ex)
-            {
-                if (!(ex.InnerException is OverflowException))
-                    throw;
-                double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
-            }
-        }
-
-            
-        /// <summary>
-        /// Calculates average of collection . Nulls are treated as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average([NotNull] this List<decimal?> source)
-        {
-            source.IsNotNull("source");
-            try
-            {
-                double sum = (double) source.Sum();
-                return sum/source.Count;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
-            }
-            catch (AggregateException ex)
-            {                
-                if (!(ex.InnerException is OverflowException))
-                    throw;                
-                double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
-            }
-        }
-
-        /// <summary>
-        /// Calculates average of collection mapping . Nulls are treated as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average<T>([NotNull] this List<T> source, [NotNull] Func<T, decimal?> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            try
-            {
-                double sum = (double) source.Sum(mapFunc);
-                return sum/source.Count;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
-            }
-            catch (AggregateException ex)
-            {
-                if (!(ex.InnerException is OverflowException))
-                    throw;
-                double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
-            }
-        }
-
-            
-        /// <summary>
-        /// Calculates average of collection . Nulls are treated as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average([NotNull] this IList<decimal?> source)
-        {
-            source.IsNotNull("source");
-            try
-            {
-                double sum = (double) source.Sum();
-                return sum/source.Count;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
-            }
-            catch (AggregateException ex)
-            {                
-                if (!(ex.InnerException is OverflowException))
-                    throw;                
-                double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
-            }
-        }
-
-        /// <summary>
-        /// Calculates average of collection mapping . Nulls are treated as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average<T>([NotNull] this IList<T> source, [NotNull] Func<T, decimal?> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            try
-            {
-                double sum = (double) source.Sum(mapFunc);
-                return sum/source.Count;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
-            }
-            catch (AggregateException ex)
-            {
-                if (!(ex.InnerException is OverflowException))
-                    throw;
-                double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
         }
 
@@ -3825,20 +2739,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Length;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Length;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Length;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
         }
 
@@ -3855,20 +2769,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Length;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Length;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
         }
 
@@ -3884,20 +2798,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
         }
 
@@ -3914,20 +2828,20 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
         }
 
@@ -3943,20 +2857,20 @@ namespace ZLinq
             source.IsNotNull("source");
             try
             {
-                double sum = (double) source.Sum();
+                double sum = source.Sum();
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
             catch (AggregateException ex)
             {                
                 if (!(ex.InnerException is OverflowException))
                     throw;                
                 double mult = 1.0/source.Count;
-                return source.Sum(x => (double) (x ?? 0)*mult);
+                return source.Sum(x => (x ?? 0)*mult);
             }
         }
 
@@ -3973,21 +2887,749 @@ namespace ZLinq
             mapFunc.IsNotNull("mapFunc");
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = source.Sum(mapFunc);
                 return sum/source.Count;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.Count;
-                return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+                return source.Sum(arg => (mapFunc(arg) ?? 0)*mult);
             }
+        }
+
+        
+        #endregion
+        
+
+       
+        #region float             
+            
+        /// <summary>
+        /// Calculates average of collection 
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average([NotNull] this float[] source)
+        {
+            source.IsNotNull("source");
+            double sum = (double) source.Sum();
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Length;
+            }
+            double mult = 1.0/source.Length;
+            return source.Sum(x => (double) x*mult);
+        }
+
+        /// <summary>
+        /// Calculates average of collection mapping 
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average<T>([NotNull] this T[] source, [NotNull] Func<T, float> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            double sum = (double) source.Sum(mapFunc);
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Length;
+            }
+            double mult = 1.0/source.Length;
+            return source.Sum(arg => (double) mapFunc(arg)*mult);
+        }
+
+            
+        /// <summary>
+        /// Calculates average of collection 
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average([NotNull] this List<float> source)
+        {
+            source.IsNotNull("source");
+            double sum = (double) source.Sum();
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Count;
+            }
+            double mult = 1.0/source.Count;
+            return source.Sum(x => (double) x*mult);
+        }
+
+        /// <summary>
+        /// Calculates average of collection mapping 
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average<T>([NotNull] this List<T> source, [NotNull] Func<T, float> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            double sum = (double) source.Sum(mapFunc);
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Count;
+            }
+            double mult = 1.0/source.Count;
+            return source.Sum(arg => (double) mapFunc(arg)*mult);
+        }
+
+            
+        /// <summary>
+        /// Calculates average of collection 
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average([NotNull] this IList<float> source)
+        {
+            source.IsNotNull("source");
+            double sum = (double) source.Sum();
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Count;
+            }
+            double mult = 1.0/source.Count;
+            return source.Sum(x => (double) x*mult);
+        }
+
+        /// <summary>
+        /// Calculates average of collection mapping 
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average<T>([NotNull] this IList<T> source, [NotNull] Func<T, float> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            double sum = (double) source.Sum(mapFunc);
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Count;
+            }
+            double mult = 1.0/source.Count;
+            return source.Sum(arg => (double) mapFunc(arg)*mult);
+        }
+
+        
+        #endregion
+    
+        #region double             
+            
+        /// <summary>
+        /// Calculates average of collection 
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average([NotNull] this double[] source)
+        {
+            source.IsNotNull("source");
+            double sum = (double) source.Sum();
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Length;
+            }
+            double mult = 1.0/source.Length;
+            return source.Sum(x => (double) x*mult);
+        }
+
+        /// <summary>
+        /// Calculates average of collection mapping 
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average<T>([NotNull] this T[] source, [NotNull] Func<T, double> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            double sum = (double) source.Sum(mapFunc);
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Length;
+            }
+            double mult = 1.0/source.Length;
+            return source.Sum(arg => (double) mapFunc(arg)*mult);
+        }
+
+            
+        /// <summary>
+        /// Calculates average of collection 
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average([NotNull] this List<double> source)
+        {
+            source.IsNotNull("source");
+            double sum = (double) source.Sum();
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Count;
+            }
+            double mult = 1.0/source.Count;
+            return source.Sum(x => (double) x*mult);
+        }
+
+        /// <summary>
+        /// Calculates average of collection mapping 
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average<T>([NotNull] this List<T> source, [NotNull] Func<T, double> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            double sum = (double) source.Sum(mapFunc);
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Count;
+            }
+            double mult = 1.0/source.Count;
+            return source.Sum(arg => (double) mapFunc(arg)*mult);
+        }
+
+            
+        /// <summary>
+        /// Calculates average of collection 
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average([NotNull] this IList<double> source)
+        {
+            source.IsNotNull("source");
+            double sum = (double) source.Sum();
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Count;
+            }
+            double mult = 1.0/source.Count;
+            return source.Sum(x => (double) x*mult);
+        }
+
+        /// <summary>
+        /// Calculates average of collection mapping 
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average<T>([NotNull] this IList<T> source, [NotNull] Func<T, double> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            double sum = (double) source.Sum(mapFunc);
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Count;
+            }
+            double mult = 1.0/source.Count;
+            return source.Sum(arg => (double) mapFunc(arg)*mult);
+        }
+
+        
+        #endregion
+    
+        #region decimal             
+            
+        /// <summary>
+        /// Calculates average of collection 
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average([NotNull] this decimal[] source)
+        {
+            source.IsNotNull("source");
+            double sum = (double) source.Sum();
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Length;
+            }
+            double mult = 1.0/source.Length;
+            return source.Sum(x => (double) x*mult);
+        }
+
+        /// <summary>
+        /// Calculates average of collection mapping 
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average<T>([NotNull] this T[] source, [NotNull] Func<T, decimal> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            double sum = (double) source.Sum(mapFunc);
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Length;
+            }
+            double mult = 1.0/source.Length;
+            return source.Sum(arg => (double) mapFunc(arg)*mult);
+        }
+
+            
+        /// <summary>
+        /// Calculates average of collection 
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average([NotNull] this List<decimal> source)
+        {
+            source.IsNotNull("source");
+            double sum = (double) source.Sum();
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Count;
+            }
+            double mult = 1.0/source.Count;
+            return source.Sum(x => (double) x*mult);
+        }
+
+        /// <summary>
+        /// Calculates average of collection mapping 
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average<T>([NotNull] this List<T> source, [NotNull] Func<T, decimal> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            double sum = (double) source.Sum(mapFunc);
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Count;
+            }
+            double mult = 1.0/source.Count;
+            return source.Sum(arg => (double) mapFunc(arg)*mult);
+        }
+
+            
+        /// <summary>
+        /// Calculates average of collection 
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average([NotNull] this IList<decimal> source)
+        {
+            source.IsNotNull("source");
+            double sum = (double) source.Sum();
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Count;
+            }
+            double mult = 1.0/source.Count;
+            return source.Sum(x => (double) x*mult);
+        }
+
+        /// <summary>
+        /// Calculates average of collection mapping 
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average<T>([NotNull] this IList<T> source, [NotNull] Func<T, decimal> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            double sum = (double) source.Sum(mapFunc);
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Count;
+            }
+            double mult = 1.0/source.Count;
+            return source.Sum(arg => (double) mapFunc(arg)*mult);
+        }
+
+        
+        #endregion
+    
+        #region float?             
+            
+        /// <summary>
+        /// Calculates average of collection . Nulls are treated as 0
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average([NotNull] this float?[] source)
+        {
+            source.IsNotNull("source");
+            double sum = (double) source.Sum();
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Length;
+            }
+            double mult = 1.0/source.Length;
+            return source.Sum(x => (double) (x ?? 0)*mult);
+        }
+
+        /// <summary>
+        /// Calculates average of collection mapping . Nulls are treated as 0
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average<T>([NotNull] this T[] source, [NotNull] Func<T, float?> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            double sum = (double) source.Sum(mapFunc);
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Length;
+            }
+            double mult = 1.0/source.Length;
+            return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+        }
+
+            
+        /// <summary>
+        /// Calculates average of collection . Nulls are treated as 0
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average([NotNull] this List<float?> source)
+        {
+            source.IsNotNull("source");
+            double sum = (double) source.Sum();
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Count;
+            }
+            double mult = 1.0/source.Count;
+            return source.Sum(x => (double) (x ?? 0)*mult);
+        }
+
+        /// <summary>
+        /// Calculates average of collection mapping . Nulls are treated as 0
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average<T>([NotNull] this List<T> source, [NotNull] Func<T, float?> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            double sum = (double) source.Sum(mapFunc);
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Count;
+            }
+            double mult = 1.0/source.Count;
+            return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+        }
+
+            
+        /// <summary>
+        /// Calculates average of collection . Nulls are treated as 0
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average([NotNull] this IList<float?> source)
+        {
+            source.IsNotNull("source");
+            double sum = (double) source.Sum();
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Count;
+            }
+            double mult = 1.0/source.Count;
+            return source.Sum(x => (double) (x ?? 0)*mult);
+        }
+
+        /// <summary>
+        /// Calculates average of collection mapping . Nulls are treated as 0
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average<T>([NotNull] this IList<T> source, [NotNull] Func<T, float?> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            double sum = (double) source.Sum(mapFunc);
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Count;
+            }
+            double mult = 1.0/source.Count;
+            return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+        }
+
+        
+        #endregion
+    
+        #region double?             
+            
+        /// <summary>
+        /// Calculates average of collection . Nulls are treated as 0
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average([NotNull] this double?[] source)
+        {
+            source.IsNotNull("source");
+            double sum = (double) source.Sum();
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Length;
+            }
+            double mult = 1.0/source.Length;
+            return source.Sum(x => (double) (x ?? 0)*mult);
+        }
+
+        /// <summary>
+        /// Calculates average of collection mapping . Nulls are treated as 0
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average<T>([NotNull] this T[] source, [NotNull] Func<T, double?> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            double sum = (double) source.Sum(mapFunc);
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Length;
+            }
+            double mult = 1.0/source.Length;
+            return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+        }
+
+            
+        /// <summary>
+        /// Calculates average of collection . Nulls are treated as 0
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average([NotNull] this List<double?> source)
+        {
+            source.IsNotNull("source");
+            double sum = (double) source.Sum();
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Count;
+            }
+            double mult = 1.0/source.Count;
+            return source.Sum(x => (double) (x ?? 0)*mult);
+        }
+
+        /// <summary>
+        /// Calculates average of collection mapping . Nulls are treated as 0
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average<T>([NotNull] this List<T> source, [NotNull] Func<T, double?> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            double sum = (double) source.Sum(mapFunc);
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Count;
+            }
+            double mult = 1.0/source.Count;
+            return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+        }
+
+            
+        /// <summary>
+        /// Calculates average of collection . Nulls are treated as 0
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average([NotNull] this IList<double?> source)
+        {
+            source.IsNotNull("source");
+            double sum = (double) source.Sum();
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Count;
+            }
+            double mult = 1.0/source.Count;
+            return source.Sum(x => (double) (x ?? 0)*mult);
+        }
+
+        /// <summary>
+        /// Calculates average of collection mapping . Nulls are treated as 0
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average<T>([NotNull] this IList<T> source, [NotNull] Func<T, double?> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            double sum = (double) source.Sum(mapFunc);
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Count;
+            }
+            double mult = 1.0/source.Count;
+            return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+        }
+
+        
+        #endregion
+    
+        #region decimal?             
+            
+        /// <summary>
+        /// Calculates average of collection . Nulls are treated as 0
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average([NotNull] this decimal?[] source)
+        {
+            source.IsNotNull("source");
+            double sum = (double) source.Sum();
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Length;
+            }
+            double mult = 1.0/source.Length;
+            return source.Sum(x => (double) (x ?? 0)*mult);
+        }
+
+        /// <summary>
+        /// Calculates average of collection mapping . Nulls are treated as 0
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average<T>([NotNull] this T[] source, [NotNull] Func<T, decimal?> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            double sum = (double) source.Sum(mapFunc);
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Length;
+            }
+            double mult = 1.0/source.Length;
+            return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+        }
+
+            
+        /// <summary>
+        /// Calculates average of collection . Nulls are treated as 0
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average([NotNull] this List<decimal?> source)
+        {
+            source.IsNotNull("source");
+            double sum = (double) source.Sum();
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Count;
+            }
+            double mult = 1.0/source.Count;
+            return source.Sum(x => (double) (x ?? 0)*mult);
+        }
+
+        /// <summary>
+        /// Calculates average of collection mapping . Nulls are treated as 0
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average<T>([NotNull] this List<T> source, [NotNull] Func<T, decimal?> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            double sum = (double) source.Sum(mapFunc);
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Count;
+            }
+            double mult = 1.0/source.Count;
+            return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
+        }
+
+            
+        /// <summary>
+        /// Calculates average of collection . Nulls are treated as 0
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average([NotNull] this IList<decimal?> source)
+        {
+            source.IsNotNull("source");
+            double sum = (double) source.Sum();
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Count;
+            }
+            double mult = 1.0/source.Count;
+            return source.Sum(x => (double) (x ?? 0)*mult);
+        }
+
+        /// <summary>
+        /// Calculates average of collection mapping . Nulls are treated as 0
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Average of all elements</returns>
+        [Pure]
+        public static double Average<T>([NotNull] this IList<T> source, [NotNull] Func<T, decimal?> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            double sum = (double) source.Sum(mapFunc);
+            if (!double.IsInfinity(sum))
+            {
+               return sum/source.Count;
+            }
+            double mult = 1.0/source.Count;
+            return source.Sum(arg => (double) (mapFunc(arg) ?? 0)*mult);
         }
 
         

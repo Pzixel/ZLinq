@@ -24,8 +24,9 @@ namespace ZLinq.TTHelp
         };
         
         public static readonly string[] LongableTypes = IntableTypes.Concat(new[] { "uint", "long" }).ToArray();
+        public static readonly string[] ULongableTypes = LongableTypes.Concat(new[] { "ulong" }).ToArray();
 
-        public static readonly string[] NumberTypes = LongableTypes.Concat(FloatTypes.Concat(new[] {"ulong"})).ToArray();
+        public static readonly string[] NumberTypes = ULongableTypes.Concat(FloatTypes).ToArray();
         public static readonly string[] NumberTypesInt = {"int"};
 
         public static readonly string[] NullableNumberTypes = NumberTypes.Select(x => x + "?").ToArray();

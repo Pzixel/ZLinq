@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
-using ZLinq.Extension;
+using ZLinq.Common;
 
 // ReSharper disable CheckNamespace
 

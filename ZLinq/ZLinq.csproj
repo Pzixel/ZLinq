@@ -155,7 +155,6 @@
     <Compile Include="Comparers\ZComparerNonGen.cs" />
     <Compile Include="Comparers\ZComparer.cs" />
     <Compile Include="Comparers\ZComparerVisitor.cs" />
-    <Compile Include="Constants.cs" />
     <Compile Include="Core\Common\Shuffle.cs">
       <DependentUpon>Shuffle.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -219,7 +218,6 @@
     </Compile>
     <Compile Include="Core\Common\Split.cs" />
     <Compile Include="Core\NonPure\WhereInPlace.cs" />
-    <Compile Include="Extension\Guard.cs" />
     <Compile Include="ZMath\Average.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -307,6 +305,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Core\Extra\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ZLinq.Common\ZLinq.Common.csproj">
+      <Project>{72c72778-b75f-4740-9c4c-25414a5162d4}</Project>
+      <Name>ZLinq.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -5,7 +5,8 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
-using ZLinq.Extension;
+using ZLinq.Common;
+
 
 // ReSharper disable CheckNamespace 
 namespace ZLinq
@@ -31,9 +32,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -55,12 +58,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sbyte)(sum1 + sum2 + sum3 + sum4);
+                    return (sbyte) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sbyte)(sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (sbyte)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (sbyte)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -78,13 +81,15 @@ namespace ZLinq
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             sbyte result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -111,7 +116,7 @@ namespace ZLinq
                     return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
                     return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                return  (sbyte) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -131,9 +136,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -155,12 +162,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sbyte)(sum1 + sum2 + sum3 + sum4);
+                    return (sbyte) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sbyte)(sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (sbyte)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (sbyte)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -178,13 +185,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             sbyte result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -211,7 +220,7 @@ namespace ZLinq
                     return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
                     return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                return  (sbyte) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -231,9 +240,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -255,12 +266,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sbyte)(sum1 + sum2 + sum3 + sum4);
+                    return (sbyte) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sbyte)(sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (sbyte)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (sbyte)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -278,13 +289,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             sbyte result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -311,7 +324,7 @@ namespace ZLinq
                     return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
                     return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                return  (sbyte) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
         
@@ -335,9 +348,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -359,12 +374,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (byte)(sum1 + sum2 + sum3 + sum4);
+                    return (byte) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (byte)(sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return (byte) (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (byte)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (byte)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return (byte) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (byte) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -382,13 +397,15 @@ namespace ZLinq
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             byte result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -415,7 +432,7 @@ namespace ZLinq
                     return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
                     return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                return  (byte) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -435,9 +452,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -459,12 +478,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (byte)(sum1 + sum2 + sum3 + sum4);
+                    return (byte) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (byte)(sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return (byte) (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (byte)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (byte)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return (byte) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (byte) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -482,13 +501,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             byte result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -515,7 +536,7 @@ namespace ZLinq
                     return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
                     return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                return  (byte) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -535,9 +556,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -559,12 +582,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (byte)(sum1 + sum2 + sum3 + sum4);
+                    return (byte) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (byte)(sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return (byte) (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (byte)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (byte)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return (byte) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (byte) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -582,13 +605,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             byte result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -615,7 +640,7 @@ namespace ZLinq
                     return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
                     return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                return  (byte) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
         
@@ -639,9 +664,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -663,12 +690,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (short)(sum1 + sum2 + sum3 + sum4);
+                    return (short) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (short)(sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return (short) (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (short)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (short)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return (short) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (short) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -686,13 +713,15 @@ namespace ZLinq
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             short result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -719,7 +748,7 @@ namespace ZLinq
                     return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
                     return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                return  (short) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -739,9 +768,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -763,12 +794,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (short)(sum1 + sum2 + sum3 + sum4);
+                    return (short) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (short)(sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return (short) (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (short)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (short)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return (short) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (short) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -786,13 +817,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             short result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -819,7 +852,7 @@ namespace ZLinq
                     return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
                     return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                return  (short) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -839,9 +872,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -863,12 +898,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (short)(sum1 + sum2 + sum3 + sum4);
+                    return (short) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (short)(sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return (short) (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (short)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (short)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return (short) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (short) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -886,13 +921,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             short result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -919,7 +956,7 @@ namespace ZLinq
                     return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
                     return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                return  (short) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
         
@@ -943,9 +980,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -967,12 +1006,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (ushort)(sum1 + sum2 + sum3 + sum4);
+                    return (ushort) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (ushort)(sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (ushort)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (ushort)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -990,13 +1029,15 @@ namespace ZLinq
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             ushort result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -1023,7 +1064,7 @@ namespace ZLinq
                     return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
                     return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                return  (ushort) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -1043,9 +1084,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -1067,12 +1110,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (ushort)(sum1 + sum2 + sum3 + sum4);
+                    return (ushort) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (ushort)(sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (ushort)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (ushort)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -1090,13 +1133,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             ushort result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -1123,7 +1168,7 @@ namespace ZLinq
                     return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
                     return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                return  (ushort) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -1143,9 +1188,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -1167,12 +1214,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (ushort)(sum1 + sum2 + sum3 + sum4);
+                    return (ushort) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (ushort)(sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (ushort)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (ushort)(sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -1190,13 +1237,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             ushort result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -1223,7 +1272,7 @@ namespace ZLinq
                     return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
                     return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                return  (ushort) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
         
@@ -1243,11 +1292,15 @@ namespace ZLinq
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             int result = 0;
-                
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        Interlocked.Add(ref result, x);       
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -1269,12 +1322,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
+                    return (int) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return (int) (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return (int) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (int) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -1292,11 +1345,15 @@ namespace ZLinq
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             int result = 0;
-                
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        Interlocked.Add(ref result, x);       
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -1318,12 +1375,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
+                    return  (int) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (int)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (int)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (int) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -1339,11 +1396,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             int result = 0;
-                
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        Interlocked.Add(ref result, x);       
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -1365,12 +1426,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
+                    return (int) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return (int) (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return (int) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (int) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -1388,11 +1449,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             int result = 0;
-                
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        Interlocked.Add(ref result, x);       
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -1414,12 +1479,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
+                    return  (int) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (int)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (int)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (int) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -1435,11 +1500,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             int result = 0;
-                
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        Interlocked.Add(ref result, x);       
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -1461,12 +1530,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
+                    return (int) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return (int) (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return (int) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (int) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -1484,11 +1553,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             int result = 0;
-                
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        Interlocked.Add(ref result, x);       
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -1510,12 +1583,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
+                    return  (int) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (int)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (int)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (int) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
         
@@ -1539,9 +1612,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -1563,12 +1638,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
+                    return (uint) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return (uint) (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return (uint) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (uint) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -1586,13 +1661,15 @@ namespace ZLinq
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             uint result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -1614,12 +1691,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
+                    return  (uint) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (uint)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (uint)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (uint) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -1639,9 +1716,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -1663,12 +1742,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
+                    return (uint) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return (uint) (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return (uint) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (uint) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -1686,13 +1765,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             uint result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -1714,12 +1795,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
+                    return  (uint) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (uint)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (uint)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (uint) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -1739,9 +1820,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -1763,12 +1846,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
+                    return (uint) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return (uint) (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return (uint) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (uint) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -1786,13 +1869,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             uint result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -1814,12 +1899,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
+                    return  (uint) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (uint)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (uint)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (uint) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
         
@@ -1839,11 +1924,15 @@ namespace ZLinq
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             long result = 0;
-                
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        Interlocked.Add(ref result, x);       
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -1865,12 +1954,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
+                    return (long) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return (long) (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return (long) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (long) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -1888,11 +1977,15 @@ namespace ZLinq
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             long result = 0;
-                
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        Interlocked.Add(ref result, x);       
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -1914,12 +2007,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
+                    return  (long) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (long)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (long)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (long) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -1935,11 +2028,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             long result = 0;
-                
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        Interlocked.Add(ref result, x);       
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -1961,12 +2058,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
+                    return (long) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return (long) (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return (long) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (long) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -1984,11 +2081,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             long result = 0;
-                
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        Interlocked.Add(ref result, x);       
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -2010,12 +2111,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
+                    return  (long) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (long)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (long)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (long) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -2031,11 +2132,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             long result = 0;
-                
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        Interlocked.Add(ref result, x);       
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -2057,12 +2162,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
+                    return (long) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return (long) (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return (long) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (long) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -2080,11 +2185,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             long result = 0;
-                
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        Interlocked.Add(ref result, x);       
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -2106,924 +2215,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
+                    return  (long) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (long)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
-            }
-        }
-        
-        #endregion
-    
-        #region float             
-            
-        /// <summary>
-        /// Perform checked summing of source collection
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static float Sum([NotNull] this float[] source)
-        {
-            source.IsNotNull("source");
-            if (source.Length < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, 0, source.Length);
-            float result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Length),
-                        range => {
-                        var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
-                    });              
-            return result;
-        }
-
-        [Pure]
-        private static float Sum([NotNull] this float[] source, int startIndex, int endIndex)
-        {
-            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
-                }
-
-                if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
-                if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
-            }
-        }
-
-        /// <summary>
-        /// Perform checked summing of source collection mapping
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static float Sum<T>([NotNull] this T[] source, [NotNull] Func<T, float> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            if (source.Length < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, mapFunc, 0, source.Length);
-            float result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Length),
-                        range => {
-                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
-                    });   
-
-            return result;
-        }
-
-        [Pure]
-        private static float Sum<T>([NotNull] this T[] source, Func<T, float> mapFunc, int startIndex, int endIndex)
-        {
-            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
-                }
-                if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
-                if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
-            }
-        }
-            
-        /// <summary>
-        /// Perform checked summing of source collection
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static float Sum([NotNull] this List<float> source)
-        {
-            source.IsNotNull("source");
-            if (source.Count < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, 0, source.Count);
-            float result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Count),
-                        range => {
-                        var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
-                    });              
-            return result;
-        }
-
-        [Pure]
-        private static float Sum([NotNull] this List<float> source, int startIndex, int endIndex)
-        {
-            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
-                }
-
-                if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
-                if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
-            }
-        }
-
-        /// <summary>
-        /// Perform checked summing of source collection mapping
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static float Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, float> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            if (source.Count < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, mapFunc, 0, source.Count);
-            float result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Count),
-                        range => {
-                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
-                    });   
-
-            return result;
-        }
-
-        [Pure]
-        private static float Sum<T>([NotNull] this List<T> source, Func<T, float> mapFunc, int startIndex, int endIndex)
-        {
-            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
-                }
-                if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
-                if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
-            }
-        }
-            
-        /// <summary>
-        /// Perform checked summing of source collection
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static float Sum([NotNull] this IList<float> source)
-        {
-            source.IsNotNull("source");
-            if (source.Count < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, 0, source.Count);
-            float result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Count),
-                        range => {
-                        var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
-                    });              
-            return result;
-        }
-
-        [Pure]
-        private static float Sum([NotNull] this IList<float> source, int startIndex, int endIndex)
-        {
-            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
-                }
-
-                if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
-                if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
-            }
-        }
-
-        /// <summary>
-        /// Perform checked summing of source collection mapping
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static float Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, float> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            if (source.Count < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, mapFunc, 0, source.Count);
-            float result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Count),
-                        range => {
-                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
-                    });   
-
-            return result;
-        }
-
-        [Pure]
-        private static float Sum<T>([NotNull] this IList<T> source, Func<T, float> mapFunc, int startIndex, int endIndex)
-        {
-            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
-                }
-                if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
-                if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
-            }
-        }
-        
-        #endregion
-    
-        #region double             
-            
-        /// <summary>
-        /// Perform checked summing of source collection
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static double Sum([NotNull] this double[] source)
-        {
-            source.IsNotNull("source");
-            if (source.Length < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, 0, source.Length);
-            double result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Length),
-                        range => {
-                        var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
-                    });              
-            return result;
-        }
-
-        [Pure]
-        private static double Sum([NotNull] this double[] source, int startIndex, int endIndex)
-        {
-            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
-                }
-
-                if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
-                if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
-            }
-        }
-
-        /// <summary>
-        /// Perform checked summing of source collection mapping
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static double Sum<T>([NotNull] this T[] source, [NotNull] Func<T, double> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            if (source.Length < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, mapFunc, 0, source.Length);
-            double result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Length),
-                        range => {
-                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
-                    });   
-
-            return result;
-        }
-
-        [Pure]
-        private static double Sum<T>([NotNull] this T[] source, Func<T, double> mapFunc, int startIndex, int endIndex)
-        {
-            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
-                }
-                if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
-                if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
-            }
-        }
-            
-        /// <summary>
-        /// Perform checked summing of source collection
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static double Sum([NotNull] this List<double> source)
-        {
-            source.IsNotNull("source");
-            if (source.Count < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, 0, source.Count);
-            double result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Count),
-                        range => {
-                        var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
-                    });              
-            return result;
-        }
-
-        [Pure]
-        private static double Sum([NotNull] this List<double> source, int startIndex, int endIndex)
-        {
-            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
-                }
-
-                if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
-                if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
-            }
-        }
-
-        /// <summary>
-        /// Perform checked summing of source collection mapping
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static double Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, double> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            if (source.Count < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, mapFunc, 0, source.Count);
-            double result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Count),
-                        range => {
-                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
-                    });   
-
-            return result;
-        }
-
-        [Pure]
-        private static double Sum<T>([NotNull] this List<T> source, Func<T, double> mapFunc, int startIndex, int endIndex)
-        {
-            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
-                }
-                if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
-                if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
-            }
-        }
-            
-        /// <summary>
-        /// Perform checked summing of source collection
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static double Sum([NotNull] this IList<double> source)
-        {
-            source.IsNotNull("source");
-            if (source.Count < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, 0, source.Count);
-            double result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Count),
-                        range => {
-                        var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
-                    });              
-            return result;
-        }
-
-        [Pure]
-        private static double Sum([NotNull] this IList<double> source, int startIndex, int endIndex)
-        {
-            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
-                }
-
-                if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
-                if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
-            }
-        }
-
-        /// <summary>
-        /// Perform checked summing of source collection mapping
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static double Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, double> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            if (source.Count < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, mapFunc, 0, source.Count);
-            double result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Count),
-                        range => {
-                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
-                    });   
-
-            return result;
-        }
-
-        [Pure]
-        private static double Sum<T>([NotNull] this IList<T> source, Func<T, double> mapFunc, int startIndex, int endIndex)
-        {
-            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
-                }
-                if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
-                if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
-            }
-        }
-        
-        #endregion
-    
-        #region decimal             
-            
-        /// <summary>
-        /// Perform checked summing of source collection
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static decimal Sum([NotNull] this decimal[] source)
-        {
-            source.IsNotNull("source");
-            if (source.Length < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, 0, source.Length);
-            decimal result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Length),
-                        range => {
-                        var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
-                    });              
-            return result;
-        }
-
-        [Pure]
-        private static decimal Sum([NotNull] this decimal[] source, int startIndex, int endIndex)
-        {
-            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
-                }
-
-                if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
-                if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
-            }
-        }
-
-        /// <summary>
-        /// Perform checked summing of source collection mapping
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static decimal Sum<T>([NotNull] this T[] source, [NotNull] Func<T, decimal> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            if (source.Length < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, mapFunc, 0, source.Length);
-            decimal result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Length),
-                        range => {
-                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
-                    });   
-
-            return result;
-        }
-
-        [Pure]
-        private static decimal Sum<T>([NotNull] this T[] source, Func<T, decimal> mapFunc, int startIndex, int endIndex)
-        {
-            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
-                }
-                if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
-                if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
-            }
-        }
-            
-        /// <summary>
-        /// Perform checked summing of source collection
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static decimal Sum([NotNull] this List<decimal> source)
-        {
-            source.IsNotNull("source");
-            if (source.Count < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, 0, source.Count);
-            decimal result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Count),
-                        range => {
-                        var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
-                    });              
-            return result;
-        }
-
-        [Pure]
-        private static decimal Sum([NotNull] this List<decimal> source, int startIndex, int endIndex)
-        {
-            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
-                }
-
-                if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
-                if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
-            }
-        }
-
-        /// <summary>
-        /// Perform checked summing of source collection mapping
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static decimal Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, decimal> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            if (source.Count < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, mapFunc, 0, source.Count);
-            decimal result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Count),
-                        range => {
-                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
-                    });   
-
-            return result;
-        }
-
-        [Pure]
-        private static decimal Sum<T>([NotNull] this List<T> source, Func<T, decimal> mapFunc, int startIndex, int endIndex)
-        {
-            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
-                }
-                if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
-                if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
-            }
-        }
-            
-        /// <summary>
-        /// Perform checked summing of source collection
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static decimal Sum([NotNull] this IList<decimal> source)
-        {
-            source.IsNotNull("source");
-            if (source.Count < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, 0, source.Count);
-            decimal result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Count),
-                        range => {
-                        var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
-                    });              
-            return result;
-        }
-
-        [Pure]
-        private static decimal Sum([NotNull] this IList<decimal> source, int startIndex, int endIndex)
-        {
-            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
-                }
-
-                if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
-                if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
-            }
-        }
-
-        /// <summary>
-        /// Perform checked summing of source collection mapping
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static decimal Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, decimal> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            if (source.Count < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, mapFunc, 0, source.Count);
-            decimal result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Count),
-                        range => {
-                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
-                    });   
-
-            return result;
-        }
-
-        [Pure]
-        private static decimal Sum<T>([NotNull] this IList<T> source, Func<T, decimal> mapFunc, int startIndex, int endIndex)
-        {
-            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
-                }
-                if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
-                if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (long)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (long) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
         
@@ -3047,9 +2244,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -3071,12 +2270,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
+                    return (ulong) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -3094,13 +2293,15 @@ namespace ZLinq
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             ulong result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -3122,12 +2323,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
+                    return  (ulong) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (ulong)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (ulong)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (ulong) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -3147,9 +2348,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -3171,12 +2374,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
+                    return (ulong) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -3194,13 +2397,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             ulong result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -3222,12 +2427,12 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
+                    return  (ulong) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (ulong)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (ulong)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (ulong) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
             
@@ -3247,9 +2452,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -3271,12 +2478,12 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
+                    return (ulong) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i]);
                 if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
             }
         }
 
@@ -3294,13 +2501,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             ulong result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -3322,29 +2531,969 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]);
                 }
                 if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
+                    return  (ulong) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (ulong)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (ulong)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (ulong) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
             }
         }
         
         #endregion
-        
-
-
-
-
-
-
     
+        #region float             
+            
+        /// <summary>
+        /// Perform checked summing of source collection
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static float Sum([NotNull] this float[] source)
+        {
+            source.IsNotNull("source");
+            if (source.Length < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, 0, source.Length);
+            float result = 0;
+            object syncRoot = new object();     
+            Parallel.ForEach(Partitioner.Create(0, source.Length),
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });              
+            return result;
+        }
+
+        [Pure]
+        private static float Sum([NotNull] this float[] source, int startIndex, int endIndex)
+        {
+            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += source[i];
+                    sum2 += source[i + 1];
+                    sum3 += source[i + 2];
+                    sum4 += source[i + 3];
+                }
+
+                if (i == endIndex)
+                    return (float) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return (float) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                if (i == endIndex - 2)
+                    return (float) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (float) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+            }
+        }
+
+        /// <summary>
+        /// Perform checked summing of source collection mapping
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static float Sum<T>([NotNull] this T[] source, [NotNull] Func<T, float> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            if (source.Length < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, mapFunc, 0, source.Length);
+            float result = 0;
+            object syncRoot = new object();  
+            Parallel.ForEach(Partitioner.Create(0, source.Length),
+                        range => {
+                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });   
+
+            return result;
+        }
+
+        [Pure]
+        private static float Sum<T>([NotNull] this T[] source, Func<T, float> mapFunc, int startIndex, int endIndex)
+        {
+            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += mapFunc(source[i]);
+                    sum2 += mapFunc(source[i + 1]);
+                    sum3 += mapFunc(source[i + 2]);
+                    sum4 += mapFunc(source[i + 3]);
+                }
+                if (i == endIndex)
+                    return  (float) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return  (float)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                if (i == endIndex - 2)
+                    return  (float)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (float) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+            }
+        }
+            
+        /// <summary>
+        /// Perform checked summing of source collection
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static float Sum([NotNull] this List<float> source)
+        {
+            source.IsNotNull("source");
+            if (source.Count < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, 0, source.Count);
+            float result = 0;
+            object syncRoot = new object();     
+            Parallel.ForEach(Partitioner.Create(0, source.Count),
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });              
+            return result;
+        }
+
+        [Pure]
+        private static float Sum([NotNull] this List<float> source, int startIndex, int endIndex)
+        {
+            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += source[i];
+                    sum2 += source[i + 1];
+                    sum3 += source[i + 2];
+                    sum4 += source[i + 3];
+                }
+
+                if (i == endIndex)
+                    return (float) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return (float) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                if (i == endIndex - 2)
+                    return (float) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (float) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+            }
+        }
+
+        /// <summary>
+        /// Perform checked summing of source collection mapping
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static float Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, float> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            if (source.Count < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, mapFunc, 0, source.Count);
+            float result = 0;
+            object syncRoot = new object();  
+            Parallel.ForEach(Partitioner.Create(0, source.Count),
+                        range => {
+                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });   
+
+            return result;
+        }
+
+        [Pure]
+        private static float Sum<T>([NotNull] this List<T> source, Func<T, float> mapFunc, int startIndex, int endIndex)
+        {
+            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += mapFunc(source[i]);
+                    sum2 += mapFunc(source[i + 1]);
+                    sum3 += mapFunc(source[i + 2]);
+                    sum4 += mapFunc(source[i + 3]);
+                }
+                if (i == endIndex)
+                    return  (float) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return  (float)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                if (i == endIndex - 2)
+                    return  (float)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (float) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+            }
+        }
+            
+        /// <summary>
+        /// Perform checked summing of source collection
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static float Sum([NotNull] this IList<float> source)
+        {
+            source.IsNotNull("source");
+            if (source.Count < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, 0, source.Count);
+            float result = 0;
+            object syncRoot = new object();     
+            Parallel.ForEach(Partitioner.Create(0, source.Count),
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });              
+            return result;
+        }
+
+        [Pure]
+        private static float Sum([NotNull] this IList<float> source, int startIndex, int endIndex)
+        {
+            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += source[i];
+                    sum2 += source[i + 1];
+                    sum3 += source[i + 2];
+                    sum4 += source[i + 3];
+                }
+
+                if (i == endIndex)
+                    return (float) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return (float) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                if (i == endIndex - 2)
+                    return (float) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (float) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+            }
+        }
+
+        /// <summary>
+        /// Perform checked summing of source collection mapping
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static float Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, float> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            if (source.Count < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, mapFunc, 0, source.Count);
+            float result = 0;
+            object syncRoot = new object();  
+            Parallel.ForEach(Partitioner.Create(0, source.Count),
+                        range => {
+                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });   
+
+            return result;
+        }
+
+        [Pure]
+        private static float Sum<T>([NotNull] this IList<T> source, Func<T, float> mapFunc, int startIndex, int endIndex)
+        {
+            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += mapFunc(source[i]);
+                    sum2 += mapFunc(source[i + 1]);
+                    sum3 += mapFunc(source[i + 2]);
+                    sum4 += mapFunc(source[i + 3]);
+                }
+                if (i == endIndex)
+                    return  (float) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return  (float)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                if (i == endIndex - 2)
+                    return  (float)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (float) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+            }
+        }
+        
+        #endregion
+    
+        #region double             
+            
+        /// <summary>
+        /// Perform checked summing of source collection
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static double Sum([NotNull] this double[] source)
+        {
+            source.IsNotNull("source");
+            if (source.Length < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, 0, source.Length);
+            double result = 0;
+            object syncRoot = new object();     
+            Parallel.ForEach(Partitioner.Create(0, source.Length),
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });              
+            return result;
+        }
+
+        [Pure]
+        private static double Sum([NotNull] this double[] source, int startIndex, int endIndex)
+        {
+            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += source[i];
+                    sum2 += source[i + 1];
+                    sum3 += source[i + 2];
+                    sum4 += source[i + 3];
+                }
+
+                if (i == endIndex)
+                    return (double) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return (double) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                if (i == endIndex - 2)
+                    return (double) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (double) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+            }
+        }
+
+        /// <summary>
+        /// Perform checked summing of source collection mapping
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static double Sum<T>([NotNull] this T[] source, [NotNull] Func<T, double> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            if (source.Length < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, mapFunc, 0, source.Length);
+            double result = 0;
+            object syncRoot = new object();  
+            Parallel.ForEach(Partitioner.Create(0, source.Length),
+                        range => {
+                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });   
+
+            return result;
+        }
+
+        [Pure]
+        private static double Sum<T>([NotNull] this T[] source, Func<T, double> mapFunc, int startIndex, int endIndex)
+        {
+            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += mapFunc(source[i]);
+                    sum2 += mapFunc(source[i + 1]);
+                    sum3 += mapFunc(source[i + 2]);
+                    sum4 += mapFunc(source[i + 3]);
+                }
+                if (i == endIndex)
+                    return  (double) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return  (double)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                if (i == endIndex - 2)
+                    return  (double)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (double) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+            }
+        }
+            
+        /// <summary>
+        /// Perform checked summing of source collection
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static double Sum([NotNull] this List<double> source)
+        {
+            source.IsNotNull("source");
+            if (source.Count < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, 0, source.Count);
+            double result = 0;
+            object syncRoot = new object();     
+            Parallel.ForEach(Partitioner.Create(0, source.Count),
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });              
+            return result;
+        }
+
+        [Pure]
+        private static double Sum([NotNull] this List<double> source, int startIndex, int endIndex)
+        {
+            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += source[i];
+                    sum2 += source[i + 1];
+                    sum3 += source[i + 2];
+                    sum4 += source[i + 3];
+                }
+
+                if (i == endIndex)
+                    return (double) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return (double) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                if (i == endIndex - 2)
+                    return (double) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (double) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+            }
+        }
+
+        /// <summary>
+        /// Perform checked summing of source collection mapping
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static double Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, double> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            if (source.Count < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, mapFunc, 0, source.Count);
+            double result = 0;
+            object syncRoot = new object();  
+            Parallel.ForEach(Partitioner.Create(0, source.Count),
+                        range => {
+                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });   
+
+            return result;
+        }
+
+        [Pure]
+        private static double Sum<T>([NotNull] this List<T> source, Func<T, double> mapFunc, int startIndex, int endIndex)
+        {
+            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += mapFunc(source[i]);
+                    sum2 += mapFunc(source[i + 1]);
+                    sum3 += mapFunc(source[i + 2]);
+                    sum4 += mapFunc(source[i + 3]);
+                }
+                if (i == endIndex)
+                    return  (double) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return  (double)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                if (i == endIndex - 2)
+                    return  (double)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (double) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+            }
+        }
+            
+        /// <summary>
+        /// Perform checked summing of source collection
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static double Sum([NotNull] this IList<double> source)
+        {
+            source.IsNotNull("source");
+            if (source.Count < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, 0, source.Count);
+            double result = 0;
+            object syncRoot = new object();     
+            Parallel.ForEach(Partitioner.Create(0, source.Count),
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });              
+            return result;
+        }
+
+        [Pure]
+        private static double Sum([NotNull] this IList<double> source, int startIndex, int endIndex)
+        {
+            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += source[i];
+                    sum2 += source[i + 1];
+                    sum3 += source[i + 2];
+                    sum4 += source[i + 3];
+                }
+
+                if (i == endIndex)
+                    return (double) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return (double) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                if (i == endIndex - 2)
+                    return (double) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (double) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+            }
+        }
+
+        /// <summary>
+        /// Perform checked summing of source collection mapping
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static double Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, double> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            if (source.Count < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, mapFunc, 0, source.Count);
+            double result = 0;
+            object syncRoot = new object();  
+            Parallel.ForEach(Partitioner.Create(0, source.Count),
+                        range => {
+                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });   
+
+            return result;
+        }
+
+        [Pure]
+        private static double Sum<T>([NotNull] this IList<T> source, Func<T, double> mapFunc, int startIndex, int endIndex)
+        {
+            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += mapFunc(source[i]);
+                    sum2 += mapFunc(source[i + 1]);
+                    sum3 += mapFunc(source[i + 2]);
+                    sum4 += mapFunc(source[i + 3]);
+                }
+                if (i == endIndex)
+                    return  (double) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return  (double)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                if (i == endIndex - 2)
+                    return  (double)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (double) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+            }
+        }
+        
+        #endregion
+    
+        #region decimal             
+            
+        /// <summary>
+        /// Perform checked summing of source collection
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static decimal Sum([NotNull] this decimal[] source)
+        {
+            source.IsNotNull("source");
+            if (source.Length < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, 0, source.Length);
+            decimal result = 0;
+            object syncRoot = new object();     
+            Parallel.ForEach(Partitioner.Create(0, source.Length),
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });              
+            return result;
+        }
+
+        [Pure]
+        private static decimal Sum([NotNull] this decimal[] source, int startIndex, int endIndex)
+        {
+            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += source[i];
+                    sum2 += source[i + 1];
+                    sum3 += source[i + 2];
+                    sum4 += source[i + 3];
+                }
+
+                if (i == endIndex)
+                    return (decimal) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                if (i == endIndex - 2)
+                    return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+            }
+        }
+
+        /// <summary>
+        /// Perform checked summing of source collection mapping
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static decimal Sum<T>([NotNull] this T[] source, [NotNull] Func<T, decimal> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            if (source.Length < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, mapFunc, 0, source.Length);
+            decimal result = 0;
+            object syncRoot = new object();  
+            Parallel.ForEach(Partitioner.Create(0, source.Length),
+                        range => {
+                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });   
+
+            return result;
+        }
+
+        [Pure]
+        private static decimal Sum<T>([NotNull] this T[] source, Func<T, decimal> mapFunc, int startIndex, int endIndex)
+        {
+            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += mapFunc(source[i]);
+                    sum2 += mapFunc(source[i + 1]);
+                    sum3 += mapFunc(source[i + 2]);
+                    sum4 += mapFunc(source[i + 3]);
+                }
+                if (i == endIndex)
+                    return  (decimal) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return  (decimal)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                if (i == endIndex - 2)
+                    return  (decimal)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (decimal) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+            }
+        }
+            
+        /// <summary>
+        /// Perform checked summing of source collection
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static decimal Sum([NotNull] this List<decimal> source)
+        {
+            source.IsNotNull("source");
+            if (source.Count < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, 0, source.Count);
+            decimal result = 0;
+            object syncRoot = new object();     
+            Parallel.ForEach(Partitioner.Create(0, source.Count),
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });              
+            return result;
+        }
+
+        [Pure]
+        private static decimal Sum([NotNull] this List<decimal> source, int startIndex, int endIndex)
+        {
+            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += source[i];
+                    sum2 += source[i + 1];
+                    sum3 += source[i + 2];
+                    sum4 += source[i + 3];
+                }
+
+                if (i == endIndex)
+                    return (decimal) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                if (i == endIndex - 2)
+                    return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+            }
+        }
+
+        /// <summary>
+        /// Perform checked summing of source collection mapping
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static decimal Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, decimal> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            if (source.Count < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, mapFunc, 0, source.Count);
+            decimal result = 0;
+            object syncRoot = new object();  
+            Parallel.ForEach(Partitioner.Create(0, source.Count),
+                        range => {
+                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });   
+
+            return result;
+        }
+
+        [Pure]
+        private static decimal Sum<T>([NotNull] this List<T> source, Func<T, decimal> mapFunc, int startIndex, int endIndex)
+        {
+            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += mapFunc(source[i]);
+                    sum2 += mapFunc(source[i + 1]);
+                    sum3 += mapFunc(source[i + 2]);
+                    sum4 += mapFunc(source[i + 3]);
+                }
+                if (i == endIndex)
+                    return  (decimal) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return  (decimal)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                if (i == endIndex - 2)
+                    return  (decimal)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (decimal) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+            }
+        }
+            
+        /// <summary>
+        /// Perform checked summing of source collection
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static decimal Sum([NotNull] this IList<decimal> source)
+        {
+            source.IsNotNull("source");
+            if (source.Count < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, 0, source.Count);
+            decimal result = 0;
+            object syncRoot = new object();     
+            Parallel.ForEach(Partitioner.Create(0, source.Count),
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });              
+            return result;
+        }
+
+        [Pure]
+        private static decimal Sum([NotNull] this IList<decimal> source, int startIndex, int endIndex)
+        {
+            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += source[i];
+                    sum2 += source[i + 1];
+                    sum3 += source[i + 2];
+                    sum4 += source[i + 3];
+                }
+
+                if (i == endIndex)
+                    return (decimal) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                if (i == endIndex - 2)
+                    return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
+                return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+            }
+        }
+
+        /// <summary>
+        /// Perform checked summing of source collection mapping
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static decimal Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, decimal> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            if (source.Count < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, mapFunc, 0, source.Count);
+            decimal result = 0;
+            object syncRoot = new object();  
+            Parallel.ForEach(Partitioner.Create(0, source.Count),
+                        range => {
+                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });   
+
+            return result;
+        }
+
+        [Pure]
+        private static decimal Sum<T>([NotNull] this IList<T> source, Func<T, decimal> mapFunc, int startIndex, int endIndex)
+        {
+            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += mapFunc(source[i]);
+                    sum2 += mapFunc(source[i + 1]);
+                    sum3 += mapFunc(source[i + 2]);
+                    sum4 += mapFunc(source[i + 3]);
+                }
+                if (i == endIndex)
+                    return  (decimal) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return  (decimal)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                if (i == endIndex - 2)
+                    return  (decimal)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
+                return  (decimal) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+            }
+        }
+        
+        #endregion
     
         #region sbyte?             
             
         /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
@@ -3359,9 +3508,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                            
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -3383,17 +3534,17 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sbyte)(sum1 + sum2 + sum3 + sum4);
+                    return (sbyte) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sbyte)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (sbyte)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (sbyte)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
             }
         }
 
         /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
+        /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
@@ -3406,13 +3557,15 @@ namespace ZLinq
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             sbyte result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -3439,12 +3592,12 @@ namespace ZLinq
                     return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
                     return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                return  (sbyte) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
             }
         }
             
         /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
@@ -3459,9 +3612,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                            
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -3483,17 +3638,17 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sbyte)(sum1 + sum2 + sum3 + sum4);
+                    return (sbyte) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sbyte)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (sbyte)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (sbyte)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
             }
         }
 
         /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
+        /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
@@ -3506,13 +3661,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             sbyte result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -3539,12 +3696,12 @@ namespace ZLinq
                     return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
                     return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                return  (sbyte) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
             }
         }
             
         /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
@@ -3559,9 +3716,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                            
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -3583,17 +3742,17 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sbyte)(sum1 + sum2 + sum3 + sum4);
+                    return (sbyte) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sbyte)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (sbyte)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (sbyte)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
             }
         }
 
         /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
+        /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
@@ -3606,13 +3765,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             sbyte result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -3639,18 +3800,16 @@ namespace ZLinq
                     return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
                     return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                return  (sbyte) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
             }
         }
         
         #endregion
-
-    
     
         #region byte?             
             
         /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
@@ -3665,9 +3824,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                            
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -3689,17 +3850,17 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (byte)(sum1 + sum2 + sum3 + sum4);
+                    return (byte) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (byte)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return (byte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (byte)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (byte)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return (byte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (byte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
             }
         }
 
         /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
+        /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
@@ -3712,13 +3873,15 @@ namespace ZLinq
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             byte result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -3745,12 +3908,12 @@ namespace ZLinq
                     return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
                     return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                return  (byte) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
             }
         }
             
         /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
@@ -3765,9 +3928,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                            
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -3789,17 +3954,17 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (byte)(sum1 + sum2 + sum3 + sum4);
+                    return (byte) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (byte)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return (byte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (byte)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (byte)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return (byte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (byte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
             }
         }
 
         /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
+        /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
@@ -3812,13 +3977,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             byte result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -3845,12 +4012,12 @@ namespace ZLinq
                     return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
                     return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                return  (byte) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
             }
         }
             
         /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
@@ -3865,9 +4032,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                            
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -3889,17 +4058,17 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (byte)(sum1 + sum2 + sum3 + sum4);
+                    return (byte) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (byte)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return (byte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (byte)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (byte)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return (byte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (byte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
             }
         }
 
         /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
+        /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
@@ -3912,13 +4081,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             byte result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -3945,18 +4116,16 @@ namespace ZLinq
                     return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
                     return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                return  (byte) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
             }
         }
         
         #endregion
-
-    
     
         #region short?             
             
         /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
@@ -3971,9 +4140,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                            
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -3995,17 +4166,17 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (short)(sum1 + sum2 + sum3 + sum4);
+                    return (short) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (short)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return (short) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (short)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (short)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return (short) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (short) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
             }
         }
 
         /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
+        /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
@@ -4018,13 +4189,15 @@ namespace ZLinq
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             short result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -4051,12 +4224,12 @@ namespace ZLinq
                     return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
                     return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                return  (short) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
             }
         }
             
         /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
@@ -4071,9 +4244,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                            
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -4095,17 +4270,17 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (short)(sum1 + sum2 + sum3 + sum4);
+                    return (short) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (short)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return (short) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (short)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (short)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return (short) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (short) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
             }
         }
 
         /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
+        /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
@@ -4118,13 +4293,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             short result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -4151,12 +4328,12 @@ namespace ZLinq
                     return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
                     return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                return  (short) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
             }
         }
             
         /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
@@ -4171,9 +4348,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                            
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -4195,17 +4374,17 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (short)(sum1 + sum2 + sum3 + sum4);
+                    return (short) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (short)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return (short) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (short)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (short)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return (short) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (short) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
             }
         }
 
         /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
+        /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
@@ -4218,13 +4397,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             short result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -4251,18 +4432,16 @@ namespace ZLinq
                     return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
                     return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                return  (short) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
             }
         }
         
         #endregion
-
-    
     
         #region ushort?             
             
         /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
@@ -4277,9 +4456,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                            
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -4301,17 +4482,17 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (ushort)(sum1 + sum2 + sum3 + sum4);
+                    return (ushort) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (ushort)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (ushort)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (ushort)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
             }
         }
 
         /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
+        /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
@@ -4324,13 +4505,15 @@ namespace ZLinq
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             ushort result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -4357,12 +4540,12 @@ namespace ZLinq
                     return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
                     return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                return  (ushort) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
             }
         }
             
         /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
@@ -4377,9 +4560,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                            
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -4401,17 +4586,17 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (ushort)(sum1 + sum2 + sum3 + sum4);
+                    return (ushort) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (ushort)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (ushort)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (ushort)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
             }
         }
 
         /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
+        /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
@@ -4424,13 +4609,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             ushort result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -4457,12 +4644,12 @@ namespace ZLinq
                     return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
                     return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                return  (ushort) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
             }
         }
             
         /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
@@ -4477,9 +4664,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                            
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -4501,17 +4690,17 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (ushort)(sum1 + sum2 + sum3 + sum4);
+                    return (ushort) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (ushort)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (ushort)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (ushort)(sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
             }
         }
 
         /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
+        /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
@@ -4524,13 +4713,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             ushort result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -4557,18 +4748,16 @@ namespace ZLinq
                     return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
                     return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                return  (ushort) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
             }
         }
         
         #endregion
-
-    
     
         #region int?             
             
         /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
@@ -4579,11 +4768,15 @@ namespace ZLinq
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             int result = 0;
-                
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        Interlocked.Add(ref result, x);     
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -4605,17 +4798,17 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
+                    return (int) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return (int) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return (int) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (int) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
             }
         }
 
         /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
+        /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
@@ -4628,11 +4821,15 @@ namespace ZLinq
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             int result = 0;
-                
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        Interlocked.Add(ref result, x);       
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -4654,17 +4851,17 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
                 }
                 if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
+                    return  (int) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (int)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (int)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
+                return  (int) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
             }
         }
             
         /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
@@ -4675,11 +4872,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             int result = 0;
-                
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        Interlocked.Add(ref result, x);     
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -4701,17 +4902,17 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
+                    return (int) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return (int) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return (int) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (int) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
             }
         }
 
         /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
+        /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
@@ -4724,11 +4925,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             int result = 0;
-                
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        Interlocked.Add(ref result, x);       
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -4750,17 +4955,17 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
                 }
                 if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
+                    return  (int) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (int)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (int)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
+                return  (int) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
             }
         }
             
         /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
@@ -4771,11 +4976,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             int result = 0;
-                
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        Interlocked.Add(ref result, x);     
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -4797,17 +5006,17 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
+                    return (int) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return (int) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return (int) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (int) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
             }
         }
 
         /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
+        /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
@@ -4820,11 +5029,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             int result = 0;
-                
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        Interlocked.Add(ref result, x);       
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -4846,23 +5059,21 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
                 }
                 if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
+                    return  (int) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (int)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (int)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
+                return  (int) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
             }
         }
         
         #endregion
-
-    
     
         #region uint?             
             
         /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
@@ -4877,9 +5088,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                            
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -4901,17 +5114,17 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
+                    return (uint) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return (uint) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return (uint) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (uint) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
             }
         }
 
         /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
+        /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
@@ -4924,13 +5137,15 @@ namespace ZLinq
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             uint result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -4952,17 +5167,17 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
                 }
                 if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
+                    return  (uint) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (uint)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (uint)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
+                return  (uint) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
             }
         }
             
         /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
@@ -4977,9 +5192,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                            
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -5001,17 +5218,17 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
+                    return (uint) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return (uint) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return (uint) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (uint) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
             }
         }
 
         /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
+        /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
@@ -5024,13 +5241,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             uint result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -5052,17 +5271,17 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
                 }
                 if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
+                    return  (uint) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (uint)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (uint)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
+                return  (uint) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
             }
         }
             
         /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
@@ -5077,9 +5296,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                            
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -5101,17 +5322,17 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
+                    return (uint) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return (uint) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return (uint) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (uint) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
             }
         }
 
         /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
+        /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
@@ -5124,13 +5345,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             uint result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -5152,23 +5375,21 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
                 }
                 if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
+                    return  (uint) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (uint)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (uint)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
+                return  (uint) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
             }
         }
         
         #endregion
-
-    
     
         #region long?             
             
         /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
@@ -5179,11 +5400,15 @@ namespace ZLinq
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             long result = 0;
-                
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        Interlocked.Add(ref result, x);     
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -5205,17 +5430,17 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
+                    return (long) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return (long) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return (long) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (long) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
             }
         }
 
         /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
+        /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
@@ -5228,11 +5453,15 @@ namespace ZLinq
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             long result = 0;
-                
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        Interlocked.Add(ref result, x);       
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -5254,17 +5483,17 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
                 }
                 if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
+                    return  (long) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (long)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (long)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
+                return  (long) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
             }
         }
             
         /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
@@ -5275,11 +5504,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             long result = 0;
-                
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        Interlocked.Add(ref result, x);     
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -5301,17 +5534,17 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
+                    return (long) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return (long) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return (long) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (long) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
             }
         }
 
         /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
+        /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
@@ -5324,11 +5557,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             long result = 0;
-                
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        Interlocked.Add(ref result, x);       
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -5350,17 +5587,17 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
                 }
                 if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
+                    return  (long) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (long)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (long)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
+                return  (long) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
             }
         }
             
         /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
@@ -5371,11 +5608,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             long result = 0;
-                
+            object syncRoot = new object();     
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        Interlocked.Add(ref result, x);     
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -5397,17 +5638,17 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
+                    return (long) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return (long) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return (long) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (long) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
             }
         }
 
         /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
+        /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
@@ -5420,11 +5661,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             long result = 0;
-                
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        Interlocked.Add(ref result, x);       
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -5446,941 +5691,21 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
                 }
                 if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
+                    return  (long) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (long)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (long)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
+                return  (long) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
             }
         }
         
         #endregion
-
-    
-    
-        #region float?             
-            
-        /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static float Sum([NotNull] this float?[] source)
-        {
-            source.IsNotNull("source");
-            if (source.Length < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, 0, source.Length);
-            float result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Length),
-                        range => {
-                        var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                            
-                    });              
-            return result;
-        }
-
-        [Pure]
-        private static float Sum([NotNull] this float?[] source, int startIndex, int endIndex)
-        {
-            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
-                }
-
-                if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
-                if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
-            }
-        }
-
-        /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static float Sum<T>([NotNull] this T[] source, [NotNull] Func<T, float?> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            if (source.Length < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, mapFunc, 0, source.Length);
-            float result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Length),
-                        range => {
-                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
-                    });   
-
-            return result;
-        }
-
-        [Pure]
-        private static float Sum<T>([NotNull] this T[] source, Func<T, float?> mapFunc, int startIndex, int endIndex)
-        {
-            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
-                }
-                if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
-                if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
-            }
-        }
-            
-        /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static float Sum([NotNull] this List<float?> source)
-        {
-            source.IsNotNull("source");
-            if (source.Count < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, 0, source.Count);
-            float result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Count),
-                        range => {
-                        var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                            
-                    });              
-            return result;
-        }
-
-        [Pure]
-        private static float Sum([NotNull] this List<float?> source, int startIndex, int endIndex)
-        {
-            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
-                }
-
-                if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
-                if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
-            }
-        }
-
-        /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static float Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, float?> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            if (source.Count < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, mapFunc, 0, source.Count);
-            float result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Count),
-                        range => {
-                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
-                    });   
-
-            return result;
-        }
-
-        [Pure]
-        private static float Sum<T>([NotNull] this List<T> source, Func<T, float?> mapFunc, int startIndex, int endIndex)
-        {
-            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
-                }
-                if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
-                if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
-            }
-        }
-            
-        /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static float Sum([NotNull] this IList<float?> source)
-        {
-            source.IsNotNull("source");
-            if (source.Count < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, 0, source.Count);
-            float result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Count),
-                        range => {
-                        var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                            
-                    });              
-            return result;
-        }
-
-        [Pure]
-        private static float Sum([NotNull] this IList<float?> source, int startIndex, int endIndex)
-        {
-            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
-                }
-
-                if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
-                if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
-            }
-        }
-
-        /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static float Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, float?> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            if (source.Count < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, mapFunc, 0, source.Count);
-            float result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Count),
-                        range => {
-                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
-                    });   
-
-            return result;
-        }
-
-        [Pure]
-        private static float Sum<T>([NotNull] this IList<T> source, Func<T, float?> mapFunc, int startIndex, int endIndex)
-        {
-            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
-                }
-                if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
-                if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
-            }
-        }
-        
-        #endregion
-
-    
-    
-        #region double?             
-            
-        /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static double Sum([NotNull] this double?[] source)
-        {
-            source.IsNotNull("source");
-            if (source.Length < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, 0, source.Length);
-            double result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Length),
-                        range => {
-                        var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                            
-                    });              
-            return result;
-        }
-
-        [Pure]
-        private static double Sum([NotNull] this double?[] source, int startIndex, int endIndex)
-        {
-            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
-                }
-
-                if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
-                if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
-            }
-        }
-
-        /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static double Sum<T>([NotNull] this T[] source, [NotNull] Func<T, double?> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            if (source.Length < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, mapFunc, 0, source.Length);
-            double result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Length),
-                        range => {
-                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
-                    });   
-
-            return result;
-        }
-
-        [Pure]
-        private static double Sum<T>([NotNull] this T[] source, Func<T, double?> mapFunc, int startIndex, int endIndex)
-        {
-            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
-                }
-                if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
-                if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
-            }
-        }
-            
-        /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static double Sum([NotNull] this List<double?> source)
-        {
-            source.IsNotNull("source");
-            if (source.Count < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, 0, source.Count);
-            double result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Count),
-                        range => {
-                        var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                            
-                    });              
-            return result;
-        }
-
-        [Pure]
-        private static double Sum([NotNull] this List<double?> source, int startIndex, int endIndex)
-        {
-            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
-                }
-
-                if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
-                if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
-            }
-        }
-
-        /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static double Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, double?> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            if (source.Count < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, mapFunc, 0, source.Count);
-            double result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Count),
-                        range => {
-                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
-                    });   
-
-            return result;
-        }
-
-        [Pure]
-        private static double Sum<T>([NotNull] this List<T> source, Func<T, double?> mapFunc, int startIndex, int endIndex)
-        {
-            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
-                }
-                if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
-                if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
-            }
-        }
-            
-        /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static double Sum([NotNull] this IList<double?> source)
-        {
-            source.IsNotNull("source");
-            if (source.Count < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, 0, source.Count);
-            double result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Count),
-                        range => {
-                        var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                            
-                    });              
-            return result;
-        }
-
-        [Pure]
-        private static double Sum([NotNull] this IList<double?> source, int startIndex, int endIndex)
-        {
-            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
-                }
-
-                if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
-                if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
-            }
-        }
-
-        /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static double Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, double?> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            if (source.Count < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, mapFunc, 0, source.Count);
-            double result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Count),
-                        range => {
-                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
-                    });   
-
-            return result;
-        }
-
-        [Pure]
-        private static double Sum<T>([NotNull] this IList<T> source, Func<T, double?> mapFunc, int startIndex, int endIndex)
-        {
-            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
-                }
-                if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
-                if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
-            }
-        }
-        
-        #endregion
-
-    
-    
-        #region decimal?             
-            
-        /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static decimal Sum([NotNull] this decimal?[] source)
-        {
-            source.IsNotNull("source");
-            if (source.Length < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, 0, source.Length);
-            decimal result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Length),
-                        range => {
-                        var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                            
-                    });              
-            return result;
-        }
-
-        [Pure]
-        private static decimal Sum([NotNull] this decimal?[] source, int startIndex, int endIndex)
-        {
-            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
-                }
-
-                if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
-                if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
-            }
-        }
-
-        /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static decimal Sum<T>([NotNull] this T[] source, [NotNull] Func<T, decimal?> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            if (source.Length < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, mapFunc, 0, source.Length);
-            decimal result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Length),
-                        range => {
-                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
-                    });   
-
-            return result;
-        }
-
-        [Pure]
-        private static decimal Sum<T>([NotNull] this T[] source, Func<T, decimal?> mapFunc, int startIndex, int endIndex)
-        {
-            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
-                }
-                if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
-                if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
-            }
-        }
-            
-        /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static decimal Sum([NotNull] this List<decimal?> source)
-        {
-            source.IsNotNull("source");
-            if (source.Count < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, 0, source.Count);
-            decimal result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Count),
-                        range => {
-                        var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                            
-                    });              
-            return result;
-        }
-
-        [Pure]
-        private static decimal Sum([NotNull] this List<decimal?> source, int startIndex, int endIndex)
-        {
-            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
-                }
-
-                if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
-                if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
-            }
-        }
-
-        /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static decimal Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, decimal?> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            if (source.Count < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, mapFunc, 0, source.Count);
-            decimal result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Count),
-                        range => {
-                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
-                    });   
-
-            return result;
-        }
-
-        [Pure]
-        private static decimal Sum<T>([NotNull] this List<T> source, Func<T, decimal?> mapFunc, int startIndex, int endIndex)
-        {
-            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
-                }
-                if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
-                if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
-            }
-        }
-            
-        /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static decimal Sum([NotNull] this IList<decimal?> source)
-        {
-            source.IsNotNull("source");
-            if (source.Count < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, 0, source.Count);
-            decimal result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Count),
-                        range => {
-                        var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                            
-                    });              
-            return result;
-        }
-
-        [Pure]
-        private static decimal Sum([NotNull] this IList<decimal?> source, int startIndex, int endIndex)
-        {
-            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
-                }
-
-                if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
-                if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
-            }
-        }
-
-        /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static decimal Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, decimal?> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            if (source.Count < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, mapFunc, 0, source.Count);
-            decimal result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.Count),
-                        range => {
-                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
-                    });   
-
-            return result;
-        }
-
-        [Pure]
-        private static decimal Sum<T>([NotNull] this IList<T> source, Func<T, decimal?> mapFunc, int startIndex, int endIndex)
-        {
-            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
-                }
-                if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
-                if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
-            }
-        }
-        
-        #endregion
-
-    
     
         #region ulong?             
             
         /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
@@ -6395,9 +5720,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                            
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -6419,17 +5746,17 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
+                    return (ulong) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
             }
         }
 
         /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
+        /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
@@ -6442,13 +5769,15 @@ namespace ZLinq
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             ulong result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -6470,17 +5799,17 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
                 }
                 if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
+                    return  (ulong) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (ulong)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (ulong)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
+                return  (ulong) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
             }
         }
             
         /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
@@ -6495,9 +5824,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                            
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -6519,17 +5850,17 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
+                    return (ulong) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
             }
         }
 
         /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
+        /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
@@ -6542,13 +5873,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             ulong result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -6570,17 +5903,17 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
                 }
                 if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
+                    return  (ulong) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (ulong)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (ulong)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
+                return  (ulong) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
             }
         }
             
         /// <summary>
-        /// Perform checked summing of source collection. Nulls are traited as 0
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
@@ -6595,9 +5928,11 @@ namespace ZLinq
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                            
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });              
             return result;
         }
@@ -6619,17 +5954,17 @@ namespace ZLinq
                 }
 
                 if (i == endIndex)
-                    return (sum1 + sum2 + sum3 + sum4);
+                    return (ulong) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
             }
         }
 
         /// <summary>
-        /// Perform checked summing of source collection mapping. Nulls are traited as 0
+        /// Perform checked summing of source collection mapping
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
@@ -6642,13 +5977,15 @@ namespace ZLinq
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             ulong result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, mapFunc, range.Item1, range.Item2);
-                        lock (syncRoot)
-                            result += x;                        
-                              
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
                     });   
 
             return result;
@@ -6670,17 +6007,965 @@ namespace ZLinq
                     sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
                 }
                 if (i == endIndex)
-                    return   (sum1 + sum2 + sum3 + sum4);
+                    return  (ulong) (sum1 + sum2 + sum3 + sum4);
                 if (i == endIndex - 1)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (ulong)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (ulong)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
+                return  (ulong) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
             }
         }
         
         #endregion
+    
+        #region float?             
+            
+        /// <summary>
+        /// Perform checked summing of source collection
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static float Sum([NotNull] this float?[] source)
+        {
+            source.IsNotNull("source");
+            if (source.Length < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, 0, source.Length);
+            float result = 0;
+            object syncRoot = new object();     
+            Parallel.ForEach(Partitioner.Create(0, source.Length),
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });              
+            return result;
+        }
 
+        [Pure]
+        private static float Sum([NotNull] this float?[] source, int startIndex, int endIndex)
+        {
+            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += source[i].GetValueOrDefault();
+                    sum2 += source[i + 1].GetValueOrDefault();
+                    sum3 += source[i + 2].GetValueOrDefault();
+                    sum4 += source[i + 3].GetValueOrDefault();
+                }
+
+                if (i == endIndex)
+                    return (float) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return (float) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                if (i == endIndex - 2)
+                    return (float) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (float) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+            }
+        }
+
+        /// <summary>
+        /// Perform checked summing of source collection mapping
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static float Sum<T>([NotNull] this T[] source, [NotNull] Func<T, float?> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            if (source.Length < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, mapFunc, 0, source.Length);
+            float result = 0;
+            object syncRoot = new object();  
+            Parallel.ForEach(Partitioner.Create(0, source.Length),
+                        range => {
+                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });   
+
+            return result;
+        }
+
+        [Pure]
+        private static float Sum<T>([NotNull] this T[] source, Func<T, float?> mapFunc, int startIndex, int endIndex)
+        {
+            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += mapFunc(source[i]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                }
+                if (i == endIndex)
+                    return  (float) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return  (float)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                if (i == endIndex - 2)
+                    return  (float)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
+                return  (float) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+            }
+        }
+            
+        /// <summary>
+        /// Perform checked summing of source collection
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static float Sum([NotNull] this List<float?> source)
+        {
+            source.IsNotNull("source");
+            if (source.Count < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, 0, source.Count);
+            float result = 0;
+            object syncRoot = new object();     
+            Parallel.ForEach(Partitioner.Create(0, source.Count),
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });              
+            return result;
+        }
+
+        [Pure]
+        private static float Sum([NotNull] this List<float?> source, int startIndex, int endIndex)
+        {
+            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += source[i].GetValueOrDefault();
+                    sum2 += source[i + 1].GetValueOrDefault();
+                    sum3 += source[i + 2].GetValueOrDefault();
+                    sum4 += source[i + 3].GetValueOrDefault();
+                }
+
+                if (i == endIndex)
+                    return (float) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return (float) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                if (i == endIndex - 2)
+                    return (float) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (float) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+            }
+        }
+
+        /// <summary>
+        /// Perform checked summing of source collection mapping
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static float Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, float?> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            if (source.Count < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, mapFunc, 0, source.Count);
+            float result = 0;
+            object syncRoot = new object();  
+            Parallel.ForEach(Partitioner.Create(0, source.Count),
+                        range => {
+                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });   
+
+            return result;
+        }
+
+        [Pure]
+        private static float Sum<T>([NotNull] this List<T> source, Func<T, float?> mapFunc, int startIndex, int endIndex)
+        {
+            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += mapFunc(source[i]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                }
+                if (i == endIndex)
+                    return  (float) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return  (float)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                if (i == endIndex - 2)
+                    return  (float)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
+                return  (float) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+            }
+        }
+            
+        /// <summary>
+        /// Perform checked summing of source collection
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static float Sum([NotNull] this IList<float?> source)
+        {
+            source.IsNotNull("source");
+            if (source.Count < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, 0, source.Count);
+            float result = 0;
+            object syncRoot = new object();     
+            Parallel.ForEach(Partitioner.Create(0, source.Count),
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });              
+            return result;
+        }
+
+        [Pure]
+        private static float Sum([NotNull] this IList<float?> source, int startIndex, int endIndex)
+        {
+            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += source[i].GetValueOrDefault();
+                    sum2 += source[i + 1].GetValueOrDefault();
+                    sum3 += source[i + 2].GetValueOrDefault();
+                    sum4 += source[i + 3].GetValueOrDefault();
+                }
+
+                if (i == endIndex)
+                    return (float) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return (float) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                if (i == endIndex - 2)
+                    return (float) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (float) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+            }
+        }
+
+        /// <summary>
+        /// Perform checked summing of source collection mapping
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static float Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, float?> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            if (source.Count < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, mapFunc, 0, source.Count);
+            float result = 0;
+            object syncRoot = new object();  
+            Parallel.ForEach(Partitioner.Create(0, source.Count),
+                        range => {
+                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });   
+
+            return result;
+        }
+
+        [Pure]
+        private static float Sum<T>([NotNull] this IList<T> source, Func<T, float?> mapFunc, int startIndex, int endIndex)
+        {
+            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += mapFunc(source[i]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                }
+                if (i == endIndex)
+                    return  (float) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return  (float)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                if (i == endIndex - 2)
+                    return  (float)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
+                return  (float) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+            }
+        }
         
+        #endregion
+    
+        #region double?             
+            
+        /// <summary>
+        /// Perform checked summing of source collection
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static double Sum([NotNull] this double?[] source)
+        {
+            source.IsNotNull("source");
+            if (source.Length < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, 0, source.Length);
+            double result = 0;
+            object syncRoot = new object();     
+            Parallel.ForEach(Partitioner.Create(0, source.Length),
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });              
+            return result;
+        }
+
+        [Pure]
+        private static double Sum([NotNull] this double?[] source, int startIndex, int endIndex)
+        {
+            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += source[i].GetValueOrDefault();
+                    sum2 += source[i + 1].GetValueOrDefault();
+                    sum3 += source[i + 2].GetValueOrDefault();
+                    sum4 += source[i + 3].GetValueOrDefault();
+                }
+
+                if (i == endIndex)
+                    return (double) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return (double) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                if (i == endIndex - 2)
+                    return (double) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (double) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+            }
+        }
+
+        /// <summary>
+        /// Perform checked summing of source collection mapping
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static double Sum<T>([NotNull] this T[] source, [NotNull] Func<T, double?> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            if (source.Length < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, mapFunc, 0, source.Length);
+            double result = 0;
+            object syncRoot = new object();  
+            Parallel.ForEach(Partitioner.Create(0, source.Length),
+                        range => {
+                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });   
+
+            return result;
+        }
+
+        [Pure]
+        private static double Sum<T>([NotNull] this T[] source, Func<T, double?> mapFunc, int startIndex, int endIndex)
+        {
+            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += mapFunc(source[i]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                }
+                if (i == endIndex)
+                    return  (double) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return  (double)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                if (i == endIndex - 2)
+                    return  (double)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
+                return  (double) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+            }
+        }
+            
+        /// <summary>
+        /// Perform checked summing of source collection
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static double Sum([NotNull] this List<double?> source)
+        {
+            source.IsNotNull("source");
+            if (source.Count < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, 0, source.Count);
+            double result = 0;
+            object syncRoot = new object();     
+            Parallel.ForEach(Partitioner.Create(0, source.Count),
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });              
+            return result;
+        }
+
+        [Pure]
+        private static double Sum([NotNull] this List<double?> source, int startIndex, int endIndex)
+        {
+            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += source[i].GetValueOrDefault();
+                    sum2 += source[i + 1].GetValueOrDefault();
+                    sum3 += source[i + 2].GetValueOrDefault();
+                    sum4 += source[i + 3].GetValueOrDefault();
+                }
+
+                if (i == endIndex)
+                    return (double) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return (double) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                if (i == endIndex - 2)
+                    return (double) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (double) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+            }
+        }
+
+        /// <summary>
+        /// Perform checked summing of source collection mapping
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static double Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, double?> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            if (source.Count < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, mapFunc, 0, source.Count);
+            double result = 0;
+            object syncRoot = new object();  
+            Parallel.ForEach(Partitioner.Create(0, source.Count),
+                        range => {
+                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });   
+
+            return result;
+        }
+
+        [Pure]
+        private static double Sum<T>([NotNull] this List<T> source, Func<T, double?> mapFunc, int startIndex, int endIndex)
+        {
+            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += mapFunc(source[i]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                }
+                if (i == endIndex)
+                    return  (double) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return  (double)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                if (i == endIndex - 2)
+                    return  (double)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
+                return  (double) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+            }
+        }
+            
+        /// <summary>
+        /// Perform checked summing of source collection
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static double Sum([NotNull] this IList<double?> source)
+        {
+            source.IsNotNull("source");
+            if (source.Count < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, 0, source.Count);
+            double result = 0;
+            object syncRoot = new object();     
+            Parallel.ForEach(Partitioner.Create(0, source.Count),
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });              
+            return result;
+        }
+
+        [Pure]
+        private static double Sum([NotNull] this IList<double?> source, int startIndex, int endIndex)
+        {
+            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += source[i].GetValueOrDefault();
+                    sum2 += source[i + 1].GetValueOrDefault();
+                    sum3 += source[i + 2].GetValueOrDefault();
+                    sum4 += source[i + 3].GetValueOrDefault();
+                }
+
+                if (i == endIndex)
+                    return (double) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return (double) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                if (i == endIndex - 2)
+                    return (double) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (double) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+            }
+        }
+
+        /// <summary>
+        /// Perform checked summing of source collection mapping
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static double Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, double?> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            if (source.Count < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, mapFunc, 0, source.Count);
+            double result = 0;
+            object syncRoot = new object();  
+            Parallel.ForEach(Partitioner.Create(0, source.Count),
+                        range => {
+                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });   
+
+            return result;
+        }
+
+        [Pure]
+        private static double Sum<T>([NotNull] this IList<T> source, Func<T, double?> mapFunc, int startIndex, int endIndex)
+        {
+            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += mapFunc(source[i]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                }
+                if (i == endIndex)
+                    return  (double) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return  (double)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                if (i == endIndex - 2)
+                    return  (double)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
+                return  (double) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+            }
+        }
+        
+        #endregion
+    
+        #region decimal?             
+            
+        /// <summary>
+        /// Perform checked summing of source collection
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static decimal Sum([NotNull] this decimal?[] source)
+        {
+            source.IsNotNull("source");
+            if (source.Length < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, 0, source.Length);
+            decimal result = 0;
+            object syncRoot = new object();     
+            Parallel.ForEach(Partitioner.Create(0, source.Length),
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });              
+            return result;
+        }
+
+        [Pure]
+        private static decimal Sum([NotNull] this decimal?[] source, int startIndex, int endIndex)
+        {
+            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += source[i].GetValueOrDefault();
+                    sum2 += source[i + 1].GetValueOrDefault();
+                    sum3 += source[i + 2].GetValueOrDefault();
+                    sum4 += source[i + 3].GetValueOrDefault();
+                }
+
+                if (i == endIndex)
+                    return (decimal) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                if (i == endIndex - 2)
+                    return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+            }
+        }
+
+        /// <summary>
+        /// Perform checked summing of source collection mapping
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static decimal Sum<T>([NotNull] this T[] source, [NotNull] Func<T, decimal?> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            if (source.Length < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, mapFunc, 0, source.Length);
+            decimal result = 0;
+            object syncRoot = new object();  
+            Parallel.ForEach(Partitioner.Create(0, source.Length),
+                        range => {
+                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });   
+
+            return result;
+        }
+
+        [Pure]
+        private static decimal Sum<T>([NotNull] this T[] source, Func<T, decimal?> mapFunc, int startIndex, int endIndex)
+        {
+            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += mapFunc(source[i]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                }
+                if (i == endIndex)
+                    return  (decimal) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return  (decimal)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                if (i == endIndex - 2)
+                    return  (decimal)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
+                return  (decimal) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+            }
+        }
+            
+        /// <summary>
+        /// Perform checked summing of source collection
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static decimal Sum([NotNull] this List<decimal?> source)
+        {
+            source.IsNotNull("source");
+            if (source.Count < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, 0, source.Count);
+            decimal result = 0;
+            object syncRoot = new object();     
+            Parallel.ForEach(Partitioner.Create(0, source.Count),
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });              
+            return result;
+        }
+
+        [Pure]
+        private static decimal Sum([NotNull] this List<decimal?> source, int startIndex, int endIndex)
+        {
+            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += source[i].GetValueOrDefault();
+                    sum2 += source[i + 1].GetValueOrDefault();
+                    sum3 += source[i + 2].GetValueOrDefault();
+                    sum4 += source[i + 3].GetValueOrDefault();
+                }
+
+                if (i == endIndex)
+                    return (decimal) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                if (i == endIndex - 2)
+                    return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+            }
+        }
+
+        /// <summary>
+        /// Perform checked summing of source collection mapping
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static decimal Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, decimal?> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            if (source.Count < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, mapFunc, 0, source.Count);
+            decimal result = 0;
+            object syncRoot = new object();  
+            Parallel.ForEach(Partitioner.Create(0, source.Count),
+                        range => {
+                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });   
+
+            return result;
+        }
+
+        [Pure]
+        private static decimal Sum<T>([NotNull] this List<T> source, Func<T, decimal?> mapFunc, int startIndex, int endIndex)
+        {
+            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += mapFunc(source[i]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                }
+                if (i == endIndex)
+                    return  (decimal) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return  (decimal)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                if (i == endIndex - 2)
+                    return  (decimal)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
+                return  (decimal) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+            }
+        }
+            
+        /// <summary>
+        /// Perform checked summing of source collection
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static decimal Sum([NotNull] this IList<decimal?> source)
+        {
+            source.IsNotNull("source");
+            if (source.Count < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, 0, source.Count);
+            decimal result = 0;
+            object syncRoot = new object();     
+            Parallel.ForEach(Partitioner.Create(0, source.Count),
+                        range => {
+                        var x = Sum(source, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });              
+            return result;
+        }
+
+        [Pure]
+        private static decimal Sum([NotNull] this IList<decimal?> source, int startIndex, int endIndex)
+        {
+            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += source[i].GetValueOrDefault();
+                    sum2 += source[i + 1].GetValueOrDefault();
+                    sum3 += source[i + 2].GetValueOrDefault();
+                    sum4 += source[i + 3].GetValueOrDefault();
+                }
+
+                if (i == endIndex)
+                    return (decimal) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                if (i == endIndex - 2)
+                    return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
+                return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+            }
+        }
+
+        /// <summary>
+        /// Perform checked summing of source collection mapping
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+        /// <returns>Sum of all elements</returns>
+        [Pure]
+        public static decimal Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, decimal?> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            if (source.Count < Constants.SingleThreadExecutionThreshold)
+                return Sum(source, mapFunc, 0, source.Count);
+            decimal result = 0;
+            object syncRoot = new object();  
+            Parallel.ForEach(Partitioner.Create(0, source.Count),
+                        range => {
+                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
+                        checked
+                        {   
+                            lock (syncRoot)
+                                result += x;  
+                        }     
+                    });   
+
+            return result;
+        }
+
+        [Pure]
+        private static decimal Sum<T>([NotNull] this IList<T> source, Func<T, decimal?> mapFunc, int startIndex, int endIndex)
+        {
+            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            checked
+            {
+                int i;
+                int loopEnd = endIndex - Constants.Step + 1;
+                for (i = startIndex; i < loopEnd; i += Constants.Step)
+                {
+                    sum1 += mapFunc(source[i]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                }
+                if (i == endIndex)
+                    return  (decimal) (sum1 + sum2 + sum3 + sum4);
+                if (i == endIndex - 1)
+                    return  (decimal)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                if (i == endIndex - 2)
+                    return  (decimal)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
+                return  (decimal) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+            }
+        }
+        
+        #endregion
+        
+    
     }
 }

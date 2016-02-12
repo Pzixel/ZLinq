@@ -4,7 +4,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
-using ZLinq.Extension;
+using ZLinq.Common;
 
 // ReSharper disable CheckNamespace
 // ReSharper disable RedundantCast
@@ -2908,6 +2908,419 @@ namespace ZLinq
     
 //        [Pure]
 //        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+//        private static T Max<T>(T x, T y, [NotNull] Func<T, ulong> mapFunc)
+//        {
+//            return mapFunc(x) > mapFunc(y) ? x : y;      
+//        }
+
+        #region ulong             
+            
+        /// <summary>
+        /// Search max value in collection
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Maximum value of collection</returns>
+        [Pure]
+        public static ulong Max([NotNull] this ulong[] source)
+        {
+            source.IsNotNull("source");
+            if (source.Length < Constants.SingleThreadExecutionThreshold)
+                return Max(source, 0, source.Length);
+            ulong result = source.FirstOrDefault();
+            object syncRoot = new object();
+            Parallel.ForEach(Partitioner.Create(0, source.Length),
+                range => 
+                {
+                    var x = Max(source, range.Item1, range.Item2);
+                    lock (syncRoot)
+                        if (result < x)
+                            result = x;
+                });
+
+            return result;
+        }
+
+        [Pure]
+        private static ulong Max([NotNull] this ulong[] source, int startIndex, int endIndex)
+        {
+            if (source.Length <= 4)
+            {
+                if (source.Length == 0)
+                    return 0;
+                if (source.Length == 1)
+                    return source[0];
+                if (source.Length == 2)
+                    return Math.Max(source[0], source[1]);
+                if (source.Length == 3)
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));
+            }
+            ulong max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int i;
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
+            {
+                if (max0 < source[i])
+                    max0 = source[i];
+                if (max1 < source[i + 1])
+                    max1 = source[i + 1];
+                if (max2 < source[i + 2])
+                    max2 = source[i + 2];
+                if (max3 < source[i + 3])
+                    max3 = source[i + 3];   
+            }
+            if (i == source.Length)
+                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+            if (i == source.Length - 1)
+                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
+            if (i == source.Length - 2)
+                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
+            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
+        } 
+
+        /// <summary>
+        /// Search max value in mapped collection
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+        /// <returns>Maximum value of mapping</returns>
+        [Pure]
+        public static ulong Max<T>([NotNull] this T[] source, [NotNull] Func<T, ulong> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            if (source.Length < Constants.SingleThreadExecutionThreshold)
+                return Max(source, mapFunc, 0, source.Length);
+            ulong result = mapFunc(source.First());
+            object syncRoot = new object();
+            Parallel.ForEach(Partitioner.Create(0, source.Length),
+                range => 
+                {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
+                    lock (syncRoot)
+                        if (result < x)
+                            result = x;
+                });
+
+            return result;
+        }
+
+        [Pure]
+        private static ulong Max<T>([NotNull] this T[] source, [NotNull] Func<T, ulong> mapFunc, int startIndex, int endIndex)
+        {
+            if (source.Length <= 4)
+            {
+                if (source.Length == 0)
+                    return 0;
+                if (source.Length == 1)
+                    return mapFunc(source[0]);
+                if (source.Length == 2)
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                if (source.Length == 3)
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));
+            }
+            ulong max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), 
+                max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+
+            int i;
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
+            {
+                ulong tmp0 = mapFunc(source[i]);
+                if (max0 < tmp0)
+                    max0 = tmp0;
+                ulong tmp1 = mapFunc(source[i + 1]);
+                if (max1 < tmp1)
+                    max1 = tmp1;
+                ulong tmp2 = mapFunc(source[i + 2]);
+                if (max2 < tmp2)
+                    max2 = tmp2;
+                ulong tmp3 = mapFunc(source[i + 3]);
+                if (max3 < tmp3)
+                    max3 = tmp3;
+            }
+            if (i == source.Length)
+                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+            if (i == source.Length - 1)
+                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
+            if (i == source.Length - 2)
+                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
+            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
+        }
+            
+        /// <summary>
+        /// Search max value in collection
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Maximum value of collection</returns>
+        [Pure]
+        public static ulong Max([NotNull] this List<ulong> source)
+        {
+            source.IsNotNull("source");
+            if (source.Count < Constants.SingleThreadExecutionThreshold)
+                return Max(source, 0, source.Count);
+            ulong result = source.FirstOrDefault();
+            object syncRoot = new object();
+            Parallel.ForEach(Partitioner.Create(0, source.Count),
+                range => 
+                {
+                    var x = Max(source, range.Item1, range.Item2);
+                    lock (syncRoot)
+                        if (result < x)
+                            result = x;
+                });
+
+            return result;
+        }
+
+        [Pure]
+        private static ulong Max([NotNull] this List<ulong> source, int startIndex, int endIndex)
+        {
+            if (source.Count <= 4)
+            {
+                if (source.Count == 0)
+                    return 0;
+                if (source.Count == 1)
+                    return source[0];
+                if (source.Count == 2)
+                    return Math.Max(source[0], source[1]);
+                if (source.Count == 3)
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));
+            }
+            ulong max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int i;
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
+            {
+                if (max0 < source[i])
+                    max0 = source[i];
+                if (max1 < source[i + 1])
+                    max1 = source[i + 1];
+                if (max2 < source[i + 2])
+                    max2 = source[i + 2];
+                if (max3 < source[i + 3])
+                    max3 = source[i + 3];   
+            }
+            if (i == source.Count)
+                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+            if (i == source.Count - 1)
+                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
+            if (i == source.Count - 2)
+                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
+            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
+        } 
+
+        /// <summary>
+        /// Search max value in mapped collection
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+        /// <returns>Maximum value of mapping</returns>
+        [Pure]
+        public static ulong Max<T>([NotNull] this List<T> source, [NotNull] Func<T, ulong> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            if (source.Count < Constants.SingleThreadExecutionThreshold)
+                return Max(source, mapFunc, 0, source.Count);
+            ulong result = mapFunc(source.First());
+            object syncRoot = new object();
+            Parallel.ForEach(Partitioner.Create(0, source.Count),
+                range => 
+                {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
+                    lock (syncRoot)
+                        if (result < x)
+                            result = x;
+                });
+
+            return result;
+        }
+
+        [Pure]
+        private static ulong Max<T>([NotNull] this List<T> source, [NotNull] Func<T, ulong> mapFunc, int startIndex, int endIndex)
+        {
+            if (source.Count <= 4)
+            {
+                if (source.Count == 0)
+                    return 0;
+                if (source.Count == 1)
+                    return mapFunc(source[0]);
+                if (source.Count == 2)
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                if (source.Count == 3)
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));
+            }
+            ulong max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), 
+                max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+
+            int i;
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
+            {
+                ulong tmp0 = mapFunc(source[i]);
+                if (max0 < tmp0)
+                    max0 = tmp0;
+                ulong tmp1 = mapFunc(source[i + 1]);
+                if (max1 < tmp1)
+                    max1 = tmp1;
+                ulong tmp2 = mapFunc(source[i + 2]);
+                if (max2 < tmp2)
+                    max2 = tmp2;
+                ulong tmp3 = mapFunc(source[i + 3]);
+                if (max3 < tmp3)
+                    max3 = tmp3;
+            }
+            if (i == source.Count)
+                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+            if (i == source.Count - 1)
+                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
+            if (i == source.Count - 2)
+                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
+            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
+        }
+            
+        /// <summary>
+        /// Search max value in collection
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Maximum value of collection</returns>
+        [Pure]
+        public static ulong Max([NotNull] this IList<ulong> source)
+        {
+            source.IsNotNull("source");
+            if (source.Count < Constants.SingleThreadExecutionThreshold)
+                return Max(source, 0, source.Count);
+            ulong result = source.FirstOrDefault();
+            object syncRoot = new object();
+            Parallel.ForEach(Partitioner.Create(0, source.Count),
+                range => 
+                {
+                    var x = Max(source, range.Item1, range.Item2);
+                    lock (syncRoot)
+                        if (result < x)
+                            result = x;
+                });
+
+            return result;
+        }
+
+        [Pure]
+        private static ulong Max([NotNull] this IList<ulong> source, int startIndex, int endIndex)
+        {
+            if (source.Count <= 4)
+            {
+                if (source.Count == 0)
+                    return 0;
+                if (source.Count == 1)
+                    return source[0];
+                if (source.Count == 2)
+                    return Math.Max(source[0], source[1]);
+                if (source.Count == 3)
+                    return Math.Max(source[0], Math.Max(source[1], source[2]));
+                return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));
+            }
+            ulong max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int i;
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
+            {
+                if (max0 < source[i])
+                    max0 = source[i];
+                if (max1 < source[i + 1])
+                    max1 = source[i + 1];
+                if (max2 < source[i + 2])
+                    max2 = source[i + 2];
+                if (max3 < source[i + 3])
+                    max3 = source[i + 3];   
+            }
+            if (i == source.Count)
+                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+            if (i == source.Count - 1)
+                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
+            if (i == source.Count - 2)
+                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
+            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
+        } 
+
+        /// <summary>
+        /// Search max value in mapped collection
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+        /// <returns>Maximum value of mapping</returns>
+        [Pure]
+        public static ulong Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, ulong> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            if (source.Count < Constants.SingleThreadExecutionThreshold)
+                return Max(source, mapFunc, 0, source.Count);
+            ulong result = mapFunc(source.First());
+            object syncRoot = new object();
+            Parallel.ForEach(Partitioner.Create(0, source.Count),
+                range => 
+                {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
+                    lock (syncRoot)
+                        if (result < x)
+                            result = x;
+                });
+
+            return result;
+        }
+
+        [Pure]
+        private static ulong Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, ulong> mapFunc, int startIndex, int endIndex)
+        {
+            if (source.Count <= 4)
+            {
+                if (source.Count == 0)
+                    return 0;
+                if (source.Count == 1)
+                    return mapFunc(source[0]);
+                if (source.Count == 2)
+                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
+                if (source.Count == 3)
+                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
+                return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));
+            }
+            ulong max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), 
+                max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+
+            int i;
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
+            {
+                ulong tmp0 = mapFunc(source[i]);
+                if (max0 < tmp0)
+                    max0 = tmp0;
+                ulong tmp1 = mapFunc(source[i + 1]);
+                if (max1 < tmp1)
+                    max1 = tmp1;
+                ulong tmp2 = mapFunc(source[i + 2]);
+                if (max2 < tmp2)
+                    max2 = tmp2;
+                ulong tmp3 = mapFunc(source[i + 3]);
+                if (max3 < tmp3)
+                    max3 = tmp3;
+            }
+            if (i == source.Count)
+                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
+            if (i == source.Count - 1)
+                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
+            if (i == source.Count - 2)
+                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
+            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
+        }
+        
+        #endregion
+    
+//        [Pure]
+//        [MethodImpl(MethodImplOptions.AggressiveInlining)]
 //        private static T Max<T>(T x, T y, [NotNull] Func<T, float> mapFunc)
 //        {
 //            return mapFunc(x) > mapFunc(y) ? x : y;      
@@ -4131,419 +4544,6 @@ namespace ZLinq
                 if (max2 < tmp2)
                     max2 = tmp2;
                 decimal tmp3 = mapFunc(source[i + 3]);
-                if (max3 < tmp3)
-                    max3 = tmp3;
-            }
-            if (i == source.Count)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
-            if (i == source.Count - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
-            if (i == source.Count - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
-        }
-        
-        #endregion
-    
-//        [Pure]
-//        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-//        private static T Max<T>(T x, T y, [NotNull] Func<T, ulong> mapFunc)
-//        {
-//            return mapFunc(x) > mapFunc(y) ? x : y;      
-//        }
-
-        #region ulong             
-            
-        /// <summary>
-        /// Search max value in collection
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
-        [Pure]
-        public static ulong Max([NotNull] this ulong[] source)
-        {
-            source.IsNotNull("source");
-            if (source.Length < Constants.SingleThreadExecutionThreshold)
-                return Max(source, 0, source.Length);
-            ulong result = source.FirstOrDefault();
-            object syncRoot = new object();
-            Parallel.ForEach(Partitioner.Create(0, source.Length),
-                range => 
-                {
-                    var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
-                });
-
-            return result;
-        }
-
-        [Pure]
-        private static ulong Max([NotNull] this ulong[] source, int startIndex, int endIndex)
-        {
-            if (source.Length <= 4)
-            {
-                if (source.Length == 0)
-                    return 0;
-                if (source.Length == 1)
-                    return source[0];
-                if (source.Length == 2)
-                    return Math.Max(source[0], source[1]);
-                if (source.Length == 3)
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
-                return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));
-            }
-            ulong max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
-            int i;
-            int loopEnd = endIndex - Constants.Step + 1;
-            for (i = startIndex; i < loopEnd; i += Constants.Step)
-            {
-                if (max0 < source[i])
-                    max0 = source[i];
-                if (max1 < source[i + 1])
-                    max1 = source[i + 1];
-                if (max2 < source[i + 2])
-                    max2 = source[i + 2];
-                if (max3 < source[i + 3])
-                    max3 = source[i + 3];   
-            }
-            if (i == source.Length)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
-            if (i == source.Length - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
-            if (i == source.Length - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
-        } 
-
-        /// <summary>
-        /// Search max value in mapped collection
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
-        /// <returns>Maximum value of mapping</returns>
-        [Pure]
-        public static ulong Max<T>([NotNull] this T[] source, [NotNull] Func<T, ulong> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            if (source.Length < Constants.SingleThreadExecutionThreshold)
-                return Max(source, mapFunc, 0, source.Length);
-            ulong result = mapFunc(source.First());
-            object syncRoot = new object();
-            Parallel.ForEach(Partitioner.Create(0, source.Length),
-                range => 
-                {
-                    var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
-                });
-
-            return result;
-        }
-
-        [Pure]
-        private static ulong Max<T>([NotNull] this T[] source, [NotNull] Func<T, ulong> mapFunc, int startIndex, int endIndex)
-        {
-            if (source.Length <= 4)
-            {
-                if (source.Length == 0)
-                    return 0;
-                if (source.Length == 1)
-                    return mapFunc(source[0]);
-                if (source.Length == 2)
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                if (source.Length == 3)
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));
-            }
-            ulong max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), 
-                max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
-
-            int i;
-            int loopEnd = endIndex - Constants.Step + 1;
-            for (i = startIndex; i < loopEnd; i += Constants.Step)
-            {
-                ulong tmp0 = mapFunc(source[i]);
-                if (max0 < tmp0)
-                    max0 = tmp0;
-                ulong tmp1 = mapFunc(source[i + 1]);
-                if (max1 < tmp1)
-                    max1 = tmp1;
-                ulong tmp2 = mapFunc(source[i + 2]);
-                if (max2 < tmp2)
-                    max2 = tmp2;
-                ulong tmp3 = mapFunc(source[i + 3]);
-                if (max3 < tmp3)
-                    max3 = tmp3;
-            }
-            if (i == source.Length)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
-            if (i == source.Length - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
-            if (i == source.Length - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
-        }
-            
-        /// <summary>
-        /// Search max value in collection
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
-        [Pure]
-        public static ulong Max([NotNull] this List<ulong> source)
-        {
-            source.IsNotNull("source");
-            if (source.Count < Constants.SingleThreadExecutionThreshold)
-                return Max(source, 0, source.Count);
-            ulong result = source.FirstOrDefault();
-            object syncRoot = new object();
-            Parallel.ForEach(Partitioner.Create(0, source.Count),
-                range => 
-                {
-                    var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
-                });
-
-            return result;
-        }
-
-        [Pure]
-        private static ulong Max([NotNull] this List<ulong> source, int startIndex, int endIndex)
-        {
-            if (source.Count <= 4)
-            {
-                if (source.Count == 0)
-                    return 0;
-                if (source.Count == 1)
-                    return source[0];
-                if (source.Count == 2)
-                    return Math.Max(source[0], source[1]);
-                if (source.Count == 3)
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
-                return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));
-            }
-            ulong max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
-            int i;
-            int loopEnd = endIndex - Constants.Step + 1;
-            for (i = startIndex; i < loopEnd; i += Constants.Step)
-            {
-                if (max0 < source[i])
-                    max0 = source[i];
-                if (max1 < source[i + 1])
-                    max1 = source[i + 1];
-                if (max2 < source[i + 2])
-                    max2 = source[i + 2];
-                if (max3 < source[i + 3])
-                    max3 = source[i + 3];   
-            }
-            if (i == source.Count)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
-            if (i == source.Count - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
-            if (i == source.Count - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
-        } 
-
-        /// <summary>
-        /// Search max value in mapped collection
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
-        /// <returns>Maximum value of mapping</returns>
-        [Pure]
-        public static ulong Max<T>([NotNull] this List<T> source, [NotNull] Func<T, ulong> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            if (source.Count < Constants.SingleThreadExecutionThreshold)
-                return Max(source, mapFunc, 0, source.Count);
-            ulong result = mapFunc(source.First());
-            object syncRoot = new object();
-            Parallel.ForEach(Partitioner.Create(0, source.Count),
-                range => 
-                {
-                    var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
-                });
-
-            return result;
-        }
-
-        [Pure]
-        private static ulong Max<T>([NotNull] this List<T> source, [NotNull] Func<T, ulong> mapFunc, int startIndex, int endIndex)
-        {
-            if (source.Count <= 4)
-            {
-                if (source.Count == 0)
-                    return 0;
-                if (source.Count == 1)
-                    return mapFunc(source[0]);
-                if (source.Count == 2)
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                if (source.Count == 3)
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));
-            }
-            ulong max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), 
-                max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
-
-            int i;
-            int loopEnd = endIndex - Constants.Step + 1;
-            for (i = startIndex; i < loopEnd; i += Constants.Step)
-            {
-                ulong tmp0 = mapFunc(source[i]);
-                if (max0 < tmp0)
-                    max0 = tmp0;
-                ulong tmp1 = mapFunc(source[i + 1]);
-                if (max1 < tmp1)
-                    max1 = tmp1;
-                ulong tmp2 = mapFunc(source[i + 2]);
-                if (max2 < tmp2)
-                    max2 = tmp2;
-                ulong tmp3 = mapFunc(source[i + 3]);
-                if (max3 < tmp3)
-                    max3 = tmp3;
-            }
-            if (i == source.Count)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
-            if (i == source.Count - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), mapFunc(source[i]));
-            if (i == source.Count - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), mapFunc(source[i + 1])));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(mapFunc(source[i]), Math.Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
-        }
-            
-        /// <summary>
-        /// Search max value in collection
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
-        [Pure]
-        public static ulong Max([NotNull] this IList<ulong> source)
-        {
-            source.IsNotNull("source");
-            if (source.Count < Constants.SingleThreadExecutionThreshold)
-                return Max(source, 0, source.Count);
-            ulong result = source.FirstOrDefault();
-            object syncRoot = new object();
-            Parallel.ForEach(Partitioner.Create(0, source.Count),
-                range => 
-                {
-                    var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
-                });
-
-            return result;
-        }
-
-        [Pure]
-        private static ulong Max([NotNull] this IList<ulong> source, int startIndex, int endIndex)
-        {
-            if (source.Count <= 4)
-            {
-                if (source.Count == 0)
-                    return 0;
-                if (source.Count == 1)
-                    return source[0];
-                if (source.Count == 2)
-                    return Math.Max(source[0], source[1]);
-                if (source.Count == 3)
-                    return Math.Max(source[0], Math.Max(source[1], source[2]));
-                return Math.Max(Math.Max(source[0], source[1]), Math.Max(source[2], source[3]));
-            }
-            ulong max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
-            int i;
-            int loopEnd = endIndex - Constants.Step + 1;
-            for (i = startIndex; i < loopEnd; i += Constants.Step)
-            {
-                if (max0 < source[i])
-                    max0 = source[i];
-                if (max1 < source[i + 1])
-                    max1 = source[i + 1];
-                if (max2 < source[i + 2])
-                    max2 = source[i + 2];
-                if (max3 < source[i + 3])
-                    max3 = source[i + 3];   
-            }
-            if (i == source.Count)
-                return  Math.Max(Math.Max(max0, max1), Math.Max(max2, max3));
-            if (i == source.Count - 1)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), source[i]);
-            if (i == source.Count - 2)
-                return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], source[i + 1]));
-            return  Math.Max(Math.Max(Math.Max(max0, max1), Math.Max(max2, max3)), Math.Max(source[i], Math.Max(source[i + 1], source[i + 2])));
-        } 
-
-        /// <summary>
-        /// Search max value in mapped collection
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
-        /// <returns>Maximum value of mapping</returns>
-        [Pure]
-        public static ulong Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, ulong> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            if (source.Count < Constants.SingleThreadExecutionThreshold)
-                return Max(source, mapFunc, 0, source.Count);
-            ulong result = mapFunc(source.First());
-            object syncRoot = new object();
-            Parallel.ForEach(Partitioner.Create(0, source.Count),
-                range => 
-                {
-                    var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
-                });
-
-            return result;
-        }
-
-        [Pure]
-        private static ulong Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, ulong> mapFunc, int startIndex, int endIndex)
-        {
-            if (source.Count <= 4)
-            {
-                if (source.Count == 0)
-                    return 0;
-                if (source.Count == 1)
-                    return mapFunc(source[0]);
-                if (source.Count == 2)
-                    return Math.Max(mapFunc(source[0]), mapFunc(source[1]));
-                if (source.Count == 3)
-                    return Math.Max(mapFunc(source[0]), Math.Max(mapFunc(source[1]), mapFunc(source[2])));
-                return Math.Max(Math.Max(mapFunc(source[0]), mapFunc(source[1])), Math.Max(mapFunc(source[2]), mapFunc(source[3])));
-            }
-            ulong max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), 
-                max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
-
-            int i;
-            int loopEnd = endIndex - Constants.Step + 1;
-            for (i = startIndex; i < loopEnd; i += Constants.Step)
-            {
-                ulong tmp0 = mapFunc(source[i]);
-                if (max0 < tmp0)
-                    max0 = tmp0;
-                ulong tmp1 = mapFunc(source[i + 1]);
-                if (max1 < tmp1)
-                    max1 = tmp1;
-                ulong tmp2 = mapFunc(source[i + 2]);
-                if (max2 < tmp2)
-                    max2 = tmp2;
-                ulong tmp3 = mapFunc(source[i + 3]);
                 if (max3 < tmp3)
                     max3 = tmp3;
             }
@@ -7574,6 +7574,436 @@ namespace ZLinq
         #endregion
             
         [Pure]
+        private static ulong? Max(ulong? x, ulong? y)
+        {
+            bool hasValX = x.HasValue;
+            bool hasValY = y.HasValue;
+            if (hasValX && hasValY)
+                return Math.Max(x.Value, y.Value);
+            if (hasValX)
+                return x.Value;
+            return y.GetValueOrDefault();            
+        }
+
+        #region ulong?             
+                
+        /// <summary>
+        /// Search max value in collection or zero if all items are null
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Maximum value of collection</returns>
+        [Pure]
+        public static ulong? Max([NotNull] this ulong?[] source)
+        {
+            source.IsNotNull("source");
+            if (source.Length < Constants.SingleThreadExecutionThreshold)
+                return Max(source, 0, source.Length);
+            ulong? result = source.FirstOrDefault();
+            object syncRoot = new object();
+            Parallel.ForEach(Partitioner.Create(0, source.Length),
+                range => 
+                {
+                    var x = Max(source, range.Item1, range.Item2);
+                    lock (syncRoot)
+                        if (result < x)
+                            result = x;
+                });
+
+            return result;
+        }
+
+        [Pure]
+        private static ulong? Max([NotNull] this ulong?[] source, int startIndex, int endIndex)
+        {
+            if (source.Length <= 4)
+            {
+                if (source.Length == 0)
+                    return 0;
+                if (source.Length == 1)
+                    return source[0];
+                if (source.Length == 2)
+                    return Max(source[0], source[1]);
+                if (source.Length == 3)
+                    return Max(source[0], Max(source[1], source[2]));
+                return Max(Max(source[0], source[1]), Max(source[2], source[3]));
+            }
+            ulong? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int i;
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
+            {
+                ulong? arg0 = source[i + 0];
+                if (arg0.HasValue && max0 < arg0)
+                    max0 = arg0.Value;
+                ulong? arg1 = source[i + 1];
+                if (arg1.HasValue && max1 < arg1)
+                    max1 = arg1.Value;
+                ulong? arg2 = source[i + 2];
+                if (arg2.HasValue && max2 < arg2)
+                    max2 = arg2.Value;
+                ulong? arg3 = source[i + 3];
+                if (arg3.HasValue && max3 < arg3)
+                    max3 = arg3.Value;
+                
+            }
+            if (i == source.Length)
+                return (ulong?) Max(Max(max0, max1), Max(max2, max3));
+            if (i == source.Length - 1)
+                return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), source[i]);
+            if (i == source.Length - 2)
+                return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
+            return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
+        } 
+
+        /// <summary>
+        /// Search max value in mapped collection or zero if all items are null
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+        /// <returns>Maximum value of mapping</returns>
+        [Pure]
+        public static ulong? Max<T>([NotNull] this T[] source, [NotNull] Func<T, ulong?> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            if (source.Length < Constants.SingleThreadExecutionThreshold)
+                return Max(source, mapFunc, 0, source.Length);
+            ulong? result = mapFunc(source.First());
+            object syncRoot = new object();
+            Parallel.ForEach(Partitioner.Create(0, source.Length),
+                range => 
+                {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
+                    lock (syncRoot)
+                        if (result < x)
+                            result = x;
+                });
+
+            return result;
+        }
+
+        [Pure]
+        private static ulong? Max<T>([NotNull] this T[] source, [NotNull] Func<T, ulong?> mapFunc, int startIndex, int endIndex)
+        {
+            if (source.Length <= 4)
+            {
+                if (source.Length == 0)
+                    return 0;
+                if (source.Length == 1)
+                    return mapFunc(source[0]);
+                if (source.Length == 2)
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                if (source.Length == 3)
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));
+            }
+            ulong? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int i;
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
+            {
+                ulong? arg0 = mapFunc(source[i + 0]);
+                if (arg0.HasValue && max0 < arg0)
+                    max0 = arg0.Value;
+                ulong? arg1 = mapFunc(source[i + 1]);
+                if (arg1.HasValue && max1 < arg1)
+                    max1 = arg1.Value;
+                ulong? arg2 = mapFunc(source[i + 2]);
+                if (arg2.HasValue && max2 < arg2)
+                    max2 = arg2.Value;
+                ulong? arg3 = mapFunc(source[i + 3]);
+                if (arg3.HasValue && max3 < arg3)
+                    max3 = arg3.Value;
+                
+            }
+            if (i == source.Length)
+                return (ulong?) Max(Max(max0, max1), Max(max2, max3));
+            if (i == source.Length - 1)
+                return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), mapFunc(source[i]));
+            if (i == source.Length - 2)
+                return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), mapFunc(source[i + 1])));
+            return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
+        } 
+                
+        /// <summary>
+        /// Search max value in collection or zero if all items are null
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Maximum value of collection</returns>
+        [Pure]
+        public static ulong? Max([NotNull] this List<ulong?> source)
+        {
+            source.IsNotNull("source");
+            if (source.Count < Constants.SingleThreadExecutionThreshold)
+                return Max(source, 0, source.Count);
+            ulong? result = source.FirstOrDefault();
+            object syncRoot = new object();
+            Parallel.ForEach(Partitioner.Create(0, source.Count),
+                range => 
+                {
+                    var x = Max(source, range.Item1, range.Item2);
+                    lock (syncRoot)
+                        if (result < x)
+                            result = x;
+                });
+
+            return result;
+        }
+
+        [Pure]
+        private static ulong? Max([NotNull] this List<ulong?> source, int startIndex, int endIndex)
+        {
+            if (source.Count <= 4)
+            {
+                if (source.Count == 0)
+                    return 0;
+                if (source.Count == 1)
+                    return source[0];
+                if (source.Count == 2)
+                    return Max(source[0], source[1]);
+                if (source.Count == 3)
+                    return Max(source[0], Max(source[1], source[2]));
+                return Max(Max(source[0], source[1]), Max(source[2], source[3]));
+            }
+            ulong? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int i;
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
+            {
+                ulong? arg0 = source[i + 0];
+                if (arg0.HasValue && max0 < arg0)
+                    max0 = arg0.Value;
+                ulong? arg1 = source[i + 1];
+                if (arg1.HasValue && max1 < arg1)
+                    max1 = arg1.Value;
+                ulong? arg2 = source[i + 2];
+                if (arg2.HasValue && max2 < arg2)
+                    max2 = arg2.Value;
+                ulong? arg3 = source[i + 3];
+                if (arg3.HasValue && max3 < arg3)
+                    max3 = arg3.Value;
+                
+            }
+            if (i == source.Count)
+                return (ulong?) Max(Max(max0, max1), Max(max2, max3));
+            if (i == source.Count - 1)
+                return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), source[i]);
+            if (i == source.Count - 2)
+                return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
+            return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
+        } 
+
+        /// <summary>
+        /// Search max value in mapped collection or zero if all items are null
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+        /// <returns>Maximum value of mapping</returns>
+        [Pure]
+        public static ulong? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, ulong?> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            if (source.Count < Constants.SingleThreadExecutionThreshold)
+                return Max(source, mapFunc, 0, source.Count);
+            ulong? result = mapFunc(source.First());
+            object syncRoot = new object();
+            Parallel.ForEach(Partitioner.Create(0, source.Count),
+                range => 
+                {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
+                    lock (syncRoot)
+                        if (result < x)
+                            result = x;
+                });
+
+            return result;
+        }
+
+        [Pure]
+        private static ulong? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, ulong?> mapFunc, int startIndex, int endIndex)
+        {
+            if (source.Count <= 4)
+            {
+                if (source.Count == 0)
+                    return 0;
+                if (source.Count == 1)
+                    return mapFunc(source[0]);
+                if (source.Count == 2)
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                if (source.Count == 3)
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));
+            }
+            ulong? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int i;
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
+            {
+                ulong? arg0 = mapFunc(source[i + 0]);
+                if (arg0.HasValue && max0 < arg0)
+                    max0 = arg0.Value;
+                ulong? arg1 = mapFunc(source[i + 1]);
+                if (arg1.HasValue && max1 < arg1)
+                    max1 = arg1.Value;
+                ulong? arg2 = mapFunc(source[i + 2]);
+                if (arg2.HasValue && max2 < arg2)
+                    max2 = arg2.Value;
+                ulong? arg3 = mapFunc(source[i + 3]);
+                if (arg3.HasValue && max3 < arg3)
+                    max3 = arg3.Value;
+                
+            }
+            if (i == source.Count)
+                return (ulong?) Max(Max(max0, max1), Max(max2, max3));
+            if (i == source.Count - 1)
+                return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), mapFunc(source[i]));
+            if (i == source.Count - 2)
+                return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), mapFunc(source[i + 1])));
+            return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
+        } 
+                
+        /// <summary>
+        /// Search max value in collection or zero if all items are null
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <returns>Maximum value of collection</returns>
+        [Pure]
+        public static ulong? Max([NotNull] this IList<ulong?> source)
+        {
+            source.IsNotNull("source");
+            if (source.Count < Constants.SingleThreadExecutionThreshold)
+                return Max(source, 0, source.Count);
+            ulong? result = source.FirstOrDefault();
+            object syncRoot = new object();
+            Parallel.ForEach(Partitioner.Create(0, source.Count),
+                range => 
+                {
+                    var x = Max(source, range.Item1, range.Item2);
+                    lock (syncRoot)
+                        if (result < x)
+                            result = x;
+                });
+
+            return result;
+        }
+
+        [Pure]
+        private static ulong? Max([NotNull] this IList<ulong?> source, int startIndex, int endIndex)
+        {
+            if (source.Count <= 4)
+            {
+                if (source.Count == 0)
+                    return 0;
+                if (source.Count == 1)
+                    return source[0];
+                if (source.Count == 2)
+                    return Max(source[0], source[1]);
+                if (source.Count == 3)
+                    return Max(source[0], Max(source[1], source[2]));
+                return Max(Max(source[0], source[1]), Max(source[2], source[3]));
+            }
+            ulong? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
+            int i;
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
+            {
+                ulong? arg0 = source[i + 0];
+                if (arg0.HasValue && max0 < arg0)
+                    max0 = arg0.Value;
+                ulong? arg1 = source[i + 1];
+                if (arg1.HasValue && max1 < arg1)
+                    max1 = arg1.Value;
+                ulong? arg2 = source[i + 2];
+                if (arg2.HasValue && max2 < arg2)
+                    max2 = arg2.Value;
+                ulong? arg3 = source[i + 3];
+                if (arg3.HasValue && max3 < arg3)
+                    max3 = arg3.Value;
+                
+            }
+            if (i == source.Count)
+                return (ulong?) Max(Max(max0, max1), Max(max2, max3));
+            if (i == source.Count - 1)
+                return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), source[i]);
+            if (i == source.Count - 2)
+                return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
+            return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
+        } 
+
+        /// <summary>
+        /// Search max value in mapped collection or zero if all items are null
+        /// </summary>
+        /// <param name="source">Source collection</param>
+        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
+        /// <returns>Maximum value of mapping</returns>
+        [Pure]
+        public static ulong? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, ulong?> mapFunc)
+        {
+            source.IsNotNull("source");
+            mapFunc.IsNotNull("mapFunc");
+            if (source.Count < Constants.SingleThreadExecutionThreshold)
+                return Max(source, mapFunc, 0, source.Count);
+            ulong? result = mapFunc(source.First());
+            object syncRoot = new object();
+            Parallel.ForEach(Partitioner.Create(0, source.Count),
+                range => 
+                {
+                    var x = Max(source, mapFunc, range.Item1, range.Item2);
+                    lock (syncRoot)
+                        if (result < x)
+                            result = x;
+                });
+
+            return result;
+        }
+
+        [Pure]
+        private static ulong? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, ulong?> mapFunc, int startIndex, int endIndex)
+        {
+            if (source.Count <= 4)
+            {
+                if (source.Count == 0)
+                    return 0;
+                if (source.Count == 1)
+                    return mapFunc(source[0]);
+                if (source.Count == 2)
+                    return Max(mapFunc(source[0]), mapFunc(source[1]));
+                if (source.Count == 3)
+                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
+                return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));
+            }
+            ulong? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
+            int i;
+            int loopEnd = endIndex - Constants.Step + 1;
+            for (i = startIndex; i < loopEnd; i += Constants.Step)
+            {
+                ulong? arg0 = mapFunc(source[i + 0]);
+                if (arg0.HasValue && max0 < arg0)
+                    max0 = arg0.Value;
+                ulong? arg1 = mapFunc(source[i + 1]);
+                if (arg1.HasValue && max1 < arg1)
+                    max1 = arg1.Value;
+                ulong? arg2 = mapFunc(source[i + 2]);
+                if (arg2.HasValue && max2 < arg2)
+                    max2 = arg2.Value;
+                ulong? arg3 = mapFunc(source[i + 3]);
+                if (arg3.HasValue && max3 < arg3)
+                    max3 = arg3.Value;
+                
+            }
+            if (i == source.Count)
+                return (ulong?) Max(Max(max0, max1), Max(max2, max3));
+            if (i == source.Count - 1)
+                return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), mapFunc(source[i]));
+            if (i == source.Count - 2)
+                return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), mapFunc(source[i + 1])));
+            return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
+        } 
+        
+        #endregion
+            
+        [Pure]
         private static float? Max(float? x, float? y)
         {
             bool hasValX = x.HasValue;
@@ -8859,436 +9289,6 @@ namespace ZLinq
             if (i == source.Count - 2)
                 return (decimal?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), mapFunc(source[i + 1])));
             return (decimal?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
-        } 
-        
-        #endregion
-            
-        [Pure]
-        private static ulong? Max(ulong? x, ulong? y)
-        {
-            bool hasValX = x.HasValue;
-            bool hasValY = y.HasValue;
-            if (hasValX && hasValY)
-                return Math.Max(x.Value, y.Value);
-            if (hasValX)
-                return x.Value;
-            return y.GetValueOrDefault();            
-        }
-
-        #region ulong?             
-                
-        /// <summary>
-        /// Search max value in collection or zero if all items are null
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
-        [Pure]
-        public static ulong? Max([NotNull] this ulong?[] source)
-        {
-            source.IsNotNull("source");
-            if (source.Length < Constants.SingleThreadExecutionThreshold)
-                return Max(source, 0, source.Length);
-            ulong? result = source.FirstOrDefault();
-            object syncRoot = new object();
-            Parallel.ForEach(Partitioner.Create(0, source.Length),
-                range => 
-                {
-                    var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
-                });
-
-            return result;
-        }
-
-        [Pure]
-        private static ulong? Max([NotNull] this ulong?[] source, int startIndex, int endIndex)
-        {
-            if (source.Length <= 4)
-            {
-                if (source.Length == 0)
-                    return 0;
-                if (source.Length == 1)
-                    return source[0];
-                if (source.Length == 2)
-                    return Max(source[0], source[1]);
-                if (source.Length == 3)
-                    return Max(source[0], Max(source[1], source[2]));
-                return Max(Max(source[0], source[1]), Max(source[2], source[3]));
-            }
-            ulong? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
-            int i;
-            int loopEnd = endIndex - Constants.Step + 1;
-            for (i = startIndex; i < loopEnd; i += Constants.Step)
-            {
-                ulong? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
-                    max0 = arg0.Value;
-                ulong? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
-                    max1 = arg1.Value;
-                ulong? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
-                    max2 = arg2.Value;
-                ulong? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
-                    max3 = arg3.Value;
-                
-            }
-            if (i == source.Length)
-                return (ulong?) Max(Max(max0, max1), Max(max2, max3));
-            if (i == source.Length - 1)
-                return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), source[i]);
-            if (i == source.Length - 2)
-                return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
-            return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
-        } 
-
-        /// <summary>
-        /// Search max value in mapped collection or zero if all items are null
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
-        /// <returns>Maximum value of mapping</returns>
-        [Pure]
-        public static ulong? Max<T>([NotNull] this T[] source, [NotNull] Func<T, ulong?> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            if (source.Length < Constants.SingleThreadExecutionThreshold)
-                return Max(source, mapFunc, 0, source.Length);
-            ulong? result = mapFunc(source.First());
-            object syncRoot = new object();
-            Parallel.ForEach(Partitioner.Create(0, source.Length),
-                range => 
-                {
-                    var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
-                });
-
-            return result;
-        }
-
-        [Pure]
-        private static ulong? Max<T>([NotNull] this T[] source, [NotNull] Func<T, ulong?> mapFunc, int startIndex, int endIndex)
-        {
-            if (source.Length <= 4)
-            {
-                if (source.Length == 0)
-                    return 0;
-                if (source.Length == 1)
-                    return mapFunc(source[0]);
-                if (source.Length == 2)
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
-                if (source.Length == 3)
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));
-            }
-            ulong? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
-            int i;
-            int loopEnd = endIndex - Constants.Step + 1;
-            for (i = startIndex; i < loopEnd; i += Constants.Step)
-            {
-                ulong? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
-                    max0 = arg0.Value;
-                ulong? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
-                    max1 = arg1.Value;
-                ulong? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
-                    max2 = arg2.Value;
-                ulong? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
-                    max3 = arg3.Value;
-                
-            }
-            if (i == source.Length)
-                return (ulong?) Max(Max(max0, max1), Max(max2, max3));
-            if (i == source.Length - 1)
-                return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), mapFunc(source[i]));
-            if (i == source.Length - 2)
-                return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), mapFunc(source[i + 1])));
-            return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
-        } 
-                
-        /// <summary>
-        /// Search max value in collection or zero if all items are null
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
-        [Pure]
-        public static ulong? Max([NotNull] this List<ulong?> source)
-        {
-            source.IsNotNull("source");
-            if (source.Count < Constants.SingleThreadExecutionThreshold)
-                return Max(source, 0, source.Count);
-            ulong? result = source.FirstOrDefault();
-            object syncRoot = new object();
-            Parallel.ForEach(Partitioner.Create(0, source.Count),
-                range => 
-                {
-                    var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
-                });
-
-            return result;
-        }
-
-        [Pure]
-        private static ulong? Max([NotNull] this List<ulong?> source, int startIndex, int endIndex)
-        {
-            if (source.Count <= 4)
-            {
-                if (source.Count == 0)
-                    return 0;
-                if (source.Count == 1)
-                    return source[0];
-                if (source.Count == 2)
-                    return Max(source[0], source[1]);
-                if (source.Count == 3)
-                    return Max(source[0], Max(source[1], source[2]));
-                return Max(Max(source[0], source[1]), Max(source[2], source[3]));
-            }
-            ulong? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
-            int i;
-            int loopEnd = endIndex - Constants.Step + 1;
-            for (i = startIndex; i < loopEnd; i += Constants.Step)
-            {
-                ulong? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
-                    max0 = arg0.Value;
-                ulong? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
-                    max1 = arg1.Value;
-                ulong? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
-                    max2 = arg2.Value;
-                ulong? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
-                    max3 = arg3.Value;
-                
-            }
-            if (i == source.Count)
-                return (ulong?) Max(Max(max0, max1), Max(max2, max3));
-            if (i == source.Count - 1)
-                return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), source[i]);
-            if (i == source.Count - 2)
-                return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
-            return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
-        } 
-
-        /// <summary>
-        /// Search max value in mapped collection or zero if all items are null
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
-        /// <returns>Maximum value of mapping</returns>
-        [Pure]
-        public static ulong? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, ulong?> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            if (source.Count < Constants.SingleThreadExecutionThreshold)
-                return Max(source, mapFunc, 0, source.Count);
-            ulong? result = mapFunc(source.First());
-            object syncRoot = new object();
-            Parallel.ForEach(Partitioner.Create(0, source.Count),
-                range => 
-                {
-                    var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
-                });
-
-            return result;
-        }
-
-        [Pure]
-        private static ulong? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, ulong?> mapFunc, int startIndex, int endIndex)
-        {
-            if (source.Count <= 4)
-            {
-                if (source.Count == 0)
-                    return 0;
-                if (source.Count == 1)
-                    return mapFunc(source[0]);
-                if (source.Count == 2)
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
-                if (source.Count == 3)
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));
-            }
-            ulong? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
-            int i;
-            int loopEnd = endIndex - Constants.Step + 1;
-            for (i = startIndex; i < loopEnd; i += Constants.Step)
-            {
-                ulong? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
-                    max0 = arg0.Value;
-                ulong? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
-                    max1 = arg1.Value;
-                ulong? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
-                    max2 = arg2.Value;
-                ulong? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
-                    max3 = arg3.Value;
-                
-            }
-            if (i == source.Count)
-                return (ulong?) Max(Max(max0, max1), Max(max2, max3));
-            if (i == source.Count - 1)
-                return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), mapFunc(source[i]));
-            if (i == source.Count - 2)
-                return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), mapFunc(source[i + 1])));
-            return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
-        } 
-                
-        /// <summary>
-        /// Search max value in collection or zero if all items are null
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Maximum value of collection</returns>
-        [Pure]
-        public static ulong? Max([NotNull] this IList<ulong?> source)
-        {
-            source.IsNotNull("source");
-            if (source.Count < Constants.SingleThreadExecutionThreshold)
-                return Max(source, 0, source.Count);
-            ulong? result = source.FirstOrDefault();
-            object syncRoot = new object();
-            Parallel.ForEach(Partitioner.Create(0, source.Count),
-                range => 
-                {
-                    var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
-                });
-
-            return result;
-        }
-
-        [Pure]
-        private static ulong? Max([NotNull] this IList<ulong?> source, int startIndex, int endIndex)
-        {
-            if (source.Count <= 4)
-            {
-                if (source.Count == 0)
-                    return 0;
-                if (source.Count == 1)
-                    return source[0];
-                if (source.Count == 2)
-                    return Max(source[0], source[1]);
-                if (source.Count == 3)
-                    return Max(source[0], Max(source[1], source[2]));
-                return Max(Max(source[0], source[1]), Max(source[2], source[3]));
-            }
-            ulong? max0 = source[startIndex], max1 = source[startIndex + 1], max2 = source[startIndex + 2], max3 = source[startIndex + 3];
-            int i;
-            int loopEnd = endIndex - Constants.Step + 1;
-            for (i = startIndex; i < loopEnd; i += Constants.Step)
-            {
-                ulong? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
-                    max0 = arg0.Value;
-                ulong? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
-                    max1 = arg1.Value;
-                ulong? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
-                    max2 = arg2.Value;
-                ulong? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
-                    max3 = arg3.Value;
-                
-            }
-            if (i == source.Count)
-                return (ulong?) Max(Max(max0, max1), Max(max2, max3));
-            if (i == source.Count - 1)
-                return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), source[i]);
-            if (i == source.Count - 2)
-                return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], source[i + 1]));
-            return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(source[i], Max(source[i + 1], source[i + 2])));
-        } 
-
-        /// <summary>
-        /// Search max value in mapped collection or zero if all items are null
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform search</param>
-        /// <returns>Maximum value of mapping</returns>
-        [Pure]
-        public static ulong? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, ulong?> mapFunc)
-        {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
-            if (source.Count < Constants.SingleThreadExecutionThreshold)
-                return Max(source, mapFunc, 0, source.Count);
-            ulong? result = mapFunc(source.First());
-            object syncRoot = new object();
-            Parallel.ForEach(Partitioner.Create(0, source.Count),
-                range => 
-                {
-                    var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
-                });
-
-            return result;
-        }
-
-        [Pure]
-        private static ulong? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, ulong?> mapFunc, int startIndex, int endIndex)
-        {
-            if (source.Count <= 4)
-            {
-                if (source.Count == 0)
-                    return 0;
-                if (source.Count == 1)
-                    return mapFunc(source[0]);
-                if (source.Count == 2)
-                    return Max(mapFunc(source[0]), mapFunc(source[1]));
-                if (source.Count == 3)
-                    return Max(mapFunc(source[0]), Max(mapFunc(source[1]), mapFunc(source[2])));
-                return Max(Max(mapFunc(source[0]), mapFunc(source[1])), Max(mapFunc(source[2]), mapFunc(source[3])));
-            }
-            ulong? max0 = mapFunc(source[startIndex]), max1 = mapFunc(source[startIndex + 1]), max2 = mapFunc(source[startIndex + 2]), max3 = mapFunc(source[startIndex + 3]);
-            int i;
-            int loopEnd = endIndex - Constants.Step + 1;
-            for (i = startIndex; i < loopEnd; i += Constants.Step)
-            {
-                ulong? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
-                    max0 = arg0.Value;
-                ulong? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
-                    max1 = arg1.Value;
-                ulong? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
-                    max2 = arg2.Value;
-                ulong? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
-                    max3 = arg3.Value;
-                
-            }
-            if (i == source.Count)
-                return (ulong?) Max(Max(max0, max1), Max(max2, max3));
-            if (i == source.Count - 1)
-                return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), mapFunc(source[i]));
-            if (i == source.Count - 2)
-                return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), mapFunc(source[i + 1])));
-            return (ulong?) Max(Max(Max(max0, max1), Max(max2, max3)), Max(mapFunc(source[i]), Max(mapFunc(source[i + 1]), mapFunc(source[i + 2]))));
         } 
         
         #endregion

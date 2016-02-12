@@ -13,7 +13,7 @@ using System.Linq.Expressions;
 using JetBrains.Annotations;
 using ZLinq.Class;
 using ZLinq.Comparers;
-using ZLinq.Extension;
+using ZLinq.Common;
 
 // ReSharper disable CheckNamespace
 namespace ZLinq

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using JetBrains.Annotations;
-using ZLinq.Extension;
+using ZLinq.Common;
 
 // ReSharper disable CheckNamespace
 namespace ZLinq
@@ -47,6 +47,10 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             predicate.IsNotNull("predicate");
+            if (source is T[])
+            {
+                throw new NotSupportedException("Arrays should be processed with ref overload because of resizing. It couldn't be done by interface reference");
+            }
             int i = 0;
             for (int j = 0; j < source.Count; j++)
             {
