@@ -26,8 +26,9 @@ namespace ZLinq
 <#foreach (var type in TT.WithNullables(TT.NumberTypes)) {
     bool isNullable = TT.IsNullable(type);
     string max = isNullable ? "Max" : "Math.Max";
-    Func<string, string> hasValueCheck = isNullable ? new Func<string, string>(s => s + ".HasValue &&") : new Func<string, string>(s => "");
     string valuePrefix = isNullable ? ".Value" : "";
+    Func<string, string, string> isHigher = isNullable ? new Func<string, string, string>((maxName, candidate) => TT.GetMaxNullable(maxName, candidate)) : (maxName, candidate) => maxName + " < " + candidate;
+    Func<string, string, string> isHigherNoCheck = isNullable ? new Func<string, string, string>((maxName, candidate) => TT.GetMaxNullableNoCheck(maxName, candidate)) : (maxName, candidate) => maxName + " < " + candidate;
  #>
         
         <# if (isNullable) { #>
@@ -75,9 +76,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source<#= secondParamCall #>, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (<#= isHigher("result", "x") #>)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (<#= isHigherNoCheck("result", "x") #>)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -107,7 +113,7 @@ namespace ZLinq
             {
                 <# foreach(int j in TT.Unroll) { 
                 #><#= type #> arg<#= j #> = <#= TT.Envelope(mapFunc, string.Format("source[i + {0}]", j)) #>;
-                if (<#= hasValueCheck("arg" + j) #> max<#= j #> < arg<#= j #>)
+                if (<#= isHigher("max" + j, "arg" + j) #>)
                     max<#= j #> = arg<#= j #><#= valuePrefix #>;
                 <# } #>
 

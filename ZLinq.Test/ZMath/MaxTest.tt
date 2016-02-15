@@ -28,8 +28,7 @@ namespace ZLinq.Test.ZMath
         #region <#= type #>             
         <# foreach (string sourceType in TT.StandardLists) { 
         string name = TT.GetCollectionName(sourceType);#>    
-        <# if (TT.CanBeRepresented(type, i)) { #>
-
+        
         [TestMethod]
         public void TestMax<#= typeName #><#= name #><#= i #>()
         {
@@ -47,8 +46,6 @@ namespace ZLinq.Test.ZMath
             <#= type #> maxExpected = Enumerable.Max(source, arg => arg.X);        
             Assert.AreEqual(maxExpected, maxActual);
         }
-
-        <# } #>
     
         [TestMethod]
         public void TestMax<#= typeName #><#= name #><#= i #>Null()
@@ -81,6 +78,29 @@ namespace ZLinq.Test.ZMath
                 
             }
         }
+
+        <# if (TT.IsNullable(type)) { #>
+
+        [TestMethod]
+        public void TestMax<#= typeName #><#= name #><#= i #>TreatNulls()
+        {
+            var source = ZEnumerable.Repeat(new Random(), r => (<#= type #>) r.Next(<#= TT.GetMaxValue(type) #>), <#= i #>).Select(x=>x%2==0 ? x : null).To<#= name #>();
+            <#= type #> maxActual = ZEnumerable.Max(source);
+            <#= type #> maxExpected = Enumerable.Max(source, arg => arg ?? 0);          
+            Assert.AreEqual(maxExpected, maxActual);
+        }
+           
+        [TestMethod]
+        public void TestMax<#= typeName #><#= name #><#= i #>TreatNullsMap()
+        {
+            var baseCol = ZEnumerable.Repeat(new Random(), r => (<#= type #>) r.Next(<#= TT.GetMaxValue(type) #>), <#= i #>).Select(x=>x%2==0 ? x : null).To<#= name #>();
+            var source = baseCol.Select(x => new { X =  x } ).To<#= name #>();
+            <#= type #> maxActual = ZEnumerable.Max(source, arg => arg.X);
+            <#= type #> maxExpected = Enumerable.Max(source, arg => arg.X ?? 0);        
+            Assert.AreEqual(maxExpected, maxActual);
+        }
+        <# } #>
+        
         <# } #>
         
         #endregion

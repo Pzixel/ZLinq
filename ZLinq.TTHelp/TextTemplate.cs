@@ -204,5 +204,7 @@ namespace ZLinq.TTHelp
         public static string Envelope(string shell, string value) => shell == string.Empty ? value : $"{shell}({value})";
         public static IEnumerable<int> Unroll = Enumerable.Range(0, Constants.Step);
         public static IEnumerable<int> UnrollInclusive = Enumerable.Range(0, Constants.Step + 1);
+        public static string GetMaxNullable(string max, string candidate) => $"{candidate}.HasValue && ({GetMaxNullableNoCheck(max, candidate)})";
+        public static string GetMaxNullableNoCheck(string max, string candidate) => $"{max} < {candidate} || !{max}.HasValue";
     }
 }

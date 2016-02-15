@@ -38,9 +38,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -77,16 +82,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 sbyte arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 sbyte arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 sbyte arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 sbyte arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -121,9 +126,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -160,16 +170,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 sbyte arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 sbyte arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 sbyte arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 sbyte arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -203,9 +213,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -242,16 +257,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 sbyte arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 sbyte arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 sbyte arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 sbyte arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -286,9 +301,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -325,16 +345,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 sbyte arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 sbyte arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 sbyte arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 sbyte arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -368,9 +388,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -407,16 +432,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 sbyte arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 sbyte arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 sbyte arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 sbyte arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -451,9 +476,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -490,16 +520,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 sbyte arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 sbyte arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 sbyte arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 sbyte arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -538,9 +568,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -577,16 +612,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 byte arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 byte arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 byte arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 byte arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -621,9 +656,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -660,16 +700,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 byte arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 byte arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 byte arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 byte arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -703,9 +743,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -742,16 +787,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 byte arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 byte arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 byte arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 byte arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -786,9 +831,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -825,16 +875,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 byte arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 byte arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 byte arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 byte arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -868,9 +918,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -907,16 +962,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 byte arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 byte arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 byte arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 byte arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -951,9 +1006,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -990,16 +1050,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 byte arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 byte arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 byte arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 byte arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -1038,9 +1098,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -1077,16 +1142,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 short arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 short arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 short arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 short arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -1121,9 +1186,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -1160,16 +1230,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 short arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 short arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 short arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 short arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -1203,9 +1273,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -1242,16 +1317,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 short arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 short arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 short arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 short arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -1286,9 +1361,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -1325,16 +1405,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 short arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 short arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 short arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 short arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -1368,9 +1448,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -1407,16 +1492,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 short arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 short arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 short arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 short arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -1451,9 +1536,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -1490,16 +1580,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 short arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 short arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 short arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 short arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -1538,9 +1628,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -1577,16 +1672,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ushort arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 ushort arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 ushort arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 ushort arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -1621,9 +1716,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -1660,16 +1760,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ushort arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 ushort arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 ushort arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 ushort arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -1703,9 +1803,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -1742,16 +1847,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ushort arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 ushort arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 ushort arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 ushort arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -1786,9 +1891,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -1825,16 +1935,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ushort arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 ushort arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 ushort arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 ushort arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -1868,9 +1978,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -1907,16 +2022,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ushort arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 ushort arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 ushort arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 ushort arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -1951,9 +2066,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -1990,16 +2110,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ushort arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 ushort arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 ushort arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 ushort arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -2038,9 +2158,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -2077,16 +2202,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 int arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 int arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 int arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 int arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -2121,9 +2246,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -2160,16 +2290,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 int arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 int arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 int arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 int arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -2203,9 +2333,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -2242,16 +2377,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 int arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 int arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 int arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 int arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -2286,9 +2421,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -2325,16 +2465,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 int arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 int arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 int arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 int arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -2368,9 +2508,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -2407,16 +2552,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 int arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 int arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 int arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 int arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -2451,9 +2596,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -2490,16 +2640,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 int arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 int arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 int arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 int arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -2538,9 +2688,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -2577,16 +2732,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 uint arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 uint arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 uint arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 uint arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -2621,9 +2776,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -2660,16 +2820,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 uint arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 uint arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 uint arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 uint arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -2703,9 +2863,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -2742,16 +2907,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 uint arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 uint arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 uint arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 uint arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -2786,9 +2951,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -2825,16 +2995,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 uint arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 uint arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 uint arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 uint arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -2868,9 +3038,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -2907,16 +3082,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 uint arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 uint arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 uint arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 uint arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -2951,9 +3126,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -2990,16 +3170,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 uint arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 uint arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 uint arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 uint arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -3038,9 +3218,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -3077,16 +3262,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 long arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 long arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 long arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 long arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -3121,9 +3306,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -3160,16 +3350,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 long arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 long arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 long arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 long arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -3203,9 +3393,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -3242,16 +3437,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 long arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 long arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 long arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 long arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -3286,9 +3481,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -3325,16 +3525,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 long arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 long arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 long arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 long arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -3368,9 +3568,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -3407,16 +3612,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 long arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 long arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 long arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 long arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -3451,9 +3656,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -3490,16 +3700,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 long arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 long arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 long arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 long arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -3538,9 +3748,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -3577,16 +3792,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ulong arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 ulong arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 ulong arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 ulong arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -3621,9 +3836,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -3660,16 +3880,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ulong arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 ulong arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 ulong arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 ulong arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -3703,9 +3923,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -3742,16 +3967,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ulong arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 ulong arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 ulong arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 ulong arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -3786,9 +4011,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -3825,16 +4055,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ulong arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 ulong arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 ulong arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 ulong arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -3868,9 +4098,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -3907,16 +4142,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ulong arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 ulong arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 ulong arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 ulong arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -3951,9 +4186,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -3990,16 +4230,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ulong arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 ulong arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 ulong arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 ulong arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -4038,9 +4278,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -4077,16 +4322,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 float arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 float arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 float arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 float arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -4121,9 +4366,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -4160,16 +4410,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 float arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 float arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 float arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 float arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -4203,9 +4453,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -4242,16 +4497,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 float arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 float arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 float arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 float arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -4286,9 +4541,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -4325,16 +4585,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 float arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 float arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 float arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 float arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -4368,9 +4628,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -4407,16 +4672,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 float arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 float arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 float arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 float arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -4451,9 +4716,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -4490,16 +4760,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 float arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 float arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 float arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 float arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -4538,9 +4808,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -4577,16 +4852,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 double arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 double arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 double arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 double arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -4621,9 +4896,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -4660,16 +4940,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 double arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 double arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 double arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 double arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -4703,9 +4983,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -4742,16 +5027,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 double arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 double arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 double arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 double arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -4786,9 +5071,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -4825,16 +5115,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 double arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 double arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 double arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 double arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -4868,9 +5158,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -4907,16 +5202,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 double arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 double arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 double arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 double arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -4951,9 +5246,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -4990,16 +5290,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 double arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 double arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 double arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 double arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -5038,9 +5338,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -5077,16 +5382,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 decimal arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 decimal arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 decimal arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 decimal arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -5121,9 +5426,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -5160,16 +5470,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 decimal arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 decimal arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 decimal arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 decimal arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -5203,9 +5513,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -5242,16 +5557,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 decimal arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 decimal arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 decimal arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 decimal arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -5286,9 +5601,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -5325,16 +5645,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 decimal arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 decimal arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 decimal arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 decimal arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -5368,9 +5688,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -5407,16 +5732,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 decimal arg0 = source[i + 0];
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 decimal arg1 = source[i + 1];
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 decimal arg2 = source[i + 2];
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 decimal arg3 = source[i + 3];
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -5451,9 +5776,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (result < x)
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -5490,16 +5820,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 decimal arg0 = mapFunc(source[i + 0]);
-                if ( max0 < arg0)
+                if (max0 < arg0)
                     max0 = arg0;
                 decimal arg1 = mapFunc(source[i + 1]);
-                if ( max1 < arg1)
+                if (max1 < arg1)
                     max1 = arg1;
                 decimal arg2 = mapFunc(source[i + 2]);
-                if ( max2 < arg2)
+                if (max2 < arg2)
                     max2 = arg2;
                 decimal arg3 = mapFunc(source[i + 3]);
-                if ( max3 < arg3)
+                if (max3 < arg3)
                     max3 = arg3;
                 
             }
@@ -5549,9 +5879,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -5588,16 +5923,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 sbyte? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 sbyte? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 sbyte? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 sbyte? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -5632,9 +5967,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -5671,16 +6011,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 sbyte? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 sbyte? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 sbyte? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 sbyte? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -5714,9 +6054,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -5753,16 +6098,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 sbyte? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 sbyte? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 sbyte? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 sbyte? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -5797,9 +6142,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -5836,16 +6186,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 sbyte? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 sbyte? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 sbyte? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 sbyte? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -5879,9 +6229,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -5918,16 +6273,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 sbyte? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 sbyte? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 sbyte? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 sbyte? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -5962,9 +6317,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -6001,16 +6361,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 sbyte? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 sbyte? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 sbyte? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 sbyte? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -6060,9 +6420,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -6099,16 +6464,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 byte? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 byte? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 byte? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 byte? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -6143,9 +6508,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -6182,16 +6552,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 byte? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 byte? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 byte? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 byte? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -6225,9 +6595,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -6264,16 +6639,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 byte? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 byte? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 byte? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 byte? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -6308,9 +6683,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -6347,16 +6727,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 byte? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 byte? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 byte? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 byte? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -6390,9 +6770,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -6429,16 +6814,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 byte? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 byte? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 byte? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 byte? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -6473,9 +6858,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -6512,16 +6902,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 byte? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 byte? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 byte? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 byte? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -6571,9 +6961,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -6610,16 +7005,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 short? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 short? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 short? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 short? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -6654,9 +7049,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -6693,16 +7093,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 short? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 short? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 short? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 short? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -6736,9 +7136,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -6775,16 +7180,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 short? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 short? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 short? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 short? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -6819,9 +7224,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -6858,16 +7268,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 short? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 short? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 short? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 short? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -6901,9 +7311,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -6940,16 +7355,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 short? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 short? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 short? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 short? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -6984,9 +7399,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -7023,16 +7443,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 short? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 short? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 short? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 short? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -7082,9 +7502,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -7121,16 +7546,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ushort? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 ushort? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 ushort? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 ushort? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -7165,9 +7590,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -7204,16 +7634,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ushort? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 ushort? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 ushort? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 ushort? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -7247,9 +7677,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -7286,16 +7721,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ushort? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 ushort? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 ushort? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 ushort? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -7330,9 +7765,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -7369,16 +7809,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ushort? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 ushort? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 ushort? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 ushort? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -7412,9 +7852,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -7451,16 +7896,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ushort? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 ushort? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 ushort? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 ushort? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -7495,9 +7940,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -7534,16 +7984,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ushort? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 ushort? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 ushort? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 ushort? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -7593,9 +8043,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -7632,16 +8087,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 int? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 int? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 int? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 int? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -7676,9 +8131,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -7715,16 +8175,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 int? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 int? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 int? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 int? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -7758,9 +8218,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -7797,16 +8262,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 int? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 int? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 int? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 int? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -7841,9 +8306,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -7880,16 +8350,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 int? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 int? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 int? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 int? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -7923,9 +8393,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -7962,16 +8437,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 int? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 int? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 int? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 int? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -8006,9 +8481,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -8045,16 +8525,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 int? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 int? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 int? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 int? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -8104,9 +8584,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -8143,16 +8628,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 uint? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 uint? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 uint? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 uint? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -8187,9 +8672,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -8226,16 +8716,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 uint? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 uint? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 uint? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 uint? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -8269,9 +8759,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -8308,16 +8803,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 uint? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 uint? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 uint? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 uint? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -8352,9 +8847,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -8391,16 +8891,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 uint? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 uint? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 uint? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 uint? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -8434,9 +8934,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -8473,16 +8978,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 uint? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 uint? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 uint? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 uint? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -8517,9 +9022,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -8556,16 +9066,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 uint? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 uint? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 uint? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 uint? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -8615,9 +9125,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -8654,16 +9169,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 long? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 long? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 long? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 long? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -8698,9 +9213,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -8737,16 +9257,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 long? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 long? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 long? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 long? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -8780,9 +9300,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -8819,16 +9344,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 long? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 long? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 long? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 long? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -8863,9 +9388,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -8902,16 +9432,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 long? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 long? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 long? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 long? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -8945,9 +9475,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -8984,16 +9519,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 long? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 long? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 long? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 long? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -9028,9 +9563,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -9067,16 +9607,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 long? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 long? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 long? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 long? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -9126,9 +9666,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -9165,16 +9710,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ulong? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 ulong? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 ulong? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 ulong? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -9209,9 +9754,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -9248,16 +9798,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ulong? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 ulong? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 ulong? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 ulong? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -9291,9 +9841,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -9330,16 +9885,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ulong? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 ulong? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 ulong? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 ulong? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -9374,9 +9929,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -9413,16 +9973,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ulong? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 ulong? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 ulong? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 ulong? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -9456,9 +10016,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -9495,16 +10060,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ulong? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 ulong? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 ulong? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 ulong? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -9539,9 +10104,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -9578,16 +10148,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 ulong? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 ulong? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 ulong? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 ulong? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -9637,9 +10207,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -9676,16 +10251,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 float? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 float? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 float? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 float? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -9720,9 +10295,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -9759,16 +10339,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 float? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 float? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 float? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 float? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -9802,9 +10382,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -9841,16 +10426,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 float? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 float? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 float? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 float? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -9885,9 +10470,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -9924,16 +10514,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 float? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 float? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 float? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 float? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -9967,9 +10557,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -10006,16 +10601,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 float? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 float? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 float? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 float? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -10050,9 +10645,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -10089,16 +10689,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 float? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 float? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 float? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 float? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -10148,9 +10748,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -10187,16 +10792,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 double? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 double? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 double? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 double? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -10231,9 +10836,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -10270,16 +10880,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 double? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 double? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 double? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 double? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -10313,9 +10923,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -10352,16 +10967,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 double? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 double? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 double? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 double? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -10396,9 +11011,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -10435,16 +11055,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 double? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 double? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 double? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 double? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -10478,9 +11098,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -10517,16 +11142,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 double? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 double? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 double? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 double? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -10561,9 +11186,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -10600,16 +11230,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 double? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 double? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 double? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 double? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -10659,9 +11289,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -10698,16 +11333,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 decimal? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 decimal? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 decimal? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 decimal? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -10742,9 +11377,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -10781,16 +11421,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 decimal? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 decimal? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 decimal? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 decimal? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -10824,9 +11464,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -10863,16 +11508,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 decimal? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 decimal? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 decimal? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 decimal? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -10907,9 +11552,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -10946,16 +11596,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 decimal? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 decimal? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 decimal? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 decimal? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -10989,9 +11639,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -11028,16 +11683,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 decimal? arg0 = source[i + 0];
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 decimal? arg1 = source[i + 1];
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 decimal? arg2 = source[i + 2];
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 decimal? arg3 = source[i + 3];
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
@@ -11072,9 +11727,14 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source, mapFunc, range.Item1, range.Item2);
-                    lock (syncRoot)
-                        if (result < x)
-                            result = x;
+                    if (x.HasValue && (result < x || !result.HasValue))
+                    {
+                        lock (syncRoot)
+                        {
+                            if (result < x || !result.HasValue)
+                                result = x;
+                        }
+                    }
                 });
 
             return result;
@@ -11111,16 +11771,16 @@ namespace ZLinq
             for (i = startIndex; i < loopEnd; i += Constants.Step)
             {
                 decimal? arg0 = mapFunc(source[i + 0]);
-                if (arg0.HasValue && max0 < arg0)
+                if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
                     max0 = arg0.Value;
                 decimal? arg1 = mapFunc(source[i + 1]);
-                if (arg1.HasValue && max1 < arg1)
+                if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
                     max1 = arg1.Value;
                 decimal? arg2 = mapFunc(source[i + 2]);
-                if (arg2.HasValue && max2 < arg2)
+                if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
                     max2 = arg2.Value;
                 decimal? arg3 = mapFunc(source[i + 3]);
-                if (arg3.HasValue && max3 < arg3)
+                if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
                     max3 = arg3.Value;
                 
             }
