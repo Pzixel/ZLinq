@@ -34,7 +34,7 @@ namespace ZLinq.Test.ZMath
          #>    
 
          
-        <# foreach(int i in new[] {100, 2049, 2051 }) { #>
+        <# foreach(int i in TT.TestSizes) { #>
         [TestMethod]
         public void TestAverage<#= typeName #><#= TT.GetCollectionName(sourceType) #><#= i #>()
         {            

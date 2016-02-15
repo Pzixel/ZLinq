@@ -8,6 +8,7 @@ namespace ZLinq.TTHelp
 {
     public class TT
     {
+        public static readonly int[] TestSizes = {0, 1, 2, 3, 4, 100, 2049, 2051};
         public static readonly string[] IntableTypes =
         {
             "sbyte",

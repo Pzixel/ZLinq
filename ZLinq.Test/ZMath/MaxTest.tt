@@ -19,7 +19,7 @@ namespace ZLinq.Test.ZMath
     [TestClass]
     public class Max
     {            
-    <# foreach(int i in new[] {100, 2049, 2051 }) { #>
+    <# foreach(int i in TT.TestSizes) { #>
 
                 
     <#foreach (var type in TT.WithNullables(TT.NumberTypes)) { 
@@ -82,7 +82,7 @@ namespace ZLinq.Test.ZMath
         <# if (TT.IsNullable(type)) { #>
 
         [TestMethod]
-        public void TestMax<#= typeName #><#= name #><#= i #>TreatNulls()
+        public void TestMax<#= typeName #><#= name #><#= i #>ThreatNulls()
         {
             var source = ZEnumerable.Repeat(new Random(), r => (<#= type #>) r.Next(<#= TT.GetMaxValue(type) #>), <#= i #>).Select(x=>x%2==0 ? x : null).To<#= name #>();
             <#= type #> maxActual = ZEnumerable.Max(source);
@@ -91,7 +91,7 @@ namespace ZLinq.Test.ZMath
         }
            
         [TestMethod]
-        public void TestMax<#= typeName #><#= name #><#= i #>TreatNullsMap()
+        public void TestMax<#= typeName #><#= name #><#= i #>ThreatNullsMap()
         {
             var baseCol = ZEnumerable.Repeat(new Random(), r => (<#= type #>) r.Next(<#= TT.GetMaxValue(type) #>), <#= i #>).Select(x=>x%2==0 ? x : null).To<#= name #>();
             var source = baseCol.Select(x => new { X =  x } ).To<#= name #>();

@@ -19,7 +19,7 @@ namespace ZLinq.Test.ZMath
     [TestClass]
     public class Sum
     {            
-    <# foreach(int i in new[] {100, 2049, 2051 }) { #>
+    <# foreach(int i in TT.TestSizes) { #>
 
                 
     <#foreach (var type in TT.WithNullables(TT.NumberTypes)) { 
@@ -28,6 +28,28 @@ namespace ZLinq.Test.ZMath
         <# foreach (string sourceType in TT.StandardLists) { 
         string name = TT.GetCollectionName(sourceType);#>    
         <# if (TT.CanBeRepresented(type, i)) { #>
+                
+            <# if (TT.IsNullable(type)) { #>
+
+        [TestMethod]
+        public void TestSum<#= typeName #><#= name #><#= i #>ThreatNulls()
+        {
+            var source = ZEnumerable.Repeat((<#= type #>) 1, <#= i #>).Select((x, i) => i%3==0 ? x : null).To<#= name #>();
+            <#= type #> SumActual = ZEnumerable.Sum(source);
+            <#= type #> SumExpected = (<#= type #>) Enumerable.Sum(source.Select(x=> <#= TT.Expand(type) #> x ?? 0));          
+            Assert.AreEqual(SumExpected, SumActual);
+        }
+           
+        [TestMethod]
+        public void TestSum<#= typeName #><#= name #><#= i #>ThreatNullsMap()
+        {
+            var baseCol = ZEnumerable.Repeat((<#= type #>) 1, <#= i #>).Select((x, i) => i%3==0 ? x : null).To<#= name #>();
+            var source = baseCol.Select(x => new { X = x } ).To<#= name #>();
+            <#= type #> SumActual = ZEnumerable.Sum(source, arg => arg.X);
+            <#= type #> SumExpected = (<#= type #>) Enumerable.Sum(source, arg => <#= TT.Expand(type) #> arg.X ?? 0);        
+            Assert.AreEqual(SumExpected, SumActual);
+        }
+            <# } #>
 
         [TestMethod]
         public void TestSum<#= typeName #><#= name #><#= i #>()
@@ -80,6 +102,7 @@ namespace ZLinq.Test.ZMath
                 
             }
         }
+
         <# } #>
         
         #endregion
