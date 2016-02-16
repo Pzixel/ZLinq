@@ -23,81 +23,40 @@ namespace ZLinq
     public static partial class ZEnumerable
     {        
     <#foreach (var type in TT.WithNullables(TT.NumberTypes)) { 
+        
         string resType = type.TrimEnd('?');
         string suffix = type != resType ? ".GetValueOrDefault()" : ""; #>
 
         #region <#= type #>             
         <# foreach (string sourceType in TT.StandardLists) 
-        { #>    
+        { 
+            const string funcName = "mapFunc";
+            foreach(string mapFunc in new[] {"", funcName}) {
+                bool isNotMap = mapFunc == string.Empty;
+                string collectionType = isNotMap ? sourceType.To(type) : sourceType; 
+                string secondParam = isNotMap ? "" : string.Format(", [NotNull] Func<T, {0}> {1}", type, mapFunc);
+                string secondParamCall = isNotMap ? "" : string.Format(", {0}", mapFunc);
+                string comment = isNotMap? "" : Environment.NewLine + "/// <param name=\"mapFunc\">Function that maps each element of source to perform search</param>";
+                string checkMap = isNotMap ? "" : TT.IsNotNull(mapFunc);
+                string generic = isNotMap ? "" : "<T>"; 
+        #>    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
-        /// <param name="source">Source collection</param>
+        /// <param name="source">Source collection</param><#= comment #>
         /// <returns>Sum of all elements</returns>
         [Pure]
-        public static <#= resType #> Sum([NotNull] this <#= sourceType.Replace("T", type) #> source)
+        public static <#= resType #> Sum<#= generic #>([NotNull] this <#= collectionType #> source<#= secondParam #>)
         {
             <#= TT.IsNotNull("source") #>
+            <#= checkMap #>
             if (source.<#= TT.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, 0, source.<#= TT.LengthOrCount(sourceType) #>);
-            <#= resType #> result = 0;
-            object syncRoot = new object();     
-            Parallel.ForEach(Partitioner.Create(0, source.<#= TT.LengthOrCount(sourceType) #>),
-                        range => {
-                        var x = Sum(source, range.Item1, range.Item2);
-                        checked
-                        {   
-                            lock (syncRoot)
-                                result += x;  
-                        }     
-                    });              
-            return result;
-        }
-
-        [Pure]
-        private static <#= resType #> Sum([NotNull] this <#= sourceType.Replace("T", type) #> source, int startIndex, int endIndex)
-        {
-            <#= resType #> sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-            checked
-            {
-                int i;
-                int loopEnd = endIndex - Constants.Step + 1;
-                for (i = startIndex; i < loopEnd; i += Constants.Step)
-                {
-                    sum1 += source[i]<#= suffix #>;
-                    sum2 += source[i + 1]<#= suffix #>;
-                    sum3 += source[i + 2]<#= suffix #>;
-                    sum4 += source[i + 3]<#= suffix #>;
-                }
-
-                if (i == endIndex)
-                    return (<#= resType #>) (sum1 + sum2 + sum3 + sum4);
-                if (i == endIndex - 1)
-                    return (<#= resType #>) (sum1 + sum2 + sum3 + sum4 + source[i]<#= suffix #>);
-                if (i == endIndex - 2)
-                    return (<#= resType #>) (sum1 + sum2 + sum3 + sum4 + source[i]<#= suffix #> + source[i + 1]<#= suffix #>);
-                return (<#= resType #>) (sum1 + sum2 + sum3 + sum4 + source[i]<#= suffix #> + source[i + 1]<#= suffix #> + source[i + 2]<#= suffix #>);
-            }
-        }
-
-        /// <summary>
-        /// Perform checked summing of source collection mapping
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Sum of all elements</returns>
-        [Pure]
-        public static <#= resType #> Sum<T>([NotNull] this <#= sourceType #> source, [NotNull] Func<T, <#= type #>> mapFunc)
-        {
-            <#= TT.IsNotNull("source") #>
-            <#= TT.IsNotNull("mapFunc") #>
-            if (source.<#= TT.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
-                return Sum(source, mapFunc, 0, source.<#= TT.LengthOrCount(sourceType) #>);
+                return Sum(source<#= secondParamCall #>, 0, source.<#= TT.LengthOrCount(sourceType) #>);
             <#= resType #> result = 0;
             object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.<#= TT.LengthOrCount(sourceType) #>),
                         range => {
-                        var x = Sum(source, mapFunc, range.Item1, range.Item2);
+                        var x = Sum(source<#= secondParamCall #>, range.Item1, range.Item2);
                         checked
                         {   
                             lock (syncRoot)
@@ -109,29 +68,32 @@ namespace ZLinq
         }
 
         [Pure]
-        private static <#= resType #> Sum<T>([NotNull] this <#= sourceType #> source, Func<T, <#= type #>> mapFunc, int startIndex, int endIndex)
+        private static <#= resType #> Sum<#= generic #>([NotNull] this <#= collectionType #> source<#= secondParam #>, int startIndex, int endIndex)
         {
-            <#= resType #> sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            <# foreach(int j in TT.Unroll) { 
+            #><#= type #> sum<#=j#> = 0;
+            <# } #>  
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i])<#= suffix #>;
-                    sum2 += mapFunc(source[i + 1])<#= suffix #>;
-                    sum3 += mapFunc(source[i + 2])<#= suffix #>;
-                    sum4 += mapFunc(source[i + 3])<#= suffix #>;
+                <# foreach(int j in TT.Unroll) { 
+                #>    sum<#= j #> += <#= TT.Envelope(mapFunc, string.Format("source[i + {0}]", j)) #><#= suffix #>;
+                <# } #>
+
                 }
                 if (i == endIndex)
-                    return  (<#= resType #>) (sum1 + sum2 + sum3 + sum4);
+                    return  (<#= resType #>) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (<#= resType #>)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i])<#= suffix #>);
+                    return  (<#= resType #>) (sum0 + sum1 + sum2 + sum3 + <#= TT.Envelope(mapFunc, "source[i]") #><#= suffix #>);
                 if (i == endIndex - 2)
-                    return  (<#= resType #>)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i])<#= suffix #> + mapFunc(source[i + 1])<#= suffix #>);
-                return  (<#= resType #>) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i])<#= suffix #> + mapFunc(source[i + 1])<#= suffix #> + mapFunc(source[i + 2])<#= suffix #>);
+                    return  (<#= resType #>) (sum0 + sum1 + sum2 + sum3 + <#= TT.Envelope(mapFunc, "source[i]") #><#= suffix #> + <#= TT.Envelope(mapFunc, "source[i+1]") #><#= suffix #>);
+                return  (<#= resType #>) (sum0 + sum1 + sum2 + sum3 + <#= TT.Envelope(mapFunc, "source[i]") #><#= suffix #> + <#= TT.Envelope(mapFunc, "source[i+1]") #><#= suffix #> + <#= TT.Envelope(mapFunc, "source[i+2]") #><#= suffix #>);
             }
         }
+        <# } #>
         <# } #>
 
         #endregion

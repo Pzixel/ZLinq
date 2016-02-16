@@ -25,10 +25,11 @@ namespace ZLinq
         public static sbyte Sum([NotNull] this sbyte[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             sbyte result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -37,41 +38,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static sbyte Sum([NotNull] this sbyte[] source, int startIndex, int endIndex)
         {
-            sbyte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            sbyte sum0 = 0;
+            sbyte sum1 = 0;
+            sbyte sum2 = 0;
+            sbyte sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (sbyte) (sum1 + sum2 + sum3 + sum4);
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (sbyte) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static sbyte Sum<T>([NotNull] this T[] source, [NotNull] Func<T, sbyte> mapFunc)
@@ -96,30 +102,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static sbyte Sum<T>([NotNull] this T[] source, Func<T, sbyte> mapFunc, int startIndex, int endIndex)
+        private static sbyte Sum<T>([NotNull] this T[] source, [NotNull] Func<T, sbyte> mapFunc, int startIndex, int endIndex)
         {
-            sbyte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            sbyte sum0 = 0;
+            sbyte sum1 = 0;
+            sbyte sum2 = 0;
+            sbyte sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (sbyte) (sum1 + sum2 + sum3 + sum4);
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (sbyte) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (sbyte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -129,10 +140,11 @@ namespace ZLinq
         public static sbyte Sum([NotNull] this List<sbyte> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             sbyte result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -141,41 +153,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static sbyte Sum([NotNull] this List<sbyte> source, int startIndex, int endIndex)
         {
-            sbyte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            sbyte sum0 = 0;
+            sbyte sum1 = 0;
+            sbyte sum2 = 0;
+            sbyte sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (sbyte) (sum1 + sum2 + sum3 + sum4);
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (sbyte) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static sbyte Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, sbyte> mapFunc)
@@ -200,30 +217,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static sbyte Sum<T>([NotNull] this List<T> source, Func<T, sbyte> mapFunc, int startIndex, int endIndex)
+        private static sbyte Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, sbyte> mapFunc, int startIndex, int endIndex)
         {
-            sbyte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            sbyte sum0 = 0;
+            sbyte sum1 = 0;
+            sbyte sum2 = 0;
+            sbyte sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (sbyte) (sum1 + sum2 + sum3 + sum4);
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (sbyte) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (sbyte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -233,10 +255,11 @@ namespace ZLinq
         public static sbyte Sum([NotNull] this IList<sbyte> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             sbyte result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -245,41 +268,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static sbyte Sum([NotNull] this IList<sbyte> source, int startIndex, int endIndex)
         {
-            sbyte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            sbyte sum0 = 0;
+            sbyte sum1 = 0;
+            sbyte sum2 = 0;
+            sbyte sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (sbyte) (sum1 + sum2 + sum3 + sum4);
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (sbyte) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static sbyte Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, sbyte> mapFunc)
@@ -304,30 +332,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static sbyte Sum<T>([NotNull] this IList<T> source, Func<T, sbyte> mapFunc, int startIndex, int endIndex)
+        private static sbyte Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, sbyte> mapFunc, int startIndex, int endIndex)
         {
-            sbyte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            sbyte sum0 = 0;
+            sbyte sum1 = 0;
+            sbyte sum2 = 0;
+            sbyte sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (sbyte) (sum1 + sum2 + sum3 + sum4);
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (sbyte) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (sbyte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-        
+                
         #endregion
     
         #region byte             
@@ -341,10 +374,11 @@ namespace ZLinq
         public static byte Sum([NotNull] this byte[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             byte result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -353,41 +387,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static byte Sum([NotNull] this byte[] source, int startIndex, int endIndex)
         {
-            byte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            byte sum0 = 0;
+            byte sum1 = 0;
+            byte sum2 = 0;
+            byte sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (byte) (sum1 + sum2 + sum3 + sum4);
+                    return  (byte) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (byte) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (byte) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (byte) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (byte) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (byte) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (byte) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static byte Sum<T>([NotNull] this T[] source, [NotNull] Func<T, byte> mapFunc)
@@ -412,30 +451,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static byte Sum<T>([NotNull] this T[] source, Func<T, byte> mapFunc, int startIndex, int endIndex)
+        private static byte Sum<T>([NotNull] this T[] source, [NotNull] Func<T, byte> mapFunc, int startIndex, int endIndex)
         {
-            byte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            byte sum0 = 0;
+            byte sum1 = 0;
+            byte sum2 = 0;
+            byte sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (byte) (sum1 + sum2 + sum3 + sum4);
+                    return  (byte) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (byte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (byte) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (byte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (byte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -445,10 +489,11 @@ namespace ZLinq
         public static byte Sum([NotNull] this List<byte> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             byte result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -457,41 +502,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static byte Sum([NotNull] this List<byte> source, int startIndex, int endIndex)
         {
-            byte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            byte sum0 = 0;
+            byte sum1 = 0;
+            byte sum2 = 0;
+            byte sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (byte) (sum1 + sum2 + sum3 + sum4);
+                    return  (byte) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (byte) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (byte) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (byte) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (byte) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (byte) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (byte) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static byte Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, byte> mapFunc)
@@ -516,30 +566,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static byte Sum<T>([NotNull] this List<T> source, Func<T, byte> mapFunc, int startIndex, int endIndex)
+        private static byte Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, byte> mapFunc, int startIndex, int endIndex)
         {
-            byte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            byte sum0 = 0;
+            byte sum1 = 0;
+            byte sum2 = 0;
+            byte sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (byte) (sum1 + sum2 + sum3 + sum4);
+                    return  (byte) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (byte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (byte) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (byte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (byte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -549,10 +604,11 @@ namespace ZLinq
         public static byte Sum([NotNull] this IList<byte> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             byte result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -561,41 +617,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static byte Sum([NotNull] this IList<byte> source, int startIndex, int endIndex)
         {
-            byte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            byte sum0 = 0;
+            byte sum1 = 0;
+            byte sum2 = 0;
+            byte sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (byte) (sum1 + sum2 + sum3 + sum4);
+                    return  (byte) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (byte) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (byte) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (byte) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (byte) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (byte) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (byte) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static byte Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, byte> mapFunc)
@@ -620,30 +681,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static byte Sum<T>([NotNull] this IList<T> source, Func<T, byte> mapFunc, int startIndex, int endIndex)
+        private static byte Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, byte> mapFunc, int startIndex, int endIndex)
         {
-            byte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            byte sum0 = 0;
+            byte sum1 = 0;
+            byte sum2 = 0;
+            byte sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (byte) (sum1 + sum2 + sum3 + sum4);
+                    return  (byte) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (byte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (byte) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (byte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (byte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-        
+                
         #endregion
     
         #region short             
@@ -657,10 +723,11 @@ namespace ZLinq
         public static short Sum([NotNull] this short[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             short result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -669,41 +736,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static short Sum([NotNull] this short[] source, int startIndex, int endIndex)
         {
-            short sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            short sum0 = 0;
+            short sum1 = 0;
+            short sum2 = 0;
+            short sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (short) (sum1 + sum2 + sum3 + sum4);
+                    return  (short) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (short) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (short) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (short) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (short) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (short) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (short) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static short Sum<T>([NotNull] this T[] source, [NotNull] Func<T, short> mapFunc)
@@ -728,30 +800,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static short Sum<T>([NotNull] this T[] source, Func<T, short> mapFunc, int startIndex, int endIndex)
+        private static short Sum<T>([NotNull] this T[] source, [NotNull] Func<T, short> mapFunc, int startIndex, int endIndex)
         {
-            short sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            short sum0 = 0;
+            short sum1 = 0;
+            short sum2 = 0;
+            short sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (short) (sum1 + sum2 + sum3 + sum4);
+                    return  (short) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (short) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (short) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (short) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (short) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -761,10 +838,11 @@ namespace ZLinq
         public static short Sum([NotNull] this List<short> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             short result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -773,41 +851,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static short Sum([NotNull] this List<short> source, int startIndex, int endIndex)
         {
-            short sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            short sum0 = 0;
+            short sum1 = 0;
+            short sum2 = 0;
+            short sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (short) (sum1 + sum2 + sum3 + sum4);
+                    return  (short) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (short) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (short) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (short) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (short) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (short) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (short) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static short Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, short> mapFunc)
@@ -832,30 +915,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static short Sum<T>([NotNull] this List<T> source, Func<T, short> mapFunc, int startIndex, int endIndex)
+        private static short Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, short> mapFunc, int startIndex, int endIndex)
         {
-            short sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            short sum0 = 0;
+            short sum1 = 0;
+            short sum2 = 0;
+            short sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (short) (sum1 + sum2 + sum3 + sum4);
+                    return  (short) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (short) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (short) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (short) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (short) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -865,10 +953,11 @@ namespace ZLinq
         public static short Sum([NotNull] this IList<short> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             short result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -877,41 +966,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static short Sum([NotNull] this IList<short> source, int startIndex, int endIndex)
         {
-            short sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            short sum0 = 0;
+            short sum1 = 0;
+            short sum2 = 0;
+            short sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (short) (sum1 + sum2 + sum3 + sum4);
+                    return  (short) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (short) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (short) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (short) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (short) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (short) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (short) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static short Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, short> mapFunc)
@@ -936,30 +1030,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static short Sum<T>([NotNull] this IList<T> source, Func<T, short> mapFunc, int startIndex, int endIndex)
+        private static short Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, short> mapFunc, int startIndex, int endIndex)
         {
-            short sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            short sum0 = 0;
+            short sum1 = 0;
+            short sum2 = 0;
+            short sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (short) (sum1 + sum2 + sum3 + sum4);
+                    return  (short) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (short) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (short) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (short) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (short) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-        
+                
         #endregion
     
         #region ushort             
@@ -973,10 +1072,11 @@ namespace ZLinq
         public static ushort Sum([NotNull] this ushort[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             ushort result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -985,41 +1085,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static ushort Sum([NotNull] this ushort[] source, int startIndex, int endIndex)
         {
-            ushort sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            ushort sum0 = 0;
+            ushort sum1 = 0;
+            ushort sum2 = 0;
+            ushort sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (ushort) (sum1 + sum2 + sum3 + sum4);
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (ushort) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static ushort Sum<T>([NotNull] this T[] source, [NotNull] Func<T, ushort> mapFunc)
@@ -1044,30 +1149,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static ushort Sum<T>([NotNull] this T[] source, Func<T, ushort> mapFunc, int startIndex, int endIndex)
+        private static ushort Sum<T>([NotNull] this T[] source, [NotNull] Func<T, ushort> mapFunc, int startIndex, int endIndex)
         {
-            ushort sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            ushort sum0 = 0;
+            ushort sum1 = 0;
+            ushort sum2 = 0;
+            ushort sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (ushort) (sum1 + sum2 + sum3 + sum4);
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (ushort) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (ushort) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -1077,10 +1187,11 @@ namespace ZLinq
         public static ushort Sum([NotNull] this List<ushort> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             ushort result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -1089,41 +1200,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static ushort Sum([NotNull] this List<ushort> source, int startIndex, int endIndex)
         {
-            ushort sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            ushort sum0 = 0;
+            ushort sum1 = 0;
+            ushort sum2 = 0;
+            ushort sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (ushort) (sum1 + sum2 + sum3 + sum4);
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (ushort) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static ushort Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, ushort> mapFunc)
@@ -1148,30 +1264,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static ushort Sum<T>([NotNull] this List<T> source, Func<T, ushort> mapFunc, int startIndex, int endIndex)
+        private static ushort Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, ushort> mapFunc, int startIndex, int endIndex)
         {
-            ushort sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            ushort sum0 = 0;
+            ushort sum1 = 0;
+            ushort sum2 = 0;
+            ushort sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (ushort) (sum1 + sum2 + sum3 + sum4);
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (ushort) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (ushort) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -1181,10 +1302,11 @@ namespace ZLinq
         public static ushort Sum([NotNull] this IList<ushort> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             ushort result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -1193,41 +1315,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static ushort Sum([NotNull] this IList<ushort> source, int startIndex, int endIndex)
         {
-            ushort sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            ushort sum0 = 0;
+            ushort sum1 = 0;
+            ushort sum2 = 0;
+            ushort sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (ushort) (sum1 + sum2 + sum3 + sum4);
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (ushort) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static ushort Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, ushort> mapFunc)
@@ -1252,30 +1379,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static ushort Sum<T>([NotNull] this IList<T> source, Func<T, ushort> mapFunc, int startIndex, int endIndex)
+        private static ushort Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, ushort> mapFunc, int startIndex, int endIndex)
         {
-            ushort sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            ushort sum0 = 0;
+            ushort sum1 = 0;
+            ushort sum2 = 0;
+            ushort sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (ushort) (sum1 + sum2 + sum3 + sum4);
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (ushort) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (ushort) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-        
+                
         #endregion
     
         #region int             
@@ -1289,10 +1421,11 @@ namespace ZLinq
         public static int Sum([NotNull] this int[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             int result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -1301,41 +1434,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static int Sum([NotNull] this int[] source, int startIndex, int endIndex)
         {
-            int sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            int sum0 = 0;
+            int sum1 = 0;
+            int sum2 = 0;
+            int sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (int) (sum1 + sum2 + sum3 + sum4);
+                    return  (int) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (int) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (int) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (int) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (int) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (int) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (int) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static int Sum<T>([NotNull] this T[] source, [NotNull] Func<T, int> mapFunc)
@@ -1360,30 +1498,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static int Sum<T>([NotNull] this T[] source, Func<T, int> mapFunc, int startIndex, int endIndex)
+        private static int Sum<T>([NotNull] this T[] source, [NotNull] Func<T, int> mapFunc, int startIndex, int endIndex)
         {
-            int sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            int sum0 = 0;
+            int sum1 = 0;
+            int sum2 = 0;
+            int sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (int) (sum1 + sum2 + sum3 + sum4);
+                    return  (int) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (int)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (int) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (int)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (int) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (int) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (int) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -1393,10 +1536,11 @@ namespace ZLinq
         public static int Sum([NotNull] this List<int> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             int result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -1405,41 +1549,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static int Sum([NotNull] this List<int> source, int startIndex, int endIndex)
         {
-            int sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            int sum0 = 0;
+            int sum1 = 0;
+            int sum2 = 0;
+            int sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (int) (sum1 + sum2 + sum3 + sum4);
+                    return  (int) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (int) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (int) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (int) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (int) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (int) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (int) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static int Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, int> mapFunc)
@@ -1464,30 +1613,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static int Sum<T>([NotNull] this List<T> source, Func<T, int> mapFunc, int startIndex, int endIndex)
+        private static int Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, int> mapFunc, int startIndex, int endIndex)
         {
-            int sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            int sum0 = 0;
+            int sum1 = 0;
+            int sum2 = 0;
+            int sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (int) (sum1 + sum2 + sum3 + sum4);
+                    return  (int) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (int)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (int) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (int)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (int) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (int) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (int) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -1497,10 +1651,11 @@ namespace ZLinq
         public static int Sum([NotNull] this IList<int> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             int result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -1509,41 +1664,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static int Sum([NotNull] this IList<int> source, int startIndex, int endIndex)
         {
-            int sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            int sum0 = 0;
+            int sum1 = 0;
+            int sum2 = 0;
+            int sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (int) (sum1 + sum2 + sum3 + sum4);
+                    return  (int) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (int) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (int) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (int) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (int) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (int) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (int) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static int Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, int> mapFunc)
@@ -1568,30 +1728,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static int Sum<T>([NotNull] this IList<T> source, Func<T, int> mapFunc, int startIndex, int endIndex)
+        private static int Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, int> mapFunc, int startIndex, int endIndex)
         {
-            int sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            int sum0 = 0;
+            int sum1 = 0;
+            int sum2 = 0;
+            int sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (int) (sum1 + sum2 + sum3 + sum4);
+                    return  (int) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (int)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (int) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (int)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (int) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (int) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (int) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-        
+                
         #endregion
     
         #region uint             
@@ -1605,10 +1770,11 @@ namespace ZLinq
         public static uint Sum([NotNull] this uint[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             uint result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -1617,41 +1783,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static uint Sum([NotNull] this uint[] source, int startIndex, int endIndex)
         {
-            uint sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            uint sum0 = 0;
+            uint sum1 = 0;
+            uint sum2 = 0;
+            uint sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (uint) (sum1 + sum2 + sum3 + sum4);
+                    return  (uint) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (uint) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (uint) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (uint) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (uint) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (uint) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (uint) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static uint Sum<T>([NotNull] this T[] source, [NotNull] Func<T, uint> mapFunc)
@@ -1676,30 +1847,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static uint Sum<T>([NotNull] this T[] source, Func<T, uint> mapFunc, int startIndex, int endIndex)
+        private static uint Sum<T>([NotNull] this T[] source, [NotNull] Func<T, uint> mapFunc, int startIndex, int endIndex)
         {
-            uint sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            uint sum0 = 0;
+            uint sum1 = 0;
+            uint sum2 = 0;
+            uint sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (uint) (sum1 + sum2 + sum3 + sum4);
+                    return  (uint) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (uint)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (uint) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (uint)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (uint) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (uint) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (uint) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -1709,10 +1885,11 @@ namespace ZLinq
         public static uint Sum([NotNull] this List<uint> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             uint result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -1721,41 +1898,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static uint Sum([NotNull] this List<uint> source, int startIndex, int endIndex)
         {
-            uint sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            uint sum0 = 0;
+            uint sum1 = 0;
+            uint sum2 = 0;
+            uint sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (uint) (sum1 + sum2 + sum3 + sum4);
+                    return  (uint) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (uint) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (uint) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (uint) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (uint) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (uint) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (uint) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static uint Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, uint> mapFunc)
@@ -1780,30 +1962,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static uint Sum<T>([NotNull] this List<T> source, Func<T, uint> mapFunc, int startIndex, int endIndex)
+        private static uint Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, uint> mapFunc, int startIndex, int endIndex)
         {
-            uint sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            uint sum0 = 0;
+            uint sum1 = 0;
+            uint sum2 = 0;
+            uint sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (uint) (sum1 + sum2 + sum3 + sum4);
+                    return  (uint) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (uint)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (uint) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (uint)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (uint) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (uint) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (uint) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -1813,10 +2000,11 @@ namespace ZLinq
         public static uint Sum([NotNull] this IList<uint> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             uint result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -1825,41 +2013,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static uint Sum([NotNull] this IList<uint> source, int startIndex, int endIndex)
         {
-            uint sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            uint sum0 = 0;
+            uint sum1 = 0;
+            uint sum2 = 0;
+            uint sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (uint) (sum1 + sum2 + sum3 + sum4);
+                    return  (uint) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (uint) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (uint) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (uint) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (uint) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (uint) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (uint) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static uint Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, uint> mapFunc)
@@ -1884,30 +2077,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static uint Sum<T>([NotNull] this IList<T> source, Func<T, uint> mapFunc, int startIndex, int endIndex)
+        private static uint Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, uint> mapFunc, int startIndex, int endIndex)
         {
-            uint sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            uint sum0 = 0;
+            uint sum1 = 0;
+            uint sum2 = 0;
+            uint sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (uint) (sum1 + sum2 + sum3 + sum4);
+                    return  (uint) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (uint)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (uint) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (uint)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (uint) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (uint) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (uint) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-        
+                
         #endregion
     
         #region long             
@@ -1921,10 +2119,11 @@ namespace ZLinq
         public static long Sum([NotNull] this long[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             long result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -1933,41 +2132,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static long Sum([NotNull] this long[] source, int startIndex, int endIndex)
         {
-            long sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            long sum0 = 0;
+            long sum1 = 0;
+            long sum2 = 0;
+            long sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (long) (sum1 + sum2 + sum3 + sum4);
+                    return  (long) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (long) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (long) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (long) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (long) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (long) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (long) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static long Sum<T>([NotNull] this T[] source, [NotNull] Func<T, long> mapFunc)
@@ -1992,30 +2196,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static long Sum<T>([NotNull] this T[] source, Func<T, long> mapFunc, int startIndex, int endIndex)
+        private static long Sum<T>([NotNull] this T[] source, [NotNull] Func<T, long> mapFunc, int startIndex, int endIndex)
         {
-            long sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            long sum0 = 0;
+            long sum1 = 0;
+            long sum2 = 0;
+            long sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (long) (sum1 + sum2 + sum3 + sum4);
+                    return  (long) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (long)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (long) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (long)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (long) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (long) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (long) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -2025,10 +2234,11 @@ namespace ZLinq
         public static long Sum([NotNull] this List<long> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             long result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -2037,41 +2247,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static long Sum([NotNull] this List<long> source, int startIndex, int endIndex)
         {
-            long sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            long sum0 = 0;
+            long sum1 = 0;
+            long sum2 = 0;
+            long sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (long) (sum1 + sum2 + sum3 + sum4);
+                    return  (long) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (long) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (long) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (long) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (long) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (long) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (long) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static long Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, long> mapFunc)
@@ -2096,30 +2311,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static long Sum<T>([NotNull] this List<T> source, Func<T, long> mapFunc, int startIndex, int endIndex)
+        private static long Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, long> mapFunc, int startIndex, int endIndex)
         {
-            long sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            long sum0 = 0;
+            long sum1 = 0;
+            long sum2 = 0;
+            long sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (long) (sum1 + sum2 + sum3 + sum4);
+                    return  (long) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (long)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (long) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (long)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (long) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (long) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (long) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -2129,10 +2349,11 @@ namespace ZLinq
         public static long Sum([NotNull] this IList<long> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             long result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -2141,41 +2362,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static long Sum([NotNull] this IList<long> source, int startIndex, int endIndex)
         {
-            long sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            long sum0 = 0;
+            long sum1 = 0;
+            long sum2 = 0;
+            long sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (long) (sum1 + sum2 + sum3 + sum4);
+                    return  (long) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (long) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (long) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (long) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (long) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (long) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (long) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static long Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, long> mapFunc)
@@ -2200,30 +2426,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static long Sum<T>([NotNull] this IList<T> source, Func<T, long> mapFunc, int startIndex, int endIndex)
+        private static long Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, long> mapFunc, int startIndex, int endIndex)
         {
-            long sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            long sum0 = 0;
+            long sum1 = 0;
+            long sum2 = 0;
+            long sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (long) (sum1 + sum2 + sum3 + sum4);
+                    return  (long) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (long)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (long) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (long)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (long) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (long) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (long) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-        
+                
         #endregion
     
         #region ulong             
@@ -2237,10 +2468,11 @@ namespace ZLinq
         public static ulong Sum([NotNull] this ulong[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             ulong result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -2249,41 +2481,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static ulong Sum([NotNull] this ulong[] source, int startIndex, int endIndex)
         {
-            ulong sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            ulong sum0 = 0;
+            ulong sum1 = 0;
+            ulong sum2 = 0;
+            ulong sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (ulong) (sum1 + sum2 + sum3 + sum4);
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (ulong) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static ulong Sum<T>([NotNull] this T[] source, [NotNull] Func<T, ulong> mapFunc)
@@ -2308,30 +2545,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static ulong Sum<T>([NotNull] this T[] source, Func<T, ulong> mapFunc, int startIndex, int endIndex)
+        private static ulong Sum<T>([NotNull] this T[] source, [NotNull] Func<T, ulong> mapFunc, int startIndex, int endIndex)
         {
-            ulong sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            ulong sum0 = 0;
+            ulong sum1 = 0;
+            ulong sum2 = 0;
+            ulong sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (ulong) (sum1 + sum2 + sum3 + sum4);
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (ulong)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (ulong)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (ulong) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (ulong) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -2341,10 +2583,11 @@ namespace ZLinq
         public static ulong Sum([NotNull] this List<ulong> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             ulong result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -2353,41 +2596,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static ulong Sum([NotNull] this List<ulong> source, int startIndex, int endIndex)
         {
-            ulong sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            ulong sum0 = 0;
+            ulong sum1 = 0;
+            ulong sum2 = 0;
+            ulong sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (ulong) (sum1 + sum2 + sum3 + sum4);
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (ulong) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static ulong Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, ulong> mapFunc)
@@ -2412,30 +2660,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static ulong Sum<T>([NotNull] this List<T> source, Func<T, ulong> mapFunc, int startIndex, int endIndex)
+        private static ulong Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, ulong> mapFunc, int startIndex, int endIndex)
         {
-            ulong sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            ulong sum0 = 0;
+            ulong sum1 = 0;
+            ulong sum2 = 0;
+            ulong sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (ulong) (sum1 + sum2 + sum3 + sum4);
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (ulong)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (ulong)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (ulong) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (ulong) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -2445,10 +2698,11 @@ namespace ZLinq
         public static ulong Sum([NotNull] this IList<ulong> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             ulong result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -2457,41 +2711,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static ulong Sum([NotNull] this IList<ulong> source, int startIndex, int endIndex)
         {
-            ulong sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            ulong sum0 = 0;
+            ulong sum1 = 0;
+            ulong sum2 = 0;
+            ulong sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (ulong) (sum1 + sum2 + sum3 + sum4);
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (ulong) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static ulong Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, ulong> mapFunc)
@@ -2516,30 +2775,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static ulong Sum<T>([NotNull] this IList<T> source, Func<T, ulong> mapFunc, int startIndex, int endIndex)
+        private static ulong Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, ulong> mapFunc, int startIndex, int endIndex)
         {
-            ulong sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            ulong sum0 = 0;
+            ulong sum1 = 0;
+            ulong sum2 = 0;
+            ulong sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (ulong) (sum1 + sum2 + sum3 + sum4);
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (ulong)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (ulong)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (ulong) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (ulong) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-        
+                
         #endregion
     
         #region float             
@@ -2553,10 +2817,11 @@ namespace ZLinq
         public static float Sum([NotNull] this float[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             float result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -2565,41 +2830,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static float Sum([NotNull] this float[] source, int startIndex, int endIndex)
         {
-            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            float sum0 = 0;
+            float sum1 = 0;
+            float sum2 = 0;
+            float sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (float) (sum1 + sum2 + sum3 + sum4);
+                    return  (float) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (float) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (float) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (float) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (float) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (float) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (float) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static float Sum<T>([NotNull] this T[] source, [NotNull] Func<T, float> mapFunc)
@@ -2624,30 +2894,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static float Sum<T>([NotNull] this T[] source, Func<T, float> mapFunc, int startIndex, int endIndex)
+        private static float Sum<T>([NotNull] this T[] source, [NotNull] Func<T, float> mapFunc, int startIndex, int endIndex)
         {
-            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            float sum0 = 0;
+            float sum1 = 0;
+            float sum2 = 0;
+            float sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (float) (sum1 + sum2 + sum3 + sum4);
+                    return  (float) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (float)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (float) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (float)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (float) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (float) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (float) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -2657,10 +2932,11 @@ namespace ZLinq
         public static float Sum([NotNull] this List<float> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             float result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -2669,41 +2945,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static float Sum([NotNull] this List<float> source, int startIndex, int endIndex)
         {
-            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            float sum0 = 0;
+            float sum1 = 0;
+            float sum2 = 0;
+            float sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (float) (sum1 + sum2 + sum3 + sum4);
+                    return  (float) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (float) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (float) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (float) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (float) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (float) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (float) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static float Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, float> mapFunc)
@@ -2728,30 +3009,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static float Sum<T>([NotNull] this List<T> source, Func<T, float> mapFunc, int startIndex, int endIndex)
+        private static float Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, float> mapFunc, int startIndex, int endIndex)
         {
-            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            float sum0 = 0;
+            float sum1 = 0;
+            float sum2 = 0;
+            float sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (float) (sum1 + sum2 + sum3 + sum4);
+                    return  (float) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (float)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (float) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (float)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (float) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (float) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (float) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -2761,10 +3047,11 @@ namespace ZLinq
         public static float Sum([NotNull] this IList<float> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             float result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -2773,41 +3060,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static float Sum([NotNull] this IList<float> source, int startIndex, int endIndex)
         {
-            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            float sum0 = 0;
+            float sum1 = 0;
+            float sum2 = 0;
+            float sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (float) (sum1 + sum2 + sum3 + sum4);
+                    return  (float) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (float) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (float) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (float) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (float) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (float) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (float) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static float Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, float> mapFunc)
@@ -2832,30 +3124,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static float Sum<T>([NotNull] this IList<T> source, Func<T, float> mapFunc, int startIndex, int endIndex)
+        private static float Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, float> mapFunc, int startIndex, int endIndex)
         {
-            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            float sum0 = 0;
+            float sum1 = 0;
+            float sum2 = 0;
+            float sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (float) (sum1 + sum2 + sum3 + sum4);
+                    return  (float) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (float)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (float) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (float)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (float) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (float) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (float) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-        
+                
         #endregion
     
         #region double             
@@ -2869,10 +3166,11 @@ namespace ZLinq
         public static double Sum([NotNull] this double[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             double result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -2881,41 +3179,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static double Sum([NotNull] this double[] source, int startIndex, int endIndex)
         {
-            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            double sum0 = 0;
+            double sum1 = 0;
+            double sum2 = 0;
+            double sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (double) (sum1 + sum2 + sum3 + sum4);
+                    return  (double) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (double) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (double) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (double) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (double) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (double) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (double) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static double Sum<T>([NotNull] this T[] source, [NotNull] Func<T, double> mapFunc)
@@ -2940,30 +3243,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static double Sum<T>([NotNull] this T[] source, Func<T, double> mapFunc, int startIndex, int endIndex)
+        private static double Sum<T>([NotNull] this T[] source, [NotNull] Func<T, double> mapFunc, int startIndex, int endIndex)
         {
-            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            double sum0 = 0;
+            double sum1 = 0;
+            double sum2 = 0;
+            double sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (double) (sum1 + sum2 + sum3 + sum4);
+                    return  (double) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (double)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (double) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (double)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (double) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (double) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (double) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -2973,10 +3281,11 @@ namespace ZLinq
         public static double Sum([NotNull] this List<double> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             double result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -2985,41 +3294,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static double Sum([NotNull] this List<double> source, int startIndex, int endIndex)
         {
-            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            double sum0 = 0;
+            double sum1 = 0;
+            double sum2 = 0;
+            double sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (double) (sum1 + sum2 + sum3 + sum4);
+                    return  (double) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (double) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (double) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (double) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (double) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (double) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (double) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static double Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, double> mapFunc)
@@ -3044,30 +3358,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static double Sum<T>([NotNull] this List<T> source, Func<T, double> mapFunc, int startIndex, int endIndex)
+        private static double Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, double> mapFunc, int startIndex, int endIndex)
         {
-            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            double sum0 = 0;
+            double sum1 = 0;
+            double sum2 = 0;
+            double sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (double) (sum1 + sum2 + sum3 + sum4);
+                    return  (double) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (double)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (double) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (double)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (double) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (double) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (double) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -3077,10 +3396,11 @@ namespace ZLinq
         public static double Sum([NotNull] this IList<double> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             double result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -3089,41 +3409,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static double Sum([NotNull] this IList<double> source, int startIndex, int endIndex)
         {
-            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            double sum0 = 0;
+            double sum1 = 0;
+            double sum2 = 0;
+            double sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (double) (sum1 + sum2 + sum3 + sum4);
+                    return  (double) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (double) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (double) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (double) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (double) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (double) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (double) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static double Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, double> mapFunc)
@@ -3148,30 +3473,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static double Sum<T>([NotNull] this IList<T> source, Func<T, double> mapFunc, int startIndex, int endIndex)
+        private static double Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, double> mapFunc, int startIndex, int endIndex)
         {
-            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            double sum0 = 0;
+            double sum1 = 0;
+            double sum2 = 0;
+            double sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (double) (sum1 + sum2 + sum3 + sum4);
+                    return  (double) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (double)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (double) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (double)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (double) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (double) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (double) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-        
+                
         #endregion
     
         #region decimal             
@@ -3185,10 +3515,11 @@ namespace ZLinq
         public static decimal Sum([NotNull] this decimal[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             decimal result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -3197,41 +3528,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static decimal Sum([NotNull] this decimal[] source, int startIndex, int endIndex)
         {
-            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            decimal sum0 = 0;
+            decimal sum1 = 0;
+            decimal sum2 = 0;
+            decimal sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (decimal) (sum1 + sum2 + sum3 + sum4);
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (decimal) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static decimal Sum<T>([NotNull] this T[] source, [NotNull] Func<T, decimal> mapFunc)
@@ -3256,30 +3592,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static decimal Sum<T>([NotNull] this T[] source, Func<T, decimal> mapFunc, int startIndex, int endIndex)
+        private static decimal Sum<T>([NotNull] this T[] source, [NotNull] Func<T, decimal> mapFunc, int startIndex, int endIndex)
         {
-            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            decimal sum0 = 0;
+            decimal sum1 = 0;
+            decimal sum2 = 0;
+            decimal sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (decimal) (sum1 + sum2 + sum3 + sum4);
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (decimal)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (decimal)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (decimal) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (decimal) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -3289,10 +3630,11 @@ namespace ZLinq
         public static decimal Sum([NotNull] this List<decimal> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             decimal result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -3301,41 +3643,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static decimal Sum([NotNull] this List<decimal> source, int startIndex, int endIndex)
         {
-            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            decimal sum0 = 0;
+            decimal sum1 = 0;
+            decimal sum2 = 0;
+            decimal sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (decimal) (sum1 + sum2 + sum3 + sum4);
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (decimal) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static decimal Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, decimal> mapFunc)
@@ -3360,30 +3707,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static decimal Sum<T>([NotNull] this List<T> source, Func<T, decimal> mapFunc, int startIndex, int endIndex)
+        private static decimal Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, decimal> mapFunc, int startIndex, int endIndex)
         {
-            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            decimal sum0 = 0;
+            decimal sum1 = 0;
+            decimal sum2 = 0;
+            decimal sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (decimal) (sum1 + sum2 + sum3 + sum4);
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (decimal)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (decimal)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (decimal) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (decimal) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -3393,10 +3745,11 @@ namespace ZLinq
         public static decimal Sum([NotNull] this IList<decimal> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             decimal result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -3405,41 +3758,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static decimal Sum([NotNull] this IList<decimal> source, int startIndex, int endIndex)
         {
-            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            decimal sum0 = 0;
+            decimal sum1 = 0;
+            decimal sum2 = 0;
+            decimal sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i];
-                    sum2 += source[i + 1];
-                    sum3 += source[i + 2];
-                    sum4 += source[i + 3];
+                    sum0 += source[i + 0];
+                    sum1 += source[i + 1];
+                    sum2 += source[i + 2];
+                    sum3 += source[i + 3];
+                
                 }
-
                 if (i == endIndex)
-                    return (decimal) (sum1 + sum2 + sum3 + sum4);
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i]);
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3 + source[i]);
                 if (i == endIndex - 2)
-                    return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1]);
-                return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i] + source[i + 1] + source[i + 2]);
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1]);
+                return  (decimal) (sum0 + sum1 + sum2 + sum3 + source[i] + source[i+1] + source[i+2]);
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static decimal Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, decimal> mapFunc)
@@ -3464,30 +3822,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static decimal Sum<T>([NotNull] this IList<T> source, Func<T, decimal> mapFunc, int startIndex, int endIndex)
+        private static decimal Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, decimal> mapFunc, int startIndex, int endIndex)
         {
-            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            decimal sum0 = 0;
+            decimal sum1 = 0;
+            decimal sum2 = 0;
+            decimal sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]);
-                    sum2 += mapFunc(source[i + 1]);
-                    sum3 += mapFunc(source[i + 2]);
-                    sum4 += mapFunc(source[i + 3]);
+                    sum0 += mapFunc(source[i + 0]);
+                    sum1 += mapFunc(source[i + 1]);
+                    sum2 += mapFunc(source[i + 2]);
+                    sum3 += mapFunc(source[i + 3]);
+                
                 }
                 if (i == endIndex)
-                    return  (decimal) (sum1 + sum2 + sum3 + sum4);
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (decimal)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]));
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]));
                 if (i == endIndex - 2)
-                    return  (decimal)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]));
-                return  (decimal) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]) + mapFunc(source[i + 1]) + mapFunc(source[i + 2]));
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]));
+                return  (decimal) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]) + mapFunc(source[i+1]) + mapFunc(source[i+2]));
             }
         }
-        
+                
         #endregion
     
         #region sbyte?             
@@ -3501,10 +3864,11 @@ namespace ZLinq
         public static sbyte Sum([NotNull] this sbyte?[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             sbyte result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -3513,41 +3877,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static sbyte Sum([NotNull] this sbyte?[] source, int startIndex, int endIndex)
         {
-            sbyte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            sbyte? sum0 = 0;
+            sbyte? sum1 = 0;
+            sbyte? sum2 = 0;
+            sbyte? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (sbyte) (sum1 + sum2 + sum3 + sum4);
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (sbyte) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static sbyte Sum<T>([NotNull] this T[] source, [NotNull] Func<T, sbyte?> mapFunc)
@@ -3572,30 +3941,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static sbyte Sum<T>([NotNull] this T[] source, Func<T, sbyte?> mapFunc, int startIndex, int endIndex)
+        private static sbyte Sum<T>([NotNull] this T[] source, [NotNull] Func<T, sbyte?> mapFunc, int startIndex, int endIndex)
         {
-            sbyte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            sbyte? sum0 = 0;
+            sbyte? sum1 = 0;
+            sbyte? sum2 = 0;
+            sbyte? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (sbyte) (sum1 + sum2 + sum3 + sum4);
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (sbyte) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (sbyte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -3605,10 +3979,11 @@ namespace ZLinq
         public static sbyte Sum([NotNull] this List<sbyte?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             sbyte result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -3617,41 +3992,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static sbyte Sum([NotNull] this List<sbyte?> source, int startIndex, int endIndex)
         {
-            sbyte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            sbyte? sum0 = 0;
+            sbyte? sum1 = 0;
+            sbyte? sum2 = 0;
+            sbyte? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (sbyte) (sum1 + sum2 + sum3 + sum4);
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (sbyte) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static sbyte Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, sbyte?> mapFunc)
@@ -3676,30 +4056,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static sbyte Sum<T>([NotNull] this List<T> source, Func<T, sbyte?> mapFunc, int startIndex, int endIndex)
+        private static sbyte Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, sbyte?> mapFunc, int startIndex, int endIndex)
         {
-            sbyte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            sbyte? sum0 = 0;
+            sbyte? sum1 = 0;
+            sbyte? sum2 = 0;
+            sbyte? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (sbyte) (sum1 + sum2 + sum3 + sum4);
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (sbyte) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (sbyte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -3709,10 +4094,11 @@ namespace ZLinq
         public static sbyte Sum([NotNull] this IList<sbyte?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             sbyte result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -3721,41 +4107,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static sbyte Sum([NotNull] this IList<sbyte?> source, int startIndex, int endIndex)
         {
-            sbyte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            sbyte? sum0 = 0;
+            sbyte? sum1 = 0;
+            sbyte? sum2 = 0;
+            sbyte? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (sbyte) (sum1 + sum2 + sum3 + sum4);
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (sbyte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (sbyte) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static sbyte Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, sbyte?> mapFunc)
@@ -3780,30 +4171,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static sbyte Sum<T>([NotNull] this IList<T> source, Func<T, sbyte?> mapFunc, int startIndex, int endIndex)
+        private static sbyte Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, sbyte?> mapFunc, int startIndex, int endIndex)
         {
-            sbyte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            sbyte? sum0 = 0;
+            sbyte? sum1 = 0;
+            sbyte? sum2 = 0;
+            sbyte? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (sbyte) (sum1 + sum2 + sum3 + sum4);
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (sbyte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (sbyte) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (sbyte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (sbyte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-        
+                
         #endregion
     
         #region byte?             
@@ -3817,10 +4213,11 @@ namespace ZLinq
         public static byte Sum([NotNull] this byte?[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             byte result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -3829,41 +4226,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static byte Sum([NotNull] this byte?[] source, int startIndex, int endIndex)
         {
-            byte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            byte? sum0 = 0;
+            byte? sum1 = 0;
+            byte? sum2 = 0;
+            byte? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (byte) (sum1 + sum2 + sum3 + sum4);
+                    return  (byte) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (byte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (byte) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (byte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (byte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (byte) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (byte) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static byte Sum<T>([NotNull] this T[] source, [NotNull] Func<T, byte?> mapFunc)
@@ -3888,30 +4290,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static byte Sum<T>([NotNull] this T[] source, Func<T, byte?> mapFunc, int startIndex, int endIndex)
+        private static byte Sum<T>([NotNull] this T[] source, [NotNull] Func<T, byte?> mapFunc, int startIndex, int endIndex)
         {
-            byte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            byte? sum0 = 0;
+            byte? sum1 = 0;
+            byte? sum2 = 0;
+            byte? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (byte) (sum1 + sum2 + sum3 + sum4);
+                    return  (byte) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (byte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (byte) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (byte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (byte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -3921,10 +4328,11 @@ namespace ZLinq
         public static byte Sum([NotNull] this List<byte?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             byte result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -3933,41 +4341,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static byte Sum([NotNull] this List<byte?> source, int startIndex, int endIndex)
         {
-            byte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            byte? sum0 = 0;
+            byte? sum1 = 0;
+            byte? sum2 = 0;
+            byte? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (byte) (sum1 + sum2 + sum3 + sum4);
+                    return  (byte) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (byte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (byte) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (byte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (byte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (byte) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (byte) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static byte Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, byte?> mapFunc)
@@ -3992,30 +4405,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static byte Sum<T>([NotNull] this List<T> source, Func<T, byte?> mapFunc, int startIndex, int endIndex)
+        private static byte Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, byte?> mapFunc, int startIndex, int endIndex)
         {
-            byte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            byte? sum0 = 0;
+            byte? sum1 = 0;
+            byte? sum2 = 0;
+            byte? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (byte) (sum1 + sum2 + sum3 + sum4);
+                    return  (byte) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (byte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (byte) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (byte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (byte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -4025,10 +4443,11 @@ namespace ZLinq
         public static byte Sum([NotNull] this IList<byte?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             byte result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -4037,41 +4456,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static byte Sum([NotNull] this IList<byte?> source, int startIndex, int endIndex)
         {
-            byte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            byte? sum0 = 0;
+            byte? sum1 = 0;
+            byte? sum2 = 0;
+            byte? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (byte) (sum1 + sum2 + sum3 + sum4);
+                    return  (byte) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (byte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (byte) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (byte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (byte) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (byte) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (byte) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static byte Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, byte?> mapFunc)
@@ -4096,30 +4520,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static byte Sum<T>([NotNull] this IList<T> source, Func<T, byte?> mapFunc, int startIndex, int endIndex)
+        private static byte Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, byte?> mapFunc, int startIndex, int endIndex)
         {
-            byte sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            byte? sum0 = 0;
+            byte? sum1 = 0;
+            byte? sum2 = 0;
+            byte? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (byte) (sum1 + sum2 + sum3 + sum4);
+                    return  (byte) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (byte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (byte)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (byte) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (byte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (byte) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-        
+                
         #endregion
     
         #region short?             
@@ -4133,10 +4562,11 @@ namespace ZLinq
         public static short Sum([NotNull] this short?[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             short result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -4145,41 +4575,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static short Sum([NotNull] this short?[] source, int startIndex, int endIndex)
         {
-            short sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            short? sum0 = 0;
+            short? sum1 = 0;
+            short? sum2 = 0;
+            short? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (short) (sum1 + sum2 + sum3 + sum4);
+                    return  (short) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (short) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (short) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (short) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (short) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (short) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (short) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static short Sum<T>([NotNull] this T[] source, [NotNull] Func<T, short?> mapFunc)
@@ -4204,30 +4639,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static short Sum<T>([NotNull] this T[] source, Func<T, short?> mapFunc, int startIndex, int endIndex)
+        private static short Sum<T>([NotNull] this T[] source, [NotNull] Func<T, short?> mapFunc, int startIndex, int endIndex)
         {
-            short sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            short? sum0 = 0;
+            short? sum1 = 0;
+            short? sum2 = 0;
+            short? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (short) (sum1 + sum2 + sum3 + sum4);
+                    return  (short) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (short) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (short) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (short) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (short) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -4237,10 +4677,11 @@ namespace ZLinq
         public static short Sum([NotNull] this List<short?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             short result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -4249,41 +4690,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static short Sum([NotNull] this List<short?> source, int startIndex, int endIndex)
         {
-            short sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            short? sum0 = 0;
+            short? sum1 = 0;
+            short? sum2 = 0;
+            short? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (short) (sum1 + sum2 + sum3 + sum4);
+                    return  (short) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (short) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (short) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (short) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (short) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (short) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (short) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static short Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, short?> mapFunc)
@@ -4308,30 +4754,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static short Sum<T>([NotNull] this List<T> source, Func<T, short?> mapFunc, int startIndex, int endIndex)
+        private static short Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, short?> mapFunc, int startIndex, int endIndex)
         {
-            short sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            short? sum0 = 0;
+            short? sum1 = 0;
+            short? sum2 = 0;
+            short? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (short) (sum1 + sum2 + sum3 + sum4);
+                    return  (short) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (short) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (short) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (short) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (short) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -4341,10 +4792,11 @@ namespace ZLinq
         public static short Sum([NotNull] this IList<short?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             short result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -4353,41 +4805,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static short Sum([NotNull] this IList<short?> source, int startIndex, int endIndex)
         {
-            short sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            short? sum0 = 0;
+            short? sum1 = 0;
+            short? sum2 = 0;
+            short? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (short) (sum1 + sum2 + sum3 + sum4);
+                    return  (short) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (short) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (short) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (short) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (short) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (short) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (short) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static short Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, short?> mapFunc)
@@ -4412,30 +4869,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static short Sum<T>([NotNull] this IList<T> source, Func<T, short?> mapFunc, int startIndex, int endIndex)
+        private static short Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, short?> mapFunc, int startIndex, int endIndex)
         {
-            short sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            short? sum0 = 0;
+            short? sum1 = 0;
+            short? sum2 = 0;
+            short? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (short) (sum1 + sum2 + sum3 + sum4);
+                    return  (short) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (short) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (short)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (short) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (short) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (short) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-        
+                
         #endregion
     
         #region ushort?             
@@ -4449,10 +4911,11 @@ namespace ZLinq
         public static ushort Sum([NotNull] this ushort?[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             ushort result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -4461,41 +4924,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static ushort Sum([NotNull] this ushort?[] source, int startIndex, int endIndex)
         {
-            ushort sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            ushort? sum0 = 0;
+            ushort? sum1 = 0;
+            ushort? sum2 = 0;
+            ushort? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (ushort) (sum1 + sum2 + sum3 + sum4);
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (ushort) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static ushort Sum<T>([NotNull] this T[] source, [NotNull] Func<T, ushort?> mapFunc)
@@ -4520,30 +4988,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static ushort Sum<T>([NotNull] this T[] source, Func<T, ushort?> mapFunc, int startIndex, int endIndex)
+        private static ushort Sum<T>([NotNull] this T[] source, [NotNull] Func<T, ushort?> mapFunc, int startIndex, int endIndex)
         {
-            ushort sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            ushort? sum0 = 0;
+            ushort? sum1 = 0;
+            ushort? sum2 = 0;
+            ushort? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (ushort) (sum1 + sum2 + sum3 + sum4);
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (ushort) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (ushort) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -4553,10 +5026,11 @@ namespace ZLinq
         public static ushort Sum([NotNull] this List<ushort?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             ushort result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -4565,41 +5039,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static ushort Sum([NotNull] this List<ushort?> source, int startIndex, int endIndex)
         {
-            ushort sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            ushort? sum0 = 0;
+            ushort? sum1 = 0;
+            ushort? sum2 = 0;
+            ushort? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (ushort) (sum1 + sum2 + sum3 + sum4);
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (ushort) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static ushort Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, ushort?> mapFunc)
@@ -4624,30 +5103,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static ushort Sum<T>([NotNull] this List<T> source, Func<T, ushort?> mapFunc, int startIndex, int endIndex)
+        private static ushort Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, ushort?> mapFunc, int startIndex, int endIndex)
         {
-            ushort sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            ushort? sum0 = 0;
+            ushort? sum1 = 0;
+            ushort? sum2 = 0;
+            ushort? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (ushort) (sum1 + sum2 + sum3 + sum4);
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (ushort) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (ushort) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -4657,10 +5141,11 @@ namespace ZLinq
         public static ushort Sum([NotNull] this IList<ushort?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             ushort result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -4669,41 +5154,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static ushort Sum([NotNull] this IList<ushort?> source, int startIndex, int endIndex)
         {
-            ushort sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            ushort? sum0 = 0;
+            ushort? sum1 = 0;
+            ushort? sum2 = 0;
+            ushort? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (ushort) (sum1 + sum2 + sum3 + sum4);
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (ushort) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (ushort) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static ushort Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, ushort?> mapFunc)
@@ -4728,30 +5218,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static ushort Sum<T>([NotNull] this IList<T> source, Func<T, ushort?> mapFunc, int startIndex, int endIndex)
+        private static ushort Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, ushort?> mapFunc, int startIndex, int endIndex)
         {
-            ushort sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            ushort? sum0 = 0;
+            ushort? sum1 = 0;
+            ushort? sum2 = 0;
+            ushort? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (ushort) (sum1 + sum2 + sum3 + sum4);
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (ushort)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (ushort) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (ushort) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (ushort) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-        
+                
         #endregion
     
         #region int?             
@@ -4765,10 +5260,11 @@ namespace ZLinq
         public static int Sum([NotNull] this int?[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             int result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -4777,41 +5273,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static int Sum([NotNull] this int?[] source, int startIndex, int endIndex)
         {
-            int sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            int? sum0 = 0;
+            int? sum1 = 0;
+            int? sum2 = 0;
+            int? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (int) (sum1 + sum2 + sum3 + sum4);
+                    return  (int) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (int) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (int) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (int) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (int) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (int) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (int) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static int Sum<T>([NotNull] this T[] source, [NotNull] Func<T, int?> mapFunc)
@@ -4836,30 +5337,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static int Sum<T>([NotNull] this T[] source, Func<T, int?> mapFunc, int startIndex, int endIndex)
+        private static int Sum<T>([NotNull] this T[] source, [NotNull] Func<T, int?> mapFunc, int startIndex, int endIndex)
         {
-            int sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            int? sum0 = 0;
+            int? sum1 = 0;
+            int? sum2 = 0;
+            int? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (int) (sum1 + sum2 + sum3 + sum4);
+                    return  (int) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (int)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (int) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (int)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (int) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (int) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (int) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -4869,10 +5375,11 @@ namespace ZLinq
         public static int Sum([NotNull] this List<int?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             int result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -4881,41 +5388,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static int Sum([NotNull] this List<int?> source, int startIndex, int endIndex)
         {
-            int sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            int? sum0 = 0;
+            int? sum1 = 0;
+            int? sum2 = 0;
+            int? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (int) (sum1 + sum2 + sum3 + sum4);
+                    return  (int) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (int) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (int) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (int) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (int) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (int) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (int) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static int Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, int?> mapFunc)
@@ -4940,30 +5452,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static int Sum<T>([NotNull] this List<T> source, Func<T, int?> mapFunc, int startIndex, int endIndex)
+        private static int Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, int?> mapFunc, int startIndex, int endIndex)
         {
-            int sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            int? sum0 = 0;
+            int? sum1 = 0;
+            int? sum2 = 0;
+            int? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (int) (sum1 + sum2 + sum3 + sum4);
+                    return  (int) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (int)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (int) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (int)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (int) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (int) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (int) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -4973,10 +5490,11 @@ namespace ZLinq
         public static int Sum([NotNull] this IList<int?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             int result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -4985,41 +5503,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static int Sum([NotNull] this IList<int?> source, int startIndex, int endIndex)
         {
-            int sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            int? sum0 = 0;
+            int? sum1 = 0;
+            int? sum2 = 0;
+            int? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (int) (sum1 + sum2 + sum3 + sum4);
+                    return  (int) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (int) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (int) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (int) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (int) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (int) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (int) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static int Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, int?> mapFunc)
@@ -5044,30 +5567,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static int Sum<T>([NotNull] this IList<T> source, Func<T, int?> mapFunc, int startIndex, int endIndex)
+        private static int Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, int?> mapFunc, int startIndex, int endIndex)
         {
-            int sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            int? sum0 = 0;
+            int? sum1 = 0;
+            int? sum2 = 0;
+            int? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (int) (sum1 + sum2 + sum3 + sum4);
+                    return  (int) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (int)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (int) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (int)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (int) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (int) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (int) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-        
+                
         #endregion
     
         #region uint?             
@@ -5081,10 +5609,11 @@ namespace ZLinq
         public static uint Sum([NotNull] this uint?[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             uint result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -5093,41 +5622,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static uint Sum([NotNull] this uint?[] source, int startIndex, int endIndex)
         {
-            uint sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            uint? sum0 = 0;
+            uint? sum1 = 0;
+            uint? sum2 = 0;
+            uint? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (uint) (sum1 + sum2 + sum3 + sum4);
+                    return  (uint) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (uint) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (uint) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (uint) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (uint) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (uint) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (uint) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static uint Sum<T>([NotNull] this T[] source, [NotNull] Func<T, uint?> mapFunc)
@@ -5152,30 +5686,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static uint Sum<T>([NotNull] this T[] source, Func<T, uint?> mapFunc, int startIndex, int endIndex)
+        private static uint Sum<T>([NotNull] this T[] source, [NotNull] Func<T, uint?> mapFunc, int startIndex, int endIndex)
         {
-            uint sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            uint? sum0 = 0;
+            uint? sum1 = 0;
+            uint? sum2 = 0;
+            uint? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (uint) (sum1 + sum2 + sum3 + sum4);
+                    return  (uint) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (uint)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (uint) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (uint)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (uint) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (uint) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (uint) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -5185,10 +5724,11 @@ namespace ZLinq
         public static uint Sum([NotNull] this List<uint?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             uint result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -5197,41 +5737,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static uint Sum([NotNull] this List<uint?> source, int startIndex, int endIndex)
         {
-            uint sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            uint? sum0 = 0;
+            uint? sum1 = 0;
+            uint? sum2 = 0;
+            uint? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (uint) (sum1 + sum2 + sum3 + sum4);
+                    return  (uint) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (uint) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (uint) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (uint) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (uint) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (uint) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (uint) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static uint Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, uint?> mapFunc)
@@ -5256,30 +5801,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static uint Sum<T>([NotNull] this List<T> source, Func<T, uint?> mapFunc, int startIndex, int endIndex)
+        private static uint Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, uint?> mapFunc, int startIndex, int endIndex)
         {
-            uint sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            uint? sum0 = 0;
+            uint? sum1 = 0;
+            uint? sum2 = 0;
+            uint? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (uint) (sum1 + sum2 + sum3 + sum4);
+                    return  (uint) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (uint)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (uint) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (uint)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (uint) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (uint) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (uint) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -5289,10 +5839,11 @@ namespace ZLinq
         public static uint Sum([NotNull] this IList<uint?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             uint result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -5301,41 +5852,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static uint Sum([NotNull] this IList<uint?> source, int startIndex, int endIndex)
         {
-            uint sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            uint? sum0 = 0;
+            uint? sum1 = 0;
+            uint? sum2 = 0;
+            uint? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (uint) (sum1 + sum2 + sum3 + sum4);
+                    return  (uint) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (uint) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (uint) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (uint) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (uint) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (uint) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (uint) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static uint Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, uint?> mapFunc)
@@ -5360,30 +5916,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static uint Sum<T>([NotNull] this IList<T> source, Func<T, uint?> mapFunc, int startIndex, int endIndex)
+        private static uint Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, uint?> mapFunc, int startIndex, int endIndex)
         {
-            uint sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            uint? sum0 = 0;
+            uint? sum1 = 0;
+            uint? sum2 = 0;
+            uint? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (uint) (sum1 + sum2 + sum3 + sum4);
+                    return  (uint) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (uint)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (uint) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (uint)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (uint) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (uint) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (uint) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-        
+                
         #endregion
     
         #region long?             
@@ -5397,10 +5958,11 @@ namespace ZLinq
         public static long Sum([NotNull] this long?[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             long result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -5409,41 +5971,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static long Sum([NotNull] this long?[] source, int startIndex, int endIndex)
         {
-            long sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            long? sum0 = 0;
+            long? sum1 = 0;
+            long? sum2 = 0;
+            long? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (long) (sum1 + sum2 + sum3 + sum4);
+                    return  (long) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (long) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (long) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (long) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (long) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (long) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (long) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static long Sum<T>([NotNull] this T[] source, [NotNull] Func<T, long?> mapFunc)
@@ -5468,30 +6035,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static long Sum<T>([NotNull] this T[] source, Func<T, long?> mapFunc, int startIndex, int endIndex)
+        private static long Sum<T>([NotNull] this T[] source, [NotNull] Func<T, long?> mapFunc, int startIndex, int endIndex)
         {
-            long sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            long? sum0 = 0;
+            long? sum1 = 0;
+            long? sum2 = 0;
+            long? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (long) (sum1 + sum2 + sum3 + sum4);
+                    return  (long) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (long)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (long) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (long)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (long) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (long) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (long) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -5501,10 +6073,11 @@ namespace ZLinq
         public static long Sum([NotNull] this List<long?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             long result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -5513,41 +6086,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static long Sum([NotNull] this List<long?> source, int startIndex, int endIndex)
         {
-            long sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            long? sum0 = 0;
+            long? sum1 = 0;
+            long? sum2 = 0;
+            long? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (long) (sum1 + sum2 + sum3 + sum4);
+                    return  (long) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (long) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (long) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (long) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (long) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (long) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (long) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static long Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, long?> mapFunc)
@@ -5572,30 +6150,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static long Sum<T>([NotNull] this List<T> source, Func<T, long?> mapFunc, int startIndex, int endIndex)
+        private static long Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, long?> mapFunc, int startIndex, int endIndex)
         {
-            long sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            long? sum0 = 0;
+            long? sum1 = 0;
+            long? sum2 = 0;
+            long? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (long) (sum1 + sum2 + sum3 + sum4);
+                    return  (long) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (long)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (long) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (long)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (long) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (long) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (long) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -5605,10 +6188,11 @@ namespace ZLinq
         public static long Sum([NotNull] this IList<long?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             long result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -5617,41 +6201,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static long Sum([NotNull] this IList<long?> source, int startIndex, int endIndex)
         {
-            long sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            long? sum0 = 0;
+            long? sum1 = 0;
+            long? sum2 = 0;
+            long? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (long) (sum1 + sum2 + sum3 + sum4);
+                    return  (long) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (long) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (long) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (long) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (long) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (long) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (long) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static long Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, long?> mapFunc)
@@ -5676,30 +6265,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static long Sum<T>([NotNull] this IList<T> source, Func<T, long?> mapFunc, int startIndex, int endIndex)
+        private static long Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, long?> mapFunc, int startIndex, int endIndex)
         {
-            long sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            long? sum0 = 0;
+            long? sum1 = 0;
+            long? sum2 = 0;
+            long? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (long) (sum1 + sum2 + sum3 + sum4);
+                    return  (long) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (long)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (long) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (long)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (long) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (long) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (long) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-        
+                
         #endregion
     
         #region ulong?             
@@ -5713,10 +6307,11 @@ namespace ZLinq
         public static ulong Sum([NotNull] this ulong?[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             ulong result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -5725,41 +6320,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static ulong Sum([NotNull] this ulong?[] source, int startIndex, int endIndex)
         {
-            ulong sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            ulong? sum0 = 0;
+            ulong? sum1 = 0;
+            ulong? sum2 = 0;
+            ulong? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (ulong) (sum1 + sum2 + sum3 + sum4);
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (ulong) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static ulong Sum<T>([NotNull] this T[] source, [NotNull] Func<T, ulong?> mapFunc)
@@ -5784,30 +6384,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static ulong Sum<T>([NotNull] this T[] source, Func<T, ulong?> mapFunc, int startIndex, int endIndex)
+        private static ulong Sum<T>([NotNull] this T[] source, [NotNull] Func<T, ulong?> mapFunc, int startIndex, int endIndex)
         {
-            ulong sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            ulong? sum0 = 0;
+            ulong? sum1 = 0;
+            ulong? sum2 = 0;
+            ulong? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (ulong) (sum1 + sum2 + sum3 + sum4);
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (ulong)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (ulong)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (ulong) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (ulong) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -5817,10 +6422,11 @@ namespace ZLinq
         public static ulong Sum([NotNull] this List<ulong?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             ulong result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -5829,41 +6435,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static ulong Sum([NotNull] this List<ulong?> source, int startIndex, int endIndex)
         {
-            ulong sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            ulong? sum0 = 0;
+            ulong? sum1 = 0;
+            ulong? sum2 = 0;
+            ulong? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (ulong) (sum1 + sum2 + sum3 + sum4);
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (ulong) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static ulong Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, ulong?> mapFunc)
@@ -5888,30 +6499,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static ulong Sum<T>([NotNull] this List<T> source, Func<T, ulong?> mapFunc, int startIndex, int endIndex)
+        private static ulong Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, ulong?> mapFunc, int startIndex, int endIndex)
         {
-            ulong sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            ulong? sum0 = 0;
+            ulong? sum1 = 0;
+            ulong? sum2 = 0;
+            ulong? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (ulong) (sum1 + sum2 + sum3 + sum4);
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (ulong)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (ulong)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (ulong) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (ulong) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -5921,10 +6537,11 @@ namespace ZLinq
         public static ulong Sum([NotNull] this IList<ulong?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             ulong result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -5933,41 +6550,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static ulong Sum([NotNull] this IList<ulong?> source, int startIndex, int endIndex)
         {
-            ulong sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            ulong? sum0 = 0;
+            ulong? sum1 = 0;
+            ulong? sum2 = 0;
+            ulong? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (ulong) (sum1 + sum2 + sum3 + sum4);
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (ulong) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (ulong) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static ulong Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, ulong?> mapFunc)
@@ -5992,30 +6614,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static ulong Sum<T>([NotNull] this IList<T> source, Func<T, ulong?> mapFunc, int startIndex, int endIndex)
+        private static ulong Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, ulong?> mapFunc, int startIndex, int endIndex)
         {
-            ulong sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            ulong? sum0 = 0;
+            ulong? sum1 = 0;
+            ulong? sum2 = 0;
+            ulong? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (ulong) (sum1 + sum2 + sum3 + sum4);
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (ulong)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (ulong)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (ulong) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (ulong) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (ulong) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-        
+                
         #endregion
     
         #region float?             
@@ -6029,10 +6656,11 @@ namespace ZLinq
         public static float Sum([NotNull] this float?[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             float result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -6041,41 +6669,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static float Sum([NotNull] this float?[] source, int startIndex, int endIndex)
         {
-            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            float? sum0 = 0;
+            float? sum1 = 0;
+            float? sum2 = 0;
+            float? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (float) (sum1 + sum2 + sum3 + sum4);
+                    return  (float) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (float) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (float) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (float) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (float) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (float) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (float) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static float Sum<T>([NotNull] this T[] source, [NotNull] Func<T, float?> mapFunc)
@@ -6100,30 +6733,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static float Sum<T>([NotNull] this T[] source, Func<T, float?> mapFunc, int startIndex, int endIndex)
+        private static float Sum<T>([NotNull] this T[] source, [NotNull] Func<T, float?> mapFunc, int startIndex, int endIndex)
         {
-            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            float? sum0 = 0;
+            float? sum1 = 0;
+            float? sum2 = 0;
+            float? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (float) (sum1 + sum2 + sum3 + sum4);
+                    return  (float) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (float)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (float) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (float)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (float) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (float) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (float) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -6133,10 +6771,11 @@ namespace ZLinq
         public static float Sum([NotNull] this List<float?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             float result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -6145,41 +6784,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static float Sum([NotNull] this List<float?> source, int startIndex, int endIndex)
         {
-            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            float? sum0 = 0;
+            float? sum1 = 0;
+            float? sum2 = 0;
+            float? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (float) (sum1 + sum2 + sum3 + sum4);
+                    return  (float) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (float) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (float) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (float) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (float) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (float) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (float) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static float Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, float?> mapFunc)
@@ -6204,30 +6848,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static float Sum<T>([NotNull] this List<T> source, Func<T, float?> mapFunc, int startIndex, int endIndex)
+        private static float Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, float?> mapFunc, int startIndex, int endIndex)
         {
-            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            float? sum0 = 0;
+            float? sum1 = 0;
+            float? sum2 = 0;
+            float? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (float) (sum1 + sum2 + sum3 + sum4);
+                    return  (float) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (float)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (float) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (float)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (float) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (float) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (float) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -6237,10 +6886,11 @@ namespace ZLinq
         public static float Sum([NotNull] this IList<float?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             float result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -6249,41 +6899,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static float Sum([NotNull] this IList<float?> source, int startIndex, int endIndex)
         {
-            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            float? sum0 = 0;
+            float? sum1 = 0;
+            float? sum2 = 0;
+            float? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (float) (sum1 + sum2 + sum3 + sum4);
+                    return  (float) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (float) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (float) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (float) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (float) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (float) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (float) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static float Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, float?> mapFunc)
@@ -6308,30 +6963,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static float Sum<T>([NotNull] this IList<T> source, Func<T, float?> mapFunc, int startIndex, int endIndex)
+        private static float Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, float?> mapFunc, int startIndex, int endIndex)
         {
-            float sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            float? sum0 = 0;
+            float? sum1 = 0;
+            float? sum2 = 0;
+            float? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (float) (sum1 + sum2 + sum3 + sum4);
+                    return  (float) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (float)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (float) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (float)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (float) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (float) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (float) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-        
+                
         #endregion
     
         #region double?             
@@ -6345,10 +7005,11 @@ namespace ZLinq
         public static double Sum([NotNull] this double?[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             double result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -6357,41 +7018,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static double Sum([NotNull] this double?[] source, int startIndex, int endIndex)
         {
-            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            double? sum0 = 0;
+            double? sum1 = 0;
+            double? sum2 = 0;
+            double? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (double) (sum1 + sum2 + sum3 + sum4);
+                    return  (double) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (double) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (double) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (double) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (double) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (double) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (double) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static double Sum<T>([NotNull] this T[] source, [NotNull] Func<T, double?> mapFunc)
@@ -6416,30 +7082,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static double Sum<T>([NotNull] this T[] source, Func<T, double?> mapFunc, int startIndex, int endIndex)
+        private static double Sum<T>([NotNull] this T[] source, [NotNull] Func<T, double?> mapFunc, int startIndex, int endIndex)
         {
-            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            double? sum0 = 0;
+            double? sum1 = 0;
+            double? sum2 = 0;
+            double? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (double) (sum1 + sum2 + sum3 + sum4);
+                    return  (double) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (double)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (double) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (double)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (double) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (double) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (double) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -6449,10 +7120,11 @@ namespace ZLinq
         public static double Sum([NotNull] this List<double?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             double result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -6461,41 +7133,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static double Sum([NotNull] this List<double?> source, int startIndex, int endIndex)
         {
-            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            double? sum0 = 0;
+            double? sum1 = 0;
+            double? sum2 = 0;
+            double? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (double) (sum1 + sum2 + sum3 + sum4);
+                    return  (double) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (double) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (double) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (double) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (double) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (double) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (double) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static double Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, double?> mapFunc)
@@ -6520,30 +7197,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static double Sum<T>([NotNull] this List<T> source, Func<T, double?> mapFunc, int startIndex, int endIndex)
+        private static double Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, double?> mapFunc, int startIndex, int endIndex)
         {
-            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            double? sum0 = 0;
+            double? sum1 = 0;
+            double? sum2 = 0;
+            double? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (double) (sum1 + sum2 + sum3 + sum4);
+                    return  (double) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (double)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (double) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (double)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (double) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (double) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (double) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -6553,10 +7235,11 @@ namespace ZLinq
         public static double Sum([NotNull] this IList<double?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             double result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -6565,41 +7248,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static double Sum([NotNull] this IList<double?> source, int startIndex, int endIndex)
         {
-            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            double? sum0 = 0;
+            double? sum1 = 0;
+            double? sum2 = 0;
+            double? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (double) (sum1 + sum2 + sum3 + sum4);
+                    return  (double) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (double) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (double) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (double) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (double) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (double) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (double) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static double Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, double?> mapFunc)
@@ -6624,30 +7312,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static double Sum<T>([NotNull] this IList<T> source, Func<T, double?> mapFunc, int startIndex, int endIndex)
+        private static double Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, double?> mapFunc, int startIndex, int endIndex)
         {
-            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            double? sum0 = 0;
+            double? sum1 = 0;
+            double? sum2 = 0;
+            double? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (double) (sum1 + sum2 + sum3 + sum4);
+                    return  (double) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (double)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (double) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (double)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (double) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (double) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (double) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-        
+                
         #endregion
     
         #region decimal?             
@@ -6661,10 +7354,11 @@ namespace ZLinq
         public static decimal Sum([NotNull] this decimal?[] source)
         {
             source.IsNotNull("source");
+            
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
             decimal result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Length),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -6673,41 +7367,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static decimal Sum([NotNull] this decimal?[] source, int startIndex, int endIndex)
         {
-            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            decimal? sum0 = 0;
+            decimal? sum1 = 0;
+            decimal? sum2 = 0;
+            decimal? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (decimal) (sum1 + sum2 + sum3 + sum4);
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (decimal) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static decimal Sum<T>([NotNull] this T[] source, [NotNull] Func<T, decimal?> mapFunc)
@@ -6732,30 +7431,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static decimal Sum<T>([NotNull] this T[] source, Func<T, decimal?> mapFunc, int startIndex, int endIndex)
+        private static decimal Sum<T>([NotNull] this T[] source, [NotNull] Func<T, decimal?> mapFunc, int startIndex, int endIndex)
         {
-            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            decimal? sum0 = 0;
+            decimal? sum1 = 0;
+            decimal? sum2 = 0;
+            decimal? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (decimal) (sum1 + sum2 + sum3 + sum4);
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (decimal)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (decimal)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (decimal) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (decimal) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -6765,10 +7469,11 @@ namespace ZLinq
         public static decimal Sum([NotNull] this List<decimal?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             decimal result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -6777,41 +7482,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static decimal Sum([NotNull] this List<decimal?> source, int startIndex, int endIndex)
         {
-            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            decimal? sum0 = 0;
+            decimal? sum1 = 0;
+            decimal? sum2 = 0;
+            decimal? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (decimal) (sum1 + sum2 + sum3 + sum4);
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (decimal) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static decimal Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, decimal?> mapFunc)
@@ -6836,30 +7546,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static decimal Sum<T>([NotNull] this List<T> source, Func<T, decimal?> mapFunc, int startIndex, int endIndex)
+        private static decimal Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, decimal?> mapFunc, int startIndex, int endIndex)
         {
-            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            decimal? sum0 = 0;
+            decimal? sum1 = 0;
+            decimal? sum2 = 0;
+            decimal? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (decimal) (sum1 + sum2 + sum3 + sum4);
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (decimal)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (decimal)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (decimal) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (decimal) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-            
+                    
         /// <summary>
         /// Perform checked summing of source collection
         /// </summary>
@@ -6869,10 +7584,11 @@ namespace ZLinq
         public static decimal Sum([NotNull] this IList<decimal?> source)
         {
             source.IsNotNull("source");
+            
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
             decimal result = 0;
-            object syncRoot = new object();     
+            object syncRoot = new object();  
             Parallel.ForEach(Partitioner.Create(0, source.Count),
                         range => {
                         var x = Sum(source, range.Item1, range.Item2);
@@ -6881,41 +7597,46 @@ namespace ZLinq
                             lock (syncRoot)
                                 result += x;  
                         }     
-                    });              
+                    });   
+
             return result;
         }
 
         [Pure]
         private static decimal Sum([NotNull] this IList<decimal?> source, int startIndex, int endIndex)
         {
-            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            decimal? sum0 = 0;
+            decimal? sum1 = 0;
+            decimal? sum2 = 0;
+            decimal? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += source[i].GetValueOrDefault();
-                    sum2 += source[i + 1].GetValueOrDefault();
-                    sum3 += source[i + 2].GetValueOrDefault();
-                    sum4 += source[i + 3].GetValueOrDefault();
+                    sum0 += source[i + 0].GetValueOrDefault();
+                    sum1 += source[i + 1].GetValueOrDefault();
+                    sum2 += source[i + 2].GetValueOrDefault();
+                    sum3 += source[i + 3].GetValueOrDefault();
+                
                 }
-
                 if (i == endIndex)
-                    return (decimal) (sum1 + sum2 + sum3 + sum4);
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault());
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault());
-                return (decimal) (sum1 + sum2 + sum3 + sum4 + source[i].GetValueOrDefault() + source[i + 1].GetValueOrDefault() + source[i + 2].GetValueOrDefault());
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault());
+                return  (decimal) (sum0 + sum1 + sum2 + sum3 + source[i].GetValueOrDefault() + source[i+1].GetValueOrDefault() + source[i+2].GetValueOrDefault());
             }
         }
-
+            
         /// <summary>
-        /// Perform checked summing of source collection mapping
+        /// Perform checked summing of source collection
         /// </summary>
         /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
+/// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
         [Pure]
         public static decimal Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, decimal?> mapFunc)
@@ -6940,30 +7661,35 @@ namespace ZLinq
         }
 
         [Pure]
-        private static decimal Sum<T>([NotNull] this IList<T> source, Func<T, decimal?> mapFunc, int startIndex, int endIndex)
+        private static decimal Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, decimal?> mapFunc, int startIndex, int endIndex)
         {
-            decimal sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            decimal? sum0 = 0;
+            decimal? sum1 = 0;
+            decimal? sum2 = 0;
+            decimal? sum3 = 0;
+              
             checked
             {
                 int i;
                 int loopEnd = endIndex - Constants.Step + 1;
                 for (i = startIndex; i < loopEnd; i += Constants.Step)
                 {
-                    sum1 += mapFunc(source[i]).GetValueOrDefault();
-                    sum2 += mapFunc(source[i + 1]).GetValueOrDefault();
-                    sum3 += mapFunc(source[i + 2]).GetValueOrDefault();
-                    sum4 += mapFunc(source[i + 3]).GetValueOrDefault();
+                    sum0 += mapFunc(source[i + 0]).GetValueOrDefault();
+                    sum1 += mapFunc(source[i + 1]).GetValueOrDefault();
+                    sum2 += mapFunc(source[i + 2]).GetValueOrDefault();
+                    sum3 += mapFunc(source[i + 3]).GetValueOrDefault();
+                
                 }
                 if (i == endIndex)
-                    return  (decimal) (sum1 + sum2 + sum3 + sum4);
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3);
                 if (i == endIndex - 1)
-                    return  (decimal)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault());
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault());
                 if (i == endIndex - 2)
-                    return  (decimal)(sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault());
-                return  (decimal) (sum1 + sum2 + sum3 + sum4 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i + 1]).GetValueOrDefault() + mapFunc(source[i + 2]).GetValueOrDefault());
+                    return  (decimal) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault());
+                return  (decimal) (sum0 + sum1 + sum2 + sum3 + mapFunc(source[i]).GetValueOrDefault() + mapFunc(source[i+1]).GetValueOrDefault() + mapFunc(source[i+2]).GetValueOrDefault());
             }
         }
-        
+                
         #endregion
         
     

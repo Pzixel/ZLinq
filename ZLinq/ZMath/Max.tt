@@ -21,7 +21,7 @@ namespace ZLinq
 {
     public static partial class ZEnumerable
     {               
-<# string funcName = "mapFunc"; #>
+<# const string funcName = "mapFunc"; #>
     
 <#foreach (var type in TT.WithNullables(TT.NumberTypes)) {
     bool isNullable = TT.IsNullable(type);
