@@ -18,15 +18,15 @@ namespace ZLinq.Test.ZMath
 {
     [TestClass]
     public class Sum
-    {            
-    <# foreach(int i in TT.TestSizes) { #>
-
-                
+    {                            
     <#foreach (var type in TT.WithNullables(TT.NumberTypes)) { 
         string typeName = TT.GetNullableName(type); #>
         #region <#= type #>             
         <# foreach (string sourceType in TT.StandardLists) { 
         string name = TT.GetCollectionName(sourceType);#>    
+
+        <# foreach(int i in TT.TestSizes) { #>
+
         <# if (TT.CanBeRepresented(type, i)) { #>
                 
             <# if (TT.IsNullable(type)) { #>
@@ -70,9 +70,11 @@ namespace ZLinq.Test.ZMath
         }
 
         <# } #>
+        
+        <# }#>
     
         [TestMethod]
-        public void TestSum<#= typeName #><#= name #><#= i #>Null()
+        public void TestSum<#= typeName #><#= name #>NullOrEmpty()
         {        
             <#= sourceType.Replace("T", type) #> nullSource = null;
 
@@ -85,31 +87,48 @@ namespace ZLinq.Test.ZMath
             {
                 
             }
+
+            <#= sourceType.Replace("T", type) #> emptySource = new <#= type #>[0].To<#= name #>();
+            var sum = ZEnumerable.Sum(emptySource);
+            Assert.AreEqual(sum, (<#= type #>) 0);
         }
 
         [TestMethod]
-        public void TestSum<#= typeName #><#= name #><#= i #>MapNull()
+        public void TestSum<#= typeName #><#= name #>MapNullOrEmpty()
         {
-            var source = Enumerable.Range(1, <#= i #>).Select(arg => new KeyValuePair<<#= type #>,<#= type #>>((<#= type #>) arg, (<#= type #>) arg)).To<#= name #>();
-            Func<KeyValuePair<<#= type #>, <#= type #>>, <#= type #>> map = null;
+            var source = Enumerable.Range(1, 1).Select(arg => new KeyValuePair<<#= type #>,<#= type #>>((<#= type #>) arg, (<#= type #>) arg)).To<#= name #>();
+            Func<KeyValuePair<<#= type #>, <#= type #>>, <#= type #>> nullMap = null;
+            <#= sourceType.Replace("T", type) #> nullSource = null;
+
             try
             {
-                ZEnumerable.Sum(source, map);                
+                ZEnumerable.Sum(nullSource);                
                 Assert.Fail();
             }
             catch (ArgumentNullException)
             {
                 
             }
+
+            try
+            {
+                ZEnumerable.Sum(source, nullMap);                
+                Assert.Fail();
+            }
+            catch (ArgumentNullException)
+            {
+                
+            }
+            
+            var emptySource = source.Take(0).To<#= name #>();
+            var sum = ZEnumerable.Sum(emptySource, x => (<#= type #>) x.Key);
+            Assert.AreEqual(sum, (<#= type #>) 0);           
         }
 
         <# } #>
         
         #endregion
     <# } #>    
-
-
-    <# }#>
 
     }
 }

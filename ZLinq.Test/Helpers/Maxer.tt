@@ -10,20 +10,28 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
-using ZLinq.Test.Helpers.Wrappers;
+using System.Linq;
 
 
 namespace ZLinq.Test.Helpers
 {
-    public static class Caster
+    public static class Maxer
     {        
-        <# foreach (var sourceType in TT.StandardInterfaces.WithNonGen())
-        { 
-        #>[Pure]
-        public static <#= sourceType #> To<#= TT.GetCollectionName(sourceType) #><T>(this IEnumerable<T> source)
+        <# foreach (var type in TT.WithNullables(TT.NumberTypes)) { #>
+
+        public static <#= type #> GetMax(IEnumerable<<#= type #>> source)
         {
-            return new Wrapper<#= sourceType.GetCollectionName() #><T>(source);
+           if (!source.Any())
+              return default(<#= type #>);
+           var result = source.First();
+           foreach(var x in source)
+           {
+                if (<#= TT.IsHigher(TT.IsNullable(type), "result", "x") #>)
+                    result = x;
+           }
+           return result;
         }
         <#}#>
 

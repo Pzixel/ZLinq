@@ -26,22 +26,19 @@ namespace ZLinq
 <#foreach (var type in TT.WithNullables(TT.NumberTypes)) {
     bool isNullable = TT.IsNullable(type);
     string max = isNullable ? "Max" : "Math.Max";
-    string valuePrefix = isNullable ? ".Value" : "";
-    Func<string, string, string> isHigher = isNullable ? new Func<string, string, string>((maxName, candidate) => TT.GetMaxNullable(maxName, candidate)) : (maxName, candidate) => maxName + " < " + candidate;
-    Func<string, string, string> isHigherNoCheck = isNullable ? new Func<string, string, string>((maxName, candidate) => TT.GetMaxNullableNoCheck(maxName, candidate)) : (maxName, candidate) => maxName + " < " + candidate;
+    string valuePrefix = isNullable ? ".GetValueOrDefault()" : "";
  #>
         
         <# if (isNullable) { #>
+
         [Pure]
         private static <#= type #> Max(<#= type #> x, <#= type #> y)
         {
-            bool hasValX = x.HasValue;
-            bool hasValY = y.HasValue;
-            if (hasValX && hasValY)
-                return Math.Max(x.Value, y.Value);
-            if (hasValX)
-                return x.Value;
-            return y.GetValueOrDefault();            
+            if (!y.HasValue)
+                return x; //y is null so return x              
+            if (!x.HasValue)
+                return y; //x is null so return y
+            return Math.Max(x.Value, y.Value); //return max of x and y            
         }
         <# } #>
 
@@ -49,12 +46,14 @@ namespace ZLinq
         <# foreach (string sourceType in TT.StandardLists) {
               foreach(string mapFunc in new[] {"", funcName}) {
                   bool isNotMap = mapFunc == string.Empty;
-                  string collectionType = isNotMap ? sourceType.Replace("T", type) : sourceType; 
+                  string collectionType = isNotMap ? sourceType.To(type) : sourceType; 
                   string secondParam = isNotMap ? "" : string.Format(", [NotNull] Func<T, {0}> {1}", type, mapFunc);
                   string secondParamCall = isNotMap ? "" : string.Format(", {0}", mapFunc);
                   string comment = isNotMap? "" : Environment.NewLine + "/// <param name=\"mapFunc\">Function that maps each element of source to perform search</param>";
                   string checkMap = isNotMap ? "" : TT.IsNotNull(mapFunc);
-                  string generic = isNotMap ? "" : "<T>"; #>      
+                  string generic = isNotMap ? "" : "<T>"; 
+                  string notEmptyType = isNotMap ? type : "T";
+                  var recursion = new Recursion(max, i => TT.Envelope(mapFunc, string.Format("source[{0}]", i)), type);#>      
 
         /// <summary>
         /// Search max value in mapped collection or zero if all items are null
@@ -66,6 +65,7 @@ namespace ZLinq
         {
             <#= TT.IsNotNull("source") #>
             <#= checkMap #>
+            source.IsNotEmpty<<#= collectionType #>, <#= notEmptyType #>>();
             if (source.<#= TT.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source<#= secondParamCall #>, 0, source.<#= TT.LengthOrCount(sourceType) #>);         
@@ -76,11 +76,11 @@ namespace ZLinq
                 range => 
                 {
                     var x = Max(source<#= secondParamCall #>, range.Item1, range.Item2);
-                    if (<#= isHigher("result", "x") #>)
+                    if (<#= TT.IsHigher(isNullable, "result", "x") #>)
                     {
                         lock (syncRoot)
                         {
-                            if (<#= isHigherNoCheck("result", "x") #>)
+                            if (<#= TT.IsHigherNoCheck(isNullable, "result", "x") #>)
                                 result = x;
                         }
                     }
@@ -96,9 +96,7 @@ namespace ZLinq
             if (diff <= Constants.Step)
             {
                 switch (diff)
-                {   <#  
-                    var recursion = new Recursion(max, i => TT.Envelope(mapFunc, string.Format("source[{0}]", i)));
-                    foreach(int j in TT.UnrollInclusive) { #>  
+                {   <#  foreach(int j in TT.UnrollInclusive.Skip(1)) { #>  
                 case <#= j #>:
                     return <#= recursion.Apply(j) #>;<# } #>    
                 }
@@ -113,7 +111,7 @@ namespace ZLinq
             {
                 <# foreach(int j in TT.Unroll) { 
                 #><#= type #> arg<#= j #> = <#= TT.Envelope(mapFunc, string.Format("source[i + {0}]", j)) #>;
-                if (<#= isHigher("max" + j, "arg" + j) #>)
+                if (<#= TT.IsHigher(isNullable, "max" + j, "arg" + j) #>)
                     max<#= j #> = arg<#= j #><#= valuePrefix #>;
                 <# } #>
 

@@ -23,7 +23,8 @@ namespace ZLinq
 
         #region <#= type #>             
         <# foreach (string sourceType in TT.StandardLists) 
-        { #>    
+        { 
+            string collectionType = sourceType.To(type); #>    
         /// <summary>
         /// Calculates average of collection <#= !type.EndsWith("?") ? "" : ". Nulls are treated as 0"#>
         /// </summary>
@@ -31,8 +32,9 @@ namespace ZLinq
         /// <returns>Average of all elements</returns>
         [Pure]
         public static double Average([NotNull] this <#= sourceType.Replace("T", type) #> source)
-        {
+        {   
             <#= TT.IsNotNull("source") #>
+            source.IsNotEmpty<<#= collectionType #>, <#= type #>>();
             try
             {
                 double sum = source.Sum();
@@ -63,6 +65,7 @@ namespace ZLinq
         {
             <#= TT.IsNotNull("source") #>
             <#= TT.IsNotNull("mapFunc") #>
+            source.IsNotEmpty<<#= sourceType #>, T>();
             try
             {
                 double sum = source.Sum(mapFunc);
@@ -91,7 +94,8 @@ namespace ZLinq
 
         #region <#= type #>             
         <# foreach (string sourceType in TT.StandardLists) 
-        { #>    
+        { 
+            string collectionType = sourceType.To(type); #>  
         /// <summary>
         /// Calculates average of collection <#= !type.EndsWith("?") ? "" : ". Nulls are treated as 0"#>
         /// </summary>
@@ -101,6 +105,7 @@ namespace ZLinq
         public static double Average([NotNull] this <#= sourceType.Replace("T", type) #> source)
         {
             <#= TT.IsNotNull("source") #>
+            source.IsNotEmpty<<#= collectionType #>, <#= type #>>();
             double sum = (double) source.Sum();
             if (!double.IsInfinity(sum))
             {
@@ -121,6 +126,7 @@ namespace ZLinq
         {
             <#= TT.IsNotNull("source") #>
             <#= TT.IsNotNull("mapFunc") #>
+            source.IsNotEmpty<<#= sourceType #>, T>();
             double sum = (double) source.Sum(mapFunc);
             if (!double.IsInfinity(sum))
             {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ZLinq.Common
 {
@@ -17,6 +18,12 @@ namespace ZLinq.Common
         {
             if (!condition)
                 throw new T();
+        }
+
+        public static void IsNotEmpty<T, TParam>(this T collection) where T : ICollection<TParam>
+        {
+            if (collection.Count == 0)
+                throw new InvalidOperationException("Collection is empty");
         }
     }
 }

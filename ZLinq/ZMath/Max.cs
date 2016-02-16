@@ -28,6 +28,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<sbyte[], sbyte>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Length);         
@@ -59,8 +60,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -116,6 +115,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<T[], T>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Length);         
@@ -147,8 +147,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -203,6 +201,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<List<sbyte>, sbyte>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -234,8 +233,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -291,6 +288,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<List<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -322,8 +320,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -378,6 +374,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<IList<sbyte>, sbyte>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -409,8 +406,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -466,6 +461,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<IList<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -497,8 +493,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -558,6 +552,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<byte[], byte>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Length);         
@@ -589,8 +584,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -646,6 +639,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<T[], T>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Length);         
@@ -677,8 +671,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -733,6 +725,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<List<byte>, byte>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -764,8 +757,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -821,6 +812,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<List<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -852,8 +844,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -908,6 +898,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<IList<byte>, byte>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -939,8 +930,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -996,6 +985,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<IList<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -1027,8 +1017,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -1088,6 +1076,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<short[], short>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Length);         
@@ -1119,8 +1108,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -1176,6 +1163,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<T[], T>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Length);         
@@ -1207,8 +1195,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -1263,6 +1249,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<List<short>, short>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -1294,8 +1281,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -1351,6 +1336,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<List<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -1382,8 +1368,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -1438,6 +1422,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<IList<short>, short>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -1469,8 +1454,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -1526,6 +1509,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<IList<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -1557,8 +1541,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -1618,6 +1600,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<ushort[], ushort>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Length);         
@@ -1649,8 +1632,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -1706,6 +1687,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<T[], T>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Length);         
@@ -1737,8 +1719,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -1793,6 +1773,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<List<ushort>, ushort>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -1824,8 +1805,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -1881,6 +1860,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<List<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -1912,8 +1892,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -1968,6 +1946,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<IList<ushort>, ushort>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -1999,8 +1978,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -2056,6 +2033,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<IList<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -2087,8 +2065,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -2148,6 +2124,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<int[], int>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Length);         
@@ -2179,8 +2156,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -2236,6 +2211,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<T[], T>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Length);         
@@ -2267,8 +2243,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -2323,6 +2297,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<List<int>, int>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -2354,8 +2329,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -2411,6 +2384,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<List<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -2442,8 +2416,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -2498,6 +2470,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<IList<int>, int>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -2529,8 +2502,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -2586,6 +2557,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<IList<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -2617,8 +2589,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -2678,6 +2648,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<uint[], uint>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Length);         
@@ -2709,8 +2680,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -2766,6 +2735,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<T[], T>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Length);         
@@ -2797,8 +2767,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -2853,6 +2821,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<List<uint>, uint>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -2884,8 +2853,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -2941,6 +2908,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<List<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -2972,8 +2940,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -3028,6 +2994,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<IList<uint>, uint>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -3059,8 +3026,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -3116,6 +3081,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<IList<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -3147,8 +3113,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -3208,6 +3172,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<long[], long>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Length);         
@@ -3239,8 +3204,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -3296,6 +3259,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<T[], T>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Length);         
@@ -3327,8 +3291,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -3383,6 +3345,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<List<long>, long>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -3414,8 +3377,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -3471,6 +3432,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<List<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -3502,8 +3464,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -3558,6 +3518,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<IList<long>, long>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -3589,8 +3550,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -3646,6 +3605,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<IList<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -3677,8 +3637,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -3738,6 +3696,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<ulong[], ulong>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Length);         
@@ -3769,8 +3728,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -3826,6 +3783,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<T[], T>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Length);         
@@ -3857,8 +3815,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -3913,6 +3869,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<List<ulong>, ulong>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -3944,8 +3901,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -4001,6 +3956,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<List<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -4032,8 +3988,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -4088,6 +4042,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<IList<ulong>, ulong>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -4119,8 +4074,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -4176,6 +4129,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<IList<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -4207,8 +4161,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -4268,6 +4220,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<float[], float>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Length);         
@@ -4299,8 +4252,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -4356,6 +4307,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<T[], T>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Length);         
@@ -4387,8 +4339,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -4443,6 +4393,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<List<float>, float>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -4474,8 +4425,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -4531,6 +4480,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<List<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -4562,8 +4512,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -4618,6 +4566,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<IList<float>, float>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -4649,8 +4598,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -4706,6 +4653,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<IList<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -4737,8 +4685,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -4798,6 +4744,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<double[], double>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Length);         
@@ -4829,8 +4776,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -4886,6 +4831,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<T[], T>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Length);         
@@ -4917,8 +4863,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -4973,6 +4917,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<List<double>, double>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -5004,8 +4949,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -5061,6 +5004,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<List<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -5092,8 +5036,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -5148,6 +5090,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<IList<double>, double>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -5179,8 +5122,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -5236,6 +5177,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<IList<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -5267,8 +5209,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -5328,6 +5268,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<decimal[], decimal>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Length);         
@@ -5359,8 +5300,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -5416,6 +5355,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<T[], T>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Length);         
@@ -5447,8 +5387,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -5503,6 +5441,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<List<decimal>, decimal>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -5534,8 +5473,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -5591,6 +5528,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<List<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -5622,8 +5560,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -5678,6 +5614,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<IList<decimal>, decimal>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -5709,8 +5646,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -5766,6 +5701,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<IList<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -5797,8 +5733,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -5844,16 +5778,15 @@ namespace ZLinq
                 
     #endregion
         
-                [Pure]
+        
+        [Pure]
         private static sbyte? Max(sbyte? x, sbyte? y)
         {
-            bool hasValX = x.HasValue;
-            bool hasValY = y.HasValue;
-            if (hasValX && hasValY)
-                return Math.Max(x.Value, y.Value);
-            if (hasValX)
-                return x.Value;
-            return y.GetValueOrDefault();            
+            if (!y.HasValue)
+                return x; //y is null so return x              
+            if (!x.HasValue)
+                return y; //x is null so return y
+            return Math.Max(x.Value, y.Value); //return max of x and y            
         }
         
         #region sbyte?             
@@ -5869,6 +5802,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<sbyte?[], sbyte?>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Length);         
@@ -5900,8 +5834,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -5924,16 +5856,16 @@ namespace ZLinq
             {
                 sbyte? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 sbyte? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 sbyte? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 sbyte? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Length)
@@ -5957,6 +5889,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<T[], T>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Length);         
@@ -5988,8 +5921,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -6012,16 +5943,16 @@ namespace ZLinq
             {
                 sbyte? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 sbyte? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 sbyte? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 sbyte? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Length)
@@ -6044,6 +5975,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<List<sbyte?>, sbyte?>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -6075,8 +6007,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -6099,16 +6029,16 @@ namespace ZLinq
             {
                 sbyte? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 sbyte? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 sbyte? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 sbyte? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -6132,6 +6062,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<List<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -6163,8 +6094,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -6187,16 +6116,16 @@ namespace ZLinq
             {
                 sbyte? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 sbyte? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 sbyte? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 sbyte? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -6219,6 +6148,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<IList<sbyte?>, sbyte?>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -6250,8 +6180,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -6274,16 +6202,16 @@ namespace ZLinq
             {
                 sbyte? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 sbyte? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 sbyte? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 sbyte? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -6307,6 +6235,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<IList<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -6338,8 +6267,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -6362,16 +6289,16 @@ namespace ZLinq
             {
                 sbyte? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 sbyte? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 sbyte? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 sbyte? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -6385,16 +6312,15 @@ namespace ZLinq
                 
     #endregion
         
-                [Pure]
+        
+        [Pure]
         private static byte? Max(byte? x, byte? y)
         {
-            bool hasValX = x.HasValue;
-            bool hasValY = y.HasValue;
-            if (hasValX && hasValY)
-                return Math.Max(x.Value, y.Value);
-            if (hasValX)
-                return x.Value;
-            return y.GetValueOrDefault();            
+            if (!y.HasValue)
+                return x; //y is null so return x              
+            if (!x.HasValue)
+                return y; //x is null so return y
+            return Math.Max(x.Value, y.Value); //return max of x and y            
         }
         
         #region byte?             
@@ -6410,6 +6336,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<byte?[], byte?>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Length);         
@@ -6441,8 +6368,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -6465,16 +6390,16 @@ namespace ZLinq
             {
                 byte? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 byte? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 byte? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 byte? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Length)
@@ -6498,6 +6423,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<T[], T>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Length);         
@@ -6529,8 +6455,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -6553,16 +6477,16 @@ namespace ZLinq
             {
                 byte? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 byte? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 byte? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 byte? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Length)
@@ -6585,6 +6509,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<List<byte?>, byte?>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -6616,8 +6541,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -6640,16 +6563,16 @@ namespace ZLinq
             {
                 byte? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 byte? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 byte? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 byte? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -6673,6 +6596,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<List<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -6704,8 +6628,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -6728,16 +6650,16 @@ namespace ZLinq
             {
                 byte? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 byte? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 byte? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 byte? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -6760,6 +6682,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<IList<byte?>, byte?>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -6791,8 +6714,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -6815,16 +6736,16 @@ namespace ZLinq
             {
                 byte? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 byte? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 byte? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 byte? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -6848,6 +6769,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<IList<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -6879,8 +6801,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -6903,16 +6823,16 @@ namespace ZLinq
             {
                 byte? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 byte? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 byte? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 byte? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -6926,16 +6846,15 @@ namespace ZLinq
                 
     #endregion
         
-                [Pure]
+        
+        [Pure]
         private static short? Max(short? x, short? y)
         {
-            bool hasValX = x.HasValue;
-            bool hasValY = y.HasValue;
-            if (hasValX && hasValY)
-                return Math.Max(x.Value, y.Value);
-            if (hasValX)
-                return x.Value;
-            return y.GetValueOrDefault();            
+            if (!y.HasValue)
+                return x; //y is null so return x              
+            if (!x.HasValue)
+                return y; //x is null so return y
+            return Math.Max(x.Value, y.Value); //return max of x and y            
         }
         
         #region short?             
@@ -6951,6 +6870,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<short?[], short?>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Length);         
@@ -6982,8 +6902,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -7006,16 +6924,16 @@ namespace ZLinq
             {
                 short? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 short? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 short? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 short? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Length)
@@ -7039,6 +6957,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<T[], T>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Length);         
@@ -7070,8 +6989,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -7094,16 +7011,16 @@ namespace ZLinq
             {
                 short? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 short? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 short? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 short? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Length)
@@ -7126,6 +7043,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<List<short?>, short?>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -7157,8 +7075,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -7181,16 +7097,16 @@ namespace ZLinq
             {
                 short? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 short? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 short? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 short? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -7214,6 +7130,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<List<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -7245,8 +7162,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -7269,16 +7184,16 @@ namespace ZLinq
             {
                 short? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 short? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 short? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 short? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -7301,6 +7216,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<IList<short?>, short?>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -7332,8 +7248,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -7356,16 +7270,16 @@ namespace ZLinq
             {
                 short? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 short? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 short? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 short? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -7389,6 +7303,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<IList<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -7420,8 +7335,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -7444,16 +7357,16 @@ namespace ZLinq
             {
                 short? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 short? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 short? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 short? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -7467,16 +7380,15 @@ namespace ZLinq
                 
     #endregion
         
-                [Pure]
+        
+        [Pure]
         private static ushort? Max(ushort? x, ushort? y)
         {
-            bool hasValX = x.HasValue;
-            bool hasValY = y.HasValue;
-            if (hasValX && hasValY)
-                return Math.Max(x.Value, y.Value);
-            if (hasValX)
-                return x.Value;
-            return y.GetValueOrDefault();            
+            if (!y.HasValue)
+                return x; //y is null so return x              
+            if (!x.HasValue)
+                return y; //x is null so return y
+            return Math.Max(x.Value, y.Value); //return max of x and y            
         }
         
         #region ushort?             
@@ -7492,6 +7404,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<ushort?[], ushort?>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Length);         
@@ -7523,8 +7436,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -7547,16 +7458,16 @@ namespace ZLinq
             {
                 ushort? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 ushort? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 ushort? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 ushort? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Length)
@@ -7580,6 +7491,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<T[], T>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Length);         
@@ -7611,8 +7523,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -7635,16 +7545,16 @@ namespace ZLinq
             {
                 ushort? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 ushort? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 ushort? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 ushort? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Length)
@@ -7667,6 +7577,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<List<ushort?>, ushort?>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -7698,8 +7609,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -7722,16 +7631,16 @@ namespace ZLinq
             {
                 ushort? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 ushort? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 ushort? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 ushort? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -7755,6 +7664,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<List<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -7786,8 +7696,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -7810,16 +7718,16 @@ namespace ZLinq
             {
                 ushort? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 ushort? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 ushort? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 ushort? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -7842,6 +7750,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<IList<ushort?>, ushort?>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -7873,8 +7782,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -7897,16 +7804,16 @@ namespace ZLinq
             {
                 ushort? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 ushort? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 ushort? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 ushort? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -7930,6 +7837,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<IList<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -7961,8 +7869,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -7985,16 +7891,16 @@ namespace ZLinq
             {
                 ushort? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 ushort? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 ushort? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 ushort? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -8008,16 +7914,15 @@ namespace ZLinq
                 
     #endregion
         
-                [Pure]
+        
+        [Pure]
         private static int? Max(int? x, int? y)
         {
-            bool hasValX = x.HasValue;
-            bool hasValY = y.HasValue;
-            if (hasValX && hasValY)
-                return Math.Max(x.Value, y.Value);
-            if (hasValX)
-                return x.Value;
-            return y.GetValueOrDefault();            
+            if (!y.HasValue)
+                return x; //y is null so return x              
+            if (!x.HasValue)
+                return y; //x is null so return y
+            return Math.Max(x.Value, y.Value); //return max of x and y            
         }
         
         #region int?             
@@ -8033,6 +7938,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<int?[], int?>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Length);         
@@ -8064,8 +7970,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -8088,16 +7992,16 @@ namespace ZLinq
             {
                 int? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 int? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 int? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 int? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Length)
@@ -8121,6 +8025,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<T[], T>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Length);         
@@ -8152,8 +8057,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -8176,16 +8079,16 @@ namespace ZLinq
             {
                 int? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 int? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 int? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 int? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Length)
@@ -8208,6 +8111,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<List<int?>, int?>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -8239,8 +8143,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -8263,16 +8165,16 @@ namespace ZLinq
             {
                 int? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 int? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 int? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 int? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -8296,6 +8198,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<List<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -8327,8 +8230,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -8351,16 +8252,16 @@ namespace ZLinq
             {
                 int? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 int? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 int? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 int? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -8383,6 +8284,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<IList<int?>, int?>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -8414,8 +8316,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -8438,16 +8338,16 @@ namespace ZLinq
             {
                 int? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 int? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 int? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 int? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -8471,6 +8371,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<IList<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -8502,8 +8403,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -8526,16 +8425,16 @@ namespace ZLinq
             {
                 int? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 int? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 int? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 int? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -8549,16 +8448,15 @@ namespace ZLinq
                 
     #endregion
         
-                [Pure]
+        
+        [Pure]
         private static uint? Max(uint? x, uint? y)
         {
-            bool hasValX = x.HasValue;
-            bool hasValY = y.HasValue;
-            if (hasValX && hasValY)
-                return Math.Max(x.Value, y.Value);
-            if (hasValX)
-                return x.Value;
-            return y.GetValueOrDefault();            
+            if (!y.HasValue)
+                return x; //y is null so return x              
+            if (!x.HasValue)
+                return y; //x is null so return y
+            return Math.Max(x.Value, y.Value); //return max of x and y            
         }
         
         #region uint?             
@@ -8574,6 +8472,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<uint?[], uint?>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Length);         
@@ -8605,8 +8504,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -8629,16 +8526,16 @@ namespace ZLinq
             {
                 uint? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 uint? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 uint? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 uint? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Length)
@@ -8662,6 +8559,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<T[], T>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Length);         
@@ -8693,8 +8591,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -8717,16 +8613,16 @@ namespace ZLinq
             {
                 uint? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 uint? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 uint? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 uint? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Length)
@@ -8749,6 +8645,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<List<uint?>, uint?>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -8780,8 +8677,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -8804,16 +8699,16 @@ namespace ZLinq
             {
                 uint? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 uint? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 uint? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 uint? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -8837,6 +8732,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<List<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -8868,8 +8764,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -8892,16 +8786,16 @@ namespace ZLinq
             {
                 uint? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 uint? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 uint? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 uint? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -8924,6 +8818,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<IList<uint?>, uint?>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -8955,8 +8850,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -8979,16 +8872,16 @@ namespace ZLinq
             {
                 uint? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 uint? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 uint? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 uint? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -9012,6 +8905,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<IList<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -9043,8 +8937,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -9067,16 +8959,16 @@ namespace ZLinq
             {
                 uint? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 uint? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 uint? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 uint? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -9090,16 +8982,15 @@ namespace ZLinq
                 
     #endregion
         
-                [Pure]
+        
+        [Pure]
         private static long? Max(long? x, long? y)
         {
-            bool hasValX = x.HasValue;
-            bool hasValY = y.HasValue;
-            if (hasValX && hasValY)
-                return Math.Max(x.Value, y.Value);
-            if (hasValX)
-                return x.Value;
-            return y.GetValueOrDefault();            
+            if (!y.HasValue)
+                return x; //y is null so return x              
+            if (!x.HasValue)
+                return y; //x is null so return y
+            return Math.Max(x.Value, y.Value); //return max of x and y            
         }
         
         #region long?             
@@ -9115,6 +9006,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<long?[], long?>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Length);         
@@ -9146,8 +9038,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -9170,16 +9060,16 @@ namespace ZLinq
             {
                 long? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 long? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 long? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 long? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Length)
@@ -9203,6 +9093,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<T[], T>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Length);         
@@ -9234,8 +9125,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -9258,16 +9147,16 @@ namespace ZLinq
             {
                 long? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 long? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 long? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 long? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Length)
@@ -9290,6 +9179,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<List<long?>, long?>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -9321,8 +9211,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -9345,16 +9233,16 @@ namespace ZLinq
             {
                 long? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 long? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 long? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 long? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -9378,6 +9266,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<List<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -9409,8 +9298,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -9433,16 +9320,16 @@ namespace ZLinq
             {
                 long? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 long? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 long? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 long? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -9465,6 +9352,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<IList<long?>, long?>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -9496,8 +9384,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -9520,16 +9406,16 @@ namespace ZLinq
             {
                 long? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 long? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 long? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 long? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -9553,6 +9439,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<IList<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -9584,8 +9471,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -9608,16 +9493,16 @@ namespace ZLinq
             {
                 long? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 long? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 long? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 long? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -9631,16 +9516,15 @@ namespace ZLinq
                 
     #endregion
         
-                [Pure]
+        
+        [Pure]
         private static ulong? Max(ulong? x, ulong? y)
         {
-            bool hasValX = x.HasValue;
-            bool hasValY = y.HasValue;
-            if (hasValX && hasValY)
-                return Math.Max(x.Value, y.Value);
-            if (hasValX)
-                return x.Value;
-            return y.GetValueOrDefault();            
+            if (!y.HasValue)
+                return x; //y is null so return x              
+            if (!x.HasValue)
+                return y; //x is null so return y
+            return Math.Max(x.Value, y.Value); //return max of x and y            
         }
         
         #region ulong?             
@@ -9656,6 +9540,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<ulong?[], ulong?>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Length);         
@@ -9687,8 +9572,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -9711,16 +9594,16 @@ namespace ZLinq
             {
                 ulong? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 ulong? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 ulong? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 ulong? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Length)
@@ -9744,6 +9627,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<T[], T>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Length);         
@@ -9775,8 +9659,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -9799,16 +9681,16 @@ namespace ZLinq
             {
                 ulong? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 ulong? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 ulong? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 ulong? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Length)
@@ -9831,6 +9713,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<List<ulong?>, ulong?>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -9862,8 +9745,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -9886,16 +9767,16 @@ namespace ZLinq
             {
                 ulong? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 ulong? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 ulong? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 ulong? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -9919,6 +9800,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<List<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -9950,8 +9832,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -9974,16 +9854,16 @@ namespace ZLinq
             {
                 ulong? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 ulong? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 ulong? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 ulong? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -10006,6 +9886,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<IList<ulong?>, ulong?>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -10037,8 +9918,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -10061,16 +9940,16 @@ namespace ZLinq
             {
                 ulong? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 ulong? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 ulong? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 ulong? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -10094,6 +9973,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<IList<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -10125,8 +10005,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -10149,16 +10027,16 @@ namespace ZLinq
             {
                 ulong? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 ulong? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 ulong? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 ulong? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -10172,16 +10050,15 @@ namespace ZLinq
                 
     #endregion
         
-                [Pure]
+        
+        [Pure]
         private static float? Max(float? x, float? y)
         {
-            bool hasValX = x.HasValue;
-            bool hasValY = y.HasValue;
-            if (hasValX && hasValY)
-                return Math.Max(x.Value, y.Value);
-            if (hasValX)
-                return x.Value;
-            return y.GetValueOrDefault();            
+            if (!y.HasValue)
+                return x; //y is null so return x              
+            if (!x.HasValue)
+                return y; //x is null so return y
+            return Math.Max(x.Value, y.Value); //return max of x and y            
         }
         
         #region float?             
@@ -10197,6 +10074,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<float?[], float?>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Length);         
@@ -10228,8 +10106,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -10252,16 +10128,16 @@ namespace ZLinq
             {
                 float? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 float? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 float? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 float? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Length)
@@ -10285,6 +10161,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<T[], T>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Length);         
@@ -10316,8 +10193,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -10340,16 +10215,16 @@ namespace ZLinq
             {
                 float? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 float? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 float? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 float? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Length)
@@ -10372,6 +10247,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<List<float?>, float?>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -10403,8 +10279,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -10427,16 +10301,16 @@ namespace ZLinq
             {
                 float? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 float? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 float? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 float? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -10460,6 +10334,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<List<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -10491,8 +10366,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -10515,16 +10388,16 @@ namespace ZLinq
             {
                 float? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 float? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 float? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 float? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -10547,6 +10420,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<IList<float?>, float?>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -10578,8 +10452,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -10602,16 +10474,16 @@ namespace ZLinq
             {
                 float? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 float? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 float? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 float? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -10635,6 +10507,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<IList<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -10666,8 +10539,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -10690,16 +10561,16 @@ namespace ZLinq
             {
                 float? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 float? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 float? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 float? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -10713,16 +10584,15 @@ namespace ZLinq
                 
     #endregion
         
-                [Pure]
+        
+        [Pure]
         private static double? Max(double? x, double? y)
         {
-            bool hasValX = x.HasValue;
-            bool hasValY = y.HasValue;
-            if (hasValX && hasValY)
-                return Math.Max(x.Value, y.Value);
-            if (hasValX)
-                return x.Value;
-            return y.GetValueOrDefault();            
+            if (!y.HasValue)
+                return x; //y is null so return x              
+            if (!x.HasValue)
+                return y; //x is null so return y
+            return Math.Max(x.Value, y.Value); //return max of x and y            
         }
         
         #region double?             
@@ -10738,6 +10608,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<double?[], double?>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Length);         
@@ -10769,8 +10640,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -10793,16 +10662,16 @@ namespace ZLinq
             {
                 double? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 double? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 double? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 double? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Length)
@@ -10826,6 +10695,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<T[], T>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Length);         
@@ -10857,8 +10727,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -10881,16 +10749,16 @@ namespace ZLinq
             {
                 double? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 double? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 double? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 double? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Length)
@@ -10913,6 +10781,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<List<double?>, double?>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -10944,8 +10813,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -10968,16 +10835,16 @@ namespace ZLinq
             {
                 double? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 double? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 double? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 double? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -11001,6 +10868,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<List<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -11032,8 +10900,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -11056,16 +10922,16 @@ namespace ZLinq
             {
                 double? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 double? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 double? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 double? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -11088,6 +10954,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<IList<double?>, double?>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -11119,8 +10986,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -11143,16 +11008,16 @@ namespace ZLinq
             {
                 double? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 double? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 double? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 double? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -11176,6 +11041,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<IList<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -11207,8 +11073,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -11231,16 +11095,16 @@ namespace ZLinq
             {
                 double? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 double? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 double? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 double? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -11254,16 +11118,15 @@ namespace ZLinq
                 
     #endregion
         
-                [Pure]
+        
+        [Pure]
         private static decimal? Max(decimal? x, decimal? y)
         {
-            bool hasValX = x.HasValue;
-            bool hasValY = y.HasValue;
-            if (hasValX && hasValY)
-                return Math.Max(x.Value, y.Value);
-            if (hasValX)
-                return x.Value;
-            return y.GetValueOrDefault();            
+            if (!y.HasValue)
+                return x; //y is null so return x              
+            if (!x.HasValue)
+                return y; //x is null so return y
+            return Math.Max(x.Value, y.Value); //return max of x and y            
         }
         
         #region decimal?             
@@ -11279,6 +11142,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<decimal?[], decimal?>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Length);         
@@ -11310,8 +11174,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -11334,16 +11196,16 @@ namespace ZLinq
             {
                 decimal? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 decimal? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 decimal? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 decimal? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Length)
@@ -11367,6 +11229,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<T[], T>();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Length);         
@@ -11398,8 +11261,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -11422,16 +11283,16 @@ namespace ZLinq
             {
                 decimal? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 decimal? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 decimal? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 decimal? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Length)
@@ -11454,6 +11315,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<List<decimal?>, decimal?>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -11485,8 +11347,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -11509,16 +11369,16 @@ namespace ZLinq
             {
                 decimal? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 decimal? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 decimal? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 decimal? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -11542,6 +11402,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<List<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -11573,8 +11434,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -11597,16 +11456,16 @@ namespace ZLinq
             {
                 decimal? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 decimal? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 decimal? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 decimal? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -11629,6 +11488,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             
+            source.IsNotEmpty<IList<decimal?>, decimal?>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, 0, source.Count);         
@@ -11660,8 +11520,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return source[0];  
                 case 2:
@@ -11684,16 +11542,16 @@ namespace ZLinq
             {
                 decimal? arg0 = source[i + 0];
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 decimal? arg1 = source[i + 1];
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 decimal? arg2 = source[i + 2];
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 decimal? arg3 = source[i + 3];
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)
@@ -11717,6 +11575,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
+            source.IsNotEmpty<IList<T>, T>();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source, mapFunc, 0, source.Count);         
@@ -11748,8 +11607,6 @@ namespace ZLinq
             {
                 switch (diff)
                 {     
-                case 0:
-                    return 0;  
                 case 1:
                     return mapFunc(source[0]);  
                 case 2:
@@ -11772,16 +11629,16 @@ namespace ZLinq
             {
                 decimal? arg0 = mapFunc(source[i + 0]);
                 if (arg0.HasValue && (max0 < arg0 || !max0.HasValue))
-                    max0 = arg0.Value;
+                    max0 = arg0.GetValueOrDefault();
                 decimal? arg1 = mapFunc(source[i + 1]);
                 if (arg1.HasValue && (max1 < arg1 || !max1.HasValue))
-                    max1 = arg1.Value;
+                    max1 = arg1.GetValueOrDefault();
                 decimal? arg2 = mapFunc(source[i + 2]);
                 if (arg2.HasValue && (max2 < arg2 || !max2.HasValue))
-                    max2 = arg2.Value;
+                    max2 = arg2.GetValueOrDefault();
                 decimal? arg3 = mapFunc(source[i + 3]);
                 if (arg3.HasValue && (max3 < arg3 || !max3.HasValue))
-                    max3 = arg3.Value;
+                    max3 = arg3.GetValueOrDefault();
                 
             }
             if (i == source.Count)

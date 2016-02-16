@@ -7,11 +7,13 @@ namespace ZLinq.TTHelp
     {
         private readonly string _function;
         private readonly Func<int, string> _appFunc;
+        private readonly string _defaultVal;
         private readonly StringBuilder _builder;
-        public Recursion(string function, Func<int, string> appFunc)
+        public Recursion(string function, Func<int, string> appFunc, string type)
         {
             _function = function;
             _appFunc = appFunc;
+            _defaultVal = $"default({type})";
             _builder = new StringBuilder();
         }
 
@@ -26,24 +28,21 @@ namespace ZLinq.TTHelp
         private void Apply(int k, int n)
         {
             var diff = n - k;
-            if (diff == 0)
+            switch (diff)
             {
-                _builder.Append("0");
+            case 0:
+                _builder.Append(_defaultVal);
                 return;
-            }
-            if (diff == 1)
-            {
+            case 1:
                 _builder.Append(_appFunc(k));
                 return;
-            }
-            if (diff == 2)
-            {
+            case 2:
                 _builder.Append(_function)
-                .Append('(')
-                .Append(_appFunc(k))
-                .Append(", ")
-                .Append(_appFunc(k + 1))
-                .Append(')');
+                        .Append('(')
+                        .Append(_appFunc(k))
+                        .Append(", ")
+                        .Append(_appFunc(k + 1))
+                        .Append(')');
                 return;
             }
             int half = (n + k) / 2;

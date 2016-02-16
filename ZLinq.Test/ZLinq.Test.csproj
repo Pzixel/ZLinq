@@ -136,6 +136,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SplitTest.tt</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Wrappers\WrapperIListNonGen.cs" />
+    <Compile Include="Helpers\Wrappers\WrapperICollectionNonGen.cs" />
+    <Compile Include="Helpers\Wrappers\WrapperICollection.cs" />
+    <Compile Include="Helpers\Wrappers\WrapperIEnumerableNonGen.cs" />
+    <Compile Include="Helpers\Wrappers\WrapperIEnumerable.cs" />
+    <Compile Include="Helpers\Wrappers\WrapperIList.cs" />
+    <Compile Include="Helpers\Maxer.cs">
+      <DependentUpon>Maxer.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Helpers\Caster.cs">
       <DependentUpon>Caster.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -210,6 +221,10 @@
     <Content Include="Core\Unfold\RepeatTest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RepeatTest.cs</LastGenOutput>
+    </Content>
+    <Content Include="Helpers\Maxer.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Maxer.cs</LastGenOutput>
     </Content>
     <Content Include="Helpers\Caster.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

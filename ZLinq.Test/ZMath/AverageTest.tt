@@ -9,8 +9,9 @@
 <#@ output extension=".cs" #>
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ZLinq.Test.Helpers;
 
 
@@ -34,7 +35,71 @@ namespace ZLinq.Test.ZMath
          #>    
 
          
+        [TestMethod]
+        public void TestAverage<#= typeName #><#= name #>NullOrEmpty()
+        {        
+            <#= sourceType.Replace("T", type) #> nullSource = null;
+
+            try
+            {
+                ZEnumerable.Average(nullSource);                
+                Assert.Fail();
+            }
+            catch (ArgumentNullException)
+            {
+                
+            }
+
+            <#= sourceType.Replace("T", type) #> emptySource = new <#= type #>[0].To<#= name #>();
+            try
+            {
+                ZEnumerable.Average(emptySource);                
+                Assert.Fail();
+            }
+            catch (InvalidOperationException)
+            {
+                
+            }
+        }
+
+        [TestMethod]
+        public void TestAverage<#= typeName #><#= name #>MapNullOrEmpty()
+        {
+            var source = Enumerable.Range(1, 1).Select(arg => new KeyValuePair<<#= type #>,<#= type #>>((<#= type #>) arg, (<#= type #>) arg)).To<#= name #>();
+            Func<KeyValuePair<<#= type #>, <#= type #>>, <#= type #>> nullMap = null;
+            try
+            {
+                ZEnumerable.Average(source, nullMap);                
+                Assert.Fail();
+            }
+            catch (ArgumentNullException)
+            {
+                
+            }
+
+            var emptySource = source.Take(0).To<#= name #>();
+            try
+            {
+                ZEnumerable.Average(emptySource, nullMap);                
+                Assert.Fail();
+            }
+            catch (ArgumentNullException)
+            {
+                
+            }
+            try
+            {
+                ZEnumerable.Average(emptySource, x => x.Key);                
+                Assert.Fail();
+            }
+            catch (InvalidOperationException)
+            {
+                
+            }
+        }
+         
         <# foreach(int i in TT.TestSizes) { #>
+
         [TestMethod]
         public void TestAverage<#= typeName #><#= TT.GetCollectionName(sourceType) #><#= i #>()
         {            
