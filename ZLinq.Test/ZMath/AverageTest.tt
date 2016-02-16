@@ -99,11 +99,12 @@ namespace ZLinq.Test.ZMath
         }
          
         <# foreach(int i in TT.TestSizes) { #>
-
+            <# foreach(var val in new string[] {expectedVal, "1"}) {
+            string suffix = val == "1" ? "Min" : ""; #>
         [TestMethod]
-        public void TestAverage<#= typeName #><#= TT.GetCollectionName(sourceType) #><#= i #>()
+        public void TestAverage<#= typeName #><#= TT.GetCollectionName(sourceType) #><#= i #><#= suffix #>()
         {            
-            const <#= trimmedType #> expected = <#= expectedVal #>;
+            const <#= trimmedType #> expected = <#= val #>;
             var source = Enumerable.Repeat((<#= type #>) expected, <#= i #>).To<#= name #>();
 
             double result = ZEnumerable.Average(source);
@@ -112,56 +113,32 @@ namespace ZLinq.Test.ZMath
         }
 
         [TestMethod]
-        public void TestAverage<#= typeName #><#= TT.GetCollectionName(sourceType) #><#= i #>Map()
+        public void TestAverage<#= typeName #><#= TT.GetCollectionName(sourceType) #><#= i #>Map<#= suffix #>()
         {
-            const <#= trimmedType #> expected = <#= expectedVal #>;
+            const <#= trimmedType #> expected = <#= val #>;
             var source = Enumerable.Repeat(new { X = expected}, <#= i #>).To<#= name #>();
 
             double result = ZEnumerable.Average(source, arg => (<#= type #>) arg.X);
             <#= TT.AssertFloatsRelative("result", "expected", "Tolerance") #>
         }
-
-        [TestMethod]
-        public void TestAverage<#= typeName #><#= TT.GetCollectionName(sourceType) #><#= i #>Min()
-        {            
-            const <#= trimmedType #> expected = <#= 1 #>;
-            var source = Enumerable.Repeat((<#= type #>) expected, <#= i #>).To<#= name #>();
-
-            double result = ZEnumerable.Average(source);
-
-            <#= TT.AssertFloatsRelative("result", "expected", "Tolerance") #>
-        }
-
-        [TestMethod]
-        public void TestAverage<#= typeName #><#= TT.GetCollectionName(sourceType) #><#= i #>MapMin()
-        {
-            const <#= trimmedType #> expected = <#= 1 #>;
-            var source = Enumerable.Repeat(new { X = expected}, <#= i #>).To<#= name #>();
-
-            double result = ZEnumerable.Average(source, arg => (<#= type #>) arg.X);
-            <#= TT.AssertFloatsRelative("result", "expected", "Tolerance") #>
-        }
-          
+        <# } #>          
         <# } #>
 
-        <# if (isInteger) { #>        
+        <# if (isInteger) { #>      
+        <# var dict = new Dictionary<string, string> { {"(" + type + ") expected",""}, {string.Format("new {{ X = ({0}) expected}}", type), ", arg => arg.X"}};  #>
+        <# foreach (var pair in dict)  { #>
+        <# string map = pair.Value == "" ? "" : "Map"; #>
+
         [TestMethod]
-        public void TestAverage<#= typeName #><#= TT.GetCollectionName(sourceType) #>NoOverflow()
+        public void TestAverage<#= typeName #><#= TT.GetCollectionName(sourceType) #><#= map #>NoOverflow()
         {
             const <#= trimmedType #> expected = <#= trimmedType #>.MaxValue;
-            var source = Enumerable.Repeat((<#= type #>) expected, 2).To<#= name #>();
-            double result = ZEnumerable.Average(source);
+            var source = Enumerable.Repeat(<#= pair.Key #>, 2).To<#= name #>();
+            double result = ZEnumerable.Average(source<#= pair.Value #>);
             <#= TT.AssertFloatsRelative("result", "expected", "Tolerance") #>
         }
-        
-        [TestMethod]
-        public void TestAverage<#= typeName #><#= TT.GetCollectionName(sourceType) #>MapNoOverflow()
-        {    
-            const <#= trimmedType #> expected = <#= trimmedType #>.MaxValue;
-            var source =  Enumerable.Repeat(new { X = (<#= type #>) expected} , 2).To<#= name #>();
-            double result = ZEnumerable.Average(source, arg => arg.X);
-            <#= TT.AssertFloatsRelative("result", "expected", "Tolerance") #>
-        }
+
+        <# } #>
         <# } #>
         <# } #>
         
