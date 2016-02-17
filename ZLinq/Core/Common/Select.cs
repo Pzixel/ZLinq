@@ -23,6 +23,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="func">Function that maps elements from source collection to resulting collection</param>
         /// <returns>Array of mapped elements</returns>  
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure]
         [NotNull]
         public static TResult[] SelectToArray<T, TResult>([NotNull] this T[] source, [NotNull] Func<T, TResult> func)
@@ -68,6 +69,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="func">Function that maps elements from source collection to resulting collection</param>
         /// <returns>Array of mapped elements</returns>  
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure]
         [NotNull]
         public static TResult[] SelectToArray<T, TResult>([NotNull] this List<T> source, [NotNull] Func<T, TResult> func)
@@ -113,6 +115,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="func">Function that maps elements from source collection to resulting collection</param>
         /// <returns>Array of mapped elements</returns>  
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure]
         [NotNull]
         public static TResult[] SelectToArray<T, TResult>([NotNull] this IList<T> source, [NotNull] Func<T, TResult> func)
@@ -157,7 +160,8 @@ namespace ZLinq
         /// <typeparam name="TResult">Type of result array</typeparam>
         /// <param name="source">Source collection</param>
         /// <param name="func">Function that maps elements from source collection to resulting collection</param>
-        /// <returns>Array of mapped elements</returns>          
+        /// <returns>Array of mapped elements</returns>       
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>   
         [Pure]
         [NotNull]
         public static TResult[] SelectToArray<T, TResult>([NotNull] this ICollection<T> source, [NotNull] Func<T, TResult> func)
@@ -183,6 +187,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="func">Function that maps elements from source collection to resulting collection</param>
         /// <returns>List of mapped elements</returns> 
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure]
         [NotNull]
         public static List<TResult> SelectToList<T, TResult>([NotNull] this IEnumerable<T> source, [NotNull] Func<T, TResult> func)
@@ -201,6 +206,7 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
         /// <param name="func">Function that maps elements from source collection to resulting collection</param>
         /// <returns>List of mapped elements</returns> 
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure]
         [NotNull]
         public static List<TResult> SelectToList<T, TResult>([NotNull] this ICollection<T> source, [NotNull] Func<T, TResult> func)

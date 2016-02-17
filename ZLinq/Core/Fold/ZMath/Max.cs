@@ -24,6 +24,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static sbyte Max([NotNull] this sbyte[] source)
         {
@@ -109,8 +110,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static sbyte Max<T>([NotNull] this T[] source, [NotNull] Func<T, sbyte> mapFunc)
         {
@@ -197,6 +200,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static sbyte Max([NotNull] this List<sbyte> source)
         {
@@ -282,8 +286,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static sbyte Max<T>([NotNull] this List<T> source, [NotNull] Func<T, sbyte> mapFunc)
         {
@@ -370,6 +376,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static sbyte Max([NotNull] this IList<sbyte> source)
         {
@@ -455,8 +462,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static sbyte Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, sbyte> mapFunc)
         {
@@ -548,6 +557,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static byte Max([NotNull] this byte[] source)
         {
@@ -633,8 +643,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static byte Max<T>([NotNull] this T[] source, [NotNull] Func<T, byte> mapFunc)
         {
@@ -721,6 +733,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static byte Max([NotNull] this List<byte> source)
         {
@@ -806,8 +819,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static byte Max<T>([NotNull] this List<T> source, [NotNull] Func<T, byte> mapFunc)
         {
@@ -894,6 +909,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static byte Max([NotNull] this IList<byte> source)
         {
@@ -979,8 +995,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static byte Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, byte> mapFunc)
         {
@@ -1072,6 +1090,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static short Max([NotNull] this short[] source)
         {
@@ -1157,8 +1176,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static short Max<T>([NotNull] this T[] source, [NotNull] Func<T, short> mapFunc)
         {
@@ -1245,6 +1266,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static short Max([NotNull] this List<short> source)
         {
@@ -1330,8 +1352,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static short Max<T>([NotNull] this List<T> source, [NotNull] Func<T, short> mapFunc)
         {
@@ -1418,6 +1442,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static short Max([NotNull] this IList<short> source)
         {
@@ -1503,8 +1528,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static short Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, short> mapFunc)
         {
@@ -1596,6 +1623,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static ushort Max([NotNull] this ushort[] source)
         {
@@ -1681,8 +1709,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static ushort Max<T>([NotNull] this T[] source, [NotNull] Func<T, ushort> mapFunc)
         {
@@ -1769,6 +1799,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static ushort Max([NotNull] this List<ushort> source)
         {
@@ -1854,8 +1885,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static ushort Max<T>([NotNull] this List<T> source, [NotNull] Func<T, ushort> mapFunc)
         {
@@ -1942,6 +1975,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static ushort Max([NotNull] this IList<ushort> source)
         {
@@ -2027,8 +2061,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static ushort Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, ushort> mapFunc)
         {
@@ -2120,6 +2156,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static int Max([NotNull] this int[] source)
         {
@@ -2205,8 +2242,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static int Max<T>([NotNull] this T[] source, [NotNull] Func<T, int> mapFunc)
         {
@@ -2293,6 +2332,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static int Max([NotNull] this List<int> source)
         {
@@ -2378,8 +2418,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static int Max<T>([NotNull] this List<T> source, [NotNull] Func<T, int> mapFunc)
         {
@@ -2466,6 +2508,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static int Max([NotNull] this IList<int> source)
         {
@@ -2551,8 +2594,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static int Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, int> mapFunc)
         {
@@ -2644,6 +2689,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static uint Max([NotNull] this uint[] source)
         {
@@ -2729,8 +2775,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static uint Max<T>([NotNull] this T[] source, [NotNull] Func<T, uint> mapFunc)
         {
@@ -2817,6 +2865,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static uint Max([NotNull] this List<uint> source)
         {
@@ -2902,8 +2951,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static uint Max<T>([NotNull] this List<T> source, [NotNull] Func<T, uint> mapFunc)
         {
@@ -2990,6 +3041,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static uint Max([NotNull] this IList<uint> source)
         {
@@ -3075,8 +3127,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static uint Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, uint> mapFunc)
         {
@@ -3168,6 +3222,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static long Max([NotNull] this long[] source)
         {
@@ -3253,8 +3308,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static long Max<T>([NotNull] this T[] source, [NotNull] Func<T, long> mapFunc)
         {
@@ -3341,6 +3398,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static long Max([NotNull] this List<long> source)
         {
@@ -3426,8 +3484,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static long Max<T>([NotNull] this List<T> source, [NotNull] Func<T, long> mapFunc)
         {
@@ -3514,6 +3574,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static long Max([NotNull] this IList<long> source)
         {
@@ -3599,8 +3660,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static long Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, long> mapFunc)
         {
@@ -3692,6 +3755,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static ulong Max([NotNull] this ulong[] source)
         {
@@ -3777,8 +3841,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static ulong Max<T>([NotNull] this T[] source, [NotNull] Func<T, ulong> mapFunc)
         {
@@ -3865,6 +3931,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static ulong Max([NotNull] this List<ulong> source)
         {
@@ -3950,8 +4017,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static ulong Max<T>([NotNull] this List<T> source, [NotNull] Func<T, ulong> mapFunc)
         {
@@ -4038,6 +4107,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static ulong Max([NotNull] this IList<ulong> source)
         {
@@ -4123,8 +4193,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static ulong Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, ulong> mapFunc)
         {
@@ -4216,6 +4288,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static float Max([NotNull] this float[] source)
         {
@@ -4301,8 +4374,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static float Max<T>([NotNull] this T[] source, [NotNull] Func<T, float> mapFunc)
         {
@@ -4389,6 +4464,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static float Max([NotNull] this List<float> source)
         {
@@ -4474,8 +4550,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static float Max<T>([NotNull] this List<T> source, [NotNull] Func<T, float> mapFunc)
         {
@@ -4562,6 +4640,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static float Max([NotNull] this IList<float> source)
         {
@@ -4647,8 +4726,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static float Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, float> mapFunc)
         {
@@ -4740,6 +4821,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static double Max([NotNull] this double[] source)
         {
@@ -4825,8 +4907,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static double Max<T>([NotNull] this T[] source, [NotNull] Func<T, double> mapFunc)
         {
@@ -4913,6 +4997,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static double Max([NotNull] this List<double> source)
         {
@@ -4998,8 +5083,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static double Max<T>([NotNull] this List<T> source, [NotNull] Func<T, double> mapFunc)
         {
@@ -5086,6 +5173,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static double Max([NotNull] this IList<double> source)
         {
@@ -5171,8 +5259,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static double Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, double> mapFunc)
         {
@@ -5264,6 +5354,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static decimal Max([NotNull] this decimal[] source)
         {
@@ -5349,8 +5440,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static decimal Max<T>([NotNull] this T[] source, [NotNull] Func<T, decimal> mapFunc)
         {
@@ -5437,6 +5530,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static decimal Max([NotNull] this List<decimal> source)
         {
@@ -5522,8 +5616,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static decimal Max<T>([NotNull] this List<T> source, [NotNull] Func<T, decimal> mapFunc)
         {
@@ -5610,6 +5706,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static decimal Max([NotNull] this IList<decimal> source)
         {
@@ -5695,8 +5792,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static decimal Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, decimal> mapFunc)
         {
@@ -5798,6 +5897,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static sbyte? Max([NotNull] this sbyte?[] source)
         {
@@ -5883,8 +5983,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static sbyte? Max<T>([NotNull] this T[] source, [NotNull] Func<T, sbyte?> mapFunc)
         {
@@ -5971,6 +6073,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static sbyte? Max([NotNull] this List<sbyte?> source)
         {
@@ -6056,8 +6159,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static sbyte? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, sbyte?> mapFunc)
         {
@@ -6144,6 +6249,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static sbyte? Max([NotNull] this IList<sbyte?> source)
         {
@@ -6229,8 +6335,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static sbyte? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, sbyte?> mapFunc)
         {
@@ -6332,6 +6440,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static byte? Max([NotNull] this byte?[] source)
         {
@@ -6417,8 +6526,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static byte? Max<T>([NotNull] this T[] source, [NotNull] Func<T, byte?> mapFunc)
         {
@@ -6505,6 +6616,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static byte? Max([NotNull] this List<byte?> source)
         {
@@ -6590,8 +6702,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static byte? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, byte?> mapFunc)
         {
@@ -6678,6 +6792,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static byte? Max([NotNull] this IList<byte?> source)
         {
@@ -6763,8 +6878,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static byte? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, byte?> mapFunc)
         {
@@ -6866,6 +6983,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static short? Max([NotNull] this short?[] source)
         {
@@ -6951,8 +7069,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static short? Max<T>([NotNull] this T[] source, [NotNull] Func<T, short?> mapFunc)
         {
@@ -7039,6 +7159,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static short? Max([NotNull] this List<short?> source)
         {
@@ -7124,8 +7245,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static short? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, short?> mapFunc)
         {
@@ -7212,6 +7335,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static short? Max([NotNull] this IList<short?> source)
         {
@@ -7297,8 +7421,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static short? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, short?> mapFunc)
         {
@@ -7400,6 +7526,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static ushort? Max([NotNull] this ushort?[] source)
         {
@@ -7485,8 +7612,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static ushort? Max<T>([NotNull] this T[] source, [NotNull] Func<T, ushort?> mapFunc)
         {
@@ -7573,6 +7702,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static ushort? Max([NotNull] this List<ushort?> source)
         {
@@ -7658,8 +7788,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static ushort? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, ushort?> mapFunc)
         {
@@ -7746,6 +7878,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static ushort? Max([NotNull] this IList<ushort?> source)
         {
@@ -7831,8 +7964,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static ushort? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, ushort?> mapFunc)
         {
@@ -7934,6 +8069,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static int? Max([NotNull] this int?[] source)
         {
@@ -8019,8 +8155,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static int? Max<T>([NotNull] this T[] source, [NotNull] Func<T, int?> mapFunc)
         {
@@ -8107,6 +8245,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static int? Max([NotNull] this List<int?> source)
         {
@@ -8192,8 +8331,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static int? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, int?> mapFunc)
         {
@@ -8280,6 +8421,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static int? Max([NotNull] this IList<int?> source)
         {
@@ -8365,8 +8507,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static int? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, int?> mapFunc)
         {
@@ -8468,6 +8612,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static uint? Max([NotNull] this uint?[] source)
         {
@@ -8553,8 +8698,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static uint? Max<T>([NotNull] this T[] source, [NotNull] Func<T, uint?> mapFunc)
         {
@@ -8641,6 +8788,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static uint? Max([NotNull] this List<uint?> source)
         {
@@ -8726,8 +8874,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static uint? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, uint?> mapFunc)
         {
@@ -8814,6 +8964,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static uint? Max([NotNull] this IList<uint?> source)
         {
@@ -8899,8 +9050,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static uint? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, uint?> mapFunc)
         {
@@ -9002,6 +9155,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static long? Max([NotNull] this long?[] source)
         {
@@ -9087,8 +9241,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static long? Max<T>([NotNull] this T[] source, [NotNull] Func<T, long?> mapFunc)
         {
@@ -9175,6 +9331,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static long? Max([NotNull] this List<long?> source)
         {
@@ -9260,8 +9417,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static long? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, long?> mapFunc)
         {
@@ -9348,6 +9507,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static long? Max([NotNull] this IList<long?> source)
         {
@@ -9433,8 +9593,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static long? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, long?> mapFunc)
         {
@@ -9536,6 +9698,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static ulong? Max([NotNull] this ulong?[] source)
         {
@@ -9621,8 +9784,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static ulong? Max<T>([NotNull] this T[] source, [NotNull] Func<T, ulong?> mapFunc)
         {
@@ -9709,6 +9874,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static ulong? Max([NotNull] this List<ulong?> source)
         {
@@ -9794,8 +9960,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static ulong? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, ulong?> mapFunc)
         {
@@ -9882,6 +10050,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static ulong? Max([NotNull] this IList<ulong?> source)
         {
@@ -9967,8 +10136,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static ulong? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, ulong?> mapFunc)
         {
@@ -10070,6 +10241,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static float? Max([NotNull] this float?[] source)
         {
@@ -10155,8 +10327,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static float? Max<T>([NotNull] this T[] source, [NotNull] Func<T, float?> mapFunc)
         {
@@ -10243,6 +10417,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static float? Max([NotNull] this List<float?> source)
         {
@@ -10328,8 +10503,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static float? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, float?> mapFunc)
         {
@@ -10416,6 +10593,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static float? Max([NotNull] this IList<float?> source)
         {
@@ -10501,8 +10679,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static float? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, float?> mapFunc)
         {
@@ -10604,6 +10784,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static double? Max([NotNull] this double?[] source)
         {
@@ -10689,8 +10870,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static double? Max<T>([NotNull] this T[] source, [NotNull] Func<T, double?> mapFunc)
         {
@@ -10777,6 +10960,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static double? Max([NotNull] this List<double?> source)
         {
@@ -10862,8 +11046,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static double? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, double?> mapFunc)
         {
@@ -10950,6 +11136,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static double? Max([NotNull] this IList<double?> source)
         {
@@ -11035,8 +11222,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static double? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, double?> mapFunc)
         {
@@ -11138,6 +11327,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static decimal? Max([NotNull] this decimal?[] source)
         {
@@ -11223,8 +11413,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static decimal? Max<T>([NotNull] this T[] source, [NotNull] Func<T, decimal?> mapFunc)
         {
@@ -11311,6 +11503,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static decimal? Max([NotNull] this List<decimal?> source)
         {
@@ -11396,8 +11589,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static decimal? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, decimal?> mapFunc)
         {
@@ -11484,6 +11679,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
         [Pure]
         public static decimal? Max([NotNull] this IList<decimal?> source)
         {
@@ -11569,8 +11765,10 @@ namespace ZLinq
         /// Search max value in mapped collection or zero if all items are null
         /// </summary>
         /// <param name="source">Source collection</param>
-/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
+		/// <param name="mapFunc">Function that maps each element of source to perform search</param>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> 
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure]
         public static decimal? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, decimal?> mapFunc)
         {

@@ -22,6 +22,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static sbyte Sum([NotNull] this sbyte[] source)
         {
@@ -80,6 +82,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static sbyte Sum<T>([NotNull] this T[] source, [NotNull] Func<T, sbyte> mapFunc)
         {
@@ -137,6 +141,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static sbyte Sum([NotNull] this List<sbyte> source)
         {
@@ -195,6 +201,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static sbyte Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, sbyte> mapFunc)
         {
@@ -252,6 +260,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static sbyte Sum([NotNull] this IList<sbyte> source)
         {
@@ -310,6 +320,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static sbyte Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, sbyte> mapFunc)
         {
@@ -371,6 +383,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static byte Sum([NotNull] this byte[] source)
         {
@@ -429,6 +443,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static byte Sum<T>([NotNull] this T[] source, [NotNull] Func<T, byte> mapFunc)
         {
@@ -486,6 +502,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static byte Sum([NotNull] this List<byte> source)
         {
@@ -544,6 +562,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static byte Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, byte> mapFunc)
         {
@@ -601,6 +621,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static byte Sum([NotNull] this IList<byte> source)
         {
@@ -659,6 +681,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static byte Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, byte> mapFunc)
         {
@@ -720,6 +744,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static short Sum([NotNull] this short[] source)
         {
@@ -778,6 +804,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static short Sum<T>([NotNull] this T[] source, [NotNull] Func<T, short> mapFunc)
         {
@@ -835,6 +863,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static short Sum([NotNull] this List<short> source)
         {
@@ -893,6 +923,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static short Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, short> mapFunc)
         {
@@ -950,6 +982,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static short Sum([NotNull] this IList<short> source)
         {
@@ -1008,6 +1042,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static short Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, short> mapFunc)
         {
@@ -1069,6 +1105,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static ushort Sum([NotNull] this ushort[] source)
         {
@@ -1127,6 +1165,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static ushort Sum<T>([NotNull] this T[] source, [NotNull] Func<T, ushort> mapFunc)
         {
@@ -1184,6 +1224,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static ushort Sum([NotNull] this List<ushort> source)
         {
@@ -1242,6 +1284,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static ushort Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, ushort> mapFunc)
         {
@@ -1299,6 +1343,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static ushort Sum([NotNull] this IList<ushort> source)
         {
@@ -1357,6 +1403,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static ushort Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, ushort> mapFunc)
         {
@@ -1418,6 +1466,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static int Sum([NotNull] this int[] source)
         {
@@ -1476,6 +1526,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static int Sum<T>([NotNull] this T[] source, [NotNull] Func<T, int> mapFunc)
         {
@@ -1533,6 +1585,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static int Sum([NotNull] this List<int> source)
         {
@@ -1591,6 +1645,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static int Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, int> mapFunc)
         {
@@ -1648,6 +1704,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static int Sum([NotNull] this IList<int> source)
         {
@@ -1706,6 +1764,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static int Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, int> mapFunc)
         {
@@ -1767,6 +1827,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static uint Sum([NotNull] this uint[] source)
         {
@@ -1825,6 +1887,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static uint Sum<T>([NotNull] this T[] source, [NotNull] Func<T, uint> mapFunc)
         {
@@ -1882,6 +1946,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static uint Sum([NotNull] this List<uint> source)
         {
@@ -1940,6 +2006,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static uint Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, uint> mapFunc)
         {
@@ -1997,6 +2065,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static uint Sum([NotNull] this IList<uint> source)
         {
@@ -2055,6 +2125,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static uint Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, uint> mapFunc)
         {
@@ -2116,6 +2188,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static long Sum([NotNull] this long[] source)
         {
@@ -2174,6 +2248,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static long Sum<T>([NotNull] this T[] source, [NotNull] Func<T, long> mapFunc)
         {
@@ -2231,6 +2307,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static long Sum([NotNull] this List<long> source)
         {
@@ -2289,6 +2367,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static long Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, long> mapFunc)
         {
@@ -2346,6 +2426,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static long Sum([NotNull] this IList<long> source)
         {
@@ -2404,6 +2486,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static long Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, long> mapFunc)
         {
@@ -2465,6 +2549,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static ulong Sum([NotNull] this ulong[] source)
         {
@@ -2523,6 +2609,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static ulong Sum<T>([NotNull] this T[] source, [NotNull] Func<T, ulong> mapFunc)
         {
@@ -2580,6 +2668,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static ulong Sum([NotNull] this List<ulong> source)
         {
@@ -2638,6 +2728,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static ulong Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, ulong> mapFunc)
         {
@@ -2695,6 +2787,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static ulong Sum([NotNull] this IList<ulong> source)
         {
@@ -2753,6 +2847,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static ulong Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, ulong> mapFunc)
         {
@@ -2814,6 +2910,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static float Sum([NotNull] this float[] source)
         {
@@ -2872,6 +2970,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static float Sum<T>([NotNull] this T[] source, [NotNull] Func<T, float> mapFunc)
         {
@@ -2929,6 +3029,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static float Sum([NotNull] this List<float> source)
         {
@@ -2987,6 +3089,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static float Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, float> mapFunc)
         {
@@ -3044,6 +3148,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static float Sum([NotNull] this IList<float> source)
         {
@@ -3102,6 +3208,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static float Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, float> mapFunc)
         {
@@ -3163,6 +3271,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static double Sum([NotNull] this double[] source)
         {
@@ -3221,6 +3331,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static double Sum<T>([NotNull] this T[] source, [NotNull] Func<T, double> mapFunc)
         {
@@ -3278,6 +3390,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static double Sum([NotNull] this List<double> source)
         {
@@ -3336,6 +3450,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static double Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, double> mapFunc)
         {
@@ -3393,6 +3509,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static double Sum([NotNull] this IList<double> source)
         {
@@ -3451,6 +3569,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static double Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, double> mapFunc)
         {
@@ -3512,6 +3632,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static decimal Sum([NotNull] this decimal[] source)
         {
@@ -3570,6 +3692,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static decimal Sum<T>([NotNull] this T[] source, [NotNull] Func<T, decimal> mapFunc)
         {
@@ -3627,6 +3751,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static decimal Sum([NotNull] this List<decimal> source)
         {
@@ -3685,6 +3811,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static decimal Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, decimal> mapFunc)
         {
@@ -3742,6 +3870,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static decimal Sum([NotNull] this IList<decimal> source)
         {
@@ -3800,6 +3930,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static decimal Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, decimal> mapFunc)
         {
@@ -3861,6 +3993,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static sbyte Sum([NotNull] this sbyte?[] source)
         {
@@ -3919,6 +4053,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static sbyte Sum<T>([NotNull] this T[] source, [NotNull] Func<T, sbyte?> mapFunc)
         {
@@ -3976,6 +4112,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static sbyte Sum([NotNull] this List<sbyte?> source)
         {
@@ -4034,6 +4172,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static sbyte Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, sbyte?> mapFunc)
         {
@@ -4091,6 +4231,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static sbyte Sum([NotNull] this IList<sbyte?> source)
         {
@@ -4149,6 +4291,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static sbyte Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, sbyte?> mapFunc)
         {
@@ -4210,6 +4354,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static byte Sum([NotNull] this byte?[] source)
         {
@@ -4268,6 +4414,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static byte Sum<T>([NotNull] this T[] source, [NotNull] Func<T, byte?> mapFunc)
         {
@@ -4325,6 +4473,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static byte Sum([NotNull] this List<byte?> source)
         {
@@ -4383,6 +4533,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static byte Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, byte?> mapFunc)
         {
@@ -4440,6 +4592,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static byte Sum([NotNull] this IList<byte?> source)
         {
@@ -4498,6 +4652,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static byte Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, byte?> mapFunc)
         {
@@ -4559,6 +4715,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static short Sum([NotNull] this short?[] source)
         {
@@ -4617,6 +4775,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static short Sum<T>([NotNull] this T[] source, [NotNull] Func<T, short?> mapFunc)
         {
@@ -4674,6 +4834,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static short Sum([NotNull] this List<short?> source)
         {
@@ -4732,6 +4894,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static short Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, short?> mapFunc)
         {
@@ -4789,6 +4953,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static short Sum([NotNull] this IList<short?> source)
         {
@@ -4847,6 +5013,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static short Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, short?> mapFunc)
         {
@@ -4908,6 +5076,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static ushort Sum([NotNull] this ushort?[] source)
         {
@@ -4966,6 +5136,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static ushort Sum<T>([NotNull] this T[] source, [NotNull] Func<T, ushort?> mapFunc)
         {
@@ -5023,6 +5195,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static ushort Sum([NotNull] this List<ushort?> source)
         {
@@ -5081,6 +5255,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static ushort Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, ushort?> mapFunc)
         {
@@ -5138,6 +5314,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static ushort Sum([NotNull] this IList<ushort?> source)
         {
@@ -5196,6 +5374,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static ushort Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, ushort?> mapFunc)
         {
@@ -5257,6 +5437,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static int Sum([NotNull] this int?[] source)
         {
@@ -5315,6 +5497,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static int Sum<T>([NotNull] this T[] source, [NotNull] Func<T, int?> mapFunc)
         {
@@ -5372,6 +5556,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static int Sum([NotNull] this List<int?> source)
         {
@@ -5430,6 +5616,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static int Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, int?> mapFunc)
         {
@@ -5487,6 +5675,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static int Sum([NotNull] this IList<int?> source)
         {
@@ -5545,6 +5735,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static int Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, int?> mapFunc)
         {
@@ -5606,6 +5798,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static uint Sum([NotNull] this uint?[] source)
         {
@@ -5664,6 +5858,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static uint Sum<T>([NotNull] this T[] source, [NotNull] Func<T, uint?> mapFunc)
         {
@@ -5721,6 +5917,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static uint Sum([NotNull] this List<uint?> source)
         {
@@ -5779,6 +5977,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static uint Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, uint?> mapFunc)
         {
@@ -5836,6 +6036,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static uint Sum([NotNull] this IList<uint?> source)
         {
@@ -5894,6 +6096,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static uint Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, uint?> mapFunc)
         {
@@ -5955,6 +6159,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static long Sum([NotNull] this long?[] source)
         {
@@ -6013,6 +6219,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static long Sum<T>([NotNull] this T[] source, [NotNull] Func<T, long?> mapFunc)
         {
@@ -6070,6 +6278,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static long Sum([NotNull] this List<long?> source)
         {
@@ -6128,6 +6338,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static long Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, long?> mapFunc)
         {
@@ -6185,6 +6397,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static long Sum([NotNull] this IList<long?> source)
         {
@@ -6243,6 +6457,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static long Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, long?> mapFunc)
         {
@@ -6304,6 +6520,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static ulong Sum([NotNull] this ulong?[] source)
         {
@@ -6362,6 +6580,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static ulong Sum<T>([NotNull] this T[] source, [NotNull] Func<T, ulong?> mapFunc)
         {
@@ -6419,6 +6639,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static ulong Sum([NotNull] this List<ulong?> source)
         {
@@ -6477,6 +6699,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static ulong Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, ulong?> mapFunc)
         {
@@ -6534,6 +6758,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static ulong Sum([NotNull] this IList<ulong?> source)
         {
@@ -6592,6 +6818,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static ulong Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, ulong?> mapFunc)
         {
@@ -6653,6 +6881,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static float Sum([NotNull] this float?[] source)
         {
@@ -6711,6 +6941,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static float Sum<T>([NotNull] this T[] source, [NotNull] Func<T, float?> mapFunc)
         {
@@ -6768,6 +7000,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static float Sum([NotNull] this List<float?> source)
         {
@@ -6826,6 +7060,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static float Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, float?> mapFunc)
         {
@@ -6883,6 +7119,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static float Sum([NotNull] this IList<float?> source)
         {
@@ -6941,6 +7179,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static float Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, float?> mapFunc)
         {
@@ -7002,6 +7242,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static double Sum([NotNull] this double?[] source)
         {
@@ -7060,6 +7302,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static double Sum<T>([NotNull] this T[] source, [NotNull] Func<T, double?> mapFunc)
         {
@@ -7117,6 +7361,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static double Sum([NotNull] this List<double?> source)
         {
@@ -7175,6 +7421,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static double Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, double?> mapFunc)
         {
@@ -7232,6 +7480,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static double Sum([NotNull] this IList<double?> source)
         {
@@ -7290,6 +7540,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static double Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, double?> mapFunc)
         {
@@ -7351,6 +7603,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static decimal Sum([NotNull] this decimal?[] source)
         {
@@ -7409,6 +7663,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static decimal Sum<T>([NotNull] this T[] source, [NotNull] Func<T, decimal?> mapFunc)
         {
@@ -7466,6 +7722,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static decimal Sum([NotNull] this List<decimal?> source)
         {
@@ -7524,6 +7782,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static decimal Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, decimal?> mapFunc)
         {
@@ -7581,6 +7841,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static decimal Sum([NotNull] this IList<decimal?> source)
         {
@@ -7639,6 +7901,8 @@ namespace ZLinq
         /// <param name="source">Source collection</param>
 /// <param name="mapFunc">Function that maps each element of source to perform search</param>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static decimal Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, decimal?> mapFunc)
         {

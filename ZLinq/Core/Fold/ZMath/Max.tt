@@ -50,7 +50,8 @@ namespace ZLinq
                   string collectionType = isNotMap ? sourceType.To(type) : sourceType; 
                   string secondParam = isNotMap ? "" : string.Format(", [NotNull] Func<T, {0}> {1}", type, mapFunc);
                   string secondParamCall = isNotMap ? "" : string.Format(", {0}", mapFunc);
-                  string comment = isNotMap? "" : Environment.NewLine + "/// <param name=\"mapFunc\">Function that maps each element of source to perform search</param>";
+                  string comment = isNotMap? "" : Environment.NewLine + "		/// <param name=\"mapFunc\">Function that maps each element of source to perform search</param>";
+				  string exception = isNotMap ? "" : Environment.NewLine + "		/// <exception cref=\"InvalidOperationException\">Throws when collection is empty</exception>";
                   string checkMap = isNotMap ? "" : TT.IsNotNull(mapFunc);
                   string generic = isNotMap ? "" : "<T>"; 
                   string notEmptyType = isNotMap ? type : "T";
@@ -61,6 +62,7 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param><#= comment #>        
         /// <returns>Maximum value of mapping</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception> <#= exception #>
         [Pure]
         public static <#= type #> Max<#= generic #>([NotNull] this <#= collectionType #> source<#= secondParam #>)
         {

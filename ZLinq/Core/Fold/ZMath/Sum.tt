@@ -46,6 +46,8 @@ namespace ZLinq
         /// </summary>
         /// <param name="source">Source collection</param><#= comment #>
         /// <returns>Sum of all elements</returns>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="OverflowException">Throws when result value is bigger than MaxValue</exception>
         [Pure]
         public static <#= resType #> Sum<#= generic #>([NotNull] this <#= collectionType #> source<#= secondParam #>)
         {
