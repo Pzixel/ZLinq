@@ -1,21 +1,21 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace ZLinq.Test.Helpers.Wrappers
 {
     public sealed class WrapperIEnumerableNonGen<T> : IEnumerable
     {
-        private readonly IEnumerable _collection;
+        private readonly IEnumerable _enumerable;
 
-        public WrapperIEnumerableNonGen(IEnumerable<T> collection)
+        public WrapperIEnumerableNonGen(IEnumerable enumerable)
         {
-            _collection = collection.ToList();
+            _enumerable = enumerable;
         }
 
         public IEnumerator GetEnumerator()
         {
-            return _collection.GetEnumerator();
+            // ReSharper disable once LoopCanBeConvertedToQuery
+            foreach (var value in _enumerable)
+                yield return value;
         }
     }
 }

@@ -1,16 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace ZLinq.Test.Helpers.Wrappers
 {
     public sealed class WrapperIEnumerable<T> : IEnumerable<T>
     {
-        private readonly IEnumerable<T> _collection;
+        private readonly IEnumerable<T> _enumerable;
 
-        public WrapperIEnumerable(IEnumerable<T> collection)
+        public WrapperIEnumerable(IEnumerable<T> enumerable)
         {
-            _collection = collection.ToList();
+            _enumerable = enumerable;
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -18,10 +17,11 @@ namespace ZLinq.Test.Helpers.Wrappers
             return GetEnumerator();
         }
 
-
         public IEnumerator<T> GetEnumerator()
         {
-            return _collection.GetEnumerator();
+            // ReSharper disable once LoopCanBeConvertedToQuery
+            foreach (var value in _enumerable)
+                yield return value;
         }
     }
 }

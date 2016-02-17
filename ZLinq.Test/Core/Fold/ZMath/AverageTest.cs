@@ -288,47 +288,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAveragesbyteArray2049()
-        {            
-            const sbyte expected = sbyte.MaxValue/10*9;
-            var source = Enumerable.Repeat((sbyte) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragesbyteArray2049Map()
-        {
-            const sbyte expected = sbyte.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (sbyte) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragesbyteArray2049Min()
-        {            
-            const sbyte expected = 1;
-            var source = Enumerable.Repeat((sbyte) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragesbyteArray2049MapMin()
-        {
-            const sbyte expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (sbyte) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAveragesbyteArray2051()
         {            
             const sbyte expected = sbyte.MaxValue/10*9;
@@ -663,47 +622,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAveragesbyteList2049()
-        {            
-            const sbyte expected = sbyte.MaxValue/10*9;
-            var source = Enumerable.Repeat((sbyte) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragesbyteList2049Map()
-        {
-            const sbyte expected = sbyte.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (sbyte) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragesbyteList2049Min()
-        {            
-            const sbyte expected = 1;
-            var source = Enumerable.Repeat((sbyte) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragesbyteList2049MapMin()
-        {
-            const sbyte expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (sbyte) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAveragesbyteList2051()
         {            
             const sbyte expected = sbyte.MaxValue/10*9;
@@ -1032,47 +950,6 @@ namespace ZLinq.Test.ZMath
         {
             const sbyte expected = 1;
             var source = Enumerable.Repeat(new { X = expected}, 100).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (sbyte) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
-        public void TestAveragesbyteIList2049()
-        {            
-            const sbyte expected = sbyte.MaxValue/10*9;
-            var source = Enumerable.Repeat((sbyte) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragesbyteIList2049Map()
-        {
-            const sbyte expected = sbyte.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (sbyte) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragesbyteIList2049Min()
-        {            
-            const sbyte expected = 1;
-            var source = Enumerable.Repeat((sbyte) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragesbyteIList2049MapMin()
-        {
-            const sbyte expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
 
             double result = ZEnumerable.Average(source, arg => (sbyte) arg.X);
             Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
@@ -1417,47 +1294,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAveragebyteArray2049()
-        {            
-            const byte expected = byte.MaxValue/10*9;
-            var source = Enumerable.Repeat((byte) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragebyteArray2049Map()
-        {
-            const byte expected = byte.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (byte) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragebyteArray2049Min()
-        {            
-            const byte expected = 1;
-            var source = Enumerable.Repeat((byte) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragebyteArray2049MapMin()
-        {
-            const byte expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (byte) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAveragebyteArray2051()
         {            
             const byte expected = byte.MaxValue/10*9;
@@ -1792,47 +1628,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAveragebyteList2049()
-        {            
-            const byte expected = byte.MaxValue/10*9;
-            var source = Enumerable.Repeat((byte) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragebyteList2049Map()
-        {
-            const byte expected = byte.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (byte) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragebyteList2049Min()
-        {            
-            const byte expected = 1;
-            var source = Enumerable.Repeat((byte) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragebyteList2049MapMin()
-        {
-            const byte expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (byte) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAveragebyteList2051()
         {            
             const byte expected = byte.MaxValue/10*9;
@@ -2161,47 +1956,6 @@ namespace ZLinq.Test.ZMath
         {
             const byte expected = 1;
             var source = Enumerable.Repeat(new { X = expected}, 100).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (byte) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
-        public void TestAveragebyteIList2049()
-        {            
-            const byte expected = byte.MaxValue/10*9;
-            var source = Enumerable.Repeat((byte) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragebyteIList2049Map()
-        {
-            const byte expected = byte.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (byte) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragebyteIList2049Min()
-        {            
-            const byte expected = 1;
-            var source = Enumerable.Repeat((byte) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragebyteIList2049MapMin()
-        {
-            const byte expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
 
             double result = ZEnumerable.Average(source, arg => (byte) arg.X);
             Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
@@ -2546,47 +2300,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAverageshortArray2049()
-        {            
-            const short expected = short.MaxValue/10*9;
-            var source = Enumerable.Repeat((short) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageshortArray2049Map()
-        {
-            const short expected = short.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (short) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAverageshortArray2049Min()
-        {            
-            const short expected = 1;
-            var source = Enumerable.Repeat((short) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageshortArray2049MapMin()
-        {
-            const short expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (short) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAverageshortArray2051()
         {            
             const short expected = short.MaxValue/10*9;
@@ -2921,47 +2634,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAverageshortList2049()
-        {            
-            const short expected = short.MaxValue/10*9;
-            var source = Enumerable.Repeat((short) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageshortList2049Map()
-        {
-            const short expected = short.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (short) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAverageshortList2049Min()
-        {            
-            const short expected = 1;
-            var source = Enumerable.Repeat((short) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageshortList2049MapMin()
-        {
-            const short expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (short) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAverageshortList2051()
         {            
             const short expected = short.MaxValue/10*9;
@@ -3290,47 +2962,6 @@ namespace ZLinq.Test.ZMath
         {
             const short expected = 1;
             var source = Enumerable.Repeat(new { X = expected}, 100).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (short) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
-        public void TestAverageshortIList2049()
-        {            
-            const short expected = short.MaxValue/10*9;
-            var source = Enumerable.Repeat((short) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageshortIList2049Map()
-        {
-            const short expected = short.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (short) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAverageshortIList2049Min()
-        {            
-            const short expected = 1;
-            var source = Enumerable.Repeat((short) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageshortIList2049MapMin()
-        {
-            const short expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
 
             double result = ZEnumerable.Average(source, arg => (short) arg.X);
             Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
@@ -3675,47 +3306,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAverageushortArray2049()
-        {            
-            const ushort expected = ushort.MaxValue/10*9;
-            var source = Enumerable.Repeat((ushort) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageushortArray2049Map()
-        {
-            const ushort expected = ushort.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (ushort) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAverageushortArray2049Min()
-        {            
-            const ushort expected = 1;
-            var source = Enumerable.Repeat((ushort) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageushortArray2049MapMin()
-        {
-            const ushort expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (ushort) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAverageushortArray2051()
         {            
             const ushort expected = ushort.MaxValue/10*9;
@@ -4050,47 +3640,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAverageushortList2049()
-        {            
-            const ushort expected = ushort.MaxValue/10*9;
-            var source = Enumerable.Repeat((ushort) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageushortList2049Map()
-        {
-            const ushort expected = ushort.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (ushort) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAverageushortList2049Min()
-        {            
-            const ushort expected = 1;
-            var source = Enumerable.Repeat((ushort) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageushortList2049MapMin()
-        {
-            const ushort expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (ushort) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAverageushortList2051()
         {            
             const ushort expected = ushort.MaxValue/10*9;
@@ -4419,47 +3968,6 @@ namespace ZLinq.Test.ZMath
         {
             const ushort expected = 1;
             var source = Enumerable.Repeat(new { X = expected}, 100).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (ushort) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
-        public void TestAverageushortIList2049()
-        {            
-            const ushort expected = ushort.MaxValue/10*9;
-            var source = Enumerable.Repeat((ushort) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageushortIList2049Map()
-        {
-            const ushort expected = ushort.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (ushort) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAverageushortIList2049Min()
-        {            
-            const ushort expected = 1;
-            var source = Enumerable.Repeat((ushort) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageushortIList2049MapMin()
-        {
-            const ushort expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
 
             double result = ZEnumerable.Average(source, arg => (ushort) arg.X);
             Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
@@ -4804,47 +4312,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAverageintArray2049()
-        {            
-            const int expected = int.MaxValue/10*9;
-            var source = Enumerable.Repeat((int) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageintArray2049Map()
-        {
-            const int expected = int.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (int) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAverageintArray2049Min()
-        {            
-            const int expected = 1;
-            var source = Enumerable.Repeat((int) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageintArray2049MapMin()
-        {
-            const int expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (int) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAverageintArray2051()
         {            
             const int expected = int.MaxValue/10*9;
@@ -5179,47 +4646,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAverageintList2049()
-        {            
-            const int expected = int.MaxValue/10*9;
-            var source = Enumerable.Repeat((int) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageintList2049Map()
-        {
-            const int expected = int.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (int) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAverageintList2049Min()
-        {            
-            const int expected = 1;
-            var source = Enumerable.Repeat((int) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageintList2049MapMin()
-        {
-            const int expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (int) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAverageintList2051()
         {            
             const int expected = int.MaxValue/10*9;
@@ -5548,47 +4974,6 @@ namespace ZLinq.Test.ZMath
         {
             const int expected = 1;
             var source = Enumerable.Repeat(new { X = expected}, 100).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (int) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
-        public void TestAverageintIList2049()
-        {            
-            const int expected = int.MaxValue/10*9;
-            var source = Enumerable.Repeat((int) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageintIList2049Map()
-        {
-            const int expected = int.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (int) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAverageintIList2049Min()
-        {            
-            const int expected = 1;
-            var source = Enumerable.Repeat((int) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageintIList2049MapMin()
-        {
-            const int expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
 
             double result = ZEnumerable.Average(source, arg => (int) arg.X);
             Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
@@ -5933,47 +5318,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAverageuintArray2049()
-        {            
-            const uint expected = uint.MaxValue/10*9;
-            var source = Enumerable.Repeat((uint) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageuintArray2049Map()
-        {
-            const uint expected = uint.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (uint) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAverageuintArray2049Min()
-        {            
-            const uint expected = 1;
-            var source = Enumerable.Repeat((uint) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageuintArray2049MapMin()
-        {
-            const uint expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (uint) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAverageuintArray2051()
         {            
             const uint expected = uint.MaxValue/10*9;
@@ -6308,47 +5652,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAverageuintList2049()
-        {            
-            const uint expected = uint.MaxValue/10*9;
-            var source = Enumerable.Repeat((uint) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageuintList2049Map()
-        {
-            const uint expected = uint.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (uint) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAverageuintList2049Min()
-        {            
-            const uint expected = 1;
-            var source = Enumerable.Repeat((uint) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageuintList2049MapMin()
-        {
-            const uint expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (uint) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAverageuintList2051()
         {            
             const uint expected = uint.MaxValue/10*9;
@@ -6677,47 +5980,6 @@ namespace ZLinq.Test.ZMath
         {
             const uint expected = 1;
             var source = Enumerable.Repeat(new { X = expected}, 100).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (uint) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
-        public void TestAverageuintIList2049()
-        {            
-            const uint expected = uint.MaxValue/10*9;
-            var source = Enumerable.Repeat((uint) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageuintIList2049Map()
-        {
-            const uint expected = uint.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (uint) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAverageuintIList2049Min()
-        {            
-            const uint expected = 1;
-            var source = Enumerable.Repeat((uint) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageuintIList2049MapMin()
-        {
-            const uint expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
 
             double result = ZEnumerable.Average(source, arg => (uint) arg.X);
             Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
@@ -7062,47 +6324,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAveragelongArray2049()
-        {            
-            const long expected = long.MaxValue/10*9;
-            var source = Enumerable.Repeat((long) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragelongArray2049Map()
-        {
-            const long expected = long.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (long) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragelongArray2049Min()
-        {            
-            const long expected = 1;
-            var source = Enumerable.Repeat((long) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragelongArray2049MapMin()
-        {
-            const long expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (long) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAveragelongArray2051()
         {            
             const long expected = long.MaxValue/10*9;
@@ -7437,47 +6658,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAveragelongList2049()
-        {            
-            const long expected = long.MaxValue/10*9;
-            var source = Enumerable.Repeat((long) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragelongList2049Map()
-        {
-            const long expected = long.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (long) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragelongList2049Min()
-        {            
-            const long expected = 1;
-            var source = Enumerable.Repeat((long) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragelongList2049MapMin()
-        {
-            const long expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (long) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAveragelongList2051()
         {            
             const long expected = long.MaxValue/10*9;
@@ -7806,47 +6986,6 @@ namespace ZLinq.Test.ZMath
         {
             const long expected = 1;
             var source = Enumerable.Repeat(new { X = expected}, 100).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (long) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
-        public void TestAveragelongIList2049()
-        {            
-            const long expected = long.MaxValue/10*9;
-            var source = Enumerable.Repeat((long) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragelongIList2049Map()
-        {
-            const long expected = long.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (long) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragelongIList2049Min()
-        {            
-            const long expected = 1;
-            var source = Enumerable.Repeat((long) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragelongIList2049MapMin()
-        {
-            const long expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
 
             double result = ZEnumerable.Average(source, arg => (long) arg.X);
             Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
@@ -8191,47 +7330,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAverageulongArray2049()
-        {            
-            const ulong expected = ulong.MaxValue/10*9;
-            var source = Enumerable.Repeat((ulong) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageulongArray2049Map()
-        {
-            const ulong expected = ulong.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (ulong) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAverageulongArray2049Min()
-        {            
-            const ulong expected = 1;
-            var source = Enumerable.Repeat((ulong) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageulongArray2049MapMin()
-        {
-            const ulong expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (ulong) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAverageulongArray2051()
         {            
             const ulong expected = ulong.MaxValue/10*9;
@@ -8566,47 +7664,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAverageulongList2049()
-        {            
-            const ulong expected = ulong.MaxValue/10*9;
-            var source = Enumerable.Repeat((ulong) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageulongList2049Map()
-        {
-            const ulong expected = ulong.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (ulong) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAverageulongList2049Min()
-        {            
-            const ulong expected = 1;
-            var source = Enumerable.Repeat((ulong) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageulongList2049MapMin()
-        {
-            const ulong expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (ulong) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAverageulongList2051()
         {            
             const ulong expected = ulong.MaxValue/10*9;
@@ -8935,47 +7992,6 @@ namespace ZLinq.Test.ZMath
         {
             const ulong expected = 1;
             var source = Enumerable.Repeat(new { X = expected}, 100).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (ulong) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
-        public void TestAverageulongIList2049()
-        {            
-            const ulong expected = ulong.MaxValue/10*9;
-            var source = Enumerable.Repeat((ulong) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageulongIList2049Map()
-        {
-            const ulong expected = ulong.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (ulong) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAverageulongIList2049Min()
-        {            
-            const ulong expected = 1;
-            var source = Enumerable.Repeat((ulong) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageulongIList2049MapMin()
-        {
-            const ulong expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
 
             double result = ZEnumerable.Average(source, arg => (ulong) arg.X);
             Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
@@ -9320,47 +8336,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAveragefloatArray2049()
-        {            
-            const float expected = short.MaxValue;
-            var source = Enumerable.Repeat((float) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragefloatArray2049Map()
-        {
-            const float expected = short.MaxValue;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (float) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragefloatArray2049Min()
-        {            
-            const float expected = 1;
-            var source = Enumerable.Repeat((float) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragefloatArray2049MapMin()
-        {
-            const float expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (float) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAveragefloatArray2051()
         {            
             const float expected = short.MaxValue;
@@ -9674,47 +8649,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAveragefloatList2049()
-        {            
-            const float expected = short.MaxValue;
-            var source = Enumerable.Repeat((float) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragefloatList2049Map()
-        {
-            const float expected = short.MaxValue;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (float) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragefloatList2049Min()
-        {            
-            const float expected = 1;
-            var source = Enumerable.Repeat((float) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragefloatList2049MapMin()
-        {
-            const float expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (float) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAveragefloatList2051()
         {            
             const float expected = short.MaxValue;
@@ -10022,47 +8956,6 @@ namespace ZLinq.Test.ZMath
         {
             const float expected = 1;
             var source = Enumerable.Repeat(new { X = expected}, 100).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (float) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
-        public void TestAveragefloatIList2049()
-        {            
-            const float expected = short.MaxValue;
-            var source = Enumerable.Repeat((float) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragefloatIList2049Map()
-        {
-            const float expected = short.MaxValue;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (float) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragefloatIList2049Min()
-        {            
-            const float expected = 1;
-            var source = Enumerable.Repeat((float) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragefloatIList2049MapMin()
-        {
-            const float expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
 
             double result = ZEnumerable.Average(source, arg => (float) arg.X);
             Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
@@ -10386,47 +9279,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAveragedoubleArray2049()
-        {            
-            const double expected = short.MaxValue;
-            var source = Enumerable.Repeat((double) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragedoubleArray2049Map()
-        {
-            const double expected = short.MaxValue;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (double) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragedoubleArray2049Min()
-        {            
-            const double expected = 1;
-            var source = Enumerable.Repeat((double) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragedoubleArray2049MapMin()
-        {
-            const double expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (double) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAveragedoubleArray2051()
         {            
             const double expected = short.MaxValue;
@@ -10740,47 +9592,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAveragedoubleList2049()
-        {            
-            const double expected = short.MaxValue;
-            var source = Enumerable.Repeat((double) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragedoubleList2049Map()
-        {
-            const double expected = short.MaxValue;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (double) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragedoubleList2049Min()
-        {            
-            const double expected = 1;
-            var source = Enumerable.Repeat((double) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragedoubleList2049MapMin()
-        {
-            const double expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (double) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAveragedoubleList2051()
         {            
             const double expected = short.MaxValue;
@@ -11088,47 +9899,6 @@ namespace ZLinq.Test.ZMath
         {
             const double expected = 1;
             var source = Enumerable.Repeat(new { X = expected}, 100).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (double) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
-        public void TestAveragedoubleIList2049()
-        {            
-            const double expected = short.MaxValue;
-            var source = Enumerable.Repeat((double) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragedoubleIList2049Map()
-        {
-            const double expected = short.MaxValue;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (double) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragedoubleIList2049Min()
-        {            
-            const double expected = 1;
-            var source = Enumerable.Repeat((double) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragedoubleIList2049MapMin()
-        {
-            const double expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
 
             double result = ZEnumerable.Average(source, arg => (double) arg.X);
             Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
@@ -11452,47 +10222,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAveragedecimalArray2049()
-        {            
-            const decimal expected = short.MaxValue;
-            var source = Enumerable.Repeat((decimal) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragedecimalArray2049Map()
-        {
-            const decimal expected = short.MaxValue;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (decimal) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragedecimalArray2049Min()
-        {            
-            const decimal expected = 1;
-            var source = Enumerable.Repeat((decimal) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragedecimalArray2049MapMin()
-        {
-            const decimal expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (decimal) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAveragedecimalArray2051()
         {            
             const decimal expected = short.MaxValue;
@@ -11800,47 +10529,6 @@ namespace ZLinq.Test.ZMath
         {
             const decimal expected = 1;
             var source = Enumerable.Repeat(new { X = expected}, 100).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (decimal) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
-        public void TestAveragedecimalList2049()
-        {            
-            const decimal expected = short.MaxValue;
-            var source = Enumerable.Repeat((decimal) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragedecimalList2049Map()
-        {
-            const decimal expected = short.MaxValue;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (decimal) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragedecimalList2049Min()
-        {            
-            const decimal expected = 1;
-            var source = Enumerable.Repeat((decimal) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragedecimalList2049MapMin()
-        {
-            const decimal expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
 
             double result = ZEnumerable.Average(source, arg => (decimal) arg.X);
             Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
@@ -12160,47 +10848,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAveragedecimalIList2049()
-        {            
-            const decimal expected = short.MaxValue;
-            var source = Enumerable.Repeat((decimal) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragedecimalIList2049Map()
-        {
-            const decimal expected = short.MaxValue;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (decimal) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragedecimalIList2049Min()
-        {            
-            const decimal expected = 1;
-            var source = Enumerable.Repeat((decimal) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragedecimalIList2049MapMin()
-        {
-            const decimal expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (decimal) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAveragedecimalIList2051()
         {            
             const decimal expected = short.MaxValue;
@@ -12512,47 +11159,6 @@ namespace ZLinq.Test.ZMath
         {
             const sbyte expected = 1;
             var source = Enumerable.Repeat(new { X = expected}, 100).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (sbyte?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
-        public void TestAveragesbyteNullableArray2049()
-        {            
-            const sbyte expected = sbyte.MaxValue/10*9;
-            var source = Enumerable.Repeat((sbyte?) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragesbyteNullableArray2049Map()
-        {
-            const sbyte expected = sbyte.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (sbyte?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragesbyteNullableArray2049Min()
-        {            
-            const sbyte expected = 1;
-            var source = Enumerable.Repeat((sbyte?) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragesbyteNullableArray2049MapMin()
-        {
-            const sbyte expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
 
             double result = ZEnumerable.Average(source, arg => (sbyte?) arg.X);
             Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
@@ -12893,47 +11499,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAveragesbyteNullableList2049()
-        {            
-            const sbyte expected = sbyte.MaxValue/10*9;
-            var source = Enumerable.Repeat((sbyte?) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragesbyteNullableList2049Map()
-        {
-            const sbyte expected = sbyte.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (sbyte?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragesbyteNullableList2049Min()
-        {            
-            const sbyte expected = 1;
-            var source = Enumerable.Repeat((sbyte?) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragesbyteNullableList2049MapMin()
-        {
-            const sbyte expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (sbyte?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAveragesbyteNullableList2051()
         {            
             const sbyte expected = sbyte.MaxValue/10*9;
@@ -13262,47 +11827,6 @@ namespace ZLinq.Test.ZMath
         {
             const sbyte expected = 1;
             var source = Enumerable.Repeat(new { X = expected}, 100).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (sbyte?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
-        public void TestAveragesbyteNullableIList2049()
-        {            
-            const sbyte expected = sbyte.MaxValue/10*9;
-            var source = Enumerable.Repeat((sbyte?) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragesbyteNullableIList2049Map()
-        {
-            const sbyte expected = sbyte.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (sbyte?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragesbyteNullableIList2049Min()
-        {            
-            const sbyte expected = 1;
-            var source = Enumerable.Repeat((sbyte?) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragesbyteNullableIList2049MapMin()
-        {
-            const sbyte expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
 
             double result = ZEnumerable.Average(source, arg => (sbyte?) arg.X);
             Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
@@ -13647,47 +12171,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAveragebyteNullableArray2049()
-        {            
-            const byte expected = byte.MaxValue/10*9;
-            var source = Enumerable.Repeat((byte?) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragebyteNullableArray2049Map()
-        {
-            const byte expected = byte.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (byte?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragebyteNullableArray2049Min()
-        {            
-            const byte expected = 1;
-            var source = Enumerable.Repeat((byte?) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragebyteNullableArray2049MapMin()
-        {
-            const byte expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (byte?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAveragebyteNullableArray2051()
         {            
             const byte expected = byte.MaxValue/10*9;
@@ -14022,47 +12505,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAveragebyteNullableList2049()
-        {            
-            const byte expected = byte.MaxValue/10*9;
-            var source = Enumerable.Repeat((byte?) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragebyteNullableList2049Map()
-        {
-            const byte expected = byte.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (byte?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragebyteNullableList2049Min()
-        {            
-            const byte expected = 1;
-            var source = Enumerable.Repeat((byte?) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragebyteNullableList2049MapMin()
-        {
-            const byte expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (byte?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAveragebyteNullableList2051()
         {            
             const byte expected = byte.MaxValue/10*9;
@@ -14391,47 +12833,6 @@ namespace ZLinq.Test.ZMath
         {
             const byte expected = 1;
             var source = Enumerable.Repeat(new { X = expected}, 100).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (byte?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
-        public void TestAveragebyteNullableIList2049()
-        {            
-            const byte expected = byte.MaxValue/10*9;
-            var source = Enumerable.Repeat((byte?) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragebyteNullableIList2049Map()
-        {
-            const byte expected = byte.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (byte?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragebyteNullableIList2049Min()
-        {            
-            const byte expected = 1;
-            var source = Enumerable.Repeat((byte?) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragebyteNullableIList2049MapMin()
-        {
-            const byte expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
 
             double result = ZEnumerable.Average(source, arg => (byte?) arg.X);
             Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
@@ -14776,47 +13177,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAverageshortNullableArray2049()
-        {            
-            const short expected = short.MaxValue/10*9;
-            var source = Enumerable.Repeat((short?) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageshortNullableArray2049Map()
-        {
-            const short expected = short.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (short?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAverageshortNullableArray2049Min()
-        {            
-            const short expected = 1;
-            var source = Enumerable.Repeat((short?) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageshortNullableArray2049MapMin()
-        {
-            const short expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (short?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAverageshortNullableArray2051()
         {            
             const short expected = short.MaxValue/10*9;
@@ -15151,47 +13511,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAverageshortNullableList2049()
-        {            
-            const short expected = short.MaxValue/10*9;
-            var source = Enumerable.Repeat((short?) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageshortNullableList2049Map()
-        {
-            const short expected = short.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (short?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAverageshortNullableList2049Min()
-        {            
-            const short expected = 1;
-            var source = Enumerable.Repeat((short?) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageshortNullableList2049MapMin()
-        {
-            const short expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (short?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAverageshortNullableList2051()
         {            
             const short expected = short.MaxValue/10*9;
@@ -15520,47 +13839,6 @@ namespace ZLinq.Test.ZMath
         {
             const short expected = 1;
             var source = Enumerable.Repeat(new { X = expected}, 100).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (short?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
-        public void TestAverageshortNullableIList2049()
-        {            
-            const short expected = short.MaxValue/10*9;
-            var source = Enumerable.Repeat((short?) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageshortNullableIList2049Map()
-        {
-            const short expected = short.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (short?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAverageshortNullableIList2049Min()
-        {            
-            const short expected = 1;
-            var source = Enumerable.Repeat((short?) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageshortNullableIList2049MapMin()
-        {
-            const short expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
 
             double result = ZEnumerable.Average(source, arg => (short?) arg.X);
             Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
@@ -15905,47 +14183,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAverageushortNullableArray2049()
-        {            
-            const ushort expected = ushort.MaxValue/10*9;
-            var source = Enumerable.Repeat((ushort?) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageushortNullableArray2049Map()
-        {
-            const ushort expected = ushort.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (ushort?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAverageushortNullableArray2049Min()
-        {            
-            const ushort expected = 1;
-            var source = Enumerable.Repeat((ushort?) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageushortNullableArray2049MapMin()
-        {
-            const ushort expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (ushort?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAverageushortNullableArray2051()
         {            
             const ushort expected = ushort.MaxValue/10*9;
@@ -16280,47 +14517,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAverageushortNullableList2049()
-        {            
-            const ushort expected = ushort.MaxValue/10*9;
-            var source = Enumerable.Repeat((ushort?) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageushortNullableList2049Map()
-        {
-            const ushort expected = ushort.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (ushort?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAverageushortNullableList2049Min()
-        {            
-            const ushort expected = 1;
-            var source = Enumerable.Repeat((ushort?) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageushortNullableList2049MapMin()
-        {
-            const ushort expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (ushort?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAverageushortNullableList2051()
         {            
             const ushort expected = ushort.MaxValue/10*9;
@@ -16649,47 +14845,6 @@ namespace ZLinq.Test.ZMath
         {
             const ushort expected = 1;
             var source = Enumerable.Repeat(new { X = expected}, 100).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (ushort?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
-        public void TestAverageushortNullableIList2049()
-        {            
-            const ushort expected = ushort.MaxValue/10*9;
-            var source = Enumerable.Repeat((ushort?) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageushortNullableIList2049Map()
-        {
-            const ushort expected = ushort.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (ushort?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAverageushortNullableIList2049Min()
-        {            
-            const ushort expected = 1;
-            var source = Enumerable.Repeat((ushort?) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageushortNullableIList2049MapMin()
-        {
-            const ushort expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
 
             double result = ZEnumerable.Average(source, arg => (ushort?) arg.X);
             Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
@@ -17034,47 +15189,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAverageintNullableArray2049()
-        {            
-            const int expected = int.MaxValue/10*9;
-            var source = Enumerable.Repeat((int?) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageintNullableArray2049Map()
-        {
-            const int expected = int.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (int?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAverageintNullableArray2049Min()
-        {            
-            const int expected = 1;
-            var source = Enumerable.Repeat((int?) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageintNullableArray2049MapMin()
-        {
-            const int expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (int?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAverageintNullableArray2051()
         {            
             const int expected = int.MaxValue/10*9;
@@ -17409,47 +15523,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAverageintNullableList2049()
-        {            
-            const int expected = int.MaxValue/10*9;
-            var source = Enumerable.Repeat((int?) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageintNullableList2049Map()
-        {
-            const int expected = int.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (int?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAverageintNullableList2049Min()
-        {            
-            const int expected = 1;
-            var source = Enumerable.Repeat((int?) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageintNullableList2049MapMin()
-        {
-            const int expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (int?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAverageintNullableList2051()
         {            
             const int expected = int.MaxValue/10*9;
@@ -17778,47 +15851,6 @@ namespace ZLinq.Test.ZMath
         {
             const int expected = 1;
             var source = Enumerable.Repeat(new { X = expected}, 100).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (int?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
-        public void TestAverageintNullableIList2049()
-        {            
-            const int expected = int.MaxValue/10*9;
-            var source = Enumerable.Repeat((int?) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageintNullableIList2049Map()
-        {
-            const int expected = int.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (int?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAverageintNullableIList2049Min()
-        {            
-            const int expected = 1;
-            var source = Enumerable.Repeat((int?) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageintNullableIList2049MapMin()
-        {
-            const int expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
 
             double result = ZEnumerable.Average(source, arg => (int?) arg.X);
             Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
@@ -18163,47 +16195,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAverageuintNullableArray2049()
-        {            
-            const uint expected = uint.MaxValue/10*9;
-            var source = Enumerable.Repeat((uint?) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageuintNullableArray2049Map()
-        {
-            const uint expected = uint.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (uint?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAverageuintNullableArray2049Min()
-        {            
-            const uint expected = 1;
-            var source = Enumerable.Repeat((uint?) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageuintNullableArray2049MapMin()
-        {
-            const uint expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (uint?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAverageuintNullableArray2051()
         {            
             const uint expected = uint.MaxValue/10*9;
@@ -18538,47 +16529,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAverageuintNullableList2049()
-        {            
-            const uint expected = uint.MaxValue/10*9;
-            var source = Enumerable.Repeat((uint?) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageuintNullableList2049Map()
-        {
-            const uint expected = uint.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (uint?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAverageuintNullableList2049Min()
-        {            
-            const uint expected = 1;
-            var source = Enumerable.Repeat((uint?) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageuintNullableList2049MapMin()
-        {
-            const uint expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (uint?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAverageuintNullableList2051()
         {            
             const uint expected = uint.MaxValue/10*9;
@@ -18907,47 +16857,6 @@ namespace ZLinq.Test.ZMath
         {
             const uint expected = 1;
             var source = Enumerable.Repeat(new { X = expected}, 100).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (uint?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
-        public void TestAverageuintNullableIList2049()
-        {            
-            const uint expected = uint.MaxValue/10*9;
-            var source = Enumerable.Repeat((uint?) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageuintNullableIList2049Map()
-        {
-            const uint expected = uint.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (uint?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAverageuintNullableIList2049Min()
-        {            
-            const uint expected = 1;
-            var source = Enumerable.Repeat((uint?) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageuintNullableIList2049MapMin()
-        {
-            const uint expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
 
             double result = ZEnumerable.Average(source, arg => (uint?) arg.X);
             Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
@@ -19292,47 +17201,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAveragelongNullableArray2049()
-        {            
-            const long expected = long.MaxValue/10*9;
-            var source = Enumerable.Repeat((long?) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragelongNullableArray2049Map()
-        {
-            const long expected = long.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (long?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragelongNullableArray2049Min()
-        {            
-            const long expected = 1;
-            var source = Enumerable.Repeat((long?) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragelongNullableArray2049MapMin()
-        {
-            const long expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (long?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAveragelongNullableArray2051()
         {            
             const long expected = long.MaxValue/10*9;
@@ -19667,47 +17535,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAveragelongNullableList2049()
-        {            
-            const long expected = long.MaxValue/10*9;
-            var source = Enumerable.Repeat((long?) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragelongNullableList2049Map()
-        {
-            const long expected = long.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (long?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragelongNullableList2049Min()
-        {            
-            const long expected = 1;
-            var source = Enumerable.Repeat((long?) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragelongNullableList2049MapMin()
-        {
-            const long expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (long?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAveragelongNullableList2051()
         {            
             const long expected = long.MaxValue/10*9;
@@ -20036,47 +17863,6 @@ namespace ZLinq.Test.ZMath
         {
             const long expected = 1;
             var source = Enumerable.Repeat(new { X = expected}, 100).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (long?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
-        public void TestAveragelongNullableIList2049()
-        {            
-            const long expected = long.MaxValue/10*9;
-            var source = Enumerable.Repeat((long?) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragelongNullableIList2049Map()
-        {
-            const long expected = long.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (long?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragelongNullableIList2049Min()
-        {            
-            const long expected = 1;
-            var source = Enumerable.Repeat((long?) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragelongNullableIList2049MapMin()
-        {
-            const long expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
 
             double result = ZEnumerable.Average(source, arg => (long?) arg.X);
             Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
@@ -20421,47 +18207,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAverageulongNullableArray2049()
-        {            
-            const ulong expected = ulong.MaxValue/10*9;
-            var source = Enumerable.Repeat((ulong?) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageulongNullableArray2049Map()
-        {
-            const ulong expected = ulong.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (ulong?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAverageulongNullableArray2049Min()
-        {            
-            const ulong expected = 1;
-            var source = Enumerable.Repeat((ulong?) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageulongNullableArray2049MapMin()
-        {
-            const ulong expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (ulong?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAverageulongNullableArray2051()
         {            
             const ulong expected = ulong.MaxValue/10*9;
@@ -20796,47 +18541,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAverageulongNullableList2049()
-        {            
-            const ulong expected = ulong.MaxValue/10*9;
-            var source = Enumerable.Repeat((ulong?) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageulongNullableList2049Map()
-        {
-            const ulong expected = ulong.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (ulong?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAverageulongNullableList2049Min()
-        {            
-            const ulong expected = 1;
-            var source = Enumerable.Repeat((ulong?) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageulongNullableList2049MapMin()
-        {
-            const ulong expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (ulong?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAverageulongNullableList2051()
         {            
             const ulong expected = ulong.MaxValue/10*9;
@@ -21165,47 +18869,6 @@ namespace ZLinq.Test.ZMath
         {
             const ulong expected = 1;
             var source = Enumerable.Repeat(new { X = expected}, 100).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (ulong?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
-        public void TestAverageulongNullableIList2049()
-        {            
-            const ulong expected = ulong.MaxValue/10*9;
-            var source = Enumerable.Repeat((ulong?) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageulongNullableIList2049Map()
-        {
-            const ulong expected = ulong.MaxValue/10*9;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (ulong?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAverageulongNullableIList2049Min()
-        {            
-            const ulong expected = 1;
-            var source = Enumerable.Repeat((ulong?) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAverageulongNullableIList2049MapMin()
-        {
-            const ulong expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
 
             double result = ZEnumerable.Average(source, arg => (ulong?) arg.X);
             Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
@@ -21550,47 +19213,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAveragefloatNullableArray2049()
-        {            
-            const float expected = short.MaxValue;
-            var source = Enumerable.Repeat((float?) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragefloatNullableArray2049Map()
-        {
-            const float expected = short.MaxValue;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (float?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragefloatNullableArray2049Min()
-        {            
-            const float expected = 1;
-            var source = Enumerable.Repeat((float?) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragefloatNullableArray2049MapMin()
-        {
-            const float expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (float?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAveragefloatNullableArray2051()
         {            
             const float expected = short.MaxValue;
@@ -21904,47 +19526,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAveragefloatNullableList2049()
-        {            
-            const float expected = short.MaxValue;
-            var source = Enumerable.Repeat((float?) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragefloatNullableList2049Map()
-        {
-            const float expected = short.MaxValue;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (float?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragefloatNullableList2049Min()
-        {            
-            const float expected = 1;
-            var source = Enumerable.Repeat((float?) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragefloatNullableList2049MapMin()
-        {
-            const float expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (float?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAveragefloatNullableList2051()
         {            
             const float expected = short.MaxValue;
@@ -22252,47 +19833,6 @@ namespace ZLinq.Test.ZMath
         {
             const float expected = 1;
             var source = Enumerable.Repeat(new { X = expected}, 100).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (float?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
-        public void TestAveragefloatNullableIList2049()
-        {            
-            const float expected = short.MaxValue;
-            var source = Enumerable.Repeat((float?) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragefloatNullableIList2049Map()
-        {
-            const float expected = short.MaxValue;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (float?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragefloatNullableIList2049Min()
-        {            
-            const float expected = 1;
-            var source = Enumerable.Repeat((float?) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragefloatNullableIList2049MapMin()
-        {
-            const float expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
 
             double result = ZEnumerable.Average(source, arg => (float?) arg.X);
             Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
@@ -22616,47 +20156,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAveragedoubleNullableArray2049()
-        {            
-            const double expected = short.MaxValue;
-            var source = Enumerable.Repeat((double?) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragedoubleNullableArray2049Map()
-        {
-            const double expected = short.MaxValue;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (double?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragedoubleNullableArray2049Min()
-        {            
-            const double expected = 1;
-            var source = Enumerable.Repeat((double?) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragedoubleNullableArray2049MapMin()
-        {
-            const double expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (double?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAveragedoubleNullableArray2051()
         {            
             const double expected = short.MaxValue;
@@ -22970,47 +20469,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAveragedoubleNullableList2049()
-        {            
-            const double expected = short.MaxValue;
-            var source = Enumerable.Repeat((double?) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragedoubleNullableList2049Map()
-        {
-            const double expected = short.MaxValue;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (double?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragedoubleNullableList2049Min()
-        {            
-            const double expected = 1;
-            var source = Enumerable.Repeat((double?) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragedoubleNullableList2049MapMin()
-        {
-            const double expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (double?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAveragedoubleNullableList2051()
         {            
             const double expected = short.MaxValue;
@@ -23318,47 +20776,6 @@ namespace ZLinq.Test.ZMath
         {
             const double expected = 1;
             var source = Enumerable.Repeat(new { X = expected}, 100).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (double?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
-        public void TestAveragedoubleNullableIList2049()
-        {            
-            const double expected = short.MaxValue;
-            var source = Enumerable.Repeat((double?) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragedoubleNullableIList2049Map()
-        {
-            const double expected = short.MaxValue;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (double?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragedoubleNullableIList2049Min()
-        {            
-            const double expected = 1;
-            var source = Enumerable.Repeat((double?) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragedoubleNullableIList2049MapMin()
-        {
-            const double expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
 
             double result = ZEnumerable.Average(source, arg => (double?) arg.X);
             Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
@@ -23682,47 +21099,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAveragedecimalNullableArray2049()
-        {            
-            const decimal expected = short.MaxValue;
-            var source = Enumerable.Repeat((decimal?) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragedecimalNullableArray2049Map()
-        {
-            const decimal expected = short.MaxValue;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (decimal?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragedecimalNullableArray2049Min()
-        {            
-            const decimal expected = 1;
-            var source = Enumerable.Repeat((decimal?) expected, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragedecimalNullableArray2049MapMin()
-        {
-            const decimal expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToArray();
-
-            double result = ZEnumerable.Average(source, arg => (decimal?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAveragedecimalNullableArray2051()
         {            
             const decimal expected = short.MaxValue;
@@ -24036,47 +21412,6 @@ namespace ZLinq.Test.ZMath
         }
                   
                             [TestMethod]
-        public void TestAveragedecimalNullableList2049()
-        {            
-            const decimal expected = short.MaxValue;
-            var source = Enumerable.Repeat((decimal?) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragedecimalNullableList2049Map()
-        {
-            const decimal expected = short.MaxValue;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (decimal?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragedecimalNullableList2049Min()
-        {            
-            const decimal expected = 1;
-            var source = Enumerable.Repeat((decimal?) expected, 2049).ToList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragedecimalNullableList2049MapMin()
-        {
-            const decimal expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToList();
-
-            double result = ZEnumerable.Average(source, arg => (decimal?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
         public void TestAveragedecimalNullableList2051()
         {            
             const decimal expected = short.MaxValue;
@@ -24384,47 +21719,6 @@ namespace ZLinq.Test.ZMath
         {
             const decimal expected = 1;
             var source = Enumerable.Repeat(new { X = expected}, 100).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (decimal?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                  
-                            [TestMethod]
-        public void TestAveragedecimalNullableIList2049()
-        {            
-            const decimal expected = short.MaxValue;
-            var source = Enumerable.Repeat((decimal?) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragedecimalNullableIList2049Map()
-        {
-            const decimal expected = short.MaxValue;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source, arg => (decimal?) arg.X);
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-                [TestMethod]
-        public void TestAveragedecimalNullableIList2049Min()
-        {            
-            const decimal expected = 1;
-            var source = Enumerable.Repeat((decimal?) expected, 2049).ToIList();
-
-            double result = ZEnumerable.Average(source);
-
-            Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");
-        }
-
-        [TestMethod]
-        public void TestAveragedecimalNullableIList2049MapMin()
-        {
-            const decimal expected = 1;
-            var source = Enumerable.Repeat(new { X = expected}, 2049).ToIList();
 
             double result = ZEnumerable.Average(source, arg => (decimal?) arg.X);
             Assert.IsTrue(Math.Abs(1 - result/(double)expected) < Tolerance, $"result = {result}\texpected = {expected}");

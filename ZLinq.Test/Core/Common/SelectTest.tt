@@ -12,59 +12,25 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ZLinq.Test.Helpers;
 
 namespace ZLinq.Test.Core.Common
 {
     [TestClass]
     public class Select
-    {            
-        [TestMethod]
-        public void TestSelectToArrayFromICollection()
-        {
-            var source = (ICollection<int>) Enumerable.Range(1, 100).ToArray();
+	{
 
-            var xArr = source.SelectToArray(x => x * x);
-            var linqArr = source.Select(x => x * x).ToArray();
+        <# foreach (var sourceTypeInt in TT.ToInt(TT.StandardCollections)) { 
+			string[] tos = sourceTypeInt.IsIndexable() ? new[] {"ToArray"} : sourceTypeInt.StartsWith("ICol") ? new[] {"ToArray", "ToList"} : new[] {"ToList"};#>
 
-            Assert.IsTrue(xArr.Length == linqArr.Length);
-            Assert.IsTrue(xArr.SequenceEqual(linqArr));      
-        }        
-        
-        [TestMethod]
-        public void TestSelectToArrayFromICollectionInvalidArguments()
-        {
-            ICollection<int> nullSource = null;
-
-            try
-            {
-                nullSource.SelectToArray(x => x * x);                
-                Assert.Fail();
-            }
-            catch (ArgumentNullException)
-            {
-                
-            }
-
-            var source = (ICollection<int>) Enumerable.Range(1, 100).ToArray();
-            try
-            {
-                source.SelectToArray<int, int>(null);                
-                Assert.Fail();
-            }
-            catch (ArgumentNullException)
-            {
-                
-            }
-        }    
-
-        <# foreach (var sourceTypeInt in TT.ToInt(TT.StandardLists)) { #>
+		<# foreach (var to in tos) { #>
 
         [TestMethod]
-        public void TestSelectToArrayFrom<#= TT.GetCollectionName(sourceTypeInt) #>()
+        public void TestSelect<#= to #>From<#= sourceTypeInt.GetCollectionName() #>()
         {
-            var source = (<#= sourceTypeInt #>) Enumerable.Range(1, 100).<#= TT.ToArrayOrToList(sourceTypeInt) #>;
+            var source = Enumerable.Range(1, 100).<#= sourceTypeInt.ToCollection() #>
 
-            var xArr = source.SelectToArray(x => x * x);
+            var xArr = source.Select<#= to #>(x => x * x).ToArray();
             var linqArr = source.Select(x => x * x).ToArray();
 
             Assert.IsTrue(xArr.Length == linqArr.Length);
@@ -72,13 +38,13 @@ namespace ZLinq.Test.Core.Common
         }
 
         [TestMethod]
-        public void TestSelectToArrayFrom<#= TT.GetCollectionName(sourceTypeInt) #>InvalidArguments()
+        public void TestSelect<#= to #>From<#= sourceTypeInt.GetCollectionName() #>InvalidArguments()
         {
             <#= sourceTypeInt #> nullSource = null;
 
             try
             {
-                nullSource.SelectToArray(x => x * x);                
+                nullSource.Select<#= to #>(x => x * x);                
                 Assert.Fail();
             }
             catch (ArgumentNullException)
@@ -86,10 +52,10 @@ namespace ZLinq.Test.Core.Common
                 
             }
 
-            var source = (<#= sourceTypeInt #>) Enumerable.Range(1, 100).<#= TT.ToArrayOrToList(sourceTypeInt) #>;
+            var source = Enumerable.Range(1, 100).<#= sourceTypeInt.ToCollection() #>
             try
             {
-                source.SelectToArray<int, int>(null);                
+                source.Select<#= to #><int, int>(null);                
                 Assert.Fail();
             }
             catch (ArgumentNullException)
@@ -97,85 +63,8 @@ namespace ZLinq.Test.Core.Common
                 
             }
         }
+		<# } #>
+        <# } #> 
 
-        <# } #>    
-
-        [TestMethod]
-        public void TestSelectToListFromICollection()
-        {
-            var source = (ICollection<int>) Enumerable.Range(1, 100).ToList();
-
-            var xArr = source.SelectToList(x => x * x);
-            var linqArr = source.Select(x => x * x).ToList();
-
-            Assert.IsTrue(xArr.Count == linqArr.Count);
-            Assert.IsTrue(xArr.SequenceEqual(linqArr));
-        }
-
-        [TestMethod]
-        public void TestSelectToListFromICollectionInvalidArguments()
-        {
-            ICollection<int> nullSource = null;
-
-            try
-            {
-                nullSource.SelectToList(x => x * x);                
-                Assert.Fail();
-            }
-            catch (ArgumentNullException)
-            {
-                
-            }
-
-            var source = (ICollection<int>) Enumerable.Range(1, 100).ToList();
-            try
-            {
-                source.SelectToList<int, int>(null);                
-                Assert.Fail();
-            }
-            catch (ArgumentNullException)
-            {
-                
-            }
-        }
-
-        [TestMethod]
-        public void TestSelectToListFromIEnumerable()
-        {
-            var source = (IEnumerable<int>) Enumerable.Range(1, 100).ToList();
-
-            var xArr = source.SelectToList(x => x * x);
-            var linqArr = source.Select(x => x * x).ToList();
-
-            Assert.IsTrue(xArr.Count == linqArr.Count);
-            Assert.IsTrue(xArr.SequenceEqual(linqArr));
-        }
-
-        [TestMethod]
-        public void TestSelectToListFromIEnumerableInvalidArguments()
-        {
-            IEnumerable<int> nullSource = null;
-
-            try
-            {
-                nullSource.SelectToList(x => x * x);                
-                Assert.Fail();
-            }
-            catch (ArgumentNullException)
-            {
-                
-            }
-
-            var source = (IEnumerable<int>) Enumerable.Range(1, 100).ToList();
-            try
-            {
-                source.SelectToList<int, int>(null);                
-                Assert.Fail();
-            }
-            catch (ArgumentNullException)
-            {
-                
-            }
-        }
     }
 }

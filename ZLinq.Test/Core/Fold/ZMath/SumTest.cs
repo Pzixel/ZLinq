@@ -125,8 +125,6 @@ namespace ZLinq.Test.ZMath
                 
         
                 
-        
-                
             
         [TestMethod]
         public void TestSumsbyteArrayNullOrEmpty()
@@ -294,8 +292,6 @@ namespace ZLinq.Test.ZMath
                 
         
                 
-        
-                
             
         [TestMethod]
         public void TestSumsbyteListNullOrEmpty()
@@ -460,8 +456,6 @@ namespace ZLinq.Test.ZMath
             Assert.AreEqual(SumExpected, SumActual);
         }
 
-                
-        
                 
         
                 
@@ -635,8 +629,6 @@ namespace ZLinq.Test.ZMath
                 
         
                 
-        
-                
             
         [TestMethod]
         public void TestSumbyteArrayNullOrEmpty()
@@ -801,8 +793,6 @@ namespace ZLinq.Test.ZMath
             Assert.AreEqual(SumExpected, SumActual);
         }
 
-                
-        
                 
         
                 
@@ -973,8 +963,6 @@ namespace ZLinq.Test.ZMath
                 
         
                 
-        
-                
             
         [TestMethod]
         public void TestSumbyteIListNullOrEmpty()
@@ -1137,28 +1125,6 @@ namespace ZLinq.Test.ZMath
         public void TestSumshortArray100Map()
         {
             var source = ZEnumerable.Repeat(new { X = (short) 1 } , 100).ToArray();
-            short SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            short SumExpected = (short) Enumerable.Sum(source, arg => (long) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
-        public void TestSumshortArray2049()
-        {
-            var source = ZEnumerable.Repeat((short) 1, 2049).ToArray();
-            short SumActual = ZEnumerable.Sum(source);
-            short SumExpected = (short) Enumerable.Sum(source.Select(x=> (long)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumshortArray2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (short) 1 } , 2049).ToArray();
             short SumActual = ZEnumerable.Sum(source, arg => arg.X);
             short SumExpected = (short) Enumerable.Sum(source, arg => (long) arg.X);        
             Assert.AreEqual(SumExpected, SumActual);
@@ -1356,28 +1322,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumshortList2049()
-        {
-            var source = ZEnumerable.Repeat((short) 1, 2049).ToList();
-            short SumActual = ZEnumerable.Sum(source);
-            short SumExpected = (short) Enumerable.Sum(source.Select(x=> (long)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumshortList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (short) 1 } , 2049).ToList();
-            short SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            short SumExpected = (short) Enumerable.Sum(source, arg => (long) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumshortList2051()
         {
             var source = ZEnumerable.Repeat((short) 1, 2051).ToList();
@@ -1555,28 +1499,6 @@ namespace ZLinq.Test.ZMath
         public void TestSumshortIList100Map()
         {
             var source = ZEnumerable.Repeat(new { X = (short) 1 } , 100).ToIList();
-            short SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            short SumExpected = (short) Enumerable.Sum(source, arg => (long) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
-        public void TestSumshortIList2049()
-        {
-            var source = ZEnumerable.Repeat((short) 1, 2049).ToIList();
-            short SumActual = ZEnumerable.Sum(source);
-            short SumExpected = (short) Enumerable.Sum(source.Select(x=> (long)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumshortIList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (short) 1 } , 2049).ToIList();
             short SumActual = ZEnumerable.Sum(source, arg => arg.X);
             short SumExpected = (short) Enumerable.Sum(source, arg => (long) arg.X);        
             Assert.AreEqual(SumExpected, SumActual);
@@ -1777,28 +1699,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumushortArray2049()
-        {
-            var source = ZEnumerable.Repeat((ushort) 1, 2049).ToArray();
-            ushort SumActual = ZEnumerable.Sum(source);
-            ushort SumExpected = (ushort) Enumerable.Sum(source.Select(x=> (long)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumushortArray2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (ushort) 1 } , 2049).ToArray();
-            ushort SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            ushort SumExpected = (ushort) Enumerable.Sum(source, arg => (long) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumushortArray2051()
         {
             var source = ZEnumerable.Repeat((ushort) 1, 2051).ToArray();
@@ -1986,28 +1886,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumushortList2049()
-        {
-            var source = ZEnumerable.Repeat((ushort) 1, 2049).ToList();
-            ushort SumActual = ZEnumerable.Sum(source);
-            ushort SumExpected = (ushort) Enumerable.Sum(source.Select(x=> (long)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumushortList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (ushort) 1 } , 2049).ToList();
-            ushort SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            ushort SumExpected = (ushort) Enumerable.Sum(source, arg => (long) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumushortList2051()
         {
             var source = ZEnumerable.Repeat((ushort) 1, 2051).ToList();
@@ -2185,28 +2063,6 @@ namespace ZLinq.Test.ZMath
         public void TestSumushortIList100Map()
         {
             var source = ZEnumerable.Repeat(new { X = (ushort) 1 } , 100).ToIList();
-            ushort SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            ushort SumExpected = (ushort) Enumerable.Sum(source, arg => (long) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
-        public void TestSumushortIList2049()
-        {
-            var source = ZEnumerable.Repeat((ushort) 1, 2049).ToIList();
-            ushort SumActual = ZEnumerable.Sum(source);
-            ushort SumExpected = (ushort) Enumerable.Sum(source.Select(x=> (long)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumushortIList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (ushort) 1 } , 2049).ToIList();
             ushort SumActual = ZEnumerable.Sum(source, arg => arg.X);
             ushort SumExpected = (ushort) Enumerable.Sum(source, arg => (long) arg.X);        
             Assert.AreEqual(SumExpected, SumActual);
@@ -2407,28 +2263,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumintArray2049()
-        {
-            var source = ZEnumerable.Repeat((int) 1, 2049).ToArray();
-            int SumActual = ZEnumerable.Sum(source);
-            int SumExpected = (int) Enumerable.Sum(source.Select(x=> (long)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumintArray2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (int) 1 } , 2049).ToArray();
-            int SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            int SumExpected = (int) Enumerable.Sum(source, arg => (long) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumintArray2051()
         {
             var source = ZEnumerable.Repeat((int) 1, 2051).ToArray();
@@ -2616,28 +2450,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumintList2049()
-        {
-            var source = ZEnumerable.Repeat((int) 1, 2049).ToList();
-            int SumActual = ZEnumerable.Sum(source);
-            int SumExpected = (int) Enumerable.Sum(source.Select(x=> (long)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumintList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (int) 1 } , 2049).ToList();
-            int SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            int SumExpected = (int) Enumerable.Sum(source, arg => (long) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumintList2051()
         {
             var source = ZEnumerable.Repeat((int) 1, 2051).ToList();
@@ -2815,28 +2627,6 @@ namespace ZLinq.Test.ZMath
         public void TestSumintIList100Map()
         {
             var source = ZEnumerable.Repeat(new { X = (int) 1 } , 100).ToIList();
-            int SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            int SumExpected = (int) Enumerable.Sum(source, arg => (long) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
-        public void TestSumintIList2049()
-        {
-            var source = ZEnumerable.Repeat((int) 1, 2049).ToIList();
-            int SumActual = ZEnumerable.Sum(source);
-            int SumExpected = (int) Enumerable.Sum(source.Select(x=> (long)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumintIList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (int) 1 } , 2049).ToIList();
             int SumActual = ZEnumerable.Sum(source, arg => arg.X);
             int SumExpected = (int) Enumerable.Sum(source, arg => (long) arg.X);        
             Assert.AreEqual(SumExpected, SumActual);
@@ -3037,28 +2827,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumuintArray2049()
-        {
-            var source = ZEnumerable.Repeat((uint) 1, 2049).ToArray();
-            uint SumActual = ZEnumerable.Sum(source);
-            uint SumExpected = (uint) Enumerable.Sum(source.Select(x=> (long)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumuintArray2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (uint) 1 } , 2049).ToArray();
-            uint SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            uint SumExpected = (uint) Enumerable.Sum(source, arg => (long) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumuintArray2051()
         {
             var source = ZEnumerable.Repeat((uint) 1, 2051).ToArray();
@@ -3246,28 +3014,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumuintList2049()
-        {
-            var source = ZEnumerable.Repeat((uint) 1, 2049).ToList();
-            uint SumActual = ZEnumerable.Sum(source);
-            uint SumExpected = (uint) Enumerable.Sum(source.Select(x=> (long)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumuintList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (uint) 1 } , 2049).ToList();
-            uint SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            uint SumExpected = (uint) Enumerable.Sum(source, arg => (long) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumuintList2051()
         {
             var source = ZEnumerable.Repeat((uint) 1, 2051).ToList();
@@ -3445,28 +3191,6 @@ namespace ZLinq.Test.ZMath
         public void TestSumuintIList100Map()
         {
             var source = ZEnumerable.Repeat(new { X = (uint) 1 } , 100).ToIList();
-            uint SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            uint SumExpected = (uint) Enumerable.Sum(source, arg => (long) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
-        public void TestSumuintIList2049()
-        {
-            var source = ZEnumerable.Repeat((uint) 1, 2049).ToIList();
-            uint SumActual = ZEnumerable.Sum(source);
-            uint SumExpected = (uint) Enumerable.Sum(source.Select(x=> (long)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumuintIList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (uint) 1 } , 2049).ToIList();
             uint SumActual = ZEnumerable.Sum(source, arg => arg.X);
             uint SumExpected = (uint) Enumerable.Sum(source, arg => (long) arg.X);        
             Assert.AreEqual(SumExpected, SumActual);
@@ -3667,28 +3391,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumlongArray2049()
-        {
-            var source = ZEnumerable.Repeat((long) 1, 2049).ToArray();
-            long SumActual = ZEnumerable.Sum(source);
-            long SumExpected = (long) Enumerable.Sum(source.Select(x=> (long)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumlongArray2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (long) 1 } , 2049).ToArray();
-            long SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            long SumExpected = (long) Enumerable.Sum(source, arg => (long) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumlongArray2051()
         {
             var source = ZEnumerable.Repeat((long) 1, 2051).ToArray();
@@ -3876,28 +3578,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumlongList2049()
-        {
-            var source = ZEnumerable.Repeat((long) 1, 2049).ToList();
-            long SumActual = ZEnumerable.Sum(source);
-            long SumExpected = (long) Enumerable.Sum(source.Select(x=> (long)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumlongList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (long) 1 } , 2049).ToList();
-            long SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            long SumExpected = (long) Enumerable.Sum(source, arg => (long) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumlongList2051()
         {
             var source = ZEnumerable.Repeat((long) 1, 2051).ToList();
@@ -4075,28 +3755,6 @@ namespace ZLinq.Test.ZMath
         public void TestSumlongIList100Map()
         {
             var source = ZEnumerable.Repeat(new { X = (long) 1 } , 100).ToIList();
-            long SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            long SumExpected = (long) Enumerable.Sum(source, arg => (long) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
-        public void TestSumlongIList2049()
-        {
-            var source = ZEnumerable.Repeat((long) 1, 2049).ToIList();
-            long SumActual = ZEnumerable.Sum(source);
-            long SumExpected = (long) Enumerable.Sum(source.Select(x=> (long)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumlongIList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (long) 1 } , 2049).ToIList();
             long SumActual = ZEnumerable.Sum(source, arg => arg.X);
             long SumExpected = (long) Enumerable.Sum(source, arg => (long) arg.X);        
             Assert.AreEqual(SumExpected, SumActual);
@@ -4297,28 +3955,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumulongArray2049()
-        {
-            var source = ZEnumerable.Repeat((ulong) 1, 2049).ToArray();
-            ulong SumActual = ZEnumerable.Sum(source);
-            ulong SumExpected = (ulong) Enumerable.Sum(source.Select(x=> (long)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumulongArray2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (ulong) 1 } , 2049).ToArray();
-            ulong SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            ulong SumExpected = (ulong) Enumerable.Sum(source, arg => (long) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumulongArray2051()
         {
             var source = ZEnumerable.Repeat((ulong) 1, 2051).ToArray();
@@ -4506,28 +4142,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumulongList2049()
-        {
-            var source = ZEnumerable.Repeat((ulong) 1, 2049).ToList();
-            ulong SumActual = ZEnumerable.Sum(source);
-            ulong SumExpected = (ulong) Enumerable.Sum(source.Select(x=> (long)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumulongList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (ulong) 1 } , 2049).ToList();
-            ulong SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            ulong SumExpected = (ulong) Enumerable.Sum(source, arg => (long) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumulongList2051()
         {
             var source = ZEnumerable.Repeat((ulong) 1, 2051).ToList();
@@ -4705,28 +4319,6 @@ namespace ZLinq.Test.ZMath
         public void TestSumulongIList100Map()
         {
             var source = ZEnumerable.Repeat(new { X = (ulong) 1 } , 100).ToIList();
-            ulong SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            ulong SumExpected = (ulong) Enumerable.Sum(source, arg => (long) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
-        public void TestSumulongIList2049()
-        {
-            var source = ZEnumerable.Repeat((ulong) 1, 2049).ToIList();
-            ulong SumActual = ZEnumerable.Sum(source);
-            ulong SumExpected = (ulong) Enumerable.Sum(source.Select(x=> (long)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumulongIList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (ulong) 1 } , 2049).ToIList();
             ulong SumActual = ZEnumerable.Sum(source, arg => arg.X);
             ulong SumExpected = (ulong) Enumerable.Sum(source, arg => (long) arg.X);        
             Assert.AreEqual(SumExpected, SumActual);
@@ -4927,28 +4519,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumfloatArray2049()
-        {
-            var source = ZEnumerable.Repeat((float) 1, 2049).ToArray();
-            float SumActual = ZEnumerable.Sum(source);
-            float SumExpected = (float) Enumerable.Sum(source.Select(x=> (double)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumfloatArray2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (float) 1 } , 2049).ToArray();
-            float SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            float SumExpected = (float) Enumerable.Sum(source, arg => (double) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumfloatArray2051()
         {
             var source = ZEnumerable.Repeat((float) 1, 2051).ToArray();
@@ -5136,28 +4706,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumfloatList2049()
-        {
-            var source = ZEnumerable.Repeat((float) 1, 2049).ToList();
-            float SumActual = ZEnumerable.Sum(source);
-            float SumExpected = (float) Enumerable.Sum(source.Select(x=> (double)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumfloatList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (float) 1 } , 2049).ToList();
-            float SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            float SumExpected = (float) Enumerable.Sum(source, arg => (double) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumfloatList2051()
         {
             var source = ZEnumerable.Repeat((float) 1, 2051).ToList();
@@ -5335,28 +4883,6 @@ namespace ZLinq.Test.ZMath
         public void TestSumfloatIList100Map()
         {
             var source = ZEnumerable.Repeat(new { X = (float) 1 } , 100).ToIList();
-            float SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            float SumExpected = (float) Enumerable.Sum(source, arg => (double) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
-        public void TestSumfloatIList2049()
-        {
-            var source = ZEnumerable.Repeat((float) 1, 2049).ToIList();
-            float SumActual = ZEnumerable.Sum(source);
-            float SumExpected = (float) Enumerable.Sum(source.Select(x=> (double)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumfloatIList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (float) 1 } , 2049).ToIList();
             float SumActual = ZEnumerable.Sum(source, arg => arg.X);
             float SumExpected = (float) Enumerable.Sum(source, arg => (double) arg.X);        
             Assert.AreEqual(SumExpected, SumActual);
@@ -5557,28 +5083,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumdoubleArray2049()
-        {
-            var source = ZEnumerable.Repeat((double) 1, 2049).ToArray();
-            double SumActual = ZEnumerable.Sum(source);
-            double SumExpected = (double) Enumerable.Sum(source.Select(x=> (double)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumdoubleArray2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (double) 1 } , 2049).ToArray();
-            double SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            double SumExpected = (double) Enumerable.Sum(source, arg => (double) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumdoubleArray2051()
         {
             var source = ZEnumerable.Repeat((double) 1, 2051).ToArray();
@@ -5766,28 +5270,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumdoubleList2049()
-        {
-            var source = ZEnumerable.Repeat((double) 1, 2049).ToList();
-            double SumActual = ZEnumerable.Sum(source);
-            double SumExpected = (double) Enumerable.Sum(source.Select(x=> (double)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumdoubleList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (double) 1 } , 2049).ToList();
-            double SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            double SumExpected = (double) Enumerable.Sum(source, arg => (double) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumdoubleList2051()
         {
             var source = ZEnumerable.Repeat((double) 1, 2051).ToList();
@@ -5965,28 +5447,6 @@ namespace ZLinq.Test.ZMath
         public void TestSumdoubleIList100Map()
         {
             var source = ZEnumerable.Repeat(new { X = (double) 1 } , 100).ToIList();
-            double SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            double SumExpected = (double) Enumerable.Sum(source, arg => (double) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
-        public void TestSumdoubleIList2049()
-        {
-            var source = ZEnumerable.Repeat((double) 1, 2049).ToIList();
-            double SumActual = ZEnumerable.Sum(source);
-            double SumExpected = (double) Enumerable.Sum(source.Select(x=> (double)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumdoubleIList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (double) 1 } , 2049).ToIList();
             double SumActual = ZEnumerable.Sum(source, arg => arg.X);
             double SumExpected = (double) Enumerable.Sum(source, arg => (double) arg.X);        
             Assert.AreEqual(SumExpected, SumActual);
@@ -6187,28 +5647,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumdecimalArray2049()
-        {
-            var source = ZEnumerable.Repeat((decimal) 1, 2049).ToArray();
-            decimal SumActual = ZEnumerable.Sum(source);
-            decimal SumExpected = (decimal) Enumerable.Sum(source.Select(x=> (double)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumdecimalArray2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (decimal) 1 } , 2049).ToArray();
-            decimal SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            decimal SumExpected = (decimal) Enumerable.Sum(source, arg => (double) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumdecimalArray2051()
         {
             var source = ZEnumerable.Repeat((decimal) 1, 2051).ToArray();
@@ -6396,28 +5834,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumdecimalList2049()
-        {
-            var source = ZEnumerable.Repeat((decimal) 1, 2049).ToList();
-            decimal SumActual = ZEnumerable.Sum(source);
-            decimal SumExpected = (decimal) Enumerable.Sum(source.Select(x=> (double)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumdecimalList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (decimal) 1 } , 2049).ToList();
-            decimal SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            decimal SumExpected = (decimal) Enumerable.Sum(source, arg => (double) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumdecimalList2051()
         {
             var source = ZEnumerable.Repeat((decimal) 1, 2051).ToList();
@@ -6595,28 +6011,6 @@ namespace ZLinq.Test.ZMath
         public void TestSumdecimalIList100Map()
         {
             var source = ZEnumerable.Repeat(new { X = (decimal) 1 } , 100).ToIList();
-            decimal SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            decimal SumExpected = (decimal) Enumerable.Sum(source, arg => (double) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
-        public void TestSumdecimalIList2049()
-        {
-            var source = ZEnumerable.Repeat((decimal) 1, 2049).ToIList();
-            decimal SumActual = ZEnumerable.Sum(source);
-            decimal SumExpected = (decimal) Enumerable.Sum(source.Select(x=> (double)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumdecimalIList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (decimal) 1 } , 2049).ToIList();
             decimal SumActual = ZEnumerable.Sum(source, arg => arg.X);
             decimal SumExpected = (decimal) Enumerable.Sum(source, arg => (double) arg.X);        
             Assert.AreEqual(SumExpected, SumActual);
@@ -6910,8 +6304,6 @@ namespace ZLinq.Test.ZMath
                 
         
                 
-        
-                
             
         [TestMethod]
         public void TestSumsbyteNullableArrayNullOrEmpty()
@@ -7174,8 +6566,6 @@ namespace ZLinq.Test.ZMath
                 
         
                 
-        
-                
             
         [TestMethod]
         public void TestSumsbyteNullableListNullOrEmpty()
@@ -7435,8 +6825,6 @@ namespace ZLinq.Test.ZMath
             Assert.AreEqual(SumExpected, SumActual);
         }
 
-                
-        
                 
         
                 
@@ -7705,8 +7093,6 @@ namespace ZLinq.Test.ZMath
                 
         
                 
-        
-                
             
         [TestMethod]
         public void TestSumbyteNullableArrayNullOrEmpty()
@@ -7966,8 +7352,6 @@ namespace ZLinq.Test.ZMath
             Assert.AreEqual(SumExpected, SumActual);
         }
 
-                
-        
                 
         
                 
@@ -8233,8 +7617,6 @@ namespace ZLinq.Test.ZMath
                 
         
                 
-        
-                
             
         [TestMethod]
         public void TestSumbyteNullableIListNullOrEmpty()
@@ -8492,47 +7874,6 @@ namespace ZLinq.Test.ZMath
         public void TestSumshortNullableArray100Map()
         {
             var source = ZEnumerable.Repeat(new { X = (short?) 1 } , 100).ToArray();
-            short? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            short? SumExpected = (short?) Enumerable.Sum(source, arg => (long?) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
-        public void TestSumshortNullableArray2049ThreatNulls()
-        {
-            var source = ZEnumerable.Repeat((short?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToArray();
-            short? SumActual = ZEnumerable.Sum(source);
-            short? SumExpected = (short?) Enumerable.Sum(source.Select(x=> (long?) x ?? 0));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumshortNullableArray2049ThreatNullsMap()
-        {
-            var baseCol = ZEnumerable.Repeat((short?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToArray();
-            var source = baseCol.Select(x => new { X = x } ).ToArray();
-            short? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            short? SumExpected = (short?) Enumerable.Sum(source, arg => (long?) arg.X ?? 0);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-            
-        [TestMethod]
-        public void TestSumshortNullableArray2049()
-        {
-            var source = ZEnumerable.Repeat((short?) 1, 2049).ToArray();
-            short? SumActual = ZEnumerable.Sum(source);
-            short? SumExpected = (short?) Enumerable.Sum(source.Select(x=> (long?)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumshortNullableArray2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (short?) 1 } , 2049).ToArray();
             short? SumActual = ZEnumerable.Sum(source, arg => arg.X);
             short? SumExpected = (short?) Enumerable.Sum(source, arg => (long?) arg.X);        
             Assert.AreEqual(SumExpected, SumActual);
@@ -8844,47 +8185,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumshortNullableList2049ThreatNulls()
-        {
-            var source = ZEnumerable.Repeat((short?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToList();
-            short? SumActual = ZEnumerable.Sum(source);
-            short? SumExpected = (short?) Enumerable.Sum(source.Select(x=> (long?) x ?? 0));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumshortNullableList2049ThreatNullsMap()
-        {
-            var baseCol = ZEnumerable.Repeat((short?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToList();
-            var source = baseCol.Select(x => new { X = x } ).ToList();
-            short? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            short? SumExpected = (short?) Enumerable.Sum(source, arg => (long?) arg.X ?? 0);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-            
-        [TestMethod]
-        public void TestSumshortNullableList2049()
-        {
-            var source = ZEnumerable.Repeat((short?) 1, 2049).ToList();
-            short? SumActual = ZEnumerable.Sum(source);
-            short? SumExpected = (short?) Enumerable.Sum(source.Select(x=> (long?)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumshortNullableList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (short?) 1 } , 2049).ToList();
-            short? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            short? SumExpected = (short?) Enumerable.Sum(source, arg => (long?) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumshortNullableList2051ThreatNulls()
         {
             var source = ZEnumerable.Repeat((short?) 1, 2051).Select((x, i) => i%3==0 ? x : null).ToList();
@@ -9176,47 +8476,6 @@ namespace ZLinq.Test.ZMath
         public void TestSumshortNullableIList100Map()
         {
             var source = ZEnumerable.Repeat(new { X = (short?) 1 } , 100).ToIList();
-            short? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            short? SumExpected = (short?) Enumerable.Sum(source, arg => (long?) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
-        public void TestSumshortNullableIList2049ThreatNulls()
-        {
-            var source = ZEnumerable.Repeat((short?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToIList();
-            short? SumActual = ZEnumerable.Sum(source);
-            short? SumExpected = (short?) Enumerable.Sum(source.Select(x=> (long?) x ?? 0));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumshortNullableIList2049ThreatNullsMap()
-        {
-            var baseCol = ZEnumerable.Repeat((short?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToIList();
-            var source = baseCol.Select(x => new { X = x } ).ToIList();
-            short? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            short? SumExpected = (short?) Enumerable.Sum(source, arg => (long?) arg.X ?? 0);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-            
-        [TestMethod]
-        public void TestSumshortNullableIList2049()
-        {
-            var source = ZEnumerable.Repeat((short?) 1, 2049).ToIList();
-            short? SumActual = ZEnumerable.Sum(source);
-            short? SumExpected = (short?) Enumerable.Sum(source.Select(x=> (long?)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumshortNullableIList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (short?) 1 } , 2049).ToIList();
             short? SumActual = ZEnumerable.Sum(source, arg => arg.X);
             short? SumExpected = (short?) Enumerable.Sum(source, arg => (long?) arg.X);        
             Assert.AreEqual(SumExpected, SumActual);
@@ -9531,47 +8790,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumushortNullableArray2049ThreatNulls()
-        {
-            var source = ZEnumerable.Repeat((ushort?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToArray();
-            ushort? SumActual = ZEnumerable.Sum(source);
-            ushort? SumExpected = (ushort?) Enumerable.Sum(source.Select(x=> (long?) x ?? 0));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumushortNullableArray2049ThreatNullsMap()
-        {
-            var baseCol = ZEnumerable.Repeat((ushort?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToArray();
-            var source = baseCol.Select(x => new { X = x } ).ToArray();
-            ushort? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            ushort? SumExpected = (ushort?) Enumerable.Sum(source, arg => (long?) arg.X ?? 0);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-            
-        [TestMethod]
-        public void TestSumushortNullableArray2049()
-        {
-            var source = ZEnumerable.Repeat((ushort?) 1, 2049).ToArray();
-            ushort? SumActual = ZEnumerable.Sum(source);
-            ushort? SumExpected = (ushort?) Enumerable.Sum(source.Select(x=> (long?)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumushortNullableArray2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (ushort?) 1 } , 2049).ToArray();
-            ushort? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            ushort? SumExpected = (ushort?) Enumerable.Sum(source, arg => (long?) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumushortNullableArray2051ThreatNulls()
         {
             var source = ZEnumerable.Repeat((ushort?) 1, 2051).Select((x, i) => i%3==0 ? x : null).ToArray();
@@ -9873,47 +9091,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumushortNullableList2049ThreatNulls()
-        {
-            var source = ZEnumerable.Repeat((ushort?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToList();
-            ushort? SumActual = ZEnumerable.Sum(source);
-            ushort? SumExpected = (ushort?) Enumerable.Sum(source.Select(x=> (long?) x ?? 0));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumushortNullableList2049ThreatNullsMap()
-        {
-            var baseCol = ZEnumerable.Repeat((ushort?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToList();
-            var source = baseCol.Select(x => new { X = x } ).ToList();
-            ushort? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            ushort? SumExpected = (ushort?) Enumerable.Sum(source, arg => (long?) arg.X ?? 0);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-            
-        [TestMethod]
-        public void TestSumushortNullableList2049()
-        {
-            var source = ZEnumerable.Repeat((ushort?) 1, 2049).ToList();
-            ushort? SumActual = ZEnumerable.Sum(source);
-            ushort? SumExpected = (ushort?) Enumerable.Sum(source.Select(x=> (long?)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumushortNullableList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (ushort?) 1 } , 2049).ToList();
-            ushort? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            ushort? SumExpected = (ushort?) Enumerable.Sum(source, arg => (long?) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumushortNullableList2051ThreatNulls()
         {
             var source = ZEnumerable.Repeat((ushort?) 1, 2051).Select((x, i) => i%3==0 ? x : null).ToList();
@@ -10205,47 +9382,6 @@ namespace ZLinq.Test.ZMath
         public void TestSumushortNullableIList100Map()
         {
             var source = ZEnumerable.Repeat(new { X = (ushort?) 1 } , 100).ToIList();
-            ushort? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            ushort? SumExpected = (ushort?) Enumerable.Sum(source, arg => (long?) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
-        public void TestSumushortNullableIList2049ThreatNulls()
-        {
-            var source = ZEnumerable.Repeat((ushort?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToIList();
-            ushort? SumActual = ZEnumerable.Sum(source);
-            ushort? SumExpected = (ushort?) Enumerable.Sum(source.Select(x=> (long?) x ?? 0));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumushortNullableIList2049ThreatNullsMap()
-        {
-            var baseCol = ZEnumerable.Repeat((ushort?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToIList();
-            var source = baseCol.Select(x => new { X = x } ).ToIList();
-            ushort? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            ushort? SumExpected = (ushort?) Enumerable.Sum(source, arg => (long?) arg.X ?? 0);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-            
-        [TestMethod]
-        public void TestSumushortNullableIList2049()
-        {
-            var source = ZEnumerable.Repeat((ushort?) 1, 2049).ToIList();
-            ushort? SumActual = ZEnumerable.Sum(source);
-            ushort? SumExpected = (ushort?) Enumerable.Sum(source.Select(x=> (long?)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumushortNullableIList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (ushort?) 1 } , 2049).ToIList();
             ushort? SumActual = ZEnumerable.Sum(source, arg => arg.X);
             ushort? SumExpected = (ushort?) Enumerable.Sum(source, arg => (long?) arg.X);        
             Assert.AreEqual(SumExpected, SumActual);
@@ -10560,47 +9696,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumintNullableArray2049ThreatNulls()
-        {
-            var source = ZEnumerable.Repeat((int?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToArray();
-            int? SumActual = ZEnumerable.Sum(source);
-            int? SumExpected = (int?) Enumerable.Sum(source.Select(x=> (long?) x ?? 0));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumintNullableArray2049ThreatNullsMap()
-        {
-            var baseCol = ZEnumerable.Repeat((int?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToArray();
-            var source = baseCol.Select(x => new { X = x } ).ToArray();
-            int? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            int? SumExpected = (int?) Enumerable.Sum(source, arg => (long?) arg.X ?? 0);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-            
-        [TestMethod]
-        public void TestSumintNullableArray2049()
-        {
-            var source = ZEnumerable.Repeat((int?) 1, 2049).ToArray();
-            int? SumActual = ZEnumerable.Sum(source);
-            int? SumExpected = (int?) Enumerable.Sum(source.Select(x=> (long?)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumintNullableArray2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (int?) 1 } , 2049).ToArray();
-            int? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            int? SumExpected = (int?) Enumerable.Sum(source, arg => (long?) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumintNullableArray2051ThreatNulls()
         {
             var source = ZEnumerable.Repeat((int?) 1, 2051).Select((x, i) => i%3==0 ? x : null).ToArray();
@@ -10902,47 +9997,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumintNullableList2049ThreatNulls()
-        {
-            var source = ZEnumerable.Repeat((int?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToList();
-            int? SumActual = ZEnumerable.Sum(source);
-            int? SumExpected = (int?) Enumerable.Sum(source.Select(x=> (long?) x ?? 0));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumintNullableList2049ThreatNullsMap()
-        {
-            var baseCol = ZEnumerable.Repeat((int?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToList();
-            var source = baseCol.Select(x => new { X = x } ).ToList();
-            int? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            int? SumExpected = (int?) Enumerable.Sum(source, arg => (long?) arg.X ?? 0);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-            
-        [TestMethod]
-        public void TestSumintNullableList2049()
-        {
-            var source = ZEnumerable.Repeat((int?) 1, 2049).ToList();
-            int? SumActual = ZEnumerable.Sum(source);
-            int? SumExpected = (int?) Enumerable.Sum(source.Select(x=> (long?)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumintNullableList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (int?) 1 } , 2049).ToList();
-            int? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            int? SumExpected = (int?) Enumerable.Sum(source, arg => (long?) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumintNullableList2051ThreatNulls()
         {
             var source = ZEnumerable.Repeat((int?) 1, 2051).Select((x, i) => i%3==0 ? x : null).ToList();
@@ -11234,47 +10288,6 @@ namespace ZLinq.Test.ZMath
         public void TestSumintNullableIList100Map()
         {
             var source = ZEnumerable.Repeat(new { X = (int?) 1 } , 100).ToIList();
-            int? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            int? SumExpected = (int?) Enumerable.Sum(source, arg => (long?) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
-        public void TestSumintNullableIList2049ThreatNulls()
-        {
-            var source = ZEnumerable.Repeat((int?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToIList();
-            int? SumActual = ZEnumerable.Sum(source);
-            int? SumExpected = (int?) Enumerable.Sum(source.Select(x=> (long?) x ?? 0));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumintNullableIList2049ThreatNullsMap()
-        {
-            var baseCol = ZEnumerable.Repeat((int?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToIList();
-            var source = baseCol.Select(x => new { X = x } ).ToIList();
-            int? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            int? SumExpected = (int?) Enumerable.Sum(source, arg => (long?) arg.X ?? 0);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-            
-        [TestMethod]
-        public void TestSumintNullableIList2049()
-        {
-            var source = ZEnumerable.Repeat((int?) 1, 2049).ToIList();
-            int? SumActual = ZEnumerable.Sum(source);
-            int? SumExpected = (int?) Enumerable.Sum(source.Select(x=> (long?)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumintNullableIList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (int?) 1 } , 2049).ToIList();
             int? SumActual = ZEnumerable.Sum(source, arg => arg.X);
             int? SumExpected = (int?) Enumerable.Sum(source, arg => (long?) arg.X);        
             Assert.AreEqual(SumExpected, SumActual);
@@ -11589,47 +10602,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumuintNullableArray2049ThreatNulls()
-        {
-            var source = ZEnumerable.Repeat((uint?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToArray();
-            uint? SumActual = ZEnumerable.Sum(source);
-            uint? SumExpected = (uint?) Enumerable.Sum(source.Select(x=> (long?) x ?? 0));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumuintNullableArray2049ThreatNullsMap()
-        {
-            var baseCol = ZEnumerable.Repeat((uint?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToArray();
-            var source = baseCol.Select(x => new { X = x } ).ToArray();
-            uint? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            uint? SumExpected = (uint?) Enumerable.Sum(source, arg => (long?) arg.X ?? 0);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-            
-        [TestMethod]
-        public void TestSumuintNullableArray2049()
-        {
-            var source = ZEnumerable.Repeat((uint?) 1, 2049).ToArray();
-            uint? SumActual = ZEnumerable.Sum(source);
-            uint? SumExpected = (uint?) Enumerable.Sum(source.Select(x=> (long?)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumuintNullableArray2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (uint?) 1 } , 2049).ToArray();
-            uint? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            uint? SumExpected = (uint?) Enumerable.Sum(source, arg => (long?) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumuintNullableArray2051ThreatNulls()
         {
             var source = ZEnumerable.Repeat((uint?) 1, 2051).Select((x, i) => i%3==0 ? x : null).ToArray();
@@ -11931,47 +10903,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumuintNullableList2049ThreatNulls()
-        {
-            var source = ZEnumerable.Repeat((uint?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToList();
-            uint? SumActual = ZEnumerable.Sum(source);
-            uint? SumExpected = (uint?) Enumerable.Sum(source.Select(x=> (long?) x ?? 0));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumuintNullableList2049ThreatNullsMap()
-        {
-            var baseCol = ZEnumerable.Repeat((uint?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToList();
-            var source = baseCol.Select(x => new { X = x } ).ToList();
-            uint? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            uint? SumExpected = (uint?) Enumerable.Sum(source, arg => (long?) arg.X ?? 0);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-            
-        [TestMethod]
-        public void TestSumuintNullableList2049()
-        {
-            var source = ZEnumerable.Repeat((uint?) 1, 2049).ToList();
-            uint? SumActual = ZEnumerable.Sum(source);
-            uint? SumExpected = (uint?) Enumerable.Sum(source.Select(x=> (long?)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumuintNullableList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (uint?) 1 } , 2049).ToList();
-            uint? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            uint? SumExpected = (uint?) Enumerable.Sum(source, arg => (long?) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumuintNullableList2051ThreatNulls()
         {
             var source = ZEnumerable.Repeat((uint?) 1, 2051).Select((x, i) => i%3==0 ? x : null).ToList();
@@ -12263,47 +11194,6 @@ namespace ZLinq.Test.ZMath
         public void TestSumuintNullableIList100Map()
         {
             var source = ZEnumerable.Repeat(new { X = (uint?) 1 } , 100).ToIList();
-            uint? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            uint? SumExpected = (uint?) Enumerable.Sum(source, arg => (long?) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
-        public void TestSumuintNullableIList2049ThreatNulls()
-        {
-            var source = ZEnumerable.Repeat((uint?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToIList();
-            uint? SumActual = ZEnumerable.Sum(source);
-            uint? SumExpected = (uint?) Enumerable.Sum(source.Select(x=> (long?) x ?? 0));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumuintNullableIList2049ThreatNullsMap()
-        {
-            var baseCol = ZEnumerable.Repeat((uint?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToIList();
-            var source = baseCol.Select(x => new { X = x } ).ToIList();
-            uint? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            uint? SumExpected = (uint?) Enumerable.Sum(source, arg => (long?) arg.X ?? 0);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-            
-        [TestMethod]
-        public void TestSumuintNullableIList2049()
-        {
-            var source = ZEnumerable.Repeat((uint?) 1, 2049).ToIList();
-            uint? SumActual = ZEnumerable.Sum(source);
-            uint? SumExpected = (uint?) Enumerable.Sum(source.Select(x=> (long?)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumuintNullableIList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (uint?) 1 } , 2049).ToIList();
             uint? SumActual = ZEnumerable.Sum(source, arg => arg.X);
             uint? SumExpected = (uint?) Enumerable.Sum(source, arg => (long?) arg.X);        
             Assert.AreEqual(SumExpected, SumActual);
@@ -12618,47 +11508,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumlongNullableArray2049ThreatNulls()
-        {
-            var source = ZEnumerable.Repeat((long?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToArray();
-            long? SumActual = ZEnumerable.Sum(source);
-            long? SumExpected = (long?) Enumerable.Sum(source.Select(x=> (long?) x ?? 0));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumlongNullableArray2049ThreatNullsMap()
-        {
-            var baseCol = ZEnumerable.Repeat((long?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToArray();
-            var source = baseCol.Select(x => new { X = x } ).ToArray();
-            long? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            long? SumExpected = (long?) Enumerable.Sum(source, arg => (long?) arg.X ?? 0);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-            
-        [TestMethod]
-        public void TestSumlongNullableArray2049()
-        {
-            var source = ZEnumerable.Repeat((long?) 1, 2049).ToArray();
-            long? SumActual = ZEnumerable.Sum(source);
-            long? SumExpected = (long?) Enumerable.Sum(source.Select(x=> (long?)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumlongNullableArray2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (long?) 1 } , 2049).ToArray();
-            long? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            long? SumExpected = (long?) Enumerable.Sum(source, arg => (long?) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumlongNullableArray2051ThreatNulls()
         {
             var source = ZEnumerable.Repeat((long?) 1, 2051).Select((x, i) => i%3==0 ? x : null).ToArray();
@@ -12960,47 +11809,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumlongNullableList2049ThreatNulls()
-        {
-            var source = ZEnumerable.Repeat((long?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToList();
-            long? SumActual = ZEnumerable.Sum(source);
-            long? SumExpected = (long?) Enumerable.Sum(source.Select(x=> (long?) x ?? 0));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumlongNullableList2049ThreatNullsMap()
-        {
-            var baseCol = ZEnumerable.Repeat((long?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToList();
-            var source = baseCol.Select(x => new { X = x } ).ToList();
-            long? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            long? SumExpected = (long?) Enumerable.Sum(source, arg => (long?) arg.X ?? 0);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-            
-        [TestMethod]
-        public void TestSumlongNullableList2049()
-        {
-            var source = ZEnumerable.Repeat((long?) 1, 2049).ToList();
-            long? SumActual = ZEnumerable.Sum(source);
-            long? SumExpected = (long?) Enumerable.Sum(source.Select(x=> (long?)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumlongNullableList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (long?) 1 } , 2049).ToList();
-            long? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            long? SumExpected = (long?) Enumerable.Sum(source, arg => (long?) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumlongNullableList2051ThreatNulls()
         {
             var source = ZEnumerable.Repeat((long?) 1, 2051).Select((x, i) => i%3==0 ? x : null).ToList();
@@ -13292,47 +12100,6 @@ namespace ZLinq.Test.ZMath
         public void TestSumlongNullableIList100Map()
         {
             var source = ZEnumerable.Repeat(new { X = (long?) 1 } , 100).ToIList();
-            long? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            long? SumExpected = (long?) Enumerable.Sum(source, arg => (long?) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
-        public void TestSumlongNullableIList2049ThreatNulls()
-        {
-            var source = ZEnumerable.Repeat((long?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToIList();
-            long? SumActual = ZEnumerable.Sum(source);
-            long? SumExpected = (long?) Enumerable.Sum(source.Select(x=> (long?) x ?? 0));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumlongNullableIList2049ThreatNullsMap()
-        {
-            var baseCol = ZEnumerable.Repeat((long?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToIList();
-            var source = baseCol.Select(x => new { X = x } ).ToIList();
-            long? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            long? SumExpected = (long?) Enumerable.Sum(source, arg => (long?) arg.X ?? 0);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-            
-        [TestMethod]
-        public void TestSumlongNullableIList2049()
-        {
-            var source = ZEnumerable.Repeat((long?) 1, 2049).ToIList();
-            long? SumActual = ZEnumerable.Sum(source);
-            long? SumExpected = (long?) Enumerable.Sum(source.Select(x=> (long?)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumlongNullableIList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (long?) 1 } , 2049).ToIList();
             long? SumActual = ZEnumerable.Sum(source, arg => arg.X);
             long? SumExpected = (long?) Enumerable.Sum(source, arg => (long?) arg.X);        
             Assert.AreEqual(SumExpected, SumActual);
@@ -13647,47 +12414,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumulongNullableArray2049ThreatNulls()
-        {
-            var source = ZEnumerable.Repeat((ulong?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToArray();
-            ulong? SumActual = ZEnumerable.Sum(source);
-            ulong? SumExpected = (ulong?) Enumerable.Sum(source.Select(x=> (long?) x ?? 0));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumulongNullableArray2049ThreatNullsMap()
-        {
-            var baseCol = ZEnumerable.Repeat((ulong?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToArray();
-            var source = baseCol.Select(x => new { X = x } ).ToArray();
-            ulong? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            ulong? SumExpected = (ulong?) Enumerable.Sum(source, arg => (long?) arg.X ?? 0);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-            
-        [TestMethod]
-        public void TestSumulongNullableArray2049()
-        {
-            var source = ZEnumerable.Repeat((ulong?) 1, 2049).ToArray();
-            ulong? SumActual = ZEnumerable.Sum(source);
-            ulong? SumExpected = (ulong?) Enumerable.Sum(source.Select(x=> (long?)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumulongNullableArray2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (ulong?) 1 } , 2049).ToArray();
-            ulong? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            ulong? SumExpected = (ulong?) Enumerable.Sum(source, arg => (long?) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumulongNullableArray2051ThreatNulls()
         {
             var source = ZEnumerable.Repeat((ulong?) 1, 2051).Select((x, i) => i%3==0 ? x : null).ToArray();
@@ -13989,47 +12715,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumulongNullableList2049ThreatNulls()
-        {
-            var source = ZEnumerable.Repeat((ulong?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToList();
-            ulong? SumActual = ZEnumerable.Sum(source);
-            ulong? SumExpected = (ulong?) Enumerable.Sum(source.Select(x=> (long?) x ?? 0));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumulongNullableList2049ThreatNullsMap()
-        {
-            var baseCol = ZEnumerable.Repeat((ulong?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToList();
-            var source = baseCol.Select(x => new { X = x } ).ToList();
-            ulong? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            ulong? SumExpected = (ulong?) Enumerable.Sum(source, arg => (long?) arg.X ?? 0);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-            
-        [TestMethod]
-        public void TestSumulongNullableList2049()
-        {
-            var source = ZEnumerable.Repeat((ulong?) 1, 2049).ToList();
-            ulong? SumActual = ZEnumerable.Sum(source);
-            ulong? SumExpected = (ulong?) Enumerable.Sum(source.Select(x=> (long?)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumulongNullableList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (ulong?) 1 } , 2049).ToList();
-            ulong? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            ulong? SumExpected = (ulong?) Enumerable.Sum(source, arg => (long?) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumulongNullableList2051ThreatNulls()
         {
             var source = ZEnumerable.Repeat((ulong?) 1, 2051).Select((x, i) => i%3==0 ? x : null).ToList();
@@ -14321,47 +13006,6 @@ namespace ZLinq.Test.ZMath
         public void TestSumulongNullableIList100Map()
         {
             var source = ZEnumerable.Repeat(new { X = (ulong?) 1 } , 100).ToIList();
-            ulong? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            ulong? SumExpected = (ulong?) Enumerable.Sum(source, arg => (long?) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
-        public void TestSumulongNullableIList2049ThreatNulls()
-        {
-            var source = ZEnumerable.Repeat((ulong?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToIList();
-            ulong? SumActual = ZEnumerable.Sum(source);
-            ulong? SumExpected = (ulong?) Enumerable.Sum(source.Select(x=> (long?) x ?? 0));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumulongNullableIList2049ThreatNullsMap()
-        {
-            var baseCol = ZEnumerable.Repeat((ulong?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToIList();
-            var source = baseCol.Select(x => new { X = x } ).ToIList();
-            ulong? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            ulong? SumExpected = (ulong?) Enumerable.Sum(source, arg => (long?) arg.X ?? 0);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-            
-        [TestMethod]
-        public void TestSumulongNullableIList2049()
-        {
-            var source = ZEnumerable.Repeat((ulong?) 1, 2049).ToIList();
-            ulong? SumActual = ZEnumerable.Sum(source);
-            ulong? SumExpected = (ulong?) Enumerable.Sum(source.Select(x=> (long?)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumulongNullableIList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (ulong?) 1 } , 2049).ToIList();
             ulong? SumActual = ZEnumerable.Sum(source, arg => arg.X);
             ulong? SumExpected = (ulong?) Enumerable.Sum(source, arg => (long?) arg.X);        
             Assert.AreEqual(SumExpected, SumActual);
@@ -14676,47 +13320,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumfloatNullableArray2049ThreatNulls()
-        {
-            var source = ZEnumerable.Repeat((float?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToArray();
-            float? SumActual = ZEnumerable.Sum(source);
-            float? SumExpected = (float?) Enumerable.Sum(source.Select(x=> (double?) x ?? 0));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumfloatNullableArray2049ThreatNullsMap()
-        {
-            var baseCol = ZEnumerable.Repeat((float?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToArray();
-            var source = baseCol.Select(x => new { X = x } ).ToArray();
-            float? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            float? SumExpected = (float?) Enumerable.Sum(source, arg => (double?) arg.X ?? 0);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-            
-        [TestMethod]
-        public void TestSumfloatNullableArray2049()
-        {
-            var source = ZEnumerable.Repeat((float?) 1, 2049).ToArray();
-            float? SumActual = ZEnumerable.Sum(source);
-            float? SumExpected = (float?) Enumerable.Sum(source.Select(x=> (double?)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumfloatNullableArray2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (float?) 1 } , 2049).ToArray();
-            float? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            float? SumExpected = (float?) Enumerable.Sum(source, arg => (double?) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumfloatNullableArray2051ThreatNulls()
         {
             var source = ZEnumerable.Repeat((float?) 1, 2051).Select((x, i) => i%3==0 ? x : null).ToArray();
@@ -15018,47 +13621,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumfloatNullableList2049ThreatNulls()
-        {
-            var source = ZEnumerable.Repeat((float?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToList();
-            float? SumActual = ZEnumerable.Sum(source);
-            float? SumExpected = (float?) Enumerable.Sum(source.Select(x=> (double?) x ?? 0));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumfloatNullableList2049ThreatNullsMap()
-        {
-            var baseCol = ZEnumerable.Repeat((float?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToList();
-            var source = baseCol.Select(x => new { X = x } ).ToList();
-            float? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            float? SumExpected = (float?) Enumerable.Sum(source, arg => (double?) arg.X ?? 0);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-            
-        [TestMethod]
-        public void TestSumfloatNullableList2049()
-        {
-            var source = ZEnumerable.Repeat((float?) 1, 2049).ToList();
-            float? SumActual = ZEnumerable.Sum(source);
-            float? SumExpected = (float?) Enumerable.Sum(source.Select(x=> (double?)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumfloatNullableList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (float?) 1 } , 2049).ToList();
-            float? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            float? SumExpected = (float?) Enumerable.Sum(source, arg => (double?) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumfloatNullableList2051ThreatNulls()
         {
             var source = ZEnumerable.Repeat((float?) 1, 2051).Select((x, i) => i%3==0 ? x : null).ToList();
@@ -15350,47 +13912,6 @@ namespace ZLinq.Test.ZMath
         public void TestSumfloatNullableIList100Map()
         {
             var source = ZEnumerable.Repeat(new { X = (float?) 1 } , 100).ToIList();
-            float? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            float? SumExpected = (float?) Enumerable.Sum(source, arg => (double?) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
-        public void TestSumfloatNullableIList2049ThreatNulls()
-        {
-            var source = ZEnumerable.Repeat((float?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToIList();
-            float? SumActual = ZEnumerable.Sum(source);
-            float? SumExpected = (float?) Enumerable.Sum(source.Select(x=> (double?) x ?? 0));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumfloatNullableIList2049ThreatNullsMap()
-        {
-            var baseCol = ZEnumerable.Repeat((float?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToIList();
-            var source = baseCol.Select(x => new { X = x } ).ToIList();
-            float? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            float? SumExpected = (float?) Enumerable.Sum(source, arg => (double?) arg.X ?? 0);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-            
-        [TestMethod]
-        public void TestSumfloatNullableIList2049()
-        {
-            var source = ZEnumerable.Repeat((float?) 1, 2049).ToIList();
-            float? SumActual = ZEnumerable.Sum(source);
-            float? SumExpected = (float?) Enumerable.Sum(source.Select(x=> (double?)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumfloatNullableIList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (float?) 1 } , 2049).ToIList();
             float? SumActual = ZEnumerable.Sum(source, arg => arg.X);
             float? SumExpected = (float?) Enumerable.Sum(source, arg => (double?) arg.X);        
             Assert.AreEqual(SumExpected, SumActual);
@@ -15705,47 +14226,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumdoubleNullableArray2049ThreatNulls()
-        {
-            var source = ZEnumerable.Repeat((double?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToArray();
-            double? SumActual = ZEnumerable.Sum(source);
-            double? SumExpected = (double?) Enumerable.Sum(source.Select(x=> (double?) x ?? 0));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumdoubleNullableArray2049ThreatNullsMap()
-        {
-            var baseCol = ZEnumerable.Repeat((double?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToArray();
-            var source = baseCol.Select(x => new { X = x } ).ToArray();
-            double? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            double? SumExpected = (double?) Enumerable.Sum(source, arg => (double?) arg.X ?? 0);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-            
-        [TestMethod]
-        public void TestSumdoubleNullableArray2049()
-        {
-            var source = ZEnumerable.Repeat((double?) 1, 2049).ToArray();
-            double? SumActual = ZEnumerable.Sum(source);
-            double? SumExpected = (double?) Enumerable.Sum(source.Select(x=> (double?)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumdoubleNullableArray2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (double?) 1 } , 2049).ToArray();
-            double? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            double? SumExpected = (double?) Enumerable.Sum(source, arg => (double?) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumdoubleNullableArray2051ThreatNulls()
         {
             var source = ZEnumerable.Repeat((double?) 1, 2051).Select((x, i) => i%3==0 ? x : null).ToArray();
@@ -16047,47 +14527,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumdoubleNullableList2049ThreatNulls()
-        {
-            var source = ZEnumerable.Repeat((double?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToList();
-            double? SumActual = ZEnumerable.Sum(source);
-            double? SumExpected = (double?) Enumerable.Sum(source.Select(x=> (double?) x ?? 0));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumdoubleNullableList2049ThreatNullsMap()
-        {
-            var baseCol = ZEnumerable.Repeat((double?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToList();
-            var source = baseCol.Select(x => new { X = x } ).ToList();
-            double? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            double? SumExpected = (double?) Enumerable.Sum(source, arg => (double?) arg.X ?? 0);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-            
-        [TestMethod]
-        public void TestSumdoubleNullableList2049()
-        {
-            var source = ZEnumerable.Repeat((double?) 1, 2049).ToList();
-            double? SumActual = ZEnumerable.Sum(source);
-            double? SumExpected = (double?) Enumerable.Sum(source.Select(x=> (double?)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumdoubleNullableList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (double?) 1 } , 2049).ToList();
-            double? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            double? SumExpected = (double?) Enumerable.Sum(source, arg => (double?) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumdoubleNullableList2051ThreatNulls()
         {
             var source = ZEnumerable.Repeat((double?) 1, 2051).Select((x, i) => i%3==0 ? x : null).ToList();
@@ -16379,47 +14818,6 @@ namespace ZLinq.Test.ZMath
         public void TestSumdoubleNullableIList100Map()
         {
             var source = ZEnumerable.Repeat(new { X = (double?) 1 } , 100).ToIList();
-            double? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            double? SumExpected = (double?) Enumerable.Sum(source, arg => (double?) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
-        public void TestSumdoubleNullableIList2049ThreatNulls()
-        {
-            var source = ZEnumerable.Repeat((double?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToIList();
-            double? SumActual = ZEnumerable.Sum(source);
-            double? SumExpected = (double?) Enumerable.Sum(source.Select(x=> (double?) x ?? 0));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumdoubleNullableIList2049ThreatNullsMap()
-        {
-            var baseCol = ZEnumerable.Repeat((double?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToIList();
-            var source = baseCol.Select(x => new { X = x } ).ToIList();
-            double? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            double? SumExpected = (double?) Enumerable.Sum(source, arg => (double?) arg.X ?? 0);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-            
-        [TestMethod]
-        public void TestSumdoubleNullableIList2049()
-        {
-            var source = ZEnumerable.Repeat((double?) 1, 2049).ToIList();
-            double? SumActual = ZEnumerable.Sum(source);
-            double? SumExpected = (double?) Enumerable.Sum(source.Select(x=> (double?)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumdoubleNullableIList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (double?) 1 } , 2049).ToIList();
             double? SumActual = ZEnumerable.Sum(source, arg => arg.X);
             double? SumExpected = (double?) Enumerable.Sum(source, arg => (double?) arg.X);        
             Assert.AreEqual(SumExpected, SumActual);
@@ -16734,47 +15132,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumdecimalNullableArray2049ThreatNulls()
-        {
-            var source = ZEnumerable.Repeat((decimal?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToArray();
-            decimal? SumActual = ZEnumerable.Sum(source);
-            decimal? SumExpected = (decimal?) Enumerable.Sum(source.Select(x=> (double?) x ?? 0));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumdecimalNullableArray2049ThreatNullsMap()
-        {
-            var baseCol = ZEnumerable.Repeat((decimal?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToArray();
-            var source = baseCol.Select(x => new { X = x } ).ToArray();
-            decimal? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            decimal? SumExpected = (decimal?) Enumerable.Sum(source, arg => (double?) arg.X ?? 0);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-            
-        [TestMethod]
-        public void TestSumdecimalNullableArray2049()
-        {
-            var source = ZEnumerable.Repeat((decimal?) 1, 2049).ToArray();
-            decimal? SumActual = ZEnumerable.Sum(source);
-            decimal? SumExpected = (decimal?) Enumerable.Sum(source.Select(x=> (double?)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumdecimalNullableArray2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (decimal?) 1 } , 2049).ToArray();
-            decimal? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            decimal? SumExpected = (decimal?) Enumerable.Sum(source, arg => (double?) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumdecimalNullableArray2051ThreatNulls()
         {
             var source = ZEnumerable.Repeat((decimal?) 1, 2051).Select((x, i) => i%3==0 ? x : null).ToArray();
@@ -17076,47 +15433,6 @@ namespace ZLinq.Test.ZMath
                         
             
         [TestMethod]
-        public void TestSumdecimalNullableList2049ThreatNulls()
-        {
-            var source = ZEnumerable.Repeat((decimal?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToList();
-            decimal? SumActual = ZEnumerable.Sum(source);
-            decimal? SumExpected = (decimal?) Enumerable.Sum(source.Select(x=> (double?) x ?? 0));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumdecimalNullableList2049ThreatNullsMap()
-        {
-            var baseCol = ZEnumerable.Repeat((decimal?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToList();
-            var source = baseCol.Select(x => new { X = x } ).ToList();
-            decimal? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            decimal? SumExpected = (decimal?) Enumerable.Sum(source, arg => (double?) arg.X ?? 0);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-            
-        [TestMethod]
-        public void TestSumdecimalNullableList2049()
-        {
-            var source = ZEnumerable.Repeat((decimal?) 1, 2049).ToList();
-            decimal? SumActual = ZEnumerable.Sum(source);
-            decimal? SumExpected = (decimal?) Enumerable.Sum(source.Select(x=> (double?)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumdecimalNullableList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (decimal?) 1 } , 2049).ToList();
-            decimal? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            decimal? SumExpected = (decimal?) Enumerable.Sum(source, arg => (double?) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
         public void TestSumdecimalNullableList2051ThreatNulls()
         {
             var source = ZEnumerable.Repeat((decimal?) 1, 2051).Select((x, i) => i%3==0 ? x : null).ToList();
@@ -17408,47 +15724,6 @@ namespace ZLinq.Test.ZMath
         public void TestSumdecimalNullableIList100Map()
         {
             var source = ZEnumerable.Repeat(new { X = (decimal?) 1 } , 100).ToIList();
-            decimal? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            decimal? SumExpected = (decimal?) Enumerable.Sum(source, arg => (double?) arg.X);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-
-                
-        
-                        
-            
-        [TestMethod]
-        public void TestSumdecimalNullableIList2049ThreatNulls()
-        {
-            var source = ZEnumerable.Repeat((decimal?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToIList();
-            decimal? SumActual = ZEnumerable.Sum(source);
-            decimal? SumExpected = (decimal?) Enumerable.Sum(source.Select(x=> (double?) x ?? 0));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumdecimalNullableIList2049ThreatNullsMap()
-        {
-            var baseCol = ZEnumerable.Repeat((decimal?) 1, 2049).Select((x, i) => i%3==0 ? x : null).ToIList();
-            var source = baseCol.Select(x => new { X = x } ).ToIList();
-            decimal? SumActual = ZEnumerable.Sum(source, arg => arg.X);
-            decimal? SumExpected = (decimal?) Enumerable.Sum(source, arg => (double?) arg.X ?? 0);        
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-            
-        [TestMethod]
-        public void TestSumdecimalNullableIList2049()
-        {
-            var source = ZEnumerable.Repeat((decimal?) 1, 2049).ToIList();
-            decimal? SumActual = ZEnumerable.Sum(source);
-            decimal? SumExpected = (decimal?) Enumerable.Sum(source.Select(x=> (double?)x));          
-            Assert.AreEqual(SumExpected, SumActual);
-        }
-           
-        [TestMethod]
-        public void TestSumdecimalNullableIList2049Map()
-        {
-            var source = ZEnumerable.Repeat(new { X = (decimal?) 1 } , 2049).ToIList();
             decimal? SumActual = ZEnumerable.Sum(source, arg => arg.X);
             decimal? SumExpected = (decimal?) Enumerable.Sum(source, arg => (double?) arg.X);        
             Assert.AreEqual(SumExpected, SumActual);

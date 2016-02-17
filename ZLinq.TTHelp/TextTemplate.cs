@@ -9,7 +9,7 @@ namespace ZLinq.TTHelp
 {
     public static class TT
     {
-        public static readonly int[] TestSizes = {1, 2, 3, 4, 100, 2049, 2051};
+        public static readonly int[] TestSizes = {1, 2, 3, 4, 100, 2051};
         public static readonly string[] IntableTypes =
         {
             "sbyte",
@@ -75,9 +75,10 @@ namespace ZLinq.TTHelp
         {
             if (IsArray(collection))
                 return "Array";
-            if (collection.IndexOf('<') < 0)
+            int startIndex = collection.IndexOf('<');
+            if (startIndex < 0)
                 return collection + "NonGen";
-            return collection.Remove(collection.IndexOf('<'));
+            return collection.Remove(startIndex);
         }
 
         private static bool IsArray(this string collection)
@@ -257,6 +258,18 @@ namespace ZLinq.TTHelp
             if (startIndex < 0)
                 return type.Name;
             return type.Name.Remove(startIndex);
+        }
+
+        public static string ToCollection(this string sourceType)
+        {
+            return $"To{GetCollectionName(sourceType)}();";
+        }
+
+        public static bool IsIndexable(this string type)
+        {
+            if (type.IndexOf('[') >= 0)
+                return true;
+            return type.StartsWith("List<") || type.StartsWith("IList<");
         }
     }
 }

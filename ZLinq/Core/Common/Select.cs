@@ -12,29 +12,7 @@ namespace ZLinq
     [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
     [SuppressMessage("ReSharper", "LoopCanBeConvertedToQuery")]
     public static partial class ZEnumerable
-    {        
-        /// <summary>
-        /// Map each element of source collection to an element of resulting array
-        /// </summary>
-        /// <typeparam name="T">Type of source collection</typeparam>
-        /// <typeparam name="TResult">Type of result array</typeparam>
-        /// <param name="source">Source collection</param>
-        /// <param name="func">Function that maps elements from source collection to resulting collection</param>
-        /// <returns>Array of mapped elements</returns>          
-        [Pure]
-        [NotNull]
-        public static TResult[] SelectToArray<T, TResult>([NotNull] this ICollection<T> source, [NotNull] Func<T, TResult> func)
-        {
-            source.IsNotNull("source");
-            func.IsNotNull("func");
-            var result = new TResult[source.Count];
-            int i = 0;
-            foreach (T value in source)
-            {
-                result[i++] = func(value);
-            }
-            return result;
-        }            
+    {    
                 
         
         /// <summary>
@@ -170,9 +148,33 @@ namespace ZLinq
             }
             return result;
         }
-                
+           
+
+        /// <summary>
+        /// Map each element of source collection to an element of resulting array
+        /// </summary>
+        /// <typeparam name="T">Type of source collection</typeparam>
+        /// <typeparam name="TResult">Type of result array</typeparam>
+        /// <param name="source">Source collection</param>
+        /// <param name="func">Function that maps elements from source collection to resulting collection</param>
+        /// <returns>Array of mapped elements</returns>          
+        [Pure]
+        [NotNull]
+        public static TResult[] SelectToArray<T, TResult>([NotNull] this ICollection<T> source, [NotNull] Func<T, TResult> func)
+        {
+            source.IsNotNull("source");
+            func.IsNotNull("func");
+            var result = new TResult[source.Count];
+            int i = 0;
+            foreach (T value in source)
+            {
+                result[i++] = func(value);
+            }
+            return result;
+        }      
 
 
+		
         /// <summary>
         /// Map each element of source collection to an element of resulting list
         /// </summary>
@@ -190,7 +192,7 @@ namespace ZLinq
             func.IsNotNull("func");
             return SelectToList(source, func, Constants.ListDefaultCapacity);
         }
-
+		
         /// <summary>
         /// Map each element of source collection to an element of resulting list
         /// </summary>
@@ -198,16 +200,17 @@ namespace ZLinq
         /// <typeparam name="TResult">Type of result list</typeparam>
         /// <param name="source">Source collection</param>
         /// <param name="func">Function that maps elements from source collection to resulting collection</param>
-        /// <returns>List of mapped elements</returns>
+        /// <returns>List of mapped elements</returns> 
         [Pure]
         [NotNull]
         public static List<TResult> SelectToList<T, TResult>([NotNull] this ICollection<T> source, [NotNull] Func<T, TResult> func)
         {
+            //cannot check source here due to possible IEnumerable<T> multiple enumeration
             source.IsNotNull("source");
             func.IsNotNull("func");
             return SelectToList(source, func, source.Count);
         }
-
+		
         [Pure]
         [NotNull]
         private static List<TResult> SelectToList<T, TResult>([NotNull] this IEnumerable<T> source, [NotNull] Func<T, TResult> func, int count)
