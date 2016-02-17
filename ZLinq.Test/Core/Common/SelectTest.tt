@@ -20,15 +20,16 @@ namespace ZLinq.Test.Core.Common
     public class Select
 	{
 
-        <# foreach (var sourceTypeInt in TT.ToInt(TT.StandardCollections)) { 
+        <# foreach (var sourceTypeInt in TT.ToInt(TT.StandardEnumerables)) { 
 			string[] tos = sourceTypeInt.IsIndexable() ? new[] {"ToArray"} : sourceTypeInt.StartsWith("ICol") ? new[] {"ToArray", "ToList"} : new[] {"ToList"};#>
 
 		<# foreach (var to in tos) { #>
+		<# foreach(int i in TT.TestSizes) { #> 
 
         [TestMethod]
-        public void TestSelect<#= to #>From<#= sourceTypeInt.GetCollectionName() #>()
+        public void TestSelect<#= to #>From<#= sourceTypeInt.GetCollectionName() #><#= i #>()
         {
-            var source = Enumerable.Range(1, 100).<#= sourceTypeInt.ToCollection() #>
+            var source = Enumerable.Range(1, <#= i #>).<#= sourceTypeInt.ToCollection() #>
 
             var xArr = source.Select<#= to #>(x => x * x).ToArray();
             var linqArr = source.Select(x => x * x).ToArray();
@@ -36,7 +37,8 @@ namespace ZLinq.Test.Core.Common
             Assert.IsTrue(xArr.Length == linqArr.Length);
             Assert.IsTrue(xArr.SequenceEqual(linqArr));
         }
-
+		<# } #>
+		
         [TestMethod]
         public void TestSelect<#= to #>From<#= sourceTypeInt.GetCollectionName() #>InvalidArguments()
         {

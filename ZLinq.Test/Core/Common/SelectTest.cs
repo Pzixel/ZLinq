@@ -12,9 +12,62 @@ namespace ZLinq.Test.Core.Common
 	{
 
         
-		
+				 
+
         [TestMethod]
-        public void TestSelectToArrayFromArray()
+        public void TestSelectToArrayFromArray1()
+        {
+            var source = Enumerable.Range(1, 1).ToArray();
+
+            var xArr = source.SelectToArray(x => x * x).ToArray();
+            var linqArr = source.Select(x => x * x).ToArray();
+
+            Assert.IsTrue(xArr.Length == linqArr.Length);
+            Assert.IsTrue(xArr.SequenceEqual(linqArr));
+        }
+		 
+
+        [TestMethod]
+        public void TestSelectToArrayFromArray2()
+        {
+            var source = Enumerable.Range(1, 2).ToArray();
+
+            var xArr = source.SelectToArray(x => x * x).ToArray();
+            var linqArr = source.Select(x => x * x).ToArray();
+
+            Assert.IsTrue(xArr.Length == linqArr.Length);
+            Assert.IsTrue(xArr.SequenceEqual(linqArr));
+        }
+		 
+
+        [TestMethod]
+        public void TestSelectToArrayFromArray3()
+        {
+            var source = Enumerable.Range(1, 3).ToArray();
+
+            var xArr = source.SelectToArray(x => x * x).ToArray();
+            var linqArr = source.Select(x => x * x).ToArray();
+
+            Assert.IsTrue(xArr.Length == linqArr.Length);
+            Assert.IsTrue(xArr.SequenceEqual(linqArr));
+        }
+		 
+
+        [TestMethod]
+        public void TestSelectToArrayFromArray4()
+        {
+            var source = Enumerable.Range(1, 4).ToArray();
+
+            var xArr = source.SelectToArray(x => x * x).ToArray();
+            var linqArr = source.Select(x => x * x).ToArray();
+
+            Assert.IsTrue(xArr.Length == linqArr.Length);
+            Assert.IsTrue(xArr.SequenceEqual(linqArr));
+        }
+		 
+
+        [TestMethod]
+        public void TestSelectToArrayFromArray100()
         {
             var source = Enumerable.Range(1, 100).ToArray();
 
@@ -24,7 +77,20 @@ namespace ZLinq.Test.Core.Common
             Assert.IsTrue(xArr.Length == linqArr.Length);
             Assert.IsTrue(xArr.SequenceEqual(linqArr));
         }
+		 
 
+        [TestMethod]
+        public void TestSelectToArrayFromArray2048()
+        {
+            var source = Enumerable.Range(1, 2048).ToArray();
+
+            var xArr = source.SelectToArray(x => x * x).ToArray();
+            var linqArr = source.Select(x => x * x).ToArray();
+
+            Assert.IsTrue(xArr.Length == linqArr.Length);
+            Assert.IsTrue(xArr.SequenceEqual(linqArr));
+        }
+				
         [TestMethod]
         public void TestSelectToArrayFromArrayInvalidArguments()
         {
@@ -52,9 +118,62 @@ namespace ZLinq.Test.Core.Common
             }
         }
 		        
-		
+				 
+
         [TestMethod]
-        public void TestSelectToArrayFromList()
+        public void TestSelectToArrayFromList1()
+        {
+            var source = Enumerable.Range(1, 1).ToList();
+
+            var xArr = source.SelectToArray(x => x * x).ToArray();
+            var linqArr = source.Select(x => x * x).ToArray();
+
+            Assert.IsTrue(xArr.Length == linqArr.Length);
+            Assert.IsTrue(xArr.SequenceEqual(linqArr));
+        }
+		 
+
+        [TestMethod]
+        public void TestSelectToArrayFromList2()
+        {
+            var source = Enumerable.Range(1, 2).ToList();
+
+            var xArr = source.SelectToArray(x => x * x).ToArray();
+            var linqArr = source.Select(x => x * x).ToArray();
+
+            Assert.IsTrue(xArr.Length == linqArr.Length);
+            Assert.IsTrue(xArr.SequenceEqual(linqArr));
+        }
+		 
+
+        [TestMethod]
+        public void TestSelectToArrayFromList3()
+        {
+            var source = Enumerable.Range(1, 3).ToList();
+
+            var xArr = source.SelectToArray(x => x * x).ToArray();
+            var linqArr = source.Select(x => x * x).ToArray();
+
+            Assert.IsTrue(xArr.Length == linqArr.Length);
+            Assert.IsTrue(xArr.SequenceEqual(linqArr));
+        }
+		 
+
+        [TestMethod]
+        public void TestSelectToArrayFromList4()
+        {
+            var source = Enumerable.Range(1, 4).ToList();
+
+            var xArr = source.SelectToArray(x => x * x).ToArray();
+            var linqArr = source.Select(x => x * x).ToArray();
+
+            Assert.IsTrue(xArr.Length == linqArr.Length);
+            Assert.IsTrue(xArr.SequenceEqual(linqArr));
+        }
+		 
+
+        [TestMethod]
+        public void TestSelectToArrayFromList100()
         {
             var source = Enumerable.Range(1, 100).ToList();
 
@@ -64,7 +183,20 @@ namespace ZLinq.Test.Core.Common
             Assert.IsTrue(xArr.Length == linqArr.Length);
             Assert.IsTrue(xArr.SequenceEqual(linqArr));
         }
+		 
 
+        [TestMethod]
+        public void TestSelectToArrayFromList2048()
+        {
+            var source = Enumerable.Range(1, 2048).ToList();
+
+            var xArr = source.SelectToArray(x => x * x).ToArray();
+            var linqArr = source.Select(x => x * x).ToArray();
+
+            Assert.IsTrue(xArr.Length == linqArr.Length);
+            Assert.IsTrue(xArr.SequenceEqual(linqArr));
+        }
+				
         [TestMethod]
         public void TestSelectToArrayFromListInvalidArguments()
         {
@@ -92,9 +224,62 @@ namespace ZLinq.Test.Core.Common
             }
         }
 		        
-		
+				 
+
         [TestMethod]
-        public void TestSelectToArrayFromIList()
+        public void TestSelectToArrayFromIList1()
+        {
+            var source = Enumerable.Range(1, 1).ToIList();
+
+            var xArr = source.SelectToArray(x => x * x).ToArray();
+            var linqArr = source.Select(x => x * x).ToArray();
+
+            Assert.IsTrue(xArr.Length == linqArr.Length);
+            Assert.IsTrue(xArr.SequenceEqual(linqArr));
+        }
+		 
+
+        [TestMethod]
+        public void TestSelectToArrayFromIList2()
+        {
+            var source = Enumerable.Range(1, 2).ToIList();
+
+            var xArr = source.SelectToArray(x => x * x).ToArray();
+            var linqArr = source.Select(x => x * x).ToArray();
+
+            Assert.IsTrue(xArr.Length == linqArr.Length);
+            Assert.IsTrue(xArr.SequenceEqual(linqArr));
+        }
+		 
+
+        [TestMethod]
+        public void TestSelectToArrayFromIList3()
+        {
+            var source = Enumerable.Range(1, 3).ToIList();
+
+            var xArr = source.SelectToArray(x => x * x).ToArray();
+            var linqArr = source.Select(x => x * x).ToArray();
+
+            Assert.IsTrue(xArr.Length == linqArr.Length);
+            Assert.IsTrue(xArr.SequenceEqual(linqArr));
+        }
+		 
+
+        [TestMethod]
+        public void TestSelectToArrayFromIList4()
+        {
+            var source = Enumerable.Range(1, 4).ToIList();
+
+            var xArr = source.SelectToArray(x => x * x).ToArray();
+            var linqArr = source.Select(x => x * x).ToArray();
+
+            Assert.IsTrue(xArr.Length == linqArr.Length);
+            Assert.IsTrue(xArr.SequenceEqual(linqArr));
+        }
+		 
+
+        [TestMethod]
+        public void TestSelectToArrayFromIList100()
         {
             var source = Enumerable.Range(1, 100).ToIList();
 
@@ -104,7 +289,20 @@ namespace ZLinq.Test.Core.Common
             Assert.IsTrue(xArr.Length == linqArr.Length);
             Assert.IsTrue(xArr.SequenceEqual(linqArr));
         }
+		 
 
+        [TestMethod]
+        public void TestSelectToArrayFromIList2048()
+        {
+            var source = Enumerable.Range(1, 2048).ToIList();
+
+            var xArr = source.SelectToArray(x => x * x).ToArray();
+            var linqArr = source.Select(x => x * x).ToArray();
+
+            Assert.IsTrue(xArr.Length == linqArr.Length);
+            Assert.IsTrue(xArr.SequenceEqual(linqArr));
+        }
+				
         [TestMethod]
         public void TestSelectToArrayFromIListInvalidArguments()
         {
@@ -132,9 +330,62 @@ namespace ZLinq.Test.Core.Common
             }
         }
 		        
-		
+				 
+
         [TestMethod]
-        public void TestSelectToArrayFromICollection()
+        public void TestSelectToArrayFromICollection1()
+        {
+            var source = Enumerable.Range(1, 1).ToICollection();
+
+            var xArr = source.SelectToArray(x => x * x).ToArray();
+            var linqArr = source.Select(x => x * x).ToArray();
+
+            Assert.IsTrue(xArr.Length == linqArr.Length);
+            Assert.IsTrue(xArr.SequenceEqual(linqArr));
+        }
+		 
+
+        [TestMethod]
+        public void TestSelectToArrayFromICollection2()
+        {
+            var source = Enumerable.Range(1, 2).ToICollection();
+
+            var xArr = source.SelectToArray(x => x * x).ToArray();
+            var linqArr = source.Select(x => x * x).ToArray();
+
+            Assert.IsTrue(xArr.Length == linqArr.Length);
+            Assert.IsTrue(xArr.SequenceEqual(linqArr));
+        }
+		 
+
+        [TestMethod]
+        public void TestSelectToArrayFromICollection3()
+        {
+            var source = Enumerable.Range(1, 3).ToICollection();
+
+            var xArr = source.SelectToArray(x => x * x).ToArray();
+            var linqArr = source.Select(x => x * x).ToArray();
+
+            Assert.IsTrue(xArr.Length == linqArr.Length);
+            Assert.IsTrue(xArr.SequenceEqual(linqArr));
+        }
+		 
+
+        [TestMethod]
+        public void TestSelectToArrayFromICollection4()
+        {
+            var source = Enumerable.Range(1, 4).ToICollection();
+
+            var xArr = source.SelectToArray(x => x * x).ToArray();
+            var linqArr = source.Select(x => x * x).ToArray();
+
+            Assert.IsTrue(xArr.Length == linqArr.Length);
+            Assert.IsTrue(xArr.SequenceEqual(linqArr));
+        }
+		 
+
+        [TestMethod]
+        public void TestSelectToArrayFromICollection100()
         {
             var source = Enumerable.Range(1, 100).ToICollection();
 
@@ -144,7 +395,20 @@ namespace ZLinq.Test.Core.Common
             Assert.IsTrue(xArr.Length == linqArr.Length);
             Assert.IsTrue(xArr.SequenceEqual(linqArr));
         }
+		 
 
+        [TestMethod]
+        public void TestSelectToArrayFromICollection2048()
+        {
+            var source = Enumerable.Range(1, 2048).ToICollection();
+
+            var xArr = source.SelectToArray(x => x * x).ToArray();
+            var linqArr = source.Select(x => x * x).ToArray();
+
+            Assert.IsTrue(xArr.Length == linqArr.Length);
+            Assert.IsTrue(xArr.SequenceEqual(linqArr));
+        }
+				
         [TestMethod]
         public void TestSelectToArrayFromICollectionInvalidArguments()
         {
@@ -171,9 +435,62 @@ namespace ZLinq.Test.Core.Common
                 
             }
         }
-		
+				 
+
         [TestMethod]
-        public void TestSelectToListFromICollection()
+        public void TestSelectToListFromICollection1()
+        {
+            var source = Enumerable.Range(1, 1).ToICollection();
+
+            var xArr = source.SelectToList(x => x * x).ToArray();
+            var linqArr = source.Select(x => x * x).ToArray();
+
+            Assert.IsTrue(xArr.Length == linqArr.Length);
+            Assert.IsTrue(xArr.SequenceEqual(linqArr));
+        }
+		 
+
+        [TestMethod]
+        public void TestSelectToListFromICollection2()
+        {
+            var source = Enumerable.Range(1, 2).ToICollection();
+
+            var xArr = source.SelectToList(x => x * x).ToArray();
+            var linqArr = source.Select(x => x * x).ToArray();
+
+            Assert.IsTrue(xArr.Length == linqArr.Length);
+            Assert.IsTrue(xArr.SequenceEqual(linqArr));
+        }
+		 
+
+        [TestMethod]
+        public void TestSelectToListFromICollection3()
+        {
+            var source = Enumerable.Range(1, 3).ToICollection();
+
+            var xArr = source.SelectToList(x => x * x).ToArray();
+            var linqArr = source.Select(x => x * x).ToArray();
+
+            Assert.IsTrue(xArr.Length == linqArr.Length);
+            Assert.IsTrue(xArr.SequenceEqual(linqArr));
+        }
+		 
+
+        [TestMethod]
+        public void TestSelectToListFromICollection4()
+        {
+            var source = Enumerable.Range(1, 4).ToICollection();
+
+            var xArr = source.SelectToList(x => x * x).ToArray();
+            var linqArr = source.Select(x => x * x).ToArray();
+
+            Assert.IsTrue(xArr.Length == linqArr.Length);
+            Assert.IsTrue(xArr.SequenceEqual(linqArr));
+        }
+		 
+
+        [TestMethod]
+        public void TestSelectToListFromICollection100()
         {
             var source = Enumerable.Range(1, 100).ToICollection();
 
@@ -183,7 +500,20 @@ namespace ZLinq.Test.Core.Common
             Assert.IsTrue(xArr.Length == linqArr.Length);
             Assert.IsTrue(xArr.SequenceEqual(linqArr));
         }
+		 
 
+        [TestMethod]
+        public void TestSelectToListFromICollection2048()
+        {
+            var source = Enumerable.Range(1, 2048).ToICollection();
+
+            var xArr = source.SelectToList(x => x * x).ToArray();
+            var linqArr = source.Select(x => x * x).ToArray();
+
+            Assert.IsTrue(xArr.Length == linqArr.Length);
+            Assert.IsTrue(xArr.SequenceEqual(linqArr));
+        }
+				
         [TestMethod]
         public void TestSelectToListFromICollectionInvalidArguments()
         {
@@ -200,6 +530,112 @@ namespace ZLinq.Test.Core.Common
             }
 
             var source = Enumerable.Range(1, 100).ToICollection();
+            try
+            {
+                source.SelectToList<int, int>(null);                
+                Assert.Fail();
+            }
+            catch (ArgumentNullException)
+            {
+                
+            }
+        }
+		        
+				 
+
+        [TestMethod]
+        public void TestSelectToListFromIEnumerable1()
+        {
+            var source = Enumerable.Range(1, 1).ToIEnumerable();
+
+            var xArr = source.SelectToList(x => x * x).ToArray();
+            var linqArr = source.Select(x => x * x).ToArray();
+
+            Assert.IsTrue(xArr.Length == linqArr.Length);
+            Assert.IsTrue(xArr.SequenceEqual(linqArr));
+        }
+		 
+
+        [TestMethod]
+        public void TestSelectToListFromIEnumerable2()
+        {
+            var source = Enumerable.Range(1, 2).ToIEnumerable();
+
+            var xArr = source.SelectToList(x => x * x).ToArray();
+            var linqArr = source.Select(x => x * x).ToArray();
+
+            Assert.IsTrue(xArr.Length == linqArr.Length);
+            Assert.IsTrue(xArr.SequenceEqual(linqArr));
+        }
+		 
+
+        [TestMethod]
+        public void TestSelectToListFromIEnumerable3()
+        {
+            var source = Enumerable.Range(1, 3).ToIEnumerable();
+
+            var xArr = source.SelectToList(x => x * x).ToArray();
+            var linqArr = source.Select(x => x * x).ToArray();
+
+            Assert.IsTrue(xArr.Length == linqArr.Length);
+            Assert.IsTrue(xArr.SequenceEqual(linqArr));
+        }
+		 
+
+        [TestMethod]
+        public void TestSelectToListFromIEnumerable4()
+        {
+            var source = Enumerable.Range(1, 4).ToIEnumerable();
+
+            var xArr = source.SelectToList(x => x * x).ToArray();
+            var linqArr = source.Select(x => x * x).ToArray();
+
+            Assert.IsTrue(xArr.Length == linqArr.Length);
+            Assert.IsTrue(xArr.SequenceEqual(linqArr));
+        }
+		 
+
+        [TestMethod]
+        public void TestSelectToListFromIEnumerable100()
+        {
+            var source = Enumerable.Range(1, 100).ToIEnumerable();
+
+            var xArr = source.SelectToList(x => x * x).ToArray();
+            var linqArr = source.Select(x => x * x).ToArray();
+
+            Assert.IsTrue(xArr.Length == linqArr.Length);
+            Assert.IsTrue(xArr.SequenceEqual(linqArr));
+        }
+		 
+
+        [TestMethod]
+        public void TestSelectToListFromIEnumerable2048()
+        {
+            var source = Enumerable.Range(1, 2048).ToIEnumerable();
+
+            var xArr = source.SelectToList(x => x * x).ToArray();
+            var linqArr = source.Select(x => x * x).ToArray();
+
+            Assert.IsTrue(xArr.Length == linqArr.Length);
+            Assert.IsTrue(xArr.SequenceEqual(linqArr));
+        }
+				
+        [TestMethod]
+        public void TestSelectToListFromIEnumerableInvalidArguments()
+        {
+            IEnumerable<int> nullSource = null;
+
+            try
+            {
+                nullSource.SelectToList(x => x * x);                
+                Assert.Fail();
+            }
+            catch (ArgumentNullException)
+            {
+                
+            }
+
+            var source = Enumerable.Range(1, 100).ToIEnumerable();
             try
             {
                 source.SelectToList<int, int>(null);                

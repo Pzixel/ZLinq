@@ -161,7 +161,7 @@ namespace ZLinq.Test.Helpers
            var result = source.First();
            foreach(var x in source)
            {
-                if (result < x || !result.HasValue)
+                if (x.HasValue && (result < x || !result.HasValue))
                     result = x;
            }
            return result;
@@ -174,7 +174,7 @@ namespace ZLinq.Test.Helpers
            var result = source.First();
            foreach(var x in source)
            {
-                if (result < x || !result.HasValue)
+                if (x.HasValue && (result < x || !result.HasValue))
                     result = x;
            }
            return result;
@@ -187,7 +187,7 @@ namespace ZLinq.Test.Helpers
            var result = source.First();
            foreach(var x in source)
            {
-                if (result < x || !result.HasValue)
+                if (x.HasValue && (result < x || !result.HasValue))
                     result = x;
            }
            return result;
@@ -200,7 +200,7 @@ namespace ZLinq.Test.Helpers
            var result = source.First();
            foreach(var x in source)
            {
-                if (result < x || !result.HasValue)
+                if (x.HasValue && (result < x || !result.HasValue))
                     result = x;
            }
            return result;
@@ -213,7 +213,7 @@ namespace ZLinq.Test.Helpers
            var result = source.First();
            foreach(var x in source)
            {
-                if (result < x || !result.HasValue)
+                if (x.HasValue && (result < x || !result.HasValue))
                     result = x;
            }
            return result;
@@ -226,7 +226,7 @@ namespace ZLinq.Test.Helpers
            var result = source.First();
            foreach(var x in source)
            {
-                if (result < x || !result.HasValue)
+                if (x.HasValue && (result < x || !result.HasValue))
                     result = x;
            }
            return result;
@@ -239,7 +239,7 @@ namespace ZLinq.Test.Helpers
            var result = source.First();
            foreach(var x in source)
            {
-                if (result < x || !result.HasValue)
+                if (x.HasValue && (result < x || !result.HasValue))
                     result = x;
            }
            return result;
@@ -252,7 +252,7 @@ namespace ZLinq.Test.Helpers
            var result = source.First();
            foreach(var x in source)
            {
-                if (result < x || !result.HasValue)
+                if (x.HasValue && (result < x || !result.HasValue))
                     result = x;
            }
            return result;
@@ -265,7 +265,7 @@ namespace ZLinq.Test.Helpers
            var result = source.First();
            foreach(var x in source)
            {
-                if (result < x || !result.HasValue)
+                if (x.HasValue && (result < x || !result.HasValue))
                     result = x;
            }
            return result;
@@ -278,7 +278,7 @@ namespace ZLinq.Test.Helpers
            var result = source.First();
            foreach(var x in source)
            {
-                if (result < x || !result.HasValue)
+                if (x.HasValue && (result < x || !result.HasValue))
                     result = x;
            }
            return result;
@@ -291,7 +291,7 @@ namespace ZLinq.Test.Helpers
            var result = source.First();
            foreach(var x in source)
            {
-                if (result < x || !result.HasValue)
+                if (x.HasValue && (result < x || !result.HasValue))
                     result = x;
            }
            return result;
