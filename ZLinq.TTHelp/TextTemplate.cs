@@ -26,10 +26,17 @@ namespace ZLinq.TTHelp
             "decimal"
         };
 
+        public static readonly string[] UnoverflowableTypes =
+        {
+            "float",
+            "double"
+        };
+
         public static readonly Type[] IListTypes = {typeof (IEnumerable<>), typeof (ICollection<>), typeof (IList<>)};
 
         public static readonly string[] LongableTypes = IntableTypes.Concat(new[] { "uint", "long" }).ToArray();
         public static readonly string[] ULongableTypes = LongableTypes.Concat(new[] { "ulong" }).ToArray();
+        public static readonly string[] OverflowableTypes = ULongableTypes.Concat(new[] {"decimal"}).ToArray();
         public static readonly string[] NumberTypes = ULongableTypes.Concat(FloatTypes).ToArray();
         public static readonly string[] NumberTypesInt = {"int"};
         public static readonly string[] NullableNumberTypes = NumberTypes.Select(x => x + "?").ToArray();
