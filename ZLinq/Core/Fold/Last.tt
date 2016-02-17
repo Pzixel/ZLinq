@@ -21,18 +21,24 @@ namespace ZLinq
         <# foreach (var sourceType in TT.StandardLists) 
         { #>        
                    
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="InvalidOperationException">Throws when collection has no elements</exception>
         [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-           public static T Last<T>([NotNull] this <#= sourceType #> source)
+        public static T Last<T>([NotNull] this <#= sourceType #> source)
         {
+			source.IsNotEmpty<<#= sourceType #>, T>();
             return <#= TT.Cast(sourceType) #>source[source.<#= TT.LengthOrCount(sourceType) #> - 1];
         }         
 
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T LastOrDefault<T>([NotNull] this <#= sourceType #> source)
         {
             return source.<#= TT.LengthOrCount(sourceType) #> == 0 ? default(T) : <#= TT.Cast(sourceType) #> source[source.<#= TT.LengthOrCount(sourceType) #> - 1];
         }    
 
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="InvalidOperationException">Throws when collection has no elements matching the predicate</exception>
         [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T Last<T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
         {
@@ -47,6 +53,7 @@ namespace ZLinq
             throw new InvalidOperationException();
         }
 
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T LastOrDefault<T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
         {
@@ -61,22 +68,21 @@ namespace ZLinq
             return default(T);
         }
         <# } #>        
-
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T Last<T>([NotNull] this ICollection<T> source)
         {
-            if (source == null)
-                throw new ArgumentNullException();
-            if (source.Count == 0)
-                throw new InvalidOperationException();
+            <#= TT.IsNotNull("source") #>
+            source.IsNotEmpty<ICollection<T>, T>();
             return LastHasElements(source);
         }
 
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T LastOrDefault<T>([NotNull] this ICollection<T> source)
         {
-            if (source == null)
-                throw new ArgumentNullException();
+            <#= TT.IsNotNull("source") #>
             if (source.Count == 0)
                 return default(T);
             return LastHasElements(source);
@@ -101,6 +107,8 @@ namespace ZLinq
             }
         }
 
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T Last<T>([NotNull] this ICollection<T> source, [NotNull] Predicate<T> predicate)
         {
@@ -127,6 +135,7 @@ namespace ZLinq
             throw new InvalidOperationException();
         }
 
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T LastOrDefault<T>([NotNull] this ICollection<T> source, [NotNull] Predicate<T> predicate)
         {

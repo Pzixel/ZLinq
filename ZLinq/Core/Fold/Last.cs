@@ -11,18 +11,24 @@ namespace ZLinq
     {             
                 
                    
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="InvalidOperationException">Throws when collection has no elements</exception>
         [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-           public static T Last<T>([NotNull] this T[] source)
+        public static T Last<T>([NotNull] this T[] source)
         {
+			source.IsNotEmpty<T[], T>();
             return source[source.Length - 1];
         }         
 
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T LastOrDefault<T>([NotNull] this T[] source)
         {
             return source.Length == 0 ? default(T) :  source[source.Length - 1];
         }    
 
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="InvalidOperationException">Throws when collection has no elements matching the predicate</exception>
         [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T Last<T>([NotNull] this T[] source, [NotNull] Predicate<T> predicate)
         {
@@ -37,6 +43,7 @@ namespace ZLinq
             throw new InvalidOperationException();
         }
 
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T LastOrDefault<T>([NotNull] this T[] source, [NotNull] Predicate<T> predicate)
         {
@@ -52,18 +59,24 @@ namespace ZLinq
         }
                 
                    
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="InvalidOperationException">Throws when collection has no elements</exception>
         [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-           public static T Last<T>([NotNull] this List<T> source)
+        public static T Last<T>([NotNull] this List<T> source)
         {
+			source.IsNotEmpty<List<T>, T>();
             return source[source.Count - 1];
         }         
 
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T LastOrDefault<T>([NotNull] this List<T> source)
         {
             return source.Count == 0 ? default(T) :  source[source.Count - 1];
         }    
 
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="InvalidOperationException">Throws when collection has no elements matching the predicate</exception>
         [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T Last<T>([NotNull] this List<T> source, [NotNull] Predicate<T> predicate)
         {
@@ -78,6 +91,7 @@ namespace ZLinq
             throw new InvalidOperationException();
         }
 
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T LastOrDefault<T>([NotNull] this List<T> source, [NotNull] Predicate<T> predicate)
         {
@@ -93,18 +107,24 @@ namespace ZLinq
         }
                 
                    
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="InvalidOperationException">Throws when collection has no elements</exception>
         [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-           public static T Last<T>([NotNull] this IList<T> source)
+        public static T Last<T>([NotNull] this IList<T> source)
         {
+			source.IsNotEmpty<IList<T>, T>();
             return source[source.Count - 1];
         }         
 
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T LastOrDefault<T>([NotNull] this IList<T> source)
         {
             return source.Count == 0 ? default(T) :  source[source.Count - 1];
         }    
 
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="InvalidOperationException">Throws when collection has no elements matching the predicate</exception>
         [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T Last<T>([NotNull] this IList<T> source, [NotNull] Predicate<T> predicate)
         {
@@ -119,6 +139,7 @@ namespace ZLinq
             throw new InvalidOperationException();
         }
 
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T LastOrDefault<T>([NotNull] this IList<T> source, [NotNull] Predicate<T> predicate)
         {
@@ -133,22 +154,21 @@ namespace ZLinq
             return default(T);
         }
                 
-
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T Last<T>([NotNull] this ICollection<T> source)
         {
-            if (source == null)
-                throw new ArgumentNullException();
-            if (source.Count == 0)
-                throw new InvalidOperationException();
+            source.IsNotNull("source");
+            source.IsNotEmpty<ICollection<T>, T>();
             return LastHasElements(source);
         }
 
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T LastOrDefault<T>([NotNull] this ICollection<T> source)
         {
-            if (source == null)
-                throw new ArgumentNullException();
+            source.IsNotNull("source");
             if (source.Count == 0)
                 return default(T);
             return LastHasElements(source);
@@ -173,6 +193,8 @@ namespace ZLinq
             }
         }
 
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
         [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T Last<T>([NotNull] this ICollection<T> source, [NotNull] Predicate<T> predicate)
         {
@@ -199,6 +221,7 @@ namespace ZLinq
             throw new InvalidOperationException();
         }
 
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T LastOrDefault<T>([NotNull] this ICollection<T> source, [NotNull] Predicate<T> predicate)
         {
