@@ -23,11 +23,15 @@ namespace ZLinq.Test.Core.Common
         [TestMethod]
         public void TestSelectToArrayFrom<#= TT.GetCollectionName(sourceTypeInt) #>()
         {
-            var source = (<#= sourceTypeInt #>) Enumerable.Range(1, 100).<#= TT.ToArrayOrToList(sourceTypeInt) #>;
+			const int seed = 10;
+            <#= sourceTypeInt #> source = Enumerable.Range(1, 100).<#= TT.ToArrayOrToList(sourceTypeInt) #>;
 
-            var shuffled = source.GetShuffle();
+            var shuffled = source.GetShuffle(seed);
+			<#= sourceTypeInt #> shuffled2 = source.<#= TT.ToArrayOrToList(sourceTypeInt) #>;
+			shuffled2.Shuffle(seed);
 
             Assert.IsFalse(source.SequenceEqual(shuffled));
+			Assert.IsTrue(shuffled2.SequenceEqual(shuffled));
         }
         <#}#>
 

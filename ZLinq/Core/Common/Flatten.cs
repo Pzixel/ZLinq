@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using JetBrains.Annotations;
-using ZLinq.Common;
+using ZLinq.CommonInternal;
 
 // ReSharper disable CheckNamespace
 namespace ZLinq

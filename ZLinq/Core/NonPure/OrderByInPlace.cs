@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 using JetBrains.Annotations;
 using ZLinq.Class;
 using ZLinq.Comparers;
-using ZLinq.Common;
+using ZLinq.CommonInternal;
 
 // ReSharper disable CheckNamespace
 namespace ZLinq

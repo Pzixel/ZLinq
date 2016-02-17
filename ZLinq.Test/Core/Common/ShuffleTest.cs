@@ -13,31 +13,43 @@ namespace ZLinq.Test.Core.Common
         [TestMethod]
         public void TestSelectToArrayFromArray()
         {
-            var source = (int[]) Enumerable.Range(1, 100).ToArray();
+			const int seed = 10;
+            int[] source = Enumerable.Range(1, 100).ToArray();
 
-            var shuffled = source.GetShuffle();
+            var shuffled = source.GetShuffle(seed);
+			int[] shuffled2 = source.ToArray();
+			shuffled2.Shuffle(seed);
 
             Assert.IsFalse(source.SequenceEqual(shuffled));
+			Assert.IsTrue(shuffled2.SequenceEqual(shuffled));
         }
         
         [TestMethod]
         public void TestSelectToArrayFromList()
         {
-            var source = (List<int>) Enumerable.Range(1, 100).ToList();
+			const int seed = 10;
+            List<int> source = Enumerable.Range(1, 100).ToList();
 
-            var shuffled = source.GetShuffle();
+            var shuffled = source.GetShuffle(seed);
+			List<int> shuffled2 = source.ToList();
+			shuffled2.Shuffle(seed);
 
             Assert.IsFalse(source.SequenceEqual(shuffled));
+			Assert.IsTrue(shuffled2.SequenceEqual(shuffled));
         }
         
         [TestMethod]
         public void TestSelectToArrayFromIList()
         {
-            var source = (IList<int>) Enumerable.Range(1, 100).ToList();
+			const int seed = 10;
+            IList<int> source = Enumerable.Range(1, 100).ToList();
 
-            var shuffled = source.GetShuffle();
+            var shuffled = source.GetShuffle(seed);
+			IList<int> shuffled2 = source.ToList();
+			shuffled2.Shuffle(seed);
 
             Assert.IsFalse(source.SequenceEqual(shuffled));
+			Assert.IsTrue(shuffled2.SequenceEqual(shuffled));
         }
         
     }

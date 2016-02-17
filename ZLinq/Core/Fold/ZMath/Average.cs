@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using ZLinq.Common;
+using ZLinq.CommonInternal;
 
 // ReSharper disable CheckNamespace
 // ReSharper disable RedundantCast

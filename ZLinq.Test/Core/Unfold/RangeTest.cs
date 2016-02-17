@@ -26,5 +26,14 @@ namespace ZLinq.Test.Core.Unfold
             Assert.IsTrue(source.Length == zsource.Length);
             Assert.IsTrue(source.SequenceEqual(zsource));
         }
+
+        [TestMethod]
+        public void TestRangeGeneratorSeq()
+        {
+            var source = Enumerable.Range(1, 100).Select(i => i * i);
+            var zsource = ZEnumerable.RangeSeq(1, 100, i => i * i);
+
+            Assert.IsTrue(source.SequenceEqual(zsource));
+        }
     }
 }

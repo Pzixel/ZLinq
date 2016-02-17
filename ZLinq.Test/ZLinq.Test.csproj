@@ -152,17 +152,17 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="ZMath\AverageTest.cs">
+    <Compile Include="Core\Fold\ZMath\AverageTest.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AverageTest.tt</DependentUpon>
     </Compile>
-    <Compile Include="ZMath\MaxTest.cs">
+    <Compile Include="Core\Fold\ZMath\MaxTest.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MaxTest.tt</DependentUpon>
     </Compile>
-    <Compile Include="ZMath\SumTest.cs">
+    <Compile Include="Core\Fold\ZMath\SumTest.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SumTest.tt</DependentUpon>
@@ -230,15 +230,15 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Caster.cs</LastGenOutput>
     </Content>
-    <Content Include="ZMath\AverageTest.tt">
+    <Content Include="Core\Fold\ZMath\AverageTest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AverageTest.cs</LastGenOutput>
     </Content>
-    <Content Include="ZMath\MaxTest.tt">
+    <Content Include="Core\Fold\ZMath\MaxTest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MaxTest.cs</LastGenOutput>
     </Content>
-    <Content Include="ZMath\SumTest.tt">
+    <Content Include="Core\Fold\ZMath\SumTest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SumTest.cs</LastGenOutput>
     </Content>

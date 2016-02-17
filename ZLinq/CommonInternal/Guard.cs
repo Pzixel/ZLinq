@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ZLinq.Common
+namespace ZLinq.CommonInternal
 {
-    public static class Guard
+    internal static class Guard
     {
         public static void IsNotNull<T>(this T obj, string argName = null) where T : class
         {
