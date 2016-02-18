@@ -9,6 +9,7 @@
 <#@ output extension=".cs" #>
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using ZLinq.CommonInternal;
@@ -26,7 +27,7 @@ namespace ZLinq
         [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T Last<T>([NotNull] this <#= sourceType #> source)
         {
-			source.IsNotEmpty<<#= sourceType #>, T>();
+			source.IsNotEmpty();
             return <#= TT.Cast(sourceType) #>source[source.<#= TT.LengthOrCount(sourceType) #> - 1];
         }         
 
@@ -74,7 +75,7 @@ namespace ZLinq
         public static T Last<T>([NotNull] this ICollection<T> source)
         {
             <#= TT.IsNotNull("source") #>
-            source.IsNotEmpty<ICollection<T>, T>();
+            source.IsNotEmpty();
             return LastHasElements(source);
         }
 

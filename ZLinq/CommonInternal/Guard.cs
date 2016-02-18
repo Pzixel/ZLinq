@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 
 namespace ZLinq.CommonInternal
 {
     internal static class Guard
     {
-        public static void IsNotNull<T>(this T obj, string argName = null) where T : class
+        public static void IsNotNull<T>([Pure] this  T obj, string argName = null) where T : class
         {
             if (obj != null)
                 return;
@@ -20,10 +21,16 @@ namespace ZLinq.CommonInternal
                 throw new T();
         }
 
-        public static void IsNotEmpty<T, TParam>(this T collection) where T : ICollection<TParam>
+        public static void IsNotEmpty<T>([Pure] this ICollection<T> collection)
         {
             if (collection.Count == 0)
-                throw new InvalidOperationException("Collection is empty");
+                throw Error.EmptyCollection;
+        }
+
+        public static void HasSingleElement<T>(this ICollection<T> collection)
+        {
+            if (collection.Count > 1)
+                throw Error.MultipleElementsCollection;
         }
     }
 }

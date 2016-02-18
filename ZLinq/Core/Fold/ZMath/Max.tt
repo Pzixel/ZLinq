@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using ZLinq.Common;
@@ -68,7 +69,7 @@ namespace ZLinq
         {
             <#= TT.IsNotNull("source") #>
             <#= checkMap #>
-            source.IsNotEmpty<<#= collectionType #>, <#= notEmptyType #>>();
+            source.IsNotEmpty();
             if (source.<#= TT.LengthOrCount(sourceType) #> < Constants.SingleThreadExecutionThreshold)
             {
                 return Max(source<#= secondParamCall #>, 0, source.<#= TT.LengthOrCount(sourceType) #>);         

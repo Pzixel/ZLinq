@@ -9,54 +9,44 @@
 <#@ output extension=".cs" #>
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Runtime.CompilerServices;
+using System.Diagnostics.Contracts;
 using JetBrains.Annotations;
 using ZLinq.CommonInternal;
 
 // ReSharper disable CheckNamespace
 namespace ZLinq
 {
-    [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
     public static partial class ZEnumerable
-    {             
+    {
+		<# foreach (var reaction in new Dictionary<string, string> { {"", "throw Error.EmptyCollection"}, {"OrDefault", "return default(T)"} }) {#>
         <# foreach (var sourceType in TT.StandardLists) 
         { #>        
                    
-        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-           public static T Single<T>([NotNull] this <#= sourceType #> source)
-        {            
-            if (source.<#= TT.LengthOrCount(sourceType) #> > 1)
-            {
-                throw new InvalidOperationException("Collection contains more than one element");
-            }
+        [Pure]
+        public static T Single<#= reaction.Key #><T>([NotNull] this <#= sourceType #> source)
+        {
+			<#= "source".IsNotNull() #>            
+            source.HasSingleElement();
+			if (source.<#= TT.LengthOrCount(sourceType) #> == 0)
+			   <#= reaction.Value #>;
             return <#= TT.Cast(sourceType) #>source[0];
-        }     
-
-        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T SingleOrDefault<T>([NotNull] this <#= sourceType #> source)
-        {            
-            if (source.<#= TT.LengthOrCount(sourceType) #> > 1)
-            {
-                throw new InvalidOperationException("Collection contains more than one element");
-            }
-            return source.<#= TT.LengthOrCount(sourceType) #> == 0 ? default(T) : <#= TT.Cast(sourceType) #> source[0];
-        }    
+        }       
     
         <# } #>    
+		
         [Pure]
-        public static T Single<T>([NotNull] this ICollection<T> source)
+        public static T Single<#= reaction.Key #><T>([NotNull] this ICollection<T> source)
         {
+			<#= "source".IsNotNull() #>
             var list = source as IList<T>;
             if (list != null)
             {
-                return list.Single();
+                return list.Single<#= reaction.Key #>();
             }
 
-            if (source.Count > 1)
-            {
-                throw new InvalidOperationException("Collection contains more than one element");
-            }
+            source.HasSingleElement();
+			if (source.Count == 0)
+			   <#= reaction.Value #>;
             using (var enumerator = source.GetEnumerator())
             {
                 enumerator.MoveNext();
@@ -64,30 +54,11 @@ namespace ZLinq
             }
         }
 
-        [Pure]
-        public static T SingleOrDefault<T>([NotNull] this ICollection<T> source)
-        {
-            var list = source as IList<T>;
-            if (list != null)
-            {
-                return list.SingleOrDefault();
-            }
-
-            if (source.Count > 1)
-            {
-                throw new InvalidOperationException("Collection contains more than one element");
-            }
-            using (var enumerator = source.GetEnumerator())
-            {
-                enumerator.MoveNext();
-                return enumerator.Current;
-            }
-        }
         <# foreach (var sourceType in TT.Foreachable) 
         { #>        
 
         [Pure]
-        public static T Single<T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
+        public static T Single<#= reaction.Key #><T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
         {
             <#= TT.IsNotNull("source") #>
             <#= TT.IsNotNull("predicate") #>
@@ -98,36 +69,16 @@ namespace ZLinq
                 if (predicate(value))
                 {
                     if (found)
-                        throw new InvalidOperationException("Collection contains more than one element");
+                        throw Error.MultipleElementsCollection;
                     result = value;    
                     found = true;
                 }
             }
             if (!found)
-                throw new InvalidOperationException("Collection has no elements");
+                <#= reaction.Value #>;
             return result;
-        }
-
-        [Pure]
-        public static T SingleOrDefault<T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
-        {
-            <#= TT.IsNotNull("source") #>
-            <#= TT.IsNotNull("predicate") #>
-            T result = default(T);
-            bool found = false;
-            foreach (T value in source)
-            {
-                if (predicate(value))
-                {
-                    if (found)
-                        throw new InvalidOperationException("Collection contains more than one element");
-                    result = value;    
-                    found = true;
-                }
-            }
-            return result;
-        }
-
+        }		
+		<# } #>
         <# } #>        
 
     }

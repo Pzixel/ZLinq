@@ -9,6 +9,7 @@
 <#@ output extension=".cs" #>
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq.Expressions;
 using JetBrains.Annotations;
 using ZLinq.Class;
@@ -24,7 +25,7 @@ namespace ZLinq
         string name = suffix.Replace("Neg", "Descending"); #>
         <# foreach (string sourceType in TT.CollectionClasses) { #>
 
-        [Pure]
+		[Pure]
         [NotNull]
         public static IZOrderedEnumerable<T> OrderByInPlace<#= name #><T, TProperty>([NotNull] this <#= sourceType #> source, [NotNull] Expression<Func<T, TProperty>> member) where TProperty : IComparable<TProperty>
         {

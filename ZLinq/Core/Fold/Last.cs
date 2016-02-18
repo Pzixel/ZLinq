@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using ZLinq.CommonInternal;
@@ -16,7 +17,7 @@ namespace ZLinq
         [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T Last<T>([NotNull] this T[] source)
         {
-			source.IsNotEmpty<T[], T>();
+			source.IsNotEmpty();
             return source[source.Length - 1];
         }         
 
@@ -64,7 +65,7 @@ namespace ZLinq
         [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T Last<T>([NotNull] this List<T> source)
         {
-			source.IsNotEmpty<List<T>, T>();
+			source.IsNotEmpty();
             return source[source.Count - 1];
         }         
 
@@ -112,7 +113,7 @@ namespace ZLinq
         [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T Last<T>([NotNull] this IList<T> source)
         {
-			source.IsNotEmpty<IList<T>, T>();
+			source.IsNotEmpty();
             return source[source.Count - 1];
         }         
 
@@ -160,7 +161,7 @@ namespace ZLinq
         public static T Last<T>([NotNull] this ICollection<T> source)
         {
             source.IsNotNull("source");
-            source.IsNotEmpty<ICollection<T>, T>();
+            source.IsNotEmpty();
             return LastHasElements(source);
         }
 

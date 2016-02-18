@@ -10,6 +10,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using JetBrains.Annotations;
 using ZLinq.Common;
 using ZLinq.CommonInternal;
@@ -35,7 +36,7 @@ namespace ZLinq
         public static double Average([NotNull] this <#= sourceType.Replace("T", type) #> source)
         {   
             <#= TT.IsNotNull("source") #>
-            source.IsNotEmpty<<#= collectionType #>, <#= type #>>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -66,7 +67,7 @@ namespace ZLinq
         {
             <#= TT.IsNotNull("source") #>
             <#= TT.IsNotNull("mapFunc") #>
-            source.IsNotEmpty<<#= sourceType #>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -106,7 +107,7 @@ namespace ZLinq
         public static double Average([NotNull] this <#= sourceType.Replace("T", type) #> source)
         {
             <#= TT.IsNotNull("source") #>
-            source.IsNotEmpty<<#= collectionType #>, <#= type #>>();
+            source.IsNotEmpty();
             double sum = source.Sum();
             if (!double.IsInfinity(sum))
             {
@@ -127,7 +128,7 @@ namespace ZLinq
         {
             <#= TT.IsNotNull("source") #>
             <#= TT.IsNotNull("mapFunc") #>
-            source.IsNotEmpty<<#= sourceType #>, T>();
+            source.IsNotEmpty();
             double sum = source.Sum(mapFunc);
             if (!double.IsInfinity(sum))
             {

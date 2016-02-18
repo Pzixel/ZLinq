@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using JetBrains.Annotations;
 using ZLinq.Common;
 using ZLinq.CommonInternal;
@@ -23,7 +24,7 @@ namespace ZLinq
         public static double Average([NotNull] this sbyte[] source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<sbyte[], sbyte>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -54,7 +55,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<T[], T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -84,7 +85,7 @@ namespace ZLinq
         public static double Average([NotNull] this List<sbyte> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<List<sbyte>, sbyte>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -115,7 +116,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<List<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -145,7 +146,7 @@ namespace ZLinq
         public static double Average([NotNull] this IList<sbyte> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<IList<sbyte>, sbyte>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -176,7 +177,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<IList<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -210,7 +211,7 @@ namespace ZLinq
         public static double Average([NotNull] this byte[] source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<byte[], byte>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -241,7 +242,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<T[], T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -271,7 +272,7 @@ namespace ZLinq
         public static double Average([NotNull] this List<byte> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<List<byte>, byte>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -302,7 +303,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<List<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -332,7 +333,7 @@ namespace ZLinq
         public static double Average([NotNull] this IList<byte> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<IList<byte>, byte>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -363,7 +364,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<IList<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -397,7 +398,7 @@ namespace ZLinq
         public static double Average([NotNull] this short[] source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<short[], short>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -428,7 +429,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<T[], T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -458,7 +459,7 @@ namespace ZLinq
         public static double Average([NotNull] this List<short> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<List<short>, short>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -489,7 +490,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<List<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -519,7 +520,7 @@ namespace ZLinq
         public static double Average([NotNull] this IList<short> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<IList<short>, short>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -550,7 +551,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<IList<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -584,7 +585,7 @@ namespace ZLinq
         public static double Average([NotNull] this ushort[] source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<ushort[], ushort>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -615,7 +616,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<T[], T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -645,7 +646,7 @@ namespace ZLinq
         public static double Average([NotNull] this List<ushort> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<List<ushort>, ushort>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -676,7 +677,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<List<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -706,7 +707,7 @@ namespace ZLinq
         public static double Average([NotNull] this IList<ushort> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<IList<ushort>, ushort>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -737,7 +738,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<IList<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -771,7 +772,7 @@ namespace ZLinq
         public static double Average([NotNull] this int[] source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<int[], int>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -802,7 +803,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<T[], T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -832,7 +833,7 @@ namespace ZLinq
         public static double Average([NotNull] this List<int> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<List<int>, int>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -863,7 +864,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<List<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -893,7 +894,7 @@ namespace ZLinq
         public static double Average([NotNull] this IList<int> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<IList<int>, int>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -924,7 +925,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<IList<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -958,7 +959,7 @@ namespace ZLinq
         public static double Average([NotNull] this uint[] source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<uint[], uint>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -989,7 +990,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<T[], T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -1019,7 +1020,7 @@ namespace ZLinq
         public static double Average([NotNull] this List<uint> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<List<uint>, uint>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -1050,7 +1051,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<List<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -1080,7 +1081,7 @@ namespace ZLinq
         public static double Average([NotNull] this IList<uint> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<IList<uint>, uint>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -1111,7 +1112,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<IList<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -1145,7 +1146,7 @@ namespace ZLinq
         public static double Average([NotNull] this long[] source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<long[], long>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -1176,7 +1177,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<T[], T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -1206,7 +1207,7 @@ namespace ZLinq
         public static double Average([NotNull] this List<long> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<List<long>, long>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -1237,7 +1238,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<List<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -1267,7 +1268,7 @@ namespace ZLinq
         public static double Average([NotNull] this IList<long> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<IList<long>, long>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -1298,7 +1299,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<IList<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -1332,7 +1333,7 @@ namespace ZLinq
         public static double Average([NotNull] this ulong[] source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<ulong[], ulong>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -1363,7 +1364,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<T[], T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -1393,7 +1394,7 @@ namespace ZLinq
         public static double Average([NotNull] this List<ulong> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<List<ulong>, ulong>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -1424,7 +1425,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<List<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -1454,7 +1455,7 @@ namespace ZLinq
         public static double Average([NotNull] this IList<ulong> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<IList<ulong>, ulong>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -1485,7 +1486,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<IList<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -1519,7 +1520,7 @@ namespace ZLinq
         public static double Average([NotNull] this decimal[] source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<decimal[], decimal>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -1550,7 +1551,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<T[], T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -1580,7 +1581,7 @@ namespace ZLinq
         public static double Average([NotNull] this List<decimal> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<List<decimal>, decimal>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -1611,7 +1612,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<List<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -1641,7 +1642,7 @@ namespace ZLinq
         public static double Average([NotNull] this IList<decimal> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<IList<decimal>, decimal>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -1672,7 +1673,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<IList<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -1706,7 +1707,7 @@ namespace ZLinq
         public static double Average([NotNull] this sbyte?[] source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<sbyte?[], sbyte?>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -1737,7 +1738,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<T[], T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -1767,7 +1768,7 @@ namespace ZLinq
         public static double Average([NotNull] this List<sbyte?> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<List<sbyte?>, sbyte?>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -1798,7 +1799,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<List<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -1828,7 +1829,7 @@ namespace ZLinq
         public static double Average([NotNull] this IList<sbyte?> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<IList<sbyte?>, sbyte?>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -1859,7 +1860,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<IList<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -1893,7 +1894,7 @@ namespace ZLinq
         public static double Average([NotNull] this byte?[] source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<byte?[], byte?>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -1924,7 +1925,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<T[], T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -1954,7 +1955,7 @@ namespace ZLinq
         public static double Average([NotNull] this List<byte?> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<List<byte?>, byte?>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -1985,7 +1986,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<List<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -2015,7 +2016,7 @@ namespace ZLinq
         public static double Average([NotNull] this IList<byte?> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<IList<byte?>, byte?>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -2046,7 +2047,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<IList<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -2080,7 +2081,7 @@ namespace ZLinq
         public static double Average([NotNull] this short?[] source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<short?[], short?>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -2111,7 +2112,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<T[], T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -2141,7 +2142,7 @@ namespace ZLinq
         public static double Average([NotNull] this List<short?> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<List<short?>, short?>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -2172,7 +2173,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<List<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -2202,7 +2203,7 @@ namespace ZLinq
         public static double Average([NotNull] this IList<short?> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<IList<short?>, short?>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -2233,7 +2234,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<IList<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -2267,7 +2268,7 @@ namespace ZLinq
         public static double Average([NotNull] this ushort?[] source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<ushort?[], ushort?>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -2298,7 +2299,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<T[], T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -2328,7 +2329,7 @@ namespace ZLinq
         public static double Average([NotNull] this List<ushort?> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<List<ushort?>, ushort?>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -2359,7 +2360,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<List<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -2389,7 +2390,7 @@ namespace ZLinq
         public static double Average([NotNull] this IList<ushort?> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<IList<ushort?>, ushort?>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -2420,7 +2421,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<IList<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -2454,7 +2455,7 @@ namespace ZLinq
         public static double Average([NotNull] this int?[] source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<int?[], int?>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -2485,7 +2486,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<T[], T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -2515,7 +2516,7 @@ namespace ZLinq
         public static double Average([NotNull] this List<int?> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<List<int?>, int?>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -2546,7 +2547,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<List<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -2576,7 +2577,7 @@ namespace ZLinq
         public static double Average([NotNull] this IList<int?> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<IList<int?>, int?>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -2607,7 +2608,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<IList<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -2641,7 +2642,7 @@ namespace ZLinq
         public static double Average([NotNull] this uint?[] source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<uint?[], uint?>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -2672,7 +2673,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<T[], T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -2702,7 +2703,7 @@ namespace ZLinq
         public static double Average([NotNull] this List<uint?> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<List<uint?>, uint?>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -2733,7 +2734,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<List<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -2763,7 +2764,7 @@ namespace ZLinq
         public static double Average([NotNull] this IList<uint?> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<IList<uint?>, uint?>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -2794,7 +2795,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<IList<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -2828,7 +2829,7 @@ namespace ZLinq
         public static double Average([NotNull] this long?[] source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<long?[], long?>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -2859,7 +2860,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<T[], T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -2889,7 +2890,7 @@ namespace ZLinq
         public static double Average([NotNull] this List<long?> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<List<long?>, long?>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -2920,7 +2921,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<List<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -2950,7 +2951,7 @@ namespace ZLinq
         public static double Average([NotNull] this IList<long?> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<IList<long?>, long?>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -2981,7 +2982,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<IList<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -3015,7 +3016,7 @@ namespace ZLinq
         public static double Average([NotNull] this ulong?[] source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<ulong?[], ulong?>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -3046,7 +3047,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<T[], T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -3076,7 +3077,7 @@ namespace ZLinq
         public static double Average([NotNull] this List<ulong?> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<List<ulong?>, ulong?>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -3107,7 +3108,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<List<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -3137,7 +3138,7 @@ namespace ZLinq
         public static double Average([NotNull] this IList<ulong?> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<IList<ulong?>, ulong?>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -3168,7 +3169,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<IList<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -3202,7 +3203,7 @@ namespace ZLinq
         public static double Average([NotNull] this decimal?[] source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<decimal?[], decimal?>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -3233,7 +3234,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<T[], T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -3263,7 +3264,7 @@ namespace ZLinq
         public static double Average([NotNull] this List<decimal?> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<List<decimal?>, decimal?>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -3294,7 +3295,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<List<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -3324,7 +3325,7 @@ namespace ZLinq
         public static double Average([NotNull] this IList<decimal?> source)
         {   
             source.IsNotNull("source");
-            source.IsNotEmpty<IList<decimal?>, decimal?>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum();
@@ -3355,7 +3356,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<IList<T>, T>();
+            source.IsNotEmpty();
             try
             {
                 double sum = (double) source.Sum(mapFunc);
@@ -3391,7 +3392,7 @@ namespace ZLinq
         public static double Average([NotNull] this float[] source)
         {
             source.IsNotNull("source");
-            source.IsNotEmpty<float[], float>();
+            source.IsNotEmpty();
             double sum = source.Sum();
             if (!double.IsInfinity(sum))
             {
@@ -3412,7 +3413,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<T[], T>();
+            source.IsNotEmpty();
             double sum = source.Sum(mapFunc);
             if (!double.IsInfinity(sum))
             {
@@ -3432,7 +3433,7 @@ namespace ZLinq
         public static double Average([NotNull] this List<float> source)
         {
             source.IsNotNull("source");
-            source.IsNotEmpty<List<float>, float>();
+            source.IsNotEmpty();
             double sum = source.Sum();
             if (!double.IsInfinity(sum))
             {
@@ -3453,7 +3454,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<List<T>, T>();
+            source.IsNotEmpty();
             double sum = source.Sum(mapFunc);
             if (!double.IsInfinity(sum))
             {
@@ -3473,7 +3474,7 @@ namespace ZLinq
         public static double Average([NotNull] this IList<float> source)
         {
             source.IsNotNull("source");
-            source.IsNotEmpty<IList<float>, float>();
+            source.IsNotEmpty();
             double sum = source.Sum();
             if (!double.IsInfinity(sum))
             {
@@ -3494,7 +3495,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<IList<T>, T>();
+            source.IsNotEmpty();
             double sum = source.Sum(mapFunc);
             if (!double.IsInfinity(sum))
             {
@@ -3518,7 +3519,7 @@ namespace ZLinq
         public static double Average([NotNull] this double[] source)
         {
             source.IsNotNull("source");
-            source.IsNotEmpty<double[], double>();
+            source.IsNotEmpty();
             double sum = source.Sum();
             if (!double.IsInfinity(sum))
             {
@@ -3539,7 +3540,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<T[], T>();
+            source.IsNotEmpty();
             double sum = source.Sum(mapFunc);
             if (!double.IsInfinity(sum))
             {
@@ -3559,7 +3560,7 @@ namespace ZLinq
         public static double Average([NotNull] this List<double> source)
         {
             source.IsNotNull("source");
-            source.IsNotEmpty<List<double>, double>();
+            source.IsNotEmpty();
             double sum = source.Sum();
             if (!double.IsInfinity(sum))
             {
@@ -3580,7 +3581,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<List<T>, T>();
+            source.IsNotEmpty();
             double sum = source.Sum(mapFunc);
             if (!double.IsInfinity(sum))
             {
@@ -3600,7 +3601,7 @@ namespace ZLinq
         public static double Average([NotNull] this IList<double> source)
         {
             source.IsNotNull("source");
-            source.IsNotEmpty<IList<double>, double>();
+            source.IsNotEmpty();
             double sum = source.Sum();
             if (!double.IsInfinity(sum))
             {
@@ -3621,7 +3622,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<IList<T>, T>();
+            source.IsNotEmpty();
             double sum = source.Sum(mapFunc);
             if (!double.IsInfinity(sum))
             {
@@ -3645,7 +3646,7 @@ namespace ZLinq
         public static double Average([NotNull] this float?[] source)
         {
             source.IsNotNull("source");
-            source.IsNotEmpty<float?[], float?>();
+            source.IsNotEmpty();
             double sum = source.Sum();
             if (!double.IsInfinity(sum))
             {
@@ -3666,7 +3667,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<T[], T>();
+            source.IsNotEmpty();
             double sum = source.Sum(mapFunc);
             if (!double.IsInfinity(sum))
             {
@@ -3686,7 +3687,7 @@ namespace ZLinq
         public static double Average([NotNull] this List<float?> source)
         {
             source.IsNotNull("source");
-            source.IsNotEmpty<List<float?>, float?>();
+            source.IsNotEmpty();
             double sum = source.Sum();
             if (!double.IsInfinity(sum))
             {
@@ -3707,7 +3708,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<List<T>, T>();
+            source.IsNotEmpty();
             double sum = source.Sum(mapFunc);
             if (!double.IsInfinity(sum))
             {
@@ -3727,7 +3728,7 @@ namespace ZLinq
         public static double Average([NotNull] this IList<float?> source)
         {
             source.IsNotNull("source");
-            source.IsNotEmpty<IList<float?>, float?>();
+            source.IsNotEmpty();
             double sum = source.Sum();
             if (!double.IsInfinity(sum))
             {
@@ -3748,7 +3749,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<IList<T>, T>();
+            source.IsNotEmpty();
             double sum = source.Sum(mapFunc);
             if (!double.IsInfinity(sum))
             {
@@ -3772,7 +3773,7 @@ namespace ZLinq
         public static double Average([NotNull] this double?[] source)
         {
             source.IsNotNull("source");
-            source.IsNotEmpty<double?[], double?>();
+            source.IsNotEmpty();
             double sum = source.Sum();
             if (!double.IsInfinity(sum))
             {
@@ -3793,7 +3794,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<T[], T>();
+            source.IsNotEmpty();
             double sum = source.Sum(mapFunc);
             if (!double.IsInfinity(sum))
             {
@@ -3813,7 +3814,7 @@ namespace ZLinq
         public static double Average([NotNull] this List<double?> source)
         {
             source.IsNotNull("source");
-            source.IsNotEmpty<List<double?>, double?>();
+            source.IsNotEmpty();
             double sum = source.Sum();
             if (!double.IsInfinity(sum))
             {
@@ -3834,7 +3835,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<List<T>, T>();
+            source.IsNotEmpty();
             double sum = source.Sum(mapFunc);
             if (!double.IsInfinity(sum))
             {
@@ -3854,7 +3855,7 @@ namespace ZLinq
         public static double Average([NotNull] this IList<double?> source)
         {
             source.IsNotNull("source");
-            source.IsNotEmpty<IList<double?>, double?>();
+            source.IsNotEmpty();
             double sum = source.Sum();
             if (!double.IsInfinity(sum))
             {
@@ -3875,7 +3876,7 @@ namespace ZLinq
         {
             source.IsNotNull("source");
             mapFunc.IsNotNull("mapFunc");
-            source.IsNotEmpty<IList<T>, T>();
+            source.IsNotEmpty();
             double sum = source.Sum(mapFunc);
             if (!double.IsInfinity(sum))
             {

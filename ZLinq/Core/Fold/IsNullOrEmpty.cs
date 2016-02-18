@@ -1,6 +1,7 @@
 ﻿
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 
@@ -9,42 +10,42 @@ namespace ZLinq
 {
     public static partial class ZEnumerable
     {        
-        [System.Diagnostics.Contracts.Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         [ContractAnnotation("source:null => true; source:notnull => false")]
         public static bool IsNullOrEmpty<T>([CanBeNull] this T[] source)
         {
             return source == null || source.Length == 0;
         }
 
-        [System.Diagnostics.Contracts.Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         [ContractAnnotation("source:null => true; source:notnull => false")]
         public static bool IsNullOrEmpty<T>([CanBeNull] this List<T> source)
         {
             return source == null || source.Count == 0;
         }
 
-        [System.Diagnostics.Contracts.Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         [ContractAnnotation("source:null => true; source:notnull => false")]
         public static bool IsNullOrEmpty<T>([CanBeNull] this IList<T> source)
         {
             return source == null || source.Count == 0;
         }
 
-        [System.Diagnostics.Contracts.Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         [ContractAnnotation("source:null => true; source:notnull => false")]
         public static bool IsNullOrEmpty<T>([CanBeNull] this ICollection<T> source)
         {
             return source == null || source.Count == 0;
         }
 
-        [System.Diagnostics.Contracts.Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         [ContractAnnotation("source:null => true; source:notnull => false")]
         public static bool IsNullOrEmpty([CanBeNull] this IList source)
         {
             return source == null || source.Count == 0;
         }
 
-        [System.Diagnostics.Contracts.Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         [ContractAnnotation("source:null => true; source:notnull => false")]
         public static bool IsNullOrEmpty([CanBeNull] this ICollection source)
         {

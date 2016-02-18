@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq.Expressions;
 using JetBrains.Annotations;
 using ZLinq.Class;
@@ -12,7 +13,7 @@ namespace ZLinq
     public static partial class ZEnumerable
     {
             
-        [Pure]
+		[Pure]
         [NotNull]
         public static IZOrderedEnumerable<T> OrderByInPlace<T, TProperty>([NotNull] this T[] source, [NotNull] Expression<Func<T, TProperty>> member) where TProperty : IComparable<TProperty>
         {
@@ -22,7 +23,7 @@ namespace ZLinq
         }
 
         
-        [Pure]
+		[Pure]
         [NotNull]
         public static IZOrderedEnumerable<T> OrderByInPlace<T, TProperty>([NotNull] this List<T> source, [NotNull] Expression<Func<T, TProperty>> member) where TProperty : IComparable<TProperty>
         {
@@ -41,7 +42,7 @@ namespace ZLinq
             return source.AppendComparer(source.Comparer.Add(member));
         }
            
-        [Pure]
+		[Pure]
         [NotNull]
         public static IZOrderedEnumerable<T> OrderByInPlaceDescending<T, TProperty>([NotNull] this T[] source, [NotNull] Expression<Func<T, TProperty>> member) where TProperty : IComparable<TProperty>
         {
@@ -51,7 +52,7 @@ namespace ZLinq
         }
 
         
-        [Pure]
+		[Pure]
         [NotNull]
         public static IZOrderedEnumerable<T> OrderByInPlaceDescending<T, TProperty>([NotNull] this List<T> source, [NotNull] Expression<Func<T, TProperty>> member) where TProperty : IComparable<TProperty>
         {
