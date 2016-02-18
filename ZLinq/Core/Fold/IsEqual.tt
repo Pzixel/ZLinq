@@ -72,19 +72,18 @@ namespace ZLinq
             int length = x.Count;
             if (length != y.Count)
                 return false;
-            bool result = true;
-            IEnumerator<T> xEnum = x.GetEnumerator(), yEnum = y.GetEnumerator();
-            while(xEnum.MoveNext() && yEnum.MoveNext())
+            using (var xEnum = x.GetEnumerator())
+            using (var yEnum = y.GetEnumerator())
             {
-                if (!xEnum.Current.Equals(yEnum.Current))
+                while (xEnum.MoveNext() && yEnum.MoveNext())
                 {
-                    result = false;
-                    break;
+                    if (!xEnum.Current.Equals(yEnum.Current))
+                    {
+                        return false;
+                    }
                 }
             }
-            xEnum.Dispose();
-            yEnum.Dispose();
-            return result;
+            return true;
         }
         <# } #>    
     }
