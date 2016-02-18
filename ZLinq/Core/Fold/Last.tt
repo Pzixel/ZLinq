@@ -18,77 +18,87 @@ using ZLinq.CommonInternal;
 namespace ZLinq
 {
     public static partial class ZEnumerable
-    {             
-        <# foreach (var sourceType in TT.StandardLists) 
-        { #>        
+    {
+		<# foreach (var reaction in new Dictionary<string, string> { {"", "throw Error.EmptyCollection"}, {"OrDefault", "return default(T)"} }) {
+		
+			bool isStrict = reaction.Key == "";
+			string comment = isStrict ? Environment.NewLine + "		/// <exception cref=\"InvalidOperationException\">Throws when collection has no elements</exception>" : "";
+			string commentMapping = isStrict ? Environment.NewLine + "		/// <exception cref=\"InvalidOperationException\">Throws when collection has no elements matching the predicate</exception>" : "";#>             
+			
+			<# foreach (var sourceType in TT.StandardLists) {#>        
                    
-		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
-		/// <exception cref="InvalidOperationException">Throws when collection has no elements</exception>
-        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T Last<T>([NotNull] this <#= sourceType #> source)
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception><#= comment #>
+        [Pure]
+        public static T Last<#= reaction.Key #><T>([NotNull] this <#= sourceType #> source)
         {
-			source.IsNotEmpty();
-            return <#= TT.Cast(sourceType) #>source[source.<#= TT.LengthOrCount(sourceType) #> - 1];
-        }         
+			<#= "source".IsNotNull() #>
+			int lengthOrCount = source.<#= TT.LengthOrCount(sourceType) #>;
+			if (lengthOrCount == 0)
+			   <#= reaction.Value #>;
+            return source[lengthOrCount - 1];
+        }        
 
-		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
-        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T LastOrDefault<T>([NotNull] this <#= sourceType #> source)
-        {
-            return source.<#= TT.LengthOrCount(sourceType) #> == 0 ? default(T) : <#= TT.Cast(sourceType) #> source[source.<#= TT.LengthOrCount(sourceType) #> - 1];
-        }    
-
-		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
-		/// <exception cref="InvalidOperationException">Throws when collection has no elements matching the predicate</exception>
-        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T Last<T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception><#= commentMapping #>
+        [Pure]
+        public static T Last<#= reaction.Key #><T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
         {
             <#= TT.IsNotNull("source") #>
             <#= TT.IsNotNull("predicate") #>
             for (int i = source.<#= TT.LengthOrCount(sourceType) #> - 1; i >= 0; i--)
             {
-                T obj = <#= TT.Cast(sourceType) #> source[i];
+                T obj = source[i];
                 if (predicate(obj))
                     return obj;
             }
-            throw new InvalidOperationException();
+            <#= reaction.Value.Replace("EmptyCollection", "NoMatchingElement") #>;
         }
 
-		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
-        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T LastOrDefault<T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
-        {
-            <#= TT.IsNotNull("source") #>
-            <#= TT.IsNotNull("predicate") #>
-            for (int i = source.<#= TT.LengthOrCount(sourceType) #> - 1; i >= 0; i--)
-            {
-                T obj = <#= TT.Cast(sourceType) #> source[i];
-                if (predicate(obj))
-                    return obj;
-            }
-            return default(T);
-        }
         <# } #>        
-		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
-		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
-        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T Last<T>([NotNull] this ICollection<T> source)
-        {
-            <#= TT.IsNotNull("source") #>
-            source.IsNotEmpty();
-            return LastHasElements(source);
-        }
-
-		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
-        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T LastOrDefault<T>([NotNull] this ICollection<T> source)
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception><#= comment #>
+        [Pure]
+        public static T Last<#= reaction.Key #><T>([NotNull] this ICollection<T> source)
         {
             <#= TT.IsNotNull("source") #>
             if (source.Count == 0)
-                return default(T);
+			   <#= reaction.Value #>;
             return LastHasElements(source);
         }
-        
+
+		<#  string flagInit = isStrict ? "bool flag = false;" : "";
+			string flagAssign = isStrict ? "flag = true;" : "";
+			string flagUsage = isStrict ? "if (!flag) throw Error.NoMatchingElement;" : "";
+		#>
+
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
+        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static T Last<#= reaction.Key #><T>([NotNull] this ICollection<T> source, [NotNull] Predicate<T> predicate)
+        {
+            var list = source as IList<T>;
+            if (list != null)
+            {
+                return list.Last(predicate);
+            }
+
+            source.IsNotNull("source");
+            predicate.IsNotNull("predicate");
+            T result = default(T);
+            <#= flagInit #>
+            foreach (var value in source)
+            {
+                if (predicate(value))
+                {
+                    result = value;
+                    <#= flagAssign #>
+                }
+            }
+            <#= flagUsage #>
+            return result;
+        }
+
+		<# } #>
+			
+		        
         private static T LastHasElements<T>(ICollection<T> source)
         {
             var list = source as IList<T>;
@@ -108,55 +118,5 @@ namespace ZLinq
             }
         }
 
-		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
-		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
-        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T Last<T>([NotNull] this ICollection<T> source, [NotNull] Predicate<T> predicate)
-        {
-            var list = source as IList<T>;
-            if (list != null)
-            {
-                return list.Last(predicate);
-            }
-
-            source.IsNotNull("source");
-            predicate.IsNotNull("predicate");
-            T result = default(T);
-            bool flag = false;
-            foreach (var value in source)
-            {
-                if (predicate(value))
-                {
-                    result = value;
-                    flag = true;
-                }
-            }
-            if (flag)
-                return result;
-            throw new InvalidOperationException();
-        }
-
-		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
-        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T LastOrDefault<T>([NotNull] this ICollection<T> source, [NotNull] Predicate<T> predicate)
-        {
-            var list = source as IList<T>;
-            if (list != null)
-            {
-                return list.LastOrDefault(predicate);
-            }
-
-            source.IsNotNull("source");
-            predicate.IsNotNull("predicate");
-            T result = default(T);
-            foreach (var value in source)
-            {
-                if (predicate(value))
-                {
-                    result = value;
-                }
-            }
-            return result;
-        }
     }
 }
