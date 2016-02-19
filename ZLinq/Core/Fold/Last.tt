@@ -10,7 +10,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using ZLinq.CommonInternal;
 
@@ -19,28 +18,48 @@ namespace ZLinq
 {
     public static partial class ZEnumerable
     {
-		<# foreach (var reaction in new Dictionary<string, string> { {"", "throw Error.EmptyCollection"}, {"OrDefault", "return default(T)"} }) {
-		
-			bool isStrict = reaction.Key == "";
-			string comment = isStrict ? Environment.NewLine + "		/// <exception cref=\"InvalidOperationException\">Throws when collection has no elements</exception>" : "";
-			string commentMapping = isStrict ? Environment.NewLine + "		/// <exception cref=\"InvalidOperationException\">Throws when collection has no elements matching the predicate</exception>" : "";#>             
-			
+		<#  var templates = new[]
+			{
+				new 
+				{
+					Suffix = "",
+					NoMatch = "throw Error.EmptyCollection",
+					NoMatchMap = "throw Error.NoMatchingElement",
+					Comment = Environment.NewLine + "		/// <exception cref=\"InvalidOperationException\">Throws when collection has no elements</exception>",
+					CommentMap = Environment.NewLine + "		/// <exception cref=\"InvalidOperationException\">Throws when collection has no elements matching the predicate</exception>" ,
+					FlagInit = "bool flag = false;",
+					FlagAssign = "flag = true;",
+					FlagUsage = "if (!flag) throw Error.NoMatchingElement;"
+				},
+				new 
+				{
+					Suffix = "OrDefault",
+					NoMatch = "return default(T)",
+					NoMatchMap = "return default(T)",
+					Comment = "",
+					CommentMap = "",
+					FlagInit = "",
+					FlagAssign = "",
+					FlagUsage = ""
+				}
+			};#>		
+			<# foreach (var template in templates) { #>
 			<# foreach (var sourceType in TT.StandardLists) {#>        
                    
-		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception><#= comment #>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception><#= template.Comment #>
         [Pure]
-        public static T Last<#= reaction.Key #><T>([NotNull] this <#= sourceType #> source)
+        public static T Last<#= template.Suffix #><T>([NotNull, Pure] this <#= sourceType #> source)
         {
 			<#= "source".IsNotNull() #>
 			int lengthOrCount = source.<#= TT.LengthOrCount(sourceType) #>;
 			if (lengthOrCount == 0)
-			   <#= reaction.Value #>;
+			   <#= template.NoMatch #>;
             return source[lengthOrCount - 1];
         }        
 
-		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception><#= commentMapping #>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception><#= template.CommentMap #>
         [Pure]
-        public static T Last<#= reaction.Key #><T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
+        public static T Last<#= template.Suffix #><T>([NotNull, Pure] this <#= sourceType #> source, [NotNull, Pure] Predicate<T> predicate)
         {
             <#= TT.IsNotNull("source") #>
             <#= TT.IsNotNull("predicate") #>
@@ -50,29 +69,23 @@ namespace ZLinq
                 if (predicate(obj))
                     return obj;
             }
-            <#= reaction.Value.Replace("EmptyCollection", "NoMatchingElement") #>;
+            <#= template.NoMatchMap #>;
         }
 
         <# } #>        
-		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception><#= comment #>
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception><#= template.Comment #>
         [Pure]
-        public static T Last<#= reaction.Key #><T>([NotNull] this ICollection<T> source)
+        public static T Last<#= template.Suffix #><T>([NotNull, Pure] this ICollection<T> source)
         {
             <#= TT.IsNotNull("source") #>
             if (source.Count == 0)
-			   <#= reaction.Value #>;
+			   <#= template.NoMatch #>;
             return LastHasElements(source);
         }
-
-		<#  string flagInit = isStrict ? "bool flag = false;" : "";
-			string flagAssign = isStrict ? "flag = true;" : "";
-			string flagUsage = isStrict ? "if (!flag) throw Error.NoMatchingElement;" : "";
-		#>
-
-		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
-		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
-        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T Last<#= reaction.Key #><T>([NotNull] this ICollection<T> source, [NotNull] Predicate<T> predicate)
+		
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception><#= template.CommentMap #>
+        [Pure]
+        public static T Last<#= template.Suffix #><T>([NotNull, Pure] this ICollection<T> source, [NotNull, Pure] Predicate<T> predicate)
         {
             var list = source as IList<T>;
             if (list != null)
@@ -83,16 +96,16 @@ namespace ZLinq
             source.IsNotNull("source");
             predicate.IsNotNull("predicate");
             T result = default(T);
-            <#= flagInit #>
+            <#= template.FlagInit #>
             foreach (var value in source)
             {
                 if (predicate(value))
                 {
                     result = value;
-                    <#= flagAssign #>
+                    <#= template.FlagAssign #>
                 }
             }
-            <#= flagUsage #>
+            <#= template.FlagUsage #>
             return result;
         }
 

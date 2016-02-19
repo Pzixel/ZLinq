@@ -95,7 +95,7 @@ namespace ZLinq.TTHelp
 
         public static string ToArrayOrToList(this string collection) => GetCollectionName(collection) == "Array" ? "ToArray()" : "ToList()";
 
-        public static string IsNotNull(this string paramName) => $"{paramName}.IsNotNull(\"{paramName}\");";
+        public static string IsNotNull(this string paramName) => $"{paramName}.IsNotNull(nameof({paramName}));";
 
         public static string AssertFloatsRelative(string first, string second, string tolerance)
         {

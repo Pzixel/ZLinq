@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using ZLinq.CommonInternal;
 
@@ -10,16 +9,15 @@ namespace ZLinq
 {
     public static partial class ZEnumerable
     {
-		             
-			
-			        
+				
+						        
                    
 		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
 		/// <exception cref="InvalidOperationException">Throws when collection has no elements</exception>
         [Pure]
-        public static T Last<T>([NotNull] this T[] source)
+        public static T Last<T>([NotNull, Pure] this T[] source)
         {
-			source.IsNotNull("source");
+			source.IsNotNull(nameof(source));
 			int lengthOrCount = source.Length;
 			if (lengthOrCount == 0)
 			   throw Error.EmptyCollection;
@@ -29,10 +27,10 @@ namespace ZLinq
 		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
 		/// <exception cref="InvalidOperationException">Throws when collection has no elements matching the predicate</exception>
         [Pure]
-        public static T Last<T>([NotNull] this T[] source, [NotNull] Predicate<T> predicate)
+        public static T Last<T>([NotNull, Pure] this T[] source, [NotNull, Pure] Predicate<T> predicate)
         {
-            source.IsNotNull("source");
-            predicate.IsNotNull("predicate");
+            source.IsNotNull(nameof(source));
+            predicate.IsNotNull(nameof(predicate));
             for (int i = source.Length - 1; i >= 0; i--)
             {
                 T obj = source[i];
@@ -47,9 +45,9 @@ namespace ZLinq
 		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
 		/// <exception cref="InvalidOperationException">Throws when collection has no elements</exception>
         [Pure]
-        public static T Last<T>([NotNull] this List<T> source)
+        public static T Last<T>([NotNull, Pure] this List<T> source)
         {
-			source.IsNotNull("source");
+			source.IsNotNull(nameof(source));
 			int lengthOrCount = source.Count;
 			if (lengthOrCount == 0)
 			   throw Error.EmptyCollection;
@@ -59,10 +57,10 @@ namespace ZLinq
 		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
 		/// <exception cref="InvalidOperationException">Throws when collection has no elements matching the predicate</exception>
         [Pure]
-        public static T Last<T>([NotNull] this List<T> source, [NotNull] Predicate<T> predicate)
+        public static T Last<T>([NotNull, Pure] this List<T> source, [NotNull, Pure] Predicate<T> predicate)
         {
-            source.IsNotNull("source");
-            predicate.IsNotNull("predicate");
+            source.IsNotNull(nameof(source));
+            predicate.IsNotNull(nameof(predicate));
             for (int i = source.Count - 1; i >= 0; i--)
             {
                 T obj = source[i];
@@ -77,9 +75,9 @@ namespace ZLinq
 		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
 		/// <exception cref="InvalidOperationException">Throws when collection has no elements</exception>
         [Pure]
-        public static T Last<T>([NotNull] this IList<T> source)
+        public static T Last<T>([NotNull, Pure] this IList<T> source)
         {
-			source.IsNotNull("source");
+			source.IsNotNull(nameof(source));
 			int lengthOrCount = source.Count;
 			if (lengthOrCount == 0)
 			   throw Error.EmptyCollection;
@@ -89,10 +87,10 @@ namespace ZLinq
 		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
 		/// <exception cref="InvalidOperationException">Throws when collection has no elements matching the predicate</exception>
         [Pure]
-        public static T Last<T>([NotNull] this IList<T> source, [NotNull] Predicate<T> predicate)
+        public static T Last<T>([NotNull, Pure] this IList<T> source, [NotNull, Pure] Predicate<T> predicate)
         {
-            source.IsNotNull("source");
-            predicate.IsNotNull("predicate");
+            source.IsNotNull(nameof(source));
+            predicate.IsNotNull(nameof(predicate));
             for (int i = source.Count - 1; i >= 0; i--)
             {
                 T obj = source[i];
@@ -106,19 +104,18 @@ namespace ZLinq
 		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
 		/// <exception cref="InvalidOperationException">Throws when collection has no elements</exception>
         [Pure]
-        public static T Last<T>([NotNull] this ICollection<T> source)
+        public static T Last<T>([NotNull, Pure] this ICollection<T> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             if (source.Count == 0)
 			   throw Error.EmptyCollection;
             return LastHasElements(source);
         }
-
 		
 		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
-		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
-        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T Last<T>([NotNull] this ICollection<T> source, [NotNull] Predicate<T> predicate)
+		/// <exception cref="InvalidOperationException">Throws when collection has no elements matching the predicate</exception>
+        [Pure]
+        public static T Last<T>([NotNull, Pure] this ICollection<T> source, [NotNull, Pure] Predicate<T> predicate)
         {
             var list = source as IList<T>;
             if (list != null)
@@ -142,15 +139,13 @@ namespace ZLinq
             return result;
         }
 
-		             
-			
-			        
+					        
                    
 		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure]
-        public static T LastOrDefault<T>([NotNull] this T[] source)
+        public static T LastOrDefault<T>([NotNull, Pure] this T[] source)
         {
-			source.IsNotNull("source");
+			source.IsNotNull(nameof(source));
 			int lengthOrCount = source.Length;
 			if (lengthOrCount == 0)
 			   return default(T);
@@ -159,10 +154,10 @@ namespace ZLinq
 
 		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure]
-        public static T LastOrDefault<T>([NotNull] this T[] source, [NotNull] Predicate<T> predicate)
+        public static T LastOrDefault<T>([NotNull, Pure] this T[] source, [NotNull, Pure] Predicate<T> predicate)
         {
-            source.IsNotNull("source");
-            predicate.IsNotNull("predicate");
+            source.IsNotNull(nameof(source));
+            predicate.IsNotNull(nameof(predicate));
             for (int i = source.Length - 1; i >= 0; i--)
             {
                 T obj = source[i];
@@ -176,9 +171,9 @@ namespace ZLinq
                    
 		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure]
-        public static T LastOrDefault<T>([NotNull] this List<T> source)
+        public static T LastOrDefault<T>([NotNull, Pure] this List<T> source)
         {
-			source.IsNotNull("source");
+			source.IsNotNull(nameof(source));
 			int lengthOrCount = source.Count;
 			if (lengthOrCount == 0)
 			   return default(T);
@@ -187,10 +182,10 @@ namespace ZLinq
 
 		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure]
-        public static T LastOrDefault<T>([NotNull] this List<T> source, [NotNull] Predicate<T> predicate)
+        public static T LastOrDefault<T>([NotNull, Pure] this List<T> source, [NotNull, Pure] Predicate<T> predicate)
         {
-            source.IsNotNull("source");
-            predicate.IsNotNull("predicate");
+            source.IsNotNull(nameof(source));
+            predicate.IsNotNull(nameof(predicate));
             for (int i = source.Count - 1; i >= 0; i--)
             {
                 T obj = source[i];
@@ -204,9 +199,9 @@ namespace ZLinq
                    
 		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure]
-        public static T LastOrDefault<T>([NotNull] this IList<T> source)
+        public static T LastOrDefault<T>([NotNull, Pure] this IList<T> source)
         {
-			source.IsNotNull("source");
+			source.IsNotNull(nameof(source));
 			int lengthOrCount = source.Count;
 			if (lengthOrCount == 0)
 			   return default(T);
@@ -215,10 +210,10 @@ namespace ZLinq
 
 		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure]
-        public static T LastOrDefault<T>([NotNull] this IList<T> source, [NotNull] Predicate<T> predicate)
+        public static T LastOrDefault<T>([NotNull, Pure] this IList<T> source, [NotNull, Pure] Predicate<T> predicate)
         {
-            source.IsNotNull("source");
-            predicate.IsNotNull("predicate");
+            source.IsNotNull(nameof(source));
+            predicate.IsNotNull(nameof(predicate));
             for (int i = source.Count - 1; i >= 0; i--)
             {
                 T obj = source[i];
@@ -231,19 +226,17 @@ namespace ZLinq
                 
 		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure]
-        public static T LastOrDefault<T>([NotNull] this ICollection<T> source)
+        public static T LastOrDefault<T>([NotNull, Pure] this ICollection<T> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             if (source.Count == 0)
 			   return default(T);
             return LastHasElements(source);
         }
-
 		
 		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
-		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
-        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T LastOrDefault<T>([NotNull] this ICollection<T> source, [NotNull] Predicate<T> predicate)
+        [Pure]
+        public static T LastOrDefault<T>([NotNull, Pure] this ICollection<T> source, [NotNull, Pure] Predicate<T> predicate)
         {
             var list = source as IList<T>;
             if (list != null)
