@@ -74,6 +74,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FlattenTest.tt</DependentUpon>
     </Compile>
+    <Compile Include="Core\Common\CastTest.cs" />
     <Compile Include="Core\Common\ShuffleTest.cs">
       <DependentUpon>ShuffleTest.tt</DependentUpon>
       <AutoGen>True</AutoGen>
