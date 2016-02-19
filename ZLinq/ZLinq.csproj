@@ -146,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class\IZOrderedEnumerable.cs" />
+    <Compile Include="Class\ListCaster.cs" />
     <Compile Include="Class\ZOrderedList.cs" />
     <Compile Include="Class\ZOrderedArray.cs" />
     <Compile Include="CommonInternal\Error.cs" />
@@ -153,6 +154,7 @@
     <Compile Include="Comparers\ZComparerNonGen.cs" />
     <Compile Include="Comparers\ZComparer.cs" />
     <Compile Include="Comparers\ZComparerVisitor.cs" />
+    <Compile Include="Core\Common\Cast.cs" />
     <Compile Include="Core\Common\Shuffle.cs">
       <DependentUpon>Shuffle.tt</DependentUpon>
       <AutoGen>True</AutoGen>
