@@ -77,6 +77,75 @@ namespace ZLinq.Test.Core.Fold
             Assert.AreEqual(ZEnumerable.LastOrDefault(dict, val => val.Key%3 == 0), Enumerable.LastOrDefault(dict, val => val.Key%3 == 0));
         }
 
+		[TestMethod]
+        public void Last<#= name #>InvalidInput()
+        {
+			<#= sourceType.To("int") #> x = null;
+			try
+			{
+				ZEnumerable.Last(x);
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+			}
+
+            var y = new int[0].To<#= name #>();
+			try
+			{
+				ZEnumerable.Last(y);
+				Assert.Fail();
+			}
+			catch (InvalidOperationException)
+			{
+			}
+
+			var z = Enumerable.Range(1, 1).Select(a => new Tuple<int, int>(a, a)).To<#= name #>();
+			try
+			{
+				ZEnumerable.Last(z, null);
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+			}
+
+			try
+			{
+				ZEnumerable.Last(z, _ => false);
+				Assert.Fail();
+			}
+			catch (InvalidOperationException)
+			{
+			}
+        }
+
+		
+		[TestMethod]
+        public void LastOrDefault<#= name #>InvalidInput()
+        {
+			<#= sourceType.To("int") #> x = null;
+			try
+			{
+				ZEnumerable.LastOrDefault(x);
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+			}
+
+			var z = Enumerable.Range(1, 1).Select(a => new Tuple<int, int>(a, a)).To<#= name #>();
+
+			try
+			{
+				ZEnumerable.LastOrDefault(z, null);
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+			}
+        }
+
         <# } #>    
 
 

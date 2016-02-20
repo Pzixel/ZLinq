@@ -68,13 +68,82 @@ namespace ZLinq.Test.Core.Fold
         {
             var x = Enumerable.Range(1, 1024).To<#= name #>();
             var y = Enumerable.Range(1, 1024).Select(a => new Tuple<int, int>(a,a)).To<#= name #>();
-            var z = new int[0].To<#= name #>();
+            var z = new Tuple<int, int>[0].To<#= name #>();
             var dict = new SortedDictionary<int, int>(x.ToDictionary(a => a, a => a));
 
             Assert.AreEqual(ZEnumerable.FirstOrDefault(x, val => val%3 == 0), Enumerable.FirstOrDefault(x, val => val%3 == 0));
             Assert.AreEqual(ZEnumerable.FirstOrDefault(y, val => val.Item1%3 == 0), Enumerable.FirstOrDefault(y, val => val.Item1%3 == 0));
-            Assert.AreEqual(ZEnumerable.FirstOrDefault(z, val => val%3 == 0), Enumerable.FirstOrDefault(z, val => val%3 == 0));
+            Assert.AreEqual(ZEnumerable.FirstOrDefault(z, val => val.Item1%3 == 0), Enumerable.FirstOrDefault(z, val => val.Item1%3 == 0));
             Assert.AreEqual(ZEnumerable.FirstOrDefault(dict, val => val.Key%3 == 0), Enumerable.FirstOrDefault(dict, val => val.Key%3 == 0));
+        }
+
+		[TestMethod]
+        public void First<#= name #>InvalidInput()
+        {
+			<#= sourceType.To("int") #> x = null;
+			try
+			{
+				ZEnumerable.First(x);
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+			}
+
+            var y = new int[0].To<#= name #>();
+			try
+			{
+				ZEnumerable.First(y);
+				Assert.Fail();
+			}
+			catch (InvalidOperationException)
+			{
+			}
+
+			var z = Enumerable.Range(1, 1).Select(a => new Tuple<int, int>(a, a)).To<#= name #>();
+			try
+			{
+				ZEnumerable.First(z, null);
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+			}
+
+			try
+			{
+				ZEnumerable.First(z, _ => false);
+				Assert.Fail();
+			}
+			catch (InvalidOperationException)
+			{
+			}
+        }
+
+		
+		[TestMethod]
+        public void FirstOrDefault<#= name #>InvalidInput()
+        {
+			<#= sourceType.To("int") #> x = null;
+			try
+			{
+				ZEnumerable.FirstOrDefault(x);
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+			}
+
+			var z = Enumerable.Range(1, 1).Select(a => new Tuple<int, int>(a, a)).To<#= name #>();
+
+			try
+			{
+				ZEnumerable.FirstOrDefault(z, null);
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+			}
         }
 
         <# } #>    

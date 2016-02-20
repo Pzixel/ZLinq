@@ -67,6 +67,75 @@ namespace ZLinq.Test.Core.Fold
             Assert.AreEqual(ZEnumerable.LastOrDefault(dict, val => val.Key%3 == 0), Enumerable.LastOrDefault(dict, val => val.Key%3 == 0));
         }
 
+		[TestMethod]
+        public void LastArrayInvalidInput()
+        {
+			int[] x = null;
+			try
+			{
+				ZEnumerable.Last(x);
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+			}
+
+            var y = new int[0].ToArray();
+			try
+			{
+				ZEnumerable.Last(y);
+				Assert.Fail();
+			}
+			catch (InvalidOperationException)
+			{
+			}
+
+			var z = Enumerable.Range(1, 1).Select(a => new Tuple<int, int>(a, a)).ToArray();
+			try
+			{
+				ZEnumerable.Last(z, null);
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+			}
+
+			try
+			{
+				ZEnumerable.Last(z, _ => false);
+				Assert.Fail();
+			}
+			catch (InvalidOperationException)
+			{
+			}
+        }
+
+		
+		[TestMethod]
+        public void LastOrDefaultArrayInvalidInput()
+        {
+			int[] x = null;
+			try
+			{
+				ZEnumerable.LastOrDefault(x);
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+			}
+
+			var z = Enumerable.Range(1, 1).Select(a => new Tuple<int, int>(a, a)).ToArray();
+
+			try
+			{
+				ZEnumerable.LastOrDefault(z, null);
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+			}
+        }
+
                 
         [TestMethod]
         public void LastList()
@@ -122,6 +191,75 @@ namespace ZLinq.Test.Core.Fold
             Assert.AreEqual(ZEnumerable.LastOrDefault(y, val => val.Item1%3 == 0), Enumerable.LastOrDefault(y, val => val.Item1%3 == 0));
             Assert.AreEqual(ZEnumerable.LastOrDefault(z, val => val%3 == 0), Enumerable.LastOrDefault(z, val => val%3 == 0));
             Assert.AreEqual(ZEnumerable.LastOrDefault(dict, val => val.Key%3 == 0), Enumerable.LastOrDefault(dict, val => val.Key%3 == 0));
+        }
+
+		[TestMethod]
+        public void LastListInvalidInput()
+        {
+			List<int> x = null;
+			try
+			{
+				ZEnumerable.Last(x);
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+			}
+
+            var y = new int[0].ToList();
+			try
+			{
+				ZEnumerable.Last(y);
+				Assert.Fail();
+			}
+			catch (InvalidOperationException)
+			{
+			}
+
+			var z = Enumerable.Range(1, 1).Select(a => new Tuple<int, int>(a, a)).ToList();
+			try
+			{
+				ZEnumerable.Last(z, null);
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+			}
+
+			try
+			{
+				ZEnumerable.Last(z, _ => false);
+				Assert.Fail();
+			}
+			catch (InvalidOperationException)
+			{
+			}
+        }
+
+		
+		[TestMethod]
+        public void LastOrDefaultListInvalidInput()
+        {
+			List<int> x = null;
+			try
+			{
+				ZEnumerable.LastOrDefault(x);
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+			}
+
+			var z = Enumerable.Range(1, 1).Select(a => new Tuple<int, int>(a, a)).ToList();
+
+			try
+			{
+				ZEnumerable.LastOrDefault(z, null);
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+			}
         }
 
                 
@@ -181,6 +319,75 @@ namespace ZLinq.Test.Core.Fold
             Assert.AreEqual(ZEnumerable.LastOrDefault(dict, val => val.Key%3 == 0), Enumerable.LastOrDefault(dict, val => val.Key%3 == 0));
         }
 
+		[TestMethod]
+        public void LastIListInvalidInput()
+        {
+			IList<int> x = null;
+			try
+			{
+				ZEnumerable.Last(x);
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+			}
+
+            var y = new int[0].ToIList();
+			try
+			{
+				ZEnumerable.Last(y);
+				Assert.Fail();
+			}
+			catch (InvalidOperationException)
+			{
+			}
+
+			var z = Enumerable.Range(1, 1).Select(a => new Tuple<int, int>(a, a)).ToIList();
+			try
+			{
+				ZEnumerable.Last(z, null);
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+			}
+
+			try
+			{
+				ZEnumerable.Last(z, _ => false);
+				Assert.Fail();
+			}
+			catch (InvalidOperationException)
+			{
+			}
+        }
+
+		
+		[TestMethod]
+        public void LastOrDefaultIListInvalidInput()
+        {
+			IList<int> x = null;
+			try
+			{
+				ZEnumerable.LastOrDefault(x);
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+			}
+
+			var z = Enumerable.Range(1, 1).Select(a => new Tuple<int, int>(a, a)).ToIList();
+
+			try
+			{
+				ZEnumerable.LastOrDefault(z, null);
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+			}
+        }
+
                 
         [TestMethod]
         public void LastICollection()
@@ -236,6 +443,75 @@ namespace ZLinq.Test.Core.Fold
             Assert.AreEqual(ZEnumerable.LastOrDefault(y, val => val.Item1%3 == 0), Enumerable.LastOrDefault(y, val => val.Item1%3 == 0));
             Assert.AreEqual(ZEnumerable.LastOrDefault(z, val => val%3 == 0), Enumerable.LastOrDefault(z, val => val%3 == 0));
             Assert.AreEqual(ZEnumerable.LastOrDefault(dict, val => val.Key%3 == 0), Enumerable.LastOrDefault(dict, val => val.Key%3 == 0));
+        }
+
+		[TestMethod]
+        public void LastICollectionInvalidInput()
+        {
+			ICollection<int> x = null;
+			try
+			{
+				ZEnumerable.Last(x);
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+			}
+
+            var y = new int[0].ToICollection();
+			try
+			{
+				ZEnumerable.Last(y);
+				Assert.Fail();
+			}
+			catch (InvalidOperationException)
+			{
+			}
+
+			var z = Enumerable.Range(1, 1).Select(a => new Tuple<int, int>(a, a)).ToICollection();
+			try
+			{
+				ZEnumerable.Last(z, null);
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+			}
+
+			try
+			{
+				ZEnumerable.Last(z, _ => false);
+				Assert.Fail();
+			}
+			catch (InvalidOperationException)
+			{
+			}
+        }
+
+		
+		[TestMethod]
+        public void LastOrDefaultICollectionInvalidInput()
+        {
+			ICollection<int> x = null;
+			try
+			{
+				ZEnumerable.LastOrDefault(x);
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+			}
+
+			var z = Enumerable.Range(1, 1).Select(a => new Tuple<int, int>(a, a)).ToICollection();
+
+			try
+			{
+				ZEnumerable.LastOrDefault(z, null);
+				Assert.Fail();
+			}
+			catch (ArgumentNullException)
+			{
+			}
         }
 
             

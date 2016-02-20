@@ -65,7 +65,7 @@ namespace ZLinq.Test.Core.Fold
         {
             var x = Enumerable.Range(1, 10).ToArray();
             var y = Enumerable.Range(1, 10).Select(a => new Tuple<int, int>(a,a)).ToArray();
-            var z = Enumerable.Range(1, 10).Select(a => new { A = a}).ToArray();
+            var z = Enumerable.Range(1, 10).Select(a => new { A = a}).ToArray();			
 
             try
             {
@@ -90,6 +90,17 @@ namespace ZLinq.Test.Core.Fold
             try
             {
                 var res = ZEnumerable.Single(z);
+                Assert.Fail();
+            }
+            catch (InvalidOperationException)
+            {
+
+            }
+			
+			var empty = x.Take(0).ToArray();
+			try
+            {
+                var res = ZEnumerable.Single(empty);
                 Assert.Fail();
             }
             catch (InvalidOperationException)
@@ -134,6 +145,17 @@ namespace ZLinq.Test.Core.Fold
             {
 
             }
+
+			var empty = x.Take(0).ToArray();
+			try
+            {
+                var res = ZEnumerable.Single(empty);
+                Assert.Fail();
+            }
+            catch (InvalidOperationException)
+            {
+
+            }
         }
 
         [TestMethod]
@@ -172,6 +194,17 @@ namespace ZLinq.Test.Core.Fold
             {
 
             }
+
+			var empty = x.Take(0).ToArray();
+			try
+            {
+                var res = ZEnumerable.Single(empty);
+                Assert.Fail();
+            }
+            catch (InvalidOperationException)
+            {
+
+            }
         }
 
         [TestMethod]
@@ -204,6 +237,17 @@ namespace ZLinq.Test.Core.Fold
             try
             {
                 var res = ZEnumerable.SingleOrDefault(z, val => val.A%3 == 0);
+                Assert.Fail();
+            }
+            catch (InvalidOperationException)
+            {
+
+            }
+
+			var empty = x.Take(0).ToArray();
+			try
+            {
+                var res = ZEnumerable.Single(empty);
                 Assert.Fail();
             }
             catch (InvalidOperationException)
@@ -271,7 +315,7 @@ namespace ZLinq.Test.Core.Fold
         {
             var x = Enumerable.Range(1, 10).ToList();
             var y = Enumerable.Range(1, 10).Select(a => new Tuple<int, int>(a,a)).ToList();
-            var z = Enumerable.Range(1, 10).Select(a => new { A = a}).ToList();
+            var z = Enumerable.Range(1, 10).Select(a => new { A = a}).ToList();			
 
             try
             {
@@ -296,6 +340,17 @@ namespace ZLinq.Test.Core.Fold
             try
             {
                 var res = ZEnumerable.Single(z);
+                Assert.Fail();
+            }
+            catch (InvalidOperationException)
+            {
+
+            }
+			
+			var empty = x.Take(0).ToList();
+			try
+            {
+                var res = ZEnumerable.Single(empty);
                 Assert.Fail();
             }
             catch (InvalidOperationException)
@@ -340,6 +395,17 @@ namespace ZLinq.Test.Core.Fold
             {
 
             }
+
+			var empty = x.Take(0).ToList();
+			try
+            {
+                var res = ZEnumerable.Single(empty);
+                Assert.Fail();
+            }
+            catch (InvalidOperationException)
+            {
+
+            }
         }
 
         [TestMethod]
@@ -378,6 +444,17 @@ namespace ZLinq.Test.Core.Fold
             {
 
             }
+
+			var empty = x.Take(0).ToList();
+			try
+            {
+                var res = ZEnumerable.Single(empty);
+                Assert.Fail();
+            }
+            catch (InvalidOperationException)
+            {
+
+            }
         }
 
         [TestMethod]
@@ -410,6 +487,17 @@ namespace ZLinq.Test.Core.Fold
             try
             {
                 var res = ZEnumerable.SingleOrDefault(z, val => val.A%3 == 0);
+                Assert.Fail();
+            }
+            catch (InvalidOperationException)
+            {
+
+            }
+
+			var empty = x.Take(0).ToList();
+			try
+            {
+                var res = ZEnumerable.Single(empty);
                 Assert.Fail();
             }
             catch (InvalidOperationException)
@@ -477,7 +565,7 @@ namespace ZLinq.Test.Core.Fold
         {
             var x = Enumerable.Range(1, 10).ToIList();
             var y = Enumerable.Range(1, 10).Select(a => new Tuple<int, int>(a,a)).ToIList();
-            var z = Enumerable.Range(1, 10).Select(a => new { A = a}).ToIList();
+            var z = Enumerable.Range(1, 10).Select(a => new { A = a}).ToIList();			
 
             try
             {
@@ -502,6 +590,17 @@ namespace ZLinq.Test.Core.Fold
             try
             {
                 var res = ZEnumerable.Single(z);
+                Assert.Fail();
+            }
+            catch (InvalidOperationException)
+            {
+
+            }
+			
+			var empty = x.Take(0).ToIList();
+			try
+            {
+                var res = ZEnumerable.Single(empty);
                 Assert.Fail();
             }
             catch (InvalidOperationException)
@@ -546,6 +645,17 @@ namespace ZLinq.Test.Core.Fold
             {
 
             }
+
+			var empty = x.Take(0).ToIList();
+			try
+            {
+                var res = ZEnumerable.Single(empty);
+                Assert.Fail();
+            }
+            catch (InvalidOperationException)
+            {
+
+            }
         }
 
         [TestMethod]
@@ -584,6 +694,17 @@ namespace ZLinq.Test.Core.Fold
             {
 
             }
+
+			var empty = x.Take(0).ToIList();
+			try
+            {
+                var res = ZEnumerable.Single(empty);
+                Assert.Fail();
+            }
+            catch (InvalidOperationException)
+            {
+
+            }
         }
 
         [TestMethod]
@@ -616,6 +737,17 @@ namespace ZLinq.Test.Core.Fold
             try
             {
                 var res = ZEnumerable.SingleOrDefault(z, val => val.A%3 == 0);
+                Assert.Fail();
+            }
+            catch (InvalidOperationException)
+            {
+
+            }
+
+			var empty = x.Take(0).ToIList();
+			try
+            {
+                var res = ZEnumerable.Single(empty);
                 Assert.Fail();
             }
             catch (InvalidOperationException)
@@ -683,7 +815,7 @@ namespace ZLinq.Test.Core.Fold
         {
             var x = Enumerable.Range(1, 10).ToICollection();
             var y = Enumerable.Range(1, 10).Select(a => new Tuple<int, int>(a,a)).ToICollection();
-            var z = Enumerable.Range(1, 10).Select(a => new { A = a}).ToICollection();
+            var z = Enumerable.Range(1, 10).Select(a => new { A = a}).ToICollection();			
 
             try
             {
@@ -708,6 +840,17 @@ namespace ZLinq.Test.Core.Fold
             try
             {
                 var res = ZEnumerable.Single(z);
+                Assert.Fail();
+            }
+            catch (InvalidOperationException)
+            {
+
+            }
+			
+			var empty = x.Take(0).ToICollection();
+			try
+            {
+                var res = ZEnumerable.Single(empty);
                 Assert.Fail();
             }
             catch (InvalidOperationException)
@@ -752,6 +895,17 @@ namespace ZLinq.Test.Core.Fold
             {
 
             }
+
+			var empty = x.Take(0).ToICollection();
+			try
+            {
+                var res = ZEnumerable.Single(empty);
+                Assert.Fail();
+            }
+            catch (InvalidOperationException)
+            {
+
+            }
         }
 
         [TestMethod]
@@ -790,6 +944,17 @@ namespace ZLinq.Test.Core.Fold
             {
 
             }
+
+			var empty = x.Take(0).ToICollection();
+			try
+            {
+                var res = ZEnumerable.Single(empty);
+                Assert.Fail();
+            }
+            catch (InvalidOperationException)
+            {
+
+            }
         }
 
         [TestMethod]
@@ -822,6 +987,17 @@ namespace ZLinq.Test.Core.Fold
             try
             {
                 var res = ZEnumerable.SingleOrDefault(z, val => val.A%3 == 0);
+                Assert.Fail();
+            }
+            catch (InvalidOperationException)
+            {
+
+            }
+
+			var empty = x.Take(0).ToICollection();
+			try
+            {
+                var res = ZEnumerable.Single(empty);
                 Assert.Fail();
             }
             catch (InvalidOperationException)
