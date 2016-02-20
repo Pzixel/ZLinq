@@ -6,12 +6,10 @@ namespace ZLinq.CommonInternal
 {
     internal static class Guard
     {
-        public static void IsNotNull<T>([Pure] this  T obj, string argName = null) where T : class
+        public static void IsNotNull<T>([Pure] this  T obj, string argName) where T : class
         {
             if (obj != null)
                 return;
-            if (argName == null)
-                throw new ArgumentNullException();
             throw new ArgumentNullException(argName);
         }
 
