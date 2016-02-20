@@ -1,204 +1,247 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
-using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using ZLinq.CommonInternal;
 
 // ReSharper disable CheckNamespace
 namespace ZLinq
 {
-    [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
     public static partial class ZEnumerable
-    {             
-                
+    {
+				
+						        
                    
-        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-           public static T First<T>([NotNull] this T[] source)
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="InvalidOperationException">Throws when collection has no elements</exception>
+        [Pure]
+        public static T First<T>([NotNull, Pure] this T[] source)
         {
+			source.IsNotNull(nameof(source));
+			int lengthOrCount = source.Length;
+			if (lengthOrCount == 0)
+			   throw Error.EmptyCollection;
             return source[0];
-        }         
-
-        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T FirstOrDefault<T>([NotNull] this T[] source)
-        {
-            return source.Length == 0 ? default(T) : source[0];
         }        
-                
-                   
-        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-           public static T First<T>([NotNull] this List<T> source)
-        {
-            return source[0];
-        }         
 
-        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T FirstOrDefault<T>([NotNull] this List<T> source)
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="InvalidOperationException">Throws when collection has no elements matching the predicate</exception>
+        [Pure]
+        public static T First<T>([NotNull, Pure] this T[] source, [NotNull, Pure] Predicate<T> predicate)
         {
-            return source.Count == 0 ? default(T) : source[0];
-        }        
-                
-                   
-        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-           public static T First<T>([NotNull] this IList<T> source)
-        {
-            return source[0];
-        }         
-
-        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T FirstOrDefault<T>([NotNull] this IList<T> source)
-        {
-            return source.Count == 0 ? default(T) : source[0];
-        }        
-                
-
-        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-           public static T First<T>([NotNull] this ICollection<T> source)
-        {
-            if (source == null)
-                throw new ArgumentNullException();
-            if (source.Count == 0)
-                throw new InvalidOperationException();
-            var list = source as IList<T>;
-            if (list != null)
+            source.IsNotNull(nameof(source));
+            predicate.IsNotNull(nameof(predicate));
+            foreach (T value in source)
             {
-                return list.First();
+                if (predicate(value))
+                    return value;
             }
+            throw Error.NoMatchingElement;
+        }
+
+                
+                   
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="InvalidOperationException">Throws when collection has no elements</exception>
+        [Pure]
+        public static T First<T>([NotNull, Pure] this List<T> source)
+        {
+			source.IsNotNull(nameof(source));
+			int lengthOrCount = source.Count;
+			if (lengthOrCount == 0)
+			   throw Error.EmptyCollection;
+            return source[0];
+        }        
+
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="InvalidOperationException">Throws when collection has no elements matching the predicate</exception>
+        [Pure]
+        public static T First<T>([NotNull, Pure] this List<T> source, [NotNull, Pure] Predicate<T> predicate)
+        {
+            source.IsNotNull(nameof(source));
+            predicate.IsNotNull(nameof(predicate));
+            foreach (T value in source)
+            {
+                if (predicate(value))
+                    return value;
+            }
+            throw Error.NoMatchingElement;
+        }
+
+                
+                   
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="InvalidOperationException">Throws when collection has no elements</exception>
+        [Pure]
+        public static T First<T>([NotNull, Pure] this IList<T> source)
+        {
+			source.IsNotNull(nameof(source));
+			int lengthOrCount = source.Count;
+			if (lengthOrCount == 0)
+			   throw Error.EmptyCollection;
+            return source[0];
+        }        
+
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="InvalidOperationException">Throws when collection has no elements matching the predicate</exception>
+        [Pure]
+        public static T First<T>([NotNull, Pure] this IList<T> source, [NotNull, Pure] Predicate<T> predicate)
+        {
+            source.IsNotNull(nameof(source));
+            predicate.IsNotNull(nameof(predicate));
+            foreach (T value in source)
+            {
+                if (predicate(value))
+                    return value;
+            }
+            throw Error.NoMatchingElement;
+        }
+
+                
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="InvalidOperationException">Throws when collection has no elements</exception>
+        [Pure]
+        public static T First<T>([NotNull, Pure] this ICollection<T> source)
+        {
+            source.IsNotNull(nameof(source));
+            if (source.Count == 0)
+			   throw Error.EmptyCollection;
             using (var enumerator = source.GetEnumerator())
             {
                 enumerator.MoveNext();
                 return enumerator.Current;
             }
         }
-
-        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T FirstOrDefault<T>([NotNull] this ICollection<T> source)
+		
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="InvalidOperationException">Throws when collection has no elements matching the predicate</exception>
+        [Pure]
+        public static T First<T>([NotNull, Pure] this ICollection<T> source, [NotNull, Pure] Predicate<T> predicate)
         {
-            if (source == null)
-                throw new ArgumentNullException();
-            if (source.Count == 0)
-                return default(T);
-            var list = source as IList<T>;
-            if (list != null)
+            source.IsNotNull("source");
+            predicate.IsNotNull("predicate");
+            foreach (var value in source)
             {
-                return list.First();
+                if (predicate(value))
+                {
+                    return value;
+                }
             }
+            throw Error.NoMatchingElement;
+        }
+
+					        
+                   
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+        [Pure]
+        public static T FirstOrDefault<T>([NotNull, Pure] this T[] source)
+        {
+			source.IsNotNull(nameof(source));
+			int lengthOrCount = source.Length;
+			if (lengthOrCount == 0)
+			   return default(T);
+            return source[0];
+        }        
+
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+        [Pure]
+        public static T FirstOrDefault<T>([NotNull, Pure] this T[] source, [NotNull, Pure] Predicate<T> predicate)
+        {
+            source.IsNotNull(nameof(source));
+            predicate.IsNotNull(nameof(predicate));
+            foreach (T value in source)
+            {
+                if (predicate(value))
+                    return value;
+            }
+            return default(T);
+        }
+
+                
+                   
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+        [Pure]
+        public static T FirstOrDefault<T>([NotNull, Pure] this List<T> source)
+        {
+			source.IsNotNull(nameof(source));
+			int lengthOrCount = source.Count;
+			if (lengthOrCount == 0)
+			   return default(T);
+            return source[0];
+        }        
+
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+        [Pure]
+        public static T FirstOrDefault<T>([NotNull, Pure] this List<T> source, [NotNull, Pure] Predicate<T> predicate)
+        {
+            source.IsNotNull(nameof(source));
+            predicate.IsNotNull(nameof(predicate));
+            foreach (T value in source)
+            {
+                if (predicate(value))
+                    return value;
+            }
+            return default(T);
+        }
+
+                
+                   
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+        [Pure]
+        public static T FirstOrDefault<T>([NotNull, Pure] this IList<T> source)
+        {
+			source.IsNotNull(nameof(source));
+			int lengthOrCount = source.Count;
+			if (lengthOrCount == 0)
+			   return default(T);
+            return source[0];
+        }        
+
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+        [Pure]
+        public static T FirstOrDefault<T>([NotNull, Pure] this IList<T> source, [NotNull, Pure] Predicate<T> predicate)
+        {
+            source.IsNotNull(nameof(source));
+            predicate.IsNotNull(nameof(predicate));
+            foreach (T value in source)
+            {
+                if (predicate(value))
+                    return value;
+            }
+            return default(T);
+        }
+
+                
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+        [Pure]
+        public static T FirstOrDefault<T>([NotNull, Pure] this ICollection<T> source)
+        {
+            source.IsNotNull(nameof(source));
+            if (source.Count == 0)
+			   return default(T);
             using (var enumerator = source.GetEnumerator())
             {
                 enumerator.MoveNext();
                 return enumerator.Current;
             }
         }
-
-                
-
+		
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure]
-        public static T First<T>([NotNull] this T[] source, [NotNull] Predicate<T> predicate)
+        public static T FirstOrDefault<T>([NotNull, Pure] this ICollection<T> source, [NotNull, Pure] Predicate<T> predicate)
         {
             source.IsNotNull("source");
             predicate.IsNotNull("predicate");
-            foreach (T value in source)
+            foreach (var value in source)
             {
                 if (predicate(value))
+                {
                     return value;
-            }
-            throw new InvalidOperationException();
-        }
-                   
-        [Pure]
-        public static T FirstOrDefault<T>([NotNull] this T[] source, [NotNull] Predicate<T> predicate)
-        {
-            source.IsNotNull("source");
-            predicate.IsNotNull("predicate");
-            foreach (T value in source)
-            {
-                if (predicate(value))
-                    return value;
+                }
             }
             return default(T);
         }
-                
 
-        [Pure]
-        public static T First<T>([NotNull] this List<T> source, [NotNull] Predicate<T> predicate)
-        {
-            source.IsNotNull("source");
-            predicate.IsNotNull("predicate");
-            foreach (T value in source)
-            {
-                if (predicate(value))
-                    return value;
-            }
-            throw new InvalidOperationException();
-        }
-                   
-        [Pure]
-        public static T FirstOrDefault<T>([NotNull] this List<T> source, [NotNull] Predicate<T> predicate)
-        {
-            source.IsNotNull("source");
-            predicate.IsNotNull("predicate");
-            foreach (T value in source)
-            {
-                if (predicate(value))
-                    return value;
-            }
-            return default(T);
-        }
-                
-
-        [Pure]
-        public static T First<T>([NotNull] this IList<T> source, [NotNull] Predicate<T> predicate)
-        {
-            source.IsNotNull("source");
-            predicate.IsNotNull("predicate");
-            foreach (T value in source)
-            {
-                if (predicate(value))
-                    return value;
-            }
-            throw new InvalidOperationException();
-        }
-                   
-        [Pure]
-        public static T FirstOrDefault<T>([NotNull] this IList<T> source, [NotNull] Predicate<T> predicate)
-        {
-            source.IsNotNull("source");
-            predicate.IsNotNull("predicate");
-            foreach (T value in source)
-            {
-                if (predicate(value))
-                    return value;
-            }
-            return default(T);
-        }
-                
-
-        [Pure]
-        public static T First<T>([NotNull] this ICollection<T> source, [NotNull] Predicate<T> predicate)
-        {
-            source.IsNotNull("source");
-            predicate.IsNotNull("predicate");
-            foreach (T value in source)
-            {
-                if (predicate(value))
-                    return value;
-            }
-            throw new InvalidOperationException();
-        }
-                   
-        [Pure]
-        public static T FirstOrDefault<T>([NotNull] this ICollection<T> source, [NotNull] Predicate<T> predicate)
-        {
-            source.IsNotNull("source");
-            predicate.IsNotNull("predicate");
-            foreach (T value in source)
-            {
-                if (predicate(value))
-                    return value;
-            }
-            return default(T);
-        }
-                
+				
     }
 }

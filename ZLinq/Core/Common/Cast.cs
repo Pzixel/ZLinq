@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using ZLinq.Class;
@@ -7,6 +8,8 @@ using ZLinq.CommonInternal;
 // ReSharper disable once CheckNamespace
 namespace ZLinq
 {
+    [SuppressMessage("ReSharper", "LoopCanBeConvertedToQuery")]
+    [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
     public static partial class ZEnumerable
     {
         public static IList<T> Cast<T>(this IList source)
@@ -22,10 +25,16 @@ namespace ZLinq
                 return ilist;
             if (source.Count == 0)
                 return new List<T>(0);
-            return new ListCaster<T>(source);
+            if (!(source is Array))
+                return new ListCaster<T>(source);
+            var list = new List<T>(source.Count);
+            foreach (T obj in source)
+            {
+                list.Add(obj);
+            }
+            return list;
         }
 
-        [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
         public static IEnumerable<T> CastSeq<T>(this IEnumerable source)
         {
             source.IsNotNull(nameof(source));
@@ -37,8 +46,7 @@ namespace ZLinq
             return CastSeqInternal<T>(source);
         }
 
-        [SuppressMessage("ReSharper", "LoopCanBeConvertedToQuery")]
-        private static IEnumerable<T> CastSeqInternal<T>(IEnumerable source)
+        private static IEnumerable<T> CastSeqInternal<T>(IEnumerable source) // do not check inpus like Enumerable.Cast<T> due to performance reasons
         {
             foreach (T value in source)
             {

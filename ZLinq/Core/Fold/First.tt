@@ -9,77 +9,51 @@
 <#@ output extension=".cs" #>
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
-using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using ZLinq.CommonInternal;
 
 // ReSharper disable CheckNamespace
 namespace ZLinq
 {
-    [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
     public static partial class ZEnumerable
-    {             
-        <# foreach (var sourceType in TT.StandardLists) 
-        { #>        
+    {
+		<#  var templates = new[]
+			{
+				new 
+				{
+					Suffix = "",
+					NoMatch = "throw Error.EmptyCollection",
+					NoMatchMap = "throw Error.NoMatchingElement",
+					Comment = Environment.NewLine + "		/// <exception cref=\"InvalidOperationException\">Throws when collection has no elements</exception>",
+					CommentMap = Environment.NewLine + "		/// <exception cref=\"InvalidOperationException\">Throws when collection has no elements matching the predicate</exception>" 
+				},
+				new 
+				{
+					Suffix = "OrDefault",
+					NoMatch = "return default(T)",
+					NoMatchMap = "return default(T)",
+					Comment = "",
+					CommentMap = ""
+				}
+			};#>		
+			<# foreach (var template in templates) { #>
+			<# foreach (var sourceType in TT.StandardLists) {#>        
                    
-        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-           public static T First<T>([NotNull] this <#= sourceType #> source)
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception><#= template.Comment #>
+        [Pure]
+        public static T First<#= template.Suffix #><T>([NotNull, Pure] this <#= sourceType #> source)
         {
-            return <#= TT.Cast(sourceType) #>source[0];
-        }         
-
-        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T FirstOrDefault<T>([NotNull] this <#= sourceType #> source)
-        {
-            return source.<#= TT.LengthOrCount(sourceType) #> == 0 ? default(T) : <#= TT.Cast(sourceType) #>source[0];
+			<#= "source".IsNotNull() #>
+			int lengthOrCount = source.<#= TT.LengthOrCount(sourceType) #>;
+			if (lengthOrCount == 0)
+			   <#= template.NoMatch #>;
+            return source[0];
         }        
-        <# } #>        
 
-        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-           public static T First<T>([NotNull] this ICollection<T> source)
-        {
-            if (source == null)
-                throw new ArgumentNullException();
-            if (source.Count == 0)
-                throw new InvalidOperationException();
-            var list = source as IList<T>;
-            if (list != null)
-            {
-                return list.First();
-            }
-            using (var enumerator = source.GetEnumerator())
-            {
-                enumerator.MoveNext();
-                return enumerator.Current;
-            }
-        }
-
-        [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T FirstOrDefault<T>([NotNull] this ICollection<T> source)
-        {
-            if (source == null)
-                throw new ArgumentNullException();
-            if (source.Count == 0)
-                return default(T);
-            var list = source as IList<T>;
-            if (list != null)
-            {
-                return list.First();
-            }
-            using (var enumerator = source.GetEnumerator())
-            {
-                enumerator.MoveNext();
-                return enumerator.Current;
-            }
-        }
-
-        <# foreach (var sourceType in TT.StandardCollections) 
-        { #>        
-
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception><#= template.CommentMap #>
         [Pure]
-        public static T First<T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
+        public static T First<#= template.Suffix #><T>([NotNull, Pure] this <#= sourceType #> source, [NotNull, Pure] Predicate<T> predicate)
         {
             <#= TT.IsNotNull("source") #>
             <#= TT.IsNotNull("predicate") #>
@@ -88,21 +62,40 @@ namespace ZLinq
                 if (predicate(value))
                     return value;
             }
-            throw new InvalidOperationException();
+            <#= template.NoMatchMap #>;
         }
-                   
+
+        <# } #>        
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception><#= template.Comment #>
         [Pure]
-        public static T FirstOrDefault<T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
+        public static T First<#= template.Suffix #><T>([NotNull, Pure] this ICollection<T> source)
         {
             <#= TT.IsNotNull("source") #>
-            <#= TT.IsNotNull("predicate") #>
-            foreach (T value in source)
+            if (source.Count == 0)
+			   <#= template.NoMatch #>;
+            using (var enumerator = source.GetEnumerator())
+            {
+                enumerator.MoveNext();
+                return enumerator.Current;
+            }
+        }
+		
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception><#= template.CommentMap #>
+        [Pure]
+        public static T First<#= template.Suffix #><T>([NotNull, Pure] this ICollection<T> source, [NotNull, Pure] Predicate<T> predicate)
+        {
+            source.IsNotNull("source");
+            predicate.IsNotNull("predicate");
+            foreach (var value in source)
             {
                 if (predicate(value))
+                {
                     return value;
+                }
             }
-            return default(T);
+            <#= template.NoMatchMap #>;
         }
-        <# } #>        
+
+		<# } #>		
     }
 }

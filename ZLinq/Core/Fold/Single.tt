@@ -18,35 +18,56 @@ namespace ZLinq
 {
     public static partial class ZEnumerable
     {
-		<# foreach (var reaction in new Dictionary<string, string> { {"", "throw Error.EmptyCollection"}, {"OrDefault", "return default(T)"} }) {#>
+		<#  var templates = new[]
+			{
+				new 
+				{
+					Suffix = "",
+					NoMatch = "throw Error.EmptyCollection",
+					NoMatchMap = "throw Error.NoMatchingElement",
+					Comment = Environment.NewLine + "		/// <exception cref=\"InvalidOperationException\">Throws when collection has no elements</exception>",
+					CommentMap = Environment.NewLine + "		/// <exception cref=\"InvalidOperationException\">Throws when collection has no elements matching the predicate</exception>" 
+				},
+				new 
+				{
+					Suffix = "OrDefault",
+					NoMatch = "return default(T)",
+					NoMatchMap = "return default(T)",
+					Comment = "",
+					CommentMap = ""
+				}
+			};#>	
+		<# foreach (var template in templates) {#>
         <# foreach (var sourceType in TT.StandardLists) 
         { #>        
-                   
+        
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>           
         [Pure]
-        public static T Single<#= reaction.Key #><T>([NotNull] this <#= sourceType #> source)
+        public static T Single<#= template.Suffix #><T>([NotNull] this <#= sourceType #> source)
         {
 			<#= "source".IsNotNull() #>            
             source.HasSingleElement();
 			if (source.<#= TT.LengthOrCount(sourceType) #> == 0)
-			   <#= reaction.Value #>;
+			   <#= template.NoMatch #>;
             return <#= TT.Cast(sourceType) #>source[0];
         }       
     
         <# } #>    
 		
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure]
-        public static T Single<#= reaction.Key #><T>([NotNull] this ICollection<T> source)
+        public static T Single<#= template.Suffix #><T>([NotNull] this ICollection<T> source)
         {
 			<#= "source".IsNotNull() #>
             var list = source as IList<T>;
             if (list != null)
             {
-                return list.Single<#= reaction.Key #>();
+                return list.Single<#= template.Suffix #>();
             }
 
             source.HasSingleElement();
 			if (source.Count == 0)
-			   <#= reaction.Value #>;
+			   <#= template.NoMatch #>;
             using (var enumerator = source.GetEnumerator())
             {
                 enumerator.MoveNext();
@@ -57,8 +78,9 @@ namespace ZLinq
         <# foreach (var sourceType in TT.Foreachable) 
         { #>        
 
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception><#= template.CommentMap #>
         [Pure]
-        public static T Single<#= reaction.Key #><T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
+        public static T Single<#= template.Suffix #><#= sourceType.UnLinq() #><T>([NotNull] this <#= sourceType #> source, [NotNull] Predicate<T> predicate)
         {
             <#= TT.IsNotNull("source") #>
             <#= TT.IsNotNull("predicate") #>
@@ -75,10 +97,17 @@ namespace ZLinq
                 }
             }
             if (!found)
-                <#= reaction.Value #>;
+                <#= template.NoMatchMap #>;
             return result;
         }		
 		<# } #>
+
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception><#= template.CommentMap #>
+        [Pure]
+		public static T Single<#= template.Suffix #><T>([NotNull] this ICollection<T> source, [NotNull] Predicate<T> predicate)
+		{
+		   return source.Single<#= template.Suffix #>Seq(predicate);
+		}
         <# } #>        
 
     }

@@ -9,12 +9,14 @@ namespace ZLinq
 {
     public static partial class ZEnumerable
     {
+			
 		                
-                   
+        
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>           
         [Pure]
         public static T Single<T>([NotNull] this T[] source)
         {
-			source.IsNotNull("source");            
+			source.IsNotNull(nameof(source));            
             source.HasSingleElement();
 			if (source.Length == 0)
 			   throw Error.EmptyCollection;
@@ -22,11 +24,12 @@ namespace ZLinq
         }       
     
                 
-                   
+        
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>           
         [Pure]
         public static T Single<T>([NotNull] this List<T> source)
         {
-			source.IsNotNull("source");            
+			source.IsNotNull(nameof(source));            
             source.HasSingleElement();
 			if (source.Count == 0)
 			   throw Error.EmptyCollection;
@@ -34,11 +37,12 @@ namespace ZLinq
         }       
     
                 
-                   
+        
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>           
         [Pure]
         public static T Single<T>([NotNull] this IList<T> source)
         {
-			source.IsNotNull("source");            
+			source.IsNotNull(nameof(source));            
             source.HasSingleElement();
 			if (source.Count == 0)
 			   throw Error.EmptyCollection;
@@ -47,10 +51,11 @@ namespace ZLinq
     
             
 		
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure]
         public static T Single<T>([NotNull] this ICollection<T> source)
         {
-			source.IsNotNull("source");
+			source.IsNotNull(nameof(source));
             var list = source as IList<T>;
             if (list != null)
             {
@@ -69,11 +74,13 @@ namespace ZLinq
 
                 
 
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="InvalidOperationException">Throws when collection has no elements matching the predicate</exception>
         [Pure]
         public static T Single<T>([NotNull] this T[] source, [NotNull] Predicate<T> predicate)
         {
-            source.IsNotNull("source");
-            predicate.IsNotNull("predicate");
+            source.IsNotNull(nameof(source));
+            predicate.IsNotNull(nameof(predicate));
             T result = default(T);
             bool found = false;
             foreach (T value in source)
@@ -87,16 +94,18 @@ namespace ZLinq
                 }
             }
             if (!found)
-                throw Error.EmptyCollection;
+                throw Error.NoMatchingElement;
             return result;
         }		
 		        
 
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="InvalidOperationException">Throws when collection has no elements matching the predicate</exception>
         [Pure]
         public static T Single<T>([NotNull] this List<T> source, [NotNull] Predicate<T> predicate)
         {
-            source.IsNotNull("source");
-            predicate.IsNotNull("predicate");
+            source.IsNotNull(nameof(source));
+            predicate.IsNotNull(nameof(predicate));
             T result = default(T);
             bool found = false;
             foreach (T value in source)
@@ -110,16 +119,18 @@ namespace ZLinq
                 }
             }
             if (!found)
-                throw Error.EmptyCollection;
+                throw Error.NoMatchingElement;
             return result;
         }		
 		        
 
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="InvalidOperationException">Throws when collection has no elements matching the predicate</exception>
         [Pure]
-        public static T Single<T>([NotNull] this IEnumerable<T> source, [NotNull] Predicate<T> predicate)
+        public static T SingleSeq<T>([NotNull] this IEnumerable<T> source, [NotNull] Predicate<T> predicate)
         {
-            source.IsNotNull("source");
-            predicate.IsNotNull("predicate");
+            source.IsNotNull(nameof(source));
+            predicate.IsNotNull(nameof(predicate));
             T result = default(T);
             bool found = false;
             foreach (T value in source)
@@ -133,15 +144,24 @@ namespace ZLinq
                 }
             }
             if (!found)
-                throw Error.EmptyCollection;
+                throw Error.NoMatchingElement;
             return result;
         }		
-		                        
-                   
+		
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+		/// <exception cref="InvalidOperationException">Throws when collection has no elements matching the predicate</exception>
+        [Pure]
+		public static T Single<T>([NotNull] this ICollection<T> source, [NotNull] Predicate<T> predicate)
+		{
+		   return source.SingleSeq(predicate);
+		}
+                        
+        
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>           
         [Pure]
         public static T SingleOrDefault<T>([NotNull] this T[] source)
         {
-			source.IsNotNull("source");            
+			source.IsNotNull(nameof(source));            
             source.HasSingleElement();
 			if (source.Length == 0)
 			   return default(T);
@@ -149,11 +169,12 @@ namespace ZLinq
         }       
     
                 
-                   
+        
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>           
         [Pure]
         public static T SingleOrDefault<T>([NotNull] this List<T> source)
         {
-			source.IsNotNull("source");            
+			source.IsNotNull(nameof(source));            
             source.HasSingleElement();
 			if (source.Count == 0)
 			   return default(T);
@@ -161,11 +182,12 @@ namespace ZLinq
         }       
     
                 
-                   
+        
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>           
         [Pure]
         public static T SingleOrDefault<T>([NotNull] this IList<T> source)
         {
-			source.IsNotNull("source");            
+			source.IsNotNull(nameof(source));            
             source.HasSingleElement();
 			if (source.Count == 0)
 			   return default(T);
@@ -174,10 +196,11 @@ namespace ZLinq
     
             
 		
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure]
         public static T SingleOrDefault<T>([NotNull] this ICollection<T> source)
         {
-			source.IsNotNull("source");
+			source.IsNotNull(nameof(source));
             var list = source as IList<T>;
             if (list != null)
             {
@@ -196,11 +219,12 @@ namespace ZLinq
 
                 
 
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure]
         public static T SingleOrDefault<T>([NotNull] this T[] source, [NotNull] Predicate<T> predicate)
         {
-            source.IsNotNull("source");
-            predicate.IsNotNull("predicate");
+            source.IsNotNull(nameof(source));
+            predicate.IsNotNull(nameof(predicate));
             T result = default(T);
             bool found = false;
             foreach (T value in source)
@@ -219,11 +243,12 @@ namespace ZLinq
         }		
 		        
 
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure]
         public static T SingleOrDefault<T>([NotNull] this List<T> source, [NotNull] Predicate<T> predicate)
         {
-            source.IsNotNull("source");
-            predicate.IsNotNull("predicate");
+            source.IsNotNull(nameof(source));
+            predicate.IsNotNull(nameof(predicate));
             T result = default(T);
             bool found = false;
             foreach (T value in source)
@@ -242,11 +267,12 @@ namespace ZLinq
         }		
 		        
 
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure]
-        public static T SingleOrDefault<T>([NotNull] this IEnumerable<T> source, [NotNull] Predicate<T> predicate)
+        public static T SingleOrDefaultSeq<T>([NotNull] this IEnumerable<T> source, [NotNull] Predicate<T> predicate)
         {
-            source.IsNotNull("source");
-            predicate.IsNotNull("predicate");
+            source.IsNotNull(nameof(source));
+            predicate.IsNotNull(nameof(predicate));
             T result = default(T);
             bool found = false;
             foreach (T value in source)
@@ -263,7 +289,14 @@ namespace ZLinq
                 return default(T);
             return result;
         }		
-		                
+		
+		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
+        [Pure]
+		public static T SingleOrDefault<T>([NotNull] this ICollection<T> source, [NotNull] Predicate<T> predicate)
+		{
+		   return source.SingleOrDefaultSeq(predicate);
+		}
+                
 
     }
 }

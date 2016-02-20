@@ -278,5 +278,7 @@ namespace ZLinq.TTHelp
                 return true;
             return type.StartsWith("List<") || type.StartsWith("IList<");
         }
+
+        public static string UnLinq(this string type) => type.StartsWith("IEnumerable<") ? "Seq" : string.Empty;
     }
 }
