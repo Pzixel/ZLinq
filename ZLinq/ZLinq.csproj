@@ -146,7 +146,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class\IZOrderedEnumerable.cs" />
-    <Compile Include="Class\ListCaster.cs" />
     <Compile Include="Class\ZOrderedList.cs" />
     <Compile Include="Class\ZOrderedArray.cs" />
     <Compile Include="CommonInternal\Error.cs" />

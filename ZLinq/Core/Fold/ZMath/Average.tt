@@ -24,70 +24,48 @@ namespace ZLinq
     <#foreach (var type in TT.WithNullables(TT.OverflowableTypes)) { #>
 
         #region <#= type #>             
-        <# foreach (string sourceType in TT.StandardLists) 
-        { 
-            string collectionType = sourceType.To(type); #>    
-        /// <summary>
+        <# foreach (string sourceType in TT.StandardLists) {
+              foreach(string mapFunc in TT.MapFuncs) {
+                  bool isNotMap = mapFunc == string.Empty;
+                  string collectionType = isNotMap ? sourceType.To(type) : sourceType; 
+                  string secondParam = isNotMap ? "" : string.Format(", [NotNull] Func<T, {0}> {1}", type, mapFunc);
+                  string secondParamCall = isNotMap ? "" : string.Format(mapFunc);
+                  string comment = isNotMap? "" : Environment.NewLine + "		/// <param name=\"mapFunc\">Function that maps each element of source to perform search</param>";				  
+                  string checkMap = isNotMap ? "" : TT.IsNotNull(mapFunc);
+                  string generic = isNotMap ? "" : "<T>"; #>    
+                
+		/// <summary>
         /// Calculates average of collection <#= !type.EndsWith("?") ? "" : ". Nulls are treated as 0"#>
         /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average([NotNull] this <#= sourceType.Replace("T", type) #> source)
-        {   
-            <#= TT.IsNotNull("source") #>
-            source.IsNotEmpty();
-            try
-            {
-                double sum = (double) source.Sum();
-                return sum/source.<#= TT.LengthOrCount(sourceType) #>;
-            }
-            catch (OverflowException)
-            {
-                double mult = 1.0/source.<#= TT.LengthOrCount(sourceType) #>;
-                return source.Sum(x => (double) <#= TT.UnwrapNullable(type, "x") #>*mult);
-            }
-            catch (AggregateException ex)
-            {                
-                if (!(ex.InnerException is OverflowException))
-                    throw;                
-                double mult = 1.0/source.<#= TT.LengthOrCount(sourceType) #>;
-                return source.Sum(x => (double) <#= TT.UnwrapNullable(type, "x") #>*mult);
-            }
-        }
-
-        /// <summary>
-        /// Calculates average of collection mapping <#= !type.EndsWith("?") ? "" : ". Nulls are treated as 0"#>
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average<T>([NotNull] this <#= sourceType #> source, [NotNull] Func<T, <#= type #>> mapFunc)
+        /// <param name="source">Source collection</param><#= comment #>		
+		/// <exception cref="InvalidOperationException">Throws when collection is empty</exception>
+		[Pure]
+        public static double Average<#= generic #>([NotNull] this <#= collectionType #> source<#= secondParam #>)
         {
             <#= TT.IsNotNull("source") #>
-            <#= TT.IsNotNull("mapFunc") #>
+            <#= checkMap #>
             source.IsNotEmpty();
             try
             {
-                double sum = (double) source.Sum(mapFunc);
+                double sum = (double) source.Sum(<#= secondParamCall #>);
                 return sum/source.<#= TT.LengthOrCount(sourceType) #>;
             }
             catch (OverflowException)
             {
                 double mult = 1.0/source.<#= TT.LengthOrCount(sourceType) #>;
-                return source.Sum(arg => (double) <#= TT.UnwrapNullable(type, "mapFunc(arg)") #>*mult);
+                return source.Sum(arg => (double) <#= TT.UnwrapNullable(type, secondParamCall + "(arg)") #>*mult);
             }
             catch (AggregateException ex)
             {
                 if (!(ex.InnerException is OverflowException))
                     throw;
                 double mult = 1.0/source.<#= TT.LengthOrCount(sourceType) #>;
-                return source.Sum(arg => (double) <#= TT.UnwrapNullable(type, "mapFunc(arg)") #>*mult);
+                return source.Sum(arg => (double) <#= TT.UnwrapNullable(type, secondParamCall + "(arg)") #>*mult);
             }
         }
 
         <# } #>
+		<# } #>
 
         #endregion
     <# } #>    
@@ -96,48 +74,34 @@ namespace ZLinq
 
         #region <#= type #>             
         <# foreach (string sourceType in TT.StandardLists) 
-        { 
-            string collectionType = sourceType.To(type); #>  
-        /// <summary>
+        {               
+			foreach(string mapFunc in TT.MapFuncs) {
+                  bool isNotMap = mapFunc == string.Empty;
+                  string collectionType = isNotMap ? sourceType.To(type) : sourceType; 
+                  string secondParam = isNotMap ? "" : string.Format(", [NotNull] Func<T, {0}> {1}", type, mapFunc);
+                  string secondParamCall = isNotMap ? "" : string.Format(mapFunc);
+                  string comment = isNotMap? "" : Environment.NewLine + "		/// <param name=\"mapFunc\">Function that maps each element of source to perform search</param>";				  
+                  string checkMap = isNotMap ? "" : TT.IsNotNull(mapFunc);
+                  string generic = isNotMap ? "" : "<T>"; #>           /// <summary>
         /// Calculates average of collection <#= !type.EndsWith("?") ? "" : ". Nulls are treated as 0"#>
         /// </summary>
         /// <param name="source">Source collection</param>
         /// <returns>Average of all elements</returns>
         [Pure]
-        public static double Average([NotNull] this <#= sourceType.Replace("T", type) #> source)
+        public static double Average<#= generic #>([NotNull] this <#= collectionType #> source<#= secondParam #>)        
         {
             <#= TT.IsNotNull("source") #>
+            <#= checkMap #>
             source.IsNotEmpty();
-            double sum = source.Sum();
+            double sum = source.Sum(<#= secondParamCall #>);
             if (!double.IsInfinity(sum))
             {
                return sum/source.<#= TT.LengthOrCount(sourceType) #>;
             }
             double mult = 1.0/source.<#= TT.LengthOrCount(sourceType) #>;
-            return source.Sum(x => <#= TT.UnwrapNullable(type, "x") #>*mult);
+            return source.Sum(arg => <#= TT.UnwrapNullable(type, secondParamCall + "(arg)") #>*mult);
         }
-
-        /// <summary>
-        /// Calculates average of collection mapping <#= !type.EndsWith("?") ? "" : ". Nulls are treated as 0"#>
-        /// </summary>
-        /// <param name="source">Source collection</param>
-        /// <param name="mapFunc">Function that maps each element of source to perform summing</param>
-        /// <returns>Average of all elements</returns>
-        [Pure]
-        public static double Average<T>([NotNull] this <#= sourceType #> source, [NotNull] Func<T, <#= type #>> mapFunc)
-        {
-            <#= TT.IsNotNull("source") #>
-            <#= TT.IsNotNull("mapFunc") #>
-            source.IsNotEmpty();
-            double sum = source.Sum(mapFunc);
-            if (!double.IsInfinity(sum))
-            {
-               return sum/source.<#= TT.LengthOrCount(sourceType) #>;
-            }
-            double mult = 1.0/source.<#= TT.LengthOrCount(sourceType) #>;
-            return source.Sum(arg => <#= TT.UnwrapNullable(type, "mapFunc(arg)") #>*mult);
-        }
-
+		<# } #>
         <# } #>
 
         #endregion
