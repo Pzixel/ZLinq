@@ -36,7 +36,7 @@ namespace ZLinq
             return true;
         }
 
-                    
+                
         
         /// <summary>
         ///    Check if collections are equal 
@@ -64,7 +64,7 @@ namespace ZLinq
             return true;
         }
 
-                    
+                
         
         /// <summary>
         ///    Check if collections are equal 
@@ -92,7 +92,7 @@ namespace ZLinq
             return true;
         }
 
-                    
+                
 
         /// <summary>
         ///    Check if collections are equal 
@@ -152,7 +152,7 @@ namespace ZLinq
             return true;
         }
 
-                    
+                
         
         /// <summary>
         ///    Check if collections are equal. Use Object.Equals for equality comparasion 
@@ -180,7 +180,7 @@ namespace ZLinq
             return true;
         }
 
-                    
+                
         
         /// <summary>
         ///    Check if collections are equal. Use Object.Equals for equality comparasion 
@@ -208,7 +208,7 @@ namespace ZLinq
             return true;
         }
 
-                    
+                
 
         /// <summary>
         ///    Check if collections are equal. Use Object.Equals for equality comparasion 

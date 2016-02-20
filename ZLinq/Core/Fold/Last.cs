@@ -105,11 +105,25 @@ namespace ZLinq
 		/// <exception cref="InvalidOperationException">Throws when collection has no elements</exception>
         [Pure]
         public static T Last<T>([NotNull, Pure] this ICollection<T> source)
-        {
+        {            
+			var list = source as IList<T>;
+            if (list != null)
+            {
+                return list.Last();
+            }
             source.IsNotNull(nameof(source));
             if (source.Count == 0)
 			   throw Error.EmptyCollection;
-            return LastHasElements(source);
+            using (var enumerator = source.GetEnumerator())
+            {
+                enumerator.MoveNext();
+                T current = enumerator.Current;
+                while (enumerator.MoveNext())
+                {
+                    current = enumerator.Current;
+                }
+                return current;
+            }
         }
 		
 		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
@@ -227,11 +241,25 @@ namespace ZLinq
 		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure]
         public static T LastOrDefault<T>([NotNull, Pure] this ICollection<T> source)
-        {
+        {            
+			var list = source as IList<T>;
+            if (list != null)
+            {
+                return list.Last();
+            }
             source.IsNotNull(nameof(source));
             if (source.Count == 0)
 			   return default(T);
-            return LastHasElements(source);
+            using (var enumerator = source.GetEnumerator())
+            {
+                enumerator.MoveNext();
+                T current = enumerator.Current;
+                while (enumerator.MoveNext())
+                {
+                    current = enumerator.Current;
+                }
+                return current;
+            }
         }
 		
 		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
@@ -260,26 +288,5 @@ namespace ZLinq
             return result;
         }
 
-					
-		        
-        private static T LastHasElements<T>(ICollection<T> source)
-        {
-            var list = source as IList<T>;
-            if (list != null)
-            {
-                return list.Last();
-            }
-            using (var enumerator = source.GetEnumerator())
-            {
-                enumerator.MoveNext();
-                T current = enumerator.Current;
-                while (enumerator.MoveNext())
-                {
-                    current = enumerator.Current;
-                }
-                return current;
-            }
-        }
-
-    }
+		    }
 }

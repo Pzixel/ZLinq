@@ -53,7 +53,7 @@ namespace ZLinq
             return true;
         }
 
-            <# } #>        
+        <# } #>        
 
         /// <summary>
         ///    Check if collections are equal<#= overload.Description #> 

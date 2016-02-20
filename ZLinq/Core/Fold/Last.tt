@@ -76,11 +76,25 @@ namespace ZLinq
 		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception><#= template.Comment #>
         [Pure]
         public static T Last<#= template.Suffix #><T>([NotNull, Pure] this ICollection<T> source)
-        {
+        {            
+			var list = source as IList<T>;
+            if (list != null)
+            {
+                return list.Last();
+            }
             <#= TT.IsNotNull("source") #>
             if (source.Count == 0)
 			   <#= template.NoMatch #>;
-            return LastHasElements(source);
+            using (var enumerator = source.GetEnumerator())
+            {
+                enumerator.MoveNext();
+                T current = enumerator.Current;
+                while (enumerator.MoveNext())
+                {
+                    current = enumerator.Current;
+                }
+                return current;
+            }
         }
 		
 		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception><#= template.CommentMap #>
@@ -110,26 +124,5 @@ namespace ZLinq
         }
 
 		<# } #>
-			
-		        
-        private static T LastHasElements<T>(ICollection<T> source)
-        {
-            var list = source as IList<T>;
-            if (list != null)
-            {
-                return list.Last();
-            }
-            using (var enumerator = source.GetEnumerator())
-            {
-                enumerator.MoveNext();
-                T current = enumerator.Current;
-                while (enumerator.MoveNext())
-                {
-                    current = enumerator.Current;
-                }
-                return current;
-            }
-        }
-
     }
 }
