@@ -17,8 +17,8 @@ namespace ZLinq
         [NotNull]
         public static IZOrderedEnumerable<T> OrderByInPlace<T, TProperty>([NotNull] this T[] source, [NotNull] Expression<Func<T, TProperty>> member) where TProperty : IComparable<TProperty>
         {
-            source.IsNotNull("source");
-            member.IsNotNull("member");
+            source.IsNotNull(nameof(source));
+            member.IsNotNull(nameof(member));
             return new ZOrderedArray<T>(source, ZComparer<T>.New(member));
         }
 
@@ -27,8 +27,8 @@ namespace ZLinq
         [NotNull]
         public static IZOrderedEnumerable<T> OrderByInPlace<T, TProperty>([NotNull] this List<T> source, [NotNull] Expression<Func<T, TProperty>> member) where TProperty : IComparable<TProperty>
         {
-            source.IsNotNull("source");
-            member.IsNotNull("member");
+            source.IsNotNull(nameof(source));
+            member.IsNotNull(nameof(member));
             return new ZOrderedList<T>(source, ZComparer<T>.New(member));
         }
 
@@ -37,8 +37,8 @@ namespace ZLinq
         [NotNull]
         public static IZOrderedEnumerable<T> ThenBy<T, TProperty>([NotNull] this IZOrderedEnumerable<T> source, Expression<Func<T, TProperty>> member) where TProperty : IComparable<TProperty>
         {
-            source.IsNotNull("source");
-            member.IsNotNull("member");
+            source.IsNotNull(nameof(source));
+            member.IsNotNull(nameof(member));
             return source.AppendComparer(source.Comparer.Add(member));
         }
            
@@ -46,8 +46,8 @@ namespace ZLinq
         [NotNull]
         public static IZOrderedEnumerable<T> OrderByInPlaceDescending<T, TProperty>([NotNull] this T[] source, [NotNull] Expression<Func<T, TProperty>> member) where TProperty : IComparable<TProperty>
         {
-            source.IsNotNull("source");
-            member.IsNotNull("member");
+            source.IsNotNull(nameof(source));
+            member.IsNotNull(nameof(member));
             return new ZOrderedArray<T>(source, ZComparer<T>.NewNeg(member));
         }
 
@@ -56,8 +56,8 @@ namespace ZLinq
         [NotNull]
         public static IZOrderedEnumerable<T> OrderByInPlaceDescending<T, TProperty>([NotNull] this List<T> source, [NotNull] Expression<Func<T, TProperty>> member) where TProperty : IComparable<TProperty>
         {
-            source.IsNotNull("source");
-            member.IsNotNull("member");
+            source.IsNotNull(nameof(source));
+            member.IsNotNull(nameof(member));
             return new ZOrderedList<T>(source, ZComparer<T>.NewNeg(member));
         }
 
@@ -66,8 +66,8 @@ namespace ZLinq
         [NotNull]
         public static IZOrderedEnumerable<T> ThenByDescending<T, TProperty>([NotNull] this IZOrderedEnumerable<T> source, Expression<Func<T, TProperty>> member) where TProperty : IComparable<TProperty>
         {
-            source.IsNotNull("source");
-            member.IsNotNull("member");
+            source.IsNotNull(nameof(source));
+            member.IsNotNull(nameof(member));
             return source.AppendComparer(source.Comparer.AddNeg(member));
         }
        }

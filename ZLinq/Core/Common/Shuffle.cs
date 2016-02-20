@@ -17,7 +17,7 @@ namespace ZLinq
         /// </summary>    
         public static void Shuffle<T>([NotNull] this T[] source, int? seed = null)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
 
             if (source.Length == 0)
                 return;
@@ -35,7 +35,7 @@ namespace ZLinq
         [NotNull]
         public static T[] GetShuffle<T>([NotNull] this T[] source, int? seed = null)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
 
             T[] result = new T[source.Length];
             source.CopyTo(result, 0);
@@ -49,7 +49,7 @@ namespace ZLinq
         /// </summary>    
         public static void Shuffle<T>([NotNull] this List<T> source, int? seed = null)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
 
             if (source.Count == 0)
                 return;
@@ -67,7 +67,7 @@ namespace ZLinq
         [NotNull]
         public static T[] GetShuffle<T>([NotNull] this List<T> source, int? seed = null)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
 
             T[] result = new T[source.Count];
             source.CopyTo(result, 0);
@@ -81,7 +81,7 @@ namespace ZLinq
         /// </summary>    
         public static void Shuffle<T>([NotNull] this IList<T> source, int? seed = null)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
 
             if (source.Count == 0)
                 return;
@@ -99,7 +99,7 @@ namespace ZLinq
         [NotNull]
         public static T[] GetShuffle<T>([NotNull] this IList<T> source, int? seed = null)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
 
             T[] result = new T[source.Count];
             source.CopyTo(result, 0);

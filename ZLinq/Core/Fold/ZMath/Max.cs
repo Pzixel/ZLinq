@@ -13,8 +13,8 @@ using ZLinq.CommonInternal;
 namespace ZLinq
 {
     public static partial class ZEnumerable
-    {               
-    
+    {  
+   
         
         
         #region sbyte             
@@ -29,7 +29,7 @@ namespace ZLinq
         [Pure]
         public static sbyte Max([NotNull] this sbyte[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -118,8 +118,8 @@ namespace ZLinq
         [Pure]
         public static sbyte Max<T>([NotNull] this T[] source, [NotNull] Func<T, sbyte> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
@@ -205,7 +205,7 @@ namespace ZLinq
         [Pure]
         public static sbyte Max([NotNull] this List<sbyte> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -294,8 +294,8 @@ namespace ZLinq
         [Pure]
         public static sbyte Max<T>([NotNull] this List<T> source, [NotNull] Func<T, sbyte> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -381,7 +381,7 @@ namespace ZLinq
         [Pure]
         public static sbyte Max([NotNull] this IList<sbyte> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -470,8 +470,8 @@ namespace ZLinq
         [Pure]
         public static sbyte Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, sbyte> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -562,7 +562,7 @@ namespace ZLinq
         [Pure]
         public static byte Max([NotNull] this byte[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -651,8 +651,8 @@ namespace ZLinq
         [Pure]
         public static byte Max<T>([NotNull] this T[] source, [NotNull] Func<T, byte> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
@@ -738,7 +738,7 @@ namespace ZLinq
         [Pure]
         public static byte Max([NotNull] this List<byte> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -827,8 +827,8 @@ namespace ZLinq
         [Pure]
         public static byte Max<T>([NotNull] this List<T> source, [NotNull] Func<T, byte> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -914,7 +914,7 @@ namespace ZLinq
         [Pure]
         public static byte Max([NotNull] this IList<byte> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -1003,8 +1003,8 @@ namespace ZLinq
         [Pure]
         public static byte Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, byte> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -1095,7 +1095,7 @@ namespace ZLinq
         [Pure]
         public static short Max([NotNull] this short[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -1184,8 +1184,8 @@ namespace ZLinq
         [Pure]
         public static short Max<T>([NotNull] this T[] source, [NotNull] Func<T, short> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
@@ -1271,7 +1271,7 @@ namespace ZLinq
         [Pure]
         public static short Max([NotNull] this List<short> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -1360,8 +1360,8 @@ namespace ZLinq
         [Pure]
         public static short Max<T>([NotNull] this List<T> source, [NotNull] Func<T, short> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -1447,7 +1447,7 @@ namespace ZLinq
         [Pure]
         public static short Max([NotNull] this IList<short> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -1536,8 +1536,8 @@ namespace ZLinq
         [Pure]
         public static short Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, short> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -1628,7 +1628,7 @@ namespace ZLinq
         [Pure]
         public static ushort Max([NotNull] this ushort[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -1717,8 +1717,8 @@ namespace ZLinq
         [Pure]
         public static ushort Max<T>([NotNull] this T[] source, [NotNull] Func<T, ushort> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
@@ -1804,7 +1804,7 @@ namespace ZLinq
         [Pure]
         public static ushort Max([NotNull] this List<ushort> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -1893,8 +1893,8 @@ namespace ZLinq
         [Pure]
         public static ushort Max<T>([NotNull] this List<T> source, [NotNull] Func<T, ushort> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -1980,7 +1980,7 @@ namespace ZLinq
         [Pure]
         public static ushort Max([NotNull] this IList<ushort> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -2069,8 +2069,8 @@ namespace ZLinq
         [Pure]
         public static ushort Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, ushort> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -2161,7 +2161,7 @@ namespace ZLinq
         [Pure]
         public static int Max([NotNull] this int[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -2250,8 +2250,8 @@ namespace ZLinq
         [Pure]
         public static int Max<T>([NotNull] this T[] source, [NotNull] Func<T, int> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
@@ -2337,7 +2337,7 @@ namespace ZLinq
         [Pure]
         public static int Max([NotNull] this List<int> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -2426,8 +2426,8 @@ namespace ZLinq
         [Pure]
         public static int Max<T>([NotNull] this List<T> source, [NotNull] Func<T, int> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -2513,7 +2513,7 @@ namespace ZLinq
         [Pure]
         public static int Max([NotNull] this IList<int> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -2602,8 +2602,8 @@ namespace ZLinq
         [Pure]
         public static int Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, int> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -2694,7 +2694,7 @@ namespace ZLinq
         [Pure]
         public static uint Max([NotNull] this uint[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -2783,8 +2783,8 @@ namespace ZLinq
         [Pure]
         public static uint Max<T>([NotNull] this T[] source, [NotNull] Func<T, uint> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
@@ -2870,7 +2870,7 @@ namespace ZLinq
         [Pure]
         public static uint Max([NotNull] this List<uint> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -2959,8 +2959,8 @@ namespace ZLinq
         [Pure]
         public static uint Max<T>([NotNull] this List<T> source, [NotNull] Func<T, uint> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -3046,7 +3046,7 @@ namespace ZLinq
         [Pure]
         public static uint Max([NotNull] this IList<uint> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -3135,8 +3135,8 @@ namespace ZLinq
         [Pure]
         public static uint Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, uint> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -3227,7 +3227,7 @@ namespace ZLinq
         [Pure]
         public static long Max([NotNull] this long[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -3316,8 +3316,8 @@ namespace ZLinq
         [Pure]
         public static long Max<T>([NotNull] this T[] source, [NotNull] Func<T, long> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
@@ -3403,7 +3403,7 @@ namespace ZLinq
         [Pure]
         public static long Max([NotNull] this List<long> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -3492,8 +3492,8 @@ namespace ZLinq
         [Pure]
         public static long Max<T>([NotNull] this List<T> source, [NotNull] Func<T, long> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -3579,7 +3579,7 @@ namespace ZLinq
         [Pure]
         public static long Max([NotNull] this IList<long> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -3668,8 +3668,8 @@ namespace ZLinq
         [Pure]
         public static long Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, long> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -3760,7 +3760,7 @@ namespace ZLinq
         [Pure]
         public static ulong Max([NotNull] this ulong[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -3849,8 +3849,8 @@ namespace ZLinq
         [Pure]
         public static ulong Max<T>([NotNull] this T[] source, [NotNull] Func<T, ulong> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
@@ -3936,7 +3936,7 @@ namespace ZLinq
         [Pure]
         public static ulong Max([NotNull] this List<ulong> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -4025,8 +4025,8 @@ namespace ZLinq
         [Pure]
         public static ulong Max<T>([NotNull] this List<T> source, [NotNull] Func<T, ulong> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -4112,7 +4112,7 @@ namespace ZLinq
         [Pure]
         public static ulong Max([NotNull] this IList<ulong> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -4201,8 +4201,8 @@ namespace ZLinq
         [Pure]
         public static ulong Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, ulong> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -4293,7 +4293,7 @@ namespace ZLinq
         [Pure]
         public static float Max([NotNull] this float[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -4382,8 +4382,8 @@ namespace ZLinq
         [Pure]
         public static float Max<T>([NotNull] this T[] source, [NotNull] Func<T, float> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
@@ -4469,7 +4469,7 @@ namespace ZLinq
         [Pure]
         public static float Max([NotNull] this List<float> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -4558,8 +4558,8 @@ namespace ZLinq
         [Pure]
         public static float Max<T>([NotNull] this List<T> source, [NotNull] Func<T, float> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -4645,7 +4645,7 @@ namespace ZLinq
         [Pure]
         public static float Max([NotNull] this IList<float> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -4734,8 +4734,8 @@ namespace ZLinq
         [Pure]
         public static float Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, float> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -4826,7 +4826,7 @@ namespace ZLinq
         [Pure]
         public static double Max([NotNull] this double[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -4915,8 +4915,8 @@ namespace ZLinq
         [Pure]
         public static double Max<T>([NotNull] this T[] source, [NotNull] Func<T, double> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
@@ -5002,7 +5002,7 @@ namespace ZLinq
         [Pure]
         public static double Max([NotNull] this List<double> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -5091,8 +5091,8 @@ namespace ZLinq
         [Pure]
         public static double Max<T>([NotNull] this List<T> source, [NotNull] Func<T, double> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -5178,7 +5178,7 @@ namespace ZLinq
         [Pure]
         public static double Max([NotNull] this IList<double> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -5267,8 +5267,8 @@ namespace ZLinq
         [Pure]
         public static double Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, double> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -5359,7 +5359,7 @@ namespace ZLinq
         [Pure]
         public static decimal Max([NotNull] this decimal[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -5448,8 +5448,8 @@ namespace ZLinq
         [Pure]
         public static decimal Max<T>([NotNull] this T[] source, [NotNull] Func<T, decimal> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
@@ -5535,7 +5535,7 @@ namespace ZLinq
         [Pure]
         public static decimal Max([NotNull] this List<decimal> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -5624,8 +5624,8 @@ namespace ZLinq
         [Pure]
         public static decimal Max<T>([NotNull] this List<T> source, [NotNull] Func<T, decimal> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -5711,7 +5711,7 @@ namespace ZLinq
         [Pure]
         public static decimal Max([NotNull] this IList<decimal> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -5800,8 +5800,8 @@ namespace ZLinq
         [Pure]
         public static decimal Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, decimal> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -5902,7 +5902,7 @@ namespace ZLinq
         [Pure]
         public static sbyte? Max([NotNull] this sbyte?[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -5991,8 +5991,8 @@ namespace ZLinq
         [Pure]
         public static sbyte? Max<T>([NotNull] this T[] source, [NotNull] Func<T, sbyte?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
@@ -6078,7 +6078,7 @@ namespace ZLinq
         [Pure]
         public static sbyte? Max([NotNull] this List<sbyte?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -6167,8 +6167,8 @@ namespace ZLinq
         [Pure]
         public static sbyte? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, sbyte?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -6254,7 +6254,7 @@ namespace ZLinq
         [Pure]
         public static sbyte? Max([NotNull] this IList<sbyte?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -6343,8 +6343,8 @@ namespace ZLinq
         [Pure]
         public static sbyte? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, sbyte?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -6445,7 +6445,7 @@ namespace ZLinq
         [Pure]
         public static byte? Max([NotNull] this byte?[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -6534,8 +6534,8 @@ namespace ZLinq
         [Pure]
         public static byte? Max<T>([NotNull] this T[] source, [NotNull] Func<T, byte?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
@@ -6621,7 +6621,7 @@ namespace ZLinq
         [Pure]
         public static byte? Max([NotNull] this List<byte?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -6710,8 +6710,8 @@ namespace ZLinq
         [Pure]
         public static byte? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, byte?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -6797,7 +6797,7 @@ namespace ZLinq
         [Pure]
         public static byte? Max([NotNull] this IList<byte?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -6886,8 +6886,8 @@ namespace ZLinq
         [Pure]
         public static byte? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, byte?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -6988,7 +6988,7 @@ namespace ZLinq
         [Pure]
         public static short? Max([NotNull] this short?[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -7077,8 +7077,8 @@ namespace ZLinq
         [Pure]
         public static short? Max<T>([NotNull] this T[] source, [NotNull] Func<T, short?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
@@ -7164,7 +7164,7 @@ namespace ZLinq
         [Pure]
         public static short? Max([NotNull] this List<short?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -7253,8 +7253,8 @@ namespace ZLinq
         [Pure]
         public static short? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, short?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -7340,7 +7340,7 @@ namespace ZLinq
         [Pure]
         public static short? Max([NotNull] this IList<short?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -7429,8 +7429,8 @@ namespace ZLinq
         [Pure]
         public static short? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, short?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -7531,7 +7531,7 @@ namespace ZLinq
         [Pure]
         public static ushort? Max([NotNull] this ushort?[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -7620,8 +7620,8 @@ namespace ZLinq
         [Pure]
         public static ushort? Max<T>([NotNull] this T[] source, [NotNull] Func<T, ushort?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
@@ -7707,7 +7707,7 @@ namespace ZLinq
         [Pure]
         public static ushort? Max([NotNull] this List<ushort?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -7796,8 +7796,8 @@ namespace ZLinq
         [Pure]
         public static ushort? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, ushort?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -7883,7 +7883,7 @@ namespace ZLinq
         [Pure]
         public static ushort? Max([NotNull] this IList<ushort?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -7972,8 +7972,8 @@ namespace ZLinq
         [Pure]
         public static ushort? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, ushort?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -8074,7 +8074,7 @@ namespace ZLinq
         [Pure]
         public static int? Max([NotNull] this int?[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -8163,8 +8163,8 @@ namespace ZLinq
         [Pure]
         public static int? Max<T>([NotNull] this T[] source, [NotNull] Func<T, int?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
@@ -8250,7 +8250,7 @@ namespace ZLinq
         [Pure]
         public static int? Max([NotNull] this List<int?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -8339,8 +8339,8 @@ namespace ZLinq
         [Pure]
         public static int? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, int?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -8426,7 +8426,7 @@ namespace ZLinq
         [Pure]
         public static int? Max([NotNull] this IList<int?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -8515,8 +8515,8 @@ namespace ZLinq
         [Pure]
         public static int? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, int?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -8617,7 +8617,7 @@ namespace ZLinq
         [Pure]
         public static uint? Max([NotNull] this uint?[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -8706,8 +8706,8 @@ namespace ZLinq
         [Pure]
         public static uint? Max<T>([NotNull] this T[] source, [NotNull] Func<T, uint?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
@@ -8793,7 +8793,7 @@ namespace ZLinq
         [Pure]
         public static uint? Max([NotNull] this List<uint?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -8882,8 +8882,8 @@ namespace ZLinq
         [Pure]
         public static uint? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, uint?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -8969,7 +8969,7 @@ namespace ZLinq
         [Pure]
         public static uint? Max([NotNull] this IList<uint?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -9058,8 +9058,8 @@ namespace ZLinq
         [Pure]
         public static uint? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, uint?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -9160,7 +9160,7 @@ namespace ZLinq
         [Pure]
         public static long? Max([NotNull] this long?[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -9249,8 +9249,8 @@ namespace ZLinq
         [Pure]
         public static long? Max<T>([NotNull] this T[] source, [NotNull] Func<T, long?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
@@ -9336,7 +9336,7 @@ namespace ZLinq
         [Pure]
         public static long? Max([NotNull] this List<long?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -9425,8 +9425,8 @@ namespace ZLinq
         [Pure]
         public static long? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, long?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -9512,7 +9512,7 @@ namespace ZLinq
         [Pure]
         public static long? Max([NotNull] this IList<long?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -9601,8 +9601,8 @@ namespace ZLinq
         [Pure]
         public static long? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, long?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -9703,7 +9703,7 @@ namespace ZLinq
         [Pure]
         public static ulong? Max([NotNull] this ulong?[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -9792,8 +9792,8 @@ namespace ZLinq
         [Pure]
         public static ulong? Max<T>([NotNull] this T[] source, [NotNull] Func<T, ulong?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
@@ -9879,7 +9879,7 @@ namespace ZLinq
         [Pure]
         public static ulong? Max([NotNull] this List<ulong?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -9968,8 +9968,8 @@ namespace ZLinq
         [Pure]
         public static ulong? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, ulong?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -10055,7 +10055,7 @@ namespace ZLinq
         [Pure]
         public static ulong? Max([NotNull] this IList<ulong?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -10144,8 +10144,8 @@ namespace ZLinq
         [Pure]
         public static ulong? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, ulong?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -10246,7 +10246,7 @@ namespace ZLinq
         [Pure]
         public static float? Max([NotNull] this float?[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -10335,8 +10335,8 @@ namespace ZLinq
         [Pure]
         public static float? Max<T>([NotNull] this T[] source, [NotNull] Func<T, float?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
@@ -10422,7 +10422,7 @@ namespace ZLinq
         [Pure]
         public static float? Max([NotNull] this List<float?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -10511,8 +10511,8 @@ namespace ZLinq
         [Pure]
         public static float? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, float?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -10598,7 +10598,7 @@ namespace ZLinq
         [Pure]
         public static float? Max([NotNull] this IList<float?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -10687,8 +10687,8 @@ namespace ZLinq
         [Pure]
         public static float? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, float?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -10789,7 +10789,7 @@ namespace ZLinq
         [Pure]
         public static double? Max([NotNull] this double?[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -10878,8 +10878,8 @@ namespace ZLinq
         [Pure]
         public static double? Max<T>([NotNull] this T[] source, [NotNull] Func<T, double?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
@@ -10965,7 +10965,7 @@ namespace ZLinq
         [Pure]
         public static double? Max([NotNull] this List<double?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -11054,8 +11054,8 @@ namespace ZLinq
         [Pure]
         public static double? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, double?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -11141,7 +11141,7 @@ namespace ZLinq
         [Pure]
         public static double? Max([NotNull] this IList<double?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -11230,8 +11230,8 @@ namespace ZLinq
         [Pure]
         public static double? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, double?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -11332,7 +11332,7 @@ namespace ZLinq
         [Pure]
         public static decimal? Max([NotNull] this decimal?[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
@@ -11421,8 +11421,8 @@ namespace ZLinq
         [Pure]
         public static decimal? Max<T>([NotNull] this T[] source, [NotNull] Func<T, decimal?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Length < Constants.SingleThreadExecutionThreshold)
             {
@@ -11508,7 +11508,7 @@ namespace ZLinq
         [Pure]
         public static decimal? Max([NotNull] this List<decimal?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -11597,8 +11597,8 @@ namespace ZLinq
         [Pure]
         public static decimal? Max<T>([NotNull] this List<T> source, [NotNull] Func<T, decimal?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {
@@ -11684,7 +11684,7 @@ namespace ZLinq
         [Pure]
         public static decimal? Max([NotNull] this IList<decimal?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
@@ -11773,8 +11773,8 @@ namespace ZLinq
         [Pure]
         public static decimal? Max<T>([NotNull] this IList<T> source, [NotNull] Func<T, decimal?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             source.IsNotEmpty();
             if (source.Count < Constants.SingleThreadExecutionThreshold)
             {

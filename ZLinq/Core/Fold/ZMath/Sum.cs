@@ -27,7 +27,7 @@ namespace ZLinq
         [Pure]
         public static sbyte Sum([NotNull] this sbyte[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
@@ -87,8 +87,8 @@ namespace ZLinq
         [Pure]
         public static sbyte Sum<T>([NotNull] this T[] source, [NotNull] Func<T, sbyte> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             sbyte result = 0;
@@ -146,7 +146,7 @@ namespace ZLinq
         [Pure]
         public static sbyte Sum([NotNull] this List<sbyte> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -206,8 +206,8 @@ namespace ZLinq
         [Pure]
         public static sbyte Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, sbyte> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             sbyte result = 0;
@@ -265,7 +265,7 @@ namespace ZLinq
         [Pure]
         public static sbyte Sum([NotNull] this IList<sbyte> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -325,8 +325,8 @@ namespace ZLinq
         [Pure]
         public static sbyte Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, sbyte> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             sbyte result = 0;
@@ -388,7 +388,7 @@ namespace ZLinq
         [Pure]
         public static byte Sum([NotNull] this byte[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
@@ -448,8 +448,8 @@ namespace ZLinq
         [Pure]
         public static byte Sum<T>([NotNull] this T[] source, [NotNull] Func<T, byte> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             byte result = 0;
@@ -507,7 +507,7 @@ namespace ZLinq
         [Pure]
         public static byte Sum([NotNull] this List<byte> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -567,8 +567,8 @@ namespace ZLinq
         [Pure]
         public static byte Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, byte> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             byte result = 0;
@@ -626,7 +626,7 @@ namespace ZLinq
         [Pure]
         public static byte Sum([NotNull] this IList<byte> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -686,8 +686,8 @@ namespace ZLinq
         [Pure]
         public static byte Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, byte> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             byte result = 0;
@@ -749,7 +749,7 @@ namespace ZLinq
         [Pure]
         public static short Sum([NotNull] this short[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
@@ -809,8 +809,8 @@ namespace ZLinq
         [Pure]
         public static short Sum<T>([NotNull] this T[] source, [NotNull] Func<T, short> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             short result = 0;
@@ -868,7 +868,7 @@ namespace ZLinq
         [Pure]
         public static short Sum([NotNull] this List<short> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -928,8 +928,8 @@ namespace ZLinq
         [Pure]
         public static short Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, short> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             short result = 0;
@@ -987,7 +987,7 @@ namespace ZLinq
         [Pure]
         public static short Sum([NotNull] this IList<short> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -1047,8 +1047,8 @@ namespace ZLinq
         [Pure]
         public static short Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, short> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             short result = 0;
@@ -1110,7 +1110,7 @@ namespace ZLinq
         [Pure]
         public static ushort Sum([NotNull] this ushort[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
@@ -1170,8 +1170,8 @@ namespace ZLinq
         [Pure]
         public static ushort Sum<T>([NotNull] this T[] source, [NotNull] Func<T, ushort> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             ushort result = 0;
@@ -1229,7 +1229,7 @@ namespace ZLinq
         [Pure]
         public static ushort Sum([NotNull] this List<ushort> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -1289,8 +1289,8 @@ namespace ZLinq
         [Pure]
         public static ushort Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, ushort> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             ushort result = 0;
@@ -1348,7 +1348,7 @@ namespace ZLinq
         [Pure]
         public static ushort Sum([NotNull] this IList<ushort> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -1408,8 +1408,8 @@ namespace ZLinq
         [Pure]
         public static ushort Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, ushort> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             ushort result = 0;
@@ -1471,7 +1471,7 @@ namespace ZLinq
         [Pure]
         public static int Sum([NotNull] this int[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
@@ -1531,8 +1531,8 @@ namespace ZLinq
         [Pure]
         public static int Sum<T>([NotNull] this T[] source, [NotNull] Func<T, int> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             int result = 0;
@@ -1590,7 +1590,7 @@ namespace ZLinq
         [Pure]
         public static int Sum([NotNull] this List<int> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -1650,8 +1650,8 @@ namespace ZLinq
         [Pure]
         public static int Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, int> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             int result = 0;
@@ -1709,7 +1709,7 @@ namespace ZLinq
         [Pure]
         public static int Sum([NotNull] this IList<int> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -1769,8 +1769,8 @@ namespace ZLinq
         [Pure]
         public static int Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, int> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             int result = 0;
@@ -1832,7 +1832,7 @@ namespace ZLinq
         [Pure]
         public static uint Sum([NotNull] this uint[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
@@ -1892,8 +1892,8 @@ namespace ZLinq
         [Pure]
         public static uint Sum<T>([NotNull] this T[] source, [NotNull] Func<T, uint> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             uint result = 0;
@@ -1951,7 +1951,7 @@ namespace ZLinq
         [Pure]
         public static uint Sum([NotNull] this List<uint> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -2011,8 +2011,8 @@ namespace ZLinq
         [Pure]
         public static uint Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, uint> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             uint result = 0;
@@ -2070,7 +2070,7 @@ namespace ZLinq
         [Pure]
         public static uint Sum([NotNull] this IList<uint> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -2130,8 +2130,8 @@ namespace ZLinq
         [Pure]
         public static uint Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, uint> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             uint result = 0;
@@ -2193,7 +2193,7 @@ namespace ZLinq
         [Pure]
         public static long Sum([NotNull] this long[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
@@ -2253,8 +2253,8 @@ namespace ZLinq
         [Pure]
         public static long Sum<T>([NotNull] this T[] source, [NotNull] Func<T, long> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             long result = 0;
@@ -2312,7 +2312,7 @@ namespace ZLinq
         [Pure]
         public static long Sum([NotNull] this List<long> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -2372,8 +2372,8 @@ namespace ZLinq
         [Pure]
         public static long Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, long> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             long result = 0;
@@ -2431,7 +2431,7 @@ namespace ZLinq
         [Pure]
         public static long Sum([NotNull] this IList<long> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -2491,8 +2491,8 @@ namespace ZLinq
         [Pure]
         public static long Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, long> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             long result = 0;
@@ -2554,7 +2554,7 @@ namespace ZLinq
         [Pure]
         public static ulong Sum([NotNull] this ulong[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
@@ -2614,8 +2614,8 @@ namespace ZLinq
         [Pure]
         public static ulong Sum<T>([NotNull] this T[] source, [NotNull] Func<T, ulong> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             ulong result = 0;
@@ -2673,7 +2673,7 @@ namespace ZLinq
         [Pure]
         public static ulong Sum([NotNull] this List<ulong> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -2733,8 +2733,8 @@ namespace ZLinq
         [Pure]
         public static ulong Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, ulong> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             ulong result = 0;
@@ -2792,7 +2792,7 @@ namespace ZLinq
         [Pure]
         public static ulong Sum([NotNull] this IList<ulong> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -2852,8 +2852,8 @@ namespace ZLinq
         [Pure]
         public static ulong Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, ulong> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             ulong result = 0;
@@ -2915,7 +2915,7 @@ namespace ZLinq
         [Pure]
         public static float Sum([NotNull] this float[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
@@ -2975,8 +2975,8 @@ namespace ZLinq
         [Pure]
         public static float Sum<T>([NotNull] this T[] source, [NotNull] Func<T, float> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             float result = 0;
@@ -3034,7 +3034,7 @@ namespace ZLinq
         [Pure]
         public static float Sum([NotNull] this List<float> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -3094,8 +3094,8 @@ namespace ZLinq
         [Pure]
         public static float Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, float> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             float result = 0;
@@ -3153,7 +3153,7 @@ namespace ZLinq
         [Pure]
         public static float Sum([NotNull] this IList<float> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -3213,8 +3213,8 @@ namespace ZLinq
         [Pure]
         public static float Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, float> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             float result = 0;
@@ -3276,7 +3276,7 @@ namespace ZLinq
         [Pure]
         public static double Sum([NotNull] this double[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
@@ -3336,8 +3336,8 @@ namespace ZLinq
         [Pure]
         public static double Sum<T>([NotNull] this T[] source, [NotNull] Func<T, double> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             double result = 0;
@@ -3395,7 +3395,7 @@ namespace ZLinq
         [Pure]
         public static double Sum([NotNull] this List<double> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -3455,8 +3455,8 @@ namespace ZLinq
         [Pure]
         public static double Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, double> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             double result = 0;
@@ -3514,7 +3514,7 @@ namespace ZLinq
         [Pure]
         public static double Sum([NotNull] this IList<double> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -3574,8 +3574,8 @@ namespace ZLinq
         [Pure]
         public static double Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, double> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             double result = 0;
@@ -3637,7 +3637,7 @@ namespace ZLinq
         [Pure]
         public static decimal Sum([NotNull] this decimal[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
@@ -3697,8 +3697,8 @@ namespace ZLinq
         [Pure]
         public static decimal Sum<T>([NotNull] this T[] source, [NotNull] Func<T, decimal> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             decimal result = 0;
@@ -3756,7 +3756,7 @@ namespace ZLinq
         [Pure]
         public static decimal Sum([NotNull] this List<decimal> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -3816,8 +3816,8 @@ namespace ZLinq
         [Pure]
         public static decimal Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, decimal> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             decimal result = 0;
@@ -3875,7 +3875,7 @@ namespace ZLinq
         [Pure]
         public static decimal Sum([NotNull] this IList<decimal> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -3935,8 +3935,8 @@ namespace ZLinq
         [Pure]
         public static decimal Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, decimal> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             decimal result = 0;
@@ -3998,7 +3998,7 @@ namespace ZLinq
         [Pure]
         public static sbyte Sum([NotNull] this sbyte?[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
@@ -4058,8 +4058,8 @@ namespace ZLinq
         [Pure]
         public static sbyte Sum<T>([NotNull] this T[] source, [NotNull] Func<T, sbyte?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             sbyte result = 0;
@@ -4117,7 +4117,7 @@ namespace ZLinq
         [Pure]
         public static sbyte Sum([NotNull] this List<sbyte?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -4177,8 +4177,8 @@ namespace ZLinq
         [Pure]
         public static sbyte Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, sbyte?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             sbyte result = 0;
@@ -4236,7 +4236,7 @@ namespace ZLinq
         [Pure]
         public static sbyte Sum([NotNull] this IList<sbyte?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -4296,8 +4296,8 @@ namespace ZLinq
         [Pure]
         public static sbyte Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, sbyte?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             sbyte result = 0;
@@ -4359,7 +4359,7 @@ namespace ZLinq
         [Pure]
         public static byte Sum([NotNull] this byte?[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
@@ -4419,8 +4419,8 @@ namespace ZLinq
         [Pure]
         public static byte Sum<T>([NotNull] this T[] source, [NotNull] Func<T, byte?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             byte result = 0;
@@ -4478,7 +4478,7 @@ namespace ZLinq
         [Pure]
         public static byte Sum([NotNull] this List<byte?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -4538,8 +4538,8 @@ namespace ZLinq
         [Pure]
         public static byte Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, byte?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             byte result = 0;
@@ -4597,7 +4597,7 @@ namespace ZLinq
         [Pure]
         public static byte Sum([NotNull] this IList<byte?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -4657,8 +4657,8 @@ namespace ZLinq
         [Pure]
         public static byte Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, byte?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             byte result = 0;
@@ -4720,7 +4720,7 @@ namespace ZLinq
         [Pure]
         public static short Sum([NotNull] this short?[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
@@ -4780,8 +4780,8 @@ namespace ZLinq
         [Pure]
         public static short Sum<T>([NotNull] this T[] source, [NotNull] Func<T, short?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             short result = 0;
@@ -4839,7 +4839,7 @@ namespace ZLinq
         [Pure]
         public static short Sum([NotNull] this List<short?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -4899,8 +4899,8 @@ namespace ZLinq
         [Pure]
         public static short Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, short?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             short result = 0;
@@ -4958,7 +4958,7 @@ namespace ZLinq
         [Pure]
         public static short Sum([NotNull] this IList<short?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -5018,8 +5018,8 @@ namespace ZLinq
         [Pure]
         public static short Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, short?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             short result = 0;
@@ -5081,7 +5081,7 @@ namespace ZLinq
         [Pure]
         public static ushort Sum([NotNull] this ushort?[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
@@ -5141,8 +5141,8 @@ namespace ZLinq
         [Pure]
         public static ushort Sum<T>([NotNull] this T[] source, [NotNull] Func<T, ushort?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             ushort result = 0;
@@ -5200,7 +5200,7 @@ namespace ZLinq
         [Pure]
         public static ushort Sum([NotNull] this List<ushort?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -5260,8 +5260,8 @@ namespace ZLinq
         [Pure]
         public static ushort Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, ushort?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             ushort result = 0;
@@ -5319,7 +5319,7 @@ namespace ZLinq
         [Pure]
         public static ushort Sum([NotNull] this IList<ushort?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -5379,8 +5379,8 @@ namespace ZLinq
         [Pure]
         public static ushort Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, ushort?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             ushort result = 0;
@@ -5442,7 +5442,7 @@ namespace ZLinq
         [Pure]
         public static int Sum([NotNull] this int?[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
@@ -5502,8 +5502,8 @@ namespace ZLinq
         [Pure]
         public static int Sum<T>([NotNull] this T[] source, [NotNull] Func<T, int?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             int result = 0;
@@ -5561,7 +5561,7 @@ namespace ZLinq
         [Pure]
         public static int Sum([NotNull] this List<int?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -5621,8 +5621,8 @@ namespace ZLinq
         [Pure]
         public static int Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, int?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             int result = 0;
@@ -5680,7 +5680,7 @@ namespace ZLinq
         [Pure]
         public static int Sum([NotNull] this IList<int?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -5740,8 +5740,8 @@ namespace ZLinq
         [Pure]
         public static int Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, int?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             int result = 0;
@@ -5803,7 +5803,7 @@ namespace ZLinq
         [Pure]
         public static uint Sum([NotNull] this uint?[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
@@ -5863,8 +5863,8 @@ namespace ZLinq
         [Pure]
         public static uint Sum<T>([NotNull] this T[] source, [NotNull] Func<T, uint?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             uint result = 0;
@@ -5922,7 +5922,7 @@ namespace ZLinq
         [Pure]
         public static uint Sum([NotNull] this List<uint?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -5982,8 +5982,8 @@ namespace ZLinq
         [Pure]
         public static uint Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, uint?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             uint result = 0;
@@ -6041,7 +6041,7 @@ namespace ZLinq
         [Pure]
         public static uint Sum([NotNull] this IList<uint?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -6101,8 +6101,8 @@ namespace ZLinq
         [Pure]
         public static uint Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, uint?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             uint result = 0;
@@ -6164,7 +6164,7 @@ namespace ZLinq
         [Pure]
         public static long Sum([NotNull] this long?[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
@@ -6224,8 +6224,8 @@ namespace ZLinq
         [Pure]
         public static long Sum<T>([NotNull] this T[] source, [NotNull] Func<T, long?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             long result = 0;
@@ -6283,7 +6283,7 @@ namespace ZLinq
         [Pure]
         public static long Sum([NotNull] this List<long?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -6343,8 +6343,8 @@ namespace ZLinq
         [Pure]
         public static long Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, long?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             long result = 0;
@@ -6402,7 +6402,7 @@ namespace ZLinq
         [Pure]
         public static long Sum([NotNull] this IList<long?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -6462,8 +6462,8 @@ namespace ZLinq
         [Pure]
         public static long Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, long?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             long result = 0;
@@ -6525,7 +6525,7 @@ namespace ZLinq
         [Pure]
         public static ulong Sum([NotNull] this ulong?[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
@@ -6585,8 +6585,8 @@ namespace ZLinq
         [Pure]
         public static ulong Sum<T>([NotNull] this T[] source, [NotNull] Func<T, ulong?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             ulong result = 0;
@@ -6644,7 +6644,7 @@ namespace ZLinq
         [Pure]
         public static ulong Sum([NotNull] this List<ulong?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -6704,8 +6704,8 @@ namespace ZLinq
         [Pure]
         public static ulong Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, ulong?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             ulong result = 0;
@@ -6763,7 +6763,7 @@ namespace ZLinq
         [Pure]
         public static ulong Sum([NotNull] this IList<ulong?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -6823,8 +6823,8 @@ namespace ZLinq
         [Pure]
         public static ulong Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, ulong?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             ulong result = 0;
@@ -6886,7 +6886,7 @@ namespace ZLinq
         [Pure]
         public static float Sum([NotNull] this float?[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
@@ -6946,8 +6946,8 @@ namespace ZLinq
         [Pure]
         public static float Sum<T>([NotNull] this T[] source, [NotNull] Func<T, float?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             float result = 0;
@@ -7005,7 +7005,7 @@ namespace ZLinq
         [Pure]
         public static float Sum([NotNull] this List<float?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -7065,8 +7065,8 @@ namespace ZLinq
         [Pure]
         public static float Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, float?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             float result = 0;
@@ -7124,7 +7124,7 @@ namespace ZLinq
         [Pure]
         public static float Sum([NotNull] this IList<float?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -7184,8 +7184,8 @@ namespace ZLinq
         [Pure]
         public static float Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, float?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             float result = 0;
@@ -7247,7 +7247,7 @@ namespace ZLinq
         [Pure]
         public static double Sum([NotNull] this double?[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
@@ -7307,8 +7307,8 @@ namespace ZLinq
         [Pure]
         public static double Sum<T>([NotNull] this T[] source, [NotNull] Func<T, double?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             double result = 0;
@@ -7366,7 +7366,7 @@ namespace ZLinq
         [Pure]
         public static double Sum([NotNull] this List<double?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -7426,8 +7426,8 @@ namespace ZLinq
         [Pure]
         public static double Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, double?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             double result = 0;
@@ -7485,7 +7485,7 @@ namespace ZLinq
         [Pure]
         public static double Sum([NotNull] this IList<double?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -7545,8 +7545,8 @@ namespace ZLinq
         [Pure]
         public static double Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, double?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             double result = 0;
@@ -7608,7 +7608,7 @@ namespace ZLinq
         [Pure]
         public static decimal Sum([NotNull] this decimal?[] source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Length);
@@ -7668,8 +7668,8 @@ namespace ZLinq
         [Pure]
         public static decimal Sum<T>([NotNull] this T[] source, [NotNull] Func<T, decimal?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Length < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Length);
             decimal result = 0;
@@ -7727,7 +7727,7 @@ namespace ZLinq
         [Pure]
         public static decimal Sum([NotNull] this List<decimal?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -7787,8 +7787,8 @@ namespace ZLinq
         [Pure]
         public static decimal Sum<T>([NotNull] this List<T> source, [NotNull] Func<T, decimal?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             decimal result = 0;
@@ -7846,7 +7846,7 @@ namespace ZLinq
         [Pure]
         public static decimal Sum([NotNull] this IList<decimal?> source)
         {
-            source.IsNotNull("source");
+            source.IsNotNull(nameof(source));
             
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, 0, source.Count);
@@ -7906,8 +7906,8 @@ namespace ZLinq
         [Pure]
         public static decimal Sum<T>([NotNull] this IList<T> source, [NotNull] Func<T, decimal?> mapFunc)
         {
-            source.IsNotNull("source");
-            mapFunc.IsNotNull("mapFunc");
+            source.IsNotNull(nameof(source));
+            mapFunc.IsNotNull(nameof(mapFunc));
             if (source.Count < Constants.SingleThreadExecutionThreshold)
                 return Sum(source, mapFunc, 0, source.Count);
             decimal result = 0;

@@ -22,9 +22,8 @@ using ZLinq.CommonInternal;
 namespace ZLinq
 {
     public static partial class ZEnumerable
-    {               
-<# const string funcName = "mapFunc"; #>
-    
+    {  
+   
 <#foreach (var type in TT.WithNullables(TT.NumberTypes)) {
     bool isNullable = TT.IsNullable(type);
     string max = isNullable ? "Max" : "Math.Max";
@@ -46,7 +45,7 @@ namespace ZLinq
 
         #region <#= type #>             
         <# foreach (string sourceType in TT.StandardLists) {
-              foreach(string mapFunc in new[] {"", funcName}) {
+              foreach(string mapFunc in TT.MapFuncs) {
                   bool isNotMap = mapFunc == string.Empty;
                   string collectionType = isNotMap ? sourceType.To(type) : sourceType; 
                   string secondParam = isNotMap ? "" : string.Format(", [NotNull] Func<T, {0}> {1}", type, mapFunc);

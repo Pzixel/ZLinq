@@ -29,8 +29,8 @@ namespace ZLinq
         [NotNull]
         public static TResult[] SelectToArray<T, TResult>([NotNull] this T[] source, [NotNull] Func<T, TResult> func)
         {
-            source.IsNotNull("source");
-            func.IsNotNull("func");
+            source.IsNotNull(nameof(source));
+            func.IsNotNull(nameof(func));
             var result = new TResult[source.Length];
             int i;
             for (i = 0; i < result.Length - Constants.Step + 1; i += Constants.Step)
@@ -75,8 +75,8 @@ namespace ZLinq
         [NotNull]
         public static TResult[] SelectToArray<T, TResult>([NotNull] this List<T> source, [NotNull] Func<T, TResult> func)
         {
-            source.IsNotNull("source");
-            func.IsNotNull("func");
+            source.IsNotNull(nameof(source));
+            func.IsNotNull(nameof(func));
             var result = new TResult[source.Count];
             int i;
             for (i = 0; i < result.Length - Constants.Step + 1; i += Constants.Step)
@@ -121,8 +121,8 @@ namespace ZLinq
         [NotNull]
         public static TResult[] SelectToArray<T, TResult>([NotNull] this IList<T> source, [NotNull] Func<T, TResult> func)
         {
-            source.IsNotNull("source");
-            func.IsNotNull("func");
+            source.IsNotNull(nameof(source));
+            func.IsNotNull(nameof(func));
             var result = new TResult[source.Count];
             int i;
             for (i = 0; i < result.Length - Constants.Step + 1; i += Constants.Step)
@@ -167,8 +167,8 @@ namespace ZLinq
         [NotNull]
         public static TResult[] SelectToArray<T, TResult>([NotNull] this ICollection<T> source, [NotNull] Func<T, TResult> func)
         {
-            source.IsNotNull("source");
-            func.IsNotNull("func");
+            source.IsNotNull(nameof(source));
+            func.IsNotNull(nameof(func));
             var result = new TResult[source.Count];
             int i = 0;
             foreach (T value in source)
@@ -194,8 +194,8 @@ namespace ZLinq
         public static List<TResult> SelectToList<T, TResult>([NotNull] this IEnumerable<T> source, [NotNull] Func<T, TResult> func)
         {
             //cannot check source here due to possible IEnumerable<T> multiple enumeration
-            source.IsNotNull("source");
-            func.IsNotNull("func");
+            source.IsNotNull(nameof(source));
+            func.IsNotNull(nameof(func));
             return SelectToList(source, func, Constants.ListDefaultCapacity);
         }
 		
@@ -213,8 +213,8 @@ namespace ZLinq
         public static List<TResult> SelectToList<T, TResult>([NotNull] this ICollection<T> source, [NotNull] Func<T, TResult> func)
         {
             //cannot check source here due to possible IEnumerable<T> multiple enumeration
-            source.IsNotNull("source");
-            func.IsNotNull("func");
+            source.IsNotNull(nameof(source));
+            func.IsNotNull(nameof(func));
             return SelectToList(source, func, source.Count);
         }
 		

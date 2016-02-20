@@ -87,7 +87,7 @@ namespace ZLinq
         [NotNull]
         public static T[] FlattenToArray<T>([NotNull] this T[,] array)
         {
-            array.IsNotNull("array");
+            array.IsNotNull(nameof(array));
             var result = new T[array.Length];
             int i = 0;
             foreach (T value in array)
@@ -99,7 +99,7 @@ namespace ZLinq
         [NotNull]
         public static T[] FlattenToArray<T>([NotNull] this T[,,] array)
         {
-            array.IsNotNull("array");
+            array.IsNotNull(nameof(array));
             var result = new T[array.Length];
             int i = 0;
             foreach (T value in array)
@@ -111,7 +111,7 @@ namespace ZLinq
         [NotNull]
         public static T[] FlattenToArray<T>([NotNull] this T[,,,] array)
         {
-            array.IsNotNull("array");
+            array.IsNotNull(nameof(array));
             var result = new T[array.Length];
             int i = 0;
             foreach (T value in array)
@@ -123,7 +123,7 @@ namespace ZLinq
         [NotNull]
         public static T[] FlattenToArray<T>([NotNull] this T[,,,,] array)
         {
-            array.IsNotNull("array");
+            array.IsNotNull(nameof(array));
             var result = new T[array.Length];
             int i = 0;
             foreach (T value in array)
@@ -135,7 +135,7 @@ namespace ZLinq
         [NotNull]
         public static T[] FlattenToArray<T>([NotNull] this T[,,,,,] array)
         {
-            array.IsNotNull("array");
+            array.IsNotNull(nameof(array));
             var result = new T[array.Length];
             int i = 0;
             foreach (T value in array)
@@ -147,7 +147,7 @@ namespace ZLinq
         [NotNull]
         public static T[] FlattenToArray<T>([NotNull] this T[,,,,,,] array)
         {
-            array.IsNotNull("array");
+            array.IsNotNull(nameof(array));
             var result = new T[array.Length];
             int i = 0;
             foreach (T value in array)
@@ -159,7 +159,7 @@ namespace ZLinq
         [NotNull]
         public static T[] FlattenToArray<T>([NotNull] this T[,,,,,,,] array)
         {
-            array.IsNotNull("array");
+            array.IsNotNull(nameof(array));
             var result = new T[array.Length];
             int i = 0;
             foreach (T value in array)
@@ -171,7 +171,7 @@ namespace ZLinq
         [NotNull]
         public static T[] FlattenToArray<T>([NotNull] this T[,,,,,,,,] array)
         {
-            array.IsNotNull("array");
+            array.IsNotNull(nameof(array));
             var result = new T[array.Length];
             int i = 0;
             foreach (T value in array)
@@ -183,7 +183,7 @@ namespace ZLinq
         [NotNull]
         public static T[] FlattenToArray<T>([NotNull] this T[,,,,,,,,,] array)
         {
-            array.IsNotNull("array");
+            array.IsNotNull(nameof(array));
             var result = new T[array.Length];
             int i = 0;
             foreach (T value in array)
