@@ -61,6 +61,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BencmarkBug.cs" />
+    <Compile Include="SumParallelismTresholdShort.cs" />
+    <Compile Include="SumParallelismTresholdMap.cs" />
+    <Compile Include="SelectBench.cs" />
     <Compile Include="OrderByBench.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,6 +74,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ZLinq.Common\ZLinq.Common.csproj">
+      <Project>{72C72778-B75F-4740-9C4C-25414A5162D4}</Project>
+      <Name>ZLinq.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ZLinq\ZLinq.csproj">
       <Project>{66DF194D-6D6E-492D-99D4-73FDA0CFF419}</Project>
       <Name>ZLinq</Name>
