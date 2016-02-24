@@ -165,7 +165,17 @@ namespace ZLinq.TTHelp
             }
             return $"new List<T>({lengthOrCount});";
         }
-        
+
+        public static string NewFromType(this string type, string sourceName, string sourceType)
+        {
+            return type.New($"{sourceName}.{sourceType.LengthOrCount()}");
+        }
+
+        public static string NewDefault(this string type, string sourceName)
+        {
+            return type.NewFromType(sourceName, type);
+        }
+
         public static string InitForeach(this string type, string result, string lengthOrCount)
         {
             if (IsArray(type))
