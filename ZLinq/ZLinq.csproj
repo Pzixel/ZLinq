@@ -188,6 +188,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Core\Fold\HasSeveralItems.cs">
+      <DependentUpon>HasSeveralItems.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Core\NonPure\OrderByInPlace.cs">
       <DependentUpon>OrderByInPlace.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -270,6 +275,10 @@
     <Content Include="Core\Common\Select.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Select.cs</LastGenOutput>
+    </Content>
+    <Content Include="Core\Fold\HasSeveralItems.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>HasSeveralItems.cs</LastGenOutput>
     </Content>
     <Content Include="Core\NonPure\OrderByInPlace.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

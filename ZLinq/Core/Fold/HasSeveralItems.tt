@@ -1,0 +1,75 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(SolutionDir)ZLinq.TTHelp\bin\$(Configuration)\ZLinq.TTHelp.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="ZLinq.TTHelp" #>
+<#@ output extension=".cs" #>
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using ZLinq.CommonInternal;
+
+
+// ReSharper disable CheckNamespace 
+namespace ZLinq
+{
+    [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
+    public static partial class ZEnumerable
+    {                   
+        <# foreach (string sourceType in TT.Countable) 
+        { 
+        #>  
+  
+		public static bool HasSeveralItems<T>(this <#= sourceType#> source, int count)
+        {
+            <#= "source".IsNotNull() #>
+            return source.<#= sourceType.LengthOrCount() #> >= count;
+        }
+        <# } #>
+
+        public static bool HasSeveralItems<T>(this IEnumerable<T> source, int count)
+        {
+            <#= "source".IsNotNull() #>
+            if (count <= 0)
+                return true;
+            var collection = source as ICollection<T>;
+            if (collection != null)
+                return collection.HasSeveralItems(count);
+            int i = count;
+            using (var enumerator = source.GetEnumerator())
+            {
+                while (enumerator.MoveNext() && i > 0)
+                {
+					i--;
+                }
+            }
+            return i == 0;
+        }
+    
+	    <# foreach (string sourceType in TT.Foreachable) 
+        { 
+        #>  
+  
+		public static bool HasSeveralItems<T>(this <#= sourceType#> source, int count, Predicate<T> predicate)
+        {
+            <#= "source".IsNotNull() #>
+			<#= "predicate".IsNotNull() #>
+            int i = count;
+            foreach (var value in source)
+			{ 
+			   if (predicate(value))
+			   {
+			      i--;
+				  if (i == 0)
+				     return true;
+			   }
+			}
+            return false;
+        }
+        <# } #>
+
+    }
+}

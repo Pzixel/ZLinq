@@ -79,6 +79,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Core\Fold\HasSeveralItems.cs">
+      <DependentUpon>HasSeveralItems.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Core\Fold\IsNullOrEmptyTest.cs">
       <DependentUpon>IsNullOrEmptyTest.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -177,6 +182,10 @@
     <Content Include="Core\Common\ShuffleTest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ShuffleTest.cs</LastGenOutput>
+    </Content>
+    <Content Include="Core\Fold\HasSeveralItems.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>HasSeveralItems.cs</LastGenOutput>
     </Content>
     <Content Include="Core\Fold\IsNullOrEmptyTest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

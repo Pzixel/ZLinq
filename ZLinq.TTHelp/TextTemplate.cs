@@ -48,6 +48,7 @@ namespace ZLinq.TTHelp
         public static readonly string[] StandardInterfaces = new[] {"IList<T>"}.Concat(Unindexable).ToArray();
         public static readonly string[] CollectionClasses = { "T[]", "List<T>" };
         public static readonly string[] Foreachable = CollectionClasses.Concat(new[] {"IEnumerable<T>"}).ToArray();
+        public static readonly string[] Countable = CollectionClasses.Concat(new[] { "ICollection<T>" }).ToArray();
         public static readonly string[] MapFuncs = {"", "mapFunc"};
 
         public static string[] ToInt(this IEnumerable<string> source) => source.Select(ToInt).ToArray();
