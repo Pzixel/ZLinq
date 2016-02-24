@@ -62,12 +62,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BencmarkBug.cs" />
-    <Compile Include="SumParallelismTresholdShort.cs" />
+    <Compile Include="SelectParallelismTreshold.cs" />
+    <Compile Include="SumParallelismTreshold.cs" />
     <Compile Include="SumParallelismTresholdMap.cs" />
     <Compile Include="SelectBench.cs" />
     <Compile Include="OrderByBench.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

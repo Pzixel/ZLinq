@@ -10,14 +10,7 @@ using ZLinq.Common;
 
 namespace ZLinq.Console
 {
-    public enum TestType
-    {
-        Short,
-        Int,
-        Long    
-    }
-
-    public class SumParallelismTresholdShort
+    public class SumParallelismTreshold
     {
         [Params("Short", "Int", "Long")]
         public string Type
@@ -40,14 +33,14 @@ namespace ZLinq.Console
         [Setup]
         public void SetupData()
         {
-            _data1Short = Enumerable.Repeat(1, Treshold).CastConvertible<short>().ToArray();
-            _data2Short = Enumerable.Repeat(1, Treshold).CastConvertible<short>().ToArray();
+            _data1Short = Enumerable.Repeat(1, Treshold).Select(x => (short)x).ToArray();
+            _data2Short = Enumerable.Repeat(1, Treshold).Select(x => (short)x).ToArray();
 
             _data1Int = Enumerable.Repeat(1, Treshold).ToArray();
             _data2Int = Enumerable.Repeat(1, Treshold).ToArray();
 
-            _data1Long = Enumerable.Repeat(1, Treshold).CastConvertible<long>().ToArray();
-            _data2Long = Enumerable.Repeat(1, Treshold).CastConvertible<long>().ToArray();
+            _data1Long = Enumerable.Repeat(1, Treshold).Select(x => (long)x).ToArray();
+            _data2Long = Enumerable.Repeat(1, Treshold).Select(x => (long)x).ToArray();
         }
 
         [Benchmark]

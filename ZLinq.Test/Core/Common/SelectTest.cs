@@ -80,9 +80,9 @@ namespace ZLinq.Test.Core.Common
 		 
 
         [TestMethod]
-        public void TestSelectToArrayFromArray2048()
+        public void TestSelectToArrayFromArray4096()
         {
-            var source = Enumerable.Range(1, 2048).ToArray();
+            var source = Enumerable.Range(1, 4096).ToArray();
 
             var xArr = source.SelectToArray(x => x * x).ToArray();
             var linqArr = source.Select(x => x * x).ToArray();
@@ -186,9 +186,9 @@ namespace ZLinq.Test.Core.Common
 		 
 
         [TestMethod]
-        public void TestSelectToArrayFromList2048()
+        public void TestSelectToArrayFromList4096()
         {
-            var source = Enumerable.Range(1, 2048).ToList();
+            var source = Enumerable.Range(1, 4096).ToList();
 
             var xArr = source.SelectToArray(x => x * x).ToArray();
             var linqArr = source.Select(x => x * x).ToArray();
@@ -292,9 +292,9 @@ namespace ZLinq.Test.Core.Common
 		 
 
         [TestMethod]
-        public void TestSelectToArrayFromIList2048()
+        public void TestSelectToArrayFromIList4096()
         {
-            var source = Enumerable.Range(1, 2048).ToIList();
+            var source = Enumerable.Range(1, 4096).ToIList();
 
             var xArr = source.SelectToArray(x => x * x).ToArray();
             var linqArr = source.Select(x => x * x).ToArray();
@@ -398,9 +398,9 @@ namespace ZLinq.Test.Core.Common
 		 
 
         [TestMethod]
-        public void TestSelectToArrayFromICollection2048()
+        public void TestSelectToArrayFromICollection4096()
         {
-            var source = Enumerable.Range(1, 2048).ToICollection();
+            var source = Enumerable.Range(1, 4096).ToICollection();
 
             var xArr = source.SelectToArray(x => x * x).ToArray();
             var linqArr = source.Select(x => x * x).ToArray();
@@ -503,9 +503,9 @@ namespace ZLinq.Test.Core.Common
 		 
 
         [TestMethod]
-        public void TestSelectToListFromICollection2048()
+        public void TestSelectToListFromICollection4096()
         {
-            var source = Enumerable.Range(1, 2048).ToICollection();
+            var source = Enumerable.Range(1, 4096).ToICollection();
 
             var xArr = source.SelectToList(x => x * x).ToArray();
             var linqArr = source.Select(x => x * x).ToArray();
@@ -609,9 +609,9 @@ namespace ZLinq.Test.Core.Common
 		 
 
         [TestMethod]
-        public void TestSelectToListFromIEnumerable2048()
+        public void TestSelectToListFromIEnumerable4096()
         {
-            var source = Enumerable.Range(1, 2048).ToIEnumerable();
+            var source = Enumerable.Range(1, 4096).ToIEnumerable();
 
             var xArr = source.SelectToList(x => x * x).ToArray();
             var linqArr = source.Select(x => x * x).ToArray();

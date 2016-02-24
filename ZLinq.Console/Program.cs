@@ -6,7 +6,7 @@ namespace ZLinq.Console
     {
         static void Main(string[] args)
         {
-            var summary = BenchmarkRunner.Run<BencmarkBug>();
+            var summary = BenchmarkRunner.Run<SelectParallelismTreshold>();
         }
     }
 }

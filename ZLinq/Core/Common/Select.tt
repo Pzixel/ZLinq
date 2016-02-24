@@ -7,11 +7,12 @@
 <#@ import namespace="System.Reflection" #>
 <#@ import namespace="ZLinq.TTHelp" #>
 <#@ output extension=".cs" #>
-
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
+using System.Threading.Tasks;
 using JetBrains.Annotations;
 using ZLinq.Common;
 using ZLinq.CommonInternal;
@@ -37,38 +38,50 @@ namespace ZLinq
 		/// <exception cref="ArgumentNullException">Throws when null is passed as input parameter</exception>
         [Pure]
         [NotNull]
-        public static TResult[] SelectToArray<T, TResult>([NotNull] this <#= sourceType #> source, [NotNull] Func<T, TResult> func)
+		public static TResult[] SelectToArray<T, TResult>([NotNull] this <#= sourceType #> source, [NotNull] Func<T, TResult> func)
         {
             <#= TT.IsNotNull("source") #>
             <#= TT.IsNotNull("func") #>
             var result = new TResult[source.<#= TT.LengthOrCount(sourceType) #>];
-            int i;
-            for (i = 0; i < result.Length - Constants.Step + 1; i += Constants.Step)
+            if (result.Length <= Constants.SingleThreadExecutionThreshold)
             {
-                TResult res1 = func(source[i]);
-                TResult res2 = func(source[i + 1]);
-                TResult res3 = func(source[i + 2]);
-                TResult res4 = func(source[i + 3]);
-
-                result[i] = res1;
-                result[i + 1] = res2;
-                result[i + 2] = res3;
-                result[i + 3] = res4;
+				SelectToArray(source, result, func, 0, result.Length);
             }
-            
-            if (i <= result.Length - 1)
-            {
-                if (i <= result.Length - 2)
-                {
-                    if (i <= result.Length - 3)
-                    {
-                        result[result.Length - 3] = func(source[result.Length - 3]);
-                    }
-                    result[result.Length - 2] = func(source[result.Length - 2]);
-                }
-                result[result.Length - 1] = func(source[result.Length - 1]);
+            else
+            {                
+                Parallel.ForEach(Partitioner.Create(0, result.Length),
+                                 range => 
+								 { 
+									SelectToArray(source, result, func, range.Item1, range.Item2); 
+								 });
             }
             return result;
+        }
+
+        private static void SelectToArray<T, TResult>([NotNull] this <#= sourceType #> source, TResult[] result, [NotNull] Func<T, TResult> func, int start, int end)
+        {
+            int i;
+			int loopEnd = end - Constants.Step + 1;
+            for (i = start; i < loopEnd; i += Constants.Step)
+            {
+                result[i] = func(source[i]);
+                result[i + 1] = func(source[i + 1]);
+                result[i + 2] = func(source[i + 2]);
+                result[i + 3] = func(source[i + 3]);
+            }
+
+            if (i <= end - 1)
+            {
+                if (i <= end - 2)
+                {
+                    if (i <= end - 3)
+                    {
+                        result[end - 3] = func(source[end - 3]);
+                    }
+                    result[end - 2] = func(source[end - 2]);
+                }
+                result[end - 1] = func(source[end - 1]);
+            }
         }
         <# } #>   
 
