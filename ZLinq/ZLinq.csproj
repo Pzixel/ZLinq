@@ -158,6 +158,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Core\Common\Split.cs" />
     <Compile Include="Core\Fold\Single.cs">
       <DependentUpon>Single.tt</DependentUpon>
       <AutoGen>True</AutoGen>
