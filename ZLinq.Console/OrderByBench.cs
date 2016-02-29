@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
@@ -12,6 +14,7 @@ namespace ZLinq.Console
     [Config(typeof (MyConfig))]
     public class OrderByBench
     {
+        [DebuggerDisplay("[{X}, {Y}]")]
         struct Point
         {
             public int X { get; }
@@ -24,24 +27,31 @@ namespace ZLinq.Console
             }
         }
 
-        private const int N = 1024*1024;
+        public const int N = 1024 * 512;
         private static readonly Point[] SourceData = Enumerable.Range(1, N).Select(x => new Point(x % 10, x % 397)).ToArray();
-        private Point[] _data1 = new Point[SourceData.Length];
-        private Point[] _data2 = new Point[SourceData.Length];
-        private Point[] _data3 = new Point[SourceData.Length];
+        private Point[] _data1;
+        private Point[] _data2;
+        private Point[] _data3;
+
+        [Params(1024, N)]//, 1024*512, 1024*1024*4, N)]
+        public int ArarayLength { get; set; }
 
         [Setup]
         public void Setup()
         {
-            Array.Copy(SourceData, _data1, SourceData.Length);
-            Array.Copy(SourceData, _data2, SourceData.Length);
-            Array.Copy(SourceData, _data3, SourceData.Length);
+            _data1 = new Point[ArarayLength];
+            _data2 = new Point[ArarayLength];
+            _data3 = new Point[ArarayLength];
+            Array.Copy(SourceData, _data1, ArarayLength);
+            Array.Copy(SourceData, _data2, ArarayLength);
+            Array.Copy(SourceData, _data3, ArarayLength);
         }
 
         [Benchmark]
         public object PLinq()
         {
-            return _data1.AsParallel().OrderBy(tuple => tuple.X).ThenBy(t => t.Y).ToArray();
+            return _data1.AsParallel().OrderBy(tuple => tuple.X).ThenBy(t => t.Y)
+                .ToArray();
         }
 
         [Benchmark]
@@ -56,60 +66,36 @@ namespace ZLinq.Console
         public object ZLinqParallel()
         {
             var comparer = ZComparer<Point>.New(t => t.X).Add(t => t.Y).ToComparer();
-            var my = new MySort<Point>(comparer);
-            my.QuicksortParallelOptimised(_data3, 0, _data3.Length - 1);
+            var my = new MySort<Point>(_data3, comparer);
+            my.QuicksortParallelOptimised(0, _data3.Length - 1);
             return _data3;
         }
 
 
+        [SuppressMessage("ReSharper", "FieldCanBeMadeReadOnly.Local")]
         class MySort<T>
         {
+            private T[] _source;
             private IComparer<T> _comparer;
 
-            public MySort(IComparer<T> comparer)
+            public MySort(T[] source, IComparer<T> comparer)
             {
+                _source = source;
                 _comparer = comparer;
             }
 
-            public void QuicksortParallelOptimised(T[] arr, int left, int right)
+            public void QuicksortParallelOptimised(int left, int right)
             {
-                if (right - left < Constants.SingleThreadExecutionThreshold)
+                int diff = right - left;
+                if (diff < 32)
                 {
-                    Array.Sort(arr, left, right - left + 1, _comparer);
+                    InsertionSort(left, right);
                     return;
                 }
 
-                int pivot = Partition(arr, left, right);
-                var mseLeft = new ManualResetEventSlim(false);
-                var mseRight = new ManualResetEventSlim(false);
-                int newRight = pivot - 1;
-                bool leftStarted = newRight > left;
-                if (leftStarted)
-                {
-                    ThreadPool.QueueUserWorkItem(mse =>
-                                                 {
-                                                     QuicksortParallelOptimised(arr, left, newRight);
-                                                     ((ManualResetEventSlim)mse).Set();
-                                                 }, mseLeft);
-                }
-                int newLeft = pivot + 1;
-                bool rightStarted = right > newLeft;
-                if (rightStarted)
-                {
-                    ThreadPool.QueueUserWorkItem(mse =>
-                                                 {
-                                                     QuicksortParallelOptimised(arr, newLeft, right);
-                                                     ((ManualResetEventSlim)mse).Set();
-                                                 }, mseRight);
-                }
-                if (leftStarted)
-                {
-                    mseLeft.Wait();
-                }
-                if (rightStarted)
-                {
-                    mseRight.Wait();
-                }
+                int pivot = Partition(_source, left, right);
+                ZParallel.Do(() => QuicksortParallelOptimised(left, pivot - 1),
+                             () => QuicksortParallelOptimised(pivot + 1, right));
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -139,6 +125,22 @@ namespace ZLinq.Console
 
                 Swap(arr, low, left);
                 return left;
+            }
+
+            private void InsertionSort(int startIndex, int endIndex)
+            {
+                for (var counter = startIndex; counter < endIndex; counter++)
+                {
+                    var index = counter + 1;
+                    while (index > startIndex)
+                    {
+                        if (_comparer.Compare(_source[index - 1], _source[index]) > 0)
+                        {
+                            Swap(_source, index - 1, index);
+                        }
+                        index--;
+                    }
+                }
             }
         }
     }

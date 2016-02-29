@@ -1,4 +1,6 @@
-﻿using BenchmarkDotNet.Running;
+﻿using System;
+using System.Threading;
+using BenchmarkDotNet.Running;
 
 namespace ZLinq.Console
 {
@@ -6,8 +8,10 @@ namespace ZLinq.Console
     {
         static void Main(string[] args)
         {
-            //var summary = BenchmarkRunner.Run<OrderByBench>();
-            System.Console.WriteLine(new OrderByBench().ZLinqParallel());
+            //     var summary = BenchmarkRunner.Run<OrderByBench>();
+               var orderByBench = new OrderByBench {ArarayLength = OrderByBench.N};
+               orderByBench.Setup();
+                 System.Console.WriteLine(orderByBench.ZLinqParallel());
         }
     }
 
