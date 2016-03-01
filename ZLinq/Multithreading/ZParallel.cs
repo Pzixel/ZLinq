@@ -1,27 +1,63 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 namespace ZLinq
 {
     public static class ZParallel
     {
-        public static void Foreach<T>(this ICollection<T> source, Action<T> action)
+    public static void Foreach<T>(ICollection<T> source, Action<T> action)
+    {
+        var toBeProcessedOnMainThread = (int) Math.Ceiling((double)source.Count / Environment.ProcessorCount);
+        var countdown = new CountdownEvent(source.Count - toBeProcessedOnMainThread);
+        ConcurrentBag<Exception> exceptionsBag = null;
+        var onMainThread = source.Take(toBeProcessedOnMainThread);
+        foreach (var item in source.Skip(toBeProcessedOnMainThread))
         {
-            var allDone = new ManualResetEventSlim(false);
-            int completed = 0;
-            foreach (var item in source)
+            ThreadPool.QueueUserWorkItem(state =>
             {
-                ThreadPool.QueueUserWorkItem(state =>
+                var closure = (T)state;
+                try
                 {
-                    var closure = (T)state;
                     action(closure);
-                    if (Interlocked.Increment(ref completed) == source.Count)
-                        allDone.Set();
-                }, item);
-            }
-            allDone.Wait();
+                }
+                catch (Exception ex)
+                {
+                    HandleException(ref exceptionsBag, countdown, ex);
+                }
+                finally
+                {
+                    countdown.Signal();
+                }
+            }, item);
         }
+        foreach (T value in onMainThread)
+        {
+            try
+            {
+                action(value);
+            }
+            catch (Exception ex)
+            {
+                HandleException(ref exceptionsBag, countdown, ex);
+            }
+        }
+        countdown.Wait();
+        if (exceptionsBag != null)
+            throw new AggregateException(exceptionsBag);
+    }
+
+    private static void HandleException(ref ConcurrentBag<Exception> exceptions, object syncRoot, Exception ex)
+    {
+        if (exceptions == null)
+            lock (syncRoot)
+                if (exceptions == null)
+                    exceptions = new ConcurrentBag<Exception>();
+
+        exceptions.Add(ex);
+    }
 
         public static void Do(Action action1, Action action2)
         {

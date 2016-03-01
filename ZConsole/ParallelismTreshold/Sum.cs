@@ -4,7 +4,7 @@ using System.Linq;
 using BenchmarkDotNet.Attributes;
 using JetBrains.Annotations;
 using ZConsole.Configs;
-using ZConsole.Enums;
+using ZConsole.General;
 using ZLinq.Common;
 
 namespace ZConsole.ParallelismTreshold

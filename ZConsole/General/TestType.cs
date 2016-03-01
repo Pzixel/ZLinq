@@ -1,4 +1,4 @@
-﻿namespace ZConsole.Enums
+﻿namespace ZConsole.General
 {
     public enum TestType
     {

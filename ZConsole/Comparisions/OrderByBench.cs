@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using BenchmarkDotNet.Attributes;
 using ZConsole.Configs;
+using ZConsole.General;
 using ZLinq;
 using ZLinq.Comparers;
 
@@ -14,19 +15,6 @@ namespace ZConsole.Comparisions
     [Config(typeof(X64))]
     public class OrderByBench
     {
-        [DebuggerDisplay("[{X}, {Y}]")]
-        struct Point
-        {
-            public int X { get; }
-            public int Y { get; }
-
-            public Point(int x, int y)
-            {
-                X = x;
-                Y = y;
-            }
-        }
-
         public const int N = 1024 * 512;
         private static readonly Point[] SourceData = Enumerable.Range(1, N).Select(x => new Point(x % 10, x % 397)).ToArray();
         private Point[] _data1;

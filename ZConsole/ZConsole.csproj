@@ -47,10 +47,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Comparisions\OrderByMerge.cs" />
     <Compile Include="Comparisions\SelectBench.cs" />
     <Compile Include="Comparisions\LinqComparision.cs" />
     <Compile Include="Comparisions\OrderByBench.cs" />
-    <Compile Include="Enums\TestType.cs" />
+    <Compile Include="General\Pivot.cs" />
+    <Compile Include="General\Range.cs" />
+    <Compile Include="General\Point.cs" />
+    <Compile Include="General\TestType.cs" />
     <Compile Include="Configs\X64.cs" />
     <Compile Include="ParallelismTreshold\Select.cs" />
     <Compile Include="ParallelismTreshold\Sum.cs" />

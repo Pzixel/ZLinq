@@ -159,6 +159,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Core\Common\Split.cs" />
+    <Compile Include="Core\Extra\ToStr.cs" />
     <Compile Include="Core\Fold\Single.cs">
       <DependentUpon>Single.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -309,9 +310,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\Extra\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\ZLinq.Common\ZLinq.Common.csproj">
       <Project>{72c72778-b75f-4740-9c4c-25414a5162d4}</Project>
