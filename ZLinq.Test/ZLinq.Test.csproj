@@ -68,7 +68,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Comparers\CustomComparerTest.cs" />
+    <Compile Include="Comparers\ZComparerTest.cs" />
     <Compile Include="Core\Common\FlattenTest.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

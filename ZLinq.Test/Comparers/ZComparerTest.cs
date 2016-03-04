@@ -5,7 +5,7 @@ using ZLinq.Comparers;
 namespace ZLinq.Test.Comparers
 {
     [TestClass]
-    public class CustomComparerTest
+    public class ZComparerTest
     {
         private class Test
         {
