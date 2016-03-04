@@ -204,5 +204,12 @@ namespace ZLinq.Test.Comparers
             Assert.AreEqual(comparerNeg.Compare(objA, objB), -comparer.Compare(objA, objB));
             Assert.AreEqual(comparerNeg.Compare(objA, objB), -comparer.Compare(objB, objA));
         }
+
+        [TestMethod]
+        public void TestCustomPredicate()
+        {
+            var zComparer = ZComparer<int>.New(i => i%10).ToComparer();
+            Assert.AreEqual(zComparer.Compare(1,11), 0);
+        }
     }
 }

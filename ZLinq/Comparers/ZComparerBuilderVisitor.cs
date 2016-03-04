@@ -2,11 +2,11 @@
 
 namespace ZLinq.Comparers
 {
-    internal class ZComparerVisitor : ExpressionVisitor
+    internal class ZComparerBuilderVisitor : ExpressionVisitor
     {
         public Expression Replacement { get; }
         private bool _canReplace = true;
-        public ZComparerVisitor(Expression replacement)
+        public ZComparerBuilderVisitor(Expression replacement)
         {
             Replacement = replacement;
         }

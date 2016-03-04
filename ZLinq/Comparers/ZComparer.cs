@@ -33,22 +33,16 @@ namespace ZLinq.Comparers
 
         private BlockExpression Value { get; set; }
 
-        private static BlockExpression CreateBody<TProperty>(Expression<Func<T, TProperty>> member, bool negate)
-            where TProperty : IComparable<TProperty>
+        private static BlockExpression CreateBody<TComparable>(Expression<Func<T, TComparable>> expression, bool negate)
+            where TComparable : IComparable<TComparable>
         {
-            MemberExpression memberExpression = member.Body as MemberExpression;
-            if (memberExpression == null)
-            {
-                negate = true;
-                memberExpression = (MemberExpression) ((UnaryExpression) member.Body).Operand;
-            }
-            BlockExpression result = GetCompareTo<TProperty>(negate, memberExpression);
+            BlockExpression result = GetCompareTo(negate, expression);
             return result;
         }
 
-        private static BlockExpression GetCompareTo<TProperty>(bool negate, MemberExpression memberExpression) where TProperty : IComparable<TProperty>
+        private static BlockExpression GetCompareTo<TComparable>(bool negate, Expression<Func<T, TComparable>> expression) where TComparable : IComparable<TComparable>
         {
-            string name = memberExpression.Member.Name;
+            string name = expression.ToString();
             if (negate)
                 name += "Neg";
             BlockExpression result;
@@ -56,14 +50,14 @@ namespace ZLinq.Comparers
             {
                 return result;
             }
-            result = CreateCompareTo<TProperty>(memberExpression, negate);
+            result = CreateCompareTo(expression, negate);
             MemberMemoizeDictionary[name] = result;
             return result;
         }
 
-        private static BlockExpression CreateCompareTo<TProperty>(MemberExpression memberExpression, bool negate) where TProperty : IComparable<TProperty>
+        private static BlockExpression CreateCompareTo<TComparable>(Expression<Func<T, TComparable>> memberExpression, bool negate) where TComparable : IComparable<TComparable>
         {
-            var compareTo = GetCompareToExpression<TProperty>(memberExpression);
+            var compareTo = GetCompareToExpression(memberExpression);
             var compareToVariable = compareTo.Key;
             var compareToCall = compareTo.Value;
             ConstantExpression zero = Expression.Constant(0, typeof (int));
@@ -74,21 +68,27 @@ namespace ZLinq.Comparers
         }
 
 
-        private static KeyValuePair<ParameterExpression, MethodCallExpression> GetCompareToExpression<TProperty>(MemberExpression memberExpression)
-            where TProperty : IComparable<TProperty>
+        private static KeyValuePair<ParameterExpression, MethodCallExpression> GetCompareToExpression<TComparable>(Expression<Func<T, TComparable>> memberExpression)
+            where TComparable : IComparable<TComparable>
         {
-            var member = memberExpression.Member;
-            var prop0 = Expression.PropertyOrField(Parameters[0], member.Name);
-            var prop1 = Expression.PropertyOrField(Parameters[1], member.Name);
-            var compareTo = GetCompareToMethodInfo<TProperty>();
-            var compareToCall = Expression.Call(prop0, compareTo, prop1);
-            var parameterExpression = Expression.Variable(typeof (int), "compare" + member.Name);
+            var leftSide = GetSideFromExpression(Parameters[0], memberExpression);
+            var rightSide = GetSideFromExpression(Parameters[1], memberExpression);
+            var compareTo = GetCompareToMethodInfo<TComparable>();
+            var compareToCall = Expression.Call(leftSide, compareTo, rightSide);
+            var parameterExpression = Expression.Variable(typeof (int), "compare" + Guid.NewGuid());
             return new KeyValuePair<ParameterExpression, MethodCallExpression>(parameterExpression, compareToCall);
         }
 
-        private static MethodInfo GetCompareToMethodInfo<TProperty>()
+        private static Expression GetSideFromExpression<TComparable>(ParameterExpression parameter, Expression<Func<T, TComparable>> expression)
+            where TComparable : IComparable<TComparable>
         {
-            var type = typeof (TProperty);
+            var replace = PredicateRewriterVisitor.Rewrite(expression, parameter);
+            return replace.Body;
+        }
+
+        private static MethodInfo GetCompareToMethodInfo<TComparable>()
+        {
+            var type = typeof (TComparable);
             var methods = type.GetMethods().Where(x => x.Name == "CompareTo").ToArray();
             if (methods.Length == 1)
                 return methods[0];
@@ -102,7 +102,7 @@ namespace ZLinq.Comparers
         }
         
         [Pure]
-        public static ZComparer<T> New<TProperty>([NotNull] Expression<Func<T, TProperty>> member, bool negate = false) where TProperty : IComparable<TProperty>
+        public static ZComparer<T> New<TComparable>([NotNull] Expression<Func<T, TComparable>> member, bool negate = false) where TComparable : IComparable<TComparable>
         {
             var comparator = new ZComparer<T>();
             var body = CreateBody(member, negate);
@@ -111,22 +111,22 @@ namespace ZLinq.Comparers
         }
 
         [Pure]
-        public static ZComparer<T> NewNeg<TProperty>([NotNull] Expression<Func<T, TProperty>> member) where TProperty : IComparable<TProperty>
+        public static ZComparer<T> NewNeg<TComparable>([NotNull] Expression<Func<T, TComparable>> member) where TComparable : IComparable<TComparable>
         {
             return New(member, true);
         }
 
         [Pure]
-        public ZComparer<T> Add<TProperty>([NotNull] Expression<Func<T, TProperty>> member, bool negate = false) where TProperty : IComparable<TProperty>
+        public ZComparer<T> Add<TComparable>([NotNull] Expression<Func<T, TComparable>> member, bool negate = false) where TComparable : IComparable<TComparable>
         {
             var additionalComparasion = CreateBody(member, negate);
-            var visitor = new ZComparerVisitor(additionalComparasion);
+            var visitor = new ZComparerBuilderVisitor(additionalComparasion);
             BlockExpression blockExpression = (BlockExpression)visitor.Visit(Value);
             return new ZComparer<T>(blockExpression);
         }
 
         [Pure]
-        public ZComparer<T> AddNeg<TProperty>([NotNull] Expression<Func<T, TProperty>> member) where TProperty : IComparable<TProperty>
+        public ZComparer<T> AddNeg<TComparable>([NotNull] Expression<Func<T, TComparable>> member) where TComparable : IComparable<TComparable>
         {
             return Add(member, true);
         }
