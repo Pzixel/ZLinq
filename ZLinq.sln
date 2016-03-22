@@ -4,10 +4,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZLinq", "ZLinq\ZLinq.csproj", "{66DF194D-6D6E-492D-99D4-73FDA0CFF419}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AC50A454-8C4C-47B0-845D-AD781D4E3688} = {AC50A454-8C4C-47B0-845D-AD781D4E3688}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZLinq.TTHelp", "ZLinq.TTHelp\ZLinq.TTHelp.csproj", "{AC50A454-8C4C-47B0-845D-AD781D4E3688}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZLinq.Test", "ZLinq.Test\ZLinq.Test.csproj", "{0DCCA0EE-0985-4EDB-9178-4E6B2FDCF71C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AC50A454-8C4C-47B0-845D-AD781D4E3688} = {AC50A454-8C4C-47B0-845D-AD781D4E3688}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZLinq.Common", "ZLinq.Common\ZLinq.Common.csproj", "{72C72778-B75F-4740-9C4C-25414A5162D4}"
 EndProject
