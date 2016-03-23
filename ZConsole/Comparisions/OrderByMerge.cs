@@ -59,7 +59,7 @@ namespace ZConsole.Comparisions
 
         public void Sort<T>(T[] arr, IComparer<T> comparer)
         {
-            ZParallel.Foreach(Ranges, rr => Array.Sort(arr, rr.StartIndex, rr.Length, comparer));
+            Parallel.ForEach(Ranges, rr => Array.Sort(arr, rr.StartIndex, rr.Length, comparer));
         }
 
         public void SortParallel<T>(T[] arr, IComparer<T> comparer)

@@ -223,7 +223,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Select.tt</DependentUpon>
     </Compile>
-    <Compile Include="Multithreading\ZParallel.cs" />
     <Compile Include="Core\NonPure\WhereInPlace.cs" />
     <Compile Include="Core\Fold\ZMath\Average.cs">
       <AutoGen>True</AutoGen>
