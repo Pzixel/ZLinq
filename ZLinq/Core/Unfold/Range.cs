@@ -37,6 +37,11 @@ namespace ZLinq
             long num = (long)start + count - 1L;
             if (count < 0 || num > int.MaxValue)
                 throw new ArgumentOutOfRangeException();
+            return RangeSeqEnumerable(start, count, generator);
+        }
+
+        private static IEnumerable<T> RangeSeqEnumerable<T>(int start, int count, Func<int, T> generator)
+        {
             for (int i = 0, j = start; i < count; i++, j++)
                 yield return generator(j);
         }

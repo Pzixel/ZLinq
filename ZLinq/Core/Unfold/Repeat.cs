@@ -81,10 +81,7 @@ namespace ZLinq
         {
             if (count < 0)
                 throw new ArgumentOutOfRangeException();
-            for (int i = 0; i < count; i++)
-            {
-                yield return func(generator);
-            }
+            return RepeatSeqEnumerable(generator, func, count);
         }
 
         [Pure]
@@ -92,6 +89,19 @@ namespace ZLinq
         {
             if (count < 0)
                 throw new ArgumentOutOfRangeException();
+            return RepeatSeqEnumerable(func, count);
+        }
+		
+		private static IEnumerable<T> RepeatSeqEnumerable<T, TSource>(TSource generator, Func<TSource, T> func, int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                yield return func(generator);
+            }
+        }
+
+        private static IEnumerable<T> RepeatSeqEnumerable<T>(Func<T> func, int count)
+        {
             for (int i = 0; i < count; i++)
             {
                 yield return func();

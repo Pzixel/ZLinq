@@ -133,7 +133,36 @@ namespace ZLinq.Test.Core.Unfold
 
             Assert.IsTrue(source.Length == zsource.Length);
             Assert.IsTrue(source.SequenceEqual(zsource));
-        }        
-        
+        }
+
+        [TestMethod]
+        public void TestRepeatSeqException()
+        {
+            try
+            {
+                var zsource = ZEnumerable.RepeatSeq(() => int.MaxValue, -1);
+                Assert.Fail();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+
+            }
+
+        }
+
+        [TestMethod]
+        public void TestRepeatGeneratorSeqException()
+        {
+            try
+            {
+                var zsource = ZEnumerable.RepeatSeq(10, i => i, -1);
+                Assert.Fail();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+
+            }
+
+        }
     }
 }

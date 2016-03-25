@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ZLinq.Test.Core.Unfold
@@ -34,6 +35,21 @@ namespace ZLinq.Test.Core.Unfold
             var zsource = ZEnumerable.RangeSeq(1, 100, i => i * i);
 
             Assert.IsTrue(source.SequenceEqual(zsource));
+        }
+
+        [TestMethod]
+        public void TestRangeGeneratorSeqException()
+        {
+            try
+            {
+                var zsource = ZEnumerable.RangeSeq(int.MaxValue, int.MaxValue, x => x);
+                Assert.Fail();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                    
+            }
+
         }
     }
 }
